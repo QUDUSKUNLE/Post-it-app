@@ -1,22 +1,8 @@
-"use strict";
-
-
 // ====================================== Import Libraries=========================================================//
 import express from "express";
-import firebase from "firebase";
+import db from "../Config/config.js";
+
 const Router = express.Router();
-
-//======================================Firebase Configuration======================================================// 
-let config = {
-    apiKey: "AIzaSyBUL7H7Vull9iAEuPIvI1C2yXHHT2hyf7w",
-    authDomain: "post-it-app.firebaseapp.com",
-    databaseURL: "https://post-it-app.firebaseio.com",
-    projectId: "post-it-app",
-    storageBucket: "post-it-app.appspot.com",
-    messagingSenderId: "465033980113"
-};
-firebase.initializeApp(config);
-
 //=================================Homepage Endpoint===================================================================//
 Router.route("/")
     .post((req, res) => {
@@ -29,7 +15,7 @@ Router.route("/user/signup")
         let email = req.body.email,
             password = req.body.password,
             username = req.body.username;
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        db.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 firebase.database().ref("users").push({
                     userEmail: email,
@@ -53,7 +39,7 @@ Router.route("/user/signin")
     .post((req, res) => {
         let email = req.body.email,
             password = req.body.password;
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        db.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
                 res.send({
                     message: "User Signed in successfully"
@@ -69,7 +55,7 @@ Router.route("/user/signin")
 
 Router.route("/user/signout")
     .post((req, res) => {
-        firebase.auth().signOut()
+        db.auth().signOut()
             .then(() => {
                 res.send({
                     message: "Sign-out successful."
@@ -89,18 +75,18 @@ Router.route("/group")
         let email = req.body.email,
             password = req.body.password,
             groupName = req.body.group;
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        db.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
-                firebase.auth().onAuthStateChanged((user) => {
+                db.auth().onAuthStateChanged((user) => {
                     let uSer = firebase.auth().currentUser,
                         uid = uSer.uid;
                     if (uSer !== null) {
                         let group = groupName.toLowerCase();
-                        firebase.database().ref("Group").child(group).once("value", (snapshot) => {
+                        db.database().ref("Group").child(group).once("value", (snapshot) => {
                             if (snapshot.val() != null) {
                                 res.json({ message: "Group already exists" })
                             } else {
-                                firebase.database().ref("Group").child(group).push({
+                                db.database().ref("Group").child(group).push({
                                     member: uid
                                 });
                                 res.send({ message: "Group Created Successfully" })
@@ -121,10 +107,10 @@ Router.route('/group/groupId/user')
             groupMember = req.body.user,
             groupId = req.body.groupId;
 
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        db.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
                 let name = groupName.toLowerCase()
-                firebase.database().ref("Group/" + name).push({
+                db.database().ref("Group/" + name).push({
                     member: groupMember
                 })
                 res.send({

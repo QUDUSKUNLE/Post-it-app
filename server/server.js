@@ -4,15 +4,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cookieParser from "cookie-parser";
-import multer from 'multer';
-import Router from './Config/users.js';
+import Router from './Config/userRoutes.js';
 
-let upload = multer();
 let app = express();
 
 // PORT
 let port = process.env.PORT || 8080;
-
 
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
