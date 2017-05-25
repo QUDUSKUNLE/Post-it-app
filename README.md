@@ -10,6 +10,7 @@
   2. Log in
   3. Create group
   4. Add Member to group
+  5. Send broadcast message to group members
   
   
   <a href="#">Click here</a> for API documentation.
