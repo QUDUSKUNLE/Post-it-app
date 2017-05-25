@@ -10,6 +10,7 @@
   2. Log in
   3. Create group
   4. Add Member to group
+  <a href="#">Click here</a> for API documentation.
 
 # Installation
   Kindly follow the steps below to setup a local development environment.
