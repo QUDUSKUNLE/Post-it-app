@@ -12,55 +12,55 @@ Methods
 		.POST: Welcome to PostIt Homepage
     
     
-  '/user/signup'
+'/user/signup'
 
-		.POST: Create a user
+	.POST: Create a user
 
-			parameters:
+		parameters:
 
-				email: string
+			email: string
 
-				username: string
+			username: string
 
-			  password: string
+			password: string
 
-	'/users/signin'
+'/users/signin'
 
-		.POST: Sign in user
+	.POST: Sign in user
 
-			parameters:
+		parameters:
 
-				email: string
+			email: string
 
-				password: string
+			password: string
 
-	'/group'
+'/group'
 
-		 .POST: Create a group
+	.POST: Create a group
 
-			parameters:
+		parameters:
 
-				email: string
+			email: string
 
-				password: string
+			password: string
         
-        groupName: string
+        		groupName: string
         
-  '/group/<groupId>/user'
+'/group/groupId/user'
       
-     .POST:Add a user a group
+ 	.POST:Add a user a group
 
-			parameters:
+		parameters:
 
-				email: string
+			email: string
 
-				password: string
+			password: string
         
-        groupName: string
+        		groupName: string
         
-        groupMember: string
+        		groupMember: string
         
-        groupId: string
+        		groupId: string
       
       
 
