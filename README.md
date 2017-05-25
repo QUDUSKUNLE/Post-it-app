@@ -13,7 +13,7 @@
   5. Send broadcast message to group members
   
   
-  <a href="#">Click here</a> for API documentation.
+  <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
 # Installation
   Kindly follow the steps below to setup a local development environment.
