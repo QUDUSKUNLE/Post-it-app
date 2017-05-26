@@ -1,5 +1,6 @@
 // ====================================== Import Libraries=========================================================//
 import express from "express";
+import firebase from 'firebase';
 import db from "./config.js";
 
 const Router = express.Router();
@@ -15,7 +16,7 @@ Router.route("/user/signup")
         let email = req.body.email,
             password = req.body.password,
             username = req.body.username;
-        db.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
                 db.database().ref("users").push({
                     userEmail: email,
@@ -39,7 +40,7 @@ Router.route("/user/signin")
     .post((req, res) => {
         let email = req.body.email,
             password = req.body.password;
-        db.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
                 res.send({
                     message: "User Signed in successfully"
@@ -55,7 +56,7 @@ Router.route("/user/signin")
 
 Router.route("/user/signout")
     .post((req, res) => {
-        db.auth().signOut()
+        firebase.auth().signOut()
             .then(() => {
                 res.send({
                     message: "Sign-out successful."
@@ -75,9 +76,9 @@ Router.route("/group")
         let email = req.body.email,
             password = req.body.password,
             groupName = req.body.group;
-        db.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then(user => {
-                db.auth().onAuthStateChanged((user) => {
+                firebase.auth().onAuthStateChanged((user) => {
                     let uSer = firebase.auth().currentUser,
                         uid = uSer.uid;
                     if (uSer !== null) {
@@ -107,7 +108,7 @@ Router.route('/group/groupId/user')
             groupMember = req.body.user,
             groupId = req.body.groupId;
 
-        db.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
                 let name = groupName.toLowerCase()
                 db.database().ref("Group/" + name).push({

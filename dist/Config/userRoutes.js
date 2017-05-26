@@ -8,15 +8,19 @@ var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
 
+var _firebase = require("firebase");
+
+var _firebase2 = _interopRequireDefault(_firebase);
+
 var _config = require("./config.js");
 
 var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// ====================================== Import Libraries=========================================================//
 var Router = _express2.default.Router();
 //=================================Homepage Endpoint===================================================================//
+// ====================================== Import Libraries=========================================================//
 Router.route("/").get(function (req, res) {
     res.send('Welcome to PostIt-App');
 });
@@ -26,7 +30,7 @@ Router.route("/user/signup").post(function (req, res) {
     var email = req.body.email,
         password = req.body.password,
         username = req.body.username;
-    _config2.default.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
+    _firebase2.default.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
         _config2.default.database().ref("users").push({
             userEmail: email,
             UserPassword: password,
@@ -47,7 +51,7 @@ Router.route("/user/signup").post(function (req, res) {
 Router.route("/user/signin").post(function (req, res) {
     var email = req.body.email,
         password = req.body.password;
-    _config2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+    _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
         res.send({
             message: "User Signed in successfully"
         });
@@ -60,7 +64,7 @@ Router.route("/user/signin").post(function (req, res) {
 // ===========================================Sign Out Endpoint===================================================//
 
 Router.route("/user/signout").post(function (req, res) {
-    _config2.default.auth().signOut().then(function () {
+    _firebase2.default.auth().signOut().then(function () {
         res.send({
             message: "Sign-out successful."
         });
@@ -77,9 +81,9 @@ Router.route("/group").post(function (req, res) {
     var email = req.body.email,
         password = req.body.password,
         groupName = req.body.group;
-    _config2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-        _config2.default.auth().onAuthStateChanged(function (user) {
-            var uSer = firebase.auth().currentUser,
+    _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+        _firebase2.default.auth().onAuthStateChanged(function (user) {
+            var uSer = _firebase2.default.auth().currentUser,
                 uid = uSer.uid;
             if (uSer !== null) {
                 var group = groupName.toLowerCase();
@@ -107,7 +111,7 @@ Router.route('/group/groupId/user').post(function (req, res) {
         groupMember = req.body.user,
         groupId = req.body.groupId;
 
-    _config2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+    _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
         var name = groupName.toLowerCase();
         _config2.default.database().ref("Group/" + name).push({
             member: groupMember
