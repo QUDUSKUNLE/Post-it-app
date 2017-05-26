@@ -17,7 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // ====================================== Import Libraries=========================================================//
 var Router = _express2.default.Router();
 //=================================Homepage Endpoint===================================================================//
-Router.route("/").post(function (req, res) {
+Router.route("/").get(function (req, res) {
     res.send('Welcome to PostIt-App');
 });
 
