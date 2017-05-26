@@ -29,7 +29,7 @@ Router.route("/user/signup")
             })
             .catch((error) => {
                 res.send({
-                    message: "error in Registration " + error.message
+                    message: "Already registered"
                 });
             });
     });

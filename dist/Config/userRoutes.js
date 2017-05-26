@@ -41,7 +41,7 @@ Router.route("/user/signup").post(function (req, res) {
         });
     }).catch(function (error) {
         res.send({
-            message: "error in Registration " + error.message
+            message: "Already registered"
         });
     });
 });
