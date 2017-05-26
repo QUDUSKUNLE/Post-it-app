@@ -5,7 +5,7 @@ import db from "./config.js";
 const Router = express.Router();
 //=================================Homepage Endpoint===================================================================//
 Router.route("/")
-    .get((req, res) => {
+    .post((req, res) => {
         res.send('Welcome to PostIt-App');
     });
 
