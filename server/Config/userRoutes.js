@@ -48,7 +48,7 @@ Router.route("/user/signin")
             })
             .catch(error => {
                 res.send({
-                    message: error.code + " " + error.message
+                    message: "Ouch!!!, you are not a registered user"
                 });
             });
     });
@@ -77,7 +77,7 @@ Router.route("/group")
             password = req.body.password,
             groupName = req.body.group;
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(user => {
+            .then((user) => {
                 firebase.auth().onAuthStateChanged((user) => {
                     let uSer = firebase.auth().currentUser,
                         uid = uSer.uid;
@@ -95,7 +95,12 @@ Router.route("/group")
                         });
                     }
                 })
-            });
+            })
+            .catch((error) => {
+                res.send({
+                    message: "Sorry, you are not a registered user!!!"
+                })
+            })
     })
 
 //=========================================ADD MEMBER ENDPOINT===============================================//
@@ -104,9 +109,8 @@ Router.route('/group/groupId/user')
     .post((req, res) => {
         let email = req.body.email,
             password = req.body.password,
-            groupName = req.body.groupname,
-            groupMember = req.body.user,
-            groupId = req.body.groupId;
+            groupName = req.body.group,
+            groupMember = req.body.user
 
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((user) => {
@@ -117,7 +121,8 @@ Router.route('/group/groupId/user')
                 res.send({
                     message: "Member added successfully"
                 });
-            }).catch((error) => {
+            })
+            .catch((error) => {
                 res.send({
                     message: "Ouch!!! Not an authenticated User"
                 });

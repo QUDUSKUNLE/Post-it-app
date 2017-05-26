@@ -57,7 +57,7 @@ Router.route("/user/signin").post(function (req, res) {
         });
     }).catch(function (error) {
         res.send({
-            message: error.code + " " + error.message
+            message: "Ouch!!!, you are not a registered user"
         });
     });
 });
@@ -99,6 +99,10 @@ Router.route("/group").post(function (req, res) {
                 });
             }
         });
+    }).catch(function (error) {
+        res.send({
+            message: "Sorry, you are not a registered user!!!"
+        });
     });
 });
 
@@ -107,9 +111,8 @@ Router.route("/group").post(function (req, res) {
 Router.route('/group/groupId/user').post(function (req, res) {
     var email = req.body.email,
         password = req.body.password,
-        groupName = req.body.groupname,
-        groupMember = req.body.user,
-        groupId = req.body.groupId;
+        groupName = req.body.group,
+        groupMember = req.body.user;
 
     _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function (user) {
         var name = groupName.toLowerCase();
