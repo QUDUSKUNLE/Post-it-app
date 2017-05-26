@@ -8,7 +8,7 @@ var _express = require("express");
 
 var _express2 = _interopRequireDefault(_express);
 
-var _config = require("../Config/config.js");
+var _config = require("./config.js");
 
 var _config2 = _interopRequireDefault(_config);
 
@@ -27,7 +27,7 @@ Router.route("/user/signup").post(function (req, res) {
         password = req.body.password,
         username = req.body.username;
     _config2.default.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
-        firebase.database().ref("users").push({
+        _config2.default.database().ref("users").push({
             userEmail: email,
             UserPassword: password,
             userName: username
