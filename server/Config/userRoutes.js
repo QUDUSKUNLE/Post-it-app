@@ -1,6 +1,6 @@
 // ====================================== Import Libraries=========================================================//
 import express from "express";
-import db from "../Config/config.js";
+import db from "./config.js";
 
 const Router = express.Router();
 //=================================Homepage Endpoint===================================================================//
@@ -17,7 +17,7 @@ Router.route("/user/signup")
             username = req.body.username;
         db.auth().createUserWithEmailAndPassword(email, password)
             .then((user) => {
-                firebase.database().ref("users").push({
+                db.database().ref("users").push({
                     userEmail: email,
                     UserPassword: password,
                     userName: username
