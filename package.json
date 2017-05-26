@@ -4,7 +4,8 @@
     "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
     "main": "index.js",
     "scripts": {
-        "start": "webpack-dev-server --hot",
+        "start": "node ./dist/server.js",
+        "build": "babel server/ -d dist",
         "start-server": "babel-watch server/server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
