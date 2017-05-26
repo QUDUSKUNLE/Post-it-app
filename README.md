@@ -9,7 +9,7 @@ Methods
 
 	'/':
 
-		.POST: Welcome to PostIt Homepage
+		.GET: Welcome to PostIt-App
     
     
 '/user/signup'
@@ -60,7 +60,7 @@ Methods
         
         		groupMember: string
         
-        		groupId: string
+      
       
       
 
