@@ -24,7 +24,7 @@ Methods
 
 			password: string
 
-'/users/signin'
+'/user/signin'
 
 	.POST: Sign in user
 
