@@ -1,5 +1,4 @@
-"use strict";
-// BASE SET-UP
+'use strict';
 
 var _express = require('express');
 
@@ -23,28 +22,24 @@ var _userRoutes2 = _interopRequireDefault(_userRoutes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express2.default)();
-
 // PORT
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8080; //  BASE SET-UP
+
+var app = (0, _express2.default)();
 
 // CONFIG APP
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
-
 // configure app to handle CORS requests
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, \
-		content-type, Authorization');
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, \
+	content-type, Authorization');
+  next();
 });
-
-//================================================LOG ALL REQUEST TO CONSOLE========================================//
-// MIDDLEWARE 
+// MIDDLEWARE
 app.use((0, _morgan2.default)('dev')); // log all requests to the console
-
 // Register our routes - all routes
 app.use('/', _userRoutes2.default);
 
