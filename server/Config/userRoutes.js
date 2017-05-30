@@ -68,7 +68,7 @@ Router.route('/user/signout')
         firebase.auth().signOut()
             .then(() => {
                 res.send({
-                    message: 'Sign-out successful.'
+                    message: 'User`s signed-out successfully.'
                 });
             })
             .catch(() => {
@@ -146,7 +146,7 @@ Router.route('/user/delete')
         const password = req.body.password;
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(() => {
-                const user = firebase.auth().currentUser
+                const user = firebase.auth().currentUser;
                 const userId = user.uid;
                 db.database().ref(`users/${userId}`).remove();
                 user.delete()
@@ -164,6 +164,35 @@ Router.route('/user/delete')
             .catch(() => {
                 res.status(404).send({
                     message: 'User`s not Found'
+                });
+            });
+    });
+
+
+Router.route('/groupName/message')
+    .post((req, res) => {
+        const email = req.body.email;
+        const password = req.body.password;
+        const groupName = req.body.group;
+        const mess = req.body.message;
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(() => {
+                const group = groupName.toLowerCase();
+                const userId = (firebase.auth().currentUser).uid;
+                let groupRef = db.database().ref(`Group/${userId}`).child(group);
+                groupRef.orderByKey().on('child_added', (data) => {
+                    groupRef.child(data.key).push({
+                        message: mess
+                    })
+                });
+                res.send({
+                    message: 'Broadcast Message sent successfully'
+                });
+
+            })
+            .catch(() => {
+                res.status(404).send({
+                    message: 'User`s not registered'
                 });
             });
     });
