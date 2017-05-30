@@ -18,13 +18,18 @@ Router.route('/user/signup')
         const username = req.body.username;
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
+                const user = firebase.auth().currentUser;
+                user.sendEmailVerification()
+                    .then(() => {
+                        // Send out verification email to a just registered user
+                    });
                 db.database().ref('users').push({
                     userEmail: email,
                     UserPassword: password,
                     userName: username
                 });
                 res.send({
-                    message: 'Registration successful'
+                    message: 'Registration successful and verification email sent to your email'
                 });
             })
             .catch(() => {
