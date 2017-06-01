@@ -1,7 +1,7 @@
 //  =================== Import Libraries=====================//
-import express from 'express';
-import firebase from 'firebase';
-import db from './config.js';
+const express = require('express');
+const firebase = require('firebase');
+const db = require('./config.js');
 
 const Router = express.Router();
 //  ===================Homepage Endpoint=======================//
@@ -33,7 +33,7 @@ Router.route('/user/signup')
                     })
                     .catch((error) => {
                         res.status(404).send({
-                            message: 'Network Error'
+                            message: 'Network Errors'
                         });
                     })
             })
@@ -199,4 +199,4 @@ Router.route('/groupName/message')
 
 
 // Export apiRouter
-export default Router;
+module.exports = Router;

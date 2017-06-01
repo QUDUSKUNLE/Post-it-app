@@ -31,13 +31,21 @@ Router.route('/user/signup').post(function (req, res) {
     var password = req.body.password;
     var username = req.body.username;
     _firebase2.default.auth().createUserWithEmailAndPassword(email, password).then(function () {
-        _config2.default.database().ref('users').push({
-            userEmail: email,
-            UserPassword: password,
-            userName: username
-        });
-        res.send({
-            message: 'Registration successful'
+        var user = _firebase2.default.auth().currentUser;
+        var userId = user.uid;
+        user.sendEmailVerification().then(function () {
+            _config2.default.database().ref('users/' + userId).push({
+                userEmail: email,
+                UserPassword: password,
+                userName: username
+            });
+            res.send({
+                message: 'Registration successful and verification email sent to your email'
+            });
+        }).catch(function (error) {
+            res.status(404).send({
+                message: 'Network Error'
+            });
         });
     }).catch(function () {
         res.status(502).send({
@@ -65,11 +73,11 @@ Router.route('/user/signin').post(function (req, res) {
 Router.route('/user/signout').post(function (req, res) {
     _firebase2.default.auth().signOut().then(function () {
         res.send({
-            message: 'Sign-out successful.'
+            message: 'User`s signed-out successfully.'
         });
     }).catch(function () {
-        res.send({
-            message: 'Try again'
+        res.status(404).send({
+            message: 'Network Error'
         });
     });
 });
@@ -86,11 +94,11 @@ Router.route('/group').post(function (req, res) {
             var uid = uSer.uid;
             if (uSer !== null) {
                 var group = groupName.toLowerCase();
-                _config2.default.database().ref('Group').child(group).once('value', function (snapshot) {
+                _config2.default.database().ref('Group/' + uid).child(group).once('value', function (snapshot) {
                     if (snapshot.val() != null) {
                         res.status(502).send({ message: 'Group already exists' });
                     } else {
-                        _config2.default.database().ref('Group').child(group).push({
+                        _config2.default.database().ref('Group/' + uid).child(group).push({
                             member: uid
                         });
                         res.send({ message: 'Group Created Successfully' });
@@ -100,7 +108,7 @@ Router.route('/group').post(function (req, res) {
         });
     }).catch(function () {
         res.status(401).send({
-            message: 'User not registered'
+            message: 'User`s not registered'
         });
     });
 });
@@ -113,8 +121,9 @@ Router.route('/group/groupId/user').post(function (req, res) {
     var groupName = req.body.group;
     var groupMember = req.body.user;
     _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+        var uSer = _firebase2.default.auth().currentUser.uid;
         var name = groupName.toLowerCase();
-        _config2.default.database().ref('Group/' + name).push({
+        _config2.default.database().ref('Group/' + uSer).child(name).push({
             member: groupMember
         });
         res.send({
@@ -123,6 +132,54 @@ Router.route('/group/groupId/user').post(function (req, res) {
     }).catch(function () {
         res.status(401).send({
             message: 'Not authorized'
+        });
+    });
+});
+
+//	===============Delete a user`s Account============
+Router.route('/user/delete').post(function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+    _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+        var user = _firebase2.default.auth().currentUser;
+        var userId = user.uid;
+        _config2.default.database().ref('users/' + userId).remove();
+        user.delete().then(function () {
+            res.send({
+                message: 'User`s deleted successfully '
+            });
+        }).catch(function (error) {
+            res.status(404).send({
+                message: 'Network Error'
+            });
+        });
+    }).catch(function () {
+        res.status(404).send({
+            message: 'User`s not Found'
+        });
+    });
+});
+
+Router.route('/groupName/message').post(function (req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+    var groupName = req.body.group;
+    var mess = req.body.message;
+    _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+        var group = groupName.toLowerCase();
+        var userId = _firebase2.default.auth().currentUser.uid;
+        var groupRef = _config2.default.database().ref('Group/' + userId).child(group);
+        groupRef.orderByKey().on('child_added', function (data) {
+            groupRef.child(data.key).push({
+                message: mess
+            });
+        });
+        res.send({
+            message: 'Broadcast Message sent successfully'
+        });
+    }).catch(function () {
+        res.status(404).send({
+            message: 'User`s not registered'
         });
     });
 });
