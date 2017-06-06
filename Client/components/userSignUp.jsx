@@ -1,7 +1,7 @@
 // signUp Component
 import React from 'react';
 
-class SignUp extends React.Component {
+class SignUp extends React.Component{
 	render() {
 		return (
 			<div>
@@ -32,8 +32,8 @@ class SignUp extends React.Component {
 					</div>
 				</div>
 			</div>
-		);
+		)
 	}
-}
+};
 
 export default SignUp;

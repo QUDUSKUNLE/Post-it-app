@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SignIn extends React.Component {
+class SignIn extends React.Component{
 	render() {
 
 		return (
@@ -24,7 +24,7 @@ class SignIn extends React.Component {
 						</div>
 					</div>
 				</div>
-			</div>	
+			</div>
 		);
 	}
 };

@@ -1,3 +1,5 @@
+const webpack = require('webpack');
+
 const path = require('path');
 let config = {
     entry: './Client/index.jsx',
@@ -5,14 +7,7 @@ let config = {
     output: {
         path: path.join(__dirname, 'Client'),
         publicPath: '/',
-        filename: 'index.js',
-    },
-
-    devServer: {
-        contentBase: './Client',
-        inline: true,
-        hot: true,
-        port: 7777
+        filename: 'index.js'
     },
 
     module: {
@@ -26,6 +21,11 @@ let config = {
             }
         }]
     },
+    plugins: process.env.NODE_ENV === 'production' ? [
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin()
+    ] : [],
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
