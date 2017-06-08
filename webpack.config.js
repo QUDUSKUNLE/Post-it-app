@@ -2,7 +2,9 @@ const webpack = require('webpack');
 
 const path = require('path');
 let config = {
-    entry: './client/build/index.jsx',
+    entry: [
+        './client/build/index.jsx'
+    ],
 
     output: {
         path: path.join(__dirname, 'client/build'),
@@ -21,11 +23,12 @@ let config = {
             }
         }]
     },
-    plugins: process.env.NODE_ENV === 'production' ? [
-        new webpack.optimize.DedupePlugin(),
+    plugins: [
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin()
-    ] : [],
+        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ],
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
