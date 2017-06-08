@@ -8,7 +8,7 @@ var app = express()
 app.use(compression())
 
 // serve our static stuff like index.css
-app.use(express.static(path.join(__dirname, 'Client')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 // import some new stuff
 import React from 'react'
@@ -16,7 +16,7 @@ import React from 'react'
 import { renderToString } from 'react-dom/serve'
 // and these to match the url to routes and then render
 import { match, RouterContext } from 'react-router'
-import routes from './Client/components/routes'
+import routes from './client/src/components/routes'
 
 // send all requests to index.html so browserHistory in React Router works
 app.get('*', function(req, res) {
@@ -31,11 +31,10 @@ app.get('*', function(req, res) {
                         // really influenced by React Router, so we're just using a little
                         // function, `renderPage`
                         res.send(renderPage(appHtml))
-                    })
-                // res.sendFile(path.join(__dirname, 'Client', 'index.html'))
-            });
+                    });
+            })
 
-        var PORT = process.env.PORT || 8081
+        var PORT = process.env.PORT || 8080
         app.listen(PORT, function() {
             console.log('Production Express server running at localhost:' + PORT)
         });

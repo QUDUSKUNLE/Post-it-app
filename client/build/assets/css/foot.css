@@ -1,0 +1,17 @@
+/*footer css*/
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    margin-top: 320px;
+}
+
+.fo {
+    background-color: black;
+    height: 75px;
+    margin: 50px 0 -100px 0;
+}

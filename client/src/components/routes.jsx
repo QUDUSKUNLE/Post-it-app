@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom'
 
-import App from '../App'
+import App from '../../build/App'
 import SignUp from './userSignUp';
 import SignIn from './userSignIn';
 

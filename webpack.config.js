@@ -2,10 +2,10 @@ const webpack = require('webpack');
 
 const path = require('path');
 let config = {
-    entry: './Client/index.jsx',
+    entry: './client/build/index.jsx',
 
     output: {
-        path: path.join(__dirname, 'Client'),
+        path: path.join(__dirname, 'client/build'),
         publicPath: '/',
         filename: 'index.js'
     },

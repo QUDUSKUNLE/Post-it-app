@@ -2,12 +2,13 @@
 import express from 'express';
 import firebase from 'firebase';
 import db from './config.js';
+import path from 'path';
 
 const Router = express.Router();
 //  ===================Homepage Endpoint=======================//
 Router.route('/')
     .get((req, res) => {
-        res.send('Welcome to PostIt-App');
+        res.sendFile(path.join(__dirname, '../../client/build/index.html'));
     });
 
 //  ======================Sign Up Endpoint============//
