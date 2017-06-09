@@ -3,11 +3,11 @@ const webpack = require('webpack');
 const path = require('path');
 let config = {
     entry: [
-        './client/build/index.jsx'
+        './client/src/js/index.jsx'
     ],
 
     output: {
-        path: path.join(__dirname, 'client/build'),
+        path: path.join(__dirname, 'client/src'),
         publicPath: '/',
         filename: 'index.js'
     },
@@ -24,9 +24,13 @@ let config = {
         }]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify('production')
+            }
+        }),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
