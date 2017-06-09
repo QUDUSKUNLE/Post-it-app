@@ -1,0 +1,12 @@
+
+export const LOGIN_SUCCESSFUL = 'LOGIN_SUCCESSFUL';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const CLEAR_ALL = 'CLEAR_ALL';
+export const SIGNUP_FAILED = 'SIGNUP_FAILED';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const USER_UPDATED = 'USER_UPDATED';
+export const USER_UPDATE_FAILED = 'USER_UPDATE_FAILED';
+export const VIEW_USER = 'VIEW_USER';
+export const USER_DELETED = 'USER_DELETED';
+export const USER_DELETION_FAILED = 'USER_DELETION_FAILED';
+export const PAGINATE = 'PAGINATE';
