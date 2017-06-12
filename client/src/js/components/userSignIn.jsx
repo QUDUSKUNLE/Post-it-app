@@ -31,28 +31,29 @@ class SignIn extends React.Component{
 			<div>
 				<div className="container">
 					<div className="row">
-						<h4 className="center">Sign In</h4>
-					</div>
-					<div className="row">	
-						<form className="col s6 offset-s3" onSubmit={this.onSubmit}>
-							<div className="form-group">
-								<label htmlFor="email">Email</label>	
-								<input value={this.state.email} onChange={this.onChange}
-									id="email" type="email"
-									className="validate" placeholder="johndoe@example.com"
-									name="email" required/>	
+						<div className="col-md-6 col-md-offset-3">
+							<div className="row">
+								<form className="col-md-6 col-md-offset-3" onSubmit={this.onSubmit}>
+									<h5>Sign in</h5>
+									<div className="form-group">
+										<label htmlFor="email">Email</label>
+										<input value={this.state.email} onChange={this.onChange}
+											id="email" type="email"
+											className="form-control" placeholder="johndoe@example.com"
+											name="email" required />
+									</div>
+									<div className="form-group">
+										<label htmlFor="password">Password</label>
+										<input id="password" type="password"
+											value={this.state.password} onChange={this.onChange}
+											className="form-control" placeholder="*********"
+											name="password" required />
+									</div>
+									<Link to="/user/broadcastboard"><button type="submit" className="btn btn-success form-control" name="action">Sign in</button></Link>
+								</form>
 							</div>
-							<div className="form-group">
-								<label htmlFor="password">Password</label>	
-								<input id="password" type="password"
-									value={this.state.password} onChange={this.onChange}
-									className="validate" placeholder="*********"
-									name="password" required/>
-							</div>
-							<button type="submit" className="btn btn-success col s12" name="action">Sign in</button>
-							<br /> <br />
-							<Link to="/"><button type="btn" className="btn btn-success col s12">Back</button></Link>
-						</form>
+						</div>	
+						
 					</div>
 				</div>
 			</div>

@@ -3,20 +3,29 @@ import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component{
 	render(){
-		return(
+		return( 
 			<div>
-				<nav className="black-text" role="navigation">
-					<div className="nav-wrapper">
-						<Link to="/" className="brand-logo">PostIt<small>App</small></Link>
-						<ul className="right">
-							<li><Link to="">Home</Link></li>
-							<li><Link to="/user/signup">Sign up</Link></li>
-							<li><Link to="/user/signin">Sign in</Link></li>
-							<li><Link to="/user/broadcastboard">Broadcast Board</Link></li>
-							<li><Link to="/user/group">Create Group</Link></li>
-						</ul>
+				<div className="navbar navbar-default" role="navigation">
+					<div className="container">
+						<div className="navbar-header">
+							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span className="sr-only">Toggle navigation</span>
+								<span className="icon-bar"></span>
+								<span className="icon-bar"></span>
+								<span className="icon-bar"></span>
+							</button>
+							<Link to="/" className="navbar-brand">PostIt<small>App</small></Link>
+						</div>
+						<div className="collapse navbar-collapse">
+							<ul className="nav navbar-nav">
+							</ul>
+							<ul className="nav navbar-nav navbar-right">
+								<li><Link to="/">Home</Link></li>
+								<li><Link to="/user/signin">Sign in</Link></li>
+							</ul>
+						</div>
 					</div>
-				</nav>
+				</div>
 			</div>
 		)
 	}

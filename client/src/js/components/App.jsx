@@ -14,23 +14,12 @@ class App extends React.Component{
 		return (
 			<Router history={browserHistory}>
 			<div>
-				<nav className="black-text" role="navigation">
-					<div className="nav-wrapper">
-						<Link to="/" className="brand-logo">PostIt<small>App</small></Link>
-						<ul className="right">
-							<li><Link to="">Home</Link></li>
-							<li><Link to="/user/signup">Sign up</Link></li>
-							<li><Link to="/user/signin">Sign in</Link></li>
-							<li><Link to="/user/broadcastboard">Broadcast Board</Link></li>
-							<li><Link to="/user/group">Create Group</Link></li>
-						</ul>
-					</div>
-				</nav>
+				<NavBar />
 				<Route exact path="/" component={Home}/>
-      			<Route path="/user/signin" component={SignIn}/>
-      			<Route path="/user/signup" component={SignUp}/>
-				<Route path="/user/group" component={CreateGroup}/>
-      			<Route path="/user/broadcastboard" component={BroadCastBoard}/>
+				<Route path="/user/signin" component={SignIn} />
+				<Route path="/user/signup" component={SignUp} />
+				<Route path="/user/group" component={CreateGroup} />
+				<Route path="/user/broadcastboard" component={BroadCastBoard} />
 			</div>
 			</Router>
 		);
