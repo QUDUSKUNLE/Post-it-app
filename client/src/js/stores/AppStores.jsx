@@ -10,9 +10,9 @@ let CHANGE_EVENT = 'change';
 _items = [];
 
 let AppStore = assign({}, EventEmitter.prototype, {
-    emitChange: () => {
-        this.emit(CHANGE_EVENT);
-    },
+  emitChange: () => {
+    this.emit(CHANGE_EVENT);
+  },
     addChangeListener: (callback) => {
         this.on('change', callback);
     },

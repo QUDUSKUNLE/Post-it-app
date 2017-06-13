@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 class BroadCastBoard extends React.Component {
 	render() {
 		return (
@@ -24,7 +23,7 @@ class BroadCastBoard extends React.Component {
 						<div className="col-md-3"></div>
 					</div>
 
-				</div>	
+				</div>
 			</div>
 		);
 	}

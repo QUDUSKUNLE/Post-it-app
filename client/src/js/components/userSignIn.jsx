@@ -16,7 +16,7 @@ class SignIn extends React.Component{
 		// Bind Form values
 		this.onSubmit = this.onSubmit.bind(this);
 	}
-	
+
 	onChange(signIn) {
 		this.setState({[signIn.target.name]: signIn.target.value})
 	}
@@ -52,8 +52,8 @@ class SignIn extends React.Component{
 									<Link to="/user/broadcastboard"><button type="submit" className="btn btn-success form-control" name="action">Sign in</button></Link>
 								</form>
 							</div>
-						</div>	
-						
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -65,4 +65,3 @@ class SignIn extends React.Component{
 
 
 export default SignIn;
-

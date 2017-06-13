@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../../friends-chatroom.jpg';
 // import authentication
 
 
@@ -42,12 +41,12 @@ class SignUp extends React.Component{
 								</small>
 									&nbsp;allows friends to come together and share vital informtion
 							</p>
-							<img src={'../../friends-chatroom.jpg'} className="image-responsive"/>
-						</div>	
+
+						</div>
 						<div className="col-md-5 col-md-offset-1">
 							<div className='row'>
 								<div className='col-md-12'>
-									<h5>Create an account</h5>	
+									<h5>Create an account</h5>
 									<form onSubmit={this.onSubmit}>
 										<div className="form-group">
 											<label for='email'>Email</label>
@@ -80,11 +79,11 @@ class SignUp extends React.Component{
 										<button type="submit" className="btn btn-success form-control">Sign up</button>
 									</form>
 								</div>
-							</div>	
-							
-						</div>	
-					</div>	
-					
+							</div>
+
+						</div>
+					</div>
+
 				</div>
 			</div>
 		)

@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUp from './userSignUp'
+import SignUp from './UserSignUp'
 
 class Home extends React.Component{
 	render() {
@@ -12,4 +12,3 @@ class Home extends React.Component{
 };
 
 export default Home;
-

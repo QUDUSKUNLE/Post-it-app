@@ -56,11 +56,11 @@ class CreateGroup extends React.Component {
 											name='password' required/>
 									</div>
 									<button type="submit" className="btn btn-success form-control">Create Group</button>
-								</form>	
+								</form>
 							</div>
-						</div>	
-						
-						
+						</div>
+
+
 					</div>
 				</div>
 			</div>

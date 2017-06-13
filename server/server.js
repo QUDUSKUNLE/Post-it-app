@@ -2,8 +2,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import cookieParser from "cookie-parser";
-import Router from './Config/userRoutes.js';
+// import cookieParser from "cookie-parser";
+import Router from './config/userRoutes.js';
 
 // New Addition
 import webpack from 'webpack';
@@ -21,12 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // configure app to handle CORS requests
 
-app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, \
-	content-type, Authorization');
-    next();
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
+  'content-type, Authorization');
+  next();
 });
 
 // MIDDLEWARE
@@ -46,7 +46,7 @@ app.use(webpackMiddleware(webpack(config)));
 app.use('/', Router);
 
 app.listen(port);
-console.log('port: ' + port);
+// console.log('port: ' + port);
 
 
 module.exports = app;
