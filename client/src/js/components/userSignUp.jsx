@@ -41,7 +41,6 @@ class SignUp extends React.Component{
 								</small>
 									&nbsp;allows friends to come together and share vital informtion
 							</p>
-
 						</div>
 						<div className="col-md-5 col-md-offset-1">
 							<div className='row'>
