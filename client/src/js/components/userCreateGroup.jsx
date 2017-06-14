@@ -22,7 +22,7 @@ class CreateGroup extends React.Component {
 
 	onSubmit(createGroup) {
 		createGroup.preventDefault();
-		axios.post('/user/group', { user: this.state });
+		axios.post('/user/group', this.state );
 		alert(this.state.groupname + ' group created successfully!!!');
 		console.log(this.state);
 	}
