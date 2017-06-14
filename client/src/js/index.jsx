@@ -4,19 +4,17 @@ import ReactDOM from 'react-dom'
 // import { HashRouter as Router, browserHistory } from 'react-router-dom'
 // import routes from './components/routes'
 // import { Provider } from 'react-redux'
-// import thunk from "redux-thunk";
-// import { createStore, applyMiddleware } from 'redux';
+// import thunk from "redux-thunk"
+// import { createStore, applyMiddleware } from 'redux'
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import rootReducer from '../src/reducers';
 import App from './components/App'
 
-// const store = createStore(
-// 	rootReducer,
-// 	composeWithDevTools(
-// 		applyMiddleware(thunk)
-// 	)
-// );
 
-ReactDOM.render( < App/>
+
+ReactDOM.render(
+
+		<App />
+
 	, document.getElementById('app')
 );

@@ -23,7 +23,7 @@ class SignIn extends React.Component{
 
 	onSubmit(signIn) {
 		signIn.preventDefault();
-		axios.post('/user/signin', { user: this.state });
+		axios.post('/user/signin', this.state );
 		console.log(this.state);
 	}
 	render() {
