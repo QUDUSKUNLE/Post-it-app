@@ -1,16 +1,6 @@
-import Dispatcher
-import flux from 'flux';
-const Dispatcher = flux.Dispatcher;
-import assign from 'object-assign';
+import { Dispatcher } from 'flux';
 
-const AppDispatcher = assign(new Dispatcher(), {
-  handleViewAction: (action) => {
-    const payload = {
-      source: 'VIEW_ACTION',
-      action: action
-    };
-    this.dispatch(payload);
-  }
-});
+const AppDispatcher = new Dispatcher();
 
-module.exports = AppDispatcher;
+
+export default AppDispatcher;

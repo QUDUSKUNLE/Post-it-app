@@ -1,33 +1,57 @@
-let AppDispatcher = require('../dispatcher/AppDispatcher');
-let AppConstants = require('../constants/AppConstants');
-let EventEmitter = require('events').EventEmitter;
+import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import ActionTypes from '../constants/AppConstants.jsx';
+import events from 'events';
+const EventEmitter = events.EventEmitter;
+import assign from 'object-assign';
 
-let assign = require('object-assign');
-let AppAPI = require('..utils/AppAPI.js');
+// import AppAPI from '../utils/AppAPI.js';
 
-let CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'change';
+let signupuser = {
+  email: '',
+  password: '',
+  username: ''
+};
 
-_items = [];
+// function signupuser
+function setsignUpUser(email, password, username) {
+  signupuser = {
+    email: email,
+    password: password,
+    username: username
+  };
+}
 
-let AppStore = assign({}, EventEmitter.prototype, {
+const AppStore = assign({}, EventEmitter.prototype, {
   emitChange: () => {
     this.emit(CHANGE_EVENT);
   },
-    addChangeListener: (callback) => {
-        this.on('change', callback);
-    },
-    removeChangeListener: (callback) => {
-        this.removeListener('change', callback);
-    }
+  // change listener
+  addChangeListener: (callback) => {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: (callback) => {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
 });
 
-AppDispatcher.register((payload) => {
-    let action = payload.action;
+getsignUpUser = () => {
+  return signupuser;
+};
 
-    switch(action.acttionType) {
+AppStore.dispatcherToken = AppDispatcher.register((payload) => {
+  const action = payload.action;
+  // Case actionTypes
+  switch (action.actionTypes) {
+  case ActionTypes.SIGNUP_USER:
+    setsignUpUser(action.signUp);
+    break;
 
-    }
-    return true
+  default:
+    return true;
+  }
+  AppStore.emitChange();
+  return true;
 });
 
 module.exports = AppStore;
