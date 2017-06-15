@@ -10,7 +10,7 @@ class CreateGroup extends React.Component {
 			password: '',
 			groupname: ''
 		}
-		// Bind Create Group Inpu Fields
+		// Bind Create Group Input Fields
 		this.onChange = this.onChange.bind(this);
 
 		// Bind to Create Group Form

@@ -1,6 +1,6 @@
 // AppActions
-// import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
-// import ActionTypes from '../constants/AppConstants.jsx';
+import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
+import ActionTypes from '../constants/AppConstants.jsx';
 // // const Promise = require('es6-promise').Promise;
 // let Api;
 // // App
@@ -59,10 +59,54 @@
 // };
 //
 // export default AppActions;
-import axios from 'axios';
+// import axios from 'axios';
 
-export default function signUpRequest(signUpData) {
-  return dispatch => {
-    return axios.post('/user/signup', signUpData);
-  };
-}
+
+const AppActions = {
+
+  // SignUp user`s Action
+  /**
+    * SignUp a new User function
+    * @param {string} email the first parameter.
+    * @param {string} password the second parameter.
+    * @param {string} username the third parameter.
+    * @return {string} SignUp successful message.
+  */
+  SignUpUser: (email, password, username) => {
+    AppDispatcher.dispatch({
+      ActionTypes: ActionTypes.SIGNUP_USER,
+      email,
+      password,
+      username
+    });
+  },
+
+  // SignIn User`s Action
+  /**
+    * SignIn User's function
+    * @param {string} email the first parameter.
+    * @param {string} password the second parameter.
+    * @return {string} SignIn successful message.
+  */
+  SignInUser: (email, password) => {
+    AppDispatcher.dispatch({
+      ActionTypes: ActionTypes.SIGNIN_USER,
+      email,
+      password,
+    });
+  },
+
+  // SignOut User`s Action
+  /**
+    * SignOut User function
+    * @return {string} SignOut successful message.
+  */
+  SignOutUser: () => {
+    AppDispatcher.dispatch({
+      ActionTypes: ActionTypes.SIGNOUT_USER,
+    });
+  },
+
+};
+
+export default AppActions;

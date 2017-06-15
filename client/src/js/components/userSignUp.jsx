@@ -1,10 +1,9 @@
 // signUp Component
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import {connect} from 'react-redux'
-// import {signUpRequest} from '../actions/AppActions';
+
 import axios from 'axios'
-// import authentication
+
 
 
 class SignUp extends React.Component{
@@ -26,10 +25,11 @@ class SignUp extends React.Component{
 		this.setState({[signUp.target.name]: signUp.target.value})
 	}
 
+	// OnSubmit method
 	onSubmit(signUp) {
 		signUp.preventDefault();
-		//this.props.signUpRequest(this.state);
-		axios.post('/user/signup', this.state );
+
+		axios.post('/user/signup', this.state);
 		console.log(this.state);
 	}
 	render() {
