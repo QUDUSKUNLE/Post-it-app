@@ -2,9 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-// import cookieParser from "cookie-parser";
 import Router from './config/userRoutes.js';
-
 // New Addition
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -31,22 +29,23 @@ app.use((req, res, next) => {
 
 // MIDDLEWARE
 app.use(morgan('dev')); // log all requests to the console
-// Register our routes - all routes
+
 
 // Added Webpack
-// const compiler = webpack(config);
-// app.use(webpackMiddleware(compiler, {
-//     hot: true,
-//     publicPath: config.output.publicPath,
-//     noInfo: true
-// }));
+const compiler = webpack(config);
+app.use(webpackMiddleware(compiler, {
+  hot: true,
+  publicPath: config.output.publicPath,
+  noInfo: true
+}));
 
 app.use(webpackMiddleware(webpack(config)));
 
+
 app.use('/', Router);
 
+// App listening port
 app.listen(port);
-// console.log('port: ' + port);
 
 
 module.exports = app;

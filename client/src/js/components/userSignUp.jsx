@@ -28,9 +28,14 @@ class SignUp extends React.Component{
 	// OnSubmit method
 	onSubmit(signUp) {
 		signUp.preventDefault();
-
-		axios.post('/user/signup', this.state);
-		console.log(this.state);
+		// Trim user Details 
+		const userDetails = {
+			email: this.state.email,
+			password: this.state.password,
+			username: this.state.username
+		}
+		axios.post('/user/signup', userDetails);
+		console.log(userDetails);
 	}
 	render() {
 
