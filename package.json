@@ -4,11 +4,13 @@
   "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
   "main": "index.js",
   "scripts": {
-  "start": "npm run build:server && npm run build:client",
-    "build:server": "nodemon --watch server --exec babel-node -- server/server.js",
-    "build:client": "webpack-dev-server"
+    "start": "webpack server/server.js && npm run build",
+        "start:dev": "npm run build & npm start",
+        "start:prod": "npm run build && node server/server.js",
+        "build": "webpack-dev-server --inline --content-base client/src --history-api-fallback"
   },
   "repository": {
+    "type": "git",
     "url": "https://github.com/QUDUSKUNLE/Post-it-app"
   },
   "author": "Qudus YEKEEN",
