@@ -8,6 +8,7 @@ const Router = express.Router();
 //  ===================Homepage Endpoint=======================//
 Router.route('/')
   .get((req, res) => {
+    // Bunlde index.html
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
 //  ======================Sign Up Endpoint============//
