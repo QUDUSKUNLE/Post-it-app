@@ -39,14 +39,13 @@ Router.route('/user/signup')
             });
           });
       })
-        .catch(() => {
-          res.status(502).send({
-            message: 'Already registered'
-          });
+      .catch(() => {
+        res.status(502).send({
+          message: 'Already registered'
         });
+      });
   });
 //  ======================Sign in Endpoint===========================//
-
 Router.route('/user/signin')
   .post((req, res) => {
     const email = req.body.email;
@@ -64,7 +63,6 @@ Router.route('/user/signin')
       });
   });
 //  ======================Sign Out Endpoint========================//
-
 Router.route('/user/signout')
   .post((req, res) => {
     firebase.auth().signOut()
@@ -81,7 +79,6 @@ Router.route('/user/signout')
   });
 
 //  ===============Create Group Endpoint======================//
-
 Router.route('/group')
   .post((req, res) => {
     const email = req.body.email;

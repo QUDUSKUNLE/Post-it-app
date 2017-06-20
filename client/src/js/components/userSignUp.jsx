@@ -1,10 +1,8 @@
 // signUp Component
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-
-import axios from 'axios'
-
-
+import AppActions from '../actions/AppActions';
+import SignupStore from '../stores/SignUp';
 
 class SignUp extends React.Component{
 	constructor(props) {
@@ -21,9 +19,18 @@ class SignUp extends React.Component{
 		// Bind signUp form values
 		this.onSubmit = this.onSubmit.bind(this);
 
-		// Bind Page redirect
-		this.redirectIfSignUp = this.redirectIfSignUp.bind(this);
+		// // Bind Page redirect
+		// this.redirectIfSignUp = this.redirectIfSignUp.bind(this);
 	};
+	// Mount component
+	componentDidMount() {
+		SignupStore.addChangeListener(this.onChange);
+	}
+
+	// Unmount component
+	componentWillUnmount() {
+		SignupStore.removeChangeListener(this.onChange);
+	}
 
 	// bind signUp component
 	onChange(signUp) {
@@ -41,28 +48,9 @@ class SignUp extends React.Component{
 			password: this.state.password,
 			username: this.state.username
 		};
-
-		axios.post('/user/signup', userDetails);
-		console.log(userDetails);
+		// SignUp user function
+		AppActions.signUp(userDetails.email, userDetails.password, userDetails.username);
 	};
-
-	// Mount redirect
-	componentWillMount(){
-		this.redirectIfSignUp();
-
-		// Set Timeout for redirect
-		setTimeout(() => {
-			this.redirectIfSignUp();
-		}, 1000);
-	};
-
-	// redirect Function
-	redirectIfSignUp() {
-    const token = window.localStorage.getItem('token');
-    if (token) {
-      browserHistory.push('/user/signin');
-    }
-  };
 
 	render() {
 		return (

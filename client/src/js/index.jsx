@@ -1,20 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-//import { browserHistory } from 'react-router'
-// import { HashRouter as Router, browserHistory } from 'react-router-dom'
-// import routes from './components/routes'
-// import { Provider } from 'react-redux'
-// import thunk from "redux-thunk"
-// import { createStore, applyMiddleware } from 'redux'
-// import { composeWithDevTools } from 'redux-devtools-extension';
-// import rootReducer from '../src/reducers';
-import App from './components/App'
-
-
+import App from './components/App.jsx'
+import { BrowserRouter as Router, browserHistory, Route, Link  } from 'react-router-dom';
+import SignIn from './components/UserSignIn';
+import CreateGroup from './components/UserCreateGroup';
+import BroadCastBoard from './components/UserBroadcastBoard';
+import AddMember from './components/UserAddMember';
 
 ReactDOM.render(
-
-		<App />
-		
-	, document.getElementById('app')
+	<Router history={ browserHistory }>
+    <div>
+      <Route exact path="/" component={App}/>
+      <Route path="/user/signin" component={SignIn} />
+      <Route path="/user/group" component={CreateGroup} />
+      <Route path="/user/broadcastboard" component={BroadCastBoard}/>
+      <Route path="/user/addmember" component={AddMember}/>
+    </div>
+  </Router>, document.getElementById('app')
 );

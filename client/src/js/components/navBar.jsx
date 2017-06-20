@@ -1,11 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React from  'react'
+import {Link} from 'react-router-dom';
 
-class NavBar extends React.Component{
-	render(){
-		return(
-			<div>
-				<div className="navbar navbar-default" role="navigation">
+
+class NavBar extends React.Component {
+  render(){
+    return(
+      <div>
+        <div className="navbar navbar-default" role="navigation">
 					<div className="container">
 						<div className="navbar-header">
 							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,7 +15,9 @@ class NavBar extends React.Component{
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
 							</button>
-							<Link to="/" className="navbar-brand">PostIt<small>App</small></Link>
+							<h1 className="navbar-brand">
+                PostIt<small>App</small>
+              </h1>
 						</div>
 						<div className="collapse navbar-collapse">
 							<ul className="nav navbar-nav">
@@ -25,11 +28,10 @@ class NavBar extends React.Component{
 							</ul>
 						</div>
 					</div>
-				</div>
-			</div>
-		)
-	}
+        </div>
+      </div>
+    )
+  }
 }
-
 
 export default NavBar;

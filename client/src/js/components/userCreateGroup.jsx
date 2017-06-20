@@ -15,6 +15,8 @@ class CreateGroup extends React.Component {
 
 		// Bind to Create Group Form
 		this.onSubmit = this.onSubmit.bind(this);
+
+		//
 	}
 	onChange(createGroup) {
 		this.setState({ [createGroup.target.name]: createGroup.target.value });
@@ -29,6 +31,29 @@ class CreateGroup extends React.Component {
 	render() {
 		return (
 			<div>
+				<div className="navbar navbar-default" role="navigation">
+					<div className="container">
+						<div className="navbar-header">
+							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span className="sr-only">Toggle navigation</span>
+								<span className="icon-bar"></span>
+								<span className="icon-bar"></span>
+								<span className="icon-bar"></span>
+							</button>
+							<h1 className="navbar-brand">
+                PostIt<small>App</small>
+              </h1>
+						</div>
+						<div className="collapse navbar-collapse">
+							<ul className="nav navbar-nav">
+							</ul>
+							<ul className="nav navbar-nav navbar-right">
+								<li><Link to="/">Home</Link></li>
+								<li><Link to="/">Sign Out</Link></li>
+							</ul>
+						</div>
+					</div>
+        </div>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6">

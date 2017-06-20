@@ -6,8 +6,8 @@ import Router from './config/userRoutes.js';
 // New Addition
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
-// import webpackHotMiddleware from 'webpack-hot-middleware';
-import config from '../webpack.config';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../webpack.config.js';
 
 
 // PORT
@@ -39,7 +39,7 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 
-app.use(webpackMiddleware(webpack(config)));
+app.use(webpackHotMiddleware(compiler));
 
 
 app.use('/', Router);
