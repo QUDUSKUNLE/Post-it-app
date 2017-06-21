@@ -1,7 +1,10 @@
 import React from 'react';
-// import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import { browserHistory, Link } from 'react-router-dom';
+// import SignInUser from '../actions/AppActions';
+// import SignInForm  from './signInForm'
 
 class SignIn extends React.Component{
 	constructor(props) {
@@ -9,13 +12,13 @@ class SignIn extends React.Component{
 		this.state = {
 			email: '',
 			password: ''
-		}
+		};
 		// Bind input field values
 		this.onChange = this.onChange.bind(this);
 
 		// Bind Form values
 		this.onSubmit = this.onSubmit.bind(this);
-	}
+	};
 
 	onChange(signIn) {
 		this.setState({
@@ -25,31 +28,29 @@ class SignIn extends React.Component{
 
 	onSubmit(signIn) {
 		signIn.preventDefault();
-		const userSignInDetails = {
+		const SignInDetails = {
 			email: this.state.email,
 			password: this.state.password
-		}
-		axios.post('/user/signin', userSignInDetails)
-		  .then((response) =>{
+		};
+		axios.post('/user/signin', SignInDetails)
+			.then((response) => {
 				// const token = response.data.token;
 				// const userToken = jwtDecode(token).userToken;
 				// window.localStorage.setItem('token', token);
 				console.log(response.data);
-				// console.log(token);
 				alert(response.data.message);
-				browserHistory.push('/user/broadcastboard');
+				// browserHistory.push('/user/broadcastboard');
 			})
 			.catch((error) => {
 				if (error.response) {
 					console.log(error.response.data);
 					alert(`User's Details ${error.response.data.message}.`);
-				};
+				}
 			});
-		console.log(userSignInDetails);
 	};
 
-
 	render() {
+
 		return (
 			<div>
 				<div className="navbar navbar-default" role="navigation">
@@ -77,38 +78,38 @@ class SignIn extends React.Component{
         </div>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-6 col-md-offset-3">
-							<div className="row">
-								<form className="col-md-6 col-md-offset-3" onSubmit={this.onSubmit}>
-									<div className="form-group">
-										<label htmlFor="email">Email</label>
-										<input value={this.state.email} onChange={this.onChange}
-											id="email" type="email"
-											className="form-control" placeholder="johndoe@example.com"
-											name="email" required />
-									</div>
-									<div className="form-group">
-										<label htmlFor="password">Password</label>
-										<input id="password" type="password"
-											value={this.state.password} onChange={this.onChange}
-											className="form-control" placeholder="*********"
-											name="password" required />
-									</div>
-									<button type="submit" className="btn btn-success form-control" name="action">
-										Sign in
-									</button>
-								</form>
-							</div>
-						</div>
-
-					</div>
+	          <div className="col-md-6 col-md-offset-3">
+	            <div className="row">
+	              <form className="col-md-6 col-md-offset-3" onSubmit={this.onSubmit}>
+	                <div className="form-group">
+	                  <label htmlFor="email">Email</label>
+	                  <input value={this.state.email} onChange={this.onChange}
+	                    id="email" type="email"
+	                    className="form-control" placeholder="johndoe@example.com"
+	                    name="email" required />
+	                </div>
+	                <div className="form-group">
+	                  <label htmlFor="password">Password</label>
+	                  <input id="password" type="password"
+	                    value={this.state.password} onChange={this.onChange}
+	                    className="form-control" placeholder="*********"
+	                    name="password" required />
+	                </div>
+	                <button type="submit" className="btn btn-success form-control">
+	                  Sign in
+	                </button>
+	              </form>
+	            </div>
+	          </div>
+	        </div>
 				</div>
 			</div>
 		);
 	}
 };
 
-
-
+// SignIn.propTypes = {
+// 	SignInUser: PropTypes.func.isRequired
+// };
 
 export default SignIn;

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 // import AppActions from '../actions/AppActions';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 
 class SignUp extends React.Component{
@@ -12,8 +13,6 @@ class SignUp extends React.Component{
 			username: '',
 			password: '',
 			conf_password: ''
-			// error: {},
-			// isLoading: false
 		}
 		// Bind signUp input fields
 		this.onChange = this.onChange.bind(this);
@@ -32,22 +31,29 @@ class SignUp extends React.Component{
 	// OnSubmit method
 	onSubmit(signUp) {
 		// this.setState({ errors: {}, isLoading: true });
-		signUp.preventefault();
+		signUp.preventDefault();
 		// // Trim user Details
 		const userDetails = {
 			email: this.state.email,
 			password: this.state.password,
-			username: this.state.username,
-			conf_password: this.state.conf_password
+			username: this.state.username
 		};
-     this.props.SignUpUser(userDetails);
-		//    .then(() => {},
-		// 	 ({ data }) => this.setState({ errors: data, isLoading: false })
-		//  );
+		axios.post('/user/signup', userDetails)
+			.then((response) => {
+				alert(`Hi ${userDetails.username}, ${response.data.message}`);
+				console.log(response.data);
+				console.log(userDetails);
+			})
+			.catch((error) => {
+				if (error.response) {
+					console.log(error.response.data);
+					alert(`Hey ${userDetails.username},\
+						 you've ${error.response.data.message}.`);
+				}
+			});
 	};
 
 	render() {
-
 		// const { errors } = this.state;
 		return (
 			<div>
@@ -94,7 +100,4 @@ class SignUp extends React.Component{
 	}
 };
 
-SignUp.propTypes = {
-  SignUpUser: PropTypes.func.isRequired
-};
 export default SignUp;

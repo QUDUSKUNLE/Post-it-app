@@ -1,18 +1,17 @@
 import React from 'react';
-import axios from 'axios';
-import SignUp from './UserSignUp'
-import PropTypes from 'prop-types'
-// import AppActions from '../actions/AppActions';
-// import AppStore from '../stores/AppStore'
-import { connect } from 'react-redux';
-import SignUpUser from '../actions/AppActions'
+// import axios from 'axios';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types'
+import SignUp from './userSignUp';
+
+
 
 class Home extends React.Component{
   constructor(props) {
     super(props);
   }
   render(){
-    const { SignUpUser } = this.props;
+
     return(
         <div>
           <div className="container">
@@ -25,7 +24,7 @@ class Home extends React.Component{
 										&nbsp;allows friends to come together and share vital informtion
 								</p>
 							</div>
-							<SignUp  SignUpUser={ SignUpUser } />
+							<SignUp/>
 						</div>
 					</div>
         </div>
@@ -33,8 +32,6 @@ class Home extends React.Component{
   }
 };
 
-Home.propTypes = {
-  SignUpUser: PropTypes.func.isRequired
-};
 
-export default connect((state) => { return {}}, { SignUpUser })(Home);
+
+export default Home;

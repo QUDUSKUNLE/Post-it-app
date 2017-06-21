@@ -22,7 +22,7 @@ import axios from 'axios';
 //   }
 // };
 
-const SignUpUser =
+export const SignUpUser =
   (userData) => {
     axios.post('/user/signup', userData)
       .then((response) => {
@@ -38,5 +38,3 @@ const SignUpUser =
         }
       });
   };
-
-export default SignUpUser;
