@@ -1,6 +1,8 @@
 //  =================== Import Libraries=====================//
 import express from 'express';
 import firebase from 'firebase';
+// import Validator from 'validator';
+// import isEmpty from 'lodash/isEmpty';
 import db from './config.js';
 import path from 'path';
 
@@ -12,6 +14,19 @@ Router.route('/')
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
 //  ======================Sign Up Endpoint============//
+// // Password validation
+// const passwordValidator = (data) => {
+//   const errors = {};
+//   if (!Validator.equals(data.password, data.conf_password)) {
+//     errors.conf_password = 'Password does not match';
+//   }
+//   return {
+//     errors,
+//     isValid: isEmpty(errors)
+//   };
+// };
+
+// Sign up Routes
 Router.route('/user/signup')
   .post((req, res) => {
     const email = req.body.email;
