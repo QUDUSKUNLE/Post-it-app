@@ -1,6 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 class BroadCastBoard extends React.Component {
+	constructor(props){
+		super(props);
+
+		this.onClick = this.onClick.bind(this);
+	}
+
+	onClick() {
+		axios.post('/signout')
+		  .then((response) => {
+				alert(response.data.message);
+				console.log(response.data);
+				this.props.history.push('/');
+			})
+			.catch((error) => {
+				if (error.response) {
+					console.log(error.response.data);
+				};
+			});
+	};
+
 	render() {
 		return (
 			<div>
@@ -22,7 +43,7 @@ class BroadCastBoard extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-								<li><Link to="/">Sign out</Link></li>
+								<li className="btn" onClick={this.onClick}>Sign out</li>
 							</ul>
 						</div>
 					</div>
@@ -31,9 +52,9 @@ class BroadCastBoard extends React.Component {
 					<div className="row">
 						<div className="col-md-12">
 							<ul className="nav nav-pills nav-justified">
-								<li role="presentation" className="active"><Link to="/user/broadcastboard">BroadcastBoard</Link></li>
-								<li role="presentation" data-toggle="modal" data-target="#myModal"><Link to="/user/group">Create Group</Link></li>
-								<li role="presentation"><Link to="/user/addmember">Add member</Link></li>
+								<li role="presentation" className="active"><Link to="/broadcastboard">BroadcastBoard</Link></li>
+								<li role="presentation" data-toggle="modal" data-target="#myModal"><Link to="/group">Create Group</Link></li>
+								<li role="presentation"><Link to="/member">Add member</Link></li>
 							</ul>
 						</div>
 					</div>

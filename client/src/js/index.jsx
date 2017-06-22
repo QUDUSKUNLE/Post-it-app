@@ -20,10 +20,10 @@ ReactDOM.render(
 		<Router history={ browserHistory }>
 		  <div>
 		    <Route exact path="/" component={App}/>
-		    <Route path="/user/signin" component={SignIn} />
-		    <Route path="/user/group" component={CreateGroup} />
-		    <Route path="/user/broadcastboard" component={BroadCastBoard}/>
-		    <Route path="/user/addmember" component={AddMember}/>
+		    <Route path="/signin" component={SignIn} />
+		    <Route path="/group" component={CreateGroup} />
+		    <Route path="/broadcastboard" component={BroadCastBoard}/>
+		    <Route path="/member" component={AddMember}/>
 		  </div>
 		</Router>
 </Provider>, document.getElementById('app')

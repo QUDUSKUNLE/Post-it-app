@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import { browserHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import SignInUser from '../actions/AppActions';
 // import SignInForm  from './signInForm'
 
@@ -32,14 +30,14 @@ class SignIn extends React.Component{
 			email: this.state.email,
 			password: this.state.password
 		};
-		axios.post('/user/signin', SignInDetails)
+		axios.post('/signin', SignInDetails)
 			.then((response) => {
 				// const token = response.data.token;
 				// const userToken = jwtDecode(token).userToken;
 				// window.localStorage.setItem('token', token);
 				console.log(response.data);
 				alert(response.data.message);
-				// browserHistory.push('/user/broadcastboard');
+				this.props.history.push('/broadcastboard');
 			})
 			.catch((error) => {
 				if (error.response) {
@@ -71,7 +69,6 @@ class SignIn extends React.Component{
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-                <li><Link to="/user/broadcastboard">Chat Room</Link></li>
 							</ul>
 						</div>
 					</div>

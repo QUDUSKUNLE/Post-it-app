@@ -27,7 +27,7 @@ Router.route('/')
 // };
 
 // Sign up Routes
-Router.route('/user/signup')
+Router.route('/signup')
   .post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -61,7 +61,7 @@ Router.route('/user/signup')
       });
   });
 //  ======================Sign in Endpoint===========================//
-Router.route('/user/signin')
+Router.route('/signin')
   .post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -78,7 +78,7 @@ Router.route('/user/signin')
       });
   });
 //  ======================Sign Out Endpoint========================//
-Router.route('/user/signout')
+Router.route('/signout')
   .post((req, res) => {
     firebase.auth().signOut()
       .then(() => {
@@ -129,12 +129,12 @@ Router.route('/group')
 
 
 //  ============================ADD MEMBER ENDPOINT=================//
-Router.route('/group/groupId/user')
+Router.route('/group/member')
   .post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const groupName = req.body.group;
-    const groupMember = req.body.user;
+    const groupMember = req.body.member;
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
         const uSer = (firebase.auth().currentUser).uid;
@@ -154,7 +154,7 @@ Router.route('/group/groupId/user')
   });
 
 //	===============Delete a user`s Account============
-Router.route('/user/delete')
+Router.route('/delete')
   .post((req, res) => {
     const email = req.body.email;
     const password = req.body.password;

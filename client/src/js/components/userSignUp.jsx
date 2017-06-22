@@ -1,6 +1,6 @@
 // signUp Component
 import React from 'react';
-import { Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 // import AppActions from '../actions/AppActions';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -38,11 +38,12 @@ class SignUp extends React.Component{
 			password: this.state.password,
 			username: this.state.username
 		};
-		axios.post('/user/signup', userDetails)
+		axios.post('/signup', userDetails)
 			.then((response) => {
 				alert(`Hi ${userDetails.username}, ${response.data.message}`);
 				console.log(response.data);
 				console.log(userDetails);
+				this.props.history.push('/signin');
 			})
 			.catch((error) => {
 				if (error.response) {

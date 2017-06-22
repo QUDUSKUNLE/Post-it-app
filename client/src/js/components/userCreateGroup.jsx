@@ -8,7 +8,8 @@ class CreateGroup extends React.Component {
 		this.state = {
 			email: '',
 			password: '',
-			groupname: ''
+			group: '',
+
 		}
 		// Bind Create Group Input Fields
 		this.onChange = this.onChange.bind(this);
@@ -16,18 +17,46 @@ class CreateGroup extends React.Component {
 		// Bind to Create Group Form
 		this.onSubmit = this.onSubmit.bind(this);
 
-		//
-	}
+		this.onClick = this.onClick.bind(this);
+	};
 	onChange(createGroup) {
 		this.setState({ [createGroup.target.name]: createGroup.target.value });
-	}
+	};
+
+	onClick() {
+		axios.post('/signout')
+		  .then((response) => {
+				alert(response.data.message);
+				console.log(response.data);
+				this.props.history.push('/')
+			})
+			.catch((error) => {
+				if (error.response) {
+					console.log(error.response.data);
+				};
+			});
+	};
 
 	onSubmit(createGroup) {
 		createGroup.preventDefault();
-		axios.post('/user/group', this.state );
-		alert(this.state.groupname + ' group created successfully!!!');
-		console.log(this.state);
-	}
+		const groupDetails = {
+			email: this.state.email,
+			password: this.state.password,
+			group: this.state.group
+		}
+		axios.post('/group', groupDetails)
+		  .then((response) => {
+				console.log(response.data);
+				alert(this.state.group + ' group created successfully!!!');
+				this.props.history.push('/broadcastboard');
+			})
+			.catch((error) => {
+				if (error.response) {
+					console.log(error.response.data)
+				}
+			});
+	};
+
 	render() {
 		return (
 			<div>
@@ -49,7 +78,8 @@ class CreateGroup extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-								<li><Link to="/">Sign Out</Link></li>
+								<li><Link to="/broadcastboard">Chat Room</Link></li>
+								<li className="btn" onClick={this.onClick}>Sign Out</li>
 							</ul>
 						</div>
 					</div>
@@ -61,10 +91,10 @@ class CreateGroup extends React.Component {
 								<form className="col-md-offset-3 col-md-6" onSubmit={this.onSubmit}>
 									<div className="form-group">
 										<label htmlFor="groupname">Group Name</label>
-										<input value={this.state.groupname} onChange={this.onChange}
+										<input value={this.state.group} onChange={this.onChange}
 											id="groupname" type="text"
 											className="form-control" placeholder="andela-abuja"
-											name='groupname' required/>
+											name='group' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="email">Email</label>

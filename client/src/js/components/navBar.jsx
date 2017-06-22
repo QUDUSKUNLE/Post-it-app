@@ -24,7 +24,7 @@ class NavBar extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-								<li><Link to="/user/signin">Sign in</Link></li>
+								<li><Link to="/signin">Sign in</Link></li>
 							</ul>
 						</div>
 					</div>
