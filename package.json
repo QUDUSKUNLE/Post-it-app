@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
   "main": "index.js",
+  "engines": {
+    "node": "6.9.4"
+  },
   "scripts": {
     "dev": "babel-watch server/server.js",
     "start": "babel-watch ./dist/server.js",
