@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router';
 // import AppActions from '../actions/AppActions';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 class SignUp extends React.Component{
 	constructor(props) {

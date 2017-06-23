@@ -60,7 +60,7 @@ class CreateGroup extends React.Component {
 	render() {
 		return (
 			<div>
-				<div className="navbar navbar-default" role="navigation">
+				<nav className="navbar navbar-inverse navabar-fixed-top" role="navigation">
 					<div className="container">
 						<div className="navbar-header">
 							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -69,21 +69,22 @@ class CreateGroup extends React.Component {
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
 							</button>
-							<h1 className="navbar-brand">
+							<Link className="navbar-brand" to="/">
                 PostIt<small>App</small>
-              </h1>
+              </Link>
 						</div>
 						<div className="collapse navbar-collapse">
 							<ul className="nav navbar-nav">
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-								<li><Link to="/broadcastboard">Chat Room</Link></li>
-								<li className="btn" onClick={this.onClick}>Sign Out</li>
+								<li><Link to="/broadcastboard">ChatRoom</Link></li>
+								<li className="active"><Link to="">Create Group</Link></li>
+								<li onClick={this.onClick}><Link to="">Sign Out</Link></li>
 							</ul>
 						</div>
 					</div>
-        </div>
+        </nav>
 				<div className="container">
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6">

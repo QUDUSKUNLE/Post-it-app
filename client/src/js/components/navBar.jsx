@@ -1,34 +1,34 @@
 import React from  'react'
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+// import '../../css/dashboard.css';
 
 class NavBar extends React.Component {
   render(){
     return(
       <div>
-        <div className="navbar navbar-default" role="navigation">
-					<div className="container">
-						<div className="navbar-header">
-							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span className="sr-only">Toggle navigation</span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-							</button>
-							<h1 className="navbar-brand">
+        <nav className="navbar navbar-inverse navabar-fixed-top" role="navigation">
+          <div className="container">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="/">
                 PostIt<small>App</small>
-              </h1>
-						</div>
-						<div className="collapse navbar-collapse">
-							<ul className="nav navbar-nav">
-							</ul>
-							<ul className="nav navbar-nav navbar-right">
-								<li><Link to="/">Home</Link></li>
-								<li><Link to="/signin">Sign in</Link></li>
-							</ul>
-						</div>
-					</div>
-        </div>
+              </Link>
+            </div>
+            <div className="collapse navbar-collapse">
+              <ul className="nav navbar-nav">
+              </ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li className="active"><Link to="/">Home</Link></li>
+                <li><Link to="/signin">Sign in</Link></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
       </div>
     )
   }
