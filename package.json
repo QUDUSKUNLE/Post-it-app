@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "babel-watch server/server.js",
-    "start": "babel-watch server/server.js",
-    "build": "webpack"
+    "start": "babel-node ./dist/server.js",
+    "build": "babel server/ -d dist"
   },
   "repository": {
     "type": "git",
