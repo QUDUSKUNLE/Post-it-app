@@ -7,7 +7,7 @@ import { BrowserRouter as Router, browserHistory, Route, Link  } from 'react-rou
 import App from './components/app.jsx'
 import SignIn from './components/userSignIn.jsx'
 import CreateGroup from './components/userCreateGroup.jsx'
-import BroadCastBoard from './components/userBroadcastBoard.jsx'
+import BroadCastBoard from './components/userBroadCastBoard.jsx'
 import AddMember from './components/userAddMember.jsx'
 
 const store =  createStore(
