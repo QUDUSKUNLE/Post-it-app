@@ -12,12 +12,12 @@ class BroadCastBoard extends React.Component {
 		axios.post('/signout')
 		  .then((response) => {
 				alert(response.data.message);
-				console.log(response.data);
+				// console.log(response.data);
 				this.props.history.push('/');
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data);
+					// console.log(error.response.data);
 				};
 			});
 	};

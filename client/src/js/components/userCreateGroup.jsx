@@ -27,12 +27,12 @@ class CreateGroup extends React.Component {
 		axios.post('/signout')
 		  .then((response) => {
 				alert(response.data.message);
-				console.log(response.data);
+				// console.log(response.data);
 				this.props.history.push('/')
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data);
+					// console.log(error.response.data);
 				};
 			});
 	};
@@ -46,13 +46,13 @@ class CreateGroup extends React.Component {
 		}
 		axios.post('/group', groupDetails)
 		  .then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				alert(this.state.group + ' group created successfully!!!');
 				this.props.history.push('/broadcastboard');
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data)
+					// console.log(error.response.data)
 				}
 			});
 	};

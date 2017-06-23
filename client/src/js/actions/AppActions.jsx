@@ -1,7 +1,3 @@
-// AppActions
-// import axios from 'axios';
-// import Validator from 'validator'
-// // import jwtDecode from 'jwt-decode';
 import ActionTypes from '../constants/AppConstants.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 //
