@@ -35,13 +35,13 @@ class SignIn extends React.Component{
 				// const token = response.data.token;
 				// const userToken = jwtDecode(token).userToken;
 				// window.localStorage.setItem('token', token);
-				console.log(response.data);
+				// console.log(response.data);
 				alert(response.data.message);
 				this.props.history.push('/broadcastboard');
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data);
+					// console.log(error.response.data);
 					alert(`User's Details ${error.response.data.message}.`);
 				}
 			});

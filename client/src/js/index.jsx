@@ -4,11 +4,11 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter as Router, browserHistory, Route, Link  } from 'react-router-dom'
-import App from './components/app.jsx'
-import SignIn from './components/userSignIn'
-import CreateGroup from './components/userCreateGroup'
-import BroadCastBoard from './components/userBroadcastBoard'
-import AddMember from './components/userAddMember'
+import App from './components/userApp.jsx'
+import SignIn from './components/userSignIn.jsx'
+import CreateGroup from './components/userCreateGroup.jsx'
+import BroadCastBoard from './components/userBroadCastBoard.jsx'
+import AddMember from './components/userAddMember.jsx'
 
 const store =  createStore(
 	(state = {}) => state,

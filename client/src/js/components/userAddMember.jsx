@@ -26,12 +26,12 @@ class AddMember extends React.Component {
 		axios.post('/signout')
 		  .then((response) => {
         alert(response.data.message);
-        console.log(response.data);
+        // console.log(response.data);
         this.props.history.push('/')
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data);
+					// console.log(error.response.data);
 				};
 			});
 	};
@@ -52,13 +52,13 @@ class AddMember extends React.Component {
     };
     axios.post('/group/member', memberDetails)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         alert(response.data.message);
         this.props.history.push('/broadcastboard')
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response.data);
+          // console.log(error.response.data);
         }
       })
   };

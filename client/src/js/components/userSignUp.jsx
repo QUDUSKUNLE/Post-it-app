@@ -40,13 +40,13 @@ class SignUp extends React.Component{
 		axios.post('/signup', userDetails)
 			.then((response) => {
 				alert(`Hi ${userDetails.username}, ${response.data.message}`);
-				console.log(response.data);
-				console.log(userDetails);
+				// console.log(response.data);
+				// console.log(userDetails);
 				this.props.history.push('/signin');
 			})
 			.catch((error) => {
 				if (error.response) {
-					console.log(error.response.data);
+					// console.log(error.response.data);
 					alert(`Hey ${userDetails.username},\
 						 you've ${error.response.data.message}.`);
 				}

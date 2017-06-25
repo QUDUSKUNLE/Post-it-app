@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 
 const path = require('path');
-export default {
+const config = {
   entry: [
     'webpack-hot-middleware/./client',
     './client/src/js/index.jsx'
@@ -30,8 +30,8 @@ export default {
         ]
       },
       {
-        test: /\.scss?$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.css?$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -39,3 +39,4 @@ export default {
     extensions: ['*', '.js', '.jsx']
   },
 };
+export default config;
