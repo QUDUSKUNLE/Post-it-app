@@ -1,10 +1,14 @@
 //  BASE SET-UP
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const cookieParser = require("cookie-parser");
-const Router = require('./Config/userRoutes.js');
-const config = require('config');
+import express from 'express';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import Router from './config/userRoutes.js';
+// New Addition
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../webpack.config.js';
+
 
 // PORT
 const port = process.env.PORT || 8080;
@@ -14,22 +18,33 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // configure app to handle CORS requests
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, \
-	content-type, Authorization');
-    next();
-});
-// MIDDLEWARE
-if (config.util.getEnv('NODE_ENV') !== 'test') {
-    app.use(morgan('dev')); // log all requests to the console
-}
 
-// Register our routes - all routes
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
+  'content-type, Authorization');
+  next();
+});
+
+// MIDDLEWARE
+app.use(morgan('dev')); // log all requests to the console
+
+
+// Added Webpack
+const compiler = webpack(config);
+app.use(webpackMiddleware(compiler, {
+  hot: true,
+  publicPath: config.output.publicPath,
+  noInfo: true
+}));
+
+app.use(webpackHotMiddleware(compiler));
+
+
 app.use('/', Router);
 
+// App listening port
 app.listen(port);
-console.log('port: ' + port);
 
 module.exports = app;

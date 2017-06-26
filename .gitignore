@@ -1,7 +1,4 @@
 node_modules
 ./server/Config/postItApp.json
 .env
-
-dist
-.env-sample
-README.md
+in.txt
