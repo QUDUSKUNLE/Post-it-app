@@ -1,18 +1,15 @@
 import React from 'react';
-// import axios from 'axios';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types'
-import SignUp from './userSignUp';
+import SignUp from './userSignUp.jsx';
 
-
-
-class Home extends React.Component{
-  constructor(props) {
-    super(props);
-  }
-  render(){
-
-    return(
+/**
+ * Represents Home component.
+ */
+class Home extends React.Component {
+  /**
+     * @override
+     */
+  render() {
+    return (
         <div>
           <div className="container">
 						<div className="row">
@@ -21,17 +18,16 @@ class Home extends React.Component{
 									<small>
 										<i>App</i>
 									</small>
-										&nbsp;allows friends to come together and share vital informtion
+										&nbsp;
+                    allows friends to come together and share vital informtion
 								</p>
 							</div>
 							<SignUp/>
 						</div>
 					</div>
         </div>
-    )
+    );
   }
-};
-
-
-
+}
+// Export Home
 export default Home;

@@ -1,15 +1,21 @@
-import React from  'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-// import '../../css/dashboard.css';
-
+/**
+ * Represents NavBar Component.
+ */
 class NavBar extends React.Component {
-  render(){
-    return(
+  /**
+     * @override
+     */
+  render() {
+    return (
       <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top" role="navigation">
+        <nav className="navbar navbar-inverse navabar-fixed-top"
+          role="navigation">
           <div className="container">
             <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <button type="button" className="navbar-toggle collapsed"
+                data-toggle="collapse" data-target=".navbar-collapse">
                 <span className="sr-only">Toggle navigation</span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
@@ -30,8 +36,8 @@ class NavBar extends React.Component {
           </div>
         </nav>
       </div>
-    )
+    );
   }
 }
-
+// Export Navbar
 export default NavBar;

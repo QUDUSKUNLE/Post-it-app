@@ -1,8 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 
+/**
+ * Represents AddMember Component.
+ */
 class AddMember extends React.Component {
+  // AddMember constructor
+  /**
+     * @param {string} props inbuilt props.
+     */
   constructor(props) {
     super(props);
     this.state = {
@@ -20,28 +27,41 @@ class AddMember extends React.Component {
 
     // Sign out
     this.onClick = this.onClick.bind(this);
-  };
+  }
 
+  /**
+ * onClick event.
+ * @param {void} nil no parameter.
+ * @returns {object} response from server.
+ */
   onClick() {
-		axios.post('/signout')
-		  .then((response) => {
-        alert(response.data.message);
+    axios.post('/signout').then((response) => {
+      alert(response.data.message);
         // console.log(response.data);
-        this.props.history.push('/')
-			})
-			.catch((error) => {
-				if (error.response) {
+      this.props.history.push('/');
+    }).catch((error) => {
+      if (error.response) {
 					// console.log(error.response.data);
-				};
-			});
-	};
+      }
+    });
+  }
 
+  /**
+ * onChange event.
+ * @param {object} addmember The first number.
+ * @returns {void} bind input values to name.
+ */
   onChange(addmember) {
     this.setState({
       [addmember.target.name]: addmember.target.value
     });
-  };
+  }
 
+  /**
+ * onSubmit event.
+ * @param {object} addmember .
+ * @returns {void} .
+ */
   onSubmit(addmember) {
     addmember.preventDefault();
     const memberDetails = {
@@ -54,23 +74,27 @@ class AddMember extends React.Component {
       .then((response) => {
         // console.log(response.data);
         alert(response.data.message);
-        this.props.history.push('/broadcastboard')
+        this.props.history.push('/broadcastboard');
       })
       .catch((error) => {
         if (error.response) {
           // console.log(error.response.data);
         }
-      })
-  };
+      });
+  }
 
-
-  render(){
+  /**
+     * @override
+     */
+  render() {
     return (
       <div>
-        <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav className="navbar navbar-inverse navbar-fixed-top"
+          role="navigation">
 					<div className="container">
 						<div className="navbar-header">
-							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<button type="button" className="navbar-toggle"
+                data-toggle="collapse" data-target=".navbar-collapse">
 								<span className="sr-only">Toggle navigation</span>
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
@@ -94,8 +118,8 @@ class AddMember extends React.Component {
 					</div>
         </nav>
       </div>
-    )
+    );
   }
-};
-
+}
+// Export AddMember
 export default AddMember;
