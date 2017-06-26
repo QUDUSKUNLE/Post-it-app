@@ -1,5 +1,5 @@
-import firebase from 'firebase';
-import dotenv from 'dotenv';
+const firebase = require('firebase');
+const dotenv = require('dotenv');
 dotenv.config();
 
 //  =============Firebase Configuration=============================//
@@ -12,5 +12,5 @@ const config = {
   messagingSenderId: process.env.messagingSenderId
 };
 const db = firebase.initializeApp(config);
-
-export default db; // export db
+// export db
+module.exports = db;

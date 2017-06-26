@@ -47,5 +47,4 @@ app.use('/', Router);
 // App listening port
 app.listen(port);
 
-
 module.exports = app;

@@ -30,7 +30,7 @@ Router.route('/signup')
               userName: username
             });
             res.send({
-              message: 'Registration successful and ' +
+              message: 'Registration successful and \n' +
                   'verification email sent to your email'
             });
           })

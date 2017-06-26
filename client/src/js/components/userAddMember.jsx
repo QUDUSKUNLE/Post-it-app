@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import axios from 'axios';
 
+/**
+ * AddMember component.
+ * @returns {AddMember} component.
+ */
 class AddMember extends React.Component {
   constructor(props) {
     super(props);
@@ -20,28 +24,42 @@ class AddMember extends React.Component {
 
     // Sign out
     this.onClick = this.onClick.bind(this);
-  };
+  }
 
+  /**
+   * onclick event.
+   * @returns {response} from server.
+   */
   onClick() {
-		axios.post('/signout')
-		  .then((response) => {
+    axios.post('/signout')
+      .then((response) => {
         alert(response.data.message);
         // console.log(response.data);
         this.props.history.push('/')
-			})
+      })
 			.catch((error) => {
-				if (error.response) {
+  if (error.response) {
 					// console.log(error.response.data);
-				};
-			});
-	};
+  }
+});
+  }
 
+  /**
+   * setState.
+   * @params {addmember}
+   * @returns {response} from server.
+   */
   onChange(addmember) {
     this.setState({
       [addmember.target.name]: addmember.target.value
     });
-  };
+  }
 
+  /**
+   * onSubmit event.
+   * @params {addmember}
+   * @returns {response} from server.
+   */
   onSubmit(addmember) {
     addmember.preventDefault();
     const memberDetails = {
@@ -60,17 +78,19 @@ class AddMember extends React.Component {
         if (error.response) {
           // console.log(error.response.data);
         }
-      })
-  };
+      });
+  }
 
 
-  render(){
+  render() {
     return (
       <div>
-        <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav className="navbar navbar-inverse navbar-fixed-top"
+           role="navigation">
 					<div className="container">
 						<div className="navbar-header">
-							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<button type="button" className="navbar-toggle"
+                 data-toggle="collapse" data-target=".navbar-collapse">
 								<span className="sr-only">Toggle navigation</span>
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
@@ -94,8 +114,8 @@ class AddMember extends React.Component {
 					</div>
         </nav>
       </div>
-    )
+    );
   }
-};
+}
 
 export default AddMember;

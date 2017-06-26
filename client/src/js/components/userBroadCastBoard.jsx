@@ -1,34 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+
+/**
+ * BroadCastBoard component.
+ * @returns {AddMember} component.
+ */
 class BroadCastBoard extends React.Component {
-	constructor(props){
-		super(props);
+	/**
+	* props
+	 * constructor declaration
+	 @params {props}
+	 */
+  constructor(props) {
+    super(props);
+    this.onClick = this.onClick.bind(this);
+  }
 
-		this.onClick = this.onClick.bind(this);
-	}
+	/**
+	 * onClick wvent.
+	 * @returns {response} from server.
+	 */
+  onClick() {
+    axios.post('/signout').then((response) => {
+      alert(response.data.message);
+			// console.log(response.data);
+      this.props.history.push('/');
+    })
+		.catch((error) => {
+  if (error.response) {
+				// console.log(error.response.data);
+  }
+});
+  }
 
-	onClick() {
-		axios.post('/signout')
-		  .then((response) => {
-				alert(response.data.message);
-				// console.log(response.data);
-				this.props.history.push('/');
-			})
-			.catch((error) => {
-				if (error.response) {
-					// console.log(error.response.data);
-				};
-			});
-	};
-
-	render() {
-		return (
+	/**
+	 * render userBroadCastBoard.
+	 * @returns {render} userBroadCastBoard Component.
+	 */
+  render() {
+    return (
 			<div>
-        <nav className="navbar navbar-inverse navabar-fixed-top" role="navigation">
+        <nav className="navbar navbar-inverse navabar-fixed-top"
+					role="navigation">
 					<div className="container">
 						<div className="navbar-header">
-							<button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<button type="button" className="navbar-toggle"
+								data-toggle="collapse" data-target=".navbar-collapse">
 								<span className="sr-only">Toggle navigation</span>
 								<span className="icon-bar"></span>
 								<span className="icon-bar"></span>
@@ -43,7 +61,8 @@ class BroadCastBoard extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-								<li className="active"><Link to="/broadcastboard">ChatRoom</Link></li>
+								<li className="active"><Link to="/broadcastboard">
+								ChatRoom</Link></li>
 								<li onClick={this.onClick}><Link to="#">Sign out</Link></li>
 							</ul>
 						</div>
@@ -53,9 +72,14 @@ class BroadCastBoard extends React.Component {
 					<div className="row">
 						<div className="col-md-12">
 							<ul className="nav nav-pills nav-justified">
-								<li role="presentation" className="active"><Link to="/broadcastboard">BroadcastBoard</Link></li>
-								<li role="presentation" data-toggle="modal" data-target="#myModal"><Link to="/group">Create Group</Link></li>
-								<li role="presentation"><Link to="/member">Add member</Link></li>
+								<li role="presentation" className="active">
+									<Link to="/broadcastboard">BroadcastBoard</Link>
+								</li>
+								<li role="presentation" data-target="#myModal">
+									<Link to="/group">Create Group</Link></li>
+								<li role="presentation">
+									<Link to="/member">Add member</Link>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -68,8 +92,8 @@ class BroadCastBoard extends React.Component {
 					</div>
 				</div>
 			</div>
-		);
-	}
-};
+    );
+  }
+}
 
 export default BroadCastBoard;
