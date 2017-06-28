@@ -27,6 +27,7 @@
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
+    "css-loader": "^0.28.4",
     "dotenv": "^4.0.0",
     "eslint-plugin-react": "^6.1.2",
     "express": "^4.15.3",
@@ -47,6 +48,7 @@
     "redux-thunk": "^2.2.0",
     "underscore": "^1.8.3",
     "validator": "^7.0.0",
+    "style-loader": "^0.18.2",
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",
@@ -54,7 +56,6 @@
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
-    "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^8.0.0",
     "eslint-plugin-import": "^1.6.1",
