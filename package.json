@@ -48,7 +48,6 @@
     "redux-thunk": "^2.2.0",
     "underscore": "^1.8.3",
     "validator": "^7.0.0",
-    "style-loader": "^0.18.2",
     "webpack": "^2.5.1",
     "webpack-dev-middleware": "^1.10.2",
     "webpack-dev-server": "^2.4.5",
