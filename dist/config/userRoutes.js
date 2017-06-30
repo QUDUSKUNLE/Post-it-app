@@ -24,9 +24,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //  =================== Import Libraries=====================//
 var Router = _express2.default.Router();
+
 //  ===================Homepage Endpoint=======================//
-Router.route('/').get(function (req, res) {
-  // Bunlde index.html
+Router.route('/*').get(function (req, res) {
   res.sendFile(_path2.default.join(__dirname, '../../client/src/index.html'));
 });
 //  ======================Sign Up Endpoint============//
