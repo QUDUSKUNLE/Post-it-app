@@ -5,14 +5,20 @@ import morgan from 'morgan';
 import Router from './config/userRoutes.js';
 // New Addition
 import webpack from 'webpack';
+import compression from 'compression';
+// import connect from 'connect';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+// import historyFallback from 'express-history-api-fallback';
 import config from '../webpack.config.js';
+import path from 'path';
 
 
 // PORT
 const port = process.env.PORT || 8080;
 const app = express();
+app.use(compression());
+// app.use(historyFallback());
 
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,7 +46,6 @@ app.use(webpackMiddleware(compiler, {
 }));
 
 app.use(webpackHotMiddleware(compiler));
-
 
 app.use('/', Router);
 

@@ -5,10 +5,10 @@ import db from './config.js';
 import path from 'path';
 
 const Router = express.Router();
+
 //  ===================Homepage Endpoint=======================//
-Router.route('/')
+Router.route('/*')
   .get((req, res) => {
-    // Bunlde index.html
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
 //  ======================Sign Up Endpoint============//

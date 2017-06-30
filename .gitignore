@@ -2,3 +2,4 @@ node_modules
 ./server/Config/postItApp.json
 .env
 in.txt
+dist

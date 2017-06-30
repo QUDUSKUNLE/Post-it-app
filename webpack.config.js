@@ -1,5 +1,6 @@
-import webpack from 'webpack';
-import path from 'path';
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
     'webpack-hot-middleware/./client',
@@ -11,8 +12,17 @@ const config = {
     publicPath: '/',
     filename: 'index.js'
   },
-
+  devServer: {
+    contentBase: path.join(__dirname, 'client/src'),
+    compress: true,
+    port: 8080,
+    hot: true,
+    historyApiFallback: true
+  },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './client/src/index.html'
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin()
@@ -38,4 +48,4 @@ const config = {
     extensions: ['*', '.js', '.jsx']
   },
 };
-export default config;
+module.exports = config;
