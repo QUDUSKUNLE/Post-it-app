@@ -7,7 +7,7 @@
 
  <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
-# Local
+# Local install
   Kindly follow the steps below to setup a local development environment.
   1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
   
@@ -21,6 +21,6 @@
   
   6. <b>npm start</b>
   
-  7. Go to htto://localhost:8080/
+  7. Go to <b>http://localhost:8080/</b>
   
   
