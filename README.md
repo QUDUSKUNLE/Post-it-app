@@ -10,7 +10,7 @@ Methods
 &nbsp;&nbsp;&nbsp;&nbsp;'/':<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.GET: http://localhost:8080/
     
     
-&nbsp;&nbsp;&nbsp;&nbsp;'/signup'<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.POST: Create a user
+&nbsp;&nbsp;&nbsp;&nbsp;'/signup'<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.POST: Create a user<br/>
            parameters:
 	        email: string
 		
