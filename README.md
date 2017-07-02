@@ -7,7 +7,7 @@
 
  <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
-# Installation
+# Local
   Kindly follow the steps below to setup a local development environment.
   1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
   
@@ -20,6 +20,7 @@
   5. Create an .env file and set the variables in .env-sample to your specified database connection
   
   6. <b>npm start</b>
-
-# Contribution
-  If you wish to contribute to PostIt-app, you are much welcome. Kindly fork the repository and raise a PR.
+  
+  7. Go to htto://localhost:8080/
+  
+  
