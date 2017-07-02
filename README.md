@@ -2,7 +2,7 @@
   PostIt is a simple application that allows friends and colleagues create groups for notifications. This way one person can post       notifications to everyone by sending a message once. The application allows people create accounts, create groups and add registered users  to the groups, and then send messages out to these groups whenever they want.
 
 # PostIt-app API.
-  PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group. 
+  PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
   PostIt-app API is built with <a href="https://nodejs.org/">Node.js</a>, <a href="https://www.javascript.com/">JavaScript(ES6)</a>, <a href="https://expressjs.com/">Express</a> and <a href="https://firebase.google.com/">Firebase</a>
 
 # Features
@@ -11,8 +11,8 @@
   3. Create group
   4. Add Member to group
   5. Send broadcast message to group members
-  
-  
+
+
   <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
 # Installation
@@ -22,7 +22,7 @@
   3. Install project dependencies npm install
   4. Create an account of firebase and set up your app
   5. Create an .env file and set the variables in .env-sample to your specified database connection
-  6. Run npm run start-server
+  6. Run npm start
 
 # Contribution
   If you wish to contribute to PostIt-app, you are much welcome. Kindly fork the repository and raise a PR.
