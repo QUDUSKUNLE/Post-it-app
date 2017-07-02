@@ -12,19 +12,21 @@ Methods
     
     
 '/signup'
-	.POST: Create a user<br>parameters:
-			email: string
-
-			username: string
-
-			password: string
+      .POST: Create a user
+           parameters:
+	        email: string
+		
+		username: string
+		
+		password: string
 
 '/signin'
-	.POST: Sign in user
-		parameters:
-			email: string
-			
-			password: string
+      .POST: Sign in user
+           parameters:
+	   
+	   email: string
+	   
+	   password: string
 
 '/group'
 	.POST: Create a group
