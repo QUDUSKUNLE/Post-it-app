@@ -5,24 +5,21 @@
   PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
   PostIt-app API is built with <a href="https://nodejs.org/">Node.js</a>, <a href="https://www.javascript.com/">JavaScript(ES6)</a>, <a href="https://expressjs.com/">Express</a> and <a href="https://firebase.google.com/">Firebase</a>
 
-# Features
-  1. Sign Up
-  2. Log in
-  3. Create group
-  4. Add Member to group
-  5. Send broadcast message to group members
-
-
-  <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
+ <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
 # Installation
   Kindly follow the steps below to setup a local development environment.
-  1. Clone this repository from a terminal git clone https://github.com/QUDUSKUNLE/Post-it-app.
+  1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
+  
   2. Move into the project directory
-  3. Install project dependencies npm install
+  
+  3. Install project dependencies <b>npm install</b>
+  
   4. Create an account of firebase and set up your app
+  
   5. Create an .env file and set the variables in .env-sample to your specified database connection
-  6. Run npm start
+  
+  6. <b>npm start</b>
 
 # Contribution
   If you wish to contribute to PostIt-app, you are much welcome. Kindly fork the repository and raise a PR.
