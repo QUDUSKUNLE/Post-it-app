@@ -7,51 +7,54 @@ use x-www-formurlencoded parameters.
 
 Methods
 
-<b>'/'</b>:<br/>
+'/':
 
-	.GET: http://localhost:8080/
+      .GET: http://localhost:8080/
     
     
-<b>'/signup'</b>:
+'/signup':
 
       .POST: Create a user
       
            parameters:
-	   	
+	        
 		email: string
 		
 		username: string
 		
 		password: string
 
-<b>'/signin'</b>:
+
+'/signin':
 
       .POST: Sign in user
       
            parameters:
-	   
-	   	email: string
-	   
-	   	password: string
+	        
+		email: string
+		
+		password: string
 
-<b>'/group'</b>:
+
+'/group':
 
       .POST: Create a group
       
            parameters:
-		
+	        
 		email: string
 
 		password: string
         
         	groupName: string
-        
-<b>'/group/groupId/user'</b>:
+  
+  
+'/group/groupId/user':
 
       .POST: Add a user a group
       
            parameters:
-	    
+	        
 		email: string
 
 		password: string
