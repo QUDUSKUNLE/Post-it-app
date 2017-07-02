@@ -7,7 +7,7 @@ use x-www-formurlencoded parameters.
 
 Methods
 
-&nbsp;&nbsp;'/':<br/>&nbsp;&nbsp;.GET: http://localhost:8080/
+&nbsp;&nbsp;&nbsp;&nbsp;'/':<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.GET: http://localhost:8080/
     
     
 '/signup'<br>
