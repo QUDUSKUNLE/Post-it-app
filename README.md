@@ -12,9 +12,11 @@ Methods
 	.GET: http://localhost:8080/
     
     
-<b>'/signup'</b>:<br>.POST: Create a user<br/>
+<b>'/signup'</b>:
 
-        parameters:
+	.POST: Create a user
+
+            parameters:
 	   	
 		email: string
 		
