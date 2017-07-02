@@ -14,9 +14,9 @@ Methods
     
 <b>'/signup'</b>:
 
-	.POST: Create a user
-
-            parameters:
+      .POST: Create a user
+      
+           parameters:
 	   	
 		email: string
 		
@@ -26,9 +26,9 @@ Methods
 
 <b>'/signin'</b>:
 
-       .POST: Sign in user
-           
-	   parameters:
+      .POST: Sign in user
+      
+           parameters:
 	   
 	   	email: string
 	   
@@ -36,9 +36,9 @@ Methods
 
 <b>'/group'</b>:
 
-	.POST: Create a group
-	
-	     parameters:
+      .POST: Create a group
+      
+           parameters:
 		
 		email: string
 
@@ -48,9 +48,9 @@ Methods
         
 <b>'/group/groupId/user'</b>:
 
-	.POST: Add a user a group
-	
-	    parameters:
+      .POST: Add a user a group
+      
+           parameters:
 	    
 		email: string
 
