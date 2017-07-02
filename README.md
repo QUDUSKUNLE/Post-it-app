@@ -7,39 +7,29 @@ use x-www-formurlencoded parameters.
 
 Methods
 
-	'/':
-
-		.GET: Welcome to PostIt-App
+'/':
+	.GET: http://localhost:8080/
     
     
-'/user/signup'
-
+'/signup'
 	.POST: Create a user
-
 		parameters:
-
 			email: string
 
 			username: string
 
 			password: string
 
-'/user/signin'
-
+'/signin'
 	.POST: Sign in user
-
 		parameters:
-
 			email: string
-
+			
 			password: string
 
 '/group'
-
 	.POST: Create a group
-
 		parameters:
-
 			email: string
 
 			password: string
@@ -47,11 +37,8 @@ Methods
         		groupName: string
         
 '/group/groupId/user'
-      
- 	.POST:Add a user a group
-
+	.POST:Add a user a group
 		parameters:
-
 			email: string
 
 			password: string
