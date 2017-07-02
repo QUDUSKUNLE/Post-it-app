@@ -3,8 +3,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import Router from './config/userRoutes.js';
-// New Addition
 import webpack from 'webpack';
+import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.js';
@@ -13,12 +13,13 @@ import config from '../webpack.config.js';
 // PORT
 const port = process.env.PORT || 8080;
 const app = express();
+app.use(compression());
 
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// configure app to handle CORS requests
 
+// configure app to handle CORS requests
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
@@ -38,7 +39,6 @@ app.use(webpackMiddleware(compiler, {
   publicPath: config.output.publicPath,
   noInfo: true
 }));
-
 app.use(webpackHotMiddleware(compiler));
 
 

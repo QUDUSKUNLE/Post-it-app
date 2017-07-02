@@ -5,14 +5,14 @@ import db from './config.js';
 import path from 'path';
 
 const Router = express.Router();
+
 //  ===================Homepage Endpoint=======================//
-Router.route('/')
+Router.route('/*')
   .get((req, res) => {
-    // Bunlde index.html
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
-//  ======================Sign Up Endpoint============//
 
+//  ======================Sign Up Endpoint============//
 Router.route('/signup')
   .post((req, res) => {
     const email = req.body.email;
@@ -63,6 +63,7 @@ Router.route('/signin')
         });
       });
   });
+
 //  ======================Sign Out Endpoint========================//
 Router.route('/signout')
   .post((req, res) => {
@@ -112,7 +113,6 @@ Router.route('/group')
         });
       });
   });
-
 
 //  ============================ADD MEMBER ENDPOINT=================//
 Router.route('/group/member')

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../../css/icon.css';
 
 /**
  * Represents AddMember Component.
@@ -13,11 +14,10 @@ class AddMember extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
       group: '',
-      member: ''
-
+      member: '',
+      email: '',
+      password: ''
     };
     // bind the input values
     this.onChange = this.onChange.bind(this);
@@ -117,6 +117,48 @@ class AddMember extends React.Component {
 						</div>
 					</div>
         </nav>
+        <div className="container addmember">
+					<div className="row">
+						<div className="col-md-offset-3 col-md-6">
+							<div className='row'>
+								<form className="col-md-offset-3 col-md-6"
+									onSubmit={this.onSubmit}>
+									<div className="form-group">
+										<label htmlFor="groupname">Group Name</label>
+										<input value={this.state.group} onChange={this.onChange}
+											id="groupname" type="text"
+											className="form-control" placeholder="andela-abuja"
+											name='group' required/>
+									</div>
+                  <div className="form-group">
+										<label htmlFor="email">Member</label>
+										<input value={this.state.member} onChange={this.onChange}
+											id="member" type="text"
+											className="form-control" placeholder="adewale"
+											name='member' required/>
+									</div>
+									<div className="form-group">
+										<label htmlFor="email">Email</label>
+										<input value={this.state.email} onChange={this.onChange}
+											id="email" type="email"
+											className="form-control" placeholder="johndoe@example.com"
+											name='email' required/>
+									</div>
+									<div className="form-group">
+										<label htmlFor="password">Password</label>
+										<input value={this.state.password} onChange={this.onChange}
+											id="pass" type="password"
+											className="form-control" placeholder="*********"
+											name='password' required/>
+									</div>
+									<button type="submit"
+										className="btn btn-success form-control">Add Member
+									</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
       </div>
     );
   }
