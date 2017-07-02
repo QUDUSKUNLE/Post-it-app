@@ -12,8 +12,7 @@ Methods
     
     
 '/signup'
-	.POST: Create a user
-		parameters:
+	.POST: Create a user<br>parameters:
 			email: string
 
 			username: string
