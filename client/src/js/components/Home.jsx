@@ -14,13 +14,13 @@ class Home extends React.Component {
           <div className="container">
 						<div className="row">
 							<div className='col-md-6'>
-								<p>PostIt
+								<h4>PostIt
 									<small>
 										<i>App</i>
 									</small>
 										&nbsp;
                     allows friends to come together and share vital informtion
-								</p>
+								</h4>
 							</div>
 							<SignUp/>
 						</div>

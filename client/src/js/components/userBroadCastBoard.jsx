@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import BroadCastNav from './userBroadCastBoardNav.jsx';
+import BroadCastGroupList from './userBroadCastBoardGroupList.jsx';
+import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
+import BroadCastMemberList from './userBroadCastMemberList.jsx';
 import '../../css/icon.css';
 
 /**
@@ -96,22 +100,7 @@ class BroadCastBoard extends React.Component {
 						</div>
 					</div>
         </nav>
-				<div className="container">
-					<div className="row">
-						<div className="col-md-12">
-							<ul className="nav nav-pills nav-justified">
-								<li role="presentation" className="active">
-									<Link to="/broadcastboard">BroadcastBoard</Link>
-								</li>
-								<li role="presentation" data-toggle="modal"
-									data-target="#myModal"><Link to="/group">Create Group</Link>
-								</li>
-								<li role="presentation"><Link to="/member">
-								Add member</Link></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<BroadCastNav />
 				<div className="container">
 					<div className="col-md-12">
 						<div className="row board">
@@ -120,52 +109,10 @@ class BroadCastBoard extends React.Component {
 								<h5 className="text-center para">Groups</h5>
 								<hr />
 								<br />
-								<div className="row">
-                  <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-                    <ul>
-                      <li>Andela Lagos</li>
-											<li>Andela Abuja</li>
-											<li>Andela Calabar</li>
-										</ul>
-									</div>
-								</div>
+								<BroadCastGroupList />
 							</div>
-							<div className="col-md-6"
-								style={{ backgroundColor: '#2d2d2d' }}>
-								<h5 className="text-center para">Group: Andela Abuja</h5>
-								<hr />
-								<br />
-								<div className="row">
-                  <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-                    <form id="broadcastform" onSubmit={this.onSubmit}>
-                      <div className="form-group">
-												<input type="text" name="message"
-													onChange={this.onChange} placeholder="write message"
-													className="form-control" value={this.state.message} />
-											</div>
-											<button type="submit"
-												className="btn btn-primary pull-right">Send</button>
-										</form>
-									</div>
-								</div>
-							</div>
-							<div className="col-md-3"
-								style={{ backgroundColor: '#756d6d' }}>
-								<h5 className="text-center para">Group member</h5>
-								<hr />
-								<br />
-								<div className="row">
-                  <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-                    <div>
-											<ul>
-												<li>ebuka</li>
-												<li>quduskunle</li>
-												<li>osayamen</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
+							<BroadCastChatBoard />
+							<BroadCastMemberList />
 							<hr />
 						</div>
 					</div>
