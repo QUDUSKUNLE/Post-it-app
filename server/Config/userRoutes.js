@@ -114,6 +114,15 @@ Router.route('/group')
       });
   });
 
+// ========================Get Groups=================//
+
+Router.route('/groupList')
+  .get((req, res) => {
+    db.database().ref('Group');
+    res.send({
+      message: 'GroupList'
+    });
+  });
 //  ============================ADD MEMBER ENDPOINT=================//
 Router.route('/group/member')
   .post((req, res) => {

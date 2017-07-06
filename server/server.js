@@ -5,25 +5,14 @@ import morgan from 'morgan';
 import Router from './config/userRoutes.js';
 import webpack from 'webpack';
 import compression from 'compression';
-<<<<<<< HEAD
-=======
-// import connect from 'connect';
->>>>>>> dd1349d380e724cb9260e7c26c77a7fc6a387194
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-// import historyFallback from 'express-history-api-fallback';
 import config from '../webpack.config.js';
-import path from 'path';
-
 
 // PORT
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(compression());
-<<<<<<< HEAD
-=======
-// app.use(historyFallback());
->>>>>>> dd1349d380e724cb9260e7c26c77a7fc6a387194
 
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
