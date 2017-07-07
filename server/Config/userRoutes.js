@@ -1,8 +1,9 @@
 //  =================== Import Libraries=====================//
 import express from 'express';
 import firebase from 'firebase';
-import db from './config.js';
 import path from 'path';
+import db from './config.js';
+
 
 const Router = express.Router();
 
@@ -123,7 +124,9 @@ Router.route('/groupList')
       message: 'GroupList'
     });
   });
+
 //  ============================ADD MEMBER ENDPOINT=================//
+
 Router.route('/group/member')
   .post((req, res) => {
     const email = req.body.email;
@@ -148,7 +151,8 @@ Router.route('/group/member')
       });
   });
 
-//	===============Delete a user`s Account============
+//	===============Delete a user`s Account=============//
+
 Router.route('/delete')
   .post((req, res) => {
     const email = req.body.email;
@@ -176,6 +180,8 @@ Router.route('/delete')
         });
       });
   });
+
+// ================Message===============//
 
 Router.route('/groupName/message')
   .post((req, res) => {
