@@ -121,38 +121,38 @@ class AddMember extends React.Component {
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6">
 							<div className='row'>
-								<form className="col-md-offset-3 col-md-6"
+								<form className="signin"
 									onSubmit={this.onSubmit}>
 									<div className="form-group">
 										<label htmlFor="groupname">Group Name</label>
 										<input value={this.state.group} onChange={this.onChange}
 											id="groupname" type="text"
-											className="form-control" placeholder="andela-abuja"
+											className="googleform" placeholder="andela-abuja"
 											name='group' required/>
 									</div>
                   <div className="form-group">
 										<label htmlFor="email">Member</label>
 										<input value={this.state.member} onChange={this.onChange}
 											id="member" type="text"
-											className="form-control" placeholder="adewale"
+											className="googleform" placeholder="adewale"
 											name='member' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="email">Email</label>
 										<input value={this.state.email} onChange={this.onChange}
 											id="email" type="email"
-											className="form-control" placeholder="johndoe@example.com"
+											className="googleform" placeholder="johndoe@example.com"
 											name='email' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="password">Password</label>
 										<input value={this.state.password} onChange={this.onChange}
 											id="pass" type="password"
-											className="form-control" placeholder="*********"
+											className="googleform" placeholder="*********"
 											name='password' required/>
 									</div>
 									<button type="submit"
-										className="btn btn-success form-control">Add Member
+										className="googleformbtn">Add Member
 									</button>
 								</form>
 							</div>

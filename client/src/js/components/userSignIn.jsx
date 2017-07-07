@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import firebase from 'firebase';
 import { Link } from 'react-router-dom';
+import config from '../vendors/vendors.jsx';
+import '../../css/icon.css';
+
 
 /**
  * Represents SignIn Component.
@@ -46,10 +50,6 @@ class SignIn extends React.Component {
       password: this.state.password
     };
     axios.post('/signin', SignInDetails).then((response) => {
-				// const token = response.data.token;
-				// const userToken = jwtDecode(token).userToken;
-				// window.localStorage.setItem('token', token);
-				// console.log(response.data);
       alert(response.data.message);
       this.props.history.push('/broadcastboard');
     }).catch((error) => {
@@ -60,6 +60,27 @@ class SignIn extends React.Component {
     });
   }
 
+	/**
+		 * @override
+		 */
+  authenticate() {
+    firebase.initializeApp(config);
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider)
+      .then((result) => {
+        const token = result.credential.accessToken;
+        const user = result.user;
+        if (user) {
+          firebase.auth().onAuthStateChanged(() => {
+            this.props.history.push('/broadcastboard');
+          });
+        }
+        console.log(token);
+        console.log(user);
+      });
+  }
 	/**
 		 * @override
 		 */
@@ -89,28 +110,34 @@ class SignIn extends React.Component {
 						</div>
 					</div>
         </nav>
-				<div className="container">
+				<div className="container signin">
 					<div className="row">
 						<div className="col-md-6 col-md-offset-3">
 							<div className="row">
-								<form className="col-md-6 col-md-offset-3"
-									onSubmit={this.onSubmit}>
+								<button className='google'
+									onClick={this.authenticate.bind(this)}>
+									Sign in with Google+
+								</button>
+								<br/>
+								<br/>
+								<div className="text-center or"><b>OR</b></div>
+								<form onSubmit={this.onSubmit} id="signinForm">
 									<div className="form-group">
 										<label htmlFor="email">Email</label>
 										<input value={this.state.email} onChange={this.onChange}
 											id="email" type="email"
-											className="form-control" placeholder="johndoe@example.com"
+											className="googleform" placeholder="johndoe@example.com"
 											name="email" required />
 									</div>
 									<div className="form-group">
 										<label htmlFor="password">Password</label>
 										<input id="password" type="password"
 											value={this.state.password} onChange={this.onChange}
-											className="form-control" placeholder="*********"
+											className="googleform" placeholder="*********"
 											name="password" required />
 									</div>
 									<button type="submit"
-										className="btn btn-success form-control">Sign in
+										className="googleformbtn">Sign in
 									</button>
 								</form>
 							</div>
