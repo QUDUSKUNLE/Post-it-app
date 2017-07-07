@@ -19,6 +19,9 @@ const config = {
     hot: true,
     historyApiFallback: true
   },
+  node: {
+    fs: 'empty'
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/index.html'
