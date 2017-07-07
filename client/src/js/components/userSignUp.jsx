@@ -22,7 +22,14 @@ class SignUp extends React.Component {
 
 		// Bind signUp form values
     this.onSubmit = this.onSubmit.bind(this);
+
+		// Bimd Google+
+    // this.onclick = this.onclick.bind(this);
   }
+
+  // onclick() {
+	//
+	// }
 
 	/**
  * onChange event.
@@ -70,27 +77,27 @@ class SignUp extends React.Component {
 				<div className="col-md-5 col-md-offset-1">
 					<div className='row'>
 						<div className='col-md-12'>
-							<h5>Create an account</h5>
+							<h3>Create an account</h3>
 							<form onSubmit={this.onSubmit}>
 								<div className="form-group">
 									<label htmlFor='email'>Email</label>
 									<input value={this.state.email} onChange={this.onChange}
 										id='email' type="email"
-										className="form-control" placeholder="johndoe@example.com"
+										className="googleform" placeholder="johndoe@example.com"
 										name='email' required />
 								</div>
 								<div className="form-group">
 									<label htmlFor='username'>Username</label>
 									<input value={this.state.username} onChange={this.onChange}
 										id='username' type="text"
-										className="form-control" placeholder="johndoe"
+										className="googleform" placeholder="johndoe"
 										name='username' required />
 								</div>
 								<div className="form-group">
 									<label htmlFor='password'>Password</label>
 									<input value={this.state.password} onChange={this.onChange}
 										id='pass' type="password"
-										className="form-control" placeholder="********"
+										className="googleform" placeholder="********"
 										name='password' required />
 								</div>
 								<div className="form-group">
@@ -98,11 +105,11 @@ class SignUp extends React.Component {
 									<input value={this.state.conf_password}
 										onChange={this.onChange}
 										id='conf_password' type="password"
-										className="form-control" placeholder="********"
+										className="googleform" placeholder="********"
 										name='conf_password' required />
 								</div>
 								<button type="submit"
-									className="btn btn-success form-control">Sign up
+									className="googleformbtn">Sign up
 								</button>
 							</form>
 						</div>
