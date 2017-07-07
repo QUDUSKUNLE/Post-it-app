@@ -54,7 +54,6 @@ class SignIn extends React.Component {
       this.props.history.push('/broadcastboard');
     }).catch((error) => {
       if (error.response) {
-					// console.log(error.response.data);
         alert(`User's Details ${error.response.data.message}.`);
       }
     });
@@ -148,6 +147,5 @@ class SignIn extends React.Component {
     );
   }
 }
-
 // Export SignIn Form
 export default SignIn;
