@@ -5,11 +5,10 @@ import axios from 'axios';
  * Represents SignUp Component.
  */
 class SignUp extends React.Component {
-	// SignUp constructor
   /**
      * @param {string} props inbuilt props.
      */
-  constructor(props) {
+  constructor(props) { // SignUp constructor
     super(props);
     this.state = {
       email: '',
@@ -17,19 +16,10 @@ class SignUp extends React.Component {
       password: '',
       conf_password: ''
     };
-		// Bind signUp input fields
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this); // Bind signUp input fields
 
-		// Bind signUp form values
-    this.onSubmit = this.onSubmit.bind(this);
-
-		// Bimd Google+
-    // this.onclick = this.onclick.bind(this);
+    this.onSubmit = this.onSubmit.bind(this); // Bind signUp form values
   }
-
-  // onclick() {
-	//
-	// }
 
 	/**
  * onChange event.
@@ -56,12 +46,9 @@ class SignUp extends React.Component {
     };
     axios.post('/signup', userDetails).then((response) => {
       alert(`Hi ${userDetails.username}, ${response.data.message}`);
-				// console.log(response.data);
-				// console.log(userDetails);
       this.props.history.push('/signin');
     }).catch((error) => {
       if (error.response) {
-					// console.log(error.response.data);
         alert(`Hey ${userDetails.username}, you've\n `
 				`${error.response.data.message}.`);
       }
@@ -77,13 +64,14 @@ class SignUp extends React.Component {
 				<div className="col-md-5 col-md-offset-1">
 					<div className='row'>
 						<div className='col-md-12'>
-							<h3>Create an account</h3>
+							<h4>Create an account</h4>
+						<br />
 							<form onSubmit={this.onSubmit}>
 								<div className="form-group">
 									<label htmlFor='email'>Email</label>
 									<input value={this.state.email} onChange={this.onChange}
 										id='email' type="email"
-										className="googleform" placeholder="johndoe@example.com"
+										className="googleform inp" placeholder="johndoe@example.com"
 										name='email' required />
 								</div>
 								<div className="form-group">
