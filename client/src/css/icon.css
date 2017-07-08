@@ -16,6 +16,7 @@
   position: center;
   width: 100%;
   margin-bottom: 15px;
+  border-radius: 6px;
 }
 
 .or {
@@ -30,6 +31,7 @@
   color: black;
   font-size: 25px;
   width: 100%;
+  border-radius: 4px;
 }
 
 .googleformbtn {
@@ -39,6 +41,7 @@
   background-color: #424bf4;
   text-decoration: none;
   border:none;
+  border-radius: 6px
 }
 
 /*
