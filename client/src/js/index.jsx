@@ -10,6 +10,7 @@ import SignIn from './components/userSignIn.jsx';
 import CreateGroup from './components/userCreateGroup.jsx';
 import BroadCastBoard from './components/userBroadCastBoard.jsx';
 import AddMember from './components/userAddMember.jsx';
+import ResetPassword from './components/userResetPassword.jsx';
 
 const store = createStore(
 	(state = {}) => state,
@@ -24,6 +25,7 @@ ReactDOM.render(
 				<Route path="/signin" component={SignIn} />
 				<Route path="/group" component={CreateGroup} />
 				<Route path="/broadcastboard" component={BroadCastBoard}/>
+        <Route path="/passwordreset" component={ResetPassword} />
 				<Route path="/member" component={AddMember}/>
 			</div>
 		</Router>
