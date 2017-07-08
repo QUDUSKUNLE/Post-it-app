@@ -129,7 +129,17 @@ class SignIn extends React.Component {
 											name="email" required />
 									</div>
 									<div className="form-group">
-										<label htmlFor="password">Password</label>
+										<div className='row'>
+                      <div className='col-md-4'>
+												<label htmlFor="password">Password
+												</label>
+											</div>
+											<div className='col-md-4 col-md-offset-4'>
+                        <Link to="/passwordreset"><h5 className='pull-right'>
+													<b>Forgot password?</b></h5>
+												</Link>
+											</div>
+										</div>
 										<input id="password" type="password"
 											value={this.state.password} onChange={this.onChange}
 											className="googleform" placeholder="*********"
@@ -139,6 +149,12 @@ class SignIn extends React.Component {
 										className="googleformbtn">Sign in
 									</button>
 								</form>
+							</div>
+							<br/>
+							<div>
+								<center>
+                <p>New to PostIt App? <Link to="/">Create an account.</Link></p>
+							</center>
 							</div>
 						</div>
 					</div>
