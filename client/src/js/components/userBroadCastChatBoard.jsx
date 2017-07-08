@@ -4,13 +4,12 @@ import axios from 'axios';
 // import { Link } from 'react-router-dom';
 
 /**
- * Represents BroadCastChatBoard Component.
- */
+  * Represents BroadCastChatBoard Component.
+*/
 class BroadCastChatBoard extends React.Component {
-  // BroadCastBoard constructor
   /**
-     * @param {string} props inbuilt props.
-     */
+    * @param {string} props inbuilt props.
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -21,11 +20,12 @@ class BroadCastChatBoard extends React.Component {
 		// Bind signOut tab to onClick event
     // this.onClick = this.onClick.bind(this);
   }
+
   /**
- * onChange event.
- * @param {object} message The first number.
- * @returns {void} bind input values to name.
- */
+    * onChange event.
+    * @param {object} message The first number.
+    * @returns {void} bind input values to name.
+  */
   onChange(message) {
     this.setState({
       [message.target.name]: message.target.value
@@ -33,10 +33,10 @@ class BroadCastChatBoard extends React.Component {
   }
 
 	/**
- * onSubmit event.
- * @param {object} message .
- * @returns {void} .
- */
+    * onSubmit event.
+    * @param {object} message .
+    * @returns {void} .
+  */
   onSubmit(message) {
     message.preventDefault();
     const broadcastmessage = {
@@ -48,8 +48,8 @@ class BroadCastChatBoard extends React.Component {
   }
 
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>

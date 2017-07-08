@@ -4,13 +4,12 @@ import axios from 'axios';
 import '../../css/icon.css';
 
 /**
- * Represents AddMember Component.
- */
+  * Represents AddMember Component.
+*/
 class AddMember extends React.Component {
-  // AddMember constructor
   /**
-     * @param {string} props inbuilt props.
-     */
+    * @param {string} props inbuilt props.
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,38 +18,34 @@ class AddMember extends React.Component {
       email: '',
       password: ''
     };
-    // bind the input values
-    this.onChange = this.onChange.bind(this);
+    this.onChange = this.onChange.bind(this); // bind the input values
 
-    // onSubmit events
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this); // onSubmit events
 
-    // Sign out
-    this.onClick = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this); // Sign out
   }
 
   /**
- * onClick event.
- * @param {void} nil no parameter.
- * @returns {object} response from server.
+    * onClick event.
+    * @param {void} nil no parameter.
+    * @returns {object} response from server.
  */
   onClick() {
     axios.post('/signout').then((response) => {
       alert(response.data.message);
-        // console.log(response.data);
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-					// console.log(error.response.data);
+			// console.log(error.response.data);
       }
     });
   }
 
   /**
- * onChange event.
- * @param {object} addmember The first number.
- * @returns {void} bind input values to name.
- */
+    * onChange event.
+    * @param {object} addmember The first number.
+    * @returns {void} bind input values to name.
+  */
   onChange(addmember) {
     this.setState({
       [addmember.target.name]: addmember.target.value
@@ -58,10 +53,10 @@ class AddMember extends React.Component {
   }
 
   /**
- * onSubmit event.
- * @param {object} addmember .
- * @returns {void} .
- */
+    * onSubmit event.
+    * @param {object} addmember .
+    * @returns {void} .
+  */
   onSubmit(addmember) {
     addmember.preventDefault();
     const memberDetails = {
@@ -72,20 +67,20 @@ class AddMember extends React.Component {
     };
     axios.post('/group/member', memberDetails)
       .then((response) => {
-        // console.log(response.data);
+      // console.log(response.data);
         alert(response.data.message);
         this.props.history.push('/broadcastboard');
       })
       .catch((error) => {
         if (error.response) {
-          // console.log(error.response.data);
+        // console.log(error.response.data);
         }
       });
   }
 
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>
@@ -110,9 +105,9 @@ class AddMember extends React.Component {
 							</ul>
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
-                <li className="active"><Link to="">AddMember</Link></li>
+                <li className="active"><Link to="/member">AddMember</Link></li>
                 <li><Link to="/broadcastboard">Chat Room</Link></li>
-								<li onClick={this.onClick}><Link to="">Sign Out</Link></li>
+								<li onClick={this.onClick}><Link to="/">Sign Out</Link></li>
 							</ul>
 						</div>
 					</div>
@@ -120,39 +115,39 @@ class AddMember extends React.Component {
         <div className="container addmember">
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6">
-							<div className='row'>
-								<form className="signin"
+							<div className='row w3-card w3-white'>
+								<form className='addmemberform'
 									onSubmit={this.onSubmit}>
 									<div className="form-group">
 										<label htmlFor="groupname">Group Name</label>
 										<input value={this.state.group} onChange={this.onChange}
 											id="groupname" type="text"
-											className="googleform" placeholder="andela-abuja"
+											className="signinform" placeholder="andela-abuja"
 											name='group' required/>
 									</div>
                   <div className="form-group">
 										<label htmlFor="email">Member</label>
 										<input value={this.state.member} onChange={this.onChange}
 											id="member" type="text"
-											className="googleform" placeholder="adewale"
+											className="signinform" placeholder="adewale"
 											name='member' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="email">Email</label>
 										<input value={this.state.email} onChange={this.onChange}
 											id="email" type="email"
-											className="googleform" placeholder="johndoe@example.com"
+											className="signinform" placeholder="johndoe@example.com"
 											name='email' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="password">Password</label>
 										<input value={this.state.password} onChange={this.onChange}
 											id="pass" type="password"
-											className="googleform" placeholder="*********"
+											className="signinform" placeholder="*********"
 											name='password' required/>
 									</div>
 									<button type="submit"
-										className="googleformbtn">Add Member
+										className="signinformbtn">Add Member
 									</button>
 								</form>
 							</div>

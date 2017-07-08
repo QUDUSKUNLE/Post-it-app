@@ -3,12 +3,12 @@ import Navbar from './navBar.jsx';
 import Home from './Home.jsx';
 
 /**
- * Represents App Component.
- */
+  * Represents App Component.
+*/
 class App extends React.Component {
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>

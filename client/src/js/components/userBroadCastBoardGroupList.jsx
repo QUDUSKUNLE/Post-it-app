@@ -4,13 +4,12 @@ import axios from 'axios';
 import '../../css/icon.css';
 
 /**
- * Represents BroadCastGroupList Component.
- */
+  * Represents BroadCastGroupList Component.
+*/
 class BroadCastGroupList extends React.Component {
-  // BroadCastGroupList constructor
   /**
-     * @param {string} props inbuilt props.
-     */
+    * @param {string} props inbuilt props.
+  */
   // constructor(props) {
   //   super(props);
   //   this.onChange = this.onChange.bind(this);
@@ -20,17 +19,18 @@ class BroadCastGroupList extends React.Component {
   // }
 
   /**
-	* Server query event.
-	* @returns {object} .
+	  * Server query event.
+	  * @returns {object} .
 	*/
   getGroupList() {
     axios.get('/groupList').then((response) => {
       console.log(response.data.message);
     });
   }
+
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>
