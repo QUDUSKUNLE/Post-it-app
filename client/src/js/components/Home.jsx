@@ -19,7 +19,7 @@ class Home extends React.Component {
 										<i>App</i>
 									</small>
 										&nbsp;
-                    allows friends to come together and share vital informtion
+                    allows friends to come together and share vital informtion.
 								</h4>
 							</div>
 							<SignUp/>
