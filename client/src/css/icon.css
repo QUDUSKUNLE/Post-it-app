@@ -14,7 +14,7 @@
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 35px;
+  font-size: 30px;
   position: center;
   width: 100%;
   margin-bottom: 15px;
@@ -34,6 +34,7 @@
   font-size: 25px;
   width: 100%;
   border-radius: 4px;
+  padding: 6px 0 6px 10px;
 }
 
 .googleformbtn {
