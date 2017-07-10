@@ -102,6 +102,9 @@ class SignUp extends React.Component {
                   </button>
                 </form>
               </div>
+              <br/>
+              <p className='text-center'>By clicking "Sign up for Postit App",
+                 you agree to our terms of service and privacy policy.</p>
 						</div>
 					</div>
 				</div>
