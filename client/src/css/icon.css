@@ -1,50 +1,75 @@
 /*
-  SignIn Component
+ Main body
 */
-/*.inp {
-  margin-left: 2px;
-}*/
-.signin {
-  margin-top: 100px;
+body {
+  background-color: #e8e8ee;
 }
 
-.google {
+/*
+  home
+*/
+
+.home {
+  margin-top: 35px;
+}
+/*
+  SignIn Component
+*/
+
+#google {
   background-color: #f44242; /* Green */
   border: none;
   color: white;
   text-align: center;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
   position: center;
-  width: 100%;
-  margin-bottom: 15px;
-  border-radius: 6px;
+  width: 95%;
+  margin: 8px;
+  border-radius: 5px;
+  /*padding: 10px;*/
 }
 
 .or {
-  font-size: 25px
+  font-size: 15px
 }
 
+.signin {
+  margin-top: 70px;
+}
 #signinForm {
   margin-top: 20px;
+  padding: 15px 25px 25px 25px;
 }
 
-.googleform {
+.signinform {
   color: black;
-  font-size: 25px;
+  font-size: 15px;
   width: 100%;
   border-radius: 4px;
   padding: 6px 0 6px 10px;
 }
 
-.googleformbtn {
+.signinformbtn {
   color: white;
-  font-size: 30px;
+  font-size: 25px;
   width: 100%;
-  background-color: #424bf4;
+  background-color: #228B22;
   text-decoration: none;
   border:none;
   border-radius: 6px
+}
+
+.create {
+  color: blue
+}
+
+/*
+ SignUp Component
+*/
+
+#signupform {
+  padding: 8px 20px 9px 20px;
 }
 
 /*
@@ -78,5 +103,34 @@
   AddMember
 */
 .addmember {
-  margin-top: 75px
+  margin-top: 125px
+}
+
+.addmemberform {
+  margin: 20px 25px;
+}
+
+/*
+  Create Group
+*/
+.creategroupform {
+  margin-top: 75px;
+}
+#creategroupform {
+  margin: 20px 25px;
+}
+
+/*
+  ResetPassword Component
+*/
+.passwordreset {
+  margin-top: 60px;
+}
+
+.resetform {
+  margin-top: 20px;
+}
+#resetform {
+  margin-top: 8px;
+  padding: 10px 10px 25px 10px;
 }

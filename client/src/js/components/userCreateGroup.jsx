@@ -102,41 +102,43 @@ class CreateGroup extends React.Component {
 							<ul className="nav navbar-nav navbar-right">
 								<li><Link to="/">Home</Link></li>
 								<li><Link to="/broadcastboard">ChatRoom</Link></li>
-								<li className="active"><Link to="">Create Group</Link></li>
-								<li onClick={this.onClick}><Link to="">Sign Out</Link></li>
+								<li className="active">
+									<Link to="/group">Create Group</Link>
+								</li>
+								<li onClick={this.onClick}><Link to="/">Sign Out</Link></li>
 							</ul>
 						</div>
 					</div>
         </nav>
 				<div className="container">
 					<div className="row">
-						<div className="col-md-offset-3 col-md-6">
-							<div className='row'>
-								<form className="signin"
+						<div className="col-md-offset-3 col-md-6 creategroupform">
+							<div className='row w3-card w3-white'>
+								<form id="creategroupform"
 									onSubmit={this.onSubmit}>
 									<div className="form-group">
 										<label htmlFor="groupname">Group Name</label>
 										<input value={this.state.group} onChange={this.onChange}
 											id="groupname" type="text"
-											className="googleform" placeholder="andela-abuja"
+											className="signinform" placeholder="andela-abuja"
 											name='group' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="email">Email</label>
 										<input value={this.state.email} onChange={this.onChange}
 											id="email" type="email"
-											className="googleform" placeholder="johndoe@example.com"
+											className="signinform" placeholder="johndoe@example.com"
 											name='email' required/>
 									</div>
 									<div className="form-group">
 										<label htmlFor="password">Password</label>
 										<input value={this.state.password} onChange={this.onChange}
 											id="pass" type="password"
-											className="googleform" placeholder="*********"
+											className="signinform" placeholder="*********"
 											name='password' required/>
 									</div>
 									<button type="submit"
-										className="googleformbtn">Create Group
+										className="signinformbtn">Create Group
 									</button>
 								</form>
 							</div>

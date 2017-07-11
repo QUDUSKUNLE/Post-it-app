@@ -8,28 +8,29 @@ import BroadCastMemberList from './userBroadCastMemberList.jsx';
 import '../../css/icon.css';
 
 /**
- * Represents BroadCastBoard Component.
- */
+  * Represents BroadCastBoard Component.
+*/
 class BroadCastBoard extends React.Component {
-	// BroadCastBoard constructor
+
   /**
-     * @param {string} props inbuilt props.
-     */
+    * @param {string} props inbuilt props.
+  */
   constructor(props) {
     super(props);
     this.state = {
       message: ''
     };
     this.onChange = this.onChange.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
-		// Bind signOut tab to onClick event
-    this.onClick = this.onClick.bind(this);
+
+    this.onClick = this.onClick.bind(this); // Bind signOut tab to onClick event
   }
 
 	/**
- * onChange event.
- * @param {object} message The first number.
- * @returns {void} bind input values to name.
+    * onChange event.
+    * @param {object} message The first number.
+    * @returns {void} bind input values to name.
  */
   onChange(message) {
     this.setState({
@@ -38,10 +39,10 @@ class BroadCastBoard extends React.Component {
   }
 
 	/**
- * onSubmit event.
- * @param {object} message .
- * @returns {void} .
- */
+    * onSubmit event.
+    * @param {object} message .
+    * @returns {void} .
+  */
   onSubmit(message) {
     message.preventDefault();
     const broadcastmessage = {
@@ -52,10 +53,10 @@ class BroadCastBoard extends React.Component {
     });
   }
 	/**
- * onClick event.
- * @param {void} nill no parameter.
- * @returns {object} response from server.
- */
+    * onClick event.
+    * @param {void} nill no parameter.
+    * @returns {object} response from server.
+  */
   onClick() {
     axios.post('/signout').then((response) => {
       alert(response.data.message);
@@ -67,8 +68,8 @@ class BroadCastBoard extends React.Component {
     });
   }
 	/**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
 			<div>
@@ -122,5 +123,4 @@ class BroadCastBoard extends React.Component {
   }
 }
 
-// Export BroadCastBoard Component
-export default BroadCastBoard;
+export default BroadCastBoard; // Export BroadCastBoard Component

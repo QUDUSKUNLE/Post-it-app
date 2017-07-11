@@ -1,13 +1,13 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 /**
- * Represents NavBar Component.
- */
+  * Represents NavBar Component.
+*/
 class NavBar extends React.Component {
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>
@@ -40,5 +40,5 @@ class NavBar extends React.Component {
     );
   }
 }
-// Export Navbar
-export default NavBar;
+
+export default NavBar; // Export Navbar

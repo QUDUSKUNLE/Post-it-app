@@ -1,9 +1,8 @@
-//  =================== Import Libraries=====================//
+//  ===================Import Libraries=====================//
 import express from 'express';
 import firebase from 'firebase';
 import path from 'path';
 import db from './config.js';
-
 
 const Router = express.Router();
 
@@ -77,6 +76,23 @@ Router.route('/signout')
       .catch(() => {
         res.status(404).send({
           message: 'Network Error'
+        });
+      });
+  });
+
+//  ==========================Password Reset ==================//
+Router.route('/passwordreset')
+  .post((req, res) => {
+    const email = req.body.email;
+    firebase.auth().sendPasswordResetEmail(email)
+      .then(() => {
+        res.send({
+          message: 'Password reset email sent successfully!'
+        });
+      })
+      .catch((error) => {
+        res.status(404).send({
+          message: error.message
         });
       });
   });

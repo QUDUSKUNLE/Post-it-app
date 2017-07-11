@@ -5,32 +5,29 @@ import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.jsx';
 import '../../css/icon.css';
 
-
 /**
- * Represents SignIn Component.
- */
+  * Represents SignIn Component.
+*/
 class SignIn extends React.Component {
-	// SignIn constructor
   /**
-     * @param {string} props inbuilt props.
-     */
+    * @param {string} props inbuilt props.
+  */
   constructor(props) {
     super(props);
     this.state = {
       email: '',
       password: ''
     };
-		// Bind input field values
-    this.onChange = this.onChange.bind(this);
 
-		// Bind Form values
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this); // Bind input field values
+
+    this.onSubmit = this.onSubmit.bind(this); // Bind Form values
   }
 
 	/**
- * onChange event.
- * @param {object} signIn The first number.
- * @returns {void} bind input values to name.
+    * onChange event.
+    * @param {object} signIn The first number.
+    * @returns {void} bind input values to name.
  */
   onChange(signIn) {
     this.setState({
@@ -39,9 +36,9 @@ class SignIn extends React.Component {
   }
 
 	/**
-	* onSubmit event.
-	* @param {object} signIn .
-	* @returns {void} .
+	  * onSubmit event.
+	  * @param {object} signIn .
+	  * @returns {void} .
 	*/
   onSubmit(signIn) {
     signIn.preventDefault();
@@ -60,8 +57,8 @@ class SignIn extends React.Component {
   }
 
 	/**
-		 * @override
-		 */
+		* @override
+	*/
   authenticate() {
     firebase.initializeApp(config);
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -81,8 +78,8 @@ class SignIn extends React.Component {
       });
   }
 	/**
-		 * @override
-		 */
+		* @override
+	*/
   render() {
     return (
 			<div>
@@ -90,13 +87,13 @@ class SignIn extends React.Component {
 					role="navigation">
 					<div className="container">
 						<div className="navbar-header">
-							<button type="button" className="navbar-toggle"
-								data-toggle="collapse" data-target=".navbar-collapse">
-								<span className="sr-only">Toggle navigation</span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-							</button>
+							<button type="button" className="navbar-toggle collapsed"
+                data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
 							<Link className="navbar-brand" to="/">
                 PostIt<small>App</small>
               </Link>
@@ -113,19 +110,20 @@ class SignIn extends React.Component {
 					<div className="row">
 						<div className="col-md-6 col-md-offset-3">
 							<div className="row">
-								<button className='google'
+								<button id='google'
 									onClick={this.authenticate.bind(this)}>
 									Sign in with Google+
 								</button>
 								<br/>
 								<br/>
 								<div className="text-center or"><b>OR</b></div>
-								<form onSubmit={this.onSubmit} id="signinForm">
+								<form onSubmit={this.onSubmit}
+									className='w3-card w3-white' id="signinForm">
 									<div className="form-group">
 										<label htmlFor="email">Email</label>
 										<input value={this.state.email} onChange={this.onChange}
 											id="email" type="email"
-											className="googleform" placeholder="johndoe@example.com"
+											className="signinform" placeholder="johndoe@example.com"
 											name="email" required />
 									</div>
 									<div className="form-group">
@@ -135,25 +133,28 @@ class SignIn extends React.Component {
 												</label>
 											</div>
 											<div className='col-md-4 col-md-offset-4'>
-                        <Link to="/passwordreset"><h5 className='pull-right'>
-													<b>Forgot password?</b></h5>
+                        <Link to="/passwordreset">
+												<h6 className='pull-right create'>
+													<b>Forgot password?</b></h6>
 												</Link>
 											</div>
 										</div>
 										<input id="password" type="password"
 											value={this.state.password} onChange={this.onChange}
-											className="googleform" placeholder="*********"
+											className="signinform" placeholder="*********"
 											name="password" required />
 									</div>
 									<button type="submit"
-										className="googleformbtn">Sign in
+										className="signinformbtn">Sign in
 									</button>
 								</form>
 							</div>
 							<br/>
 							<div>
 								<center>
-                <p>New to PostIt App? <Link to="/">Create an account.</Link></p>
+                <p>New to PostIt App? <Link to="/" className="create">
+								Create an account.</Link>
+							</p>
 							</center>
 							</div>
 						</div>
@@ -163,5 +164,5 @@ class SignIn extends React.Component {
     );
   }
 }
-// Export SignIn Form
-export default SignIn;
+
+export default SignIn; // Export SignIn Form

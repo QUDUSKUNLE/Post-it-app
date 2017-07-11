@@ -2,13 +2,13 @@ import React from 'react';
 import axios from 'axios';
 
 /**
- * Represents SignUp Component.
- */
+  * Represents SignUp Component.
+*/
 class SignUp extends React.Component {
   /**
-     * @param {string} props inbuilt props.
-     */
-  constructor(props) { // SignUp constructor
+    * @param {string} props inbuilt props.
+  */
+  constructor(props) {
     super(props);
     this.state = {
       email: '',
@@ -21,22 +21,22 @@ class SignUp extends React.Component {
     this.onSubmit = this.onSubmit.bind(this); // Bind signUp form values
   }
 
-	/**
- * onChange event.
- * @param {object} signUp The first number.
- * @returns {void} bind input values to name.
- */
+/**
+  * onChange event.
+  * @param {object} signUp The first number.
+  * @returns {void} bind input values to name.
+*/
   onChange(signUp) {
     this.setState({
       [signUp.target.name]: signUp.target.value
     });
   }
 
-	/**
- * onSubmit event.
- * @param {object} signUp .
- * @returns {void} .
- */
+/**
+  * onSubmit event.
+  * @param {object} signUp .
+  * @returns {void} .
+*/
   onSubmit(signUp) {
     signUp.preventDefault();
     const userDetails = {
@@ -56,50 +56,55 @@ class SignUp extends React.Component {
   }
 
 	/**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
 			<div>
 				<div className="col-md-5 col-md-offset-1">
 					<div className='row'>
-						<div className='col-md-12'>
+						<div className='col-md-12 w3-card w3-white' id='signupform'>
 							<h4>Create an account</h4>
-						<br />
-							<form onSubmit={this.onSubmit}>
-								<div className="form-group">
-									<label htmlFor='email'>Email</label>
-									<input value={this.state.email} onChange={this.onChange}
+              <br />
+              <div className=''>
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <label htmlFor='email'>Email
+                    </label>
+                    <input value={this.state.email} onChange={this.onChange}
 										id='email' type="email"
-										className="googleform inp" placeholder="johndoe@example.com"
+										className="signinform inp" placeholder="johndoe@example.com"
 										name='email' required />
-								</div>
-								<div className="form-group">
-									<label htmlFor='username'>Username</label>
-									<input value={this.state.username} onChange={this.onChange}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor='username'>Username</label>
+                    <input value={this.state.username} onChange={this.onChange}
 										id='username' type="text"
-										className="googleform" placeholder="johndoe"
+										className="signinform" placeholder="johndoe"
 										name='username' required />
-								</div>
-								<div className="form-group">
-									<label htmlFor='password'>Password</label>
-									<input value={this.state.password} onChange={this.onChange}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor='password'>Password</label>
+                    <input value={this.state.password} onChange={this.onChange}
 										id='pass' type="password"
-										className="googleform" placeholder="********"
+										className="signinform" placeholder="********"
 										name='password' required />
-								</div>
-								<div className="form-group">
-									<label htmlFor='conf_password'>Confirm Password</label>
-									<input value={this.state.conf_password}
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor='conf_password'>Confirm Password</label>
+                    <input value={this.state.conf_password}
 										onChange={this.onChange}
 										id='conf_password' type="password"
-										className="googleform" placeholder="********"
+										className="signinform" placeholder="********"
 										name='conf_password' required />
-								</div>
-								<button type="submit"
-									className="googleformbtn">Sign up
-								</button>
-							</form>
+                  </div>
+                  <button type="submit" className="signinformbtn">Sign up
+                  </button>
+                </form>
+              </div>
+              <br/>
+              <p className='text-center'>By clicking "Sign up for Postit App",
+                 you agree to our terms of service and privacy policy.</p>
 						</div>
 					</div>
 				</div>

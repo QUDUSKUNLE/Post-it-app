@@ -2,17 +2,18 @@ import React from 'react';
 import SignUp from './userSignUp.jsx';
 
 /**
- * Represents Home component.
- */
+  * Represents Home component.
+*/
 class Home extends React.Component {
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
+    const img = 'https://www.google.com.ng/search?q=share+information+image&';
     return (
         <div>
           <div className="container">
-						<div className="row">
+						<div className="row home">
 							<div className='col-md-6'>
 								<h4>PostIt
 									<small>
@@ -21,6 +22,7 @@ class Home extends React.Component {
 										&nbsp;
                     allows friends to come together and share vital informtion.
 								</h4>
+                <img src={img} alt=''/>
 							</div>
 							<SignUp/>
 						</div>
@@ -29,5 +31,5 @@ class Home extends React.Component {
     );
   }
 }
-// Export Home
-export default Home;
+
+export default Home; // Export Home

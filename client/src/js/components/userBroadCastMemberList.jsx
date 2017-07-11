@@ -3,12 +3,12 @@ import '../../css/icon.css';
 // import { Link } from 'react-router-dom';
 
 /**
- * Represents BroadCastMemberList Component.
- */
+  * Represents BroadCastMemberList Component.
+*/
 class BroadCastMemberList extends React.Component {
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>

@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import '../../css/icon.css';
 
 /**
- * Represents BroadCastNav Component.
- */
+   Represents BroadCastNav Component.
+*/
 class BroadCastNav extends React.Component {
   /**
-     * @override
-     */
+    * @override
+  */
   render() {
     return (
       <div>
