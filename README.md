@@ -19,8 +19,10 @@
   
   5. Create an .env file and set the variables in .env-sample to your specified database connection
   
-  6. <b>npm start</b>
+  6. <b>npm run build</b>
+
+  7. <b>npm start</b>
   
-  7. Go to <b>http://localhost:8080/</b>
+  8. Go to <b>http://localhost:8080/</b>
   
   
