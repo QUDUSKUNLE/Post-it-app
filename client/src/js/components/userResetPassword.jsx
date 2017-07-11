@@ -7,7 +7,8 @@ class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ''
+      email: '',
+      response: {}
     };
   }
   /**
@@ -31,14 +32,20 @@ class ResetPassword extends React.Component {
     const reset = {
       email: this.state.email,
     };
-    axios.post('/passwordreset', reset).then((response) => {
-      alert(response.data.message);
-      this.props.history.push('/broadcastboard');
-    }).catch((error) => {
-      if (error.response) {
-        alert(`User's Details ${error.response.data.message}.`);
-      }
-    });
+    // console.log(reset);
+    axios.post('/passwordreset', reset)
+      .then((res) => {
+        const mess = res.data.message;
+        console.log(mess);
+        alert(mess);
+        this.props.history.push('/signin');
+      }).catch((error) => {
+        if (error.response) {
+          const er = `User's Details ${error.response.data.message}.`;
+          console.log(er);
+          alert(er);
+        }
+      });
   }
 
   /**
@@ -74,6 +81,7 @@ class ResetPassword extends React.Component {
             <h4>
               Reset your password
             </h4>
+            <span className='help-block'>{this.props.response}</span>
           </center><br/>
             <div className='container resetform'>
               <div className='row'>
