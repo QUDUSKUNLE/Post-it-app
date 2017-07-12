@@ -12,19 +12,19 @@ class Home extends React.Component {
     return (
         <div>
           <div className="container">
-						<div className="row home">
-							<div className='col-md-6'>
-								<h4>PostIt
-									<small>
-										<i>App</i>
-									</small>
-										&nbsp;
+            <div className="row home">
+              <div className='col-md-6'>
+		<h4>PostIt
+                  <small>
+                    <i>App</i>
+		  </small>
+                    &nbsp;
                     allows friends to come together and share vital informtion.
-								</h4>
-							</div>
-							<SignUp/>
-						</div>
-					</div>
+                </h4>
+             </div>
+             <SignUp/>
+           </div>
+         </div>
         </div>
     );
   }
