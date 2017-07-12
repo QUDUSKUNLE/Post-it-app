@@ -14,7 +14,8 @@ class SignUp extends React.Component {
       email: '',
       username: '',
       password: '',
-      conf_password: ''
+      conf_password: '',
+      signupMessage: ''
     };
     this.onChange = this.onChange.bind(this); // Bind signUp input fields
 
@@ -45,12 +46,17 @@ class SignUp extends React.Component {
       username: this.state.username
     };
     axios.post('/signup', userDetails).then((response) => {
-      alert(`Hi ${userDetails.username}, ${response.data.message}`);
+      if (response) {
+        this.setState({
+          signupMessage: `Hi ${userDetails.username}, ${response.data.message}`
+        });
+      }
       this.props.history.push('/signin');
     }).catch((error) => {
       if (error.response) {
-        alert(`Hey ${userDetails.username}, you've\n `
-				`${error.response.data.message}.`);
+        this.setState({
+          signupMessage: error.response.data.message
+        });
       }
     });
   }
@@ -66,7 +72,11 @@ class SignUp extends React.Component {
 						<div className='col-md-12 w3-card w3-white' id='signupform'>
 							<h4>Create an account</h4>
               <br />
-              <div className=''>
+              <div>
+                <center>
+                  <span>{this.state.signupMessage}</span>
+                </center>
+              </div>
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <label htmlFor='email'>Email
@@ -101,7 +111,6 @@ class SignUp extends React.Component {
                   <button type="submit" className="signinformbtn">Sign up
                   </button>
                 </form>
-              </div>
               <br/>
               <p className='text-center'>By clicking "Sign up for Postit App",
                  you agree to our terms of service and privacy policy.</p>

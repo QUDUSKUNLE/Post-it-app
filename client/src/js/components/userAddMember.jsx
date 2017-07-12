@@ -16,7 +16,8 @@ class AddMember extends React.Component {
       group: '',
       member: '',
       email: '',
-      password: ''
+      password: '',
+      addmemberMess: ''
     };
     this.onChange = this.onChange.bind(this); // bind the input values
 
@@ -31,8 +32,8 @@ class AddMember extends React.Component {
     * @returns {object} response from server.
  */
   onClick() {
-    axios.post('/signout').then((response) => {
-      alert(response.data.message);
+    axios.post('/signout').then(() => {
+      // alert(response.data.message);
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
@@ -67,13 +68,18 @@ class AddMember extends React.Component {
     };
     axios.post('/group/member', memberDetails)
       .then((response) => {
-      // console.log(response.data);
-        alert(response.data.message);
+        if (response) {
+          this.setState({
+            addmemberMess: response.data.message
+          });
+        }
         this.props.history.push('/broadcastboard');
       })
       .catch((error) => {
-        if (error.response) {
-        // console.log(error.response.data);
+        if (error) {
+          this.setState({
+            addmemberMess: error.response.data.message
+          });
         }
       });
   }
@@ -116,6 +122,11 @@ class AddMember extends React.Component {
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6">
 							<div className='row w3-card w3-white'>
+                <div>
+                  <center>
+                    <span>{this.state.addmemberMess}</span>
+                  </center>
+                </div>
 								<form className='addmemberform'
 									onSubmit={this.onSubmit}>
 									<div className="form-group">

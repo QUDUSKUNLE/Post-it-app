@@ -9,7 +9,6 @@ class Home extends React.Component {
     * @override
   */
   render() {
-    const img = 'https://www.google.com.ng/search?q=share+information+image&';
     return (
         <div>
           <div className="container">
@@ -22,7 +21,6 @@ class Home extends React.Component {
 										&nbsp;
                     allows friends to come together and share vital informtion.
 								</h4>
-                <img src={img} alt=''/>
 							</div>
 							<SignUp/>
 						</div>

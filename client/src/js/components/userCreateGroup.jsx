@@ -16,6 +16,8 @@ class CreateGroup extends React.Component {
       email: '',
       password: '',
       group: '',
+      createGroupMessage: '',
+      signOutMessage: ''
     };
 		// Bind Create Group Input Fields
     this.onChange = this.onChange.bind(this);
@@ -41,13 +43,18 @@ class CreateGroup extends React.Component {
  * @returns {object} response from server.
  */
   onClick() {
-    axios.post('/signout').then((response) => {
-      alert(response.data.message);
-				// console.log(response.data);
+    axios.post('/signout').then((resp) => {
+      if (resp) {
+        this.setState({
+          signOutMessage: resp.data.message
+        });
+      }
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-					// console.log(error.response.data);
+        this.setState({
+          signOutMessage: error.response.data.message
+        });
       }
     });
   }
@@ -64,13 +71,19 @@ class CreateGroup extends React.Component {
       password: this.state.password,
       group: this.state.group
     };
-    axios.post('/group', groupDetails).then(() => {
-				// console.log(response.data);
-      alert(`${groupDetails.group} group created successfully!!!`);
+    axios.post('/group', groupDetails).then((res) => {
+      if (res) {
+        this.setState({
+          createGroupMessage: `${groupDetails.group} group created successfully`
+        });
+      }
+			// console.log()
       this.props.history.push('/broadcastboard');
     }).catch((error) => {
       if (error.response) {
-					// console.log(error.response.data)
+        this.setState({
+          createGroupMessage: error.response.data.message
+        });
       }
     });
   }
@@ -113,7 +126,17 @@ class CreateGroup extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="col-md-offset-3 col-md-6 creategroupform">
+							<div>
+								<center>
+									<span>{this.state.signOutMessage}</span>
+								</center>
+							</div>
 							<div className='row w3-card w3-white'>
+								<div>
+									<center>
+										<span>{this.state.createGroupMessage}</span>
+									</center>
+								</div>
 								<form id="creategroupform"
 									onSubmit={this.onSubmit}>
 									<div className="form-group">

@@ -3,12 +3,18 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/icon.css';
 
+/**
+  * Represents PasswordReset component.
+*/
 class ResetPassword extends React.Component {
+  /**
+    * @param {string} props inbuilt props.
+  */
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      response: {}
+      respons: ''
     };
   }
   /**
@@ -32,18 +38,19 @@ class ResetPassword extends React.Component {
     const reset = {
       email: this.state.email,
     };
-    // console.log(reset);
+
     axios.post('/passwordreset', reset)
       .then((res) => {
         const mess = res.data.message;
-        console.log(mess);
-        alert(mess);
-        this.props.history.push('/signin');
+        this.setState({
+          respons: mess
+        });
       }).catch((error) => {
         if (error.response) {
           const er = `User's Details ${error.response.data.message}.`;
-          console.log(er);
-          alert(er);
+          this.setState({
+            respons: er
+          });
         }
       });
   }
@@ -81,11 +88,13 @@ class ResetPassword extends React.Component {
             <h4>
               Reset your password
             </h4>
-            <span className='help-block'>{this.props.response}</span>
           </center><br/>
             <div className='container resetform'>
               <div className='row'>
                 <div className='col-md-6 col-md-offset-3 w3-card w3-white'>
+                  <center>
+                    <span>{this.state.respons}</span>
+                  </center>
                   <form onSubmit={this.onSubmit.bind(this)} id="resetform">
                     <div className="form-group">
                     <label htmlFor="email">

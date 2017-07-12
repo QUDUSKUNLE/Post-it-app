@@ -16,7 +16,8 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      signinMessage: ''
     };
 
     this.onChange = this.onChange.bind(this); // Bind input field values
@@ -47,11 +48,17 @@ class SignIn extends React.Component {
       password: this.state.password
     };
     axios.post('/signin', SignInDetails).then((response) => {
-      alert(response.data.message);
+      if (response) {
+        this.setState({
+          signinMessage: response.data.message
+        });
+      }
       this.props.history.push('/broadcastboard');
     }).catch((error) => {
       if (error.response) {
-        alert(`User's Details ${error.response.data.message}.`);
+        this.setState({
+          signinMessage: `User details ${error.response.data.message}`
+        });
       }
     });
   }
@@ -117,6 +124,11 @@ class SignIn extends React.Component {
 								<br/>
 								<br/>
 								<div className="text-center or"><b>OR</b></div>
+                <div>
+                  <center>
+                    <span>{this.state.signinMessage}</span>
+                  </center>
+                </div>
 								<form onSubmit={this.onSubmit}
 									className='w3-card w3-white' id="signinForm">
 									<div className="form-group">
