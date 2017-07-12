@@ -17,7 +17,7 @@ class Home extends React.Component {
 		<h4>PostIt
                   <small>
                     <i>App</i>
-		  </small>
+                  </small>
                     &nbsp;
                     allows friends to come together and share vital informtion.
                 </h4>
