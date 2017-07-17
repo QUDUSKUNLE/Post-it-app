@@ -1,0 +1,86 @@
+"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+        "start:dev": "webpack-dev-server --inline --content-base client/src --history-api-fallback",
+        "start:prod": "npm run build:client && node server.index.js",
+        "build:client": "webpack",
+        "run:server": "webpack --config webpack.server.config.js"
+
+nodemon --watch server --exec babel-node -- server/server.js
+
+last 24 Hours
+ - I worked on React/Flux Architecture more
+
+Next 24 Hours
+- I will be working on how to send data from client side to server side
+
+Blocker
+
+quduskunle
+[9:30 AM]
+Last 24 Hours
+- I worked on list out groups on messageboard
+- I wrote groupList route to get groupList displayed on messageboard
+Next 24 Hours
+- Work on Google+ sigin
+
+Blockers
+- Slow internet speed
+- Power
+
+Last 24 Hours
+- I redesigned Project UI
+- Display response message from the server
+
+Next 24 Hours
+- work on user profile editing
+
+Blockers
+- Slow internet speed
+- Power
+
+
+
+
+query: {
+                presets: ['es2015', 'react']
+            }
+
+"start:dev": "npm run build & npm start",
+    "start:prod": "npm run build && node server/server.js",
+    "build": "webpack-dev-server --inline --content-base client/src --history-api-fallback"
+
+
+    <div className="container">
+      <div className="row">
+        <div className="col-md-6 col-md-offset-3">
+          <form onSubmit={this.onSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input value={this.state.email} onChange={this.onChange}
+                id="email" type="email"
+                className="form-control" placeholder="johndoe@example.com"
+                name="email" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input id="password" type="password"
+                value={this.state.password} onChange={this.onChange}
+                className="form-control" placeholder="*********"
+                name="password" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="group">Group Name</label>
+              <input value={this.state.group} onChange={this.onChange}
+                type="text" name="group" className="form-control"
+                placeholder="groupname" required />
+            </div>
+            <div className="form-group">
+              <label htmlFor="member">Member</label>
+              <input value={this.state.member} onChange={this.onChange}
+                type="text" name="member" className="form-control"
+                placeholder="member" required />
+            </div>
+            <button type="submit" className="btn btn-success form-control">Add To Group</button>
+          </form>
+        </div>
+      </div>
+    </div>
