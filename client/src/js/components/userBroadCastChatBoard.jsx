@@ -53,23 +53,23 @@ class BroadCastChatBoard extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-6"
-          style={{ backgroundColor: '#2d2d2d' }}>
-          <h5 className="text-center para">Group: Andela Abuja</h5>
-          <hr />
-          <br />
-          <div className="row">
-            <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-              <form id="broadcastform" onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <textarea type="text" name="message"
-                    onChange={this.onChange} placeholder="write message"
-                    className="form-control" value={this.state.message}>
-                  </textarea>
-                </div>
-                <button type="submit"
-                  className="btn btn-primary pull-right">Send</button>
-              </form>
+        <div className="col-md-8">
+          <h6 className='text-center'>Group: Andela Lagos</h6>
+          <hr/>
+          <div id="conversation">
+          </div>
+          <div className="row" id="sendMessageDetails">
+            <div className="col-md-10">
+              <input id="sendMessage" onSubmit={this.onSubmit}
+                onChange={this.onChange}
+                type="text" className="form-control"
+                value={this.state.message} name="message"
+                placeholder="Type your message..."/>
+            </div>
+            <div className="col-md-2">
+              <button id="sendMessageBut"
+                type="button" className="btn btn-primary">Send
+              </button>
             </div>
           </div>
         </div>

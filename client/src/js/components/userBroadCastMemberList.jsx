@@ -12,21 +12,21 @@ class BroadCastMemberList extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-3"
-          style={{ backgroundColor: '#756d6d' }}>
-          <h5 className="text-center para">Group member</h5>
-          <hr />
-          <br />
-          <div className="row">
-            <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-              <div>
-                <ul>
-                  <li>ebuka</li>
-                  <li>quduskunle</li>
-                  <li>osayamen</li>
-                </ul>
-              </div>
-            </div>
+        <div className="col-md-2">
+          <h6 className='text-center'>Member</h6>
+          <hr/>
+          <div id="user-list">
+            <ul className="nav grouplist">
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+              <li className='text-center'>Andela Lagos</li>
+            </ul>
           </div>
         </div>
       </div>

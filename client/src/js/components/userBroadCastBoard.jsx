@@ -101,17 +101,14 @@ class BroadCastBoard extends React.Component {
 						</div>
 					</div>
         </nav>
+        <div className="container">
+          <p className="pull-right">Hi, Adewale</p>
+        </div>
 				<BroadCastNav />
 				<div className="container">
-					<div className="col-md-12">
+					<div className="col-xs-12">
 						<div className="row board">
-							<div className="col-md-3"
-								style={{ backgroundColor: '#756d6d' }}>
-								<h5 className="text-center para">Groups</h5>
-								<hr />
-								<br />
-								<BroadCastGroupList />
-							</div>
+							<BroadCastGroupList />
 							<BroadCastChatBoard />
 							<BroadCastMemberList />
 							<hr />

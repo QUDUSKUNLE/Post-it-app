@@ -34,17 +34,34 @@ class BroadCastGroupList extends React.Component {
   render() {
     return (
       <div>
-        <div className="row">
-          <div className="col-md-12 col-xs-12 col-lg-12 broadcastbody">
-            <ul className="nav grouplist">
-              <li><Link to="/broadcastboard">Andela Lagos</Link></li>
-              <li><Link to="/broadcastboard">Andela Abuja</Link></li>
-              <li><Link to="/broadcastboard">Andela Calabar</Link></li>
-              <li><Link to="/broadcastboard">Andela Calabar</Link></li>
-              <li><Link to="/broadcastboard">Andela Kisi</Link></li>
-            </ul>
+          <div className="col-md-2 broadcastbody">
+            <h6 className='text-center'>Group</h6>
+            <hr/>
+            <div id="user-list">
+              <ul className="nav">
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Lagos</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Abuja</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Calabar</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Calabar</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Kisi</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Lagos</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Abuja</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Calabar</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Calabar</Link></li>
+                <li className='text-center'>
+                  <Link to="/broadcastboard">Andela Kisi</Link></li>
+              </ul>
+            </div>
           </div>
-        </div>
       </div>
     );
   }
