@@ -12,25 +12,25 @@ var _firebase = require('firebase');
 
 var _firebase2 = _interopRequireDefault(_firebase);
 
-var _config = require('./config.js');
-
-var _config2 = _interopRequireDefault(_config);
-
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
+var _config = require('./config.js');
+
+var _config2 = _interopRequireDefault(_config);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//  =================== Import Libraries=====================//
+//  ===================Import Libraries=====================//
 var Router = _express2.default.Router();
 
 //  ===================Homepage Endpoint=======================//
 Router.route('/*').get(function (req, res) {
   res.sendFile(_path2.default.join(__dirname, '../../client/src/index.html'));
 });
-//  ======================Sign Up Endpoint============//
 
+//  ======================Sign Up Endpoint============//
 Router.route('/signup').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -72,6 +72,7 @@ Router.route('/signin').post(function (req, res) {
     });
   });
 });
+
 //  ======================Sign Out Endpoint========================//
 Router.route('/signout').post(function (req, res) {
   _firebase2.default.auth().signOut().then(function () {
@@ -81,6 +82,20 @@ Router.route('/signout').post(function (req, res) {
   }).catch(function () {
     res.status(404).send({
       message: 'Network Error'
+    });
+  });
+});
+
+//  ==========================Password Reset ==================//
+Router.route('/passwordreset').post(function (req, res) {
+  var email = req.body.email;
+  _firebase2.default.auth().sendPasswordResetEmail(email).then(function () {
+    res.send({
+      message: 'Password reset email sent successfully!'
+    });
+  }).catch(function (error) {
+    res.status(404).send({
+      message: error.message
     });
   });
 });
@@ -115,7 +130,17 @@ Router.route('/group').post(function (req, res) {
   });
 });
 
+// ========================Get Groups=================//
+
+Router.route('/groupList').get(function (req, res) {
+  _config2.default.database().ref('Group');
+  res.send({
+    message: 'GroupList'
+  });
+});
+
 //  ============================ADD MEMBER ENDPOINT=================//
+
 Router.route('/group/member').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -137,7 +162,8 @@ Router.route('/group/member').post(function (req, res) {
   });
 });
 
-//	===============Delete a user`s Account============
+//	===============Delete a user`s Account=============//
+
 Router.route('/delete').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -160,6 +186,8 @@ Router.route('/delete').post(function (req, res) {
     });
   });
 });
+
+// ================Message===============//
 
 Router.route('/groupName/message').post(function (req, res) {
   var email = req.body.email;

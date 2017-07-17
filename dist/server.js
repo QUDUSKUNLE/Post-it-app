@@ -36,30 +36,19 @@ var _webpackConfig = require('../webpack.config.js');
 
 var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PORT
+var port = process.env.PORT || 8080; //  BASE SET-UP
 
-// import historyFallback from 'express-history-api-fallback';
-
-// import connect from 'connect';
-
-// New Addition
-//  BASE SET-UP
-var port = process.env.PORT || 8080;
 var app = (0, _express2.default)();
 app.use((0, _compression2.default)());
-// app.use(historyFallback());
 
 // CONFIG APP
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
-// configure app to handle CORS requests
 
+// configure app to handle CORS requests
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
@@ -78,7 +67,6 @@ app.use((0, _webpackDevMiddleware2.default)(compiler, {
   publicPath: _webpackConfig2.default.output.publicPath,
   noInfo: true
 }));
-
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 
 app.use('/', _userRoutes2.default);
