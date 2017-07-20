@@ -141,153 +141,118 @@ body {
 
 }
 
-
-h3 {
-    margin-top: 10px;
-    margin-bottom: 0;
+/*Newly Add*/
+/*#broadcastchat {
+  background: rgb(45, 45, 45);
+}*/
+.group {
+  border: 0px 2px 0 1px solid #ddd;
+  margin: 0 -6px 0 -35px;
+  background: rgb(20, 20, 20);
 }
 
-#connection-details {
-    display: none;
-    z-index: 10;
-    border: solid 1px red;
-    position: fixed;
-    top: 5px;
-    padding: 20px;
-    border: solid 2px #ffa1a1;
-    background-color: #ffffff;
-    /*background-color: #fff7f7;*/
-    box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.22);
+.group .groupHeader {
+  width: 100%;
+  background: white;
+  padding: 3px;
+  border-bottom: 1px solid #ddd;
 
-    /* Center */
-    left: 50%;
-    width: auto;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
+}
+#groupDisplay {
+    height: 450px;
+    /*border-bottom: 1px solid #ddd;*/
+    /*overflow-y: scroll;*/
+}
+.groupHeader h5 {
+    margin: 5px;
+    padding: 0;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
 }
 
-#connection-details button {
-    min-width: 100px;
+.chat {
+  border: 0 1px 2px 0 solid #ddd;
+  margin: 0 -10px 0 -25px;
+  background: rgb(45, 45, 45);
 }
 
-#wsUrl {
-    min-width: 300px;
+.chat .groupHeader {
+  width: 100%;
+  background: white;
+  padding: 3px;
+  border-bottom: 1px solid #ddd;
+
 }
 
-#username {
-    margin-top: 10px;
-}
-
-#conversation {
-    border: solid 1px #cccccc;
-    border-radius: 2px;
-    min-height: 350px;
+#chat {
+    height: 400px;
+    border-bottom: 1px solid black;
     overflow-y: scroll;
-    margin-top: 10px;
 }
 
-#conversation .card {
-    border-bottom: solid 1px #eeeeee;
-    padding: 8px 20px;
-}
-#conversation .card:nth-of-type(odd) {
-    background-color: #f9f9f9;
+#chatboard {
+  border: 0 0 1px 0 solid #ddd;
 }
 
-#conversation .message {
-    margin-top: 8px;
+.chatBottom {
+    border-radius: 1px;
+    border-bottom: 1px solid black;
+    margin: 0 -10px 1px -25px;
+    background: rgb(45, 45, 45);
 }
 
-#conversation .sent .sender {
-    color: #b7d1b2;
-}
-#conversation .sent .message {
-    color: #3B6932;
-}
-
-
-#conversation .received .sender {
-    color: #bdc3e5;
-}
-#conversation .received .message {
-    color: #323F91;
-}
-
-#sendMessageDetails {
-    margin-top: 5px;
-}
-
-#sendMessageDetails div:nth-of-type(1) {
-    padding-right: 0;
-}
-#sendMessageDetails div:nth-of-type(2) {
-    padding-left: 4px;
+.chatBottom .col-md-12 input[type='text']{
+    width: 90%;
+    padding: 6px;
+    padding-left: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 2px -50px 0 0;
+    background: rgb(45, 45, 45);
+    color: white;
 }
 
 #sendMessageBut {
-  display: block;
+    padding: 6px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 4px 2px 2px 65px;
+    background: rgb(45, 45, 45);
+    color: white;
+}
+
+/*Member*/
+.member {
+  border: 0px 2px 2px 1px solid #ddd;
+  margin: 0 -35px 0 -20px;
+  background: rgb(20, 20, 20);;
+}
+
+.member .memberHeader {
   width: 100%;
+  background: white;
+  padding: 3px;
+  border-bottom: 1px solid #ddd;
+
+}
+#memberDisplay {
+    height: 450px;
+    /*border-bottom: 1px solid #ddd;*/
+    /*overflow-y: scroll;*/
+}
+.memberHeader h5 {
+    margin: 5px;
+    padding: 0;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
 }
 
-#connection-status {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    position: relative;
-    top: 30px;
-}
-#connection-status.agent {
-    top: 23px;
-}
-
-/*#connection-status.disconnected {
-    background-image: url('../images/led_disconnected_16x16.png');
-}
-
-#connection-status.connected {
-    background-image: url('../images/led_connected_16x16.png');
-}*/
-
-#user-list {
-    max-height: 400px;
-    overflow-y: scroll;
-    margin-top: 5px;
-    /*border: solid 1px #dddddd;*/
-    border-radius: 4px;
-}
-
-.list-group {
-    margin-bottom: 0;
-}
-
-.list-group-item {
-    outline: none;
-}
-
-#user-list span.connected, #user-list span.disconnected {
-    display: inline-block;
-    margin-right: 10px;
-    width: 16px;
-    height: 16px;
-    position: relative;
-    top: 3px;
-}
-
-/*#user-list span.connected {
-    background-image: url('../images/led_connected_16x16.png');
-}
-
-#user-list span.disconnected {
-    background-image: url('../images/led_disconnected_16x16.png');
-}*/
-
-.unread {
-    display: block;
-}
-
-.read {
-    display: none;
+.foot {
+  background: rgb(10,10,10);
+  color: white;
+  /*margin-top: -2px;*/
+  height: 50px
 }
