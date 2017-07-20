@@ -53,23 +53,41 @@ class BroadCastChatBoard extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-8">
-          <h6 className='text-center'>Group: Andela Lagos</h6>
-          <hr/>
-          <div id="conversation">
-          </div>
-          <div className="row" id="sendMessageDetails">
-            <div className="col-md-10">
-              <input id="sendMessage" onSubmit={this.onSubmit}
-                onChange={this.onChange}
-                type="text" className="form-control"
-                value={this.state.message} name="message"
-                placeholder="Type your message..."/>
+        <div id='broadcastchat'>
+          <div className='col-md-2'>
+            <div className='group'>
+              <div className="groupHeader">
+                  <h5>Group</h5>
+              </div>
+              <div id="groupDisplay"></div>
             </div>
-            <div className="col-md-2">
-              <button id="sendMessageBut"
-                type="button" className="btn btn-primary">Send
-              </button>
+          </div>
+          <div className='col-md-8'>
+            <div className='chat'>
+              <div className='groupHeader'>
+                <h5>Abuja</h5>
+              </div>
+              <div id="chat"></div>
+            </div>
+            <div className="chatBottom">
+              <div className='col-md-12'>
+                <input type="text" onSubmit={this.onSubmit}
+                  onChange={this.onChange} type="text"
+                  className=""
+                  value={this.state.message} name="message"
+                  placeholder="Type your message..." />
+                  <button id="sendMessageBut"
+                    type="button" className="">Send
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div className='col-md-2'>
+            <div className='member'>
+              <div className="memberHeader">
+                  <h5>Member</h5>
+              </div>
+              <div id="memberDisplay"></div>
             </div>
           </div>
         </div>

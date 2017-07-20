@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/icon.css';
 
@@ -34,34 +34,6 @@ class BroadCastGroupList extends React.Component {
   render() {
     return (
       <div>
-          <div className="col-md-2 broadcastbody">
-            <h6 className='text-center'>Group</h6>
-            <hr/>
-            <div id="user-list">
-              <ul className="nav">
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Lagos</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Abuja</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Calabar</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Calabar</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Kisi</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Lagos</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Abuja</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Calabar</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Calabar</Link></li>
-                <li className='text-center'>
-                  <Link to="/broadcastboard">Andela Kisi</Link></li>
-              </ul>
-            </div>
-          </div>
       </div>
     );
   }

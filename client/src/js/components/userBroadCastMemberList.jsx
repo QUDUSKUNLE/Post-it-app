@@ -12,23 +12,6 @@ class BroadCastMemberList extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-md-2">
-          <h6 className='text-center'>Member</h6>
-          <hr/>
-          <div id="user-list">
-            <ul className="nav grouplist">
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-              <li className='text-center'>Andela Lagos</li>
-            </ul>
-          </div>
-        </div>
       </div>
     );
   }

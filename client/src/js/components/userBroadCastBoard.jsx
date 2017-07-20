@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BroadCastNav from './userBroadCastBoardNav.jsx';
-import BroadCastGroupList from './userBroadCastBoardGroupList.jsx';
+// import BroadCastGroupList from './userBroadCastBoardGroupList.jsx';
 import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
-import BroadCastMemberList from './userBroadCastMemberList.jsx';
+// import BroadCastMemberList from './userBroadCastMemberList.jsx';
 import '../../css/icon.css';
 
 /**
@@ -101,20 +101,22 @@ class BroadCastBoard extends React.Component {
 						</div>
 					</div>
         </nav>
-        <div className="container">
+        <div className="container-fluid">
           <p className="pull-right">Hi, Adewale</p>
         </div>
 				<BroadCastNav />
-				<div className="container">
-					<div className="col-xs-12">
+				<div className="container-fluid">
+					<div className="col-md-12">
 						<div className="row board">
-							<BroadCastGroupList />
 							<BroadCastChatBoard />
-							<BroadCastMemberList />
-							<hr />
 						</div>
 					</div>
 				</div>
+        <div className='container-fluid foot'>
+          <div className="container">
+            <p></p>
+          </div>
+        </div>
 			</div>
     );
   }
