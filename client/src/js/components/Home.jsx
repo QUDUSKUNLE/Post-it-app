@@ -1,5 +1,6 @@
 import React from 'react';
 import SignUp from './userSignUp.jsx';
+import Footer from './footer.jsx';
 
 /**
   * Represents Home component.
@@ -14,7 +15,7 @@ class Home extends React.Component {
           <div className="container">
             <div className="row home">
               <div className='col-md-6'>
-		<h4>PostIt
+                <h4>PostIt
                   <small>
                     <i>App</i>
                   </small>
@@ -25,6 +26,7 @@ class Home extends React.Component {
              <SignUp/>
            </div>
          </div>
+         <Footer/>
         </div>
     );
   }
