@@ -8,7 +8,9 @@ class Footer extends React.Component {
     return (
       <div>
         <div className='container-fluid footie'>
-          <div className='footer'></div>
+          <div className='container' id='post-footer'>
+            PostItApp
+          </div>
         </div>
       </div>
     );

@@ -1,168 +1,178 @@
 /*
  Main body
 */
+
 body {
-  background-color: #e8e8ee;
+    background-color: #e8e8ee;
 }
+
 
 /*
   home
 */
 
 .home {
-  margin-top: 35px;
+    margin-top: 35px;
 }
+
+.footie {
+    background-color: #333;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: left;
+}
+
+#post-footer {
+    /* margin-top: 2px; */
+    color: white
+}
+
+
 /*
   SignIn Component
 */
 
 #google {
-  background-color: #f44242; /* Green */
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 25px;
-  position: center;
-  width: 95%;
-  margin: 8px;
-  border-radius: 5px;
-  /*padding: 10px;*/
+    background-color: #f44242;
+    /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 25px;
+    position: center;
+    width: 95%;
+    margin: 8px;
+    border-radius: 5px;
+    /*padding: 10px;*/
 }
 
 .or {
-  font-size: 15px
+    font-size: 15px
 }
 
 .signin {
-  margin-top: 70px;
+    margin-top: 70px;
 }
+
 #signinForm {
-  margin-top: 20px;
-  padding: 15px 25px 25px 25px;
+    margin-top: 20px;
+    padding: 15px 25px 25px 25px;
 }
 
 .signinform {
-  color: black;
-  font-size: 15px;
-  width: 100%;
-  border-radius: 4px;
-  padding: 6px 0 6px 10px;
+    color: black;
+    font-size: 15px;
+    width: 100%;
+    border-radius: 4px;
+    padding: 6px 0 6px 10px;
 }
 
 .signinformbtn {
-  color: white;
-  font-size: 25px;
-  width: 100%;
-  background-color: #228B22;
-  text-decoration: none;
-  border:none;
-  border-radius: 6px
+    color: white;
+    font-size: 25px;
+    width: 100%;
+    background-color: #228B22;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px
 }
 
 .create {
-  color: blue
+    color: blue
 }
+
 
 /*
  SignUp Component
 */
 
 #signupform {
-  padding: 8px 20px 9px 20px;
+    padding: 8px 20px 9px 20px;
 }
 
-/*
- ============================================BroadcastBoard
-*/
-
-/*.para {
-  color: white;
-  padding: 10px
-}
-
-
-
-.broadcastbody {
-  height: 250px;
-}
-
-.grouplist {
-  color: white;
-}
-
-#broadcastform {
-  position: relative;
-  bottom: 5px
-}*/
 
 /*
   AddMember         ========================================================
 */
+
 .addmember {
-  margin-top: 125px
+    margin-top: 125px
 }
 
 .addmemberform {
-  margin: 20px 25px;
+    margin: 20px 25px;
 }
+
 
 /*
   Create Group
 */
+
 .creategroupform {
-  margin-top: 75px;
+    margin-top: 75px;
 }
+
 #creategroupform {
-  margin: 20px 25px;
+    margin: 20px 25px;
 }
+
 
 /*
   ResetPassword Component
 */
+
 .passwordreset {
-  margin-top: 60px;
+    margin-top: 60px;
 }
 
 .resetform {
-  margin-top: 20px;
-}
-#resetform {
-  margin-top: 8px;
-  padding: 10px 10px 25px 10px;
+    margin-top: 20px;
 }
 
+#resetform {
+    margin-top: 8px;
+    padding: 10px 10px 25px 10px;
+}
 
 
 /* Broadcast-Copy*/
 
 .board {
-  margin-top: 20px;
-
+    margin-top: 20px;
 }
 
+
 /*Newly Add*/
+
+
 /*#broadcastchat {
   background: rgb(45, 45, 45);
 }*/
+
 .group {
-  border: 0px 2px 0 1px solid #ddd;
-  margin: 0 -6px 0 -35px;
-  background: rgb(20, 20, 20);
+    border: 0px 2px 0 1px solid #ddd;
+    margin: 0 -6px 0 -35px;
+    background: rgb(20, 20, 20);
 }
 
 .group .groupHeader {
-  width: 100%;
-  background: white;
-  padding: 3px;
-  border-bottom: 1px solid #ddd;
-
+    width: 100%;
+    background: white;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
 }
+
 #groupDisplay {
     height: 450px;
     /*border-bottom: 1px solid #ddd;*/
     /*overflow-y: scroll;*/
 }
+
 .groupHeader h5 {
     margin: 5px;
     padding: 0;
@@ -172,17 +182,16 @@ body {
 }
 
 .chat {
-  border: 0 1px 2px 0 solid #ddd;
-  margin: 0 -10px 0 -25px;
-  background: rgb(45, 45, 45);
+    border: 0 1px 2px 0 solid #ddd;
+    margin: 0 -10px 0 -25px;
+    background: rgb(45, 45, 45);
 }
 
 .chat .groupHeader {
-  width: 100%;
-  background: white;
-  padding: 3px;
-  border-bottom: 1px solid #ddd;
-
+    width: 100%;
+    background: white;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
 }
 
 #chat {
@@ -192,7 +201,7 @@ body {
 }
 
 #chatboard {
-  border: 0 0 1px 0 solid #ddd;
+    border: 0 0 1px 0 solid #ddd;
 }
 
 .chatBottom {
@@ -202,7 +211,7 @@ body {
     background: rgb(45, 45, 45);
 }
 
-.chatBottom .col-md-12 input[type='text']{
+.chatBottom .col-md-12 input[type='text'] {
     width: 90%;
     padding: 6px;
     padding-left: 10px;
@@ -223,25 +232,29 @@ body {
     color: white;
 }
 
+
 /*Member*/
+
 .member {
-  border: 0px 2px 2px 1px solid #ddd;
-  margin: 0 -35px 0 -20px;
-  background: rgb(20, 20, 20);;
+    border: 0px 2px 2px 1px solid #ddd;
+    margin: 0 -35px 0 -20px;
+    background: rgb(20, 20, 20);
+    ;
 }
 
 .member .memberHeader {
-  width: 100%;
-  background: white;
-  padding: 3px;
-  border-bottom: 1px solid #ddd;
-
+    width: 100%;
+    background: white;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
 }
+
 #memberDisplay {
     height: 450px;
     /*border-bottom: 1px solid #ddd;*/
     /*overflow-y: scroll;*/
 }
+
 .memberHeader h5 {
     margin: 5px;
     padding: 0;
@@ -251,8 +264,7 @@ body {
 }
 
 .foot {
-  background: rgb(10,10,10);
-  color: white;
-  /*margin-top: -2px;*/
-  height: 50px
+    background: rgb(10, 10, 10);
+    color: white;
+    height: 75pxpx
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/icon.css';
+import Footer from './footer.jsx';
 
 /**
   * Represents PasswordReset component.
@@ -114,6 +115,7 @@ class ResetPassword extends React.Component {
               </div>
             </div>
         </div>
+        <Footer/>
       </div>
     );
   }

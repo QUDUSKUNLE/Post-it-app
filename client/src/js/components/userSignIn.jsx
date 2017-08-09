@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.jsx';
 import '../../css/icon.css';
+import Footer from './footer.jsx';
 
 /**
   * Represents SignIn Component.
@@ -172,6 +173,7 @@ class SignIn extends React.Component {
 						</div>
 					</div>
 				</div>
+        <Footer/>
 			</div>
     );
   }
