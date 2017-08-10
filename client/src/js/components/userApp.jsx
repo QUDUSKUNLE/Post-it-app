@@ -5,7 +5,7 @@ import Home from './Home.jsx';
 /**
   * Represents App Component.
 */
-class App extends React.Component {
+export default class App extends React.Component {
   /**
     * @override
   */
@@ -18,5 +18,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App; // export App Component

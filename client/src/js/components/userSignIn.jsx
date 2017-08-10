@@ -9,7 +9,7 @@ import Footer from './footer.jsx';
 /**
   * Represents SignIn Component.
 */
-class SignIn extends React.Component {
+export default class SignIn extends React.Component {
   /**
     * @param {string} props inbuilt props.
   */
@@ -178,5 +178,3 @@ class SignIn extends React.Component {
     );
   }
 }
-
-export default SignIn; // Export SignIn Form

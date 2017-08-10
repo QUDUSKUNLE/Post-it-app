@@ -8,7 +8,7 @@ import '../../css/icon.css';
 /**
   * Represents BroadCastBoard Component.
 */
-class BroadCastBoard extends React.Component {
+export default class BroadCastBoard extends React.Component {
 
   /**
     * @param {string} props inbuilt props.
@@ -119,5 +119,3 @@ class BroadCastBoard extends React.Component {
     );
   }
 }
-
-export default BroadCastBoard; // Export BroadCastBoard Component

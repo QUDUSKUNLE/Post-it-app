@@ -4,7 +4,7 @@ import axios from 'axios';
 /**
   * Represents SignUp Component.
 */
-class SignUp extends React.Component {
+export default class SignUp extends React.Component {
   /**
     * @param {string} props inbuilt props.
   */
@@ -121,5 +121,3 @@ class SignUp extends React.Component {
     );
   }
 }
-
-export default SignUp;

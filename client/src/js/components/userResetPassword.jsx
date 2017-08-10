@@ -7,7 +7,7 @@ import Footer from './footer.jsx';
 /**
   * Represents PasswordReset component.
 */
-class ResetPassword extends React.Component {
+export default class ResetPassword extends React.Component {
   /**
     * @param {string} props inbuilt props.
   */
@@ -120,5 +120,3 @@ class ResetPassword extends React.Component {
     );
   }
 }
-
-export default ResetPassword;

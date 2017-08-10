@@ -6,7 +6,7 @@ import '../../css/icon.css';
 /**
   * Represents AddMember Component.
 */
-class AddMember extends React.Component {
+export default class AddMember extends React.Component {
   /**
     * @param {string} props inbuilt props.
   */
@@ -169,5 +169,3 @@ class AddMember extends React.Component {
     );
   }
 }
-// Export AddMember
-export default AddMember;

@@ -3,7 +3,7 @@ import React from 'react';
 /**
   * Represents Footer component.
 */
-class Footer extends React.Component {
+export default class Footer extends React.Component {
   /**
     *@override
    */
@@ -19,5 +19,3 @@ class Footer extends React.Component {
     );
   }
 }
-
-export default Footer; // Export Footer

@@ -1,23 +1,26 @@
 import ActionTypes from '../constants/AppConstants.jsx';
-import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
-//
-const AppActions = {
+import Dispatcher from '../dispatcher/AppDispatcher.jsx';
+import AppAPI from '../utils/AppAPI.jsx';
 
-  addMember(member) {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.ADD_MEMBER,
-      member: member
-    });
-  },
-//       .then(() => {
-  receiveMember(members) {
-    AppDispatcher.handleViewAction({
-      actionType: ActionTypes.RECEIVE_MEMBER,
-      member: members
+/**
+ * dispatches it to the store.
+ * @class AppActions
+ */
+export default class AppActions {
+
+  /**
+   *This function gets the sources JSON data from the api function
+   * @param {object} user
+   * @returns {array} sources - returns an array of sources
+   * @memberof AppActions
+   */
+  static signIn(user) {
+    return AppAPI.signInUser(user).then((serverResponse) => {
+      Dispatcher.dispatch({
+        Type: ActionTypes.SIGNIN_USER,
+        payLoad: serverResponse,
+      });
     });
   }
-//   }
-};
 
-export default AppActions;
-
+}

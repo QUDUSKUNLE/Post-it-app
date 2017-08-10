@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 /**
  * Represents CreateGroup Component.
  */
-class CreateGroup extends React.Component {
-	// CreateGroup constructor
+export default class CreateGroup extends React.Component {
   /**
      * @param {string} props inbuilt props.
      */
@@ -172,6 +171,3 @@ class CreateGroup extends React.Component {
     );
   }
 }
-
-// Export CreateGroup
-export default CreateGroup;

@@ -5,7 +5,7 @@ import '../../css/icon.css';
 /**
    Represents BroadCastNav Component.
 */
-class BroadCastNav extends React.Component {
+export default class BroadCastNav extends React.Component {
   /**
     * @override
   */
@@ -32,5 +32,3 @@ class BroadCastNav extends React.Component {
     );
   }
 }
-
-export default BroadCastNav;

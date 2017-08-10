@@ -5,7 +5,7 @@ import '../../css/icon.css';
 /**
   * Represents BroadCastMemberList Component.
 */
-class BroadCastMemberList extends React.Component {
+export default class BroadCastMemberList extends React.Component {
   /**
     * @override
   */
@@ -16,5 +16,3 @@ class BroadCastMemberList extends React.Component {
     );
   }
 }
-
-export default BroadCastMemberList;

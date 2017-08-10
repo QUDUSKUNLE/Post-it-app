@@ -5,7 +5,7 @@ import Footer from './footer.jsx';
 /**
   * Represents Home component.
 */
-class Home extends React.Component {
+export default class Home extends React.Component {
   /**
     * @override
   */
@@ -31,5 +31,3 @@ class Home extends React.Component {
     );
   }
 }
-
-export default Home; // Export Home

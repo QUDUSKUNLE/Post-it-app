@@ -31,7 +31,7 @@ Router.route('/signup')
             });
             res.send({
               message: 'Registration successful and ' +
-                  'verification email sent to your email'
+                        'verification email sent to your email'
             });
           })
           .catch(() => {
@@ -134,11 +134,10 @@ Router.route('/group')
 // ========================Get Groups=================//
 
 Router.route('/groupList')
-  .get((req, res) => {
-    db.database().ref('Group');
-    res.send({
-      message: 'GroupList'
-    });
+  .post((req, res) => {
+    db.database().ref('Group').once('value', (snapshot) => {
+      const groupList = snapshot.val();
+      res.send({ groupList });
   });
 
 //  ============================ADD MEMBER ENDPOINT=================//
@@ -179,16 +178,16 @@ Router.route('/delete')
         const userId = user.uid;
         db.database().ref(`users/${userId}`).remove();
         user.delete()
-          .then(() => {
-            res.send({
-              message: 'User`s deleted successfully '
-            });
-          })
-          .catch(() => {
-            res.status(404).send({
-              message: 'Network Error'
-            });
+        .then(() => {
+          res.send({
+            message: 'User`s deleted successfully '
           });
+        })
+        .catch(() => {
+          res.status(404).send({
+            message: 'Network Error'
+          });
+        });
       })
       .catch(() => {
         res.status(404).send({
@@ -226,5 +225,4 @@ Router.route('/groupName/message')
       });
   });
 
-// Export apiRouter
 export default Router;

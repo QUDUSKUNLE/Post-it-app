@@ -1,34 +1,24 @@
-// import request from 'superagent';
-// const Promise = require('es6-promise').Promise; // jshint ignore:line
-
-/**
- * Wrapper for calling a API
- */
-// import ActionTypes from '../actions/AppActions';
 import axios from 'axios';
-export const AppAPI = {
-  saveMember(member) {
+
+const AppAPI = {
+  signUpUser(user) {
     axios.post('/user/signup', {
-      username: member.name,
-      password: member.phone,
-      email: member.email
+      username: user.username,
+      password: user.password,
+      email: user.email
     })
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    .then((res) => res)
+    .catch((err) => err);
   },
 
-  getMembers() {
-    axios.get('/user/database')
-      .then((response) => {
-        console.log(response);
-        // ActionTypes.recieveContacts();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  signInUser(user) {
+    axios.post('/user/signin', {
+      email: user.email,
+      password: user.password
+    })
+    .then((res) => res)
+    .catch((err) => err);
   }
 };
+
+export default AppAPI;
