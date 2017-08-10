@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BroadCastNav from './userBroadCastBoardNav.jsx';
-// import BroadCastGroupList from './userBroadCastBoardGroupList.jsx';
 import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
-// import BroadCastMemberList from './userBroadCastMemberList.jsx';
 import '../../css/icon.css';
 
 /**
@@ -102,7 +100,7 @@ class BroadCastBoard extends React.Component {
 					</div>
         </nav>
         <div className="container-fluid">
-          <p className="pull-right">Hi, Adewale</p>
+          <p className="pull-right">Hi, welcome to PostIt</p>
         </div>
 				<BroadCastNav />
 				<div className="container-fluid">

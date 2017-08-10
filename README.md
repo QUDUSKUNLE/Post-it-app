@@ -15,7 +15,7 @@
   
   3. Install project dependencies <b>npm install</b>
   
-  4. Create an account of firebase and set up your app
+  4. Create an account on firebase and set up the app
   
   5. Create an .env file and set the variables in .env-sample to your specified database connection
   

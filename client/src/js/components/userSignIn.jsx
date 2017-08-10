@@ -82,7 +82,7 @@ class SignIn extends React.Component {
           });
         }
         console.log(token);
-        console.log(user);
+        console.log(user.username);
       });
   }
 	/**

@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BroadCastNav from './userBroadCastBoardNav.jsx';
-import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
 import '../../css/icon.css';
 
 /**
   * Represents BroadCastBoard Component.
 */
-class BroadCastBoard extends React.Component {
+class BroadCastChatBoard extends React.Component {
 
   /**
     * @param {string} props inbuilt props.
@@ -22,9 +21,8 @@ class BroadCastBoard extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.onClick = this.onClick.bind(this); // Bind signOut tab to onClick event
+    this.onClick = this.onClick.bind(this);
   }
-
 	/**
     * onChange event.
     * @param {object} message The first number.
@@ -65,7 +63,8 @@ class BroadCastBoard extends React.Component {
       }
     });
   }
-	/**
+
+  /**
     * @override
   */
   render() {
@@ -100,7 +99,7 @@ class BroadCastBoard extends React.Component {
 					</div>
         </nav>
         <div className="container-fluid">
-          <p className="pull-right">Hi, Adewale</p>
+          <p className="pull-right"></p>
         </div>
 				<BroadCastNav />
 				<div className="container-fluid">
@@ -120,4 +119,4 @@ class BroadCastBoard extends React.Component {
   }
 }
 
-export default BroadCastBoard; // Export BroadCastBoard Component
+export default BroadCastChatBoard; // Export BroadCastBoard Component

@@ -2,9 +2,7 @@ import ActionTypes from '../constants/AppConstants.jsx';
 import AppDispatcher from '../dispatcher/AppDispatcher.jsx';
 //
 const AppActions = {
-//   signup: () => {
-//     axios.post('/user/signup')
-//       .then(() => {
+
   addMember(member) {
     AppDispatcher.handleViewAction({
       actionType: ActionTypes.ADD_MEMBER,
@@ -23,19 +21,3 @@ const AppActions = {
 
 export default AppActions;
 
-// export const SignUpUser =
-//   (userData) => {
-//     axios.post('/user/signup', userData)
-//       .then((response) => {
-//         alert(`Hi ${userData.username}, ${response.data.message}`);
-//         console.log(response.data);
-//         console.log(userData);
-//       })
-//       .catch((error) => {
-//         if (error.response) {
-//           console.log(error.response.data);
-//           alert(`Hey ${userData.username},\
-//             you've ${error.response.data.message}.`);
-//         }
-//       });
-//   };

@@ -1,10 +1,13 @@
 import React from 'react';
 
+/**
+  * Represents Footer component.
+*/
 class Footer extends React.Component {
   /**
     *@override
    */
-  render(){
+  render() {
     return (
       <div>
         <div className='container-fluid footie'>
