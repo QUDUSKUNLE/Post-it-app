@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "babel-watch server/server.js",
     "start": "babel-watch ./dist/server.js",
-    "build": "babel server/ -d dist"
+    "build": "babel server/ -d dist",
+    "compile": "npm-run-all build start"
   },
   "repository": {
     "type": "git",

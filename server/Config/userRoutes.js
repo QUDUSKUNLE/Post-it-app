@@ -6,7 +6,7 @@ import db from './config.js';
 
 const Router = express.Router();
 
-//  ===================Homepage Endpoint=======================//
+//  ===================Homepage Endpoint==============//
 Router.route('/*')
   .get((req, res) => {
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
@@ -46,7 +46,7 @@ Router.route('/signup')
         });
       });
   });
-//  ======================Sign in Endpoint===========================//
+//  ======================Sign in Endpoint=============//
 Router.route('/signin')
   .post((req, res) => {
     const email = req.body.email;
@@ -64,7 +64,7 @@ Router.route('/signin')
       });
   });
 
-//  ======================Sign Out Endpoint========================//
+//  ======================Sign Out Endpoint============//
 Router.route('/signout')
   .post((req, res) => {
     firebase.auth().signOut()
@@ -80,7 +80,7 @@ Router.route('/signout')
       });
   });
 
-//  ==========================Password Reset ==================//
+//  ==========================Password Reset ==========//
 Router.route('/passwordreset')
   .post((req, res) => {
     const email = req.body.email;
@@ -97,7 +97,7 @@ Router.route('/passwordreset')
       });
   });
 
-//  ===============Create Group Endpoint======================//
+//  ===============Create Group Endpoint===============//
 Router.route('/group')
   .post((req, res) => {
     const email = req.body.email;
@@ -131,7 +131,7 @@ Router.route('/group')
       });
   });
 
-// ========================Get Groups=================//
+// ========================Get Groups==================//
 
 Router.route('/groupList')
   .post((req, res) => {
@@ -140,7 +140,7 @@ Router.route('/groupList')
       res.send({ groupList });
   });
 
-//  ============================ADD MEMBER ENDPOINT=================//
+//  ============================ADD MEMBER ENDPOINT====//
 
 Router.route('/group/member')
   .post((req, res) => {
