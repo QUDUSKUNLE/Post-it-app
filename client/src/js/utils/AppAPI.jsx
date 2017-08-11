@@ -11,10 +11,10 @@ const AppAPI = {
     .catch((err) => err);
   },
 
-  signInUser(user) {
+  signInUser(email, password) {
     axios.post('/user/signin', {
-      email: user.email,
-      password: user.password
+      email,
+      password
     })
     .then((res) => res)
     .catch((err) => err);

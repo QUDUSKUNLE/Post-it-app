@@ -1,10 +1,13 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.jsx';
 import '../../css/icon.css';
 import Footer from './footer.jsx';
+import AppAPI from '../utils/AppAPI.jsx';
+import AppActions from '../actions/AppActions.jsx';
+import SigninStore from '../stores/signinStore.jsx';
 
 /**
   * Represents SignIn Component.
@@ -31,6 +34,25 @@ export default class SignIn extends React.Component {
     * @param {object} signIn The first number.
     * @returns {void} bind input values to name.
  */
+  componentDidMount() {
+    AppActions.signIn(this.state.email, this.state.password);
+    SigninStore.on('change', this.onChange);
+  }
+
+  /**
+    * onChange event.
+    * @returns {void} set the update state
+ */
+  componentWillUnmout() {
+    SigninStore.removeListener('change', this.onChange);
+  }
+
+  /**
+    *This function is reponsible for updating the state of the user prop when
+    the component is rendered.
+    * @param {object} signIn
+    * @return {object} updated state of user
+    */
   onChange(signIn) {
     this.setState({
       [signIn.target.name]: signIn.target.value
@@ -48,22 +70,38 @@ export default class SignIn extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post('/signin', SignInDetails).then((response) => {
-      if (response) {
-        this.setState({
-          signinMessage: response.data.message
-        });
-      }
-      this.props.history.push('/broadcastboard');
-    }).catch((error) => {
-      if (error.response) {
-        this.setState({
-          signinMessage: `User details ${error.response.data.message}`
-        });
-      }
-    });
+    // axios.post('/signin', SignInDetails).then((response) => {
+    //   if (response) {
+    //     this.setState({
+    //       signinMessage: response.data.message
+    //     });
+    //   }
+    //   this.props.history.push('/broadcastboard');
+    // }).catch((error) => {
+    //   if (error.response) {
+    //     this.setState({
+    //       signinMessage: `User details ${error.response.data.message}`
+    //     });
+    //   }
+    // });
+    AppAPI.signInUser(SignInDetails);
+    //   .then((response) => {
+    //     if (response) {
+    //       this.setState({
+    //         signinMessage: response.data.message
+    //       });
+    //     }
+    //     this.props.history.push('/broadcastboard');
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       this.setState({
+    //         signinMessage: `User details ${error.response.data.message}`
+    //       });
+    //     }
+    //   }
+    // );
   }
-
 	/**
 		* @override
 	*/
