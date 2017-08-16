@@ -1,8 +1,9 @@
+
 // BASE SET-UP
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import Router from './config/userRoutes.js';
+import Router from './config/userRoutes';
 import webpack from 'webpack';
 import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
