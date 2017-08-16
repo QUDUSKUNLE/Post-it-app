@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { resetPassword } from '../actions/appActions.js';
 import '../../css/icon.css';
 import Footer from './footer.jsx';
 
@@ -17,38 +17,40 @@ export default class ResetPassword extends React.Component {
       email: '',
       respons: ''
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
   /**
  * onChange event.
- * @param {object} passwordreset The first number.
+ * @param {object} e The first number.
  * @returns {void} bind input values to name.
  */
-  onChange(passwordreset) {
+  onChange(e) {
     this.setState({
-      [passwordreset.target.name]: passwordreset.target.value
+      [e.target.name]: e.target.value
     });
   }
 
-	/**
+  /**
 	* onSubmit event.
-	* @param {object} passwordreset .
+	* @param {object} e .
 	* @returns {void} .
 	*/
-  onSubmit(passwordreset) {
-    passwordreset.preventDefault();
-    const reset = {
+  onSubmit(e) {
+    e.preventDefault();
+    const resetEmail = {
       email: this.state.email,
     };
 
-    axios.post('/passwordreset', reset)
+    resetPassword(resetEmail)
       .then((res) => {
         const mess = res.data.message;
         this.setState({
           respons: mess
         });
-      }).catch((error) => {
-        if (error.response) {
-          const er = `User's Details ${error.response.data.message}.`;
+      }).catch((err) => {
+        if (err.response) {
+          const er = `User's Details ${err.response.data.message}.`;
           this.setState({
             respons: er
           });
@@ -63,9 +65,9 @@ export default class ResetPassword extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
-					role="navigation">
-					<div className="container">
-						<div className="navbar-header">
+          role="navigation">
+          <div className="container">
+            <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed"
                 data-toggle="collapse" data-target=".navbar-collapse">
                 <span className="sr-only">Toggle navigation</span>
@@ -73,47 +75,47 @@ export default class ResetPassword extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-							<Link className="navbar-brand" to="/">
+              <Link className="navbar-brand" to="#">
                 PostIt<small>App</small>
               </Link>
-						</div>
+            </div>
             <div className="collapse navbar-collapse">
-							<ul className="nav navbar-nav navbar-right">
-								<li><Link to="/signin">Sign in</Link></li>
-							</ul>
-						</div>
-					</div>
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link to="/signin">Sign in</Link></li>
+              </ul>
+            </div>
+          </div>
         </nav>
-        <div className='passwordreset'>
+        <div className="passwordreset">
           <center>
             <h4>
               Reset your password
             </h4>
           </center><br/>
-            <div className='container resetform'>
-              <div className='row'>
-                <div className='col-md-6 col-md-offset-3 w3-card w3-white'>
-                  <center>
-                    <span>{this.state.respons}</span>
-                  </center>
-                  <form onSubmit={this.onSubmit.bind(this)} id="resetform">
-                    <div className="form-group">
+          <div className="container resetform">
+            <div className="row">
+              <div className="col-md-6 col-md-offset-3 w3-card w3-white">
+                <center>
+                  <span>{this.state.respons}</span>
+                </center>
+                <form onSubmit={this.onSubmit} id="resetform">
+                  <div className="form-group">
                     <label htmlFor="email">
                       Enter your email address
                     </label>
                     <input value={this.state.email}
-                      onChange={this.onChange.bind(this)}
+                      onChange={this.onChange}
                       id="email" type="email"
                       className="signinform" placeholder="johndoe@example.com"
                       name="email" required />
-                    </div>
-                    <button type="submit"
-                      className="signinformbtn">Send password reset email
-                    </button>
-                  </form>
-                </div>
+                  </div>
+                  <button type="submit"
+                    className="signinformbtn">Send password reset email
+                  </button>
+                </form>
               </div>
             </div>
+          </div>
         </div>
         <Footer/>
       </div>

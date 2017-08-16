@@ -1,5 +1,4 @@
-// Import Dispatcher from flux
+//  AppDispatcher
 import { Dispatcher } from 'flux';
-
-// Export  dispatch
+// export AppDispatcher
 export default new Dispatcher();

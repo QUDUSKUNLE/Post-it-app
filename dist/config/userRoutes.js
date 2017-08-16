@@ -22,7 +22,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//  ===================Import Libraries=====================//
+// =================== Import Libraries =====================//
 var Router = _express2.default.Router();
 
 //  ===================Homepage Endpoint=======================//
@@ -30,7 +30,7 @@ Router.route('/*').get(function (req, res) {
   res.sendFile(_path2.default.join(__dirname, '../../client/src/index.html'));
 });
 
-//  ======================Sign Up Endpoint============//
+//   //  ======================Sign Up Endpoint============//
 Router.route('/signup').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -41,20 +41,35 @@ Router.route('/signup').post(function (req, res) {
     user.sendEmailVerification().then(function () {
       _config2.default.database().ref('users/' + userId).push({
         userEmail: email,
-        UserPassword: password,
-        userName: username
+        userPassword: password,
+        userName: username,
+        date: new Date().toDateString(),
+        time: new Date().toTimeString()
+      });
+      _config2.default.database().ref('Group').child('general' + userId).push({
+        user: username,
+        userID: userId,
+        date: new Date().toDateString(),
+        time: new Date().toTimeString()
       });
       res.send({
-        message: 'Registration successful and ' + 'verification email sent to your email'
+        message: 'Registration successful and ' + 'verification email sent to your email',
+        data: {
+          email: email,
+          password: password,
+          username: username,
+          userId: userId
+        }
       });
     }).catch(function () {
       res.status(404).send({
         message: 'Network Error'
       });
     });
-  }).catch(function () {
+  }).catch(function (error) {
     res.status(502).send({
-      message: 'Already registered'
+      message: error,
+      data: 'error signing in user`s'
     });
   });
 });
@@ -63,12 +78,37 @@ Router.route('/signin').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
   _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
-    res.send({
-      message: 'User Signed in successfully'
+    var uID = _firebase2.default.auth().currentUser.uid;
+    _config2.default.database().ref('users').child(uID).once('value', function (snapshot) {
+      if (snapshot.val() != null) {
+        var userDetail = snapshot.val();
+        _config2.default.database().ref('Group').child('general').once('value', function (groups) {
+          if (groups.val() != null) {
+            var userGroups = groups.val();
+            res.send({
+              message: 'User Signed in successfully',
+              data: {
+                uID: uID,
+                userDetail: userDetail,
+                userGroups: userGroups
+              }
+            });
+          } else {
+            // userDetails
+            res.send({
+              message: 'User Signed in successfully',
+              data: {
+                uID: uID,
+                userDetail: userDetail
+              }
+            });
+          }
+        });
+      }
     });
-  }).catch(function () {
+  }).catch(function (error) {
     res.status(404).send({
-      message: 'Not Found'
+      err: error
     });
   });
 });
@@ -86,60 +126,115 @@ Router.route('/signout').post(function (req, res) {
   });
 });
 
-//  ==========================Password Reset ==================//
+// // //  ==========================Password Reset ==================//
 Router.route('/passwordreset').post(function (req, res) {
   var email = req.body.email;
   _firebase2.default.auth().sendPasswordResetEmail(email).then(function () {
     res.send({
       message: 'Password reset email sent successfully!'
     });
-  }).catch(function (error) {
+  }).catch(function (err) {
     res.status(404).send({
-      message: error.message
+      message: err.code
     });
   });
 });
 
 //  ===============Create Group Endpoint======================//
-Router.route('/group').post(function (req, res) {
+Router.route('/creategroup').post(function (req, res) {
+  var groupMember = void 0;
   var email = req.body.email;
   var password = req.body.password;
   var groupName = req.body.group;
   _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
-    _firebase2.default.auth().onAuthStateChanged(function () {
-      var uSer = _firebase2.default.auth().currentUser;
-      var uid = uSer.uid;
-      if (uSer !== null) {
-        var group = groupName.toLowerCase();
-        _config2.default.database().ref('Group/' + uid).child(group).once('value', function (snapshot) {
-          if (snapshot.val() != null) {
-            res.status(502).send({ message: 'Group already exists' });
-          } else {
-            _config2.default.database().ref('Group/' + uid).child(group).push({
-              member: uid
-            });
-            res.send({ message: 'Group Created Successfully' });
-          }
+    var user = _firebase2.default.auth().currentUser;
+    var uid = user.uid;
+    if (user) {
+      var group = groupName.toLowerCase();
+      _config2.default.database().ref('Group/' + uid).child(group).once('value', function (snapshot) {
+        if (snapshot.val() != null) {
+          groupMember = snapshot.val();
+          // if current group already exists, output group members and
+          // group name
+          res.status(502).send({
+            message: 'Group already exists',
+            groupMember: groupMember,
+            group: groupName
+          });
+        } else {
+          _config2.default.database().ref('Group/' + uid).child(group).push({
+            member: uid
+          });
+          _config2.default.database().ref('Group/' + uid).child(group).once('value', function (snap) {
+            if (snap.val() != null) {
+              groupMember = snap.val();
+              if (groupMember) {
+                _config2.default.database().ref('Group').child(uid).once('value', function (get) {
+                  if (get.val() != null) {
+                    var userGroup = get.val();
+                    // Get user details both new group and old ones
+                    res.status(200).send({
+                      message: 'Group Created Successfully',
+                      groupMember: groupMember,
+                      group: groupName,
+                      Groups: userGroup
+                    });
+                  }
+                });
+              }
+            }
+          });
+        }
+      });
+    }
+  }, function (_ref) {
+    var error = _ref.error;
+
+    res.send({ err: error });
+  });
+});
+// });
+
+// ========================Get Groups=================//
+Router.route('/getgroups').post(function (req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+    // get user firebase Unique identification uid
+    var uID = _firebase2.default.auth().currentUser.uid;
+    _config2.default.database().ref('Group').child(uID).once('value', function (snapshot) {
+      if (snapshot.val() != null) {
+        var groupMembers = snapshot.val();
+        // return grouplist members and success message
+        res.send({ message: 'group members are here', groupMembers: groupMembers });
+      }
+    });
+  });
+});
+
+//  get member of a particular group
+Router.route('/memberlist').post(function (req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  var groupName = req.body.group;
+  _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+    var user = _firebase2.default.auth().currentUser.uid;
+    _config2.default.database().ref('Group/' + user).child(groupName).once('value', function (snapshot) {
+      if (snapshot.val() != null) {
+        var member = snapshot.val();
+        res.send({
+          message: 'Hey, here are members of the group ' + groupName,
+          member: member });
+      } else {
+        res.send({
+          message: 'No data found'
         });
       }
     });
-  }).catch(function () {
-    res.status(401).send({
-      message: 'User`s not registered'
-    });
   });
 });
 
-// ========================Get Groups=================//
-
-Router.route('/groupList').get(function (req, res) {
-  _config2.default.database().ref('Group');
-  res.send({
-    message: 'GroupList'
-  });
-});
-
-//  ============================ADD MEMBER ENDPOINT=================//
+// //  ============================ADD MEMBER ENDPOINT=================//
 
 Router.route('/group/member').post(function (req, res) {
   var email = req.body.email;
@@ -152,16 +247,18 @@ Router.route('/group/member').post(function (req, res) {
     _config2.default.database().ref('Group/' + uSer).child(name).push({
       member: groupMember
     });
-    res.send({
-      message: 'Member added successfully'
+    _config2.default.database().ref('Group').child(uSer).once('value', function (get) {
+      if (get.val() != null) {
+        var userGroup = get.val();
+        // Get user details both new group and old ones
+        res.send({ message: 'Member added successfully', groupMember: groupMember,
+          group: groupName, Groups: userGroup });
+      }
     });
   }).catch(function () {
-    res.status(401).send({
-      message: 'Not authorized'
-    });
+    res.status(401).send({ message: 'Not authorized' });
   });
 });
-
 //	===============Delete a user`s Account=============//
 
 Router.route('/delete').post(function (req, res) {
@@ -170,20 +267,21 @@ Router.route('/delete').post(function (req, res) {
   _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
     var user = _firebase2.default.auth().currentUser;
     var userId = user.uid;
-    _config2.default.database().ref('users/' + userId).remove();
+    // delete user details from Groups and  user`s membership
+    _config2.default.database().ref('users').child(userId).remove();
+    _config2.default.database().ref('Group').child(userId).remove();
     user.delete().then(function () {
-      res.send({
-        message: 'User`s deleted successfully '
-      });
-    }).catch(function () {
-      res.status(404).send({
-        message: 'Network Error'
-      });
+      // Server response for successfully delete account
+      res.send({ message: 'User`s deleted successfully' });
+    })
+    // Catch error for network error
+    .catch(function () {
+      res.status(404).send({ message: 'Network Error' });
     });
-  }).catch(function () {
-    res.status(404).send({
-      message: 'User`s not Found'
-    });
+  })
+  // Catch for non registered user
+  .catch(function (err) {
+    res.status(404).send({ message: err });
   });
 });
 
@@ -193,25 +291,42 @@ Router.route('/groupName/message').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
   var groupName = req.body.group;
-  var mess = req.body.message;
+  var message = req.body.message;
   _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+    // convert all input groups to lowercase
     var group = groupName.toLowerCase();
     var userId = _firebase2.default.auth().currentUser.uid;
     var groupRef = _config2.default.database().ref('Group/' + userId).child(group);
     groupRef.orderByKey().on('child_added', function (data) {
-      groupRef.child(data.key).push({
-        message: mess
-      });
+      // both date and time at which message is sent
+      var date = new Date().toDateString();
+      var time = new Date().toTimeString();
+      groupRef.child(data.key).push({ message: message, date: date, time: time });
     });
-    res.send({
-      message: 'Broadcast Message sent successfully'
+    // get sentMessages and newly sent message
+    _config2.default.database().ref('Group/' + userId).child(group).once('value', function (snapshot) {
+      if (snapshot.val() != null) {
+        var sentMessages = snapshot.val();
+        var newMess = message;
+        // server response sentMessages and newly sent message
+        res.send({ message: 'Broadcast Message sent successfully',
+          sentMessages: sentMessages,
+          newMess: newMess
+        });
+      } else {
+        // send only server response and newly sent message
+        var _newMess = message;
+        res.send({ message: 'Broadcast Message sent successfully',
+          newMess: _newMess
+        });
+      }
     });
-  }).catch(function () {
-    res.status(404).send({
-      message: 'User`s not registered'
-    });
+  })
+  // Catch error for non registered user
+  .catch(function () {
+    res.status(404).send({ message: 'User`s not registered' });
   });
 });
 
-// Export apiRouter
+// export Router
 exports.default = Router;

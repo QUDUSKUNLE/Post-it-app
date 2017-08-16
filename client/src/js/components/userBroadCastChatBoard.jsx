@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../css/icon.css';
-import axios from 'axios';
+import { sendMessage } from '../actions/appActions.js';
+import { getGroups } from '../actions/groupAction.js';
+import GroupStore from '../stores/groupStore.js';
 
 /**
   * Represents BroadCastChatBoard Component.
@@ -11,11 +13,43 @@ class BroadCastChatBoard extends React.Component {
   */
   constructor(props) {
     super(props);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const groups = GroupStore.allGroups(user);
     this.state = {
-      message: ''
+      groups,
+      user,
+      message: '',
+      currentGroup: 'general',
+      chatMessages: [],
+      groupUsers: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.groups = this.groups.bind(this);
+  }
+
+  componentWillMount() {
+    getGroups(this.state.user);
+    // call action that gets the group that a user belongs to
+    // call action that gets the chat belonginf to that group
+    // call action that get all the user that belongs to that group
+  }
+
+  componentDidMount() {
+    GroupStore.on('getGroups', this.groups);
+    // add event listener for the 3 actions
+  }
+
+  componentWillUnmount() {
+    GroupStore.removeListener('getGroups', this.groups);
+  }
+
+  groups() {
+    const group = GroupStore.allGroups(this.state.user);
+    this.setState({
+      groups: group
+    });
   }
 
   /**
@@ -29,65 +63,29 @@ class BroadCastChatBoard extends React.Component {
     });
   }
 
-	/**
+  /**
     * onSubmit event.
-    * @param {object} message .
+    * @param {object} e .
     * @returns {void} .
   */
-  onSubmit(message) {
-    message.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
     const broadcastmessage = {
       message: this.state.message
     };
-    axios.post('/groupName/message', broadcastmessage).then(() => {
-      alert('message sent');
-    });
+    sendMessage(broadcastmessage)
+      .then(() => {
+        // alert('message sent');
+      });
   }
 
   /**
     * @override
   */
   render() {
+    // const userGroups = Object.keys(this.state.groups);
     return (
       <div>
-        <div id='broadcastchat'>
-          <div className='col-md-2'>
-            <div className='group'>
-              <div className="groupHeader">
-                  <h5>Group</h5>
-              </div>
-              <div id="groupDisplay"></div>
-            </div>
-          </div>
-          <div className='col-md-8'>
-            <div className='chat'>
-              <div className='groupHeader'>
-                <h5>Abuja</h5>
-              </div>
-              <div id="chat"></div>
-            </div>
-            <div className="chatBottom">
-              <div className='col-md-12'>
-                <input type="text" onSubmit={this.onSubmit}
-                  onChange={this.onChange} type="text"
-                  className=""
-                  value={this.state.message} name="message"
-                  placeholder="Type your message..." />
-                  <button id="sendMessageBut"
-                    type="button" className="">Send
-                  </button>
-              </div>
-            </div>
-          </div>
-          <div className='col-md-2'>
-            <div className='member'>
-              <div className="memberHeader">
-                  <h5>Member</h5>
-              </div>
-              <div id="memberDisplay"></div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
