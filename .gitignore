@@ -4,3 +4,5 @@ node_modules
 in.txt
 dist
 .sample.json
+newfile.json
+sample.jsx

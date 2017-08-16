@@ -16,9 +16,6 @@ export default class BroadCastNav extends React.Component {
           <div className="row">
             <div className="col-md-12">
               <ul className="nav nav-pills nav-justified">
-                <li role="presentation" className="active">
-                  <Link to="/broadcastboard">ChatRoom</Link>
-                </li>
                 <li role="presentation" data-toggle="modal"
                   data-target="#myModal"><Link to="/group">Create Group</Link>
                 </li>

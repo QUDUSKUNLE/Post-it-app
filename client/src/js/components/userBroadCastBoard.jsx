@@ -1,22 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Link, Redirect } from 'react-router-dom';
 import BroadCastNav from './userBroadCastBoardNav.jsx';
-import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
+// import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
+import Groups from './userGroups.jsx';
+import ChatBox from './userChatBox.jsx';
+import GroupMembers from './userGroupMembers.jsx';
+// import Footer from './footer.jsx';
+import { signoutAction, sendMessage } from
+  '../actions/appActions.js';
 import '../../css/icon.css';
 
+const loggedIn = (localStorage.getItem('user')) !== false;
 /**
   * Represents BroadCastBoard Component.
 */
 export default class BroadCastBoard extends React.Component {
-
   /**
     * @param {string} props inbuilt props.
   */
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      signOutMessage: '',
+      errSignOut: '',
+      broadcastmessage: '',
+      loggedIn
     };
     this.onChange = this.onChange.bind(this);
 
@@ -25,97 +35,108 @@ export default class BroadCastBoard extends React.Component {
     this.onClick = this.onClick.bind(this); // Bind signOut tab to onClick event
   }
 
-	/**
+  /**
     * onChange event.
-    * @param {object} message The first number.
+    * @param {object} e The first number.
     * @returns {void} bind input values to name.
  */
-  onChange(message) {
+  onChange(e) {
     this.setState({
-      [message.target.name]: message.target.value
+      [e.target.name]: e.target.value
     });
   }
 
-	/**
+  /**
     * onSubmit event.
-    * @param {object} message .
+    * @param {object} e .
     * @returns {void} .
   */
-  onSubmit(message) {
-    message.preventDefault();
+  onSubmit(e) {
+    e.preventDefault();
     const broadcastmessage = {
       message: this.state.message
     };
-    axios.post('/groupName/message', broadcastmessage).then(() => {
-      alert('message sent');
+    sendMessage(broadcastmessage).then((res) => {
+      this.setState({
+        message: res.data.message
+      });
     });
   }
-	/**
+  /**
     * onClick event.
     * @param {void} nill no parameter.
     * @returns {object} response from server.
   */
   onClick() {
-    axios.post('/signout').then((response) => {
-      alert(response.data.message);
-      this.props.history.push('/');
+    signoutAction().then((resp) => {
+      this.setState({
+        signupMessage: resp.data.message
+      });
+      localStorage.removeItem('user');
+      setTimeout(() => {
+        this.props.history.push('/');
+      }, 1000);
     }).catch((error) => {
       if (error.response) {
-			// console.log(error.response.data);
+        this.setState({
+          errSignOut: error.response.data
+        });
       }
     });
   }
-	/**
+  /**
     * @override
   */
   render() {
+    // const { loggedIn } = this.state;
+    if (!loggedIn) {
+      return (
+        <Redirect to="/signin" />
+      );
+    }
     return (
-			<div>
+      <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
-					role="navigation">
-					<div className="container">
-						<div className="navbar-header">
-							<button type="button" className="navbar-toggle"
-								data-toggle="collapse" data-target=".navbar-collapse">
-								<span className="sr-only">Toggle navigation</span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-								<span className="icon-bar"></span>
-							</button>
-							<Link className="navbar-brand" to="/">
+          role="navigation">
+          <div className="container">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle"
+                data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="#">
                 PostIt<small>App</small>
               </Link>
-						</div>
-						<div className="collapse navbar-collapse">
-							<ul className="nav navbar-nav">
-							</ul>
-							<ul className="nav navbar-nav navbar-right">
-								<li><Link to="/">Home</Link></li>
-								<li className="active">
-									<Link to="/broadcastboard">ChatRoom</Link>
-								</li>
-								<li onClick={this.onClick}><Link to="#">Sign out</Link></li>
-							</ul>
-						</div>
-					</div>
+            </div>
+            <div className="collapse navbar-collapse">
+              <ul className="nav navbar-nav"></ul>
+              <ul className="nav navbar-nav navbar-right">
+                <li><Link to="#">Home</Link></li><li className="active">
+                  <Link to="/broadcastboard">ChatRoom</Link></li>
+                <li onClick={this.onClick}><Link to="#">Sign out</Link></li>
+              </ul>
+            </div>
+          </div>
         </nav>
-        <div className="container-fluid">
+        <div className="container">
+          <span>{this.state.errSignOut}</span>
           <p className="pull-right">Hi, welcome to PostIt</p>
-        </div>
-				<BroadCastNav />
-				<div className="container-fluid">
-					<div className="col-md-12">
-						<div className="row board">
-							<BroadCastChatBoard />
-						</div>
-					</div>
-				</div>
-        <div className='container-fluid foot'>
-          <div className="container">
-            <p></p>
+          <BroadCastNav />
+          <br/>
+          <div className="row">
+            <Groups/>
+            <ChatBox/>
+            <GroupMembers/>
           </div>
         </div>
-			</div>
+      </div>
     );
   }
 }
+
+BroadCastBoard.propTypes = {
+  history: PropTypes.function
+};

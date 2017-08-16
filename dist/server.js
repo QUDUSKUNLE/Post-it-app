@@ -12,7 +12,7 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _userRoutes = require('./config/userRoutes.js');
+var _userRoutes = require('./config/userRoutes');
 
 var _userRoutes2 = _interopRequireDefault(_userRoutes);
 
@@ -39,7 +39,8 @@ var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PORT
-var port = process.env.PORT || 8080; // BASE SET-UP
+var port = process.env.PORT || 8080;
+// BASE SET-UP
 
 var app = (0, _express2.default)();
 app.use((0, _compression2.default)());
