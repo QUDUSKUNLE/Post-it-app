@@ -20,8 +20,6 @@
 
   5. Create an .env file and set the variables in .env-sample to your specified database connection
 
-# To start
-
-
-
+  6. <b>npm start</b>
+  
   7. Go to <b>http://localhost:8080/</b>
