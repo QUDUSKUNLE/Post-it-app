@@ -166,7 +166,7 @@ export default class AddMember extends React.Component {
                     <label htmlFor="groupname">Group Name</label>
                     <select name="group" onChange={this.onChange}
                       className="form-control">
-                      <option value="" disabled>Select a group</option>
+                      <option value="">Select a group</option>
                       {(Object.keys(this.state.groups)).map((group, i) =>
                         <option key={i}
                           value={group}>
@@ -178,7 +178,7 @@ export default class AddMember extends React.Component {
                     <label htmlFor="members">Member</label>
                     <select name="member" onChange={this.onChange}
                       className="form-control">
-                      <option value="" disabled>add member to group</option>
+                      <option value="">add member to group</option>
                       {(this.state.general).map((member, i) =>
                         <option key={i}
                           value={member}>
