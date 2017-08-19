@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { resetPassword } from '../actions/appActions.js';
+import { resetPassword } from '../actions/resetPasswordActions.js';
 import '../../css/icon.css';
 import Footer from './footer.jsx';
 
@@ -13,7 +13,10 @@ export default class ResetPassword extends React.Component {
   */
   constructor(props) {
     super(props);
+    // const loggedIn = (localStorage.getItem('user')) === false;
+    // console.log(localStorage.getItem('user'), loggedIn);
     this.state = {
+      // loggedIn,
       email: '',
       respons: ''
     };
@@ -58,10 +61,16 @@ export default class ResetPassword extends React.Component {
       });
   }
 
-  /**
+  /*
      * @override
      */
   render() {
+    // // const { loggedIn } = this.state;
+    // if (!this.state.loggedIn) {
+    //   return (
+    //     <Redirect to="/signin" />
+    //   );
+    // }
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"

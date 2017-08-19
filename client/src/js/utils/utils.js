@@ -9,3 +9,13 @@ export const validatePassword = (pass) => {
   }
   return output;
 };
+
+
+export const memberOfGeneralGroups = (generalGroups) => {
+  const generalArrays = (Object.values(generalGroups));
+  const membersOfGeneralGroup = [];
+  for (let i = 0; i < generalArrays.length; i++) {
+    membersOfGeneralGroup.push((Object.values(generalArrays[i]))[0]);
+  }
+  return (membersOfGeneralGroup.map((member) => member.user));
+};

@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { createGroup, signoutAction } from '../actions/appActions.js';
+import { createGroup } from '../actions/appActions.js';
+import { signoutAction } from '../actions/signOutActions.js';
 
-const loggedIn = (localStorage.getItem('user')) !== false;
+
+// import { GroupStore } from '../stores/GroupStore.js';
+
 /**
  * Represents CreateGroup Component.
  */
@@ -12,13 +15,16 @@ export default class CreateGroup extends React.Component {
      * @param {string} props inbuilt props.
      */
   constructor(props) {
+    // const loggedIn = (localStorage.getItem('user'));
+    // console.log(loggedIn, localStorage.getItem('user'));
     super(props);
     this.state = {
+      group: '',
       email: '',
       password: '',
-      group: '',
       responseMessage: '',
-      signOutMessage: ''
+      signOutMessage: '',
+      loggedIn: !null
     };
     // Bind Create Group Input Fields
     this.onChange = this.onChange.bind(this);
@@ -81,7 +87,8 @@ export default class CreateGroup extends React.Component {
           // remove user`s details completely from localStorage
           localStorage.removeItem('user');
           this.setState({
-            signOutMessage: resp.data.message
+            signOutMessage: resp.data.message,
+            loggedIn: null
           });
         }
         this.props.history.push('/');
@@ -98,11 +105,12 @@ export default class CreateGroup extends React.Component {
 		* @override
 	*/
   render() {
-    if (!loggedIn) {
+    if (!this.state.loggedIn) {
       return (
         <Redirect to="/signin" />
       );
     }
+    // console.log(this.props.loggedIn);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -168,5 +176,7 @@ export default class CreateGroup extends React.Component {
 }
 
 CreateGroup.propTypes = {
-  history: PropTypes.function
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired
+  })
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { signupAction } from '../actions/appActions.js';
-import validatePassword from '../utils/utils.js';
+import { signupAction } from '../actions/signUpActions.js';
+// import validatePassword from '../utils/utils.js';
 
 /**
   * Represents SignUp Component.
@@ -39,7 +39,6 @@ export default class SignUp extends React.Component {
       [e.target.name]: e.target.value
     });
   }
-
   /**
   * onSubmit event
   * @param {object} e .
@@ -48,41 +47,37 @@ export default class SignUp extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     // validate password
-    if (validatePassword(this.state.password)) {
-      this.setState({
-        errMessage: 'Password is too low, at least 8 chaaracters'
-      });
-    } else {
-      // check if passwords match
-      if (this.state.password === this.state.conf_password) {
-        const user = {
-          email: this.state.email,
-          password: this.state.password,
-          username: this.state.username
-        };
-        // signupAction
-        signupAction(user)
-          .then((res) => {
-            this.setState({
-              signupMessage: res.data.message
-            });
-            setTimeout(() => {
-              this.props.history.push('/signin');
-            }, 1500);
-            // console.log(this.state.signupMessage);
-          }, (err) => {
-            if (err) {
-              this.setState({
-                errMessage: 'Error sign up user`s'
-              });
-            }
-            // console.log(this.state.errMessage);
+    // if (validatePassword(this.state.password)) {
+    //   this.setState({
+    //     errMessage: 'Password is too low, at least 8 chaaracters'
+    //   });
+    // } else {
+    // check if passwords match
+    if (this.state.password === this.state.conf_password) {
+      const user = {
+        email: this.state.email,
+        password: this.state.password,
+        username: this.state.username
+      };
+      // signupAction
+      signupAction(user)
+        .then((res) => {
+          this.setState({
+            signupMessage: res.data.message
           });
-      } else {
-        this.setState({
-          errMessage: 'Password does not match!!!'
+          this.props.history.push('/signin');
+        }, (err) => {
+          if (err) {
+            // console.log(err);
+            this.setState({
+              errMessage: 'Error sign up user`s'
+            });
+          }
         });
-      }
+    } else {
+      this.setState({
+        errMessage: 'Password does not match!!!'
+      });
     }
   }
 
@@ -143,6 +138,9 @@ export default class SignUp extends React.Component {
   }
 }
 
+// props validation
 SignUp.propTypes = {
-  history: PropTypes.node
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
 };

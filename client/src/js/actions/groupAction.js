@@ -20,7 +20,8 @@ export const getGroups = (user) => axios.post('/getgroups', user)
     });
   });
 
-// Create new Groupm Action
+
+// Create new Group Action
 export const createGroup = (userDetails) => axios.post('/creategroup',
   userDetails)
   .the(({ data }) => {

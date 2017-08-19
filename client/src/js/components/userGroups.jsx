@@ -1,6 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ChatBox from './userChatBox.jsx';
+import GroupMembers from './userGroupMembers.jsx';
 import { getGroups } from '../actions/groupAction.js';
-import GroupStore from '../stores/groupStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import { generalMembers } from '../actions/memberActions.js';
+import GroupMemberStore from '../stores/GroupMemberStore.js';
 
 
 export default class Groups extends React.Component {
@@ -11,88 +16,113 @@ export default class Groups extends React.Component {
     super(props);
     const user = JSON.parse(localStorage.getItem('user'));
     const groups = GroupStore.allGroups(user);
+    const general = GroupMemberStore.allGeneralMembers(user);
     this.state = {
       groups,
+      general,
       user,
+      displayNewGroupName: [],
+      groupname: 'general',
+      newMembers: '',
       message: '',
-      currentGroup: 'general',
-      groupname: '',
-      groupUsers: []
+      newGroup: ''
     };
+    this.userGroups = this.userGroups.bind(this);
+    // this.onClick = this.onClick.bind(this);
     // this.onChange = this.onChange.bind(this);
-
-    this.group = this.group.bind(this);
+    this.getMembersOnClick = this.getMembersOnClick.bind(this);
   }
 
   componentWillMount() {
     getGroups(this.state.user);
+    generalMembers(this.state.user);
+    // getGroupMembers(this.state.newGroup);
     // call action that gets the group that a user belongs to
     // call action that gets the chat belonginf to that group
     // call action that get all the user that belongs to that group
   }
 
   componentDidMount() {
-    GroupStore.on('getGroups', this.group);
+    GroupStore.on('GET_GROUPS', this.userGroups);
+    GroupMemberStore.on('GENERAL', this.userGroups);
+    // GroupMemberStore.on('GET_MEMBERS', this.getMembersOnClick);
     // add event listener for the 3 actions
   }
 
   componentWillUnmount() {
-    GroupStore.removeListener('getGroups', this.group);
+    GroupStore.removeListener('GET_GROUPS', this.userGroups);
+    GroupMemberStore.removeListener('GENERAL', this.userGroups);
+    // GroupMemberStore.removeListener('GET_MEMBERS', this.getMembersOnClick);
+    // onClick should unMount GroupMemberStore General group
+    // GroupMemberStore.removeListener('GENERAL', this.onClick);
   }
 
-  group() {
-    const group = GroupStore.allGroups(this.state.user);
+  // getMembersOnClick() {
+  //   const displayNewGroup = GroupMemberStore.allGroupMembers(
+  //     this.state.newGroup);
+  //   this.setState({
+  //     general: displayNewGroup
+  //   });
+  // }
+
+  userGroups() {
+    const userGroups = GroupStore.allGroups(this.state.user);
+    const genMembers = GroupMemberStore.allGeneralMembers(this.state.user);
     this.setState({
-      groups: group
+      groups: userGroups,
+      general: genMembers
     });
   }
 
   // /**
-  //   * onChange event.
-  //   * @param {object} message The first number.
-  //   * @returns {void} bind input values to name.
-  // */
-  // onChange(message) {
+  //   *onChange event
+  //   * @param {string} e The first input
+  //   * @return {void} updated state of user
+  //   */
+  // onChange(e) {
   //   this.setState({
-  //     [message.target.name]: message.target.value
+  //     [e.target.name]: e.target.value
   //   });
+  //   // console.log(e.target.value);
   // }
-  //
-  // /**
-  //   * onSubmit event.
-  //   * @param {object} e .
-  //   * @returns {void} .
-  // onSubmit(e) {
-  //   e.preventDefault();
-  //   const broadcastmessage = {
-  //     message: this.state.message
-  //   };
-  //   // sendMessage(broadcastmessage)
-  //   //   .then(() => {
-  //   //     // alert('message sent');
-  //   //   });
 
+  getMembersOnClick() {
+    // const m = this.onChange();
+    this.setState({
+      newGroup: {
+        email: this.state.user.email,
+        password: this.state.user.password
+        // group: m
+      }
+    });
+    console.log(this.state.newGroup);
+  }
   /**
     * @override
   */
   render() {
-    // const userGroups = Object.keys(this.state.groups);
-    // console.log(this.state.groups);
     return (
-      <div className="col-md-3">
-        <div className="row chats-row">
-          <div className="col-md-12">
-            <ul className="col-md-10 col-md-offset-1 nav nav-pills
-              nav-stacked grouplist">
-              <li><a href="#">General</a></li>
-              {
-                (Object.keys(this.state.groups)).map((group, i) =>
-                  <li key={i}><a href="#">
-                    {group}</a></li>)
-              }
-            </ul>
+      <div>
+        <div className="col-md-3">
+          <div className="row chats-row">
+            <div className="col-md-12">
+              <ul className="col-md-10 col-md-offset-1 nav nav-pills
+                nav-stacked grouplist">
+                <li>general</li>
+                {
+                  (Object.keys(this.state.groups)).map((group, i) =>
+                    <li key={i}
+                      value={group} name={group}
+                      onClick={this.getMembersOnClick}><Link to="#">
+                        {group}</Link>
+                    </li>
+                  )}
+              </ul>
+            </div>
           </div>
         </div>
+        <ChatBox name={this.state.groupname}/>
+        <GroupMembers memberlist={this.state.general}/>
       </div>
     );
   }

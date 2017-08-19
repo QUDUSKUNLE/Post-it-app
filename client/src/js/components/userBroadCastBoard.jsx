@@ -1,17 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import BroadCastNav from './userBroadCastBoardNav.jsx';
-// import BroadCastChatBoard from './userBroadCastChatBoard.jsx';
+import { Link } from 'react-router-dom';
 import Groups from './userGroups.jsx';
-import ChatBox from './userChatBox.jsx';
-import GroupMembers from './userGroupMembers.jsx';
-// import Footer from './footer.jsx';
-import { signoutAction, sendMessage } from
-  '../actions/appActions.js';
+import { sendMessage } from '../actions/appActions.js';
 import '../../css/icon.css';
+import { signoutAction } from '../actions/signOutActions.js';
 
-const loggedIn = (localStorage.getItem('user')) !== false;
 /**
   * Represents BroadCastBoard Component.
 */
@@ -21,12 +15,14 @@ export default class BroadCastBoard extends React.Component {
   */
   constructor(props) {
     super(props);
+    const userName = JSON.parse(localStorage.getItem('userName'));
+    console.log(userName);
     this.state = {
+      username: userName,
       message: '',
       signOutMessage: '',
       errSignOut: '',
-      broadcastmessage: '',
-      loggedIn
+      broadcastmessage: ''
     };
     this.onChange = this.onChange.bind(this);
 
@@ -73,9 +69,8 @@ export default class BroadCastBoard extends React.Component {
         signupMessage: resp.data.message
       });
       localStorage.removeItem('user');
-      setTimeout(() => {
-        this.props.history.push('/');
-      }, 1000);
+      localStorage.removeItem('userName');
+      this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
         this.setState({
@@ -89,11 +84,12 @@ export default class BroadCastBoard extends React.Component {
   */
   render() {
     // const { loggedIn } = this.state;
-    if (!loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
+    // if (!this.state.loggedIn) {
+    //   return (
+    //     <Redirect to="/signin" />
+    //   );
+    // }
+    // console.log(this.state.username);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -123,13 +119,21 @@ export default class BroadCastBoard extends React.Component {
         </nav>
         <div className="container">
           <span>{this.state.errSignOut}</span>
-          <p className="pull-right">Hi, welcome to PostIt</p>
-          <BroadCastNav />
+          <p className="pull-right">Hi, {this.state.username}.</p>
+          <div className="row">
+            <div className="col-md-12">
+              <ul className="nav nav-pills nav-justified">
+                <li role="presentation" data-toggle="modal"
+                  data-target="#myModal"><Link to="/group">Create Group</Link>
+                </li>
+                <li role="presentation"><Link to="/member">
+                Add member</Link></li>
+              </ul>
+            </div>
+          </div>
           <br/>
           <div className="row">
             <Groups/>
-            <ChatBox/>
-            <GroupMembers/>
           </div>
         </div>
       </div>
@@ -137,6 +141,9 @@ export default class BroadCastBoard extends React.Component {
   }
 }
 
+// props validation
 BroadCastBoard.propTypes = {
-  history: PropTypes.function
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
 };

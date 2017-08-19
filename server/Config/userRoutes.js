@@ -1,4 +1,3 @@
-
 // =================== Import Libraries =====================//
 import express from 'express';
 import firebase from 'firebase';
@@ -13,7 +12,7 @@ Router.route('/*')
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
 
-//   //  ======================Sign Up Endpoint============//
+//  ======================Sign Up Endpoint============//
 Router.route('/signup')
   .post((req, res) => {
     const email = req.body.email;
@@ -34,7 +33,7 @@ Router.route('/signup')
               time: (new Date()).toTimeString()
             });
             // Default add user`s to general group
-            db.database().ref('Group').child(`general${userId}`).push({
+            db.database().ref('Group').child(`general/${userId}`).push({
               user: username,
               userID: userId,
               date: (new Date()).toDateString(),
@@ -215,13 +214,38 @@ Router.route('/getgroups')
             if (snapshot.val() != null) {
               const groupMembers = snapshot.val();
               // return grouplist members and success message
-              res.send({ message: 'group members are here', groupMembers });
+              res.send({ message: 'user`s groups are here', groupMembers });
             }
           });
       });
   });
 
-//  get member of a particular group
+//  get members of General Group
+Router.route('/generallist')
+  .post((req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    const groupName = 'general';
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        // const user = (firebase.auth().currentUser).uid;
+        db.database().ref('Group').child(groupName)
+          .once('value', (snapshot) => {
+            if (snapshot.val() != null) {
+              const member = snapshot.val();
+              res.send({
+                message: `Hey, here are members of the group ${groupName}`,
+                member });
+            } else {
+              res.send({
+                message: 'No data found'
+              });
+            }
+          });
+      });
+  });
+
+// GET MEMBER OF A PARTUCULAR group
 Router.route('/memberlist')
   .post((req, res) => {
     const email = req.body.email;
@@ -236,10 +260,11 @@ Router.route('/memberlist')
               const member = snapshot.val();
               res.send({
                 message: `Hey, here are members of the group ${groupName}`,
-                member });
+                member
+              });
             } else {
               res.send({
-                message: 'No data found'
+                message: 'No group available'
               });
             }
           });

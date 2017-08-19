@@ -24,10 +24,22 @@ ReactDOM.render(
       <div>
         <Route exact path="/" component={App}/>
         <Route path="/signin" component={SignIn} />
-        <Route path="/broadcastboard" component={BroadCastBoard}/>
-        <Route path="/group" component={CreateGroup} />
-        <Route path="/passwordreset" component={ResetPassword} />
-        <Route path="/member" component={AddMember}/>
+        <Route
+          path="/broadcastboard"
+          component={BroadCastBoard}
+        />
+        <Route
+          path="/group"
+          component={CreateGroup}
+        />
+        <Route
+          path="/passwordreset"
+          component={ResetPassword}
+        />
+        <Route
+          path="/member"
+          component={AddMember}
+        />
       </div>
     </Router>
   </Provider>, document.getElementById('app')

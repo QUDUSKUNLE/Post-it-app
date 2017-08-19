@@ -1,11 +1,11 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 export default class ChatBox extends React.Component {
   render() {
     return (
       <div className="col-md-6 current-chat">
         <div className="row" style={{ backgroundColor: '#e8e8ee' }}>
-          <p className="text-center">Chatbox</p>
+          <p className="text-center">{this.props.name}</p>
         </div>
         <div className="row current-chat-area">
           <div className="col-md-12">
@@ -46,3 +46,7 @@ export default class ChatBox extends React.Component {
     );
   }
 }
+
+ChatBox.propTypes = {
+  name: PropTypes.string
+};

@@ -4,8 +4,9 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import '../../css/icon.css';
-// import Footer from './footer.jsx';
-import { signinAction } from '../actions/appActions.js';
+import { signinAction } from '../actions/signInActions.js';
+
+
 /**
   * Represents SignIn Component.
 */
@@ -16,6 +17,7 @@ export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loggedIn: '',
       userName: '',
       email: '',
       password: '',
@@ -63,11 +65,13 @@ export default class SignIn extends React.Component {
         this.setState({
           signinMessage: data.message,
           groups: data.userGroups,
-          userName: Object.values(data.data.userDetail)[0].userName
+          userName: Object.values(data.data.userDetail)[0].userName,
+          loggedIn: !null
         });
-        setTimeout(() => {
+        localStorage.setItem('userName', JSON.stringify(this.state.userName));
+        if (this.state.loggedIn === !null) {
           this.props.history.push('/broadcastboard');
-        }, 1000);
+        }
       }, (error) => {
         if (error) {
           this.setState({
@@ -101,6 +105,7 @@ export default class SignIn extends React.Component {
 		* @override
 	*/
   render() {
+    // console.log(this.state.userName);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -186,6 +191,9 @@ export default class SignIn extends React.Component {
   }
 }
 
+// props validation
 SignIn.propTypes = {
-  history: PropTypes.node
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
 };

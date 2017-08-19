@@ -30,7 +30,7 @@ Router.route('/*').get(function (req, res) {
   res.sendFile(_path2.default.join(__dirname, '../../client/src/index.html'));
 });
 
-//   //  ======================Sign Up Endpoint============//
+//  ======================Sign Up Endpoint============//
 Router.route('/signup').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -48,7 +48,7 @@ Router.route('/signup').post(function (req, res) {
         time: new Date().toTimeString()
       });
       // Default add user`s to general group
-      _config2.default.database().ref('Group').child('general' + userId).push({
+      _config2.default.database().ref('Group').child('general/' + userId).push({
         user: username,
         userID: userId,
         date: new Date().toDateString(),
@@ -209,13 +209,35 @@ Router.route('/getgroups').post(function (req, res) {
       if (snapshot.val() != null) {
         var groupMembers = snapshot.val();
         // return grouplist members and success message
-        res.send({ message: 'group members are here', groupMembers: groupMembers });
+        res.send({ message: 'user`s groups are here', groupMembers: groupMembers });
       }
     });
   });
 });
 
-//  get member of a particular group
+//  get members of General Group
+Router.route('/generallist').post(function (req, res) {
+  var email = req.body.email;
+  var password = req.body.password;
+  var groupName = 'general';
+  _firebase2.default.auth().signInWithEmailAndPassword(email, password).then(function () {
+    // const user = (firebase.auth().currentUser).uid;
+    _config2.default.database().ref('Group').child(groupName).once('value', function (snapshot) {
+      if (snapshot.val() != null) {
+        var member = snapshot.val();
+        res.send({
+          message: 'Hey, here are members of the group ' + groupName,
+          member: member });
+      } else {
+        res.send({
+          message: 'No data found'
+        });
+      }
+    });
+  });
+});
+
+// GET MEMBER OF A PARTUCULAR group
 Router.route('/memberlist').post(function (req, res) {
   var email = req.body.email;
   var password = req.body.password;
@@ -227,10 +249,11 @@ Router.route('/memberlist').post(function (req, res) {
         var member = snapshot.val();
         res.send({
           message: 'Hey, here are members of the group ' + groupName,
-          member: member });
+          member: member
+        });
       } else {
         res.send({
-          message: 'No data found'
+          message: 'No group available'
         });
       }
     });

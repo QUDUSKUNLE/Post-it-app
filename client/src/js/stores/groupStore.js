@@ -21,11 +21,11 @@ class GroupStore extends EventEmitter {
     switch (action.type) {
       case GET_GROUPS:
         this.groups = action.groups;
-        this.emit('getGroups');
+        this.emit('GET_GROUPS');
         break;
       case CREATE_NEW_GROUP:
         this.groups.push(action.groups);
-        this.emit('createGroup');
+        this.emit('CREATE_NEW_GROUP');
         break;
       default:
     }

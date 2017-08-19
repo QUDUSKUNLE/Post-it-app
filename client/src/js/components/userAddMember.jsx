@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import { addMember, signoutAction } from '../actions/appActions.js';
+import { Link } from 'react-router-dom';
+import { addMember } from '../actions/appActions.js';
+import { signoutAction } from '../actions/signOutActions.js';
+import GroupMemberStore from '../stores/GroupMemberStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import { getGroups } from '../actions/groupAction.js';
+import { generalMembers } from '../actions/memberActions.js';
 import '../../css/icon.css';
-const loggedIn = (localStorage.getItem('user')) !== false;
+
 
 /**
   * Represents AddMember Component.
@@ -14,27 +19,55 @@ export default class AddMember extends React.Component {
   */
   constructor(props) {
     super(props);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const groups = GroupStore.allGroups(user);
+    const general = GroupMemberStore.allGeneralMembers(user);
     this.state = {
+      user,
+      groups,
+      general,
       group: '',
       member: '',
       addmemberMess: ''
     };
-    this.onChange = this.onChange.bind(this); // bind the input values
-
-    this.onSubmit = this.onSubmit.bind(this); // onSubmit events
-
-    this.onClick = this.onClick.bind(this); // Sign out
+    // bind the input values
+    this.onChange = this.onChange.bind(this);
+    // onSubmit events
+    this.onSubmit = this.onSubmit.bind(this);
+    // Sign out
+    this.onClick = this.onClick.bind(this);
+    this.userGroups = this.userGroups.bind(this);
   }
 
+  componentWillMount() {
+    getGroups(this.state.user);
+    generalMembers(this.state.user);
+  }
+
+  componentDidMount() {
+    GroupStore.on('GET_GROUPS', this.userGroups);
+    GroupMemberStore.on('GENERAL', this.userGroups);
+  }
+  componentWillUnmount() {
+    GroupStore.removeListener('GET_GROUPS', this.userGroups);
+    GroupMemberStore.removeListener('GENERAL', this.userGroups);
+  }
+
+  userGroups() {
+    const userGroups = GroupStore.allGroups(this.state.user);
+    const genMembers = GroupMemberStore.allGeneralMembers(this.state.user);
+    this.setState({
+      groups: userGroups,
+      general: genMembers
+    });
+  }
   /**
     * onChange event.
-    * @param {object} addmember The first number.
+    * @param {object} ee The first number.
     * @returns {void} bind input values to name.
   */
-  onChange(addmember) {
-    this.setState({
-      [addmember.target.name]: addmember.target.value
-    });
+  onChange(ee) {
+    this.setState({ [ee.target.name]: ee.target.value });
   }
 
   /**
@@ -50,12 +83,11 @@ export default class AddMember extends React.Component {
       group: this.state.group,
       member: this.state.member
     };
-    // add member Action
     addMember(memberDetails)
-      .then((res) => {
-        if (res) {
+      .then(({ data }) => {
+        if (data) {
           this.setState({
-            addmemberMess: res.data.message
+            addmemberMess: data.message
           });
         }
         this.props.history.push('/broadcastboard');
@@ -91,11 +123,6 @@ export default class AddMember extends React.Component {
     * @override
   */
   render() {
-    if (!loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     return (
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top"
@@ -137,17 +164,27 @@ export default class AddMember extends React.Component {
                 <form className="addmemberform" onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <label htmlFor="groupname">Group Name</label>
-                    <input value={this.state.group} onChange={this.onChange}
-                      id="groupname" type="text"
-                      className="signinform" placeholder="andela-abuja"
-                      name="group" required/>
+                    <select name="group" onChange={this.onChange}
+                      className="form-control">
+                      <option value="" disabled>Select a group</option>
+                      {(Object.keys(this.state.groups)).map((group, i) =>
+                        <option key={i}
+                          value={group}>
+                          {group}</option>
+                      )}
+                    </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email">Member</label>
-                    <input value={this.state.member} onChange={this.onChange}
-                      id="member" type="text"
-                      className="signinform" placeholder="adewale"
-                      name="member" required/>
+                    <label htmlFor="members">Member</label>
+                    <select name="member" onChange={this.onChange}
+                      className="form-control">
+                      <option value="" disabled>add member to group</option>
+                      {(this.state.general).map((member, i) =>
+                        <option key={i}
+                          value={member}>
+                          {member}</option>
+                      )}
+                    </select>
                   </div>
                   <button type="submit" className="signinformbtn">Add Member
                   </button>
@@ -161,6 +198,9 @@ export default class AddMember extends React.Component {
   }
 }
 
+// props validation
 AddMember.propTypes = {
-  history: PropTypes.node
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
 };

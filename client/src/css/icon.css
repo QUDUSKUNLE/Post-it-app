@@ -204,3 +204,21 @@ body {
   color: white;
   text-align: center;
 }
+
+/*.grouplist li {
+  list-style-type: none;
+};
+
+.grouplist ul li button {
+  width: 100%;
+  background-color: #333333;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  margin: 2px;
+  border-radius: 4px;
+}*/
