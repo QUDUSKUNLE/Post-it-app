@@ -1,36 +1,50 @@
-
 // BASE SET-UP
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import Router from './config/userRoutes';
+import Router from './config/usersRoutes';
 import webpack from 'webpack';
 import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config.js';
+import dbConfig from './config/dbConfig.js';
 
 // PORT
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(compression());
 
+function getCurrentUser() {
+  return new Promise((resolve) => {
+    dbConfig.auth().onAuthStateChanged((user) => {
+      console.log(user, 'userrrr');
+      if (user) {
+        console.log(user, 'user');
+        resolve(user);
+      }
+      resolve({});
+    });
+  });
+}
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // configure app to handle CORS requests
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
-  'content-type, Authorization');
-  next();
+  getCurrentUser().then((user) => {
+    req.user = user;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
+         'content-type, Authorization');
+    next();
+  });
 });
 
 // MIDDLEWARE
 app.use(morgan('dev')); // log all requests to the console
-
 
 // Added Webpack
 const compiler = webpack(config);

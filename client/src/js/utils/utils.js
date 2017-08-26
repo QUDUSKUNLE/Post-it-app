@@ -19,3 +19,12 @@ export const memberOfGeneralGroups = (generalGroups) => {
   }
   return (membersOfGeneralGroup.map((member) => member.user));
 };
+
+export const getMemberOfAGroup = (group) => {
+  const arrayOfGroup = Object.values(group.member);
+  const result = [];
+  for (let i = 1; i < arrayOfGroup.length; i++) {
+    result.push(Object.values(arrayOfGroup[i]));
+  }
+  return result;
+};

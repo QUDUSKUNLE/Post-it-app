@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import dotenv from 'dotenv';
 dotenv.config();
 
-//  =============Firebase Configuration=============================//
 const config = {
   apiKey: process.env.apiKey,
   authDomain: process.env.authDomain,
@@ -11,6 +10,6 @@ const config = {
   storageBucket: process.env.storageBucket,
   messagingSenderId: process.env.messagingSenderId
 };
-const db = firebase.initializeApp(config);
+const dbConfig = firebase.initializeApp(config);
 
-export default db; // export db
+export default dbConfig;

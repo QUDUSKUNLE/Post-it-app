@@ -1,6 +1,6 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { memberOfGeneralGroups } from '../utils/utils.js';
+import { memberOfGeneralGroups, getMemberOfAGroup } from '../utils/utils.js';
 
 import {
   GENERAL,
@@ -11,10 +11,10 @@ import {
 // userDetails = {email: email, password: password, group: group}
 export const getGroupMembers = (userDetails) => axios.post('/memberlist',
   userDetails)
-  .then(({ member }) => {
+  .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GET_MEMBERS,
-      members: member
+      members: getMemberOfAGroup(data)
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({
@@ -27,7 +27,6 @@ export const getGroupMembers = (userDetails) => axios.post('/memberlist',
   // userDetails = { email: email, password: password }
 export const generalMembers = (user) => axios.post('/generallist', user)
   .then(({ data }) => {
-    // const general = data.member;
     AppDispatcher.dispatch({
       type: GENERAL,
       general: memberOfGeneralGroups(data.member)

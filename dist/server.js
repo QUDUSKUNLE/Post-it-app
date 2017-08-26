@@ -12,9 +12,9 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _userRoutes = require('./config/userRoutes');
+var _usersRoutes = require('./config/usersRoutes');
 
-var _userRoutes2 = _interopRequireDefault(_userRoutes);
+var _usersRoutes2 = _interopRequireDefault(_usersRoutes);
 
 var _webpack = require('webpack');
 
@@ -36,25 +36,43 @@ var _webpackConfig = require('../webpack.config.js');
 
 var _webpackConfig2 = _interopRequireDefault(_webpackConfig);
 
+var _dbConfig = require('./config/dbConfig.js');
+
+var _dbConfig2 = _interopRequireDefault(_dbConfig);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // PORT
-var port = process.env.PORT || 8080;
 // BASE SET-UP
-
+var port = process.env.PORT || 8080;
 var app = (0, _express2.default)();
 app.use((0, _compression2.default)());
 
+function getCurrentUser() {
+  return new Promise(function (resolve) {
+    _dbConfig2.default.auth().onAuthStateChanged(function (user) {
+      console.log(user, 'userrrr');
+      if (user) {
+        console.log(user, 'user');
+        resolve(user);
+      }
+      resolve({});
+    });
+  });
+}
 // CONFIG APP
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
 // configure app to handle CORS requests
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' + 'content-type, Authorization');
-  next();
+  getCurrentUser().then(function (user) {
+    req.user = user;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' + 'content-type, Authorization');
+    next();
+  });
 });
 
 // MIDDLEWARE
@@ -70,7 +88,7 @@ app.use((0, _webpackDevMiddleware2.default)(compiler, {
 }));
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 
-app.use('/', _userRoutes2.default);
+app.use('/', _usersRoutes2.default);
 
 // App listening port
 app.listen(port);

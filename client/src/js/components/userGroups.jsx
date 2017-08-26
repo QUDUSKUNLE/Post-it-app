@@ -4,7 +4,7 @@ import ChatBox from './userChatBox.jsx';
 import GroupMembers from './userGroupMembers.jsx';
 import { getGroups } from '../actions/groupAction.js';
 import GroupStore from '../stores/GroupStore.js';
-import { generalMembers } from '../actions/memberActions.js';
+import { generalMembers, getGroupMembers } from '../actions/memberActions.js';
 import GroupMemberStore from '../stores/GroupMemberStore.js';
 
 
@@ -15,11 +15,13 @@ export default class Groups extends React.Component {
   constructor(props) {
     super(props);
     const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
     const groups = GroupStore.allGroups(user);
-    const general = GroupMemberStore.allGeneralMembers(user);
+    console.log(groups);
+    const memberList = GroupMemberStore.allGeneralMembers(user);
     this.state = {
       groups,
-      general,
+      memberList,
       user,
       displayNewGroupName: [],
       groupname: 'general',
@@ -57,50 +59,36 @@ export default class Groups extends React.Component {
     // GroupMemberStore.removeListener('GENERAL', this.onClick);
   }
 
-  // getMembersOnClick() {
-  //   const displayNewGroup = GroupMemberStore.allGroupMembers(
-  //     this.state.newGroup);
-  //   this.setState({
-  //     general: displayNewGroup
-  //   });
-  // }
-
   userGroups() {
-    const userGroups = GroupStore.allGroups(this.state.user);
-    const genMembers = GroupMemberStore.allGeneralMembers(this.state.user);
     this.setState({
-      groups: userGroups,
-      general: genMembers
+      groups: GroupStore.allGroups(this.state.user),
+      memberList: GroupMemberStore.allGeneralMembers(this.state.user)
     });
+    // console.log(this.state.groups);
   }
 
-  // /**
-  //   *onChange event
-  //   * @param {string} e The first input
-  //   * @return {void} updated state of user
-  //   */
-  // onChange(e) {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  //   // console.log(e.target.value);
-  // }
-
-  getMembersOnClick() {
-    // const m = this.onChange();
+  getMembersOnClick(i) {
     this.setState({
       newGroup: {
         email: this.state.user.email,
-        password: this.state.user.password
-        // group: m
-      }
+        password: this.state.user.password,
+        group: i
+      },
+      // memberList: GroupMemberStore.allGroupMembers(this.state.newGroups)
     });
     console.log(this.state.newGroup);
+    console.log(getGroupMembers(this.state.newGroups));
   }
   /**
     * @override
   */
   render() {
+    const groupList = (Object.keys(this.state.groups)).map((group, i) =>
+      <li key={i}
+        value={group} name={group}
+        onClick={() => this.getMembersOnClick(group)}><Link to="#">
+          {group}</Link>
+      </li>, this);
     return (
       <div>
         <div className="col-md-3">
@@ -109,20 +97,13 @@ export default class Groups extends React.Component {
               <ul className="col-md-10 col-md-offset-1 nav nav-pills
                 nav-stacked grouplist">
                 <li>general</li>
-                {
-                  (Object.keys(this.state.groups)).map((group, i) =>
-                    <li key={i}
-                      value={group} name={group}
-                      onClick={this.getMembersOnClick}><Link to="#">
-                        {group}</Link>
-                    </li>
-                  )}
+                {groupList}
               </ul>
             </div>
           </div>
         </div>
         <ChatBox name={this.state.groupname}/>
-        <GroupMembers memberlist={this.state.general}/>
+        <GroupMembers memberlist={this.state.memberList}/>
       </div>
     );
   }

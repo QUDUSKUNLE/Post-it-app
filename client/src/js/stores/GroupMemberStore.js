@@ -13,6 +13,7 @@ class GroupMemberStore extends EventEmitter {
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.allGeneralMembers = this.allGeneralMembers.bind(this);
     this.handleActions = this.handleActions.bind(this);
+    this.setGroupMembers = this.setGroupMembers.bind(this);
   }
 
   allGeneralMembers() {
@@ -21,6 +22,10 @@ class GroupMemberStore extends EventEmitter {
 
   allGroupMembers() {
     return this.members;
+  }
+
+  setGroupMembers(group) {
+    this.members = group;
   }
 
   handleActions(action) {
