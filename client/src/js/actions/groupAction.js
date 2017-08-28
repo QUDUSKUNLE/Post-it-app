@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { getUserGroups } from '../utils/utils.js';
 
 import {
   GET_GROUPS,
@@ -7,11 +8,12 @@ import {
 
 
 // Get Groups Action
-export const getGroups = (user) => axios.post('/getgroups', user)
+export const getGroups = () => axios.post('/getgroups')
   .then(({ data }) => {
+    console.log(data, 'is this the data', getUserGroups(data));
     AppDispatcher.dispatch({
       type: GET_GROUPS,
-      groups: data.groupMembers
+      groups: getUserGroups(data)
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({

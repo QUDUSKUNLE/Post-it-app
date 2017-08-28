@@ -39,9 +39,9 @@ Router.route('/signup')
         })
         .then((response) => res.status(200).send({
           message: 'Registration successful and ' +
-          'verification email sent to your email', data: response })
+          'verification email sent to your email', response })
         ))
-      .catch((error) => res.status(502).send({ message: error,
+      .catch((error) => res.status(502).send({ error,
         data: 'error signing up user`s'
       }));
   });
@@ -52,30 +52,26 @@ Router.route('/signin')
     const email = req.body.email;
     const password = req.body.password;
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        const uID = user.uid;
-        return Promise.all(
-          [
-            dbConfig.database().ref('Group').child('general')
-              .once('value', (groups) => {
-                if (groups.val() != null) {
-                  groups.val();
-                }
-              }),
-            uID,
-            dbConfig.database().ref('users').child(uID)
-              .once('value', (snapshot) => {
-                if (snapshot.val() != null) {
-                  snapshot.val();
-                }
-              })
-          ]);
-      })
+      .then((user) => Promise.all(
+        [
+          dbConfig.database().ref('Group').child('general')
+            .once('value', (groups) => {
+              if (groups.val() != null) {
+                groups.val();
+              }
+            }),
+          dbConfig.database().ref('users').child(user.uid)
+            .once('value', (snapshot) => {
+              if (snapshot.val() != null) {
+                snapshot.val();
+              }
+            })
+        ]))
       .then((response) => res.status(200).send({
         message: 'User Signed in successfully',
-        data: { response }
+        response
       }))
-      .catch((error) => res.status(404).send({ err: error }));
+      .catch((error) => res.status(404).send({ error }));
   });
 
 
@@ -97,7 +93,7 @@ Router.route('/passwordreset')
       .then(() => res.send({
         message: 'Password reset email sent successfully!'
       }))
-      .catch((err) => res.status(404).send({ message: err.code }));
+      .catch((err) => res.status(404).send({ err }));
   });
 
 //  ===============Create Group Endpoint======================//
@@ -247,7 +243,7 @@ Router.route('/delete')
       })
       // Catch for non registered user
       .catch((err) => {
-        res.status(404).send({ message: err });
+        res.status(404).send({ err });
       });
   });
 
@@ -279,6 +275,24 @@ Router.route('/groupName/message')
         message: 'Broadcast Message sent successfully', response }))
       .catch((error) => res.send({ error }));
   });
+
+Router.route('/groupMessage')
+  .post((req, res) => {
+    const groupName = req.body.group;
+    const uID = req.user.uid;
+    return Promise.all(
+      [
+        dbConfig.database().ref(`Group${uID}`).child(groupName)
+          .once('value', (snapshot) => {
+            if (snapshot.val() != null) {
+              snapshot.val();
+            }
+          })
+      ])
+      .then((response) => res.status(200).send({ response }))
+      .catch((error) => res.send({ error }));
+  });
+
 
 // export Router
 export default Router;

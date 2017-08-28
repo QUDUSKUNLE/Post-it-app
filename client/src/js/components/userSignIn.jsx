@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import '../../css/icon.css';
 import { signinAction } from '../actions/signInActions.js';
+import { getAllUsers } from '../utils/utils.js';
 
 
 /**
@@ -17,13 +18,12 @@ export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: '',
       userName: '',
       email: '',
       password: '',
       signinMessage: '',
-      errMessage: '',
-      groups: {}
+      errMessage: {},
+      groups: []
     };
     // Bind input field values
     this.onChange = this.onChange.bind(this);
@@ -57,27 +57,20 @@ export default class SignIn extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-    // set user`s details in local storage
-    localStorage.setItem('user', JSON.stringify(user));
     // user`s signin Action
     signinAction(user)
       .then(({ data }) => {
         this.setState({
           signinMessage: data.message,
-          groups: data.userGroups,
-          userName: Object.values(data.data.userDetail)[0].userName,
-          loggedIn: !null
+          groups: getAllUsers(data),
+          userName: (Object.values((data.response[1]))[0].userName),
         });
         localStorage.setItem('userName', JSON.stringify(this.state.userName));
-        if (this.state.loggedIn === !null) {
-          this.props.history.push('/broadcastboard');
-        }
-      }, (error) => {
-        if (error) {
-          this.setState({
-            errMessage: 'User`s not Found'
-          });
-        }
+        this.props.history.push('/broadcastboard');
+      }, () => {
+        this.setState({
+          signinMessage: 'User`s not Found'
+        });
       });
   }
   /**
@@ -142,7 +135,6 @@ export default class SignIn extends React.Component {
                 <div>
                   <center>
                     <span>{this.state.signinMessage}</span>
-                    <span>{this.state.errMessage}</span>
                   </center>
                 </div>
                 <form onSubmit={this.onSubmit}

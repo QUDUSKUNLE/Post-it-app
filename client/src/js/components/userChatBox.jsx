@@ -1,11 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 export default class ChatBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newMessage: '',
+      message: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+  onChange(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      newMessage: this.state.message
+    });
+  }
   render() {
     return (
       <div className="col-md-6 current-chat">
         <div className="row" style={{ backgroundColor: '#e8e8ee' }}>
-          <p className="text-center">{this.props.name}</p>
+          <p className="text-center">{'general'}</p>
         </div>
         <div className="row current-chat-area">
           <div className="col-md-12">
@@ -34,9 +54,17 @@ export default class ChatBox extends React.Component {
         <div className="row current-chat-footer">
           <div className="panel-footer">
             <div className="input-group">
-              <input type="text" className="form-control" />
+              <input
+                type="text"
+                name="message"
+                value={this.state.message}
+                className="form-control"
+                onChange={this.onChange}/>
               <span className="input-group-btn">
-                <button className="btn btn-default" type="button">Send
+                <button
+                  className="btn btn-default"
+                  type="button"
+                  onClick={this.onSubmit}>Send
                 </button>
               </span>
             </div>

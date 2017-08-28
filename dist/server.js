@@ -51,9 +51,9 @@ app.use((0, _compression2.default)());
 function getCurrentUser() {
   return new Promise(function (resolve) {
     _dbConfig2.default.auth().onAuthStateChanged(function (user) {
-      console.log(user, 'userrrr');
+      // console.log(user, 'userrrr');
       if (user) {
-        console.log(user, 'user');
+        // console.log(user, 'user');
         resolve(user);
       }
       resolve({});
@@ -77,7 +77,6 @@ app.use(function (req, res, next) {
 
 // MIDDLEWARE
 app.use((0, _morgan2.default)('dev')); // log all requests to the console
-
 
 // Added Webpack
 var compiler = (0, _webpack2.default)(_webpackConfig2.default);

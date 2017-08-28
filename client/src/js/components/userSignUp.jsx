@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { signupAction } from '../actions/signUpActions.js';
-// import validatePassword from '../utils/utils.js';
+import { validatePassword } from '../utils/utils.js';
 
 /**
   * Represents SignUp Component.
@@ -12,8 +12,6 @@ export default class SignUp extends React.Component {
   */
   constructor(props) {
     super(props);
-
-    // const Newuser = signupStore.NewUser(user);
     this.state = {
       email: '',
       password: '',
@@ -46,14 +44,21 @@ export default class SignUp extends React.Component {
 */
   onSubmit(e) {
     e.preventDefault();
-    // validate password
-    // if (validatePassword(this.state.password)) {
-    //   this.setState({
-    //     errMessage: 'Password is too low, at least 8 chaaracters'
-    //   });
-    // } else {
-    // check if passwords match
-    if (this.state.password === this.state.conf_password) {
+    this.setState({
+      email: this.state.email,
+      password: this.state.password,
+      conf_password: this.state.conf_password,
+      username: this.state.username
+    });
+    if (validatePassword(this.state.password)) {
+      this.setState({
+        errMessage: 'Password is too low, at least 8 chaaracters'
+      });
+    } else if (this.state.password !== this.state.conf_password) {
+      this.setState({
+        errMessage: 'Password do not match'
+      });
+    } else {
       const user = {
         email: this.state.email,
         password: this.state.password,
@@ -61,23 +66,16 @@ export default class SignUp extends React.Component {
       };
       // signupAction
       signupAction(user)
-        .then((res) => {
+        .then(({ data }) => {
           this.setState({
-            signupMessage: res.data.message
+            signupMessage: data.message
           });
           this.props.history.push('/signin');
-        }, (err) => {
-          if (err) {
-            // console.log(err);
-            this.setState({
-              errMessage: 'Error sign up user`s'
-            });
-          }
+        }, () => {
+          this.setState({
+            signupMessage: 'Error sign up user`s',
+          });
         });
-    } else {
-      this.setState({
-        errMessage: 'Password does not match!!!'
-      });
     }
   }
 
@@ -95,7 +93,6 @@ export default class SignUp extends React.Component {
               <div>
                 <center>
                   <span>{this.state.signupMessage}</span>
-                  <span>{this.state.errMessage}</span>
                 </center>
               </div>
               <form onSubmit={this.onSubmit}>

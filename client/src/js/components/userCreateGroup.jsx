@@ -23,8 +23,7 @@ export default class CreateGroup extends React.Component {
       email: '',
       password: '',
       responseMessage: '',
-      signOutMessage: '',
-      loggedIn: !null
+      signOutMessage: ''
     };
     // Bind Create Group Input Fields
     this.onChange = this.onChange.bind(this);
@@ -51,8 +50,6 @@ export default class CreateGroup extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const group = {
-      email: JSON.parse(localStorage.getItem('user')).email,
-      password: JSON.parse(localStorage.getItem('user')).password,
       group: this.state.group
     };
     // createGroup Action
@@ -70,7 +67,6 @@ export default class CreateGroup extends React.Component {
             responseMessage: error.response.data.message
           });
         }
-        // console.log(error.Error);
       });
   }
 
@@ -84,11 +80,9 @@ export default class CreateGroup extends React.Component {
     signoutAction()
       .then((resp) => {
         if (resp) {
-          // remove user`s details completely from localStorage
-          localStorage.removeItem('user');
+          localStorage.removeItem('userName');
           this.setState({
-            signOutMessage: resp.data.message,
-            loggedIn: null
+            signOutMessage: resp.data.message
           });
         }
         this.props.history.push('/');

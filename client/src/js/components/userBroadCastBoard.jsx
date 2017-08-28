@@ -2,9 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Groups from './userGroups.jsx';
+import ChatBox from './userChatBox.jsx';
+import GroupMembers from './userGroupMembers.jsx';
+import { getGroups } from '../actions/groupAction.js';
 import { sendMessage } from '../actions/appActions.js';
-import '../../css/icon.css';
 import { signoutAction } from '../actions/signOutActions.js';
+import { generalUsers } from '../actions/memberActions.js';
+import MemberStore from '../stores/MemberStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import '../../css/icon.css';
+
 
 /**
   * Represents BroadCastBoard Component.
@@ -16,21 +23,64 @@ export default class BroadCastBoard extends React.Component {
   constructor(props) {
     super(props);
     const userName = JSON.parse(localStorage.getItem('userName'));
-    console.log(userName);
+    // console.log(GroupStore.allGroups());
+    // console.log(getGroups());
     this.state = {
-      username: userName,
+      groups: [],
+      group: '',
+      userName,
+      allUsers: [],
       message: '',
       signOutMessage: '',
       errSignOut: '',
       broadcastmessage: ''
     };
     this.onChange = this.onChange.bind(this);
-
     this.onSubmit = this.onSubmit.bind(this);
-
-    this.onClick = this.onClick.bind(this); // Bind signOut tab to onClick event
+    this.onClick = this.onClick.bind(this);
+    this.userGroups = this.userGroups.bind(this);
+    //
+    // this.getMembersOnClick = this.getMembersOnClick.bind(this);
+  }
+  componentWillMount() {
+    getGroups();
+    generalUsers();
+    // call action that gets the group that a user belongs to
+    // call action that gets the chat belonginf to that group
+    // call action that get all the user that belongs to that group
   }
 
+  componentDidMount() {
+    GroupStore.on('GET_GROUPS', this.userGroups);
+    MemberStore.on('GENERAL', this.userGroups);
+    // MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.getMembersOnClick);
+    // add event listener for the 3 actions
+    // add event listener for the 3 actions
+  }
+
+  componentWillUnmount() {
+    GroupStore.removeListener('GET_GROUPS', this.userGroups);
+    MemberStore.removeListener('GENERAL', this.userGroups);
+    // MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
+    // this.getMembersOnClick);
+  }
+
+  // getMembersOnClick() {
+  //   this.setState({
+  //     group: MemberStore.allGroupMembers()
+  //   }, () => {
+  //     console.log(this.state.group);
+  //   });
+  // }
+
+  userGroups() {
+    console.log('got here??', GroupStore.allGroups());
+    console.log('got here too', MemberStore.allGeneralUsers());
+    this.setState({
+      groups: GroupStore.allGroups(),
+      allUsers: MemberStore.allGeneralUsers()
+    });
+  }
   /**
     * onChange event.
     * @param {object} e The first number.
@@ -68,9 +118,8 @@ export default class BroadCastBoard extends React.Component {
       this.setState({
         signupMessage: resp.data.message
       });
-      localStorage.removeItem('user');
-      localStorage.removeItem('userName');
       this.props.history.push('/');
+      localStorage.removeItem('userName');
     }).catch((error) => {
       if (error.response) {
         this.setState({
@@ -83,13 +132,6 @@ export default class BroadCastBoard extends React.Component {
     * @override
   */
   render() {
-    // const { loggedIn } = this.state;
-    // if (!this.state.loggedIn) {
-    //   return (
-    //     <Redirect to="/signin" />
-    //   );
-    // }
-    // console.log(this.state.username);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -119,7 +161,7 @@ export default class BroadCastBoard extends React.Component {
         </nav>
         <div className="container">
           <span>{this.state.errSignOut}</span>
-          <p className="pull-right">Hi, {this.state.username}.</p>
+          <p className="pull-right">{`Hi, ${this.state.username}.`}</p>
           <div className="row">
             <div className="col-md-12">
               <ul className="nav nav-pills nav-justified">
@@ -133,7 +175,10 @@ export default class BroadCastBoard extends React.Component {
           </div>
           <br/>
           <div className="row">
-            <Groups/>
+            <Groups
+              grouplist={this.state.groups}/>
+            <ChatBox/>
+            <GroupMembers Users={this.state.allUsers}/>
           </div>
         </div>
       </div>

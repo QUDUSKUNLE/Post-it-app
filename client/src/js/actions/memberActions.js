@@ -1,35 +1,34 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { memberOfGeneralGroups, getMemberOfAGroup } from '../utils/utils.js';
+import { getAllGeneralUsers, getMembersOfAGroup } from '../utils/utils.js';
 
 import {
   GENERAL,
   ADD_MEMBER,
-  GET_MEMBERS } from '../constants/ActionConstants.js';
+  GET_MEMBERS_OF_A_GROUP } from '../constants/ActionConstants.js';
 
 // Get Member of a group Action
 // userDetails = {email: email, password: password, group: group}
-export const getGroupMembers = (userDetails) => axios.post('/memberlist',
-  userDetails)
+export const getGroupMembers = (name) => axios.post('/memberlist', name)
   .then(({ data }) => {
     AppDispatcher.dispatch({
-      type: GET_MEMBERS,
-      members: getMemberOfAGroup(data)
+      type: GET_MEMBERS_OF_A_GROUP,
+      members: getMembersOfAGroup(data)
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({
-      type: GET_MEMBERS,
+      type: GET_MEMBERS_OF_A_GROUP,
       error: response.data.message
     });
   });
 
-  // Get General Member Action
-  // userDetails = { email: email, password: password }
-export const generalMembers = (user) => axios.post('/generallist', user)
+  // Get General Users Action
+export const generalUsers = () => axios.post('/generallist')
   .then(({ data }) => {
+    // console.log('Oh!! you are here', data);
     AppDispatcher.dispatch({
       type: GENERAL,
-      general: memberOfGeneralGroups(data.member)
+      general: getAllGeneralUsers(data)
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({

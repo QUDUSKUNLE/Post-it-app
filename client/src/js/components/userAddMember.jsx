@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
-import GroupMemberStore from '../stores/GroupMemberStore.js';
+import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
 import { getGroups } from '../actions/groupAction.js';
-import { generalMembers } from '../actions/memberActions.js';
+import { generalUsers } from '../actions/memberActions.js';
 import '../../css/icon.css';
 
 
@@ -19,13 +19,9 @@ export default class AddMember extends React.Component {
   */
   constructor(props) {
     super(props);
-    const user = JSON.parse(localStorage.getItem('user'));
-    const groups = GroupStore.allGroups(user);
-    const general = GroupMemberStore.allGeneralMembers(user);
     this.state = {
-      user,
-      groups,
-      general,
+      groups: [],
+      general: [],
       group: '',
       member: '',
       addmemberMess: ''
@@ -40,34 +36,32 @@ export default class AddMember extends React.Component {
   }
 
   componentWillMount() {
-    getGroups(this.state.user);
-    generalMembers(this.state.user);
+    getGroups();
+    generalUsers();
   }
 
   componentDidMount() {
     GroupStore.on('GET_GROUPS', this.userGroups);
-    GroupMemberStore.on('GENERAL', this.userGroups);
+    MemberStore.on('GENERAL', this.userGroups);
   }
   componentWillUnmount() {
     GroupStore.removeListener('GET_GROUPS', this.userGroups);
-    GroupMemberStore.removeListener('GENERAL', this.userGroups);
+    MemberStore.removeListener('GENERAL', this.userGroups);
   }
 
   userGroups() {
-    const userGroups = GroupStore.allGroups(this.state.user);
-    const genMembers = GroupMemberStore.allGeneralMembers(this.state.user);
     this.setState({
-      groups: userGroups,
-      general: genMembers
+      groups: GroupStore.allGroups(),
+      general: MemberStore.allGeneralUsers()
     });
   }
   /**
     * onChange event.
-    * @param {object} ee The first number.
+    * @param {object} e The first number.
     * @returns {void} bind input values to name.
   */
-  onChange(ee) {
-    this.setState({ [ee.target.name]: ee.target.value });
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   /**
@@ -78,8 +72,6 @@ export default class AddMember extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const memberDetails = {
-      email: JSON.parse(localStorage.getItem('user')).email,
-      password: JSON.parse(localStorage.getItem('user')).password,
       group: this.state.group,
       member: this.state.member
     };
@@ -167,7 +159,7 @@ export default class AddMember extends React.Component {
                     <select name="group" onChange={this.onChange}
                       className="form-control">
                       <option value="">Select a group</option>
-                      {(Object.keys(this.state.groups)).map((group, i) =>
+                      {(this.state.groups).map((group, i) =>
                         <option key={i}
                           value={group}>
                           {group}</option>

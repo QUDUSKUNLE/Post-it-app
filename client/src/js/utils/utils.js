@@ -1,30 +1,47 @@
 
 export const validatePassword = (pass) => {
-  const len = pass.length;
-  let output;
-  if (len < 6) {
-    output = true;
+  let validated;
+  if (pass.length < 6) {
+    validated = true;
   } else {
-    output = false;
+    validated = false;
   }
-  return output;
+  return validated;
 };
 
 
-export const memberOfGeneralGroups = (generalGroups) => {
-  const generalArrays = (Object.values(generalGroups));
-  const membersOfGeneralGroup = [];
-  for (let i = 0; i < generalArrays.length; i++) {
-    membersOfGeneralGroup.push((Object.values(generalArrays[i]))[0]);
-  }
-  return (membersOfGeneralGroup.map((member) => member.user));
+// Get members of a group
+export const getMembersOfAGroup = (data) => {
+  const arrayOfUsers = Object.values((data.response)[0]).filter(i =>
+    Object.values((data.response)[0]).indexOf(i) > 0);
+  return arrayOfUsers.map(j => Object.values(j));
 };
 
-export const getMemberOfAGroup = (group) => {
-  const arrayOfGroup = Object.values(group.member);
-  const result = [];
-  for (let i = 1; i < arrayOfGroup.length; i++) {
-    result.push(Object.values(arrayOfGroup[i]));
+// Get All Users
+export const getAllUsers = (objectOfUsers) => {
+  const arrayOfAllUsers = Object.values((objectOfUsers.response[0]));
+  const allUsers = [];
+  for (let i = 0; i < arrayOfAllUsers.length; i++) {
+    allUsers.push((Object.values(arrayOfAllUsers[i]))[0].user);
   }
-  return result;
+  return allUsers;
+};
+
+// All groups perculiar to a user
+export const getUserGroups = (data) => {
+  let getGroups;
+  if ((data.response)[0] === null) {
+    getGroups = [];
+  } else {
+    getGroups = Object.keys(((data.response)[0]));
+  }
+  return getGroups;
+};
+
+// All registered Users
+export const getAllGeneralUsers = (data) => {
+  const arrayOfUsers = Object.values((data.response)[0]).map(x =>
+    Object.values(x));
+  const allRegisteredUsers = arrayOfUsers.map(m => m[0].user);
+  return allRegisteredUsers;
 };

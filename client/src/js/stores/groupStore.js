@@ -6,8 +6,8 @@ import {
   CREATE_NEW_GROUP } from '../constants/ActionConstants.js';
 
 class GroupStore extends EventEmitter {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.groups = [];
     this.allGroups = this.allGroups.bind(this);
     this.handleActions = this.handleActions.bind(this);

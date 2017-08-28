@@ -6,7 +6,7 @@ export default class GroupMembers extends React.Component {
     * @override
   */
   render() {
-    const memberlists = (this.props.memberlist);
+    const memberlists = this.props.Users;
     return (
       <div className="col-md-3">
         <div className="row chats-row">
@@ -27,5 +27,5 @@ export default class GroupMembers extends React.Component {
 
 // props validation
 GroupMembers.propTypes = {
-  memberlist: PropTypes.array
+  Users: PropTypes.array
 };

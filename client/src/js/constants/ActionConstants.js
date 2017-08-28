@@ -12,6 +12,7 @@ export const ADD_NEW_GROUP = 'ADD_NEW_GROUP';
 export const GENERAL = 'GENERAL';
 export const ADD_MEMBER = 'ADD_MEMBER';
 export const GET_MEMBERS = 'GET_MEMBERS';
+export const GET_MEMBERS_OF_A_GROUP = 'GET_MEMBERS_OF_A_GROUP';
 
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const READ_MESSAGE = 'READ_MESSAGE';

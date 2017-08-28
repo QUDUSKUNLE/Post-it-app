@@ -18,9 +18,9 @@ app.use(compression());
 function getCurrentUser() {
   return new Promise((resolve) => {
     dbConfig.auth().onAuthStateChanged((user) => {
-      console.log(user, 'userrrr');
+      // console.log(user, 'userrrr');
       if (user) {
-        console.log(user, 'user');
+        // console.log(user, 'user');
         resolve(user);
       }
       resolve({});
