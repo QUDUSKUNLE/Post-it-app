@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
 import MemberStore from '../stores/MemberStore.js';
@@ -18,8 +18,10 @@ export default class AddMember extends React.Component {
     * @param {string} props inbuilt props.
   */
   constructor(props) {
+    const loggedIn = (localStorage.getItem('userIn'));
     super(props);
     this.state = {
+      loggedIn,
       groups: [],
       general: [],
       group: '',
@@ -101,7 +103,8 @@ export default class AddMember extends React.Component {
   onClick() {
     signoutAction()
       .then(() => {
-        localStorage.removeItem('user');
+        localStorage.removeItem('userIn');
+        localStorage.removeItem('userName');
         this.props.history.push('/');
       })
       .catch((error) => {
@@ -115,6 +118,11 @@ export default class AddMember extends React.Component {
     * @override
   */
   render() {
+    if (!this.state.loggedIn) {
+      return (
+        <Redirect to="/signin" />
+      );
+    }
     return (
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top"

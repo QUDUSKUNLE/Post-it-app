@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { sendGroupMessage } from '../actions/messageActions.js';
 export default class ChatBox extends React.Component {
   constructor(props) {
     super(props);
@@ -20,10 +21,14 @@ export default class ChatBox extends React.Component {
     this.setState({
       newMessage: this.state.message
     });
+    sendGroupMessage();
+    //   .then(({ data }) => {
+    //
+    //   })
   }
   render() {
     return (
-      <div className="col-md-6 current-chat">
+      <div className="col-md-9 current-chat">
         <div className="row" style={{ backgroundColor: '#e8e8ee' }}>
           <p className="text-center">{'general'}</p>
         </div>

@@ -12,27 +12,32 @@ export default class Groups extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      group: ''
+      group: []
     };
-    this.getMembersOnClick = this.getMembersOnClick.bind(this);
+    // this.getMembersOnClick = this.getMembersOnClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
   //
   componentDidMount() {
-    MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.getMembersOnClick);
+    MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.handleOnClick);
     // add event listener for the 3 actions
   }
 
   componentWillUnmount() {
     MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
-      this.getMembersOnClick);
+      this.handleOnClick);
   }
 
-  getMembersOnClick() {
-    this.setState({
-      group: MemberStore.allGroupMembers()
-    }, () => {
-      console.log(this.state.group);
-    });
+  // getMembersOnClick() {
+  //   this.setState({
+  //     group: MemberStore.allGroupMembers()
+  //   }, () => {
+  //     console.log(this.state.group);
+  //   });
+  // }
+  handleOnClick() {
+    const clickedGroup = MemberStore.allGroupMembers();
+    this.props.getMembers(clickedGroup);
   }
 
   /**
@@ -67,5 +72,6 @@ export default class Groups extends React.Component {
 }
 // props validation
 Groups.propTypes = {
-  grouplist: PropTypes.array
+  grouplist: PropTypes.array,
+  getMembers: PropTypes.func.isRequired
 };

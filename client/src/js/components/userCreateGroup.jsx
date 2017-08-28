@@ -15,7 +15,7 @@ export default class CreateGroup extends React.Component {
      * @param {string} props inbuilt props.
      */
   constructor(props) {
-    // const loggedIn = (localStorage.getItem('user'));
+    const loggedIn = (localStorage.getItem('userIn'));
     // console.log(loggedIn, localStorage.getItem('user'));
     super(props);
     this.state = {
@@ -23,7 +23,8 @@ export default class CreateGroup extends React.Component {
       email: '',
       password: '',
       responseMessage: '',
-      signOutMessage: ''
+      signOutMessage: '',
+      loggedIn
     };
     // Bind Create Group Input Fields
     this.onChange = this.onChange.bind(this);
@@ -81,6 +82,7 @@ export default class CreateGroup extends React.Component {
       .then((resp) => {
         if (resp) {
           localStorage.removeItem('userName');
+          localStorage.removeItem('userIn');
           this.setState({
             signOutMessage: resp.data.message
           });
@@ -104,7 +106,6 @@ export default class CreateGroup extends React.Component {
         <Redirect to="/signin" />
       );
     }
-    // console.log(this.props.loggedIn);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"

@@ -23,7 +23,7 @@ export default class SignIn extends React.Component {
       password: '',
       signinMessage: '',
       errMessage: {},
-      groups: []
+      loggedIn: false
     };
     // Bind input field values
     this.onChange = this.onChange.bind(this);
@@ -64,8 +64,10 @@ export default class SignIn extends React.Component {
           signinMessage: data.message,
           groups: getAllUsers(data),
           userName: (Object.values((data.response[1]))[0].userName),
+          loggedIn: true
         });
         localStorage.setItem('userName', JSON.stringify(this.state.userName));
+        localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
         this.props.history.push('/broadcastboard');
       }, () => {
         this.setState({

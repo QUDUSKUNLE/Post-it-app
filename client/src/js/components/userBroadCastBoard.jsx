@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
-import GroupMembers from './userGroupMembers.jsx';
+// import GroupMembers from './userGroupMembers.jsx';
 import { getGroups } from '../actions/groupAction.js';
 import { sendMessage } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -23,11 +23,15 @@ export default class BroadCastBoard extends React.Component {
   constructor(props) {
     super(props);
     const userName = JSON.parse(localStorage.getItem('userName'));
+    const loggedIn = JSON.parse(localStorage.getItem('userIn'));
     // console.log(GroupStore.allGroups());
-    // console.log(getGroups());
+    console.log(loggedIn);
+    console.log(userName);
     this.state = {
+      loggedIn,
       groups: [],
-      group: '',
+      groupName: '',
+      seletedgroup: '',
       userName,
       allUsers: [],
       message: '',
@@ -40,7 +44,7 @@ export default class BroadCastBoard extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.userGroups = this.userGroups.bind(this);
     //
-    // this.getMembersOnClick = this.getMembersOnClick.bind(this);
+    this.getMembersOnClick = this.getMembersOnClick.bind(this);
   }
   componentWillMount() {
     getGroups();
@@ -62,16 +66,17 @@ export default class BroadCastBoard extends React.Component {
     GroupStore.removeListener('GET_GROUPS', this.userGroups);
     MemberStore.removeListener('GENERAL', this.userGroups);
     // MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
-    // this.getMembersOnClick);
+    //   this.getMembersOnClick);
   }
 
-  // getMembersOnClick() {
-  //   this.setState({
-  //     group: MemberStore.allGroupMembers()
-  //   }, () => {
-  //     console.log(this.state.group);
-  //   });
-  // }
+  getMembersOnClick(i) {
+    this.setState({
+      // allUsers: MemberStore.allGroupMembers(),
+      groupName: i
+    }, () => {
+      console.log(this.state.groupName);
+    });
+  }
 
   userGroups() {
     console.log('got here??', GroupStore.allGroups());
@@ -118,8 +123,9 @@ export default class BroadCastBoard extends React.Component {
       this.setState({
         signupMessage: resp.data.message
       });
-      this.props.history.push('/');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userIn');
+      this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
         this.setState({
@@ -132,6 +138,11 @@ export default class BroadCastBoard extends React.Component {
     * @override
   */
   render() {
+    if (!this.state.loggedIn) {
+      return (
+        <Redirect to="/signin" />
+      );
+    }
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -161,7 +172,7 @@ export default class BroadCastBoard extends React.Component {
         </nav>
         <div className="container">
           <span>{this.state.errSignOut}</span>
-          <p className="pull-right">{`Hi, ${this.state.username}.`}</p>
+          <p className="pull-right">{`Hi, ${this.state.userName}.`}</p>
           <div className="row">
             <div className="col-md-12">
               <ul className="nav nav-pills nav-justified">
@@ -176,9 +187,9 @@ export default class BroadCastBoard extends React.Component {
           <br/>
           <div className="row">
             <Groups
-              grouplist={this.state.groups}/>
+              grouplist={this.state.groups}
+              getMembers={this.getMembersOnClick}/>
             <ChatBox/>
-            <GroupMembers Users={this.state.allUsers}/>
           </div>
         </div>
       </div>
