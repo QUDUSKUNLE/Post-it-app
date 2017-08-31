@@ -1,5 +1,7 @@
+[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=development)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=development)
+
+
 # PostIt-app
-  [![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=development)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=development)
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
   This way one person can send notifications to everyone in the group by sending message once. The application allows people create accounts, create groups and add registered users to groups, and then send messages to members of a group whenever there is need.
 
