@@ -1,4 +1,5 @@
 # PostIt-app
+  [![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=development)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=development)
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
   This way one person can send notifications to everyone in the group by sending message once. The application allows people create accounts, create groups and add registered users to groups, and then send messages to members of a group whenever there is need.
 
@@ -21,5 +22,5 @@
   5. Create an .env file and set the variables in .env-sample to your specified database connection
 
   6. <b>npm start</b>
-  
+
   7. Go to <b>http://localhost:8080/</b>

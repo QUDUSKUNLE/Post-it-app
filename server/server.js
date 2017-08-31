@@ -16,16 +16,16 @@ const app = express();
 app.use(compression());
 
 function getCurrentUser() {
-  return new Promise((resolve) => {
-    dbConfig.auth().onAuthStateChanged((user) => {
-      // console.log(user, 'userrrr');
-      if (user) {
-        // console.log(user, 'user');
-        resolve(user);
-      }
-      resolve({});
+    return new Promise((resolve) => {
+        dbConfig.auth().onAuthStateChanged((user) => {
+            // console.log(user, 'userrrr');
+            if (user) {
+                // console.log(user, 'user');
+                resolve(user);
+            }
+            resolve({});
+        });
     });
-  });
 }
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,14 +33,14 @@ app.use(bodyParser.json());
 
 // configure app to handle CORS requests
 app.use((req, res, next) => {
-  getCurrentUser().then((user) => {
-    req.user = user;
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
-         'content-type, Authorization');
-    next();
-  });
+    getCurrentUser().then((user) => {
+        req.user = user;
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
+            'content-type, Authorization');
+        next();
+    });
 });
 
 // MIDDLEWARE
@@ -49,9 +49,9 @@ app.use(morgan('dev')); // log all requests to the console
 // Added Webpack
 const compiler = webpack(config);
 app.use(webpackMiddleware(compiler, {
-  hot: true,
-  publicPath: config.output.publicPath,
-  noInfo: true
+    hot: true,
+    publicPath: config.output.publicPath,
+    noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
 

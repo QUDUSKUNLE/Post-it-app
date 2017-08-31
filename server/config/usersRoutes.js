@@ -80,7 +80,7 @@ Router.route('/signout')
     firebase.auth().signOut()
       .then(() => {
         req.user = {};
-        res.send({ message: 'User`s signed-out successfully.' });
+        res.status(200).send({ message: 'User`s signed-out successfully.' });
       })
       .catch(() => res.status(404).send({ message: 'Network Error' }));
   });
@@ -90,7 +90,7 @@ Router.route('/passwordreset')
   .post((req, res) => {
     const email = req.body.email;
     firebase.auth().sendPasswordResetEmail(email)
-      .then(() => res.send({
+      .then((res) => res.status(200).send({
         message: 'Password reset email sent successfully!'
       }))
       .catch((err) => res.status(404).send({ err }));
