@@ -7,3 +7,7 @@ dist
 newfile.json
 sample.jsx
 test/testaaaa.js
+.vscode
+.nyc_output
+.DS_Store
+coverage
