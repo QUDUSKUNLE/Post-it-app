@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.82% </span>
+        <span class="strong">42.02% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>45/119</span>
+        <span class='fraction'>50/119</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">9.09% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>2/22</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">27.78% </span>
+        <span class="strong">35.19% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>15/54</span>
+        <span class='fraction'>19/54</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">37.82% </span>
+        <span class="strong">42.02% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>45/119</span>
+        <span class='fraction'>50/119</span>
       </div>
     </div>
   </div>
@@ -340,7 +340,8 @@
 295
 296
 297
-298</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+298
+299</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -358,12 +359,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -379,11 +378,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -432,7 +433,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
@@ -609,6 +610,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -655,10 +657,10 @@ Router.route('/signup')
     const password = req.body.password;
     const username = req.body.username;
     dbConfig.auth().createUserWithEmailAndPassword(email, password)
-      .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>user) =&gt; user.sendEmailVerification()</span>
-        .then(<span class="fstat-no" title="function not covered" >() =&gt; </span>{
-          c</span>onst userId = (<span class="cstat-no" title="statement not covered" >firebase.auth().currentUser).uid;
-<span class="cstat-no" title="statement not covered" >          return Promise.all(</span>
+      .then((user) =&gt; user.sendEmailVerification()
+        .then(() =&gt; {
+          const userId = (firebase.auth().currentUser).uid;
+          return Promise.all(
             [dbConfig.database().ref(`users/${userId}`).push({
               userEmail: email,
               userPassword: password,
@@ -676,7 +678,7 @@ Router.route('/signup')
             userId
             ]);
         })
-        .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>response) =&gt; res.status(200).send({</span>
+        .then((response) =&gt; res.status(200).send({
           message: 'Registration successful and ' +
           'verification email sent to your email', response })
         ))
@@ -729,7 +731,7 @@ Router.route('/passwordreset')
   .post((req, res) =&gt; {
     const email = req.body.email;
     firebase.auth().sendPasswordResetEmail(email)
-      .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>res) =&gt; res.status(200).send({</span>
+      .then((res) =&gt; res.status(200).send({
         message: 'Password reset email sent successfully!'
       }))
       .catch((error) =&gt; res.status(404).send({ error }));
@@ -907,7 +909,8 @@ Router.route('/groupName/message')
 <span class="cstat-no" title="statement not covered" >            if (snapshot.val() != null) {</span>
 <span class="cstat-no" title="statement not covered" >              snapshot.val();</span>
             }
-          })
+          }),
+        { message, date, time }
       ])
       .then(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>response) =&gt; res.status(200).send({</span>
         message: 'Broadcast Message sent successfully', response }))
@@ -940,7 +943,7 @@ export default Router;
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sat Sep 02 2017 08:41:03 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Sep 03 2017 15:45:33 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
