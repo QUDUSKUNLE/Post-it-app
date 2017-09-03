@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getGroupMembers, generalUsers } from '../actions/memberActions.js';
+import { generalUsers } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore.js';
 
 
@@ -28,13 +28,6 @@ export default class Groups extends React.Component {
       this.handleOnClick);
   }
 
-  // getMembersOnClick() {
-  //   this.setState({
-  //     group: MemberStore.allGroupMembers()
-  //   }, () => {
-  //     console.log(this.state.group);
-  //   });
-  // }
   handleOnClick() {
     const clickedGroup = MemberStore.allGroupMembers();
     this.props.getMembers(clickedGroup);
@@ -44,12 +37,6 @@ export default class Groups extends React.Component {
     * @override
   */
   render() {
-    const groupList = this.props.grouplist.map((group, i) =>
-      <li key={i}
-        value={group} name={group}
-        onClick={() => getGroupMembers({ group })}><Link to="#">
-          {group}</Link>
-      </li>, this);
     return (
       <div>
         <div className="col-md-3">
@@ -61,7 +48,7 @@ export default class Groups extends React.Component {
                   value="general" name="general"
                   onClick={() => generalUsers()}>
                   <Link to="#">general</Link></li>
-                {groupList}
+                {this.props.grouplist}
               </ul>
             </div>
           </div>
@@ -73,5 +60,6 @@ export default class Groups extends React.Component {
 // props validation
 Groups.propTypes = {
   grouplist: PropTypes.array,
+  defaultGroup: PropTypes.string,
   getMembers: PropTypes.func.isRequired
 };

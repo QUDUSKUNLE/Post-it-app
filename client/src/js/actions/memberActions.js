@@ -13,6 +13,7 @@ export const getGroupMembers = (name) => axios.post('/memberlist', name)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GET_MEMBERS_OF_A_GROUP,
+      group: name,
       members: getMembersOfAGroup(data)
     });
   }, ({ response }) => {

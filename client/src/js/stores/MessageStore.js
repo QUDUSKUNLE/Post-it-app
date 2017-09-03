@@ -2,13 +2,15 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 
 import {
-  GENERAL_MESSAGES, ADD_MESSAGE, GET_GROUP_MESSAGES } from
+  GENERAL_MESSAGES, ADD_MESSAGE,
+  GET_GROUP_MESSAGES, SEND_MESSAGE } from
   '../constants/ActionConstants.js';
 
 
 class MessageStore extends EventEmitter {
   constructor(props) {
     super(props);
+    this.message = [];
     this.generalMessages = [];
     this.groupMessages = [];
     this.allGroupMessages = this.allGroupMessages.bind(this);
@@ -22,6 +24,10 @@ class MessageStore extends EventEmitter {
 
   allGroupMessages() {
     return this.members;
+  }
+
+  sendMessage() {
+    return this.message;
   }
 
   handleActions(action) {
@@ -39,6 +45,11 @@ class MessageStore extends EventEmitter {
       case ADD_MESSAGE:
         this.members.push(action.members);
         this.emit('ADD_MESSAGE');
+        break;
+
+      case SEND_MESSAGE:
+        this.message.push(action.message);
+        this.emit('SEND_MESSAGE');
         break;
 
       default:

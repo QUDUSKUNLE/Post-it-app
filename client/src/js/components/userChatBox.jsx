@@ -1,36 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { sendGroupMessage } from '../actions/messageActions.js';
+import MessageStore from '../stores/MessageStore.js';
+
+
 export default class ChatBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newMessage: '',
       message: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  // componentDidMount() {
+  //   MessageStore.on('SEND_MESSAGE', this.onSubmit);
+  // }
+
+  // componentWillUnmount() {
+  //   MessageStore.removeListener('SEND_MESSAGE', this.onSubmit);
+  // }
+
   onChange(e) {
     this.setState({
-      name: e.target.value
+      [e.target.name]: e.target.value
     });
   }
+
   onSubmit(e) {
     e.preventDefault();
-    this.setState({
-      newMessage: this.state.message
-    });
-    sendGroupMessage();
-    //   .then(({ data }) => {
-    //
-    //   })
+    const newMessage = {
+      group: this.props.defaultGroup,
+      message: this.state.message
+    };
+    console.log(newMessage);
+    sendGroupMessage(newMessage);
+    const mess = MessageStore.sendMessage();
+    console.log(mess);
   }
+
   render() {
     return (
       <div className="col-md-9 current-chat">
         <div className="row" style={{ backgroundColor: '#e8e8ee' }}>
-          <p className="text-center">{'general'}</p>
+          <p className="text-center"
+            style={{ padding: '5px', marginTops: '5px' }}>
+            {this.props.defaultGroup}</p>
         </div>
         <div className="row current-chat-area">
           <div className="col-md-12">
@@ -81,5 +97,6 @@ export default class ChatBox extends React.Component {
 }
 
 ChatBox.propTypes = {
-  name: PropTypes.string
+  name: PropTypes.string,
+  defaultGroup: PropTypes.string
 };

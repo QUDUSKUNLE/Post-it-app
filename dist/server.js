@@ -49,16 +49,16 @@ var app = (0, _express2.default)();
 app.use((0, _compression2.default)());
 
 function getCurrentUser() {
-  return new Promise(function (resolve) {
-    _dbConfig2.default.auth().onAuthStateChanged(function (user) {
-      // console.log(user, 'userrrr');
-      if (user) {
-        // console.log(user, 'user');
-        resolve(user);
-      }
-      resolve({});
+    return new Promise(function (resolve) {
+        _dbConfig2.default.auth().onAuthStateChanged(function (user) {
+            // console.log(user, 'userrrr');
+            if (user) {
+                // console.log(user, 'user');
+                resolve(user);
+            }
+            resolve({});
+        });
     });
-  });
 }
 // CONFIG APP
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
@@ -66,13 +66,13 @@ app.use(_bodyParser2.default.json());
 
 // configure app to handle CORS requests
 app.use(function (req, res, next) {
-  getCurrentUser().then(function (user) {
-    req.user = user;
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' + 'content-type, Authorization');
-    next();
-  });
+    getCurrentUser().then(function (user) {
+        req.user = user;
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' + 'content-type, Authorization');
+        next();
+    });
 });
 
 // MIDDLEWARE
@@ -81,9 +81,9 @@ app.use((0, _morgan2.default)('dev')); // log all requests to the console
 // Added Webpack
 var compiler = (0, _webpack2.default)(_webpackConfig2.default);
 app.use((0, _webpackDevMiddleware2.default)(compiler, {
-  hot: true,
-  publicPath: _webpackConfig2.default.output.publicPath,
-  noInfo: true
+    hot: true,
+    publicPath: _webpackConfig2.default.output.publicPath,
+    noInfo: true
 }));
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 

@@ -93,7 +93,7 @@ Router.route('/passwordreset')
       .then((res) => res.status(200).send({
         message: 'Password reset email sent successfully!'
       }))
-      .catch((err) => res.status(404).send({ err }));
+      .catch((error) => res.status(404).send({ error }));
   });
 
 //  ===============Create Group Endpoint======================//
@@ -150,7 +150,6 @@ Router.route('/getgroups')
       ])
       .then((response) => res.status(200).send({ response }))
       .catch((error) => res.status(401).send({ error }));
-    // const uID = (firebase.auth().currentUser).uid;
   });
 
 
@@ -269,7 +268,8 @@ Router.route('/groupName/message')
             if (snapshot.val() != null) {
               snapshot.val();
             }
-          })
+          }),
+        { message, date, time }
       ])
       .then((response) => res.status(200).send({
         message: 'Broadcast Message sent successfully', response }))

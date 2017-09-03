@@ -10,6 +10,7 @@ class MemberStore extends EventEmitter {
   constructor(props) {
     super(props);
     this.members = [];
+    this.group = '';
     this.general = [];
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.allGeneralUsers = this.allGeneralUsers.bind(this);
@@ -22,7 +23,7 @@ class MemberStore extends EventEmitter {
   }
 
   allGroupMembers() {
-    return this.members;
+    return [this.members, this.group];
   }
 
   setGroupMembers(group) {
@@ -38,6 +39,7 @@ class MemberStore extends EventEmitter {
 
       case GET_MEMBERS_OF_A_GROUP:
         this.members = action.members;
+        this.group = action.group;
         this.emit('GET_MEMBERS_OF_A_GROUP');
         break;
 

@@ -10,7 +10,7 @@ import {
 // Get Groups Action
 export const getGroups = () => axios.post('/getgroups')
   .then(({ data }) => {
-    console.log(data, 'is this the data', getUserGroups(data));
+    // console.log(data, 'is this the data', getUserGroups(data));
     AppDispatcher.dispatch({
       type: GET_GROUPS,
       groups: getUserGroups(data)
