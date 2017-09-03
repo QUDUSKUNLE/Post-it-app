@@ -10,6 +10,7 @@ before_install:
 
 cache:
   - node_modules
+
 env:
   CODECLIMATE_REPO_TOKEN: 6741a0ba3155fa8f976e977b2bd77e0e835534f1495868927a6deaa919a77a17
 
