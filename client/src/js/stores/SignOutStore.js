@@ -10,11 +10,20 @@ import {
  * @class SignOutStore
  */
 class SignOutStore extends EventEmitter {
-  constructor(props) {
-    super(props);
+  /**
+   * @constructor
+   */
+  constructor() {
+    super();
     this.handleActions = this.handleActions.bind(this);
   }
 
+  /**
+   * Receives actions and update the stores accordingly
+   * @method handleActions
+   * @param {object} action - Action type and data
+   * @return {null} -
+   */
   handleActions(action) {
     switch (action.type) {
       case SIGN_OUT_SUCCESS:

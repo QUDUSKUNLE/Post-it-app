@@ -7,7 +7,11 @@ import {
   CREATE_NEW_GROUP } from '../constants/ActionConstants.js';
 
 
-// Get Groups Action
+/**
+  * @description - Get groups of a user
+  * @param {null} null -
+  * @returns {function} dispatch - dispatch to MemberStore
+*/
 export const getGroups = () => axios.post('/getgroups')
   .then(({ data }) => {
     // console.log(data, 'is this the data', getUserGroups(data));
@@ -23,7 +27,11 @@ export const getGroups = () => axios.post('/getgroups')
   });
 
 
-// Create new Group Action
+/**
+  * @description - Get groups of a user
+  * @param {userDetails} userDetails - { groupName }
+  * @returns {function} dispatch - dispatch to MemberStore
+*/
 export const createGroup = (userDetails) => axios.post('/creategroup',
   userDetails)
   .the(({ data }) => {

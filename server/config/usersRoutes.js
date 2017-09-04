@@ -10,6 +10,7 @@ Router.route('/*')
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
   });
 
+
 Router.route('/signup')
   .post((req, res) => {
     const email = req.body.email;
@@ -275,6 +276,21 @@ Router.route('/groupName/message')
         message: 'Broadcast Message sent successfully', response }))
       .catch((error) => res.send({ error }));
   });
+
+// Router.route('/general/message')
+//   .post((req, res) => {
+//     const groupName = 'general';
+//     const message = req.body.message;
+//     const userId = req.user.uid;
+//     const date = (new Date()).toDateString();
+//     const time = (new Date()).toTimeString();
+//     return Promise.all([
+//       dbConfig.database().ref(`Group/${groupName}`).orderByKey()
+//         .on('child_added', (data) => {
+//           dbConfig.database().ref(`Group`)
+//         })
+//     ])
+//   })
 
 Router.route('/groupMessage')
   .post((req, res) => {

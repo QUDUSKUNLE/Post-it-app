@@ -4,12 +4,16 @@ import SignUp from './userSignUp.jsx';
 // import Home from './Home.jsx';
 
 /**
-  * Represents App Component.
-*/
+ * @description - renders App Component
+ * @class App
+ * @extends {React.Component}
+ */
 export default class App extends React.Component {
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} App component
+   * @App
+   */
   render() {
     return (
       <div>

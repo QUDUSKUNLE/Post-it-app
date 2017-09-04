@@ -1,4 +1,4 @@
-//  AppDispatcher
+//  Dispatcher
 import { Dispatcher } from 'flux';
-// export AppDispatcher
+// export  an instance of Dispatcher
 export default new Dispatcher();

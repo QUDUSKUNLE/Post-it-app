@@ -5,10 +5,17 @@ import {
   GENERAL, ADD_MEMBER, GET_MEMBERS_OF_A_GROUP } from
   '../constants/ActionConstants.js';
 
-
+/**
+ * Holds the storage, listen to actions and update the stores
+ * @class MemberStore
+ */
 class MemberStore extends EventEmitter {
-  constructor(props) {
-    super(props);
+  /**
+   * sets the members, general to an empty []
+   * @constructor
+   */
+  constructor() {
+    super();
     this.members = [];
     this.group = '';
     this.general = [];
@@ -18,18 +25,38 @@ class MemberStore extends EventEmitter {
     this.setGroupMembers = this.setGroupMembers.bind(this);
   }
 
+  /**
+   * @method allGeneralUsers
+   * @return {object} generalmembers - The general stored in the constructor
+   */
   allGeneralUsers() {
     return this.general;
   }
 
+  /**
+   * @method allGroupMembers
+   * @return {object} [members & group] - members and group stored in the
+    constructor
+   */
   allGroupMembers() {
     return [this.members, this.group];
   }
 
+  /**
+   * @method setGroupMembers
+   * @param {Object} group -
+   * @return {object} update mmebers - The groups stored in the constructor
+   */
   setGroupMembers(group) {
     this.members = group;
   }
 
+  /**
+   * Receives actions and update the stores accordingly
+   * @method handleActions
+   * @param {object} action - Action type and data
+   * @return {null} -
+   */
   handleActions(action) {
     switch (action.type) {
       case GENERAL:
@@ -53,8 +80,11 @@ class MemberStore extends EventEmitter {
   }
 }
 
+// create a new instance of MemberStore
 const memberStore = new MemberStore();
 
+// register an AppDispatcher and bind it to handleActions method
 AppDispatcher.register(memberStore.handleActions.bind(memberStore));
 
+// export an instance of MemberStore
 export default memberStore;
