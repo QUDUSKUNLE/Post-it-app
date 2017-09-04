@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "npm run client && npm run bundle",
-    "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha --timeout 15000 --compilers js:babel-register",
+    "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha --timeout 15000 --compilers js:babel-register && npm run coverage-report",
     "coverage-report": "cat ./coverage/lcov.info | coveralls",
     "client": "webpack",
     "bundle": "babel server/ -d dist && npm run server",
