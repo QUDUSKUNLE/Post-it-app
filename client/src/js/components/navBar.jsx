@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /**
-  * Represents NavBar Component.
-*/
+ * @description - renders NavBar Component
+ * @class NavBar
+ * @extends {React.Component}
+ */
 export default class NavBar extends React.Component {
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} NavBar component
+   * @NavBar
+   */
   render() {
     return (
       <div>

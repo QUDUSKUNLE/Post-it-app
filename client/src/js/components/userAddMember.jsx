@@ -11,12 +11,16 @@ import '../../css/icon.css';
 
 
 /**
-  * Represents AddMember Component.
-*/
+ * @description - renders AddMember Component
+ * @class AddMember
+ * @extends {React.Component}
+ */
 export default class AddMember extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     const loggedIn = (localStorage.getItem('userIn'));
     super(props);
@@ -58,25 +62,34 @@ export default class AddMember extends React.Component {
     });
   }
   /**
-    * onChange event.
-    * @param {object} e The first number.
-    * @returns {void} bind input values to name.
-  */
+   * @description - onChange event
+   * @param {e} e - event
+   * @returns {null} null
+   * @memberOf ChatBox
+   */
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   /**
-    * onSubmit event.
-    * @param {object} e .
-    * @returns {void} .
-  */
+	 * @description This handles addMember form submission
+	 * @param {object} e .
+	 * @returns {void} .
+	 */
   onSubmit(e) {
     e.preventDefault();
     const memberDetails = {
       group: this.state.group,
       member: this.state.member
     };
+
+    /**
+     * @description This handles Creategroup Action
+     * @param {object} memberDetails .
+     * @returns {void} .
+     */
     addMember(memberDetails)
       .then(({ data }) => {
         if (data) {
@@ -96,10 +109,10 @@ export default class AddMember extends React.Component {
   }
 
   /**
-    * onClick event.
-    * @param {void} nil no parameter.
-    * @returns {object} response from server.
- */
+   * onClick event.
+   * @param {void} nil no parameter.
+   * @returns {object} response from server.
+   */
   onClick() {
     signoutAction()
       .then(() => {
@@ -115,8 +128,10 @@ export default class AddMember extends React.Component {
   }
 
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} AddMember component
+   * @AddMember
+   */
   render() {
     if (!this.state.loggedIn) {
       return (

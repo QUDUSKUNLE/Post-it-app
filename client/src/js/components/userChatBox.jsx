@@ -4,7 +4,17 @@ import { sendGroupMessage } from '../actions/messageActions.js';
 import MessageStore from '../stores/MessageStore.js';
 
 
+/**
+ * @description - renders ChatBox Component
+ * @class ChatBox
+ * @extends {React.Component}
+ */
 export default class ChatBox extends React.Component {
+  /**
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -22,12 +32,24 @@ export default class ChatBox extends React.Component {
   //   MessageStore.removeListener('SEND_MESSAGE', this.onSubmit);
   // }
 
+  /**
+   * @description - onChange event
+   * @param {e} e - event
+   * @returns {null} null
+   * @memberOf ChatBox
+   */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
 
+  /**
+   * @description - onSubmit event
+   * @param {e} e - event
+   * @returns {null} null
+   * @memberOf ChatBox
+   */
   onSubmit(e) {
     e.preventDefault();
     const newMessage = {
@@ -40,6 +62,11 @@ export default class ChatBox extends React.Component {
     console.log(mess);
   }
 
+  /**
+   * @description - render method, React lifecycle method
+   * @returns {Object} ChatBox component
+   * @ChatBox
+   */
   render() {
     return (
       <div className="col-md-9 current-chat">
@@ -96,6 +123,7 @@ export default class ChatBox extends React.Component {
   }
 }
 
+// props validation
 ChatBox.propTypes = {
   name: PropTypes.string,
   defaultGroup: PropTypes.string

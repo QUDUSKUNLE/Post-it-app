@@ -1,4 +1,8 @@
-
+/**
+ * @function validatePassword
+ * @param {Object} pass -
+ * @returns {bool} validated
+ */
 export const validatePassword = (pass) => {
   let validated;
   if (pass.length < 6) {
@@ -10,14 +14,23 @@ export const validatePassword = (pass) => {
 };
 
 
-// Get members of a group
+/**
+ * @function getMembersOfAGroup
+ * @param {Object} data -
+ * @returns {Object} title
+ */
 export const getMembersOfAGroup = (data) => {
   const arrayOfUsers = Object.values((data.response)[0]).filter(i =>
     Object.values((data.response)[0]).indexOf(i) > 0);
   return arrayOfUsers.map(j => Object.values(j));
 };
 
-// Get All Users
+
+/**
+ * @function getAllUsers
+ * @param {Object} objectOfUsers -
+ * @returns {Object} allUsers
+ */
 export const getAllUsers = (objectOfUsers) => {
   const arrayOfAllUsers = Object.values((objectOfUsers.response[0]));
   const allUsers = [];
@@ -27,7 +40,12 @@ export const getAllUsers = (objectOfUsers) => {
   return allUsers;
 };
 
-// All groups perculiar to a user
+
+/**
+ * @function getUserGroups
+ * @param {Object} data -
+ * @returns {Object} getGroups
+ */
 export const getUserGroups = (data) => {
   let getGroups;
   if ((data.response)[0] === null) {
@@ -38,7 +56,12 @@ export const getUserGroups = (data) => {
   return getGroups;
 };
 
-// All registered Users
+
+/**
+ * @function getAllGeneralUsers
+ * @param {Object} data -
+ * @returns {Object} allRegisteredUsers
+ */
 export const getAllGeneralUsers = (data) => {
   const arrayOfUsers = Object.values((data.response)[0]).map(x =>
     Object.values(x));

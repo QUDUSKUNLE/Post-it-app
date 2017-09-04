@@ -7,13 +7,18 @@ import {
   ADD_MEMBER,
   GET_MEMBERS_OF_A_GROUP } from '../constants/ActionConstants.js';
 
-// Get Member of a group Action
-// userDetails = {email: email, password: password, group: group}
-export const getGroupMembers = (name) => axios.post('/memberlist', name)
+
+/**
+  * @description - Get members of a group
+  * @param {object} GroupName - { GroupName }
+  * @returns {function} dispatch - dispatch to MemberStore
+*/
+export const getGroupMembers = (GroupName) => axios.post('/memberlist',
+  GroupName)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GET_MEMBERS_OF_A_GROUP,
-      group: name,
+      group: GroupName,
       members: getMembersOfAGroup(data)
     });
   }, ({ response }) => {
@@ -23,7 +28,12 @@ export const getGroupMembers = (name) => axios.post('/memberlist', name)
     });
   });
 
-  // Get General Users Action
+
+/**
+  * @description - Get members of general
+  * @param {nill} null - null
+  * @returns {function} dispatch - dispatch to MemberStore
+*/
 export const generalUsers = () => axios.post('/generallist')
   .then(({ data }) => {
     // console.log('Oh!! you are here', data);
@@ -38,7 +48,12 @@ export const generalUsers = () => axios.post('/generallist')
     });
   });
 
-// Add Member to a group Action
+
+/**
+  * @description - Add user`s to a group
+  * @param {object} userDetails - { groupName, username}
+  * @returns {function} dispatch - dispatch to MemberStore
+*/
 export const addMember = (userDetails) => axios.post('/group/member',
   userDetails)
   .then(({ data }) => {

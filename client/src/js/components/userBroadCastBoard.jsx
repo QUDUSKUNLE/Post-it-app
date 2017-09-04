@@ -14,12 +14,16 @@ import '../../css/icon.css';
 
 
 /**
-  * Represents BroadCastBoard Component.
-*/
+ * @description - renders BroadCastBoard Component
+ * @class BroadCastBoard
+ * @extends {React.Component}
+ */
 export default class BroadCastBoard extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     const userName = JSON.parse(localStorage.getItem('userName'));
@@ -51,14 +55,11 @@ export default class BroadCastBoard extends React.Component {
   componentDidMount() {
     GroupStore.on('GET_GROUPS', this.userGroups);
     MemberStore.on('GENERAL', this.userGroups);
-    // MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.getMembersOnClick);
   }
 
   componentWillUnmount() {
     GroupStore.removeListener('GET_GROUPS', this.userGroups);
     MemberStore.removeListener('GENERAL', this.userGroups);
-    // MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
-    //   this.getMembersOnClick);
   }
 
   getMembersOnClick(i) {
@@ -76,10 +77,10 @@ export default class BroadCastBoard extends React.Component {
     });
   }
   /**
-    * onChange event.
-    * @param {object} e The first number.
-    * @returns {void} bind input values to name.
- */
+   * onChange event.
+   * @param {object} e The first number.
+   * @returns {void} bind input values to name.
+   */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -87,10 +88,10 @@ export default class BroadCastBoard extends React.Component {
   }
 
   /**
-    * onSubmit event.
-    * @param {object} e .
-    * @returns {void} .
-  */
+   * onSubmit event.
+   * @param {object} e .
+   * @returns {void} .
+   */
   onSubmit(e) {
     e.preventDefault();
     const broadcastmessage = {
@@ -123,9 +124,12 @@ export default class BroadCastBoard extends React.Component {
       }
     });
   }
+
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} BroadCastBoard component
+   * @BroadCastBoard
+   */
   render() {
     if (!this.state.loggedIn) {
       return (

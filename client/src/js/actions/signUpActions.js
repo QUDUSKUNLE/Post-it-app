@@ -1,4 +1,8 @@
 import axios from 'axios';
 
-// user sign up Action
+/**
+  * @description - Sign Up Action
+  * @param {object} user - { email, password, username }
+  * @returns {function} Object -
+*/
 export const signupAction = (user) => axios.post('/signup', user);

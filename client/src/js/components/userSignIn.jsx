@@ -9,12 +9,16 @@ import { getAllUsers } from '../utils/utils.js';
 
 
 /**
-  * Represents SignIn Component.
-*/
+ * @description - renders SignIn Component
+ * @class SignIn
+ * @extends {React.Component}
+ */
 export default class SignIn extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -36,10 +40,10 @@ export default class SignIn extends React.Component {
   }
 
   /**
-    *onChange event
-    * @param {string} e The first input
-    * @return {void} updated state of user
-    */
+   * onChange event
+   * @param {object} e - event
+   * @return {void} updated state of user
+  */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -47,17 +51,22 @@ export default class SignIn extends React.Component {
   }
 
   /**
-	  * onSubmit event.
-	  * @param {object} e The first input.
-	  * @returns {void} .
-	*/
+   * @description - this handles SignIn form submission
+   * @param {object} e - event.
+   * @returns {void} .
+  */
   onSubmit(e) {
     e.preventDefault();
     const user = {
       email: this.state.email,
       password: this.state.password
     };
-    // user`s signin Action
+
+    /**
+     * @description This handles SignInAction
+     * @param {object} user .
+     * @returns {void} .
+     */
     signinAction(user)
       .then(({ data }) => {
         this.setState({
@@ -75,9 +84,12 @@ export default class SignIn extends React.Component {
         });
       });
   }
+
   /**
-		* @override
-	*/
+   * @description - this handles Google SignIn Method
+   * @param {object} e - event.
+   * @returns {void} .
+  */
   googleSignIn() {
     firebase.initializeApp(config);
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -96,11 +108,13 @@ export default class SignIn extends React.Component {
         // console.log(user.username);
       });
   }
+
   /**
-		* @override
-	*/
+   * @description - render method, React lifecycle method
+   * @returns {Object} SignIn component
+   * @SignIn
+   */
   render() {
-    // console.log(this.state.userName);
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"

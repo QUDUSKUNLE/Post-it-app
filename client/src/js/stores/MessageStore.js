@@ -6,44 +6,73 @@ import {
   GET_GROUP_MESSAGES, SEND_MESSAGE } from
   '../constants/ActionConstants.js';
 
-
+/**
+ * Holds the storage, listen to actions and update the stores
+ * @class MessageStore
+ */
 class MessageStore extends EventEmitter {
-  constructor(props) {
-    super(props);
+  /**
+   * sets the groups to an empty []
+   * @constructor
+   */
+  constructor() {
+    super();
     this.message = [];
     this.generalMessages = [];
     this.groupMessages = [];
+
     this.allGroupMessages = this.allGroupMessages.bind(this);
     this.allGeneralMessages = this.allGeneralMessages.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
+  /**
+   * @method allGeneralMessages
+   * @return {object} generalMessages - The generalMessages stored in the
+    constructor
+   */
   allGeneralMessages() {
-    return this.general;
+    return this.generalMessages;
   }
 
+  /**
+   * @method allGroupMessages
+   * @return {object} groupMessages - The groupMessages stored in the
+    constructor
+   */
   allGroupMessages() {
-    return this.members;
+    return this.groupMessages;
   }
 
+  /**
+   * @method sendMessages
+   * @return {object} message - The message stored in the
+    constructor
+   */
   sendMessage() {
     return this.message;
   }
 
+  /**
+   * Receives actions and update the stores accordingly
+   * @method handleActions
+   * @param {object} action - Action type and data
+   * @return {null} -
+   */
   handleActions(action) {
     switch (action.type) {
       case GENERAL_MESSAGES:
-        this.general = action.general;
+        this.generalMessages = action.general;
         this.emit('GENERAL_MESSAGES');
         break;
 
       case GET_GROUP_MESSAGES:
-        this.members = action.members;
+        this.generalMessages = action.members;
         this.emit('GET_GROUP_MESSAGES');
         break;
 
       case ADD_MESSAGE:
-        this.members.push(action.members);
+        this.groupMessages.push(action.members);
         this.emit('ADD_MESSAGE');
         break;
 
@@ -57,8 +86,11 @@ class MessageStore extends EventEmitter {
   }
 }
 
+// create a new instance of MessageStore
 const messageStore = new MessageStore();
 
+// register an AppDispatcher and bind it to handleActions method
 AppDispatcher.register(messageStore.handleActions.bind(messageStore));
 
+// export an instance of MessageStore
 export default messageStore;

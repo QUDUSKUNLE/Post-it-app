@@ -5,12 +5,16 @@ import '../../css/icon.css';
 import Footer from './footer.jsx';
 
 /**
-  * Represents PasswordReset component.
-*/
+ * @description - renders ResetPassword Component
+ * @class ResetPassword
+ * @extends {React.Component}
+ */
 export default class ResetPassword extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -32,16 +36,21 @@ export default class ResetPassword extends React.Component {
   }
 
   /**
-	* onSubmit event.
-	* @param {object} e .
-	* @returns {void} .
-	*/
+	 * @description This handles resetPassword form submission
+	 * @param {object} e .
+	 * @returns {void} .
+	 */
   onSubmit(e) {
     e.preventDefault();
     const resetEmail = {
       email: this.state.email,
     };
 
+    /**
+     * @description - This handles reset Password Action
+     * @returns {Object} Object
+     * @MemberOf Reset Password
+     */
     resetPassword(resetEmail)
       .then((res) => {
         const mess = res.data.message;
@@ -58,9 +67,11 @@ export default class ResetPassword extends React.Component {
       });
   }
 
-  /*
-     * @override
-     */
+  /**
+   * @description - render method, React lifecycle method
+   * @returns {Object} ResetPassword component
+   * @ResetPassword
+   */
   render() {
     return (
       <div>

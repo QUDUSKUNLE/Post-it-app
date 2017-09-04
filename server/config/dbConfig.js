@@ -8,6 +8,7 @@ if (env === 'test') {
 }
 
 dotenv.config();
+
 const config = {
   apiKey: process.env[`${checkProcess}apiKey`],
   authDomain: process.env[`${checkProcess}authDomain`],

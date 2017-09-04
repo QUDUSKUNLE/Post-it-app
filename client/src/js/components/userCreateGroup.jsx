@@ -5,18 +5,19 @@ import { createGroup } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
 
 
-// import { GroupStore } from '../stores/GroupStore.js';
-
 /**
- * Represents CreateGroup Component.
+ * @description - renders CreateGroup Component
+ * @class CreateGroup
+ * @extends {React.Component}
  */
 export default class CreateGroup extends React.Component {
   /**
-     * @param {string} props inbuilt props.
-     */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     const loggedIn = (localStorage.getItem('userIn'));
-    // console.log(loggedIn, localStorage.getItem('user'));
     super(props);
     this.state = {
       group: '',
@@ -26,34 +27,41 @@ export default class CreateGroup extends React.Component {
       signOutMessage: '',
       loggedIn
     };
-    // Bind Create Group Input Fields
+
     this.onChange = this.onChange.bind(this);
-    // Bind to Create Group Form
+
     this.onSubmit = this.onSubmit.bind(this);
 
     this.onClick = this.onClick.bind(this);
   }
 
   /**
-	* onChange event.
-	* @param {object} e no parameter.
-	* @returns {void} bind input data to name.
-	*/
+	 * onChange event.
+	 * @param {object} e no parameter.
+	 * @returns {void} bind input data to name.
+	 */
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
   /**
-	* onSubmit event.
-	* @param {object} e .
-	* @returns {void} .
-	*/
+	 * @description This handles CreateGroup form submission
+	 * @param {object} e .
+	 * @returns {void} .
+	 */
   onSubmit(e) {
     e.preventDefault();
     const group = {
       group: this.state.group
     };
-    // createGroup Action
+
+    /**
+     * @description This handles Creategroup Action
+     * @param {object} user .
+     * @returns {void} .
+     */
     createGroup(group)
       .then(({ data }) => {
         if (data.message) {
@@ -72,12 +80,11 @@ export default class CreateGroup extends React.Component {
   }
 
   /**
- * onClick event.
- * @param {void} nil no parameter.
- * @returns {object} response from server.
- */
+   * @description This handles Click event
+   * @param {void} nil no parameter.
+   * @returns {object} response from server.
+   */
   onClick() {
-    // user`s signout Action
     signoutAction()
       .then((resp) => {
         if (resp) {
@@ -98,8 +105,10 @@ export default class CreateGroup extends React.Component {
   }
 
   /**
-		* @override
-	*/
+   * @description - render method, React lifecycle method
+   * @returns {Object} CreateGroup component
+   * @CreateGroup
+   */
   render() {
     if (!this.state.loggedIn) {
       return (
@@ -170,6 +179,7 @@ export default class CreateGroup extends React.Component {
   }
 }
 
+// props validation
 CreateGroup.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired

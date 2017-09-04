@@ -4,12 +4,16 @@ import { signupAction } from '../actions/signUpActions.js';
 import { validatePassword } from '../utils/utils.js';
 
 /**
-  * Represents SignUp Component.
-*/
+ * @description - renders SignUp Component
+ * @class SignUp
+ * @extends {React.Component}
+ */
 export default class SignUp extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -20,28 +24,27 @@ export default class SignUp extends React.Component {
       signupMessage: '',
       errMessage: ''
     };
-    // Bind signUp input fields
     this.onChange = this.onChange.bind(this);
 
-    // Bind signUp form values
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   /**
-  * onChange event.
-  * @param {object} e The first number.
-  * @returns {void} bind input values to name.
-*/
+   * @description - onChange event
+   * @param {object} e - event.
+   * @returns {void} bind input values to name.
+   */
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
   }
+
   /**
-  * onSubmit event
-  * @param {object} e .
-  * @returns {void} .
-*/
+   * @description - this handles SignUp form submission
+   * @param {object} e - event.
+   * @returns {void} .
+  */
   onSubmit(e) {
     e.preventDefault();
     this.setState({
@@ -64,7 +67,11 @@ export default class SignUp extends React.Component {
         password: this.state.password,
         username: this.state.username
       };
-      // signupAction
+      /**
+       * signupAction event
+       * @param {object} user .
+       * @returns {void} .
+       */
       signupAction(user)
         .then(({ data }) => {
           this.setState({
@@ -80,8 +87,10 @@ export default class SignUp extends React.Component {
   }
 
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} SignUp component
+   * @SignUp
+   */
   render() {
     return (
       <div>

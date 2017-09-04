@@ -7,4 +7,5 @@ const config = {
   storageBucket: 'post-it-app.appspot.com',
   messagingSenderId: '465033980113'
 };
+// export default config
 export default config;

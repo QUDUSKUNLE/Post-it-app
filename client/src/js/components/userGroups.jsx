@@ -4,23 +4,27 @@ import { Link } from 'react-router-dom';
 import { generalUsers } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore.js';
 
-
+/**
+ * @description - renders Groups Component
+ * @class Groups
+ * @extends {React.Component}
+ */
 export default class Groups extends React.Component {
   /**
-    * @param {string} props inbuilt props.
-  */
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
   constructor(props) {
     super(props);
     this.state = {
       group: []
     };
-    // this.getMembersOnClick = this.getMembersOnClick.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
-  //
+
   componentDidMount() {
     MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.handleOnClick);
-    // add event listener for the 3 actions
   }
 
   componentWillUnmount() {
@@ -34,8 +38,10 @@ export default class Groups extends React.Component {
   }
 
   /**
-    * @override
-  */
+   * @description - render method, React lifecycle method
+   * @returns {Object} Groups component
+   * @Groups
+   */
   render() {
     return (
       <div>
@@ -57,6 +63,8 @@ export default class Groups extends React.Component {
     );
   }
 }
+
+
 // props validation
 Groups.propTypes = {
   grouplist: PropTypes.array,
