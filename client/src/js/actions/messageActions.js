@@ -1,8 +1,7 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { GET_GROUP_MESSAGE,
-  SEND_MESSAGE,
-  SEND_MESSAGE_ERROR } from '../constants/ActionConstants.js';
+import { GROUP_MESSAGE,
+  SEND_GROUP_MESSAGE } from '../constants/ActionConstants.js';
 
 /**
   * @description - Get groups of a user
@@ -14,31 +13,32 @@ export const sendGroupMessage = (group) => axios.post('/groupName/message',
   .then(({ data }) => {
     // console.log(data.response[2]);
     AppDispatcher.dispatch({
-      type: SEND_MESSAGE,
+      type: SEND_GROUP_MESSAGE,
       message: data.response[2]
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({
-      type: SEND_MESSAGE_ERROR,
+      type: SEND_GROUP_MESSAGE,
       error: response.data.message
     });
   });
 
 /**
-  * @description - Get groups of a user
+  * @description - Get message of a group
   * @param {Object} groupName - { groupName }
-  * @returns {function} dispatch - dispatch to MemberStore
+  * @returns {function} dispatch - dispatch to MessageStore
 */
-export const getgroupMessage = (groupName) => axios.post('/groupName/message',
+export const GroupMessage = (groupName) => axios.post('/groupMessage',
   groupName)
   .then(({ data }) => {
+    console.log(data);
     AppDispatcher.dispatch({
-      type: GET_GROUP_MESSAGE,
-      allGeneralMessage: data
+      type: GROUP_MESSAGE,
+      message: data
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({
-      type: GET_GROUP_MESSAGE,
+      type: GROUP_MESSAGE,
       error: response.data.message
     });
   });

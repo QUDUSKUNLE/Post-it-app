@@ -10,6 +10,7 @@ import { signoutAction } from '../actions/signOutActions.js';
 import { generalUsers, getGroupMembers } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
+import MessageStore from '../stores/MessageStore.js';
 import '../../css/icon.css';
 
 
@@ -33,7 +34,6 @@ export default class BroadCastBoard extends React.Component {
       defaultGroup: 'general',
       groups: [],
       groupName: '',
-      seletedgroup: '',
       userName,
       allUsers: [],
       message: '',
@@ -67,8 +67,11 @@ export default class BroadCastBoard extends React.Component {
       groupName: i[0],
       defaultGroup: i[1].group
     }, () => {
+      console.log(MessageStore.allGroupMessages());
     });
   }
+
+
   userGroups() {
     this.setState({
       groups: GroupStore.allGroups(),
@@ -113,8 +116,7 @@ export default class BroadCastBoard extends React.Component {
       this.setState({
         signupMessage: resp.data.message
       });
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userIn');
+      localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {

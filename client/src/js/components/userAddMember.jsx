@@ -116,8 +116,7 @@ export default class AddMember extends React.Component {
   onClick() {
     signoutAction()
       .then(() => {
-        localStorage.removeItem('userIn');
-        localStorage.removeItem('userName');
+        localStorage.clear();
         this.props.history.push('/');
       })
       .catch((error) => {

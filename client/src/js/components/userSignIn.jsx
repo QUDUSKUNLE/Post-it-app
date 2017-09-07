@@ -4,8 +4,8 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import '../../css/icon.css';
-import { signinAction } from '../actions/signInActions.js';
-import { getAllUsers } from '../utils/utils.js';
+import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
+// import { getAllUsers } from '../utils/utils.js';
 
 
 /**
@@ -71,7 +71,6 @@ export default class SignIn extends React.Component {
       .then(({ data }) => {
         this.setState({
           signinMessage: data.message,
-          groups: getAllUsers(data),
           userName: (Object.values((data.response[1]))[0].userName),
           loggedIn: true
         });
@@ -97,15 +96,19 @@ export default class SignIn extends React.Component {
     provider.addScope('email');
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
-        // const token = result.credential.accessToken;
-        const user = result.user;
-        if (user) {
-          firebase.auth().onAuthStateChanged(() => {
+        signInWithGoogle(result)
+          .then((res) => {
+            console.log(res);
+            this.setState({
+              signinMessage: res.data.message,
+              userName: res.data.response.displayName,
+              loggedIn: true
+            });
+            localStorage.setItem('userName',
+              JSON.stringify(this.state.userName));
+            localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
             this.props.history.push('/broadcastboard');
           });
-        }
-        // console.log(token);
-        // console.log(user.username);
       });
   }
 
@@ -144,7 +147,7 @@ export default class SignIn extends React.Component {
               <div className="row">
                 <button id="google"
                   onClick={this.googleSignIn}>
-									Sign in with Google+
+                  Sign in with Google+
                 </button>
                 <br/><br/>
                 <div className="text-center or"><b>OR</b></div>

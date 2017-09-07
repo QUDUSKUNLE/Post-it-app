@@ -75,7 +75,39 @@ Router.route('/signin')
       .catch((error) => res.status(404).send({ error }));
   });
 
+// ==================== Google Route==============
+Router.route('/google')
+  .post((req, res) => {
+    const token = req.body.credential.idToken;
+    const credentials = firebase.auth.GoogleAuthProvider.credential(token);
+    firebase.auth().signInWithCredential(credentials)
+      .then((user) => Promise.all(
+        [
+          dbConfig.database().ref('users').child(user.uid)
+            .once('value', (snapshot) => {
+              if (snapshot.val() != null) {
+                snapshot.val();
+              }
+            })
+        ]))
+      .then((response) => {
+        if (response === null) {
+          dbConfig.database().ref(`users/${user.uid}`).push({
+            userEmail: user.email,
+            userName: user.displayName,
+            date: (new Date()).toDateString(),
+            time: (new Date()).toTimeString()
+          });
+        }
+        res.status(200).send({
+          response: user,
+          message: 'user`s signed in succesfully'
+        });
+      })
+      .catch((error) => res.status(501).send({ response: error.message }));
+  });
 
+// ===================== Sign Out Route ==============
 Router.route('/signout')
   .post((req, res) => {
     firebase.auth().signOut()
@@ -102,7 +134,6 @@ Router.route('/creategroup')
   .post((req, res) => {
     const groupName = req.body.group;
     const uId = req.user.uid;
-    // console.log(uId, 'userid');
     const group = groupName.toLowerCase();
     return Promise.all(
       [
@@ -277,36 +308,36 @@ Router.route('/groupName/message')
       .catch((error) => res.send({ error }));
   });
 
-// Router.route('/general/message')
+// Get all group Messages
+// Router.route('/groupName')
 //   .post((req, res) => {
-//     const groupName = 'general';
-//     const message = req.body.message;
+//     const groupName = req.body.groupName;
 //     const userId = req.user.uid;
-//     const date = (new Date()).toDateString();
-//     const time = (new Date()).toTimeString();
-//     return Promise.all([
-//       dbConfig.database().ref(`Group/${groupName}`).orderByKey()
-//         .on('child_added', (data) => {
-//           dbConfig.database().ref(`Group`)
-//         })
-//     ])
-//   })
+//     return Promise.all(
+//       [
+//         dbConfig.database().ref(`Group/${userId}`).child(groupName)
+//           .once('value', (snapshot) => {
+//             if (snapshot.val() != null) {
+//               snapshot.val();
+//             }
+//           })
+//       ])
+//       .then((response) => res.status(200).send({ response }))
+//       .catch((error) => res.send({ error }));
+//   });
 
-Router.route('/groupMessage')
+Router.route('/groupName')
   .post((req, res) => {
     const groupName = req.body.group;
     const uID = req.user.uid;
+    // console.log(req.user.uid);
     return Promise.all(
       [
-        dbConfig.database().ref(`Group${uID}`).child(groupName)
-          .once('value', (snapshot) => {
-            if (snapshot.val() != null) {
-              snapshot.val();
-            }
-          })
+        dbConfig.database().ref(`Group/${uID}`).child(groupName)
+          .once('value', (snapshot) => snapshot.val())
       ])
       .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.send({ error }));
+      .catch((error) => res.status(401).send({ error }));
   });
 
 

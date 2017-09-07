@@ -18,7 +18,8 @@ export default class ChatBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      message: '',
+      store: [],
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -58,8 +59,12 @@ export default class ChatBox extends React.Component {
     };
     console.log(newMessage);
     sendGroupMessage(newMessage);
-    const mess = MessageStore.sendMessage();
-    console.log(mess);
+    this.setState({
+      message: '',
+      store: MessageStore.sendMessage()
+    });
+    // const mess = MessageStore.sendMessage();
+    console.log(this.state.store);
   }
 
   /**
