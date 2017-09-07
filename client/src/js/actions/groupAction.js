@@ -29,7 +29,7 @@ export const getGroups = () => axios.post('/getgroups')
 
 /**
   * @description - Get groups of a user
-  * @param {userDetails} userDetails -
+  * @param {Object} userDetails -
   * @returns {function} dispatch - dispatch to GroupStore
 */
 export const createGroup = (userDetails) => axios.post('/creategroup',
