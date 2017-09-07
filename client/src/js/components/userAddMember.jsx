@@ -30,7 +30,7 @@ export default class AddMember extends React.Component {
       general: [],
       group: '',
       member: '',
-      addmemberMess: ''
+      addMemberResponse: ''
     };
     // bind the input values
     this.onChange = this.onChange.bind(this);
@@ -94,7 +94,7 @@ export default class AddMember extends React.Component {
       .then(({ data }) => {
         if (data) {
           this.setState({
-            addmemberMess: data.message
+            addMemberResponse: data.message
           });
         }
         this.props.history.push('/broadcastboard');
@@ -102,7 +102,7 @@ export default class AddMember extends React.Component {
       .catch((err) => {
         if (err) {
           this.setState({
-            addmemberMess: err.response.data.message
+            addMemberResponse: err.response.data.message
           });
         }
       });
@@ -116,7 +116,8 @@ export default class AddMember extends React.Component {
   onClick() {
     signoutAction()
       .then(() => {
-        localStorage.clear();
+        localStorage.removeItem('userIn');
+        localStorage.removeItem('userName');
         this.props.history.push('/');
       })
       .catch((error) => {
@@ -172,7 +173,7 @@ export default class AddMember extends React.Component {
               <div className="row w3-card w3-white">
                 <div>
                   <center>
-                    <span>{this.state.addmemberMess}</span>
+                    <span>{this.state.addMemberResponse}</span>
                   </center>
                 </div>
                 <form className="addmemberform" onSubmit={this.onSubmit}>
