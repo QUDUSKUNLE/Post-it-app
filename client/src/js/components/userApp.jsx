@@ -6,9 +6,8 @@ import SignUp from './userSignUp.jsx';
 /**
  * @description - renders App Component
  * @class App
- * @extends {React.Component}
  */
-export default class App extends React.Component {
+export default class App {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} App component
