@@ -2,8 +2,8 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 
 import {
-  GENERAL_MESSAGE, SEND_GENERAL_MESSAGE,
-  GROUP_MESSAGE, SEND_GROUP_MESSAGE } from
+  GET_GENERAL_MESSAGE, SEND_GENERAL_MESSAGE,
+  GET_GROUP_MESSAGE, SEND_GROUP_MESSAGE } from
   '../constants/ActionConstants.js';
 
 /**
@@ -17,12 +17,11 @@ class MessageStore extends EventEmitter {
    */
   constructor() {
     super();
-    this.message = [];
-    this.generalMessages = [];
-    this.groupMessages = [];
+    this.generalMessage = [];
+    this.groupMessage = [];
 
-    this.allGroupMessages = this.allGroupMessages.bind(this);
-    this.allGeneralMessages = this.allGeneralMessages.bind(this);
+    this.allGroupMessages = this.allGroupMessage.bind(this);
+    this.allGeneralMessage = this.allGeneralMessage.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
@@ -31,8 +30,8 @@ class MessageStore extends EventEmitter {
    * @return {object} generalMessages - The generalMessages stored in the
     constructor
    */
-  allGeneralMessages() {
-    return this.generalMessages;
+  allGeneralMessage() {
+    return this.generalMessage;
   }
 
   /**
@@ -40,8 +39,8 @@ class MessageStore extends EventEmitter {
    * @return {object} groupMessages - The groupMessages stored in the
     constructor
    */
-  allGroupMessages() {
-    return this.groupMessages;
+  allGroupMessage() {
+    return this.groupMessage;
   }
 
   /**
@@ -52,24 +51,24 @@ class MessageStore extends EventEmitter {
    */
   handleActions(action) {
     switch (action.type) {
-      case GENERAL_MESSAGE:
-        this.generalMessages = action.general;
-        this.emit('GENERAL_MESSAGES');
+      case GET_GENERAL_MESSAGE:
+        this.generalMessage = action.message;
+        this.emit('GET_GENERAL_MESSAGE');
         break;
 
       case SEND_GENERAL_MESSAGE:
-        this.generalMessages.push(action.general);
-        this.emit('ADD_GENERAL_MESSAGES');
+        this.generalMessage.push([action.message]);
+        this.emit('SEND_GENERAL_MESSAGE');
         break;
 
-      case GROUP_MESSAGE:
-        this.groupMessages = action.message;
+      case GET_GROUP_MESSAGE:
+        this.groupMessage = action.message;
         this.emit('GET_GROUP_MESSAGE');
         break;
 
       case SEND_GROUP_MESSAGE:
-        this.groupMessages.push(action.message);
-        this.emit('SEND_MESSAGE');
+        this.groupMessage.push([action.message]);
+        this.emit('SEND_GROUP_MESSAGE');
         break;
 
       default:

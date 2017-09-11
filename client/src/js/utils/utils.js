@@ -68,3 +68,32 @@ export const getAllGeneralUsers = (data) => {
   const allRegisteredUsers = arrayOfUsers.map(m => m[0].user);
   return allRegisteredUsers;
 };
+
+/**
+ * @function arrayOfGeneralMessage
+ * @param {Object} data -
+ * @returns {Object} GeneralMessage
+ */
+export const arrayOfGeneralMessage = (data) => {
+  const n = (data.response).map(dataVal => Object.values(dataVal));
+  let index = 0;
+  const GeneralMessage = [];
+  while (index < n[0].length) {
+    const x = Object.values((n[0])[index]);
+    index++;
+    let jIndex = 0;
+    while (jIndex < x.length) {
+      GeneralMessage.push(x[jIndex]);
+      jIndex++;
+    }
+  }
+  return GeneralMessage;
+};
+
+/**
+ * @function arrayOfGroupMessage
+ * @param {Object} data -
+ * @returns {Object} GroupMessage
+ */
+export const getArrayOfGroupMessage = (data) => Object.values(
+  (Object.values((data.response)[0]))[0]).filter(x => typeof x === 'object');

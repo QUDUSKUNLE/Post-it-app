@@ -5,9 +5,10 @@ import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
 // import GroupMembers from './userGroupMembers.jsx';
 import { getGroups } from '../actions/groupAction.js';
-import { sendMessage } from '../actions/appActions.js';
+import { getGeneralMessage,
+  getGroupMessage } from '../actions/messageActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
-import { generalUsers, getGroupMembers } from '../actions/memberActions.js';
+import { getGroupMembers } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
 import MessageStore from '../stores/MessageStore.js';
@@ -27,56 +28,61 @@ export default class BroadCastBoard extends React.Component {
    */
   constructor(props) {
     super(props);
-    const userName = JSON.parse(localStorage.getItem('userName'));
-    const loggedIn = JSON.parse(localStorage.getItem('userIn'));
     this.state = {
-      loggedIn,
+      loggedIn: JSON.parse(localStorage.getItem('userIn')),
       defaultGroup: 'general',
       groups: [],
       groupName: '',
-      userName,
+      messageGroupName: '',
+      userName: JSON.parse(localStorage.getItem('userName')),
       allUsers: [],
-      message: '',
+      allGeneralMessage: [],
+      groupMessages: [],
       signOutMessage: '',
       errSignOut: '',
       broadcastmessage: ''
     };
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
     this.userGroups = this.userGroups.bind(this);
     this.getMembersOnClick = this.getMembersOnClick.bind(this);
   }
   componentWillMount() {
     getGroups();
-    generalUsers();
+    // generalUsers();
+    getGeneralMessage();
   }
 
   componentDidMount() {
     GroupStore.on('GET_GROUPS', this.userGroups);
     MemberStore.on('GENERAL', this.userGroups);
+    // MessageStore.on('GET_GROUP_MESSAGE', this.getMembersOnClick);
   }
 
   componentWillUnmount() {
     GroupStore.removeListener('GET_GROUPS', this.userGroups);
     MemberStore.removeListener('GENERAL', this.userGroups);
+    // MessageStore.removeListener('GET_GROUP_MESSAGE', this.getMembersOnClick);
   }
 
   getMembersOnClick(i) {
-    this.setState({
-      groupName: i[0],
-      defaultGroup: i[1].group
-    }, () => {
-      console.log(MessageStore.allGroupMessages());
-    });
+    this.setState({ groupName: i[0], defaultGroup: i[1].group },
+      () => {
+        const group = this.state.defaultGroup;
+        getGroupMessage({ group });
+        this.setState({
+          allGeneralMessage: MessageStore.allGroupMessage()
+        });
+      });
   }
-
 
   userGroups() {
     this.setState({
       groups: GroupStore.allGroups(),
-      allUsers: MemberStore.allGeneralUsers(),
-      defaultGroup: 'general'
+      // allUsers: MemberStore.allGeneralUsers(),
+      defaultGroup: 'general',
+      allGeneralMessage: MessageStore.allGeneralMessage()
     });
   }
   /**
@@ -91,30 +97,14 @@ export default class BroadCastBoard extends React.Component {
   }
 
   /**
-   * onSubmit event.
-   * @param {object} e .
-   * @returns {void} .
-   */
-  onSubmit(e) {
-    e.preventDefault();
-    const broadcastmessage = {
-      message: this.state.message
-    };
-    sendMessage(broadcastmessage).then((res) => {
-      this.setState({
-        message: res.data.message
-      });
-    });
-  }
-  /**
     * onClick event.
     * @param {void} nill no parameter.
     * @returns {object} response from server.
   */
   onClick() {
-    signoutAction().then((resp) => {
+    signoutAction().then((response) => {
       this.setState({
-        signupMessage: resp.data.message
+        errSignOut: response.data.message
       });
       localStorage.clear();
       this.props.history.push('/');
@@ -191,7 +181,9 @@ export default class BroadCastBoard extends React.Component {
             <Groups
               grouplist={grouplist}
               getMembers={this.getMembersOnClick}/>
-            <ChatBox defaultGroup={this.state.defaultGroup}/>
+            <ChatBox
+              defaultGroup={this.state.defaultGroup}
+              allGeneralMessage={this.state.allGeneralMessage}/>
           </div>
         </div>
       </div>

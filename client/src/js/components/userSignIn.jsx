@@ -1,4 +1,5 @@
 import React from 'react';
+import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
@@ -98,10 +99,9 @@ export default class SignIn extends React.Component {
       .then((result) => {
         signInWithGoogle(result)
           .then((res) => {
-            console.log(res);
             this.setState({
               signinMessage: res.data.message,
-              userName: res.data.response.displayName,
+              userName: res.data.user.displayName,
               loggedIn: true
             });
             localStorage.setItem('userName',
@@ -145,11 +145,10 @@ export default class SignIn extends React.Component {
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
               <div className="row">
-                <button id="google"
-                  onClick={this.googleSignIn}>
-                  Sign in with Google+
-                </button>
-                <br/><br/>
+                <center>
+                  <GoogleButton onClick={this.googleSignIn}/>
+                </center>
+                <br/>
                 <div className="text-center or"><b>OR</b></div>
                 <div>
                   <center>

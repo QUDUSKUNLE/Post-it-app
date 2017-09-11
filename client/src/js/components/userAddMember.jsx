@@ -34,9 +34,7 @@ export default class AddMember extends React.Component {
     };
     // bind the input values
     this.onChange = this.onChange.bind(this);
-    // onSubmit events
     this.onSubmit = this.onSubmit.bind(this);
-    // Sign out
     this.onClick = this.onClick.bind(this);
     this.userGroups = this.userGroups.bind(this);
   }
