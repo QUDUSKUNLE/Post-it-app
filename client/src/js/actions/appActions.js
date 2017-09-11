@@ -3,7 +3,7 @@ import axios from 'axios';
 
 /**
  * @function createGroup
- * @param {object} groupName - { johndoe@example.cpm }
+ * @param {object} groupName - { andela }
  * @returns {object} object
  */
 export const createGroup = (groupName) => axios.post('/creategroup', groupName);
