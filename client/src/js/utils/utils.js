@@ -65,7 +65,7 @@ export const getUserGroups = (data) => {
 export const getAllGeneralUsers = (data) => {
   const arrayOfUsers = Object.values((data.response)[0]).map(x =>
     Object.values(x));
-  const allRegisteredUsers = arrayOfUsers.map(m => m[0].user);
+  const allRegisteredUsers = arrayOfUsers.map((m) => m[0].user);
   return allRegisteredUsers;
 };
 
@@ -74,17 +74,17 @@ export const getAllGeneralUsers = (data) => {
  * @param {Object} data -
  * @returns {Object} GeneralMessage
  */
-export const arrayOfGeneralMessage = data => {
-  const n = (data.response).map(dataVal => Object.values(dataVal));
+export const arrayOfGeneralMessage = (data) => {
+  const n = (data.response).map((dataVal) => Object.values(dataVal));
   let index = 0;
   const GeneralMessage = [];
   while (index < n[0].length) {
     const x = Object.values((n[0])[index]);
-    index++;
+    index += 1;
     let jIndex = 0;
     while (jIndex < x.length) {
       GeneralMessage.push(x[jIndex]);
-      jIndex++;
+      jIndex += 1;
     }
   }
   return GeneralMessage;
@@ -96,4 +96,4 @@ export const arrayOfGeneralMessage = data => {
  * @returns {Object} GroupMessage
  */
 export const getArrayOfGroupMessage = data => Object.values(
-  (Object.values((data.response)[0]))[0]).filter(x => typeof x === 'object');
+  (Object.values((data.response)[0]))[0]).filter((x) => typeof x === 'object');

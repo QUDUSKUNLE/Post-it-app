@@ -302,7 +302,7 @@ describe('PostIt', () => {
   });
 
   it('should allow signed in user`s to send message to general channel',
-    done => {
+    (done) => {
       const message = { message: 'Hello everyone' };
       chai.request(server)
         .post('/sendGeneralMessage')
@@ -352,7 +352,7 @@ describe('PostIt', () => {
 
 
   it('should not allow already signed-out user`s to add member to group',
-    done => {
+    (done) => {
       const groupName = { group: 'andela', member: 'micheal' };
       chai.request(server)
         .post('/group/member')
