@@ -6,3 +6,5 @@ import axios from 'axios';
   * @returns {Object} Object
 */
 export const signinAction = (user) => axios.post('/signin', user);
+
+export const signInWithGoogle = (user) => axios.post('/google', user);

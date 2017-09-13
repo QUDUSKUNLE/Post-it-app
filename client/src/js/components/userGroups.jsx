@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { generalUsers } from '../actions/memberActions.js';
+import { getGeneralMessage } from '../actions/messageActions.js';
 import MemberStore from '../stores/MemberStore.js';
+// import MessageStore from '../stores/MessageStore.js';
 
 /**
  * @description - renders Groups Component
@@ -21,20 +23,28 @@ export default class Groups extends React.Component {
       group: []
     };
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.handleOnClick);
+    // MessageStore.on('GET_GROUP_MESSAGE', this.handleOnClick);
   }
 
   componentWillUnmount() {
     MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
       this.handleOnClick);
+    // MessageStore.removeListener('GET_GROUP_MESSAGE', this.handleOnClick);
   }
 
   handleOnClick() {
     const clickedGroup = MemberStore.allGroupMembers();
     this.props.getMembers(clickedGroup);
+  }
+
+  handleClick() {
+    getGeneralMessage();
+    generalUsers();
   }
 
   /**
@@ -52,8 +62,8 @@ export default class Groups extends React.Component {
                 nav-stacked grouplist">
                 <li key="general"
                   value="general" name="general"
-                  onClick={() => generalUsers()}>
-                  <Link to="#">general</Link></li>
+                  onClick={this.handleClick}><Link to="#">general</Link>
+                </li>
                 {this.props.grouplist}
               </ul>
             </div>

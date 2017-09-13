@@ -5,7 +5,9 @@ import React from 'react';
 */
 export default class Footer extends React.Component {
   /**
-    *@override
+   * @description - render method, React lifecycle method
+   * @returns {Object} Footer component
+   * @Footer
    */
   render() {
     return (

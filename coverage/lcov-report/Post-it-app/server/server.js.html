@@ -106,7 +106,8 @@
 61
 62
 63
-64</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+64
+65</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -124,33 +125,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,6 +141,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -169,7 +170,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">// BASE SET-UP
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// BASE SET-UP
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -187,16 +189,16 @@ const app = express();
 app.use(compression());
 &nbsp;
 function getCurrentUser() {
-    return new Promise((resolve) =&gt; {
-        dbConfig.auth().onAuthStateChanged((user) =&gt; {
-            // console.log(user, 'userrrr');
-            if (user) {
-                // console.log(user, 'user');
-                resolve(user);
-            }
-            resolve({});
-        });
+  return new Promise((resolve) =&gt; {
+    dbConfig.auth().onAuthStateChanged((user) =&gt; {
+      // console.log(user, 'userrrr');
+      if (user) {
+        // console.log(user, 'user');
+        resolve(user);
+      }
+      resolve({});
     });
+  });
 }
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -204,14 +206,14 @@ app.use(bodyParser.json());
 &nbsp;
 // configure app to handle CORS requests
 app.use((req, res, next) =&gt; {
-    getCurrentUser().then((user) =&gt; {
-        req.user = user;
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
-        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
-            'content-type, Authorization');
-        next();
-    });
+  getCurrentUser().then((user) =&gt; {
+    req.user = user;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POSTS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, ' +
+        'content-type, Authorization');
+    next();
+  });
 });
 &nbsp;
 // MIDDLEWARE
@@ -220,9 +222,9 @@ app.use(morgan('dev')); // log all requests to the console
 // Added Webpack
 const compiler = webpack(config);
 app.use(webpackMiddleware(compiler, {
-    hot: true,
-    publicPath: config.output.publicPath,
-    noInfo: true
+  hot: true,
+  publicPath: config.output.publicPath,
+  noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
 &nbsp;
@@ -232,13 +234,14 @@ app.use('/', Router);
 app.listen(port);
 &nbsp;
 &nbsp;
-module.exports = app;</pre></td></tr>
+module.exports = app;
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Sep 04 2017 09:44:15 GMT+0100 (WAT)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Sep 13 2017 15:35:08 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../../prettify.js"></script>

@@ -10,7 +10,7 @@ import {
 /**
   * @description - Get groups of a user
   * @param {null} null -
-  * @returns {function} dispatch - dispatch to MemberStore
+  * @returns {function} dispatch - dispatch to GroupStore
 */
 export const getGroups = () => axios.post('/getgroups')
   .then(({ data }) => {
@@ -29,8 +29,8 @@ export const getGroups = () => axios.post('/getgroups')
 
 /**
   * @description - Get groups of a user
-  * @param {userDetails} userDetails - { groupName }
-  * @returns {function} dispatch - dispatch to MemberStore
+  * @param {Object} userDetails -
+  * @returns {function} dispatch - dispatch to GroupStore
 */
 export const createGroup = (userDetails) => axios.post('/creategroup',
   userDetails)

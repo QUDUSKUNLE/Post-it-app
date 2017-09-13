@@ -66,7 +66,8 @@ export default class CreateGroup extends React.Component {
       .then(({ data }) => {
         if (data.message) {
           this.setState({
-            responseMessage: data.message
+            responseMessage: data.message,
+            group: ''
           });
         }
       })
@@ -88,12 +89,11 @@ export default class CreateGroup extends React.Component {
     signoutAction()
       .then((resp) => {
         if (resp) {
-          localStorage.removeItem('userName');
-          localStorage.removeItem('userIn');
           this.setState({
             signOutMessage: resp.data.message
           });
         }
+        localStorage.clear();
         this.props.history.push('/');
       }).catch((error) => {
         if (error.response) {
