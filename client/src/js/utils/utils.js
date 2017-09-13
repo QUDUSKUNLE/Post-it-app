@@ -74,7 +74,7 @@ export const getAllGeneralUsers = (data) => {
  * @param {Object} data -
  * @returns {Object} GeneralMessage
  */
-export const arrayOfGeneralMessage = (data) => {
+export const arrayOfGeneralMessage = data => {
   const n = (data.response).map(dataVal => Object.values(dataVal));
   let index = 0;
   const GeneralMessage = [];
@@ -95,5 +95,5 @@ export const arrayOfGeneralMessage = (data) => {
  * @param {Object} data -
  * @returns {Object} GroupMessage
  */
-export const getArrayOfGroupMessage = (data) => Object.values(
+export const getArrayOfGroupMessage = data => Object.values(
   (Object.values((data.response)[0]))[0]).filter(x => typeof x === 'object');

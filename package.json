@@ -79,6 +79,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.0.1",
     "express-history-api-fallback": "^2.2.1",
+    "faker": "^4.1.0",
     "flux": "^3.1.2",
     "istanbul": "^0.4.5",
     "jest": "^21.0.1",

@@ -150,7 +150,7 @@ Router.route('/getgroups')
           })
       ])
       .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.status(401).send({ error }));
+      .catch((error) => res.status(500).send({ error }));
   });
 
 // ================== Get all Registered Users ================//
@@ -208,7 +208,7 @@ Router.route('/group/member')
       ])
       .then((response) => res.status(200).send({
         message: 'Member added successfully', response }))
-      .catch((error) => res.status(401).send({ message: 'Not authorized',
+      .catch((error) => res.status(500).send({ message: 'Not authorized',
         error }));
   });
 
@@ -224,15 +224,14 @@ Router.route('/sendGeneralMessage')
         error: 'PERMISSION_DENIED'
       }])
         .then((response) => res.status(400).send({ response }));
-    } else {
-      return Promise.all([
-        dbConfig.database().ref('Group/general/message').child(userId).push({
-          message, date, time }),
-        { message, date, time }
-      ])
-        .then((response) => res.status(200).send({ response }))
-        .catch((error) => res.send({ error }));
     }
+    return Promise.all([
+      dbConfig.database().ref('Group/general/message').child(userId).push({
+        message, date, time }),
+      { message, date, time }
+    ])
+      .then((response) => res.status(200).send({ response }))
+      .catch((error) => res.send({ error }));
   });
 
 // =================getGeneralMessage ==============//
@@ -284,26 +283,7 @@ Router.route('/getGroupMessage')
           .once('value', (snapshot) => snapshot.val())
       ])
       .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.status(401).send({ error }));
-  });
-
-//	===============Delete a user`s Account=============//
-Router.route('/delete')
-  .post((req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(() => {
-        const user = firebase.auth().currentUser;
-        const userId = user.uid;
-        // delete user details from Groups and  user`s membership
-        dbConfig.database().ref('users').child(userId).remove();
-        dbConfig.database().ref('Group').child(userId).remove();
-        user.delete()
-          .then(() => res.send({ message: 'User`s deleted successfully' }))
-          .catch(() => res.status(404).send({ message: 'Network Error' }));
-      })
-      .catch((err) => res.status(404).send({ err }));
+      .catch((error) => res.status(400).send({ error }));
   });
 
 // ===================== Sign Out Route ==============
