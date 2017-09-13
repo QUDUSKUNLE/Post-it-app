@@ -8,8 +8,3 @@ test/testaaaa.js
 .nyc_output
 .DS_Store
 coverage
-
-<button id="google"
-  onClick={this.googleSignIn}>
-  Sign in with Google+
-</button>

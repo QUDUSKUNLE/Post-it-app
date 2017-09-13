@@ -226,7 +226,7 @@ describe('PostIt', () => {
   });
 
   // User's should be able to create grpoup
-  it('should allow registered user`s to create groups', done => {
+  it('should allow registered user`s to create groups', (done) => {
     const group = { group: 'andela', uId: 'annajadsaknjd1' };
     chai.request(server)
       .post('/creategroup')
@@ -240,7 +240,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should allow user to get all groups he belongs to', done => {
+  it('should allow user to get all groups he belongs to', (done) => {
     const uID = { uID: 'annajadsaknjd1' };
     chai.request(server)
       .post('/getgroups')
@@ -253,7 +253,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should get all register user`s onmounting broadcastcomponent', done => {
+  it('should get all register user`s onmounting broadcastcomponent', (done) => {
     chai.request(server)
       .post('/generallist')
       .end((err, res) => {
@@ -263,7 +263,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should get all member of a particular group', done => {
+  it('should get all member of a particular group', (done) => {
     const group = { group: 'andela' };
     chai.request(server)
       .post('/memberlist')
@@ -277,7 +277,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should throw error for no group', done => {
+  it('should throw error for no group', (done) => {
     const group = { group: '' };
     chai.request(server)
       .post('/memberlist')
@@ -288,7 +288,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should all registered user`s to add members to a group', done => {
+  it('should all registered user`s to add members to a group', (done) => {
     const groupName = { group: 'andela', member: 'micheal' };
     chai.request(server)
       .post('/group/member')
@@ -315,7 +315,7 @@ describe('PostIt', () => {
         });
     });
 
-  it('User`s should be able to get all GeneralMessage', done => {
+  it('User`s should be able to get all GeneralMessage', (done) => {
     chai.request(server)
       .post('/getGeneralMessage')
       .end((err, res) => {
@@ -339,7 +339,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('User`s should be able to get all GeneralMessage', done => {
+  it('User`s should be able to get all GeneralMessage', (done) => {
     chai.request(server)
       .post('/getGeneralMessage')
       .end((err, res) => {
@@ -378,7 +378,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should not allow user access groups when signed out', done => {
+  it('should not allow user access groups when signed out', (done) => {
     const uID = { uID: 'annajadsaknjd1' };
     chai.request(server)
       .post('/getgroups')
