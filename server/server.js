@@ -17,9 +17,7 @@ app.use(compression());
 
 const getCurrentUser = () => new Promise((resolve) => {
   dbConfig.auth().onAuthStateChanged((user) => {
-      // console.log(user, 'userrrr');
     if (user) {
-      // console.log(user, 'user');
       resolve(user);
     }
     resolve({});
@@ -42,7 +40,8 @@ app.use((req, res, next) => {
 });
 
 // MIDDLEWARE
-app.use(morgan('dev')); // log all requests to the console
+// log all requests to the console
+app.use(morgan('dev'));
 
 // Added Webpack
 const compiler = webpack(config);
@@ -57,6 +56,5 @@ app.use('/', Router);
 
 // App listening port
 app.listen(port);
-
 
 module.exports = app;
