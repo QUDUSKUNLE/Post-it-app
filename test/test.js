@@ -12,12 +12,12 @@ chai.use(chaiHttp);
 describe('PostIt', () => {
   it('allows anyone to visit its site', (done) => {
     chai.request(server)
-          .get('http:127.0.0.1:8080')
-          .end((err, res) => {
-            res.should.have.status(200);
-            assert.equal(200, res.statusCode);
-            done();
-          });
+      .get('http:127.0.0.1:8080')
+      .end((err, res) => {
+        res.should.have.status(200);
+        assert.equal(200, res.statusCode);
+        done();
+      });
   });
 
     // Sign Up Route
@@ -34,7 +34,7 @@ describe('PostIt', () => {
       .end((err, res) => {
         res.should.have.status(200);
         assert.equal('Registration successful and verification ' +
-              'email sent to your email', res.body.message);
+          'email sent to your email', res.body.message);
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         res.body.should.be.a('object');
@@ -52,16 +52,16 @@ describe('PostIt', () => {
       username: 'Joke'
     };
     chai.request(server)
-      .post('/signup')
-      .send(newUser)
-      .end((err, res) => {
-        assert.equal('The email address is already in use by another account.',
-              res.body.error.message);
-        assert.equal('auth/email-already-in-use', res.body.error.code);
-        res.should.have.status(502);
-        res.body.should.be.a('object');
-        done();
-      });
+    .post('/signup')
+    .send(newUser)
+    .end((err, res) => {
+      assert.equal('The email address is already in use by another account.',
+        res.body.error.message);
+      assert.equal('auth/email-already-in-use', res.body.error.code);
+      res.should.have.status(502);
+      res.body.should.be.a('object');
+      done();
+    });
   });
 
   it('should flag error for bad input email', (done) => {
@@ -76,7 +76,7 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         assert.equal('The email address is badly formatted.',
-              res.body.error.message);
+          res.body.error.message);
         assert.equal('auth/invalid-email', res.body.error.code);
         res.should.have.status(502);
         res.body.should.be.a('object');
@@ -96,7 +96,7 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         assert.equal('The password must be 6 characters long or more.',
-              res.body.error.message);
+          res.body.error.message);
         assert.equal('auth/weak-password', res.body.error.code);
         res.should.have.status(502);
         res.body.should.be.a('object');
@@ -137,7 +137,7 @@ describe('PostIt', () => {
         assert.equal('auth/wrong-password', res.body.error.code);
         res.body.should.be.a('object');
         assert.equal('The password is invalid or the user does ' +
-              'not have a password.', res.body.error.message);
+          'not have a password.', res.body.error.message);
         done();
       });
   });
@@ -174,7 +174,7 @@ describe('PostIt', () => {
         res.body.should.be.a('object');
         expect(res.body.error.code).to.equal('auth/invalid-email');
         expect(res.body.error.message).to.equal('The email address is badly' +
-              ' formatted.');
+          ' formatted.');
         done();
       });
   });
@@ -200,7 +200,7 @@ describe('PostIt', () => {
       .end((err, res) => {
         assert.equal(404, res.statusCode);
         assert.equal('The email address is badly formatted.',
-              res.body.error.message);
+          res.body.error.message);
         expect(res.body).to.have.property('error');
         res.body.should.be.a('object');
         done();
@@ -242,14 +242,14 @@ describe('PostIt', () => {
   it('should allow user to get all groups he belongs to', (done) => {
     const uID = { uID: 'annajadsaknjd1' };
     chai.request(server)
-    .post('/getgroups')
-    .send(uID)
-    .end((err, res) => {
-      assert.equal('object', typeof(res.body.response));
-      assert.equal(200, res.statusCode);
-      expect(res.body).to.have.property('response');
-      done();
-    });
+      .post('/getgroups')
+      .send(uID)
+      .end((err, res) => {
+        assert.equal('object', typeof(res.body.response));
+        assert.equal(200, res.statusCode);
+        expect(res.body).to.have.property('response');
+        done();
+      });
   });
 
   it('should get all register user`s onmounting broadcastcomponent', (done) => {
