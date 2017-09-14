@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
@@ -106,6 +107,7 @@ export default class BroadCastBoard extends React.Component {
       this.setState({
         errSignOut: response.data.message
       });
+      toastr.success(this.state.errSignOut);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
@@ -114,6 +116,7 @@ export default class BroadCastBoard extends React.Component {
           errSignOut: error.response.data
         });
       }
+      toastr.error(this.state.errSignOut);
     });
   }
 

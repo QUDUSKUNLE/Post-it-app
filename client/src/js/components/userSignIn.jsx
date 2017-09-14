@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
+import toastr from 'toastr';
 import '../../css/icon.css';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
@@ -32,11 +33,7 @@ export default class SignIn extends React.Component {
     };
     // Bind input field values
     this.onChange = this.onChange.bind(this);
-
-    // Bind Form values
     this.onSubmit = this.onSubmit.bind(this);
-
-    // Bind Google form Action
     this.googleSignIn = this.googleSignIn.bind(this);
   }
 
@@ -75,14 +72,22 @@ export default class SignIn extends React.Component {
           userName: (Object.values((data.response[1]))[0].userName),
           loggedIn: true
         });
+        toastr.success(this.state.signinMessage);
         localStorage.setItem('userName', JSON.stringify(this.state.userName));
         localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
         this.props.history.push('/broadcastboard');
-      }, () => {
-        this.setState({
-          signinMessage: 'User`s not Found'
-        });
+      }, (error) => {
+        if (error.response) {
+          this.setState({
+            signinMessage: error.response.data.error.message
+          });
+        }
+        toastr.error(this.state.signinMessage);
       });
+    this.setState({
+      email: '',
+      password: ''
+    });
   }
 
   /**
@@ -104,6 +109,7 @@ export default class SignIn extends React.Component {
               userName: res.data.user.displayName,
               loggedIn: true
             });
+            toastr.success(this.state.signinMessage);
             localStorage.setItem('userName',
               JSON.stringify(this.state.userName));
             localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
@@ -150,11 +156,6 @@ export default class SignIn extends React.Component {
                 </center>
                 <br/>
                 <div className="text-center or"><b>OR</b></div>
-                <div>
-                  <center>
-                    <span>{this.state.signinMessage}</span>
-                  </center>
-                </div>
                 <form onSubmit={this.onSubmit}
                   className="w3-card w3-white" id="signinForm">
                   <div className="form-group">

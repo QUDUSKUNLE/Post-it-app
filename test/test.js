@@ -9,7 +9,6 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-
 describe('PostIt', () => {
   it('allows anyone to visit its site', (done) => {
     chai.request(server)
@@ -21,7 +20,7 @@ describe('PostIt', () => {
       });
   });
 
-  // Sign Up Route
+    // Sign Up Route
   it('should allow new user`s to signup', (done) => {
     const newUser = {
       email: faker.internet.email(),
@@ -35,7 +34,7 @@ describe('PostIt', () => {
       .end((err, res) => {
         res.should.have.status(200);
         assert.equal('Registration successful and verification ' +
-        'email sent to your email', res.body.message);
+          'email sent to your email', res.body.message);
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         res.body.should.be.a('object');
@@ -53,16 +52,16 @@ describe('PostIt', () => {
       username: 'Joke'
     };
     chai.request(server)
-      .post('/signup')
-      .send(newUser)
-      .end((err, res) => {
-        assert.equal('The email address is already in use by another account.',
-          res.body.error.message);
-        assert.equal('auth/email-already-in-use', res.body.error.code);
-        res.should.have.status(502);
-        res.body.should.be.a('object');
-        done();
-      });
+    .post('/signup')
+    .send(newUser)
+    .end((err, res) => {
+      assert.equal('The email address is already in use by another account.',
+        res.body.error.message);
+      assert.equal('auth/email-already-in-use', res.body.error.code);
+      res.should.have.status(502);
+      res.body.should.be.a('object');
+      done();
+    });
   });
 
   it('should flag error for bad input email', (done) => {
@@ -106,7 +105,7 @@ describe('PostIt', () => {
   });
 
 
-  // Sign In Route
+    // Sign In Route
   it('should allow a registered user sign in successfully', (done) => {
     const registeredUser = {
       email: 'kawthar@gmail.com',
@@ -157,7 +156,7 @@ describe('PostIt', () => {
         expect(res.body).to.not.have.property('uID');
         expect(res.body.error.code).to.equal('auth/user-not-found');
         expect(res.body.error.message).to.equal('There is no user record ' +
-        'corresponding to this identifier. The user may have been deleted.');
+          'corresponding to this identifier. The user may have been deleted.');
         done();
       });
   });
@@ -175,12 +174,12 @@ describe('PostIt', () => {
         res.body.should.be.a('object');
         expect(res.body.error.code).to.equal('auth/invalid-email');
         expect(res.body.error.message).to.equal('The email address is badly' +
-        ' formatted.');
+          ' formatted.');
         done();
       });
   });
 
-  // Password Reset Route
+    // Password Reset Route
   it('should allow registered user`s to reset their passwords', (done) => {
     const userEmail = { email: 'kawthar@gmail.com' };
     chai.request(server)
@@ -217,15 +216,15 @@ describe('PostIt', () => {
         assert.equal(404, res.statusCode);
         expect(typeof res.body.message).not.be.a('number');
         assert.equal('There is no user record corresponding ' +
-        'to this identifier. The user may have been deleted.',
-        res.body.error.message);
+          'to this identifier. The user may have been deleted.',
+          res.body.error.message);
         expect(res.body.error).to.have.property('message');
         res.body.should.be.a('object');
         done();
       });
   });
 
-  // User's should be able to create grpoup
+    // User's should be able to create grpoup
   it('should allow registered user`s to create groups', (done) => {
     const group = { group: 'andela', uId: 'annajadsaknjd1' };
     chai.request(server)
@@ -326,7 +325,7 @@ describe('PostIt', () => {
       });
   });
 
-  // Sign Out Route
+    // Sign Out Route
   it('should allow a user sign out successfully', (done) => {
     chai.request(server)
       .post('/signout')

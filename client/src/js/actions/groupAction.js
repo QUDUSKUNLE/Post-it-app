@@ -4,14 +4,15 @@ import { getUserGroups } from '../utils/utils.js';
 
 import {
   GET_GROUPS,
-  CREATE_NEW_GROUP } from '../constants/ActionConstants.js';
+  CREATE_NEW_GROUP
+} from '../constants/ActionConstants.js';
 
 
 /**
-  * @description - Get groups of a user
-  * @param {null} null -
-  * @returns {function} dispatch - dispatch to GroupStore
-*/
+ * @description - Get groups of a user
+ * @param {null} null -
+ * @returns {function} dispatch - dispatch to GroupStore
+ */
 export const getGroups = () => axios.post('/getgroups')
   .then(({ data }) => {
     // console.log(data, 'is this the data', getUserGroups(data));
@@ -28,20 +29,20 @@ export const getGroups = () => axios.post('/getgroups')
 
 
 /**
-  * @description - Get groups of a user
-  * @param {Object} userDetails -
-  * @returns {function} dispatch - dispatch to GroupStore
-*/
+ * @description - Get groups of a user
+ * @param {Object} userDetails -
+ * @returns {function} dispatch - dispatch to GroupStore
+ */
 export const createGroup = (userDetails) => axios.post('/creategroup',
   userDetails)
-  .the(({ data }) => {
-    AppDispatcher.dispatch({
-      type: CREATE_NEW_GROUP,
-      group: data.message
+    .the(({ data }) => {
+      AppDispatcher.dispatch({
+        type: CREATE_NEW_GROUP,
+        group: data.message
+      });
+    }, ({ response }) => {
+      AppDispatcher.dispatch({
+        type: CREATE_NEW_GROUP,
+        error: response.data.message
+      });
     });
-  }, ({ response }) => {
-    AppDispatcher.dispatch({
-      type: CREATE_NEW_GROUP,
-      error: response.data.message
-    });
-  });

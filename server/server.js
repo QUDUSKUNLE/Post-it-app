@@ -15,18 +15,14 @@ const port = process.env.PORT || 8080;
 const app = express();
 app.use(compression());
 
-function getCurrentUser() {
-  return new Promise((resolve) => {
-    dbConfig.auth().onAuthStateChanged((user) => {
-      // console.log(user, 'userrrr');
-      if (user) {
-        // console.log(user, 'user');
-        resolve(user);
-      }
-      resolve({});
-    });
+const getCurrentUser = () => new Promise((resolve) => {
+  dbConfig.auth().onAuthStateChanged((user) => {
+    if (user) {
+      resolve(user);
+    }
+    resolve({});
   });
-}
+});
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -44,7 +40,8 @@ app.use((req, res, next) => {
 });
 
 // MIDDLEWARE
-app.use(morgan('dev')); // log all requests to the console
+// log all requests to the console
+app.use(morgan('dev'));
 
 // Added Webpack
 const compiler = webpack(config);
@@ -59,6 +56,5 @@ app.use('/', Router);
 
 // App listening port
 app.listen(port);
-
 
 module.exports = app;

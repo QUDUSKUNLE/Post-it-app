@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
 import '../../css/icon.css';
-import Footer from './footer.jsx';
+import toastr from 'toastr';
 
 /**
  * @description - renders ResetPassword Component
@@ -19,7 +19,7 @@ export default class ResetPassword extends React.Component {
     super(props);
     this.state = {
       email: '',
-      respons: ''
+      response: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -55,16 +55,21 @@ export default class ResetPassword extends React.Component {
       .then((res) => {
         const mess = res.data.message;
         this.setState({
-          respons: mess
+          response: mess
         });
+        toastr.success(this.state.response);
       }).catch((err) => {
         if (err.response) {
-          const er = `User's Details ${err.response.data.message}.`;
+          const error = `User's Details ${err.response.data.message}.`;
           this.setState({
-            respons: er
+            response: error
           });
         }
+        toastr.error(this.state.response);
       });
+    this.setState({
+      email: ''
+    });
   }
 
   /**
@@ -106,9 +111,6 @@ export default class ResetPassword extends React.Component {
           <div className="container resetform">
             <div className="row">
               <div className="col-md-6 col-md-offset-3 w3-card w3-white">
-                <center>
-                  <span>{this.state.respons}</span>
-                </center>
                 <form onSubmit={this.onSubmit} id="resetform">
                   <div className="form-group">
                     <label htmlFor="email">
@@ -121,14 +123,13 @@ export default class ResetPassword extends React.Component {
                       name="email" required />
                   </div>
                   <button type="submit"
-                    className="signinformbtn">Send password reset email
+                    className="signinformbtn">Send
                   </button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }

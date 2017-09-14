@@ -58,8 +58,8 @@ export default class Groups extends React.Component {
         <div className="col-md-3">
           <div className="row chats-row">
             <div className="col-md-12">
-              <ul className="col-md-10 col-md-offset-1 nav nav-pills
-                nav-stacked grouplist">
+              <ul
+              className="col-md-10 col-md-offset-1 nav nav-pills nav-stacked grouplist">
                 <li key="general"
                   value="general" name="general"
                   onClick={this.handleClick}><Link to="#">general</Link>

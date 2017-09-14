@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -35,7 +36,7 @@ export default class AddMember extends React.Component {
     // bind the input values
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
     this.userGroups = this.userGroups.bind(this);
   }
 
@@ -95,6 +96,7 @@ export default class AddMember extends React.Component {
             addMemberResponse: data.message
           });
         }
+        toastr.success(this.state.addMemberResponse);
         this.props.history.push('/broadcastboard');
       })
       .catch((err) => {
@@ -103,24 +105,26 @@ export default class AddMember extends React.Component {
             addMemberResponse: err.response.data.message
           });
         }
+        toastr.error(this.state.addMemberResponse);
       });
   }
 
   /**
-   * onClick event.
-   * @param {void} nil no parameter.
+   * @description handleSignOutEvent.
+   * @param {void} null no parameter.
    * @returns {object} response from server.
    */
-  onClick() {
+  handleSignOutEvent() {
     signoutAction()
-      .then(() => {
+      .then(({ data }) => {
+        toastr.success(data.response);
         localStorage.removeItem('userIn');
         localStorage.removeItem('userName');
         this.props.history.push('/');
       })
       .catch((error) => {
         if (error.response) {
-          // console.log(error.response.data);
+          toastr.error(error.response.data);
         }
       });
   }
@@ -160,7 +164,9 @@ export default class AddMember extends React.Component {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/broadcastboard">Chat Room</Link></li>
                 <li className="active"><Link to="/member">AddMember</Link></li>
-                <li onClick={this.onClick}><Link to="/">Sign Out</Link></li>
+                <li onClick={this.handleSignOutEvent}>
+                  <Link to="/">Sign Out</Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -169,11 +175,6 @@ export default class AddMember extends React.Component {
           <div className="row">
             <div className="col-md-offset-3 col-md-6">
               <div className="row w3-card w3-white">
-                <div>
-                  <center>
-                    <span>{this.state.addMemberResponse}</span>
-                  </center>
-                </div>
                 <form className="addmemberform" onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <label htmlFor="groupname">Group Name</label>

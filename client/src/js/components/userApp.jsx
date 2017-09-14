@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './navBar.jsx';
 import SignUp from './userSignUp.jsx';
-// import Home from './Home.jsx';
+
 
 /**
  * @description - renders App Component
