@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -95,6 +96,7 @@ export default class AddMember extends React.Component {
             addMemberResponse: data.message
           });
         }
+        toastr.success(this.state.addMemberResponse);
         this.props.history.push('/broadcastboard');
       })
       .catch((err) => {
@@ -103,6 +105,7 @@ export default class AddMember extends React.Component {
             addMemberResponse: err.response.data.message
           });
         }
+        toastr.error(this.state.addMemberResponse);
       });
   }
 
@@ -113,14 +116,15 @@ export default class AddMember extends React.Component {
    */
   onClick() {
     signoutAction()
-      .then(() => {
+      .then(({ data }) => {
+        toastr.success(data.response);
         localStorage.removeItem('userIn');
         localStorage.removeItem('userName');
         this.props.history.push('/');
       })
       .catch((error) => {
         if (error.response) {
-          // console.log(error.response.data);
+          toastr.error(error.response.data);
         }
       });
   }
@@ -169,11 +173,6 @@ export default class AddMember extends React.Component {
           <div className="row">
             <div className="col-md-offset-3 col-md-6">
               <div className="row w3-card w3-white">
-                <div>
-                  <center>
-                    <span>{this.state.addMemberResponse}</span>
-                  </center>
-                </div>
                 <form className="addmemberform" onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <label htmlFor="groupname">Group Name</label>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { signupAction } from '../actions/signUpActions.js';
 import { validatePassword } from '../utils/utils.js';
+import toastr from 'toastr';
 
 /**
  * @description - renders SignUp Component
@@ -57,10 +58,12 @@ export default class SignUp extends React.Component {
       this.setState({
         errMessage: 'Password is too low, at least 8 chaaracters'
       });
+      toastr.error(this.state.errMessage);
     } else if (this.state.password !== this.state.conf_password) {
       this.setState({
         errMessage: 'Password do not match'
       });
+      toastr.error(this.state.errMessage);
     } else {
       const user = {
         email: this.state.email,
@@ -77,13 +80,24 @@ export default class SignUp extends React.Component {
           this.setState({
             signupMessage: data.message
           });
+          toastr.success(this.state.signupMessage);
           this.props.history.push('/signin');
-        }, () => {
-          this.setState({
-            signupMessage: 'Error sign up user`s',
-          });
+        })
+        .catch((err) => {
+          if (err.response) {
+            this.setState({
+              signupMessage: err.response.data.error.message
+            });
+            toastr.error(this.state.signupMessage);
+          }
         });
     }
+    this.setState({
+      email: '',
+      password: '',
+      conf_password: '',
+      username: ''
+    });
   }
 
   /**
@@ -99,11 +113,6 @@ export default class SignUp extends React.Component {
             <div className="col-md-12 w3-card w3-white" id="signupform">
               <h4>Create an account</h4>
               <br />
-              <div>
-                <center>
-                  <span>{this.state.signupMessage}</span>
-                </center>
-              </div>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email

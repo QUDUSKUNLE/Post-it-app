@@ -15,18 +15,16 @@ const port = process.env.PORT || 8080;
 const app = express();
 app.use(compression());
 
-function getCurrentUser() {
-  return new Promise((resolve) => {
-    dbConfig.auth().onAuthStateChanged((user) => {
+const getCurrentUser = () => new Promise((resolve) => {
+  dbConfig.auth().onAuthStateChanged((user) => {
       // console.log(user, 'userrrr');
-      if (user) {
-        // console.log(user, 'user');
-        resolve(user);
-      }
-      resolve({});
-    });
+    if (user) {
+      // console.log(user, 'user');
+      resolve(user);
+    }
+    resolve({});
   });
-}
+});
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

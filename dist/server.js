@@ -48,7 +48,7 @@ var port = process.env.PORT || 8080;
 var app = (0, _express2.default)();
 app.use((0, _compression2.default)());
 
-function getCurrentUser() {
+var getCurrentUser = function getCurrentUser() {
   return new Promise(function (resolve) {
     _dbConfig2.default.auth().onAuthStateChanged(function (user) {
       // console.log(user, 'userrrr');
@@ -59,7 +59,7 @@ function getCurrentUser() {
       resolve({});
     });
   });
-}
+};
 // CONFIG APP
 app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());

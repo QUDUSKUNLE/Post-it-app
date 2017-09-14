@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import { createGroup } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -70,6 +71,7 @@ export default class CreateGroup extends React.Component {
             group: ''
           });
         }
+        toastr.success(this.state.responseMessage);
       })
       .catch((error) => {
         if (error) {
@@ -77,6 +79,7 @@ export default class CreateGroup extends React.Component {
             responseMessage: error.response.data.message
           });
         }
+        toastr.error(this.state.responseMessage);
       });
   }
 
@@ -93,6 +96,7 @@ export default class CreateGroup extends React.Component {
             signOutMessage: resp.data.message
           });
         }
+        toastr.success(this.state.signOutMessage);
         localStorage.clear();
         this.props.history.push('/');
       }).catch((error) => {
@@ -101,6 +105,7 @@ export default class CreateGroup extends React.Component {
             signOutMessage: error.response.data.message
           });
         }
+        toastr.error(this.state.signOutMessage);
       });
   }
 
@@ -148,17 +153,7 @@ export default class CreateGroup extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-offset-3 col-md-6 creategroupform">
-              <div>
-                <center>
-                  <span>{this.state.signOutMessage}</span>
-                </center>
-              </div>
               <div className="row w3-card w3-white">
-                <div>
-                  <center>
-                    <span>{this.state.responseMessage}</span>
-                  </center>
-                </div>
                 <form id="creategroupform" onSubmit={this.onSubmit}>
                   <div className="form-group">
                     <label htmlFor="groupname">Group Name</label>

@@ -9,19 +9,18 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-
 describe('PostIt', () => {
   it('allows anyone to visit its site', (done) => {
     chai.request(server)
-      .get('http:127.0.0.1:8080')
-      .end((err, res) => {
-        res.should.have.status(200);
-        assert.equal(200, res.statusCode);
-        done();
-      });
+          .get('http:127.0.0.1:8080')
+          .end((err, res) => {
+            res.should.have.status(200);
+            assert.equal(200, res.statusCode);
+            done();
+          });
   });
 
-  // Sign Up Route
+    // Sign Up Route
   it('should allow new user`s to signup', (done) => {
     const newUser = {
       email: faker.internet.email(),
@@ -35,7 +34,7 @@ describe('PostIt', () => {
       .end((err, res) => {
         res.should.have.status(200);
         assert.equal('Registration successful and verification ' +
-        'email sent to your email', res.body.message);
+              'email sent to your email', res.body.message);
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         res.body.should.be.a('object');
@@ -57,7 +56,7 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         assert.equal('The email address is already in use by another account.',
-          res.body.error.message);
+              res.body.error.message);
         assert.equal('auth/email-already-in-use', res.body.error.code);
         res.should.have.status(502);
         res.body.should.be.a('object');
@@ -77,7 +76,7 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         assert.equal('The email address is badly formatted.',
-          res.body.error.message);
+              res.body.error.message);
         assert.equal('auth/invalid-email', res.body.error.code);
         res.should.have.status(502);
         res.body.should.be.a('object');
@@ -97,7 +96,7 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         assert.equal('The password must be 6 characters long or more.',
-          res.body.error.message);
+              res.body.error.message);
         assert.equal('auth/weak-password', res.body.error.code);
         res.should.have.status(502);
         res.body.should.be.a('object');
@@ -106,7 +105,7 @@ describe('PostIt', () => {
   });
 
 
-  // Sign In Route
+    // Sign In Route
   it('should allow a registered user sign in successfully', (done) => {
     const registeredUser = {
       email: 'kawthar@gmail.com',
@@ -138,7 +137,7 @@ describe('PostIt', () => {
         assert.equal('auth/wrong-password', res.body.error.code);
         res.body.should.be.a('object');
         assert.equal('The password is invalid or the user does ' +
-          'not have a password.', res.body.error.message);
+              'not have a password.', res.body.error.message);
         done();
       });
   });
@@ -157,7 +156,7 @@ describe('PostIt', () => {
         expect(res.body).to.not.have.property('uID');
         expect(res.body.error.code).to.equal('auth/user-not-found');
         expect(res.body.error.message).to.equal('There is no user record ' +
-        'corresponding to this identifier. The user may have been deleted.');
+          'corresponding to this identifier. The user may have been deleted.');
         done();
       });
   });
@@ -175,12 +174,12 @@ describe('PostIt', () => {
         res.body.should.be.a('object');
         expect(res.body.error.code).to.equal('auth/invalid-email');
         expect(res.body.error.message).to.equal('The email address is badly' +
-        ' formatted.');
+              ' formatted.');
         done();
       });
   });
 
-  // Password Reset Route
+    // Password Reset Route
   it('should allow registered user`s to reset their passwords', (done) => {
     const userEmail = { email: 'kawthar@gmail.com' };
     chai.request(server)
@@ -201,7 +200,7 @@ describe('PostIt', () => {
       .end((err, res) => {
         assert.equal(404, res.statusCode);
         assert.equal('The email address is badly formatted.',
-          res.body.error.message);
+              res.body.error.message);
         expect(res.body).to.have.property('error');
         res.body.should.be.a('object');
         done();
@@ -217,15 +216,15 @@ describe('PostIt', () => {
         assert.equal(404, res.statusCode);
         expect(typeof res.body.message).not.be.a('number');
         assert.equal('There is no user record corresponding ' +
-        'to this identifier. The user may have been deleted.',
-        res.body.error.message);
+          'to this identifier. The user may have been deleted.',
+          res.body.error.message);
         expect(res.body.error).to.have.property('message');
         res.body.should.be.a('object');
         done();
       });
   });
 
-  // User's should be able to create grpoup
+    // User's should be able to create grpoup
   it('should allow registered user`s to create groups', (done) => {
     const group = { group: 'andela', uId: 'annajadsaknjd1' };
     chai.request(server)
@@ -243,14 +242,14 @@ describe('PostIt', () => {
   it('should allow user to get all groups he belongs to', (done) => {
     const uID = { uID: 'annajadsaknjd1' };
     chai.request(server)
-      .post('/getgroups')
-      .send(uID)
-      .end((err, res) => {
-        assert.equal('object', typeof (res.body.response));
-        assert.equal(200, res.statusCode);
-        expect(res.body).to.have.property('response');
-        done();
-      });
+    .post('/getgroups')
+    .send(uID)
+    .end((err, res) => {
+      assert.equal('object', typeof(res.body.response));
+      assert.equal(200, res.statusCode);
+      expect(res.body).to.have.property('response');
+      done();
+    });
   });
 
   it('should get all register user`s onmounting broadcastcomponent', (done) => {
@@ -258,7 +257,7 @@ describe('PostIt', () => {
       .post('/generallist')
       .end((err, res) => {
         assert.equal(200, res.statusCode);
-        assert.equal('object', typeof (res.body.response));
+        assert.equal('object', typeof(res.body.response));
         done();
       });
   });
@@ -270,7 +269,7 @@ describe('PostIt', () => {
       .send(group)
       .end((err, res) => {
         assert.equal(200, res.statusCode);
-        assert.equal('object', typeof (res.body.response));
+        assert.equal('object', typeof(res.body.response));
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         done();
@@ -326,7 +325,7 @@ describe('PostIt', () => {
       });
   });
 
-  // Sign Out Route
+    // Sign Out Route
   it('should allow a user sign out successfully', (done) => {
     chai.request(server)
       .post('/signout')
