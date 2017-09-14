@@ -245,7 +245,7 @@ describe('PostIt', () => {
       .post('/getgroups')
       .send(uID)
       .end((err, res) => {
-        assert.equal('object', typeof(res.body.response));
+        assert.equal('object', typeof (res.body.response));
         assert.equal(200, res.statusCode);
         expect(res.body).to.have.property('response');
         done();
@@ -257,7 +257,7 @@ describe('PostIt', () => {
       .post('/generallist')
       .end((err, res) => {
         assert.equal(200, res.statusCode);
-        assert.equal('object', typeof(res.body.response));
+        assert.equal('object', typeof (res.body.response));
         done();
       });
   });
@@ -269,7 +269,7 @@ describe('PostIt', () => {
       .send(group)
       .end((err, res) => {
         assert.equal(200, res.statusCode);
-        assert.equal('object', typeof(res.body.response));
+        assert.equal('object', typeof (res.body.response));
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         done();
