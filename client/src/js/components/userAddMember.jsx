@@ -36,7 +36,7 @@ export default class AddMember extends React.Component {
     // bind the input values
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
     this.userGroups = this.userGroups.bind(this);
   }
 
@@ -110,11 +110,11 @@ export default class AddMember extends React.Component {
   }
 
   /**
-   * onClick event.
-   * @param {void} nil no parameter.
+   * @description handleSignOutEvent.
+   * @param {void} null no parameter.
    * @returns {object} response from server.
    */
-  onClick() {
+  handleSignOutEvent() {
     signoutAction()
       .then(({ data }) => {
         toastr.success(data.response);
@@ -164,7 +164,9 @@ export default class AddMember extends React.Component {
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/broadcastboard">Chat Room</Link></li>
                 <li className="active"><Link to="/member">AddMember</Link></li>
-                <li onClick={this.onClick}><Link to="/">Sign Out</Link></li>
+                <li onClick={this.handleSignOutEvent}>
+                  <Link to="/">Sign Out</Link>
+                </li>
               </ul>
             </div>
           </div>
