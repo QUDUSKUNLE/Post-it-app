@@ -33,7 +33,7 @@ export default class CreateGroup extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.onClick = this.onClick.bind(this);
+    this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
   }
 
   /**
@@ -88,7 +88,7 @@ export default class CreateGroup extends React.Component {
    * @param {void} nil no parameter.
    * @returns {object} response from server.
    */
-  onClick() {
+  handleSignOutEvent() {
     signoutAction()
       .then((resp) => {
         if (resp) {
@@ -145,7 +145,7 @@ export default class CreateGroup extends React.Component {
                 <li className="active">
                   <Link to="/group">Create Group</Link>
                 </li>
-                <li onClick={this.onClick}><Link to="/">Sign Out</Link></li>
+                <li onClick={this.handleSignOutEvent}><Link to="/">Sign Out</Link></li>
               </ul>
             </div>
           </div>
