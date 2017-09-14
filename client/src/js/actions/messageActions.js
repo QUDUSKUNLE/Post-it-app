@@ -1,15 +1,21 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { GET_GROUP_MESSAGE, GET_GENERAL_MESSAGE, SEND_GROUP_MESSAGE,
-  SEND_GENERAL_MESSAGE } from '../constants/ActionConstants.js';
-import { arrayOfGeneralMessage,
-  getArrayOfGroupMessage } from '../utils/utils.js';
+import {
+  GET_GROUP_MESSAGE,
+  GET_GENERAL_MESSAGE,
+  SEND_GROUP_MESSAGE,
+  SEND_GENERAL_MESSAGE
+} from '../constants/ActionConstants.js';
+import {
+  arrayOfGeneralMessage,
+  getArrayOfGroupMessage
+} from '../utils/utils.js';
 
 /**
-  * @description - Get message of a group
-  * @param {Object} groupName - { groupName }
-  * @returns {function} dispatch - dispatch to MessageStore
-*/
+ * @description - Get message of a group
+ * @param {Object} groupName - { groupName }
+ * @returns {function} dispatch - dispatch to MessageStore
+ */
 export const getGeneralMessage = () => axios.post('/getGeneralMessage')
   .then(({ data }) => {
     AppDispatcher.dispatch({
@@ -24,10 +30,10 @@ export const getGeneralMessage = () => axios.post('/getGeneralMessage')
   });
 
 /**
-  * @description - Get message of a group
-  * @param {Object} message - { groupName }
-  * @returns {function} dispatch - dispatch to MessageStore
-*/
+ * @description - Get message of a group
+ * @param {Object} message - { groupName }
+ * @returns {function} dispatch - dispatch to MessageStore
+ */
 export const sendGeneralMessage = (message) => axios.post('/sendGeneralMessage',
   message)
   .then(({ data }) => {
@@ -43,14 +49,13 @@ export const sendGeneralMessage = (message) => axios.post('/sendGeneralMessage',
   });
 
 /**
-  * @description - Get message of a group
-  * @param {Object} group - { group }
-  * @returns {function} dispatch - dispatch to MessageStore
-*/
+ * @description - Get message of a group
+ * @param {Object} group - { group }
+ * @returns {function} dispatch - dispatch to MessageStore
+ */
 export const getGroupMessage = (group) => axios.post('/getGroupMessage',
   group)
   .then(({ data }) => {
-    getArrayOfGroupMessage(data);
     AppDispatcher.dispatch({
       type: GET_GROUP_MESSAGE,
       message: getArrayOfGroupMessage(data)
@@ -63,10 +68,10 @@ export const getGroupMessage = (group) => axios.post('/getGroupMessage',
   });
 
 /**
-  * @description - Get groups of a user
-  * @param {Object} group - { groupname, message }
-  * @returns {function} dispatch - dispatch to MemberStore
-*/
+ * @description - Get groups of a user
+ * @param {Object} group - { groupname, message }
+ * @returns {function} dispatch - dispatch to MemberStore
+ */
 export const sendGroupMessage = (group) => axios.post('/sendGroupMessage',
   group)
   .then(({ data }) => {
