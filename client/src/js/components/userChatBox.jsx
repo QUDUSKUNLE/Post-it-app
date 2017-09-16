@@ -75,15 +75,16 @@ export default class ChatBox extends React.Component {
    * @ChatBox
    */
   render() {
+    console.log(this.props.allGeneralMessage);
     const chatMessage = this.props.allGeneralMessage.map((Index, i) =>
       <li key={i} className="media">
         <div className="media-body">
           <div className="media">
             <div className="media-body">
-              {Index.Message}
+              {Index.message}
               <br/>
               <small className="text-muted">
-                {Index.Date} | {Index.Time}
+                {Index.date} | {Index.time}
               </small>
               <hr/>
             </div>

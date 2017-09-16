@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import toastr from 'toastr';
-import '../../css/icon.css';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
 

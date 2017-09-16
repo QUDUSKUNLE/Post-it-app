@@ -54,9 +54,9 @@ export default class SignUp extends React.Component {
       conf_password: this.state.conf_password,
       username: this.state.username
     });
-    if (validatePassword(this.state.password)) {
+    if (!validatePassword(this.state.password)) {
       this.setState({
-        errMessage: 'Password is too low, at least 8 chaaracters'
+        errMessage: 'Password is too low, at least 8 characters'
       });
       toastr.error(this.state.errMessage);
     } else if (this.state.password !== this.state.conf_password) {

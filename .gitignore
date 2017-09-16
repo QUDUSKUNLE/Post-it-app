@@ -3,8 +3,11 @@ node_modules
 .env
 dist
 .sample.json
-test/testaaaa.js
 .vscode
 .nyc_output
 .DS_Store
 coverage
+__test__/component/__snapshots__
+
+
+

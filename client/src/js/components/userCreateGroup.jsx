@@ -145,7 +145,9 @@ export default class CreateGroup extends React.Component {
                 <li className="active">
                   <Link to="/group">Create Group</Link>
                 </li>
-                <li onClick={this.handleSignOutEvent}><Link to="/">Sign Out</Link></li>
+                <li onClick={this.handleSignOutEvent}><Link to="/">
+                  Sign Out</Link>
+                </li>
               </ul>
             </div>
           </div>

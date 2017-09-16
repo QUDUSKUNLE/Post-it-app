@@ -8,7 +8,6 @@ import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
 import { getGroups } from '../actions/groupAction.js';
 import { generalUsers } from '../actions/memberActions.js';
-import '../../css/icon.css';
 
 
 /**

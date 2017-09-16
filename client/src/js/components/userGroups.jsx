@@ -62,7 +62,10 @@ export default class Groups extends React.Component {
               className="col-md-10 col-md-offset-1 nav nav-pills nav-stacked grouplist">
                 <li key="general"
                   value="general" name="general"
-                  onClick={this.handleClick}><Link to="#">general</Link>
+                  onClick={this.handleClick}><Link to="#">general
+                    <span className="badge badge-info">{this.props.generalMessageLength}</span>
+                    <span className="sr-only">unread messages</span>
+                    </Link>
                 </li>
                 {this.props.grouplist}
               </ul>
@@ -78,6 +81,7 @@ export default class Groups extends React.Component {
 // props validation
 Groups.propTypes = {
   grouplist: PropTypes.array,
+  generalMessageLength: PropTypes.number,
   defaultGroup: PropTypes.string,
   getMembers: PropTypes.func.isRequired
 };

@@ -13,7 +13,7 @@ import { getGroupMembers } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
 import MessageStore from '../stores/MessageStore.js';
-import '../../css/icon.css';
+
 
 
 /**
@@ -136,7 +136,8 @@ export default class BroadCastBoard extends React.Component {
         value={group}
         name={group}
         onClick={() => getGroupMembers({ group })}>
-        <Link to="#"> {group}</Link>
+        <Link to="#"> {group}
+        </Link>
       </li>, this);
     return (
       <div>
@@ -183,7 +184,8 @@ export default class BroadCastBoard extends React.Component {
           <div className="row">
             <Groups
               grouplist={grouplist}
-              getMembers={this.getMembersOnClick}/>
+              getMembers={this.getMembersOnClick}
+              generalMessageLength={this.state.allGeneralMessage.length}/>
             <ChatBox
               defaultGroup={this.state.defaultGroup}
               allGeneralMessage={this.state.allGeneralMessage}/>

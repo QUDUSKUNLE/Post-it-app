@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
-import '../../css/icon.css';
 import toastr from 'toastr';
 
 /**
