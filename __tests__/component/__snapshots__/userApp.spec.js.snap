@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostIt-app should render correctly 1`] = `
+exports[`App component should render correctly 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -160,7 +160,367 @@ ShallowWrapper {
 }
 `;
 
-exports[`PostIt-app should render correctly 2`] = `
+exports[`App component should render correctly 2`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <div>
+    <nav
+      className="navbar navbar-inverse navabar-fixed-top"
+      role="navigation"
+    >
+      <div
+        className="container"
+      >
+        <div
+          className="navbar-header"
+        >
+          <button
+            className="navbar-toggle collapsed"
+            data-target=".navbar-collapse"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              className="sr-only"
+            >
+              Toggle navigation
+            </span>
+            <span
+              className="icon-bar"
+            />
+            <span
+              className="icon-bar"
+            />
+            <span
+              className="icon-bar"
+            />
+          </button>
+          <Link
+            className="navbar-brand"
+            replace={false}
+            to="/"
+          >
+            PostIt
+            <small>
+              App
+            </small>
+          </Link>
+        </div>
+        <div
+          className="collapse navbar-collapse"
+        >
+          <ul
+            className="nav navbar-nav"
+          />
+          <ul
+            className="nav navbar-nav navbar-right"
+          >
+            <li
+              className="active"
+            >
+              <Link
+                replace={false}
+                to="/"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                replace={false}
+                to="/signin"
+              >
+                Sign in
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>,
+  "nodes": Array [
+    <div>
+      <nav
+        className="navbar navbar-inverse navabar-fixed-top"
+        role="navigation"
+      >
+        <div
+          className="container"
+        >
+          <div
+            className="navbar-header"
+          >
+            <button
+              className="navbar-toggle collapsed"
+              data-target=".navbar-collapse"
+              data-toggle="collapse"
+              type="button"
+            >
+              <span
+                className="sr-only"
+              >
+                Toggle navigation
+              </span>
+              <span
+                className="icon-bar"
+              />
+              <span
+                className="icon-bar"
+              />
+              <span
+                className="icon-bar"
+              />
+            </button>
+            <Link
+              className="navbar-brand"
+              replace={false}
+              to="/"
+            >
+              PostIt
+              <small>
+                App
+              </small>
+            </Link>
+          </div>
+          <div
+            className="collapse navbar-collapse"
+          >
+            <ul
+              className="nav navbar-nav"
+            />
+            <ul
+              className="nav navbar-nav navbar-right"
+            >
+              <li
+                className="active"
+              >
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  replace={false}
+                  to="/signin"
+                >
+                  Sign in
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 0,
+      "_context": Object {},
+      "_currentElement": <NavBar />,
+      "_debugID": 3,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": NavBar {
+        "_reactInternalInstance": [Circular],
+        "context": Object {},
+        "props": Object {},
+        "refs": Object {},
+        "state": null,
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+      },
+      "_mountOrder": 2,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <div>
+          <nav
+            className="navbar navbar-inverse navabar-fixed-top"
+            role="navigation"
+          >
+            <div
+              className="container"
+            >
+              <div
+                className="navbar-header"
+              >
+                <button
+                  className="navbar-toggle collapsed"
+                  data-target=".navbar-collapse"
+                  data-toggle="collapse"
+                  type="button"
+                >
+                  <span
+                    className="sr-only"
+                  >
+                    Toggle navigation
+                  </span>
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                </button>
+                <Link
+                  className="navbar-brand"
+                  replace={false}
+                  to="/"
+                >
+                  PostIt
+                  <small>
+                    App
+                  </small>
+                </Link>
+              </div>
+              <div
+                className="collapse navbar-collapse"
+              >
+                <ul
+                  className="nav navbar-nav"
+                />
+                <ul
+                  className="nav navbar-nav navbar-right"
+                >
+                  <li
+                    className="active"
+                  >
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/signin"
+                    >
+                      Sign in
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>,
+        "_debugID": 4,
+        "_renderedOutput": <div>
+          <nav
+            className="navbar navbar-inverse navabar-fixed-top"
+            role="navigation"
+          >
+            <div
+              className="container"
+            >
+              <div
+                className="navbar-header"
+              >
+                <button
+                  className="navbar-toggle collapsed"
+                  data-target=".navbar-collapse"
+                  data-toggle="collapse"
+                  type="button"
+                >
+                  <span
+                    className="sr-only"
+                  >
+                    Toggle navigation
+                  </span>
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                </button>
+                <Link
+                  className="navbar-brand"
+                  replace={false}
+                  to="/"
+                >
+                  PostIt
+                  <small>
+                    App
+                  </small>
+                </Link>
+              </div>
+              <div
+                className="collapse navbar-collapse"
+              >
+                <ul
+                  className="nav navbar-nav"
+                />
+                <ul
+                  className="nav navbar-nav navbar-right"
+                >
+                  <li
+                    className="active"
+                  >
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/signin"
+                    >
+                      Sign in
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>,
+      },
+      "_renderedNodeType": 0,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <NavBar />,
+}
+`;
+
+exports[`App component should render correctly 3`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -399,7 +759,7 @@ ShallowWrapper {
       "_compositeType": 0,
       "_context": Object {},
       "_currentElement": <SignUp />,
-      "_debugID": 3,
+      "_debugID": 5,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": SignUp {
@@ -428,7 +788,7 @@ ShallowWrapper {
           "validateCallback": [Function],
         },
       },
-      "_mountOrder": 2,
+      "_mountOrder": 3,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
@@ -546,7 +906,7 @@ ShallowWrapper {
             </div>
           </div>
         </div>,
-        "_debugID": 4,
+        "_debugID": 6,
         "_renderedOutput": <div>
           <div
             className="col-md-5 col-md-offset-1"

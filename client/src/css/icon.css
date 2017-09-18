@@ -155,9 +155,6 @@ body {
     background: grey
 }
 
-
-/*.chats-row { height: 75vh; }*/
-
 .chats-row div {
     height: 75vh;
     border: 3px solid #ddd;
@@ -204,7 +201,6 @@ body {
 /*Groups*/
 
 .grouplist {
-    margin-top: 10px;
     color: white;
     text-align: center;
 }

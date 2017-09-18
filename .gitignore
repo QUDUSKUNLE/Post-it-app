@@ -8,6 +8,3 @@ dist
 .DS_Store
 coverage
 __test__/component/__snapshots__
-
-
-

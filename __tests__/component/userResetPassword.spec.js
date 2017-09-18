@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ResetPassword from '../../client/src/js/components/userResetPassword.jsx';
+import ResetPassword
+  from '../../client/src/js/components/userResetPassword.jsx';
 
 describe('PostIt-app', () => {
   it('expects App component to be defined', () => {

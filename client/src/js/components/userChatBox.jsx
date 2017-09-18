@@ -107,7 +107,7 @@ export default class ChatBox extends React.Component {
           </div>
         </div>
         <div className="row current-chat-footer">
-          <div className="panel-footer">
+        <div className="panel-footer">
             <div className="input-group">
               <input
                 type="text"

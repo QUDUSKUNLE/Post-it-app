@@ -59,7 +59,7 @@ export default class ResetPassword extends React.Component {
         toastr.success(this.state.response);
       }).catch((err) => {
         if (err.response) {
-          const error = `User's Details ${err.response.data.message}.`;
+          const error = 'User Not Found';
           this.setState({
             response: error
           });

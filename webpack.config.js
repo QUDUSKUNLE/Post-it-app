@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+require('dotenv').config();
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
@@ -25,6 +27,10 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/index.html'
+    }),
+    new Dotenv({
+      path: './.env',
+      safe: false
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),

@@ -58,6 +58,7 @@ export default class AddMember extends React.Component {
       groups: GroupStore.allGroups(),
       general: MemberStore.allGeneralUsers()
     });
+    console.log(this.state.general);
   }
   /**
    * @description - onChange event
