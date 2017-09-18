@@ -31,9 +31,7 @@ export default class BroadCastBoard extends React.Component {
       defaultGroup: 'general',
       groups: [],
       groupName: '',
-      messageGroupName: '',
       userName: JSON.parse(localStorage.getItem('userName')),
-      allUsers: [],
       allGeneralMessage: [],
       groupMessages: [],
       signOutMessage: '',
@@ -42,6 +40,9 @@ export default class BroadCastBoard extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.newGeneralMessage = this.newGeneralMessage.bind(this);
+    this.newGroupMessage = this.newGroupMessage.bind(this);
+    this.getGroupMessage = this.getGroupMessage.bind(this);
     this.userGroups = this.userGroups.bind(this);
     this.getMembersOnClick = this.getMembersOnClick.bind(this);
   }
@@ -53,6 +54,9 @@ export default class BroadCastBoard extends React.Component {
   componentDidMount() {
     GroupStore.on('GET_GROUPS', this.userGroups);
     MemberStore.on('GENERAL', this.userGroups);
+    MessageStore.on('SEND_GENERAL_MESSAGE', this.newGeneralMessage);
+    MessageStore.on('SEND_GROUP_MESSAGE', this.newGroupMessage);
+    MessageStore.on('GET_GROUP_MESSAGE', this.getGroupMessage);
   }
 
   componentWillUnmount() {
@@ -65,10 +69,22 @@ export default class BroadCastBoard extends React.Component {
       () => {
         const group = this.state.defaultGroup;
         getGroupMessage({ group });
-        this.setState({
-          allGeneralMessage: MessageStore.allGroupMessage()
-        });
       });
+  }
+  newGeneralMessage() {
+    this.setState({
+      allGeneralMessage: MessageStore.allGeneralMessage()
+    });
+  }
+  newGroupMessage() {
+    this.setState({
+      allGeneralMessage: MessageStore.allGroupMessage()
+    });
+  }
+  getGroupMessage() {
+    this.setState({
+      allGeneralMessage: MessageStore.allGroupMessage()
+    });
   }
 
   userGroups() {
@@ -115,7 +131,6 @@ export default class BroadCastBoard extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} BroadCastBoard component
-   * @BroadCastBoard
    */
   render() {
     if (!this.state.loggedIn) {

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { sendGeneralMessage,
   sendGroupMessage } from '../actions/messageActions.js';
-import MessageStore from '../stores/MessageStore.js';
 
 
 /**
@@ -19,8 +18,7 @@ export default class ChatBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: '',
-      store: this.props.allGeneralMessage
+      message: ''
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -51,18 +49,12 @@ export default class ChatBox extends React.Component {
         message: this.state.message
       };
       sendGeneralMessage(newMessage);
-      this.setState({
-        store: MessageStore.allGeneralMessage()
-      });
     } else {
       const newMessage = {
         group: this.props.defaultGroup,
         message: this.state.message
       };
       sendGroupMessage(newMessage);
-      this.setState({
-        store: MessageStore.allGroupMessage()
-      });
     }
     this.setState({
       message: ''
@@ -75,7 +67,6 @@ export default class ChatBox extends React.Component {
    * @ChatBox
    */
   render() {
-    console.log(this.props.allGeneralMessage);
     const chatMessage = this.props.allGeneralMessage.map((Index, i) =>
       <li key={i} className="media">
         <div className="media-body">
@@ -107,7 +98,7 @@ export default class ChatBox extends React.Component {
           </div>
         </div>
         <div className="row current-chat-footer">
-        <div className="panel-footer">
+          <div className="panel-footer">
             <div className="input-group">
               <input
                 type="text"

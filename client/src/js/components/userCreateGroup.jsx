@@ -112,7 +112,6 @@ export default class CreateGroup extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} CreateGroup component
-   * @CreateGroup
    */
   render() {
     if (!this.state.loggedIn) {
