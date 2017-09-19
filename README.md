@@ -7,11 +7,50 @@
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
   This way one person can send notifications to everyone in the group by sending message once. The application allows people create accounts, create groups and add registered users to groups, and then send messages to members of a group whenever there is need.
 
+  A live demo of the app can access on Heroku via <b><a href="https://heroku-postitapp.herokuapp.com/">PostIt-app</a></b>
+
 # PostIt-app API.
   PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
   PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://facebook.github.io/react/">React</a> and <a href="https://nodejs.org/">Node.js</a>
 
- <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
+
+
+# Dependencies
+  
+  The following dependencies are required by the app
+  
+  <b>. <a href="https://www.npmjs.com/package/axios">axios</a></b> - It's used to make GET/POST requests to APIs
+
+  <b>. <a href="https://www.npmjs.com/package/babel-core">babel-core</a></b> - It compiles Ecmascript-6 to Ecmascript-5 in the app
+
+  <b>. <a href="https://www.npmjs.com/package/babel-eslint">babel-eslint</a></b> - It helps to lint Syntax errors
+
+  <b>. <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a></b> - It transpiles Javascript codes
+
+  <b>. <a href="https://coveralls.io/">Coveralls</a></b> - It displays test coverage
+
+  <b>. <a href="https://coveralls.io/">Coveralls</a></b> - It displays test coverage
+
+  <b>. <a href="https://www.npmjs.com/package/eslint">eslint</a></b> - This is a javascript syntax highlighter used to highligh syntax error during the development of this app
+
+  <b>. <a href="https://www.npmjs.com/package/eslint-confi-airbnb">eslint-config-airbnb</a></b> - It contains eslint rules
+
+  <b>. <a href="https://www.npmjs.com/package/firebase">firebase</a></b> - Firebase helps to authenticate and manage users.
+
+  <b>. <a href="https://facebook.github.io/react/">react</a></b> - It helps the app to use React architecture
+  
+  <b>. <a href="https://www.npmjs.com/package/react-google-login">react-google-login </a></b> - Enables sign in with google
+
+  <b>. <a href="https://www.npmjs.com/package/flux">flux</a></b> - It allows Unidirectional flow of data in the application
+
+  <b>. <a href="https://www.npmjs.com/package/nyc">nyc</a></b> - For test coverage
+
+  <b>. <a href="https://www.npmjs.com/package/webpack">webpack</a></b> - Used to bundle the app's js files
+
+  <b>. <a href="https://www.npmjs.com/package/webpack-dev-middleware">webpack-dev-middleware</a></b> - It helps to serve files to the server
+
+  <b>. <a href="https://www.npmjs.com/package/webpack-hot-middleware">webpack-hot-middleware</a></b> - Enables the browser to reload automatically when changes are made to the app
+
 
 # Local installation
   Kindly follow the steps below to setup a local development environment.
