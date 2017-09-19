@@ -25,7 +25,7 @@ export default class App extends React.Component {
                   <i>App</i>
                 </small>
                     &nbsp;
-                  allows friends to come together and share vital informtion.
+                  allows friends to come together and share vital information.
               </h4>
             </div>
             <SignUp/>
