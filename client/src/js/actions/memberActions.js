@@ -1,7 +1,6 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { getAllGeneralUsers, getMembersOfAGroup } from '../utils/utils.js';
-
 import {
   GENERAL,
   ADD_MEMBER,

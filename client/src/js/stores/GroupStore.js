@@ -1,6 +1,5 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-
 import {
   GET_GROUPS,
   CREATE_NEW_GROUP } from '../constants/ActionConstants.js';

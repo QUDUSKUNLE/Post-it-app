@@ -14,7 +14,13 @@ class SignInStore extends EventEmitter {
    */
   constructor() {
     super();
+    this.signInMessage = {};
+    this.signInUser = this.signInUser.bind(this);
     this.handleActions = this.handleActions.bind(this);
+  }
+
+  signInUser() {
+    return this.signInMessage;
   }
 
   /**
@@ -26,10 +32,12 @@ class SignInStore extends EventEmitter {
   handleActions(action) {
     switch (action.type) {
       case SIGN_IN_SUCCESS:
-        this.emit('SIGN_OUT_SUCCESS');
+        this.signInMessage = action.response;
+        this.emit('SIGN_IN_SUCCESS');
         break;
 
       case SIGN_IN_ERROR:
+        this.signInMessage = action.error;
         this.emit('SIGN_IN_ERROR');
         break;
 

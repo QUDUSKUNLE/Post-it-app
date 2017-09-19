@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
+import SignUpStore from '../stores/SignUpStore.js';
 import { signupAction } from '../actions/signUpActions.js';
 import { validatePassword } from '../utils/utils.js';
-import toastr from 'toastr';
 
 /**
  * @description - renders SignUp Component
@@ -26,10 +27,14 @@ export default class SignUp extends React.Component {
       errMessage: ''
     };
     this.onChange = this.onChange.bind(this);
-
+    this.handleSignUpAction = this.handleSignUpAction.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    SignUpStore.on('SIGN_UP_SUCCESS', this.handleSignUpAction);
+    SignUpStore.on('SIGN_UP_ERROR', this.handleSignUpAction);
+  }
   /**
    * @description - onChange event
    * @param {object} e - event.
@@ -70,27 +75,7 @@ export default class SignUp extends React.Component {
         password: this.state.password,
         username: this.state.username
       };
-      /**
-       * signupAction event
-       * @param {object} user .
-       * @returns {void} .
-       */
-      signupAction(user)
-        .then(({ data }) => {
-          this.setState({
-            signupMessage: data.message
-          });
-          toastr.success(this.state.signupMessage);
-          this.props.history.push('/signin');
-        })
-        .catch((err) => {
-          if (err.response) {
-            this.setState({
-              signupMessage: err.response.data.error.message
-            });
-            toastr.error(this.state.signupMessage);
-          }
-        });
+      signupAction(user);
     }
     this.setState({
       email: '',
@@ -98,6 +83,27 @@ export default class SignUp extends React.Component {
       conf_password: '',
       username: ''
     });
+  }
+
+  /**
+   * handleSignUpAction event
+   * @returns {void} .
+   */
+  handleSignUpAction() {
+    const response = SignUpStore.signUpUser();
+    if (response.message === 'Registration successful and' +
+    ' verification email sent to your email') {
+      this.setState({
+        signupMessage: response.message
+      });
+      toastr.success(this.state.signupMessage);
+      this.props.history.push('/signin');
+    } else if (response.data.error.code === 'auth/email-already-in-use') {
+      this.setState({
+        signupMessage: response.data.error.message
+      });
+      toastr.error(this.state.signupMessage);
+    }
   }
 
   /**

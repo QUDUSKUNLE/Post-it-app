@@ -28,11 +28,8 @@ export default class CreateGroup extends React.Component {
       signOutMessage: '',
       loggedIn
     };
-
     this.onChange = this.onChange.bind(this);
-
     this.onSubmit = this.onSubmit.bind(this);
-
     this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
   }
 
@@ -89,24 +86,21 @@ export default class CreateGroup extends React.Component {
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
-    signoutAction()
-      .then((resp) => {
-        if (resp) {
-          this.setState({
-            signOutMessage: resp.data.message
-          });
-        }
-        toastr.success(this.state.signOutMessage);
-        localStorage.clear();
-        this.props.history.push('/');
-      }).catch((error) => {
-        if (error.response) {
-          this.setState({
-            signOutMessage: error.response.data.message
-          });
-        }
-        toastr.error(this.state.signOutMessage);
+    signoutAction().then((response) => {
+      this.setState({
+        errSignOut: response.data.message
       });
+      toastr.success(this.state.errSignOut);
+      localStorage.clear();
+      this.props.history.push('/');
+    }).catch((error) => {
+      if (error.response) {
+        this.setState({
+          errSignOut: error.response.data
+        });
+      }
+      toastr.error(this.state.errSignOut);
+    });
   }
 
   /**

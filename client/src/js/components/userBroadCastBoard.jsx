@@ -39,18 +39,28 @@ export default class BroadCastBoard extends React.Component {
       broadcastmessage: ''
     };
     this.onChange = this.onChange.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.handleSignOutAction = this.handleSignOutAction.bind(this);
     this.newGeneralMessage = this.newGeneralMessage.bind(this);
     this.newGroupMessage = this.newGroupMessage.bind(this);
     this.getGroupMessage = this.getGroupMessage.bind(this);
     this.userGroups = this.userGroups.bind(this);
     this.getMembersOnClick = this.getMembersOnClick.bind(this);
   }
+  /**
+   * Call action on initial page load
+   * @method componentWillMount
+   * @return {null} -
+   */
   componentWillMount() {
     getGroups();
     getGeneralMessage();
   }
 
+  /**
+   * Attach an event listener to favorite store
+   * @method componentDidMount
+   * @return {null} -
+   */
   componentDidMount() {
     GroupStore.on('GET_GROUPS', this.userGroups);
     MemberStore.on('GENERAL', this.userGroups);
@@ -59,11 +69,19 @@ export default class BroadCastBoard extends React.Component {
     MessageStore.on('GET_GROUP_MESSAGE', this.getGroupMessage);
   }
 
+  /**
+   * @method componentWillUnount
+   * @return {null} -
+   */
   componentWillUnmount() {
     GroupStore.removeListener('GET_GROUPS', this.userGroups);
     MemberStore.removeListener('GENERAL', this.userGroups);
   }
 
+  /**
+   * @method getMembersOnClick
+   * @return {null} -
+   */
   getMembersOnClick(i) {
     this.setState({ groupName: i[0], defaultGroup: i[1].group },
       () => {
@@ -71,22 +89,41 @@ export default class BroadCastBoard extends React.Component {
         getGroupMessage({ group });
       });
   }
+
+  /**
+   * @method newGeneralMessage
+   * @return {null} -
+   */
   newGeneralMessage() {
     this.setState({
       allGeneralMessage: MessageStore.allGeneralMessage()
     });
   }
+
+  /**
+   * @method newGroupMessage
+   * @return {null} -
+   */
   newGroupMessage() {
     this.setState({
       allGeneralMessage: MessageStore.allGroupMessage()
     });
   }
+
+  /**
+   * @method getGroupMessage
+   * @return {null} -
+   */
   getGroupMessage() {
     this.setState({
       allGeneralMessage: MessageStore.allGroupMessage()
     });
   }
 
+  /**
+   * @method userGroups
+   * @return {null} -
+   */
   userGroups() {
     this.setState({
       groups: GroupStore.allGroups(),
@@ -106,11 +143,14 @@ export default class BroadCastBoard extends React.Component {
   }
 
   /**
-    * onClick event.
-    * @param {void} null no parameter.
-    * @returns {object} response from server.
+   * onClick event.
+   * @returns {object} response from server.
   */
   onClick() {
+    signoutAction();
+  }
+
+  handleSignOutAction() {
     signoutAction().then((response) => {
       this.setState({
         errSignOut: response.data.message
@@ -167,13 +207,12 @@ export default class BroadCastBoard extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               <li><Link to="#">Home</Link></li><li className="active">
                 <Link to="/broadcastboard">ChatRoom</Link></li>
-              <li onClick={this.onClick}><Link to="#">Sign out</Link></li>
+              <li onClick={this.handleSignOutAction}><Link to="#">Sign out</Link></li>
             </ul>
           </div>
         </div>
       </nav>
         <div className="container">
-          <span>{this.state.errSignOut}</span>
           <div className="row">
             <div className="col-md-12">
               <p className="pull-right">{`Hi, ${this.state.userName}.`}</p>

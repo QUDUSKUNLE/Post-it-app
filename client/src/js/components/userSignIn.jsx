@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import toastr from 'toastr';
+import SignInStore from '../stores/SignInStore.js';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
 
@@ -27,15 +28,25 @@ export default class SignIn extends React.Component {
       email: '',
       password: '',
       signinMessage: '',
-      errMessage: {},
+      errMessage: '',
       loggedIn: false
     };
     // Bind input field values
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleSignInAction = this.handleSignInAction.bind(this);
     this.googleSignIn = this.googleSignIn.bind(this);
   }
 
+  componentDidMount() {
+    SignInStore.on('SIGN_IN_SUCCESS', this.handleSignInAction);
+    SignInStore.on('SIGN_IN_ERROR', this.handleSignInAction);
+  }
+
+  compoenentWillUnmount() {
+    SignInStore.removeListener('SIGN_IN_SUCCESS', this.handleSignInAction);
+    SignInStore.removeListener('SIGN_IN_ERROR', this.handleSignInAction);
+  }
   /**
    * onChange event
    * @param {object} e - event
@@ -58,36 +69,37 @@ export default class SignIn extends React.Component {
       email: this.state.email,
       password: this.state.password
     };
-
-    /**
-     * @description This handles SignInAction
-     * @param {object} user .
-     * @returns {void} .
-     */
-    signinAction(user)
-      .then(({ data }) => {
-        this.setState({
-          signinMessage: data.message,
-          userName: (Object.values((data.response[1]))[0].userName),
-          loggedIn: true
-        });
-        toastr.success(this.state.signinMessage);
-        localStorage.setItem('userName', JSON.stringify(this.state.userName));
-        localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
-        this.props.history.push('/broadcastboard');
-      }, (error) => {
-        if (error.response) {
-          this.setState({
-            signinMessage: error.response.data.error.message
-          });
-        }
-        toastr.error(this.state.signinMessage);
-      });
-    this.setState({
-      email: '',
-      password: ''
-    });
+    signinAction(user);
+    this.setState({ email: '', password: '' });
   }
+
+  /**
+   * @description This handles handleSignInAction
+   * @param {object} user .
+   * @returns {void} .
+   */
+  handleSignInAction() {
+    const response = SignInStore.signInUser();
+    if (response.message === 'User Signed in successfully') {
+      this.setState({
+        signinMessage: 'User Signed in successfully',
+        userName: (Object.values((response.response)[1])[0].userName),
+        loggedIn: true
+      });
+      toastr.success(this.state.signinMessage);
+      localStorage.setItem('userName', JSON.stringify(this.state.userName));
+      localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
+      this.props.history.push('/broadcastboard');
+      this.setState({
+        signinMessage: ''
+      });
+    } else if (response.data.error.code === 'auth/wrong-password') {
+      this.setState({ errMessage: response.data.error.message });
+      toastr.error(this.state.errMessage);
+      this.setState({ errMessage: '' });
+    }
+  }
+
 
   /**
    * @description - this handles Google SignIn Method
@@ -109,8 +121,7 @@ export default class SignIn extends React.Component {
               loggedIn: true
             });
             toastr.success(this.state.signinMessage);
-            localStorage.setItem('userName',
-              JSON.stringify(this.state.userName));
+            localStorage.setItem('userName', JSON.stringify(this.state.userName));
             localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
             this.props.history.push('/broadcastboard');
           });
