@@ -9,7 +9,7 @@
 
 # PostIt-app API.
   PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
-  PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://expressjs.com/">Express</a> and <a href="https://nodejs.org/">Node.js</a>
+  PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://facebook.github.io/react/">React</a> and <a href="https://nodejs.org/">Node.js</a>
 
  <a href="https://github.com/QUDUSKUNLE/Post-it-app/tree/develop">Click here</a> for API documentation.
 
