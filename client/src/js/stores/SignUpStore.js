@@ -1,5 +1,5 @@
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { EventEmitter } from 'events';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
   SIGN_UP_SUCCESS, SIGN_UP_ERROR
 } from '../constants/ActionConstants.js';

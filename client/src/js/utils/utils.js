@@ -1,6 +1,6 @@
 /**
  * @function validatePassword
- * @param {Object} pass -
+ * @param {Object} password -
  * @returns {bool} validated
  */
 export const validatePassword = (password) => {
