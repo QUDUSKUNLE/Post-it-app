@@ -4,7 +4,9 @@
  * @returns {bool} validated
  */
 export const validatePassword = (password) => {
-  if (password.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)) {
+  if (
+password.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  ) {
     return true;
   }
 };

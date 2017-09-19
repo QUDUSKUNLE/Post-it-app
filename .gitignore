@@ -7,4 +7,4 @@ dist
 .nyc_output
 .DS_Store
 coverage
-__test__/component/__snapshots__
+__test__/component/
