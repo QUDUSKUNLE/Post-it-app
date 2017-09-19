@@ -57,7 +57,7 @@ class MessageStore extends EventEmitter {
         break;
 
       case SEND_GENERAL_MESSAGE:
-        this.generalMessage.push([action.message]);
+        this.generalMessage.push(action.message);
         this.emit('SEND_GENERAL_MESSAGE');
         break;
 
@@ -67,7 +67,7 @@ class MessageStore extends EventEmitter {
         break;
 
       case SEND_GROUP_MESSAGE:
-        this.groupMessage.push([action.message]);
+        this.groupMessage.push(action.message);
         this.emit('SEND_GROUP_MESSAGE');
         break;
 

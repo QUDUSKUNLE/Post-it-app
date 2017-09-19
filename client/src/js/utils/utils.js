@@ -1,18 +1,15 @@
 /**
  * @function validatePassword
- * @param {Object} pass -
+ * @param {Object} password -
  * @returns {bool} validated
  */
-export const validatePassword = (pass) => {
-  let validated;
-  if (pass.length < 6) {
-    validated = true;
-  } else {
-    validated = false;
+export const validatePassword = (password) => {
+  if (
+password.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
+  ) {
+    return true;
   }
-  return validated;
 };
-
 
 /**
  * @function getMembersOfAGroup
@@ -55,7 +52,6 @@ export const getUserGroups = (data) => {
   }
   return getGroups;
 };
-
 
 /**
  * @function getAllGeneralUsers

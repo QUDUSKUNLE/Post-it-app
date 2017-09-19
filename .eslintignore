@@ -3,4 +3,3 @@ dist
 .git
 .env-sample
 dist/*
-in.txt

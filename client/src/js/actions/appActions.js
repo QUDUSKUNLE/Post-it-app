@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 /**
  * @function createGroup
  * @param {object} groupName - { andela }
@@ -8,13 +7,11 @@ import axios from 'axios';
  */
 export const createGroup = (groupName) => axios.post('/creategroup', groupName);
 
-
 /**
  * @function deleteAccount
  * @returns {object} object
  */
 export const deleteAccount = () => axios.post('/delete');
-
 
 /**
  * @function addMember

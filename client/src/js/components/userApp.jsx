@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './navBar.jsx';
+import NavBar from './navBar.jsx';
 import SignUp from './userSignUp.jsx';
 
 
@@ -16,7 +16,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <NavBar />
         <div className="container">
           <div className="row home">
             <div className="col-md-6">

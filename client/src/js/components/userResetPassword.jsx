@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
-import '../../css/icon.css';
 import toastr from 'toastr';
 
 /**
@@ -60,7 +59,7 @@ export default class ResetPassword extends React.Component {
         toastr.success(this.state.response);
       }).catch((err) => {
         if (err.response) {
-          const error = `User's Details ${err.response.data.message}.`;
+          const error = 'User Not Found';
           this.setState({
             response: error
           });

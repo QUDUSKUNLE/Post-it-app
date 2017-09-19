@@ -1,7 +1,6 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { getAllGeneralUsers, getMembersOfAGroup } from '../utils/utils.js';
-
 import {
   GENERAL,
   ADD_MEMBER,
@@ -31,12 +30,11 @@ export const getGroupMembers = (GroupName) => axios.post('/memberlist',
 
 /**
   * @description - Get members of general
-  * @param {nill} null - null
+  * @param {null} null - null
   * @returns {function} dispatch - dispatch to MemberStore
 */
 export const generalUsers = () => axios.post('/generallist')
   .then(({ data }) => {
-    // console.log('Oh!! you are here', data);
     AppDispatcher.dispatch({
       type: GENERAL,
       general: getAllGeneralUsers(data)

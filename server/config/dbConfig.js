@@ -9,7 +9,7 @@ if (env === 'test') {
 
 dotenv.config();
 
-const config = {
+export const config = {
   apiKey: process.env[`${checkProcess}apiKey`],
   authDomain: process.env[`${checkProcess}authDomain`],
   databaseURL: process.env[`${checkProcess}databaseURL`],
@@ -19,5 +19,5 @@ const config = {
 };
 const dbConfig = firebase.initializeApp(config);
 
-// console.log(config);
+// // console.log(config);
 export default dbConfig;

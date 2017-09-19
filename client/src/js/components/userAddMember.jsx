@@ -8,8 +8,6 @@ import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
 import { getGroups } from '../actions/groupAction.js';
 import { generalUsers } from '../actions/memberActions.js';
-import '../../css/icon.css';
-
 
 /**
  * @description - renders AddMember Component
@@ -115,18 +113,21 @@ export default class AddMember extends React.Component {
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
-    signoutAction()
-      .then(({ data }) => {
-        toastr.success(data.response);
-        localStorage.removeItem('userIn');
-        localStorage.removeItem('userName');
-        this.props.history.push('/');
-      })
-      .catch((error) => {
-        if (error.response) {
-          toastr.error(error.response.data);
-        }
+    signoutAction().then((response) => {
+      this.setState({
+        errSignOut: response.data.message
       });
+      toastr.success(this.state.errSignOut);
+      localStorage.clear();
+      this.props.history.push('/');
+    }).catch((error) => {
+      if (error.response) {
+        this.setState({
+          errSignOut: error.response.data
+        });
+      }
+      toastr.error(this.state.errSignOut);
+    });
   }
 
   /**

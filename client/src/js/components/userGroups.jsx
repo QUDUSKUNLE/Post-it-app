@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { generalUsers } from '../actions/memberActions.js';
 import { getGeneralMessage } from '../actions/messageActions.js';
 import MemberStore from '../stores/MemberStore.js';
-// import MessageStore from '../stores/MessageStore.js';
 
 /**
  * @description - renders Groups Component
@@ -28,13 +27,11 @@ export default class Groups extends React.Component {
 
   componentDidMount() {
     MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.handleOnClick);
-    // MessageStore.on('GET_GROUP_MESSAGE', this.handleOnClick);
   }
 
   componentWillUnmount() {
     MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
       this.handleOnClick);
-    // MessageStore.removeListener('GET_GROUP_MESSAGE', this.handleOnClick);
   }
 
   handleOnClick() {
@@ -50,7 +47,6 @@ export default class Groups extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} Groups component
-   * @Groups
    */
   render() {
     return (
@@ -59,10 +55,11 @@ export default class Groups extends React.Component {
           <div className="row chats-row">
             <div className="col-md-12">
               <ul
-              className="col-md-10 col-md-offset-1 nav nav-pills nav-stacked grouplist">
+              className="nav nav-pills nav-stacked grouplist">
                 <li key="general"
                   value="general" name="general"
-                  onClick={this.handleClick}><Link to="#">general</Link>
+                  onClick={this.handleClick}><Link to="#">general
+                  </Link>
                 </li>
                 {this.props.grouplist}
               </ul>
@@ -78,6 +75,7 @@ export default class Groups extends React.Component {
 // props validation
 Groups.propTypes = {
   grouplist: PropTypes.array,
+  generalMessageLength: PropTypes.number,
   defaultGroup: PropTypes.string,
   getMembers: PropTypes.func.isRequired
 };
