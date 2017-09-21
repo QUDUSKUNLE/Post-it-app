@@ -13,7 +13,7 @@ import {
  * @param {null} null -
  * @returns {function} dispatch - dispatch to GroupStore
  */
-export const getGroups = () => axios.post('/getgroups')
+export const getGroups = () => axios.post('/getUserGroups')
   .then(({ data }) => {
     // console.log(data, 'is this the data', getUserGroups(data));
     AppDispatcher.dispatch({
@@ -33,7 +33,7 @@ export const getGroups = () => axios.post('/getgroups')
  * @param {Object} userDetails -
  * @returns {function} dispatch - dispatch to GroupStore
  */
-export const createGroup = (userDetails) => axios.post('/creategroup',
+export const createGroup = (userDetails) => axios.post('/userCreateGroup',
   userDetails)
     .the(({ data }) => {
       AppDispatcher.dispatch({

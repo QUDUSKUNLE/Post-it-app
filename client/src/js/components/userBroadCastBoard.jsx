@@ -4,6 +4,7 @@ import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
+import Footer from './Footer.jsx';
 import { getGroups } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
@@ -152,19 +153,13 @@ export default class BroadCastBoard extends React.Component {
 
   handleSignOutAction() {
     signoutAction().then((response) => {
-      this.setState({
-        errSignOut: response.data.message
-      });
-      toastr.success(this.state.errSignOut);
+      toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-        this.setState({
-          errSignOut: error.response.data
-        });
+        toastr.error(error.response.data);
       }
-      toastr.error(this.state.errSignOut);
     });
   }
 
@@ -188,40 +183,42 @@ export default class BroadCastBoard extends React.Component {
       </li>, this);
     return (
       <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top"
-        role="navigation">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle"
-              data-toggle="collapse" data-target=".navbar-collapse">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <Link className="navbar-brand" to="#">
-              PostIt<small>App</small>
-            </Link>
+        <nav className="navbar navbar-inverse navabar-fixed-top">
+          <div className="container">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle"
+                data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="#">
+                PostIt<small>App</small>
+              </Link>
+            </div>
+            <div className="collapse navbar-collapse">
+              <ul className="nav navbar-nav navbar-right">
+                <li className="active">
+                  <Link to="/broadcastboard">MessageBoard</Link>
+                </li>
+                <li>
+                  <Link to="/group">Create Group</Link>
+                </li>
+                <li onClick={this.handleSignOutAction}>
+                  <Link to="#">Sign out</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav navbar-right">
-              <li><Link to="#">Home</Link></li><li className="active">
-                <Link to="/broadcastboard">ChatRoom</Link></li>
-              <li onClick={this.handleSignOutAction}><Link to="#">Sign out</Link></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+       </nav>
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <p className="pull-right">{`Hi, ${this.state.userName}.`}</p>
+              <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
             </div>
           </div>
           <div className="row">
             <ul className="nav nav-pills nav-justified">
-              <li className="col-md-6"><Link to="/group">Create Group</Link>
-              </li>
               <li className="col-md-6"><Link to="/member">Add member</Link></li>
             </ul>
           </div>
@@ -236,6 +233,7 @@ export default class BroadCastBoard extends React.Component {
               allGeneralMessage={this.state.allGeneralMessage}/>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

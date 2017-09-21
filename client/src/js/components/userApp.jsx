@@ -1,6 +1,7 @@
 import React from 'react';
 import NavBar from './navBar.jsx';
 import SignUp from './userSignUp.jsx';
+import Footer from './Footer.jsx';
 
 
 /**
@@ -29,6 +30,7 @@ export default class App extends React.Component {
               </h4>
             </div>
             <SignUp/>
+            <Footer/>
           </div>
         </div>
       </div>

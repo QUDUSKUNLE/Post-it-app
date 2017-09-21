@@ -33,7 +33,7 @@ export const getGroupMembers = (GroupName) => axios.post('/memberlist',
   * @param {null} null - null
   * @returns {function} dispatch - dispatch to MemberStore
 */
-export const generalUsers = () => axios.post('/generallist')
+export const generalUsers = () => axios.post('/getGeneralUsers')
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GENERAL,

@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import toastr from 'toastr';
+import Footer from './Footer.jsx';
 import SignInStore from '../stores/SignInStore.js';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
@@ -70,7 +71,6 @@ export default class SignIn extends React.Component {
       password: this.state.password
     };
     signinAction(user);
-    this.setState({ email: '', password: '' });
   }
 
   /**
@@ -81,22 +81,16 @@ export default class SignIn extends React.Component {
   handleSignInAction() {
     const response = SignInStore.signInUser();
     if (response.message === 'User Signed in successfully') {
+      toastr.success('User Signed in successfully');
       this.setState({
-        signinMessage: 'User Signed in successfully',
-        userName: (Object.values((response.response)[1])[0].userName),
+        userName: (Object.values((response.response)[0])[0].userName),
         loggedIn: true
       });
-      toastr.success(this.state.signinMessage);
       localStorage.setItem('userName', JSON.stringify(this.state.userName));
       localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
       this.props.history.push('/broadcastboard');
-      this.setState({
-        signinMessage: ''
-      });
     } else if (response.data.error.code === 'auth/wrong-password') {
-      this.setState({ errMessage: response.data.error.message });
-      toastr.error(this.state.errMessage);
-      this.setState({ errMessage: '' });
+      toastr.error(response.data.error.message);
     }
   }
 
@@ -207,6 +201,7 @@ export default class SignIn extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

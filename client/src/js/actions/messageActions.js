@@ -48,10 +48,9 @@ export const sendGeneralMessage = (message) => axios.post('/sendGeneralMessage',
       });
     });
 
+
 /**
- * @description - Get message of a group
- * @param {Object} group - { group }
- * @returns {function} dispatch - dispatch to MessageStore
+ * @param {any} group
  */
 export const getGroupMessage = (group) => axios.post('/getGroupMessage',
   group)
@@ -67,10 +66,8 @@ export const getGroupMessage = (group) => axios.post('/getGroupMessage',
     });
   });
 
-/**
- * @description - Get groups of a user
- * @param {Object} group - { groupname, message }
- * @returns {function} dispatch - dispatch to MemberStore
+ /**
+ * @param {any} group
  */
 export const sendGroupMessage = (group) => axios.post('/sendGroupMessage',
   group)

@@ -6,14 +6,15 @@ import {
   GET_GROUP_MESSAGE, SEND_GROUP_MESSAGE } from
   '../constants/ActionConstants.js';
 
+
 /**
- * Holds the storage, listen to actions and update the stores
  * @class MessageStore
+ * @extends {EventEmitter}
  */
 class MessageStore extends EventEmitter {
   /**
-   * sets the groups to an empty []
-   * @constructor
+   * Creates an instance of MessageStore.
+   * @memberof MessageStore
    */
   constructor() {
     super();
@@ -26,28 +27,25 @@ class MessageStore extends EventEmitter {
   }
 
   /**
-   * @method allGeneralMessages
-   * @return {object} generalMessages - The generalMessages stored in the
-    constructor
+   * @returns
+   * @memberof MessageStore
    */
   allGeneralMessage() {
     return this.generalMessage;
   }
 
   /**
-   * @method allGroupMessages
-   * @return {object} groupMessages - The groupMessages stored in the
-    constructor
+   * @returns
+   * @memberof MessageStore
    */
   allGroupMessage() {
     return this.groupMessage;
   }
 
   /**
-   * Receives actions and update the stores accordingly
-   * @method handleActions
-   * @param {object} action - Action type and data
-   * @return {null} -
+   * @param {any} action
+   * @memberof MessageStore
+   * @return action
    */
   handleActions(action) {
     switch (action.type) {

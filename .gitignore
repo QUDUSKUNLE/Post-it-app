@@ -8,3 +8,4 @@ dist
 .DS_Store
 coverage
 __test__/component/
+example.html

@@ -6,6 +6,7 @@ const Router = express.Router();
 
 
 // ====================Homepage =====================//
+
 Router.route('/*')
   .get((req, res) => {
     res.sendFile(path.join(__dirname, '../../client/src/index.html'));
@@ -24,7 +25,6 @@ Router.route('/signup')
           return Promise.all(
             [dbConfig.database().ref(`users/${userId}`).push({
               userEmail: email,
-              userPassword: password,
               userName: username,
               date: (new Date()).toDateString(),
               time: (new Date()).toTimeString()
@@ -56,12 +56,6 @@ Router.route('/signin')
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => Promise.all(
         [
-          dbConfig.database().ref('Group').child('general')
-            .once('value', (groups) => {
-              if (groups.val() != null) {
-                groups.val();
-              }
-            }),
           dbConfig.database().ref('users').child(user.uid)
             .once('value', (snapshot) => {
               if (snapshot.val() != null) {
@@ -100,26 +94,27 @@ Router.route('/passwordreset')
   });
 
 //  ===============Create Group Endpoint======================//
-Router.route('/creategroup')
+
+Router.route('/userCreateGroup')
   .post((req, res) => {
     const groupName = req.body.group;
-    const uId = req.user.uid;
+    const userId = req.user.uid;
     const group = groupName.toLowerCase();
     return Promise.all(
       [
-        dbConfig.database().ref(`Group/${uId}`).child(group)
+        dbConfig.database().ref(`Group/${userId}`).child(group)
           .once('value', (snapshot) => {
             if (snapshot.val() != null) {
               snapshot.val();
             } else {
-              dbConfig.database().ref(`Group/${uId}`).child(group).push({
-                member: uId
+              dbConfig.database().ref(`Group/${userId}`).child(group).push({
+                member: userId
               });
-              dbConfig.database().ref(`Group/${uId}`).child(group)
+              dbConfig.database().ref(`Group/${userId}`).child(group)
                 .once('value', (snap) => {
                   if (snap.val() != null) {
                     snap.val();
-                    dbConfig.database().ref('Group').child(uId)
+                    dbConfig.database().ref('Group').child(userId)
                       .once('value', (get) => {
                         if (get.val() != null) {
                           get.val();
@@ -138,12 +133,12 @@ Router.route('/creategroup')
   });
 
 // ========================Get Groups=================//
-Router.route('/getgroups')
+Router.route('/getUserGroups')
   .post((req, res) => {
-    const uID = req.user.uid;
+    const userId = req.user.uid;
     return Promise.all(
       [
-        dbConfig.database().ref('Group').child(uID)
+        dbConfig.database().ref('Group').child(userId)
           .once('value', (snapshot) => {
             if (snapshot.val() != null) {
               snapshot.val();
@@ -155,7 +150,7 @@ Router.route('/getgroups')
   });
 
 // ================== Get all Registered Users ================//
-Router.route('/generallist')
+Router.route('/getGeneralUsers')
   .post((req, res) => Promise.all([
     dbConfig.database().ref('Group/general').child('member')
       .once('value', (snapshot) => {
@@ -169,13 +164,13 @@ Router.route('/generallist')
 
 
 // ================ Get all members of a group ===============//
-Router.route('/memberlist')
+Router.route('/getGroupMember')
   .post((req, res) => {
     const groupName = req.body.group;
-    const uID = req.user.uid;
+    const userId = req.user.uid;
     return Promise.all(
       [
-        dbConfig.database().ref(`Group/${uID}`).child(groupName)
+        dbConfig.database().ref(`Group/${userId}`).child(groupName)
           .once('value', (snapshot) => {
             if (snapshot.val() != null) {
               snapshot.val();
@@ -193,14 +188,14 @@ Router.route('/group/member')
   .post((req, res) => {
     const groupName = req.body.group;
     const groupMember = req.body.member;
-    const uID = req.user.uid;
+    const userId = req.user.uid;
     const name = groupName.toLowerCase();
     return Promise.all(
       [
-        dbConfig.database().ref(`Group/${uID}`).child(name).push({
+        dbConfig.database().ref(`Group/${userId}`).child(name).push({
           member: groupMember
         }),
-        dbConfig.database().ref('Group').child(uID)
+        dbConfig.database().ref('Group').child(userId)
           .once('value', (get) => {
             if (get.val() != null) {
               get.val();
@@ -277,10 +272,10 @@ Router.route('/sendGroupMessage')
 Router.route('/getGroupMessage')
   .post((req, res) => {
     const group = req.body.group;
-    const uID = req.user.uid;
+    const userId = req.user.uid;
     return Promise.all(
       [
-        dbConfig.database().ref(`Group/${uID}`).child(group)
+        dbConfig.database().ref(`Group/${userId}`).child(group)
           .once('value', (snapshot) => snapshot.val())
       ])
       .then((response) => res.status(200).send({ response }))

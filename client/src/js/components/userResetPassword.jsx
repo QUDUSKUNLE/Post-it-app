@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
+import Footer from './Footer.jsx';
 import toastr from 'toastr';
 
 /**
@@ -52,23 +53,14 @@ export default class ResetPassword extends React.Component {
      */
     resetPassword(resetEmail)
       .then((res) => {
-        const mess = res.data.message;
-        this.setState({
-          response: mess
-        });
-        toastr.success(this.state.response);
+        toastr.success(res.data.message);
       }).catch((err) => {
-        if (err.response) {
-          const error = 'User Not Found';
-          this.setState({
-            response: error
-          });
+        if (err.response.data.error.code === 'auth/user-not-found') {
+          toastr.error(err.response.data.error.message);
+        } else if (err.response.data.error.code === 'auth/invalid-email') {
+          toastr.error(err.response.data.error.message);
         }
-        toastr.error(this.state.response);
       });
-    this.setState({
-      email: ''
-    });
   }
 
   /**
@@ -129,6 +121,7 @@ export default class ResetPassword extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

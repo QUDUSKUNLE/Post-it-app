@@ -60,15 +60,9 @@ export default class SignUp extends React.Component {
       username: this.state.username
     });
     if (!validatePassword(this.state.password)) {
-      this.setState({
-        errMessage: 'Password is too low, at least 8 characters'
-      });
-      toastr.error(this.state.errMessage);
+      toastr.error('Incorrect password');
     } else if (this.state.password !== this.state.conf_password) {
-      this.setState({
-        errMessage: 'Password do not match'
-      });
-      toastr.error(this.state.errMessage);
+      toastr.error('Password does not match');
     } else {
       const user = {
         email: this.state.email,
@@ -77,12 +71,6 @@ export default class SignUp extends React.Component {
       };
       signupAction(user);
     }
-    this.setState({
-      email: '',
-      password: '',
-      conf_password: '',
-      username: ''
-    });
   }
 
   /**
@@ -93,16 +81,10 @@ export default class SignUp extends React.Component {
     const response = SignUpStore.signUpUser();
     if (response.message === 'Registration successful and' +
     ' verification email sent to your email') {
-      this.setState({
-        signupMessage: response.message
-      });
-      toastr.success(this.state.signupMessage);
+      toastr.success(response.message);
       this.props.history.push('/signin');
     } else if (response.data.error.code === 'auth/email-already-in-use') {
-      this.setState({
-        signupMessage: response.data.error.message
-      });
-      toastr.error(this.state.signupMessage);
+      toastr.error(response.data.error.message);
     }
   }
 
