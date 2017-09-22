@@ -233,7 +233,6 @@ export default class BroadCastBoard extends React.Component {
               allGeneralMessage={this.state.allGeneralMessage}/>
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }

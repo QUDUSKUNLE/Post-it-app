@@ -60,7 +60,7 @@ export default class SignUp extends React.Component {
       username: this.state.username
     });
     if (!validatePassword(this.state.password)) {
-      toastr.error('Incorrect password');
+      toastr.error('Incorrect password, should contain atleast one special character');
     } else if (this.state.password !== this.state.conf_password) {
       toastr.error('Password does not match');
     } else {

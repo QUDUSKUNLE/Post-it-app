@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
-    'webpack-hot-middleware/./client',
+    'webpack-hot-middleware/client',
     './client/src/js/index.jsx'
   ],
   devtool: 'eval',
@@ -48,8 +48,8 @@ const config = {
         ]
       },
       {
-        test: /\.css?$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.scss?$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },

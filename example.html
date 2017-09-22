@@ -2,59 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Document</title>
-</head>
-
-<body>
-    <script>
-        $(document).ready(function() {
-            $('[data-toggle=offcanvas]').click(function() {
-                $('.row-offcanvas').toggleClass('active');
-            });
-        });
-    </script>
     <style>
-        body,
-        html,
-        .row-offcanvas {
-            height: 100%;
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
         }
         
-        body {
-            padding-top: 50px;
+        * {
+            margin: 0px;
+            padding: 0px;
         }
         
         #sidebar {
-            width: inherit;
-            min-width: 220px;
-            max-width: 220px;
-            background-color: #f5f5f5;
-            float: left;
             height: 100%;
-            position: relative;
-            overflow-y: auto;
-            overflow-x: hidden;
+            background-color: #222222;
+            display: block;
+            position: fixed;
+            width: 175px;
+            left: -200px;
+            transition: all 500ms linear;
         }
         
-        #sidebar ul {
-            padding-top: 20px;
-            margin-bottom: 50px;
+        #sidebar.active {
+            left: 0px;
+        }
+        
+        #sidebar ul li {
+            color: white;
+            list-style: none;
+            padding: 15px 10px;
+            margin: 0px;
+            text-align: center;
+            border-bottom: 1px solid rgba(100, 100, 100, 0.3)
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            left: 220px;
+            top: 30px;
+        }
+        
+        .toggle-btn span {
+            display: block;
+            width: 30px;
+            height: 5px;
+            background: #151719;
+            margin: 5px 0px;
+            left: 230px;
+            top: 20px;
+            border-radius: 2px;
         }
         
         .main {
-            height: 70%;
-            overflow-y: auto;
-            background-color: #222222;
+            margin: 100px 100px 0 200px;
+            width: 65%;
+            background: #222222;
         }
         
-        .main .message {
-            margin-top: 20px;
+        .main .group {
+            background: #222222;
+            color: white;
+            padding: 15px 0;
+            border-radius: 2px
+        }
+        
+        .groupmembers ul li {
+            color: white;
+            background: #222222;
+            list-style: none;
+            padding: 15px 10px;
+            margin: 0px;
+            text-align: center;
         }
         
         .footer {
@@ -65,150 +91,65 @@
             margin-top: 50px;
             background-color: #222222;
             color: white;
-            text-align: center;
-        }
-        /*
- * off Canvas sidebar
- * --------------------------------------------------
- */
-        
-        @media screen and (max-width: 768px) {
-            .row-offcanvas {
-                position: relative;
-                -webkit-transition: all 0.25s ease-out;
-                -moz-transition: all 0.25s ease-out;
-                transition: all 0.25s ease-out;
-                width: calc(100% + 220px);
-            }
-            .row-offcanvas-left {
-                left: -220px;
-            }
-            .row-offcanvas-left.active {
-                left: 0;
-            }
-            .sidebar-offcanvas {
-                position: absolute;
-                top: 0;
-            }
+            padding: 10px 0 10px 0;
         }
     </style>
+</head>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                              </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+                <a class="navbar-brand" href="#">PostIt-App</a>
             </div>
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li class="active"><a href="#">MessageBoard</a></li>
+                    <li><a href="#">Create Group</a></li>
+                    <li><a href="#">Sign out</a></li>
                 </ul>
             </div>
         </div>
+    </nav>
+
+    <div id="sidebar">
+        <div class="toggle-btn" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul>
+            <li>Home</li>
+            <li>Contacts</li>
+        </ul>
     </div>
 
-    <div class="row-offcanvas row-offcanvas-left">
-        <div id="sidebar" class="sidebar-offcanvas">
-            <div class="col-md-12">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#">Section</a></li>
-                    <li><a href="#">Section</a></li>
-                    <li><a href="#">Section</a></li>
-                    <li><a href="#">Section</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="main">
-            <div class="col-md-12 message">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="well">
-                            <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <div class="main">
+        ade
     </div>
+
+
     <div class="footer">
-        <p>Footer</p>
+        <div class="container-fluid">
+            <p>Footer</p>
+        </div>
+
     </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById("sidebar").classList.toggle('active');
+        }
+    </script>
+
+
 </body>
 
 </html>

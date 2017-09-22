@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle=offcanvas]').click(function() {
+                $('.row-offcanvas').toggleClass('active');
+            });
+        });
+    </script>
+    <style>
+        .row-offcanvas {
+            height: 100%;
+        }
+        
+        body {
+            padding-top: 50px;
+        }
+        
+        #sidebar {
+            width: inherit;
+            min-width: 220px;
+            max-width: 220px;
+            background-color: #222222;
+            float: left;
+            height: 90vh;
+            position: relative;
+            /* overflow-y: auto; */
+            overflow-x: hidden;
+            padding-bottom: 100px;
+            border-right: 1px solid gray;
+        }
+        
+        .row-offcanvas .sidebar-offcanvas .groups {
+            height: 50vh
+        }
+        
+        .row-offcanvas .sidebar-offcanvas .members {
+            height: 50vh;
+            color: white;
+        }
+        
+        .row-offcanvas .sidebar-offcanvas .members ul li {
+            padding: 10px;
+        }
+        
+        #main {
+            height: 80%;
+            /* margin-top: 10px; */
+            overflow: auto;
+        }
+        
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            margin-top: 50px;
+            background-color: #222222;
+            color: white;
+        }
+        
+        .footer p {
+            padding: 10px 0 10px 20px
+        }
+        
+        .messageBoard {
+            height: 65vh;
+            overflow-y: scroll;
+            margin-top: 10px;
+        }
+        
+        .messageForm {
+            padding-top: 20px;
+        }
+        
+        .message {
+            padding: 25px;
+        }
+        /*
+ * off Canvas sidebar
+ * --------------------------------------------------
+ */
+        
+        @media screen and (max-width: 768px) {
+            .row-offcanvas {
+                position: relative;
+                -webkit-transition: all 0.25s ease-out;
+                -moz-transition: all 0.25s ease-out;
+                transition: all 0.25s ease-out;
+                width: calc(100% + 220px);
+            }
+            .row-offcanvas-left {
+                left: -220px;
+            }
+            .row-offcanvas-left.active {
+                left: 0;
+            }
+            .sidebar-offcanvas {
+                position: absolute;
+                top: 0;
+            }
+        }
+    </style>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                <a class="navbar-brand" href="#">PostIt-app</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">MessageBoard</a></li>
+                    <li><a href="#about">Create Group</a></li>
+                    <li><a href="#contact">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row-offcanvas row-offcanvas-left">
+        <div id="sidebar" class="sidebar-offcanvas">
+            <div class="col-md-12 groups">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="text-center"><a href="#">Abuja</a></li>
+                    <li class="text-center"><a href="#">kisi</a></li>
+                </ul>
+            </div>
+            <div class="col-md-12 members">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="text-center">Shola</li>
+                    <li class="text-center">Bola</li>
+                    <li class="text-center">Shola</li>
+                    <li class="text-center">Bola</li>
+                    <li class="text-center">Shola</li>
+                    <li class="text-center">Bola</li>
+                    <li class="text-center">Shola</li>
+                    <li class="text-center">Bola</li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <div class="col-md-10 col-md-offset-1">
+                <p class="visible-xs">
+                    <button type="button" class="btn btn-default btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                </p>
+                <h5>Group | abuja
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
+                </h5>
+                <div class="messageBoard">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well">
+                                <p>Shrink the browser width to make the sidebar collapse off canvase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row messageForm">
+                    <form class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <select>
+                                        <option>Normal</option>
+                                        <option>Crtical</option>
+                                        <option>Normal</option>
+                                      </select>
+                                </div>
+                                <input type="text" class="form-control message" placeholder="Type message.....">
+                                <div class="input-group-addon">
+                                    <button class="btn btn-default">Send</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- <div class="col-md-4">
+                    <h4 class="text-center">Members</h4>
+                    <div class="member">
+                        <ul>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                            <li class="text-center">ade</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Footer</p>
+    </div>
+
+</body>
+
+</html>
