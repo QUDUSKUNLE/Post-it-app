@@ -12,6 +12,30 @@
 # PostIt-app API.
   PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
   PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://facebook.github.io/react/">React</a> and <a href="https://nodejs.org/">Node.js</a>
+
+
+ # Application Features
+  <b>.</b> Users can Sign up
+
+  <b>.</b> Users can Sign in
+
+  <b>.</b> Users can Sign in with Google
+
+  <b>.</b> Users can reset password
+
+  <b>.</b> Signed in users can create group
+
+  <b>.</b> Users can add other registered users to groups
+
+  <b>.</b> Users can send message to groups they belong to
+
+  <b>.</b> Users can receive notification base on message priority
+
+  <b>.</b> Users can see members of their groups
+  
+  <b>.</b> Users can Sign out
+
+
 # Getting Started
   Kindly follow the steps below to setup a local development environment.
   1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
@@ -29,6 +53,13 @@
   7. Go to <b>http://localhost:8080/</b>
 
 # Limitations
+1. Users cannot edit profile
+
+2. Users can add any registered users without users prior knowledge
+
+3. Users cannot leave a group
+
+4. Users cannot delete message sent
 
 # FAQ
 
@@ -36,4 +67,3 @@
   . Qudus YEKEEN
 
 # Licence
-  

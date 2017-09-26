@@ -12,8 +12,7 @@ import {
 } from '../utils/utils.js';
 
 /**
- * @description - Get message of a group
- * @param {Object} groupName - { groupName }
+ * @description - Get message of general Group
  * @returns {function} dispatch - dispatch to MessageStore
  */
 export const getGeneralMessage = () => axios.post('/getGeneralMessage')
@@ -30,12 +29,12 @@ export const getGeneralMessage = () => axios.post('/getGeneralMessage')
     });
 
 /**
- * @description - Get message of a group
- * @param {Object} message - { groupName }
+ * @description - Send message to general group
+ * @param {Object} messageDetails - { message, priority, userName, email }
  * @returns {function} dispatch - dispatch to MessageStore
  */
-export const sendGeneralMessage = (message) => axios.post('/sendGeneralMessage',
-        message)
+export const sendGeneralMessage = (messageDetails) =>
+  axios.post('/sendGeneralMessage', messageDetails)
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: SEND_GENERAL_MESSAGE,
@@ -48,9 +47,10 @@ export const sendGeneralMessage = (message) => axios.post('/sendGeneralMessage',
       });
     });
 
-
 /**
- * @param {any} group
+ * @description - Get message of a group
+ * @param {Object} group - { group }
+ * @returns {function} dispatch - dispatch to MessageStore
  */
 export const getGroupMessage = (group) => axios.post('/getGroupMessage',
   group)
@@ -66,15 +66,18 @@ export const getGroupMessage = (group) => axios.post('/getGroupMessage',
     });
   });
 
- /**
- * @param {any} group
- */
-export const sendGroupMessage = (group) => axios.post('/sendGroupMessage',
-  group)
+/**
+* @description - Send message to a group
+* @param {Object} messageDetails - { groupName,
+    message, priority, userName, email }
+* @returns {function} dispatch - dispatch to MessageStore
+*/
+export const sendGroupMessage = (messageDetails) => axios.post(
+  '/sendGroupMessage', messageDetails)
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: SEND_GROUP_MESSAGE,
-        message: data.response[2]
+        message: data.response[1]
       });
     }, ({ response }) => {
       AppDispatcher.dispatch({

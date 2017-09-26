@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
 import Footer from './Footer.jsx';
 import toastr from 'toastr';
+import SignInStore from '../stores/SignInStore.js';
 
 /**
  * @description - renders ResetPassword Component
@@ -23,6 +24,12 @@ export default class ResetPassword extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handlePasswordReset = this.handlePasswordReset.bind(this);
+  }
+
+  componentDidMount() {
+    SignInStore.on('PASSWORD_RESET_SUCCESS', this.handlePasswordReset);
+    SignInStore.on('PASSWORD_RESET_ERROR', this.handlePasswordReset);
   }
   /**
  * onChange event.
@@ -43,24 +50,26 @@ export default class ResetPassword extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     const resetEmail = {
-      email: this.state.email,
+      email: this.state.email
     };
+    resetPassword(resetEmail);
+  }
 
-    /**
-     * @description - This handles reset Password Action
-     * @returns {Object} Object
-     * @MemberOf Reset Password
-     */
-    resetPassword(resetEmail)
-      .then((res) => {
-        toastr.success(res.data.message);
-      }).catch((err) => {
-        if (err.response.data.error.code === 'auth/user-not-found') {
-          toastr.error(err.response.data.error.message);
-        } else if (err.response.data.error.code === 'auth/invalid-email') {
-          toastr.error(err.response.data.error.message);
-        }
-      });
+  /**
+   * @description - This handles reset Password Action
+   * @returns {Object} Object
+   * @MemberOf Reset Password
+   */
+  handlePasswordReset() {
+    const passwordResetResponse = SignInStore.passwordReset();
+    if (passwordResetResponse.message ===
+      'Password reset email sent successfully!') {
+      toastr.success(passwordResetResponse.message);
+    } else if (passwordResetResponse.error.code === 'auth/user-not-found') {
+      toastr.error(passwordResetResponse.error.message);
+    } else if (passwordResetResponse.error.code === 'auth/invalid-email') {
+      toastr.error(passwordResetResponse.error.message);
+    }
   }
 
   /**
@@ -73,7 +82,7 @@ export default class ResetPassword extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed"
                 data-toggle="collapse" data-target=".navbar-collapse">

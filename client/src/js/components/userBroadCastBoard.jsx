@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
 import Footer from './Footer.jsx';
-import { getGroups } from '../actions/groupAction.js';
+import { getUserGroup } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -29,6 +29,7 @@ export default class BroadCastBoard extends React.Component {
     super(props);
     this.state = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
+      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: 'general',
       groups: [],
       groupName: '',
@@ -53,7 +54,7 @@ export default class BroadCastBoard extends React.Component {
    * @return {null} -
    */
   componentWillMount() {
-    getGroups();
+    getUserGroup();
     getGeneralMessage();
   }
 
@@ -96,8 +97,9 @@ export default class BroadCastBoard extends React.Component {
    * @return {null} -
    */
   newGeneralMessage() {
+    const newMessage = MessageStore.allGeneralMessage();
     this.setState({
-      allGeneralMessage: MessageStore.allGeneralMessage()
+      allGeneralMessage: newMessage
     });
   }
 
@@ -184,7 +186,7 @@ export default class BroadCastBoard extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle"
                 data-toggle="collapse" data-target=".navbar-collapse">
@@ -211,7 +213,7 @@ export default class BroadCastBoard extends React.Component {
             </div>
           </div>
        </nav>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
               <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
@@ -227,7 +229,7 @@ export default class BroadCastBoard extends React.Component {
             <Groups
               grouplist={grouplist}
               getMembers={this.getMembersOnClick}
-              generalMessageLength={this.state.allGeneralMessage.length}/>
+              />
             <ChatBox
               defaultGroup={this.state.defaultGroup}
               allGeneralMessage={this.state.allGeneralMessage}/>

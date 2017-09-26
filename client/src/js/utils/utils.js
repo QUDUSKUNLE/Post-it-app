@@ -91,5 +91,12 @@ export const arrayOfGeneralMessage = (data) => {
  * @param {Object} data -
  * @returns {Object} GroupMessage
  */
-export const getArrayOfGroupMessage = data => Object.values(
-  (Object.values((data.response)[0]))[0]).filter(x => typeof x === 'object');
+export const getArrayOfGroupMessage = data => {
+  let arrayOfGroupMessage;
+  if ((data.response)[0] === null) {
+    arrayOfGroupMessage = [];
+  } else {
+    arrayOfGroupMessage = Object.values((data.response)[0]);
+  }
+  return arrayOfGroupMessage;
+};

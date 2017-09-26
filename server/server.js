@@ -2,7 +2,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import Router from './config/usersRoutes';
+import Router from './routes';
 import webpack from 'webpack';
 import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
@@ -40,7 +40,6 @@ app.use((req, res, next) => {
 });
 
 // MIDDLEWARE
-// log all requests to the console
 app.use(morgan('dev'));
 
 // Added Webpack

@@ -12,7 +12,7 @@ import {
   * @param {object} GroupName - { GroupName }
   * @returns {function} dispatch - dispatch to MemberStore
 */
-export const getGroupMembers = (GroupName) => axios.post('/memberlist',
+export const getGroupMembers = (GroupName) => axios.post('/getGroupMember',
   GroupName)
   .then(({ data }) => {
     AppDispatcher.dispatch({
@@ -33,7 +33,7 @@ export const getGroupMembers = (GroupName) => axios.post('/memberlist',
   * @param {null} null - null
   * @returns {function} dispatch - dispatch to MemberStore
 */
-export const generalUsers = () => axios.post('/getGeneralUsers')
+export const getAllUsers = () => axios.post('/getAllUsers')
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GENERAL,

@@ -26,6 +26,7 @@ export default class SignIn extends React.Component {
     super(props);
     this.state = {
       userName: '',
+      userId: '',
       email: '',
       password: '',
       signinMessage: '',
@@ -84,12 +85,20 @@ export default class SignIn extends React.Component {
       toastr.success('User Signed in successfully');
       this.setState({
         userName: (Object.values((response.response)[0])[0].userName),
-        loggedIn: true
+        loggedIn: true,
+        email: this.state.email,
+        userId: (Object.keys((response.response)[0]))[0]
       });
       localStorage.setItem('userName', JSON.stringify(this.state.userName));
       localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
+      localStorage.setItem('Id', JSON.stringify(this.state.userId));
+      localStorage.setItem('email', JSON.stringify(this.state.email));
       this.props.history.push('/broadcastboard');
     } else if (response.data.error.code === 'auth/wrong-password') {
+      toastr.error(response.data.error.message);
+    } else if (response.data.error.code === 'auth/user-not-found') {
+      toastr.error(response.data.error.message);
+    } else if (response.data.error.code === 'auth/invalid-email') {
       toastr.error(response.data.error.message);
     }
   }
@@ -132,7 +141,7 @@ export default class SignIn extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed"
                 data-toggle="collapse" data-target=".navbar-collapse">

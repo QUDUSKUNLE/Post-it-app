@@ -7,8 +7,8 @@ import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
 import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
-import { getGroups } from '../actions/groupAction.js';
-import { generalUsers } from '../actions/memberActions.js';
+import { getUserGroup } from '../actions/groupAction.js';
+import { getAllUsers } from '../actions/memberActions.js';
 
 /**
  * @description - renders AddMember Component
@@ -40,8 +40,8 @@ export default class AddMember extends React.Component {
   }
 
   componentWillMount() {
-    getGroups();
-    generalUsers();
+    getUserGroup();
+    getAllUsers();
   }
 
   componentDidMount() {
@@ -146,7 +146,7 @@ export default class AddMember extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle"
                 data-toggle="collapse" data-target=".navbar-collapse">
