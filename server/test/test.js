@@ -21,11 +21,52 @@ describe('PostIt', () => {
   });
 
     // Sign Up Route
-  it('should allow new user`s to signup', (done) => {
+  it('should throw error for a non validated password', (done) => {
     const newUser = {
       email: faker.internet.email(),
       password: 'kawthar',
       confirmPassword: 'kawthar',
+      username: faker.name.findName()
+    };
+    chai.request(server)
+      .post('/signup')
+      .send(newUser)
+      .end((err, res) => {
+        res.should.have.status(501);
+        assert.equal('password should be at' +
+        ' least 6 characters with a speacial character', res.body.error.code);
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.have.property('code');
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('should throw error for password that does not match', (done) => {
+    const newUser = {
+      email: faker.internet.email(),
+      password: 'kawthar@',
+      confirmPassword: 'kawthar',
+      username: faker.name.findName()
+    };
+    chai.request(server)
+      .post('/signup')
+      .send(newUser)
+      .end((err, res) => {
+        res.should.have.status(501);
+        assert.equal('Password does not match', res.body.error.code);
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.have.property('code');
+        res.body.should.be.a('object');
+        done();
+      });
+  });
+
+  it('should allow new users to sign up', (done) => {
+    const newUser = {
+      email: faker.internet.email(),
+      password: 'kawthar@',
+      confirmPassword: 'kawthar@',
       username: faker.name.findName()
     };
     chai.request(server)
@@ -38,6 +79,7 @@ describe('PostIt', () => {
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
         res.body.should.be.a('object');
+        assert.equal('object', typeof (res.body.response));
         done();
       });
   });
@@ -47,8 +89,8 @@ describe('PostIt', () => {
   it('should not signed up already registered user', (done) => {
     const newUser = {
       email: 'kawthar@gmail.com',
-      password: 'kawthar',
-      confirmPassword: 'kawthar',
+      password: 'kawthar@',
+      confirmPassword: 'kawthar@',
       username: 'Joke'
     };
     chai.request(server)
@@ -58,7 +100,7 @@ describe('PostIt', () => {
       assert.equal('The email address is already in use by another account.',
         res.body.error.message);
       assert.equal('auth/email-already-in-use', res.body.error.code);
-      res.should.have.status(502);
+      res.should.have.status(501);
       res.body.should.be.a('object');
       done();
     });
@@ -67,8 +109,8 @@ describe('PostIt', () => {
   it('should flag error for bad input email', (done) => {
     const newUser = {
       email: 'jksdzfkd',
-      password: 'kawthar',
-      confirmPassword: 'kawthar',
+      password: 'kawthar@',
+      confirmPassword: 'kawthar@',
       username: 'Joke'
     };
     chai.request(server)
@@ -78,62 +120,94 @@ describe('PostIt', () => {
         assert.equal('The email address is badly formatted.',
           res.body.error.message);
         assert.equal('auth/invalid-email', res.body.error.code);
-        res.should.have.status(502);
+        res.should.have.status(400);
         res.body.should.be.a('object');
         done();
       });
   });
 
-  it('should flag error for bad input format', (done) => {
+  it('should flag error if username is undefined', (done) => {
     const newUser = {
-      email: 'kunle@gmail.com',
-      password: '',
-      confirmPassword: 'kawthar',
-      username: 'Joke'
+      email: faker.internet.email(),
+      password: 'kawthar@',
+      confirmPassword: 'kawthar@'
     };
     chai.request(server)
       .post('/signup')
       .send(newUser)
       .end((err, res) => {
-        assert.equal('The password must be 6 characters long or more.',
-          res.body.error.message);
-        assert.equal('auth/weak-password', res.body.error.code);
-        res.should.have.status(502);
+        assert.equal('Username is required', res.body.error.code);
+        res.should.have.status(501);
         res.body.should.be.a('object');
         done();
       });
   });
 
+  it('should flag error if username character is less than 2', (done) => {
+    const newUser = {
+      email: faker.internet.email(),
+      password: 'kawthar@',
+      confirmPassword: 'kawthar@',
+      username: 'k'
+    };
+    chai.request(server)
+      .post('/signup')
+      .send(newUser)
+      .end((err, res) => {
+        assert.equal('Username required at least 2 characters',
+          res.body.error.code);
+        res.should.have.status(501);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
-    // Sign In Route
+  // Sign In Route
   it('should allow a registered user sign in successfully', (done) => {
     const registeredUser = {
-      email: 'kawthar@gmail.com',
-      password: 'kawthar'
+      email: 'kunle@gmail.com',
+      password: 'kawthar@'
     };
     chai.request(server)
       .post('/signin')
       .send(registeredUser)
       .end((err, res) => {
         res.should.have.status(200);
+        assert.equal('User Signed in successfully', res.body.message);
         res.body.should.be.a('object');
-        expect(res.body).to.not.have.property('uID');
         expect(res.body).to.have.property('message');
-        expect(res.body.message).to.eql('User Signed in successfully');
+        expect(res.body).to.have.property('response');
         done();
       });
   });
 
-  it('should flagg error for a wrong password', (done) => {
+  it('should flag error if email is undefined', (done) => {
     const registeredUser = {
-      email: 'kawthar@gmail.com',
-      password: 'kawtha'
+      password: 'kawthar@'
     };
     chai.request(server)
       .post('/signin')
       .send(registeredUser)
       .end((err, res) => {
         res.should.have.status(404);
+        assert.equal('Either email or passowrd is not provided', res.body.error.code);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('error');
+        expect(res.body.error).to.have.property('code');
+        done();
+      });
+  });
+
+  it('should flagg error for a wrong password', (done) => {
+    const registeredUser = {
+      email: 'kunle@gmail.com',
+      password: 'kawtha'
+    };
+    chai.request(server)
+      .post('/signin')
+      .send(registeredUser)
+      .end((err, res) => {
+        res.should.have.status(401);
         assert.equal('auth/wrong-password', res.body.error.code);
         res.body.should.be.a('object');
         assert.equal('The password is invalid or the user does ' +
@@ -142,7 +216,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('should flagg error for a wrong email address', (done) => {
+  it('should flagg error for a non registered user', (done) => {
     const registeredUser = {
       email: 'kawthajjjjjj@gmail.com',
       password: 'kawthar'
@@ -153,7 +227,6 @@ describe('PostIt', () => {
       .end((err, res) => {
         res.should.have.status(404);
         res.body.should.be.a('object');
-        expect(res.body).to.not.have.property('uID');
         expect(res.body.error.code).to.equal('auth/user-not-found');
         expect(res.body.error.message).to.equal('There is no user record ' +
           'corresponding to this identifier. The user may have been deleted.');
@@ -170,7 +243,7 @@ describe('PostIt', () => {
       .post('/signin')
       .send(registeredUser)
       .end((err, res) => {
-        res.should.have.status(404);
+        res.should.have.status(400);
         res.body.should.be.a('object');
         expect(res.body.error.code).to.equal('auth/invalid-email');
         expect(res.body.error.message).to.equal('The email address is badly' +
@@ -179,14 +252,16 @@ describe('PostIt', () => {
       });
   });
 
-    // Password Reset Route
+  // Password Reset Route
   it('should allow registered user`s to reset their passwords', (done) => {
-    const userEmail = { email: 'kawthar@gmail.com' };
+    const userEmail = { email: 'kunle@gmail.com' };
     chai.request(server)
       .post('/passwordreset')
       .send(userEmail)
       .end((err, res) => {
-        assert.equal(404, res.statusCode);
+        res.should.have.status(200);
+        assert.equal('Password reset email sent successfully!',
+          res.body.message);
         res.body.should.be.a('object');
         done();
       });
@@ -198,7 +273,7 @@ describe('PostIt', () => {
       .post('/passwordreset')
       .send(userEmail)
       .end((err, res) => {
-        assert.equal(404, res.statusCode);
+        assert.equal(400, res.statusCode);
         assert.equal('The email address is badly formatted.',
           res.body.error.message);
         expect(res.body).to.have.property('error');
@@ -224,11 +299,11 @@ describe('PostIt', () => {
       });
   });
 
-    // User's should be able to create grpoup
+  // User's should be able to create grpoup
   it('should allow registered user`s to create groups', (done) => {
-    const group = { group: 'andela', uId: 'annajadsaknjd1' };
+    const group = { group: faker.name.findName() };
     chai.request(server)
-      .post('/creategroup')
+      .post('/userCreateNewGroup')
       .send(group)
       .end((err, res) => {
         assert.equal(200, res.statusCode);
@@ -239,11 +314,23 @@ describe('PostIt', () => {
       });
   });
 
-  it('should allow user to get all groups he belongs to', (done) => {
-    const uID = { uID: 'annajadsaknjd1' };
+  // User's should be able to create grpoup
+  it('should throw an error for an already created password', (done) => {
+    const group = { group: 'andela' };
     chai.request(server)
-      .post('/getgroups')
-      .send(uID)
+      .post('/userCreateNewGroup')
+      .send(group)
+      .end((err, res) => {
+        assert.equal(400, res.statusCode);
+        assert.equal('Group already exists', res.body.error);
+        expect(res.body).to.have.property('error');
+        done();
+      });
+  });
+
+  it('should allow users to get all groups they belongs to', (done) => {
+    chai.request(server)
+      .post('/getUserGroups')
       .end((err, res) => {
         assert.equal('object', typeof (res.body.response));
         assert.equal(200, res.statusCode);
@@ -254,7 +341,7 @@ describe('PostIt', () => {
 
   it('should get all register user`s onmounting broadcastcomponent', (done) => {
     chai.request(server)
-      .post('/generallist')
+      .post('/getAllUsers')
       .end((err, res) => {
         assert.equal(200, res.statusCode);
         assert.equal('object', typeof (res.body.response));
@@ -265,10 +352,12 @@ describe('PostIt', () => {
   it('should get all member of a particular group', (done) => {
     const group = { group: 'andela' };
     chai.request(server)
-      .post('/memberlist')
+      .post('/getGroupMember')
       .send(group)
       .end((err, res) => {
         assert.equal(200, res.statusCode);
+        assert.equal('Hey, here are members of the group andela',
+          res.body.message);
         assert.equal('object', typeof (res.body.response));
         expect(res.body).to.have.property('message');
         expect(res.body).to.have.property('response');
@@ -276,33 +365,12 @@ describe('PostIt', () => {
       });
   });
 
-  it('should throw error for no group', (done) => {
-    const group = { group: '' };
-    chai.request(server)
-      .post('/memberlist')
-      .send(group)
-      .end((err, res) => {
-        assert.equal(500, res.statusCode);
-        done();
-      });
-  });
-
-  it('should all registered user`s to add members to a group', (done) => {
-    const groupName = { group: 'andela', member: 'micheal' };
-    chai.request(server)
-      .post('/group/member')
-      .send(groupName)
-      .end((err, res) => {
-        assert.equal(200, res.statusCode);
-        expect(res.body).to.have.property('message');
-        expect(res.body).to.have.property('response');
-        done();
-      });
-  });
 
   it('should allow signed in user`s to send message to general channel',
     (done) => {
-      const message = { message: 'Hello everyone' };
+      const message = { message: 'Hello everyone',
+        priority: 'normal', userName: 'kunle',
+        email: 'kawthar@gmail.com' };
       chai.request(server)
         .post('/sendGeneralMessage')
         .send(message)
@@ -349,42 +417,18 @@ describe('PostIt', () => {
       });
   });
 
-
-  it('should not allow already signed-out user`s to add member to group',
+  it('should not allow a user`s that is not sign in to create groups',
     (done) => {
-      const groupName = { group: 'andela', member: 'micheal' };
+      const groupName = { group: 'andela' };
       chai.request(server)
-        .post('/group/member')
+        .post('/userCreateNewGroup')
         .send(groupName)
         .end((err, res) => {
-          assert.equal(500, res.statusCode);
+          assert.equal(401, res.statusCode);
+          expect(res.body).to.have.property('error');
+          assert.equal('User is not signed in', res.body.error);
+          res.body.should.be.a('object');
           done();
         });
     });
-
-  it('should not a user`s that is not sign in to create groups', (done) => {
-    const groupName = { group: 'andela', uId: 'jakljascjsCKsaldjakljcaks' };
-    chai.request(server)
-      .post('/creategroup')
-      .send(groupName)
-      .end((err, res) => {
-        assert.equal(401, res.statusCode);
-        expect(res.body).to.have.property('err');
-        assert.equal('User not signed iiii!', res.body.err);
-        assert.equal('PERMISSION_DENIED', res.body.error.code);
-        res.body.should.be.a('object');
-        done();
-      });
-  });
-
-  it('should not allow user access groups when signed out', (done) => {
-    const uID = { uID: 'annajadsaknjd1' };
-    chai.request(server)
-      .post('/getgroups')
-      .send(uID)
-      .end((err, res) => {
-        assert.equal(500, res.statusCode);
-        done();
-      });
-  });
 });

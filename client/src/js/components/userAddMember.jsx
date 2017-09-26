@@ -115,19 +115,13 @@ export default class AddMember extends React.Component {
    */
   handleSignOutEvent() {
     signoutAction().then((response) => {
-      this.setState({
-        errSignOut: response.data.message
-      });
-      toastr.success(this.state.errSignOut);
+      toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-        this.setState({
-          errSignOut: error.response.data
-        });
+        toastr.error(error.response.data);
       }
-      toastr.error(this.state.errSignOut);
     });
   }
 

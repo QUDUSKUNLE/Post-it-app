@@ -12,7 +12,7 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _routes = require('./routes');
+var _routes = require('./controllers/routes');
 
 var _routes2 = _interopRequireDefault(_routes);
 

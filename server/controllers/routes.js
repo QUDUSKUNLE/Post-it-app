@@ -1,7 +1,7 @@
 import express from 'express';
-import Users from './controllers/Users';
-import Groups from './controllers/Groups';
-import Messages from './controllers/Messages';
+import Users from './Users';
+import Groups from './Groups';
+import Messages from './Messages';
 const Router = express.Router();
 
 Router.get('/*', Users.home);

@@ -79,7 +79,6 @@ export default class ChatBox extends React.Component {
    * @ChatBox
    */
   render() {
-    console.log(this.props.defaultGroup);
     const chatMessage = this.props.allGeneralMessage.map((Index, i) =>
       <li key={i} className="media">
         <div className="media-body">

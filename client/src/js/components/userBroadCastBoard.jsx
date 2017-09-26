@@ -4,7 +4,7 @@ import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
-import Footer from './Footer.jsx';
+// import Footer from './Footer.jsx';
 import { getUserGroup } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
@@ -212,7 +212,7 @@ export default class BroadCastBoard extends React.Component {
               </ul>
             </div>
           </div>
-       </nav>
+        </nav>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
