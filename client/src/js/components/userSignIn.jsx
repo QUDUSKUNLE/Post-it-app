@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import toastr from 'toastr';
+import Footer from './Footer.jsx';
 import SignInStore from '../stores/SignInStore.js';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
@@ -25,6 +26,7 @@ export default class SignIn extends React.Component {
     super(props);
     this.state = {
       userName: '',
+      userId: '',
       email: '',
       password: '',
       signinMessage: '',
@@ -70,7 +72,6 @@ export default class SignIn extends React.Component {
       password: this.state.password
     };
     signinAction(user);
-    this.setState({ email: '', password: '' });
   }
 
   /**
@@ -81,22 +82,24 @@ export default class SignIn extends React.Component {
   handleSignInAction() {
     const response = SignInStore.signInUser();
     if (response.message === 'User Signed in successfully') {
+      toastr.success('User Signed in successfully');
       this.setState({
-        signinMessage: 'User Signed in successfully',
-        userName: (Object.values((response.response)[1])[0].userName),
-        loggedIn: true
+        userName: (Object.values((response.response)[0])[0].userName),
+        loggedIn: true,
+        email: this.state.email,
+        userId: (Object.keys((response.response)[0]))[0]
       });
-      toastr.success(this.state.signinMessage);
       localStorage.setItem('userName', JSON.stringify(this.state.userName));
       localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
+      localStorage.setItem('Id', JSON.stringify(this.state.userId));
+      localStorage.setItem('email', JSON.stringify(this.state.email));
       this.props.history.push('/broadcastboard');
-      this.setState({
-        signinMessage: ''
-      });
     } else if (response.data.error.code === 'auth/wrong-password') {
-      this.setState({ errMessage: response.data.error.message });
-      toastr.error(this.state.errMessage);
-      this.setState({ errMessage: '' });
+      toastr.error(response.data.error.message);
+    } else if (response.data.error.code === 'auth/user-not-found') {
+      toastr.error(response.data.error.message);
+    } else if (response.data.error.code === 'auth/invalid-email') {
+      toastr.error(response.data.error.message);
     }
   }
 
@@ -138,7 +141,7 @@ export default class SignIn extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed"
                 data-toggle="collapse" data-target=".navbar-collapse">
@@ -207,6 +210,7 @@ export default class SignIn extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
+import Footer from './Footer.jsx';
 import { addMember } from '../actions/appActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
 import MemberStore from '../stores/MemberStore.js';
 import GroupStore from '../stores/GroupStore.js';
-import { getGroups } from '../actions/groupAction.js';
-import { generalUsers } from '../actions/memberActions.js';
+import { getUserGroup } from '../actions/groupAction.js';
+import { getAllUsers } from '../actions/memberActions.js';
 
 /**
  * @description - renders AddMember Component
@@ -39,8 +40,8 @@ export default class AddMember extends React.Component {
   }
 
   componentWillMount() {
-    getGroups();
-    generalUsers();
+    getUserGroup();
+    getAllUsers();
   }
 
   componentDidMount() {
@@ -114,19 +115,13 @@ export default class AddMember extends React.Component {
    */
   handleSignOutEvent() {
     signoutAction().then((response) => {
-      this.setState({
-        errSignOut: response.data.message
-      });
-      toastr.success(this.state.errSignOut);
+      toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-        this.setState({
-          errSignOut: error.response.data
-        });
+        toastr.error(error.response.data);
       }
-      toastr.error(this.state.errSignOut);
     });
   }
 
@@ -145,7 +140,7 @@ export default class AddMember extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle"
                 data-toggle="collapse" data-target=".navbar-collapse">
@@ -155,16 +150,15 @@ export default class AddMember extends React.Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link className="navbar-brand" to="/">
+              <Link className="navbar-brand" to="#">
                 PostIt<small>App</small>
               </Link>
             </div>
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav"></ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/broadcastboard">Chat Room</Link></li>
-                <li className="active"><Link to="/member">AddMember</Link></li>
+                <li><Link to="/broadcastboard">MessageBoard</Link></li>
+                <li className="active"><Link to="/member">Add Member</Link></li>
                 <li onClick={this.handleSignOutEvent}>
                   <Link to="/">Sign Out</Link>
                 </li>
@@ -208,6 +202,7 @@ export default class AddMember extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

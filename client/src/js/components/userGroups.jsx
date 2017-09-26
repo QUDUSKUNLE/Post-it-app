@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { generalUsers } from '../actions/memberActions.js';
+import { getAllUsers } from '../actions/memberActions.js';
 import { getGeneralMessage } from '../actions/messageActions.js';
 import MemberStore from '../stores/MemberStore.js';
 
@@ -41,7 +41,7 @@ export default class Groups extends React.Component {
 
   handleClick() {
     getGeneralMessage();
-    generalUsers();
+    getAllUsers();
   }
 
   /**

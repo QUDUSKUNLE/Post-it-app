@@ -22,7 +22,6 @@ class MemberStore extends EventEmitter {
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.allGeneralUsers = this.allGeneralUsers.bind(this);
     this.handleActions = this.handleActions.bind(this);
-    this.setGroupMembers = this.setGroupMembers.bind(this);
   }
 
   /**
@@ -40,15 +39,6 @@ class MemberStore extends EventEmitter {
    */
   allGroupMembers() {
     return [this.members, this.group];
-  }
-
-  /**
-   * @method setGroupMembers
-   * @param {Object} group -
-   * @return {object} update mmebers - The groups stored in the constructor
-   */
-  setGroupMembers(group) {
-    this.members = group;
   }
 
   /**

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import SignUpStore from '../stores/SignUpStore.js';
 import { signupAction } from '../actions/signUpActions.js';
-import { validatePassword } from '../utils/utils.js';
 
 /**
  * @description - renders SignUp Component
@@ -22,7 +21,7 @@ export default class SignUp extends React.Component {
       email: '',
       password: '',
       username: '',
-      conf_password: '',
+      confirmPassword: '',
       signupMessage: '',
       errMessage: ''
     };
@@ -56,33 +55,16 @@ export default class SignUp extends React.Component {
     this.setState({
       email: this.state.email,
       password: this.state.password,
-      conf_password: this.state.conf_password,
+      confIrmPassword: this.state.confirmPassword,
       username: this.state.username
     });
-    if (!validatePassword(this.state.password)) {
-      this.setState({
-        errMessage: 'Password is too low, at least 8 characters'
-      });
-      toastr.error(this.state.errMessage);
-    } else if (this.state.password !== this.state.conf_password) {
-      this.setState({
-        errMessage: 'Password do not match'
-      });
-      toastr.error(this.state.errMessage);
-    } else {
-      const user = {
-        email: this.state.email,
-        password: this.state.password,
-        username: this.state.username
-      };
-      signupAction(user);
-    }
-    this.setState({
-      email: '',
-      password: '',
-      conf_password: '',
-      username: ''
-    });
+    const user = {
+      email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
+      username: this.state.username
+    };
+    signupAction(user);
   }
 
   /**
@@ -93,16 +75,18 @@ export default class SignUp extends React.Component {
     const response = SignUpStore.signUpUser();
     if (response.message === 'Registration successful and' +
     ' verification email sent to your email') {
-      this.setState({
-        signupMessage: response.message
-      });
-      toastr.success(this.state.signupMessage);
+      toastr.success(response.message);
       this.props.history.push('/signin');
     } else if (response.data.error.code === 'auth/email-already-in-use') {
-      this.setState({
-        signupMessage: response.data.error.message
-      });
-      toastr.error(this.state.signupMessage);
+      toastr.error(response.data.error.message);
+    } else if (response.data.error.code === 'password should be at least 6' +
+      ' characters with a speacial character') {
+      toastr.error(response.data.error.code);
+    } else if (response.data.error.code === 'Password does not match') {
+      toastr.error(response.data.error.code);
+    } else if (response.data.error.code === 'Username required at' +
+    ' least 2 characters') {
+      toastr.error(response.data.error.code);
     }
   }
 
@@ -141,11 +125,11 @@ export default class SignUp extends React.Component {
                     name="password" required /></div>
                 <div className="form-group">
                   <label htmlFor="conf_password">Confirm Password</label>
-                  <input value={this.state.conf_password}
+                  <input value={this.state.confirmPassword}
                     onChange={this.onChange}
-                    id="conf_password" type="password"
+                    id="confirmPassword" type="password"
                     className="signinform" placeholder="********"
-                    name="conf_password" required /></div>
+                    name="confirmPassword" required /></div>
                 <button type="submit" className="signinformbtn">Sign up</button>
               </form>
               <br/>

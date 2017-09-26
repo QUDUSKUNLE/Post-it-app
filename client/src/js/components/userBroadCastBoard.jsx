@@ -4,7 +4,8 @@ import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Groups from './userGroups.jsx';
 import ChatBox from './userChatBox.jsx';
-import { getGroups } from '../actions/groupAction.js';
+// import Footer from './Footer.jsx';
+import { getUserGroup } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
@@ -28,6 +29,7 @@ export default class BroadCastBoard extends React.Component {
     super(props);
     this.state = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
+      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: 'general',
       groups: [],
       groupName: '',
@@ -52,7 +54,7 @@ export default class BroadCastBoard extends React.Component {
    * @return {null} -
    */
   componentWillMount() {
-    getGroups();
+    getUserGroup();
     getGeneralMessage();
   }
 
@@ -95,8 +97,9 @@ export default class BroadCastBoard extends React.Component {
    * @return {null} -
    */
   newGeneralMessage() {
+    const newMessage = MessageStore.allGeneralMessage();
     this.setState({
-      allGeneralMessage: MessageStore.allGeneralMessage()
+      allGeneralMessage: newMessage
     });
   }
 
@@ -152,19 +155,13 @@ export default class BroadCastBoard extends React.Component {
 
   handleSignOutAction() {
     signoutAction().then((response) => {
-      this.setState({
-        errSignOut: response.data.message
-      });
-      toastr.success(this.state.errSignOut);
+      toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-        this.setState({
-          errSignOut: error.response.data
-        });
+        toastr.error(error.response.data);
       }
-      toastr.error(this.state.errSignOut);
     });
   }
 
@@ -188,40 +185,42 @@ export default class BroadCastBoard extends React.Component {
       </li>, this);
     return (
       <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top"
-        role="navigation">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle"
-              data-toggle="collapse" data-target=".navbar-collapse">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <Link className="navbar-brand" to="#">
-              PostIt<small>App</small>
-            </Link>
+        <nav className="navbar navbar-inverse navabar-fixed-top">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button type="button" className="navbar-toggle"
+                data-toggle="collapse" data-target=".navbar-collapse">
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="#">
+                PostIt<small>App</small>
+              </Link>
+            </div>
+            <div className="collapse navbar-collapse">
+              <ul className="nav navbar-nav navbar-right">
+                <li className="active">
+                  <Link to="/broadcastboard">MessageBoard</Link>
+                </li>
+                <li>
+                  <Link to="/group">Create Group</Link>
+                </li>
+                <li onClick={this.handleSignOutAction}>
+                  <Link to="#">Sign out</Link>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="collapse navbar-collapse">
-            <ul className="nav navbar-nav navbar-right">
-              <li><Link to="#">Home</Link></li><li className="active">
-                <Link to="/broadcastboard">ChatRoom</Link></li>
-              <li onClick={this.handleSignOutAction}><Link to="#">Sign out</Link></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-        <div className="container">
+        </nav>
+        <div className="container-fluid">
           <div className="row">
             <div className="col-md-12">
-              <p className="pull-right">{`Hi, ${this.state.userName}.`}</p>
+              <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
             </div>
           </div>
           <div className="row">
             <ul className="nav nav-pills nav-justified">
-              <li className="col-md-6"><Link to="/group">Create Group</Link>
-              </li>
               <li className="col-md-6"><Link to="/member">Add member</Link></li>
             </ul>
           </div>
@@ -230,7 +229,7 @@ export default class BroadCastBoard extends React.Component {
             <Groups
               grouplist={grouplist}
               getMembers={this.getMembersOnClick}
-              generalMessageLength={this.state.allGeneralMessage.length}/>
+              />
             <ChatBox
               defaultGroup={this.state.defaultGroup}
               allGeneralMessage={this.state.allGeneralMessage}/>

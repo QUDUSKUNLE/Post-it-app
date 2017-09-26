@@ -14,45 +14,29 @@
   PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://facebook.github.io/react/">React</a> and <a href="https://nodejs.org/">Node.js</a>
 
 
+ # Application Features
+  <b>.</b> Users can Sign up
 
-# Dependencies
+  <b>.</b> Users can Sign in
+
+  <b>.</b> Users can Sign in with Google
+
+  <b>.</b> Users can reset password
+
+  <b>.</b> Signed in users can create group
+
+  <b>.</b> Users can add other registered users to groups
+
+  <b>.</b> Users can send message to groups they belong to
+
+  <b>.</b> Users can receive notification base on message priority
+
+  <b>.</b> Users can see members of their groups
   
-  The following dependencies are required by the app
-  
-  <b>. <a href="https://www.npmjs.com/package/axios">axios</a></b> - It's used to make GET/POST requests to APIs
-
-  <b>. <a href="https://www.npmjs.com/package/babel-core">babel-core</a></b> - It compiles Ecmascript-6 to Ecmascript-5 in the app
-
-  <b>. <a href="https://www.npmjs.com/package/babel-eslint">babel-eslint</a></b> - It helps to lint Syntax errors
-
-  <b>. <a href="https://www.npmjs.com/package/babel-loader">babel-loader</a></b> - It transpiles Javascript codes
-
-  <b>. <a href="https://coveralls.io/">Coveralls</a></b> - It displays test coverage
-
-  <b>. <a href="https://coveralls.io/">Coveralls</a></b> - It displays test coverage
-
-  <b>. <a href="https://www.npmjs.com/package/eslint">eslint</a></b> - This is a javascript syntax highlighter used to highligh syntax error during the development of this app
-
-  <b>. <a href="https://www.npmjs.com/package/eslint-confi-airbnb">eslint-config-airbnb</a></b> - It contains eslint rules
-
-  <b>. <a href="https://www.npmjs.com/package/firebase">firebase</a></b> - Firebase helps to authenticate and manage users.
-
-  <b>. <a href="https://facebook.github.io/react/">react</a></b> - It helps the app to use React architecture
-  
-  <b>. <a href="https://www.npmjs.com/package/react-google-login">react-google-login </a></b> - Enables sign in with google
-
-  <b>. <a href="https://www.npmjs.com/package/flux">flux</a></b> - It allows Unidirectional flow of data in the application
-
-  <b>. <a href="https://www.npmjs.com/package/nyc">nyc</a></b> - For test coverage
-
-  <b>. <a href="https://www.npmjs.com/package/webpack">webpack</a></b> - Used to bundle the app's js files
-
-  <b>. <a href="https://www.npmjs.com/package/webpack-dev-middleware">webpack-dev-middleware</a></b> - It helps to serve files to the server
-
-  <b>. <a href="https://www.npmjs.com/package/webpack-hot-middleware">webpack-hot-middleware</a></b> - Enables the browser to reload automatically when changes are made to the app
+  <b>.</b> Users can Sign out
 
 
-# Local installation
+# Getting Started
   Kindly follow the steps below to setup a local development environment.
   1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
 
@@ -67,13 +51,21 @@
   6. <b>npm start</b>
 
   7. Go to <b>http://localhost:8080/</b>
-  
- 
- 
- 
- 
- 
- 
+
+# Limitations
+1. Users cannot edit profile
+
+2. Users can add any registered users without users prior knowledge
+
+3. Users cannot leave a group
+
+4. Users cannot delete message sent
+
+# FAQ
+
+# Author
+  . Qudus YEKEEN
+
  # MIT License
  
  Copyright (c) 2017

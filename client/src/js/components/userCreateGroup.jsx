@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import Footer from './Footer.jsx';
 import { Link, Redirect } from 'react-router-dom';
-import { createGroup } from '../actions/appActions.js';
+import { userCreateNewGroup } from '../actions/appActions.js';
+// import { userCreateNewGroup } from '../actions/groupAction.js';
 import { signoutAction } from '../actions/signOutActions.js';
 
 
@@ -22,8 +24,6 @@ export default class CreateGroup extends React.Component {
     super(props);
     this.state = {
       group: '',
-      email: '',
-      password: '',
       responseMessage: '',
       signOutMessage: '',
       loggedIn
@@ -60,23 +60,16 @@ export default class CreateGroup extends React.Component {
      * @param {object} user .
      * @returns {void} .
      */
-    createGroup(group)
+    userCreateNewGroup(group)
       .then(({ data }) => {
         if (data.message) {
-          this.setState({
-            responseMessage: data.message,
-            group: ''
-          });
+          toastr.success(data.message);
         }
-        toastr.success(this.state.responseMessage);
       })
-      .catch((error) => {
-        if (error) {
-          this.setState({
-            responseMessage: error.response.data.message
-          });
+      .catch(error => {
+        if (error.response) {
+          toastr.error(error.response.data.error);
         }
-        toastr.error(this.state.responseMessage);
       });
   }
 
@@ -87,19 +80,13 @@ export default class CreateGroup extends React.Component {
    */
   handleSignOutEvent() {
     signoutAction().then((response) => {
-      this.setState({
-        errSignOut: response.data.message
-      });
-      toastr.success(this.state.errSignOut);
+      toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
     }).catch((error) => {
       if (error.response) {
-        this.setState({
-          errSignOut: error.response.data
-        });
+        toastr.error(error.response.data);
       }
-      toastr.error(this.state.errSignOut);
     });
   }
 
@@ -117,7 +104,7 @@ export default class CreateGroup extends React.Component {
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
           role="navigation">
-          <div className="container">
+          <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle"
                 data-toggle="collapse" data-target=".navbar-collapse">
@@ -133,8 +120,7 @@ export default class CreateGroup extends React.Component {
               <ul className="nav navbar-nav">
               </ul>
               <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/broadcastboard">ChatRoom</Link></li>
+                <li><Link to="/broadcastboard">MessageBoard</Link></li>
                 <li className="active">
                   <Link to="/group">Create Group</Link>
                 </li>
@@ -164,6 +150,7 @@ export default class CreateGroup extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

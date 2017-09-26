@@ -12,9 +12,9 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _usersRoutes = require('./config/usersRoutes');
+var _routes = require('./controllers/routes');
 
-var _usersRoutes2 = _interopRequireDefault(_usersRoutes);
+var _routes2 = _interopRequireDefault(_routes);
 
 var _webpack = require('webpack');
 
@@ -74,7 +74,6 @@ app.use(function (req, res, next) {
 });
 
 // MIDDLEWARE
-// log all requests to the console
 app.use((0, _morgan2.default)('dev'));
 
 // Added Webpack
@@ -86,7 +85,7 @@ app.use((0, _webpackDevMiddleware2.default)(compiler, {
 }));
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 
-app.use('/', _usersRoutes2.default);
+app.use('/', _routes2.default);
 
 // App listening port
 app.listen(port);

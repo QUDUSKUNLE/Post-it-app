@@ -1,7 +1,8 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
-  SIGN_IN_SUCCESS, SIGN_IN_ERROR
+  SIGN_IN_SUCCESS, SIGN_IN_ERROR,
+  PASSWORD_RESET_SUCCESS, PASSWORD_RESET_ERROR
 } from '../constants/ActionConstants.js';
 
 /**
@@ -15,12 +16,18 @@ class SignInStore extends EventEmitter {
   constructor() {
     super();
     this.signInMessage = {};
+    this.passwordResetResponse = {};
     this.signInUser = this.signInUser.bind(this);
+    this.passwordReset = this.passwordReset.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
   signInUser() {
     return this.signInMessage;
+  }
+
+  passwordReset() {
+    return this.passwordResetResponse;
   }
 
   /**
@@ -39,6 +46,16 @@ class SignInStore extends EventEmitter {
       case SIGN_IN_ERROR:
         this.signInMessage = action.error;
         this.emit('SIGN_IN_ERROR');
+        break;
+
+      case PASSWORD_RESET_SUCCESS:
+        this.passwordResetResponse = action.response;
+        this.emit('PASSWORD_RESET_SUCCESS');
+        break;
+
+      case PASSWORD_RESET_ERROR:
+        this.passwordResetResponse = action.error;
+        this.emit('PASSWORD_RESET_ERROR');
         break;
 
       default:

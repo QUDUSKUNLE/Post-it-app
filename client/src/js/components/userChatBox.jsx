@@ -18,7 +18,12 @@ export default class ChatBox extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      userId: JSON.parse(localStorage.getItem('Id')),
+      username: JSON.parse(localStorage.getItem('userName')),
+      email: JSON.parse(localStorage.getItem('email')),
+      message: '',
+      priority: 'normal',
+
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -44,15 +49,22 @@ export default class ChatBox extends React.Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    if (this.props.defaultGroup === 'general') {
+    if (this.props.defaultGroup === 'general'
+      && this.state.message.length > 1) {
       const newMessage = {
-        message: this.state.message
+        message: this.state.message,
+        priority: this.state.priority,
+        email: this.state.email,
+        userName: this.state.username
       };
       sendGeneralMessage(newMessage);
     } else {
       const newMessage = {
-        group: this.props.defaultGroup,
-        message: this.state.message
+        groupName: this.props.defaultGroup,
+        message: this.state.message,
+        priority: this.state.priority,
+        userName: this.state.username,
+        email: this.state.email
       };
       sendGroupMessage(newMessage);
     }
@@ -73,9 +85,10 @@ export default class ChatBox extends React.Component {
           <div className="media">
             <div className="media-body">
               {Index.message}
+              <span className="pull-right">{Index.priority}</span>
               <br/>
               <small className="text-muted">
-                {Index.date} | {Index.time}
+                {Index.date} | {Index.time} | {Index.userName}
               </small>
               <hr/>
             </div>
@@ -100,6 +113,13 @@ export default class ChatBox extends React.Component {
         <div className="row current-chat-footer">
           <div className="panel-footer">
             <div className="input-group">
+            <div className="input-group-addon">
+            <select name="priority" onChange={this.onChange}>
+                <option value="normal">Normal</option>
+                <option value="critical">Critical</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
               <input
                 type="text"
                 name="message"

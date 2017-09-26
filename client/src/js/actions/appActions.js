@@ -5,13 +5,8 @@ import axios from 'axios';
  * @param {object} groupName - { andela }
  * @returns {object} object
  */
-export const createGroup = (groupName) => axios.post('/creategroup', groupName);
-
-/**
- * @function deleteAccount
- * @returns {object} object
- */
-export const deleteAccount = () => axios.post('/delete');
+export const userCreateNewGroup = (groupName) =>
+  axios.post('/userCreateNewGroup', groupName);
 
 /**
  * @function addMember
