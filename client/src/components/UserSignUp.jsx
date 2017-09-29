@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import SignUpStore from '../stores/SignUpStore.js';
+import SignUpStore from '../stores/SignUpStore';
 import { signupAction } from '../actions/signUpActions.js';
 
 /**
@@ -9,7 +9,7 @@ import { signupAction } from '../actions/signUpActions.js';
  * @class SignUp
  * @extends {React.Component}
  */
-export default class SignUp extends React.Component {
+export default class UserSignUp extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -21,6 +21,7 @@ export default class SignUp extends React.Component {
       email: '',
       password: '',
       username: '',
+      phoneNumber: '',
       confirmPassword: '',
       signupMessage: '',
       errMessage: ''
@@ -36,24 +37,25 @@ export default class SignUp extends React.Component {
   }
   /**
    * @description - onChange event
-   * @param {object} e - event.
+   * @param {object} event - event.
    * @returns {void} bind input values to name.
    */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
    * @description - this handles SignUp form submission
-   * @param {object} e - event.
+   * @param {object} event- event.
    * @returns {void} .
   */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.setState({
       email: this.state.email,
+      phoneNumber: this.state.phoneNumber,
       password: this.state.password,
       confIrmPassword: this.state.confirmPassword,
       username: this.state.username
@@ -61,6 +63,7 @@ export default class SignUp extends React.Component {
     const user = {
       email: this.state.email,
       password: this.state.password,
+      phoneNumber: this.state.phoneNumber,
       confirmPassword: this.state.confirmPassword,
       username: this.state.username
     };
@@ -87,6 +90,8 @@ export default class SignUp extends React.Component {
     } else if (response.data.error.code === 'Username required at' +
     ' least 2 characters') {
       toastr.error(response.data.error.code);
+    } else if (response.data.error.code === 'Incorrect phone number') {
+      toastr.error('Incorrect phone number');
     }
   }
 
@@ -118,6 +123,12 @@ export default class SignUp extends React.Component {
                     className="signinform" placeholder="johndoe"
                     name="username" required /></div>
                 <div className="form-group">
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                  <input value={this.state.phoneNumber} onChange={this.onChange}
+                    id="phoneNumber" type="phone"
+                    className="signinform" placeholder="08012345678"
+                    name="phoneNumber" required /></div>
+                <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <input value={this.state.password} onChange={this.onChange}
                     id="pass" type="password"
@@ -132,9 +143,8 @@ export default class SignUp extends React.Component {
                     name="confirmPassword" required /></div>
                 <button type="submit" className="signinformbtn">Sign up</button>
               </form>
-              <br/>
-              <p className="text-center">By clicking "Sign up for Postit App",
-                 you agree to our terms of service and privacy policy.</p>
+              <div className="text-center term">By clicking "Sign up for Postit App",
+                 you agree to our terms of service and privacy policy.</div>
             </div>
           </div>
         </div>
@@ -144,7 +154,7 @@ export default class SignUp extends React.Component {
 }
 
 // props validation
-SignUp.propTypes = {
+UserSignUp.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

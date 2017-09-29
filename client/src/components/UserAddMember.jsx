@@ -2,20 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
-import Footer from './Footer.jsx';
-import { addMember } from '../actions/appActions.js';
+import Footer from './Footer';
+import { addMember, getAllUsers } from '../actions/memberActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
+import MemberStore from '../stores/MemberStore';
+import GroupStore from '../stores/GroupStore';
 import { getUserGroup } from '../actions/groupAction.js';
-import { getAllUsers } from '../actions/memberActions.js';
 
 /**
  * @description - renders AddMember Component
  * @class AddMember
  * @extends {React.Component}
  */
-export default class AddMember extends React.Component {
+export default class UserAddMember extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -61,23 +60,23 @@ export default class AddMember extends React.Component {
   }
   /**
    * @description - onChange event
-   * @param {e} e - event
+   * @param {event} event - event
    * @returns {null} null
    * @memberOf ChatBox
    */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
 	 * @description This handles addMember form submission
-	 * @param {object} e .
+	 * @param {object} event .
 	 * @returns {void} .
 	 */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     const memberDetails = {
       group: this.state.group,
       member: this.state.member
@@ -209,7 +208,7 @@ export default class AddMember extends React.Component {
 }
 
 // props validation
-AddMember.propTypes = {
+UserAddMember.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

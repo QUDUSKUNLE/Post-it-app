@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
     'webpack-hot-middleware/client',
-    './client/src/js/index.jsx'
+    './client/src/index.jsx'
   ],
   devtool: 'eval',
   output: {

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import Footer from './Footer.jsx';
+import Footer from './Footer';
 import { Link, Redirect } from 'react-router-dom';
-import { userCreateNewGroup } from '../actions/appActions.js';
-// import { userCreateNewGroup } from '../actions/groupAction.js';
+import { userCreateNewGroup } from '../actions/groupAction.js';
 import { signoutAction } from '../actions/signOutActions.js';
 
 
@@ -13,7 +12,7 @@ import { signoutAction } from '../actions/signOutActions.js';
  * @class CreateGroup
  * @extends {React.Component}
  */
-export default class CreateGroup extends React.Component {
+export default class UserCreateGroup extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -35,22 +34,22 @@ export default class CreateGroup extends React.Component {
 
   /**
 	 * onChange event.
-	 * @param {object} e no parameter.
+	 * @param {object} event no parameter.
 	 * @returns {void} bind input data to name.
 	 */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
 	 * @description This handles CreateGroup form submission
-	 * @param {object} e .
+	 * @param {object} event .
 	 * @returns {void} .
 	 */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     const group = {
       group: this.state.group
     };
@@ -75,7 +74,7 @@ export default class CreateGroup extends React.Component {
 
   /**
    * @description This handles Click event
-   * @param {void} nil no parameter.
+   * @param {void} null no parameter.
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
@@ -157,7 +156,7 @@ export default class CreateGroup extends React.Component {
 }
 
 // props validation
-CreateGroup.propTypes = {
+UserCreateGroup.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   })

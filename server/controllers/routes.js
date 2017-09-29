@@ -2,6 +2,7 @@ import express from 'express';
 import Users from './Users';
 import Groups from './Groups';
 import Messages from './Messages';
+
 const Router = express.Router();
 
 Router.get('/*', Users.home);

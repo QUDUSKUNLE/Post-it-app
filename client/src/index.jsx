@@ -5,13 +5,13 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, browserHistory, Route } from
   'react-router-dom';
-import App from './components/userApp.jsx';
-import SignIn from './components/userSignIn.jsx';
-import CreateGroup from './components/userCreateGroup.jsx';
-import BroadCastBoard from './components/userBroadCastBoard.jsx';
-import AddMember from './components/userAddMember.jsx';
-import ResetPassword from './components/userResetPassword.jsx';
-import '../css/icon.scss';
+import UserApp from './components/UserApp';
+import UserSignIn from './components/UserSignIn';
+import UserCreateGroup from './components/UserCreateGroup';
+import UserBroadCastBoard from './components/UserBroadCastBoard';
+import UserAddMember from './components/UserAddMember';
+import UserResetPassword from './components/UserResetPassword';
+import './css/icon.scss';
 
 
 const store = createStore(
@@ -23,23 +23,23 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <div>
-        <Route exact path="/" component={App}/>
-        <Route path="/signin" component={SignIn} />
+        <Route exact path="/" component={UserApp}/>
+        <Route path="/signin" component={UserSignIn} />
         <Route
           path="/broadcastboard"
-          component={BroadCastBoard}
+          component={UserBroadCastBoard}
         />
         <Route
           path="/group"
-          component={CreateGroup}
+          component={UserCreateGroup}
         />
         <Route
           path="/passwordreset"
-          component={ResetPassword}
+          component={UserResetPassword}
         />
         <Route
           path="/member"
-          component={AddMember}
+          component={UserAddMember}
         />
       </div>
     </Router>

@@ -1,14 +1,14 @@
 import React from 'react';
-import NavBar from './navBar.jsx';
-import SignUp from './userSignUp.jsx';
-import Footer from './Footer.jsx';
+import NavBar from './NavBar';
+import UserSignUp from './UserSignUp';
+import Footer from './Footer';
 
 
 /**
  * @description - renders App Component
  * @class App
  */
-export default class App extends React.Component {
+export default class UserApp extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} App component
@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <div className="container">
+        <div className="container mainbody">
           <div className="row home">
             <div className="col-md-6">
               <h4>PostIt
@@ -29,7 +29,9 @@ export default class App extends React.Component {
                   allows friends to come together and share vital information.
               </h4>
             </div>
-            <SignUp/>
+            <UserSignUp/>
+            <br/>
+            <br/>
             <Footer/>
           </div>
         </div>

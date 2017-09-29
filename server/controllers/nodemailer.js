@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   port: 25,
@@ -17,8 +18,8 @@ const mailOptions = {
 
 transporter.sendMail(mailOptions, (error, info) => {
   if (error) {
-    console.log(error);
+    // console.log(error);
   }
-  console.log('Message sent: %s', info.messageId);
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  // console.log('Message sent: %s', info.messageId);
+  // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 });

@@ -1,8 +1,8 @@
 import firebase from 'firebase';
 import moment from 'moment';
 import path from 'path';
-import dbConfig from '../config/dbConfig.js';
-import Helper from '../helper/helper';
+import dbConfig from '../config/dbConfig';
+import Helper from '../helper/Helper';
 
 /**
 * class Users: controls all Users routes
@@ -25,7 +25,8 @@ export default class User {
   * @return {Object} contains server signup response
   */
   static signUp(req, res) {
-    const { email, password, confirmPassword, username } = req.body;
+    const { email, password,
+      confirmPassword, phoneNumber, username } = req.body;
     if (!Helper.validatePassword(password)) {
       res.status(501).send({
         error: { code:
@@ -44,6 +45,9 @@ export default class User {
       res.status(501).send({ error: { code:
         'Password does not match' }
       });
+    } else if (!Helper.validatePhoneNumber(phoneNumber)) {
+      res.status(501).send({ error: { code:
+        'Incorrect phone number' } });
     } else {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
       .then(user => user.sendEmailVerification()
@@ -53,14 +57,16 @@ export default class User {
             [dbConfig.database().ref(`users/${userId}`).push({
               userEmail: email,
               userName: username,
+              phone_Number: phoneNumber,
               time: moment().format('llll')
             }),
-            dbConfig.database().ref('Group/general/member')
-              .child(`${userId}`).push({
-                user: username,
-                time: moment().format('llll')
-              }),
-            userId
+              dbConfig.database().ref('Group/general/member')
+                .child(`${userId}`).push({
+                  user: username,
+                  phone_Number: phoneNumber,
+                  time: moment().format('llll')
+                }),
+              userId
             ]);
         })
         .then(response => res.status(200).send({

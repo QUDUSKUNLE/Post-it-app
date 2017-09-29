@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getAllUsers } from '../actions/memberActions.js';
 import { getGeneralMessage } from '../actions/messageActions.js';
-import MemberStore from '../stores/MemberStore.js';
+import MemberStore from '../stores/MemberStore';
 
 /**
  * @description - renders Groups Component
  * @class Groups
  * @extends {React.Component}
  */
-export default class Groups extends React.Component {
+export default class UserGroups extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -73,7 +73,7 @@ export default class Groups extends React.Component {
 
 
 // props validation
-Groups.propTypes = {
+UserGroups.propTypes = {
   grouplist: PropTypes.array,
   generalMessageLength: PropTypes.number,
   defaultGroup: PropTypes.string,

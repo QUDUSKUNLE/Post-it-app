@@ -91,7 +91,7 @@ export const arrayOfGeneralMessage = (data) => {
  * @param {Object} data -
  * @returns {Object} GroupMessage
  */
-export const getArrayOfGroupMessage = data => {
+export const getArrayOfGroupMessage = (data) => {
   let arrayOfGroupMessage;
   if ((data.response)[0] === null) {
     arrayOfGroupMessage = [];

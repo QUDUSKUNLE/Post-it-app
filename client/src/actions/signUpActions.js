@@ -7,7 +7,8 @@ import {
 
 /**
   * @description - Sign Up Action
-  * @param {object} user - { email, password, username }
+  * @param {object} user - { email,
+     password, confirmPassword, phoneNumber, username }
   * @returns {function} Object -
 */
 

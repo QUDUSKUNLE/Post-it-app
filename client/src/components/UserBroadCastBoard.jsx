@@ -2,24 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
-import Groups from './userGroups.jsx';
-import ChatBox from './userChatBox.jsx';
+import UserGroups from './userGroups';
+import UserChatBox from './userChatBox';
 // import Footer from './Footer.jsx';
 import { getUserGroup } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
 import { getGroupMembers } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
-import MessageStore from '../stores/MessageStore.js';
+import MemberStore from '../stores/MemberStore';
+import GroupStore from '../stores/GroupStore';
+import MessageStore from '../stores/MessageStore';
 
 /**
  * @description - renders BroadCastBoard Component
  * @class BroadCastBoard
  * @extends {React.Component}
  */
-export default class BroadCastBoard extends React.Component {
+export default class UserBroadCastBoard extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -84,8 +84,8 @@ export default class BroadCastBoard extends React.Component {
    * @method getMembersOnClick
    * @return {null} -
    */
-  getMembersOnClick(i) {
-    this.setState({ groupName: i[0], defaultGroup: i[1].group },
+  getMembersOnClick(index) {
+    this.setState({ groupName: index[0], defaultGroup: index[1].group },
       () => {
         const group = this.state.defaultGroup;
         getGroupMessage({ group });
@@ -136,22 +136,22 @@ export default class BroadCastBoard extends React.Component {
   }
   /**
    * onChange event.
-   * @param {object} e The first number.
+   * @param {object} event The first number.
    * @returns {void} bind input values to name.
    */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
-  /**
-   * onClick event.
-   * @returns {object} response from server.
-  */
-  onClick() {
-    signoutAction();
-  }
+  // /**
+  //  * onClick event.
+  //  * @returns {object} response from server.
+  // */
+  // onClick() {
+  //   signoutAction();
+  // }
 
   handleSignOutAction() {
     signoutAction().then((response) => {
@@ -226,11 +226,11 @@ export default class BroadCastBoard extends React.Component {
           </div>
           <br/>
           <div className="row">
-            <Groups
+            <UserGroups
               grouplist={grouplist}
               getMembers={this.getMembersOnClick}
               />
-            <ChatBox
+            <UserChatBox
               defaultGroup={this.state.defaultGroup}
               allGeneralMessage={this.state.allGeneralMessage}/>
           </div>
@@ -241,7 +241,7 @@ export default class BroadCastBoard extends React.Component {
 }
 
 // props validation
-BroadCastBoard.propTypes = {
+UserBroadCastBoard.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

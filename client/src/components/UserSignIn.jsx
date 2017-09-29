@@ -5,8 +5,8 @@ import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors.js';
 import toastr from 'toastr';
-import Footer from './Footer.jsx';
-import SignInStore from '../stores/SignInStore.js';
+import Footer from './Footer';
+import SignInStore from '../stores/SignInStore';
 import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
 // import { getAllUsers } from '../utils/utils.js';
 
@@ -16,7 +16,7 @@ import { signinAction, signInWithGoogle } from '../actions/signInActions.js';
  * @class SignIn
  * @extends {React.Component}
  */
-export default class SignIn extends React.Component {
+export default class UserSignIn extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -51,22 +51,22 @@ export default class SignIn extends React.Component {
   }
   /**
    * onChange event
-   * @param {object} e - event
+   * @param {object} event - event
    * @return {void} updated state of user
   */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
    * @description - this handles SignIn form submission
-   * @param {object} e - event.
+   * @param {object} event - event.
    * @returns {void} .
   */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     const user = {
       email: this.state.email,
       password: this.state.password
@@ -106,7 +106,7 @@ export default class SignIn extends React.Component {
 
   /**
    * @description - this handles Google SignIn Method
-   * @param {object} e - event.
+   * @param {object} event - event.
    * @returns {void} .
   */
   googleSignIn() {
@@ -217,7 +217,7 @@ export default class SignIn extends React.Component {
 }
 
 // props validation
-SignIn.propTypes = {
+UserSignIn.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

@@ -1,5 +1,5 @@
-import dbConfig from '../config/dbConfig.js';
 import moment from 'moment';
+import dbConfig from '../config/dbConfig';
 /**
 * class Groups: controls all Groups routes
 * @class Groups
@@ -51,8 +51,8 @@ export default class Groups {
             }
           })
       ])
-      .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.status(500).send({ error }));
+      .then(response => res.status(200).send({ response }))
+      .catch(error => res.status(500).send({ error }));
   }
 
   /**
@@ -69,8 +69,8 @@ export default class Groups {
           }
         })
     ])
-    .then((response) => res.status(200).send({ response }))
-    .catch((error) => res.status(401).send({ error }));
+    .then(response => res.status(200).send({ response }))
+    .catch(error => res.status(401).send({ error }));
   }
 
   /**
@@ -90,10 +90,10 @@ export default class Groups {
             }
           })
       ])
-      .then((response) => res.status(200).send({
+      .then(response => res.status(200).send({
         message: `Hey, here are members of the group ${groupName}`,
         response }))
-      .catch((error) => res.status(401).send(error));
+      .catch(error => res.status(401).send(error));
   }
 
   /**
@@ -118,9 +118,9 @@ export default class Groups {
             }
           })
       ])
-      .then((response) => res.status(200).send({
+      .then(response => res.status(200).send({
         message: 'Member added successfully', response }))
-      .catch((error) => res.status(500).send({ message: 'Not authorized',
+      .catch(error => res.status(500).send({ message: 'Not authorized',
         error }));
   }
 }

@@ -15,7 +15,9 @@ export const resetPassword = (email) => axios.post('/passwordReset', email)
       type: PASSWORD_RESET_SUCCESS, response: data });
   }).catch((error) => {
     if (error.response) {
-      AppDispatcher.dispatch({ type: PASSWORD_RESET_ERROR, error: error.response.data
+      AppDispatcher.dispatch({
+        type: PASSWORD_RESET_ERROR,
+        error: error.response.data
       });
     }
   });

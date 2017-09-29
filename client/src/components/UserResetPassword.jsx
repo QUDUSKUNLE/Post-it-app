@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { resetPassword } from '../actions/resetPasswordActions.js';
-import Footer from './Footer.jsx';
+import Footer from './Footer';
 import toastr from 'toastr';
-import SignInStore from '../stores/SignInStore.js';
+import SignInStore from '../stores/SignInStore';
 
 /**
  * @description - renders ResetPassword Component
  * @class ResetPassword
  * @extends {React.Component}
  */
-export default class ResetPassword extends React.Component {
+export default class UserResetPassword extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -33,22 +33,22 @@ export default class ResetPassword extends React.Component {
   }
   /**
  * onChange event.
- * @param {object} e The first number.
+ * @param {object} event The first number.
  * @returns {void} bind input values to name.
  */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
 	 * @description This handles resetPassword form submission
-	 * @param {object} e .
+	 * @param {object} event .
 	 * @returns {void} .
 	 */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     const resetEmail = {
       email: this.state.email
     };

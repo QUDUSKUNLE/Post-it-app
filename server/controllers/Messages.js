@@ -1,5 +1,5 @@
 import moment from 'moment';
-import dbConfig from '../config/dbConfig.js';
+import dbConfig from '../config/dbConfig';
 
 /**
 * class Messages: controls all Messages
@@ -46,10 +46,10 @@ export default class Messages {
   static getGeneralMessage(req, res) {
     Promise.all([
       dbConfig.database().ref('Group/general').child('message')
-        .once('value', (snapshot) => snapshot.val())
+        .once('value', snapshot => snapshot.val())
     ])
-      .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.status(400).send({ error }));
+      .then(response => res.status(200).send({ response }))
+      .catch(error => res.status(400).send({ error }));
   }
 
   /**
@@ -78,9 +78,9 @@ export default class Messages {
           .child('message').push({ message, priority, userName, email, time }),
             { message, priority, userName, email, time }
       ])
-        .then((response) => res.status(200).send({
+        .then(response => res.status(200).send({
           message: 'Broadcast Message sent successfully', response }))
-        .catch((error) => res.send({ error }));
+        .catch(error => res.send({ error }));
     }
   }
 
@@ -95,10 +95,10 @@ export default class Messages {
     return Promise.all(
       [
         dbConfig.database().ref(`Group/${userId}/${group}`).child('message')
-          .once('value', (snapshot) => snapshot.val())
+          .once('value', snapshot => snapshot.val())
       ])
-      .then((response) => res.status(200).send({ response }))
-      .catch((error) => res.status(400).send({ error }));
+      .then(response => res.status(200).send({ response }))
+      .catch(error => res.status(400).send({ error }));
   }
 }
 

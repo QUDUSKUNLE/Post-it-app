@@ -9,7 +9,7 @@ import { sendGeneralMessage,
  * @class ChatBox
  * @extends {React.Component}
  */
-export default class ChatBox extends React.Component {
+export default class UserChatBox extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -31,24 +31,24 @@ export default class ChatBox extends React.Component {
 
   /**
    * @description - onChange event
-   * @param {e} e - event
+   * @param {event} event - event
    * @returns {null} null
    * @memberOf ChatBox
    */
-  onChange(e) {
+  onChange(event) {
     this.setState({
-      [e.target.name]: e.target.value
+      [event.target.name]: event.target.value
     });
   }
 
   /**
    * @description - onSubmit event
-   * @param {e} e - event
+   * @param {event} event - event
    * @returns {null} null
    * @memberOf ChatBox
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     if (this.props.defaultGroup === 'general'
       && this.state.message.length > 1) {
       const newMessage = {
@@ -142,7 +142,7 @@ export default class ChatBox extends React.Component {
 }
 
 // props validation
-ChatBox.propTypes = {
+UserChatBox.propTypes = {
   name: PropTypes.string,
   allGeneralMessage: PropTypes.array,
   defaultGroup: PropTypes.string
