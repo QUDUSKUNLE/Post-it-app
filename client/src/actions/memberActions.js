@@ -46,26 +46,6 @@ export const getAllUsers = () => axios.post('/getAllUsers')
     });
   });
 
-
-// /**
-//   * @description - Add user`s to a group
-//   * @param {object} userDetails - { groupName, username}
-//   * @returns {function} dispatch - dispatch to MemberStore
-// */
-// export const addMember = (userDetails) => axios.post('/group/member',
-//   userDetails)
-//   .then(({ data }) => {
-//     AppDispatcher.dispatch({
-//       type: ADD_MEMBER,
-//       members: data.message
-//     });
-//   }, ({ response }) => {
-//     AppDispatcher.dispatch({
-//       type: ADD_MEMBER,
-//       error: response.data.message
-//     });
-//   });
-
 /**
  * @function addMember
  * @param {object} member - { member }

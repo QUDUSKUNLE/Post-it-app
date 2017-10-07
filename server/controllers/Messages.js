@@ -1,5 +1,8 @@
 import moment from 'moment';
+import values from 'object.values';
 import dbConfig from '../config/dbConfig';
+import Helper from '../helper/Helper.js';
+import sendEmail from '../utils/nodemailer.js';
 
 /**
 * class Messages: controls all Messages
@@ -99,6 +102,69 @@ export default class Messages {
       ])
       .then(response => res.status(200).send({ response }))
       .catch(error => res.status(400).send({ error }));
+  }
+
+  // Send Message
+  static sendMessageToGroup(req, res) {
+    const { message, priority } = req.body;
+    const groupId = req.params.groupId;
+    const userId = req.user.uid;
+    const time = moment().format('llll');
+    if (userId === undefined) {
+      res.status(400).send({ error: {
+        code: 'PERMISSION_DENIED',
+        message: 'User is not signed in' }
+      });
+    } else if (message.length < 1) {
+      res.status(400).send({ error: 'No message sent' });
+    } else {
+      Helper.getUserEmailAndPhoneNumber(userId)
+        .then(senderDetails => {
+          const sender = values(senderDetails)[0];
+          const userName = sender.userName;
+          const email = sender.userEmail;
+          Helper.getGroupPhoneNumbers(groupId).then(groupPhoneAndEmail => {
+            if (priority === 'critical' || priority === 'urgent') {
+              const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
+              // sendEmail(groupEmails).then(mailresponse => {
+              //   console.log(mailresponse);
+              // });
+              console.log(groupEmails);
+            }
+          });
+          return Promise.all([
+            dbConfig.database().ref('Messages')
+              .child(groupId).push({
+                message, priority, userName, email, time }),
+                { message, priority, userName, email, time }
+          ])
+            .then(response => res.status(200).send({
+              message: 'Broadcast Message sent successfully', response }))
+            .catch(error => res.send({ error }));
+        })
+        .catch(error => res.status(400).send({ error }));
+    }
+  }
+
+
+  static getMessage(req, res) {
+    const groupId = req.params.groupId;
+    const userId = req.user.uid;
+    if (userId === undefined) {
+      res.status(400).send({ error: 'User not signed in' });
+    } else {
+      return Promise.all(
+        [
+          dbConfig.database().ref('Messages').child(groupId)
+            .once('value', snapshot => snapshot.val())
+        ])
+        .then(response => {
+          if (response) {
+            res.status(200).send({ response });
+          }
+        })
+        .catch(error => res.status(400).send({ error }));
+    }
   }
 }
 

@@ -31,5 +31,5 @@ export const getUserGroup = () => axios.post('/getUserGroups')
  * @returns {object} object
  */
 export const userCreateNewGroup = (groupName) =>
-axios.post('/userCreateNewGroup', groupName);
+axios.post('/userCreate', groupName);
 

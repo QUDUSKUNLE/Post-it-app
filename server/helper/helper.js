@@ -1,3 +1,11 @@
+import values from 'object.values';
+import dbConfig from '../config/dbConfig';
+
+export const getUserEmailAndPhoneNumber = (userId) => Promise.all([
+  dbConfig.database().ref('users').child(userId)
+    .once('value', snapshot => snapshot.val())
+]);
+
 /**
  * @class Helper
  * @param {Object} password -
@@ -18,5 +26,39 @@ export default class Helper {
     if (phoneNumber.match(matched) && phoneNumber.length >= 11) {
       return true;
     }
+  }
+
+  static getUserEmailAndPhoneNumber(userId) {
+    return new Promise(resolve => {
+      dbConfig.database().ref('users').child(userId).on('value',
+        snapshot => {
+          if (snapshot.val()) {
+            resolve(snapshot.val());
+          }
+          resolve({});
+        });
+    });
+  }
+
+  static getGroupPhoneNumbers(groupId) {
+    return new Promise(resolve => {
+      dbConfig.database().ref('GroupPhoneAndEmail').child(groupId).on('value',
+      snapshot => {
+        if (snapshot.val()) {
+          resolve(values(snapshot.val()));
+        }
+        resolve({});
+      });
+    });
+  }
+
+  static getGroupEmails(groupEmails) {
+    let emailIndex = 0;
+    const emails = [];
+    while (emailIndex < groupEmails.length) {
+      emails.push(groupEmails[emailIndex].email);
+      emailIndex++;
+    }
+    return emails.join();
   }
 }

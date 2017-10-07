@@ -3,16 +3,9 @@ import { Link } from 'react-router-dom';
 
 /**
  * @description - renders NavBar Component
- * @class NavBar
- * @extends {React.Component}
+ * @function NavBar
  */
-export default class NavBar extends React.Component {
-  /**
-   * @description - render method, React lifecycle method
-   * @returns {Object} NavBar component
-   * @NavBar
-   */
-  render() {
+export const NavBar = () => {
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -43,4 +36,3 @@ export default class NavBar extends React.Component {
       </div>
     );
   }
-}

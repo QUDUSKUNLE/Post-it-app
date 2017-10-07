@@ -12,9 +12,9 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _routes = require('./controllers/routes');
+var _index = require('./routes/index.js');
 
-var _routes2 = _interopRequireDefault(_routes);
+var _index2 = _interopRequireDefault(_index);
 
 var _webpack = require('webpack');
 
@@ -85,7 +85,7 @@ app.use((0, _webpackDevMiddleware2.default)(compiler, {
 }));
 app.use((0, _webpackHotMiddleware2.default)(compiler));
 
-app.use('/', _routes2.default);
+app.use('/', _index2.default);
 
 // App listening port
 app.listen(port);
