@@ -1,8 +1,12 @@
 import moment from 'moment';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import values from 'object.values';
 import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper.js';
-import sendEmail from '../utils/nodemailer.js';
+import { sendGroupSMS } from '../utils/utils.js';
+
+dotenv.config();
 
 /**
 * class Messages: controls all Messages
@@ -124,12 +128,69 @@ export default class Messages {
           const userName = sender.userName;
           const email = sender.userEmail;
           Helper.getGroupPhoneNumbers(groupId).then(groupPhoneAndEmail => {
-            if (priority === 'critical' || priority === 'urgent') {
+            if (priority === 'urgent') {
               const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
-              // sendEmail(groupEmails).then(mailresponse => {
-              //   console.log(mailresponse);
-              // });
-              console.log(groupEmails);
+              const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                port: 25,
+                secure: false,
+                auth: {
+                  user: process.env.APP_EMAIL,
+                  pass: process.env.APP_PASSWORD },
+                tls: { rejectUnauthorized: false }
+              });
+              const mailOptions = {
+                from: '"PostIt-App" <postitmail@gmail.com>',
+                to: groupEmails,
+                subject: 'New Message Received',
+                text: 'PostIt-App',
+                html: '<b>Hello, </b> this is to notify you ' +
+                  'that you have an important new message'
+              };
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  return console.log(error);
+                } else {
+                  console.log('Message sent: %s', info.messageId);
+                  console.log('Preview URL: %s',
+                    nodemailer.getTestMessageUrl(info));
+                }
+              });
+            } else if (priority === 'critical') {
+              const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
+              const groupPhoneNumbers = Helper.getPhoneNumbers(
+                groupPhoneAndEmail);
+              sendGroupSMS(groupPhoneNumbers).then(res => {
+                if (res) {
+                  console.log(res[0].body);
+                  const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    port: 25,
+                    secure: false,
+                    auth: {
+                      user: process.env.APP_EMAIL,
+                      pass: process.env.APP_PASSWORD },
+                    tls: { rejectUnauthorized: false }
+                  });
+                  const mailOptions = {
+                    from: '"PostIt-App" <postitmail@gmail.com>',
+                    to: groupEmails,
+                    subject: 'New Message Received',
+                    text: 'PostIt-App',
+                    html: '<b>Hello, </b> this is to notify you ' +
+                      'that you have an important new message'
+                  };
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      return console.log(error);
+                    } else {
+                      console.log('Message sent: %s', info.messageId);
+                      console.log('Preview URL: %s',
+                        nodemailer.getTestMessageUrl(info));
+                    }
+                  });
+                }
+              });
             }
           });
           return Promise.all([
@@ -145,7 +206,6 @@ export default class Messages {
         .catch(error => res.status(400).send({ error }));
     }
   }
-
 
   static getMessage(req, res) {
     const groupId = req.params.groupId;

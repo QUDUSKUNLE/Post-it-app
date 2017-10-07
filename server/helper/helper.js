@@ -15,8 +15,7 @@ export default class Helper {
 
   static validatePassword(password) {
     if (
-    password.match(/^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)
-      ) {
+      password.match(/^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)) {
       return true;
     }
   }
@@ -60,5 +59,15 @@ export default class Helper {
       emailIndex++;
     }
     return emails.join();
+  }
+
+  static getPhoneNumbers(groupPhoneNumbers) {
+    let phoneNumberIndex = 0;
+    const phoneNumbers = [];
+    while (phoneNumberIndex < groupPhoneNumbers.length) {
+      phoneNumbers.push(groupPhoneNumbers[phoneNumberIndex].phoneNumber);
+      phoneNumberIndex++;
+    }
+    return phoneNumbers;
   }
 }

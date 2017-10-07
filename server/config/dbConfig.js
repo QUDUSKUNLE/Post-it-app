@@ -19,5 +19,5 @@ export const config = {
 };
 const dbConfig = firebase.initializeApp(config);
 
-// // console.log(config);
+// export dbConfig
 export default dbConfig;
