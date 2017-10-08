@@ -10,12 +10,12 @@ const config = {
   ],
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, 'client/src'),
+    path: path.join(__dirname, 'client'),
     publicPath: '/',
     filename: 'index.js'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'client/src'),
+    contentBase: path.join(__dirname, 'client'),
     compress: true,
     port: 8080,
     hot: true,
@@ -26,7 +26,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './client/src/index.html'
+      template: './client/index.html'
     }),
     new Dotenv({
       path: './.env',

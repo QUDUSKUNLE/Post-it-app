@@ -5,12 +5,12 @@ import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, browserHistory, Route } from
   'react-router-dom';
-import UserApp from './components/UserApp';
-import UserSignIn from './components/UserSignIn';
-import UserCreateGroup from './components/UserCreateGroup';
-import UserBroadCastBoard from './components/UserBroadCastBoard';
-import UserAddMember from './components/UserAddMember';
-import UserResetPassword from './components/UserResetPassword';
+import UserApp from './components/UserApp.jsx';
+import UserSignIn from './components/UserSignIn.jsx';
+import UserCreateGroup from './components/UserCreateGroup.jsx';
+import UserBroadCastBoard from './components/UserBroadCastBoard.jsx';
+import UserAddMember from './components/UserAddMember.jsx';
+import UserResetPassword from './components/UserResetPassword.jsx';
 import './css/icon.scss';
 
 

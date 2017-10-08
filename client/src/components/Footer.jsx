@@ -4,4 +4,12 @@ import React from 'react';
  * @description - renders Footer Component
  * @class Footer
  */
-export const Footer = () => (<div><div className="footer"></div></div>);
+export default class Footer extends React.Component {
+  render() {
+    return (
+      <div>
+        <div className="footer"></div>
+      </div>
+    );
+  }
+}
