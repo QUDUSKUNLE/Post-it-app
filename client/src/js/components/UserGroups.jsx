@@ -26,11 +26,11 @@ export default class UserGroups extends React.Component {
   }
 
   componentDidMount() {
-    MemberStore.on('GET_MEMBERS_OF_A_GROUP', this.handleOnClick);
+    MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleOnClick);
   }
 
   componentWillUnmount() {
-    MemberStore.removeListener('GET_MEMBERS_OF_A_GROUP',
+    MemberStore.removeListener('GET_MEMBERS_OF_GROUP',
       this.handleOnClick);
   }
 

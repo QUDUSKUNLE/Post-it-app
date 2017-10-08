@@ -1,9 +1,8 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { getUserGroups } from '../utils/utils.js';
+import { getGroups } from '../helper/helper.js';
 
-import {
-  GET_GROUPS
+import { GET_USER_GROUPS
 } from '../constants/ActionConstants.js';
 
 
@@ -12,17 +11,19 @@ import {
  * @param {null} null -
  * @returns {function} dispatch - dispatch to GroupStore
  */
-export const getUserGroup = () => axios.post('/getUserGroups')
+export const getGroup = (userId) => axios.get(`/getgroups/${userId}`)
   .then(({ data }) => {
-    AppDispatcher.dispatch({
-      type: GET_GROUPS,
-      groups: getUserGroups(data)
-    });
-  }, ({ response }) => {
-    AppDispatcher.dispatch({
-      type: GET_GROUPS,
-      error: response.data.message
-    });
+    if (data.response[0] === null) {
+      AppDispatcher.dispatch({
+        type: GET_USER_GROUPS,
+        groups: []
+      });
+    } else {
+      AppDispatcher.dispatch({
+        type: GET_USER_GROUPS,
+        groups: getGroups(data.response)
+      });
+    }
   });
 
 /**

@@ -5,7 +5,7 @@ import Messages from '../controllers/Messages';
 
 const Router = express.Router();
 
-Router.get('/*', Users.home);
+// Router.get('/*', Users.home);
 Router.post('/signup', Users.signUp);
 
 Router.post('/signin', Users.signIn);
@@ -18,7 +18,10 @@ Router.post('/createGroup', Groups.userCreateNewGroup);
 // Create group
 Router.post('/create', Groups.createGroup);
 Router.get('/getgroups/:userId', Groups.getUsersGroups);
+
 Router.post('/addmember/:groupId', Groups.addMemberToGroup);
+Router.get('/getMembers/:groupId', Groups.getMembersOfGroup);
+
 Router.post('/sendMessage/:groupId', Messages.sendMessageToGroup);
 Router.get('/getMessage/:groupId', Messages.getMessage);
 

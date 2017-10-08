@@ -25,7 +25,7 @@ export default class UserApp extends React.Component {
                 <small>
                   <i>App</i>
                 </small>
-                    &nbsp;
+                  {' '}
                   allows friends to come together and share vital information.
               </h4>
             </div>

@@ -37,22 +37,6 @@ export const getAllUsers = (objectOfUsers) => {
   return allUsers;
 };
 
-
-/**
- * @function getUserGroups
- * @param {Object} data -
- * @returns {Object} getGroups
- */
-export const getUserGroups = (data) => {
-  let getGroups;
-  if ((data.response)[0] === null) {
-    getGroups = [];
-  } else {
-    getGroups = Object.keys(((data.response)[0]));
-  }
-  return getGroups;
-};
-
 /**
  * @function getAllGeneralUsers
  * @param {Object} data -
@@ -91,12 +75,42 @@ export const arrayOfGeneralMessage = (data) => {
  * @param {Object} data -
  * @returns {Object} GroupMessage
  */
-export const getArrayOfGroupMessage = (data) => {
-  let arrayOfGroupMessage;
-  if ((data.response)[0] === null) {
-    arrayOfGroupMessage = [];
+export const getGroupMessages = (data) => {
+  let GroupMessage;
+  if (data[0] === null) {
+    GroupMessage = [];
   } else {
-    arrayOfGroupMessage = Object.values((data.response)[0]);
+    GroupMessage = Object.values(data[0]);
   }
-  return arrayOfGroupMessage;
+  return GroupMessage;
+};
+
+
+/**
+ * @function getGroups
+ * @param {Object} data -
+ * @returns {Object} getGroups
+ */
+export const getGroups = (data) => {
+  const groupNames = Object.keys(data[0]);
+  const groupKeys = Object.values(data[0]);
+  let index = 0;
+  const groups = [];
+  while (index < groupNames.length) {
+    groups.push({ [groupNames[index]]: groupKeys[index] });
+    index++;
+  }
+  return groups;
+};
+
+export const getGroupMembers = (data) => {
+  const memberId = Object.keys(data[0]);
+  const memberName = Object.values(data[0]);
+  let index = 0;
+  const groupMembers = [];
+  while (index < memberId.length) {
+    groupMembers.push({ [memberId[index]]: memberName[index] });
+    index++;
+  }
+  return groupMembers;
 };

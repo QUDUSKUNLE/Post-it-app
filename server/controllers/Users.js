@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import path from 'path';
+// import path from 'path';
 import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper';
 
@@ -9,15 +9,6 @@ import Helper from '../helper/Helper';
 * @class Users
 */
 export default class User {
-
-  /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} response containing homepage
-  */
-  static home(req, res) {
-    res.sendFile(path.join(__dirname, '../../client/src/index.html'));
-  }
 
   /**
   * @param {Object} req requset object
@@ -59,7 +50,7 @@ export default class User {
               userName: username,
               phone_Number: phoneNumber,
               time: moment().format('llll'),
-              userID: userId
+              userId: userId
             }),
               dbConfig.database().ref('Group/general/member')
                 .child(`${userId}`).push({

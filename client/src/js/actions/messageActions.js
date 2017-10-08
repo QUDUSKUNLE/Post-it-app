@@ -8,8 +8,8 @@ import {
 } from '../constants/ActionConstants.js';
 import {
     arrayOfGeneralMessage,
-    getArrayOfGroupMessage
-} from '../utils/utils.js';
+    getGroupMessages
+} from '../helper/helper.js';
 
 /**
  * @description - Get message of general Group
@@ -52,12 +52,11 @@ export const sendGeneralMessage = (messageDetails) =>
  * @param {Object} group - { group }
  * @returns {function} dispatch - dispatch to MessageStore
  */
-export const getGroupMessage = (group) => axios.post('/getGroupMessage',
-  group)
+export const getGroupMessage = (groupId) => axios.get(`getMessage/${groupId}`)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: GET_GROUP_MESSAGE,
-      message: getArrayOfGroupMessage(data)
+      message: getGroupMessages(data.response)
     });
   }, ({ response }) => {
     AppDispatcher.dispatch({
@@ -65,15 +64,15 @@ export const getGroupMessage = (group) => axios.post('/getGroupMessage',
       error: response.data.message
     });
   });
-
 /**
 * @description - Send message to a group
-* @param {Object} messageDetails - { groupName,
-    message, priority, userName, email }
+* @param {Object} messageDetails - { groupId, message, priority }
 * @returns {function} dispatch - dispatch to MessageStore
 */
-export const sendGroupMessage = (messageDetails) => axios.post(
-  '/sendGroupMessage', messageDetails)
+export const sendGroupMessage = (messageDetails) => {
+  const message = messageDetails.message;
+  const priority = messageDetails.priority;
+  axios.post(`/sendMessage/${messageDetails.groupId}`, { message, priority })
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: SEND_GROUP_MESSAGE,
@@ -85,4 +84,4 @@ export const sendGroupMessage = (messageDetails) => axios.post(
         error: response.data.message
       });
     });
-
+};

@@ -98,6 +98,27 @@ export default class Groups {
       .catch(error => res.status(401).send(error));
   }
 
+  static getMembersOfGroup(req, res) {
+    const groupId = req.params.groupId;
+    const userId = req.user.uid;
+    if (userId === undefined) {
+      res.status(401).send({ error: 'User is not signed in' });
+    } else {
+      Helper.getGroupName(groupId).then(groupName => {
+        if (groupName) {
+          return Promise.all([
+            dbConfig.database().ref('GroupMember').child(groupId).once('value',
+              snapshot => snapshot.val()),
+            groupId,
+            groupName[0]
+          ])
+          .then(response => res.status(200).send({ response }))
+          .catch(error => res.status(400).send({ error }));
+        }
+      });
+    }
+  }
+
   /**
   * @param {Object} req requset object
   * @param {Object} res response object

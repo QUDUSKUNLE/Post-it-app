@@ -1,5 +1,6 @@
 // BASE SET-UP
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import Router from './routes/index.js';
@@ -52,6 +53,10 @@ app.use(webpackMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler));
 
 app.use('/', Router);
+app.use(express.static(path.join(__dirname, '../client/src/')));
+app.get('*', (req, res) => {
+  res.sendFile(`${process.cwd()}/client/src/index.html`);
+});
 
 // App listening port
 app.listen(port);

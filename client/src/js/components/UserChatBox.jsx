@@ -60,11 +60,9 @@ export default class UserChatBox extends React.Component {
       sendGeneralMessage(newMessage);
     } else {
       const newMessage = {
-        groupName: this.props.defaultGroup,
+        groupId: this.props.groupId,
         message: this.state.message,
         priority: this.state.priority,
-        userName: this.state.username,
-        email: this.state.email
       };
       sendGroupMessage(newMessage);
     }
@@ -145,5 +143,6 @@ export default class UserChatBox extends React.Component {
 UserChatBox.propTypes = {
   name: PropTypes.string,
   allGeneralMessage: PropTypes.array,
-  defaultGroup: PropTypes.string
+  defaultGroup: PropTypes.string,
+  groupId: PropTypes.string
 };

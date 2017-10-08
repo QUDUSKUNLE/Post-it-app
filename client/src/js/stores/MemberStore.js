@@ -1,8 +1,10 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { getGroupMembers } from '../helper/helper.js';
 
 import {
-  GENERAL, ADD_MEMBER, GET_MEMBERS_OF_A_GROUP } from
+  GENERAL, ADD_MEMBER,
+  GET_MEMBERS_OF_GROUP } from
   '../constants/ActionConstants.js';
 
 /**
@@ -16,8 +18,10 @@ class MemberStore extends EventEmitter {
    */
   constructor() {
     super();
+    this.groupIndex = [];
     this.members = [];
     this.group = '';
+    this.groupId = '';
     this.general = [];
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.allGeneralUsers = this.allGeneralUsers.bind(this);
@@ -38,7 +42,7 @@ class MemberStore extends EventEmitter {
     constructor
    */
   allGroupMembers() {
-    return [this.members, this.group];
+    return [this.members, this.group, this.groupId];
   }
 
   /**
@@ -54,10 +58,12 @@ class MemberStore extends EventEmitter {
         this.emit('GENERAL');
         break;
 
-      case GET_MEMBERS_OF_A_GROUP:
-        this.members = action.members;
-        this.group = action.group;
-        this.emit('GET_MEMBERS_OF_A_GROUP');
+      case GET_MEMBERS_OF_GROUP:
+        this.groupIndex.push((action.members)[0]);
+        this.members = getGroupMembers(this.groupIndex);
+        this.groupId = (action.members)[1];
+        this.group = (action.members)[2];
+        this.emit('GET_MEMBERS_OF_GROUP');
         break;
 
       case ADD_MEMBER:

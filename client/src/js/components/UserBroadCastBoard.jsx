@@ -5,11 +5,11 @@ import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './userGroups';
 import UserChatBox from './userChatBox';
 // import Footer from './Footer.jsx';
-import { getUserGroup } from '../actions/groupAction.js';
+import { getGroup } from '../actions/groupAction.js';
 import { getGeneralMessage,
   getGroupMessage } from '../actions/messageActions.js';
 import { signoutAction } from '../actions/signOutActions.js';
-import { getGroupMembers } from '../actions/memberActions.js';
+import { getGroupMember } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
 import MessageStore from '../stores/MessageStore';
@@ -32,7 +32,7 @@ export default class UserBroadCastBoard extends React.Component {
       userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: 'general',
       groups: [],
-      groupName: '',
+      groupId: '',
       userName: JSON.parse(localStorage.getItem('userName')),
       allGeneralMessage: [],
       groupMessages: [],
@@ -54,7 +54,8 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {null} -
    */
   componentWillMount() {
-    getUserGroup();
+    const id = this.state.userId;
+    getGroup(id);
     getGeneralMessage();
   }
 
@@ -64,7 +65,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {null} -
    */
   componentDidMount() {
-    GroupStore.on('GET_GROUPS', this.userGroups);
+    GroupStore.on('GET_USER_GROUPS', this.userGroups);
     MemberStore.on('GENERAL', this.userGroups);
     MessageStore.on('SEND_GENERAL_MESSAGE', this.newGeneralMessage);
     MessageStore.on('SEND_GROUP_MESSAGE', this.newGroupMessage);
@@ -76,8 +77,11 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {null} -
    */
   componentWillUnmount() {
-    GroupStore.removeListener('GET_GROUPS', this.userGroups);
+    GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
     MemberStore.removeListener('GENERAL', this.userGroups);
+    MessageStore.removeListener('SEND_GENERAL_MESSAGE', this.newGeneralMessage);
+    MessageStore.removeListener('SEND_GROUP_MESSAGE', this.newGroupMessage);
+    MessageStore.removeListener('GET_GROUP_MESSAGE', this.getGroupMessage);
   }
 
   /**
@@ -85,10 +89,10 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {null} -
    */
   getMembersOnClick(index) {
-    this.setState({ groupName: index[0], defaultGroup: index[1].group },
+    this.setState({ defaultGroup: index[1], groupId: index[2] },
       () => {
-        const group = this.state.defaultGroup;
-        getGroupMessage({ group });
+        const groupId = this.state.groupId;
+        getGroupMessage(groupId);
       });
   }
 
@@ -145,14 +149,6 @@ export default class UserBroadCastBoard extends React.Component {
     });
   }
 
-  // /**
-  //  * onClick event.
-  //  * @returns {object} response from server.
-  // */
-  // onClick() {
-  //   signoutAction();
-  // }
-
   handleSignOutAction() {
     signoutAction().then((response) => {
       toastr.success(response.data.message);
@@ -175,12 +171,12 @@ export default class UserBroadCastBoard extends React.Component {
         <Redirect to="/signin" />
       );
     }
-    const grouplist = this.state.groups.map((group, i) =>
-      <li key={i}
-        value={group}
-        name={group}
-        onClick={() => getGroupMembers({ group })}>
-        <Link to="#"> {group}
+    const grouplist = this.state.groups.map((group) =>
+      <li key={Object.values(group)}
+        value={Object.keys(group)}
+        name={Object.keys(group)}
+        onClick={() => getGroupMember(Object.values(group))}>
+        <Link to="#"> {Object.keys(group)}
         </Link>
       </li>, this);
     return (
@@ -232,6 +228,7 @@ export default class UserBroadCastBoard extends React.Component {
               />
             <UserChatBox
               defaultGroup={this.state.defaultGroup}
+              groupId={this.state.groupId}
               allGeneralMessage={this.state.allGeneralMessage}/>
           </div>
         </div>

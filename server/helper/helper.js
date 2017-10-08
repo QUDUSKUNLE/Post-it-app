@@ -51,6 +51,19 @@ export default class Helper {
     });
   }
 
+  static getGroupName(groupId) {
+    return new Promise(resolve => {
+      dbConfig.database().ref('Groups').child(groupId).on('value',
+      snapshot => {
+        if (snapshot.val()) {
+          resolve(values(snapshot.val()));
+        }
+        resolve({});
+      });
+    });
+  }
+
+
   static getGroupEmails(groupEmails) {
     let emailIndex = 0;
     const emails = [];

@@ -1,10 +1,9 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { getAllGeneralUsers, getMembersOfAGroup } from '../utils/utils.js';
+import { getAllGeneralUsers } from '../helper/helper.js';
 import {
   GENERAL,
-  ADD_MEMBER,
-  GET_MEMBERS_OF_A_GROUP } from '../constants/ActionConstants.js';
+  ADD_MEMBER, GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 
 /**
@@ -12,20 +11,22 @@ import {
   * @param {object} GroupName - { GroupName }
   * @returns {function} dispatch - dispatch to MemberStore
 */
-export const getGroupMembers = (GroupName) => axios.post('/getGroupMember',
-  GroupName)
-  .then(({ data }) => {
-    AppDispatcher.dispatch({
-      type: GET_MEMBERS_OF_A_GROUP,
-      group: GroupName,
-      members: getMembersOfAGroup(data)
+
+export const getGroupMember = (groupId) => axios.get(
+  `/getMembers/${groupId}`)
+    .then(({ data }) => {
+      if (data.response[0] === null) {
+        AppDispatcher.dispatch({
+          type: GET_MEMBERS_OF_GROUP,
+          members: []
+        });
+      } else {
+        AppDispatcher.dispatch({
+          type: GET_MEMBERS_OF_GROUP,
+          members: data.response
+        });
+      }
     });
-  }, ({ response }) => {
-    AppDispatcher.dispatch({
-      type: GET_MEMBERS_OF_A_GROUP,
-      error: response.data.message
-    });
-  });
 
 
 /**

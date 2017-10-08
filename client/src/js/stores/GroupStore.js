@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
-  GET_GROUPS,
+  GET_GROUPS, GET_USER_GROUPS,
   CREATE_NEW_GROUP } from '../constants/ActionConstants.js';
 
 /**
@@ -39,6 +39,10 @@ class GroupStore extends EventEmitter {
       case GET_GROUPS:
         this.groups = action.groups;
         this.emit('GET_GROUPS');
+        break;
+      case GET_USER_GROUPS:
+        this.groups = action.groups;
+        this.emit('GET_USER_GROUPS');
         break;
       case CREATE_NEW_GROUP:
         this.groups.push(action.groups);
