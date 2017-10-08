@@ -5,7 +5,7 @@ import Messages from '../controllers/Messages';
 
 const Router = express.Router();
 
-Router.get('/', Users.home);
+Router.get('/*', Users.home);
 Router.post('/signup', Users.signUp);
 
 Router.post('/signin', Users.signIn);

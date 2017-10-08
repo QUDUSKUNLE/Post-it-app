@@ -11,7 +11,7 @@ import UserCreateGroup from './components/UserCreateGroup.jsx';
 import UserBroadCastBoard from './components/UserBroadCastBoard.jsx';
 import UserAddMember from './components/UserAddMember.jsx';
 import UserResetPassword from './components/UserResetPassword.jsx';
-import './css/icon.scss';
+import '../css/icon.scss';
 
 
 const store = createStore(

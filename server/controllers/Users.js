@@ -58,7 +58,8 @@ export default class User {
               userEmail: email,
               userName: username,
               phone_Number: phoneNumber,
-              time: moment().format('llll')
+              time: moment().format('llll'),
+              userID: userId
             }),
               dbConfig.database().ref('Group/general/member')
                 .child(`${userId}`).push({
