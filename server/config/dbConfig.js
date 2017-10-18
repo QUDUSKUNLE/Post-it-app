@@ -17,7 +17,8 @@ export const config = {
   storageBucket: process.env[`${checkProcess}storageBucket`],
   messagingSenderId: process.env[`${checkProcess}messagingSenderId`]
 };
+
 const dbConfig = firebase.initializeApp(config);
 
-// export dbConfig
 export default dbConfig;
+

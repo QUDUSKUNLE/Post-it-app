@@ -6,16 +6,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = {
   entry: [
     'webpack-hot-middleware/client',
-    './client/src/js/index.jsx'
+    './client/src/index.jsx'
   ],
   devtool: 'eval',
   output: {
     path: path.join(__dirname, 'client/src'),
     publicPath: '/',
-    filename: 'index.js'
+    filename: 'bundle.js'
   },
   devServer: {
-    contentBase: path.join(__dirname, 'client/src'),
+    contentBase: './client/src',
     compress: true,
     port: 8080,
     hot: true,
@@ -27,6 +27,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './client/src/index.html'
+    }),
+
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
     new Dotenv({
       path: './.env',

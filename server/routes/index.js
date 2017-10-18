@@ -5,38 +5,28 @@ import Messages from '../controllers/Messages';
 
 const Router = express.Router();
 
-// Router.get('/*', Users.home);
-Router.post('/signup', Users.signUp);
+Router.post('/api/v1/signup', Users.signUp);
 
-Router.post('/signin', Users.signIn);
-Router.post('/google', Users.googleSignIn);
+Router.post('/api/v1/signin', Users.signIn);
+Router.post('/api/v1/google', Users.googleSignIn);
 
-Router.post('/passwordReset', Users.passwordReset);
-Router.post('/signout', Users.signOut);
+Router.post('/api/v1/passwordReset', Users.passwordReset);
+Router.post('/api/v1/signout', Users.signOut);
 
-Router.post('/createGroup', Groups.userCreateNewGroup);
-// Create group
-Router.post('/create', Groups.createGroup);
-Router.get('/getgroups/:userId', Groups.getUsersGroups);
+Router.post('/api/v1/createGroup', Groups.createGroup);
+Router.get('/api/v1/getgroups/:userId', Groups.getUsersGroups);
 
-Router.post('/addmember/:groupId', Groups.addMemberToGroup);
-Router.get('/getMembers/:groupId', Groups.getMembersOfGroup);
+Router.post('/api/v1/addmember/:groupId', Groups.addMemberToGroup);
+Router.get('/api/v1/getMembers/:groupId', Groups.getMembersOfGroup);
 
-Router.post('/sendMessage/:groupId', Messages.sendMessageToGroup);
-Router.get('/getMessage/:groupId', Messages.getMessage);
+Router.post('/api/v1/sendMessage/:groupId', Messages.sendMessageToGroup);
+Router.get('/api/v1/getMessage/:groupId', Messages.getMessage);
 
-Router.post('/getUserGroups', Groups.getUserGroups);
-Router.post('/getAllUsers', Groups.getAllUsers);
+Router.get('/api/v1/getAllRegisteredUsers', Groups.getAllRegisteredUsers);
 
-Router.post('/getGroupMember', Groups.getGroupMembers);
-Router.post('/group/member', Groups.addGroupMember);
-
-Router.post('/sendGeneralMessage', Messages.sendGeneralMessage);
-Router.post('/sendGroupMessage', Messages.sendGroupMessage);
-
-Router.post('/getGeneralMessage', Messages.getGeneralMessage);
-Router.post('/getGroupMessage', Messages.getGroupMessage);
-
+Router.post('/api/v1/sendGeneralMessage', Messages.sendGeneralMessage);
+Router.post('/api/v1/sendGroupMessage', Messages.sendGroupMessage);
+Router.post('/api/v1/getGeneralMessage', Messages.getGeneralMessage);
 
 // export Router
 export default Router;

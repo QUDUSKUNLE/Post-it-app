@@ -4,32 +4,34 @@ import dotenv from 'dotenv';
 import values from 'object.values';
 import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper.js';
-import { sendGroupSMS } from '../utils/utils.js';
+import sendGroupSMS from '../utils/utils.js';
 
 dotenv.config();
 
 /**
-* class Messages: controls all Messages
-* @class Messages
-*/
+ * @export
+ * @class Messages
+ */
 export default class Messages {
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} response containing send message to General Group
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @returns
+   * @memberof Messages
+   */
   static sendGeneralMessage(req, res) {
     const { message, priority, userName, email } = req.body;
     const userId = req.user.uid;
     const time = moment().format('llll');
     if (userId === undefined) {
-      res.status(400).send({ error: {
+      res.status(401).send({ error: {
         code: 'PERMISSION_DENIED',
         message: 'User is not signed in' }
       });
     } else if (message.length < 1) {
-      res.status(400).send({ error: 'No message sent' });
+      res.status(403).send({ error: 'No message sent' });
     } else if (userName === undefined ||
       email === undefined || message === undefined) {
       res.status(400).send({ error: 'No message sent' });
@@ -41,15 +43,16 @@ export default class Messages {
       ])
     .then(response => res.status(200).send({
       message: 'message sent succesfully', response }))
-    .catch(error => res.status(500).send({ error }));
+    .catch(error => res.status(403).send({ error }));
     }
   }
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} response containing get general Messages
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof Messages
+   */
   static getGeneralMessage(req, res) {
     Promise.all([
       dbConfig.database().ref('Group/general').child('message')
@@ -60,16 +63,18 @@ export default class Messages {
   }
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} response containing send Messages to group
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @returns
+   * @memberof Messages
+   */
   static sendGroupMessage(req, res) {
     const { groupName, message, priority, userName, email } = req.body;
     const userId = req.user.uid;
     const time = moment().format('llll');
     if (userId === undefined) {
-      res.status(400).send({ error: {
+      res.status(401).send({ error: {
         code: 'PERMISSION_DENIED',
         message: 'User is not signed in' }
       });
@@ -92,10 +97,12 @@ export default class Messages {
   }
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} response containing get Messages from a group
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @returns
+   * @memberof Messages
+   */
   static getGroupMessage(req, res) {
     const group = req.body.group;
     const userId = req.user.uid;
@@ -108,19 +115,24 @@ export default class Messages {
       .catch(error => res.status(400).send({ error }));
   }
 
-  // Send Message
+  /**
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof Messages
+   */
   static sendMessageToGroup(req, res) {
     const { message, priority } = req.body;
     const groupId = req.params.groupId;
     const userId = req.user.uid;
     const time = moment().format('llll');
     if (userId === undefined) {
-      res.status(400).send({ error: {
+      res.status(401).send({ error: {
         code: 'PERMISSION_DENIED',
         message: 'User is not signed in' }
       });
     } else if (message.length < 1) {
-      res.status(400).send({ error: 'No message sent' });
+      res.status(403).send({ error: 'No message sent' });
     } else {
       Helper.getUserEmailAndPhoneNumber(userId)
         .then(senderDetails => {
@@ -162,7 +174,6 @@ export default class Messages {
                 groupPhoneAndEmail);
               sendGroupSMS(groupPhoneNumbers).then(res => {
                 if (res) {
-                  console.log(res[0].body);
                   const transporter = nodemailer.createTransport({
                     service: 'gmail',
                     port: 25,
@@ -201,17 +212,24 @@ export default class Messages {
           ])
             .then(response => res.status(200).send({
               message: 'Broadcast Message sent successfully', response }))
-            .catch(error => res.send({ error }));
+            .catch(error => res.status(500).send({ error }));
         })
-        .catch(error => res.status(400).send({ error }));
+        .catch(error => res.status(403).send({ error }));
     }
   }
 
+  /**
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @returns
+   * @memberof Messages
+   */
   static getMessage(req, res) {
     const groupId = req.params.groupId;
     const userId = req.user.uid;
     if (userId === undefined) {
-      res.status(400).send({ error: 'User not signed in' });
+      res.status(401).send({ error: 'User not signed in' });
     } else {
       return Promise.all(
         [
@@ -223,7 +241,7 @@ export default class Messages {
             res.status(200).send({ response });
           }
         })
-        .catch(error => res.status(400).send({ error }));
+        .catch(error => res.status(403).send({ error }));
     }
   }
 }

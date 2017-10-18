@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "npm run client && npm run bundle",
-        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/test --timeout 20000 --compilers js:babel-register && npm run coverage-report",
+        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 20000 --compilers js:babel-register && npm run coverage-report",
         "client_test": "jest __tests__  && npm run coverage-report",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
         "client": "webpack -p",
@@ -79,6 +79,8 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-core": "^6.24.1",
+        "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-stage-2": "^6.24.1",
         "babel-register": "^6.26.0",

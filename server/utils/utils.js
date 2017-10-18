@@ -6,7 +6,7 @@ const key = process.env.PUBLIC_KEY;
 const token = process.env.ACCESS_TOKEN;
 const jusibe = new Jusibe(key, token);
 
-export const sendGroupSMS = (phoneNumbers) => {
+const sendGroupSMS = (phoneNumbers) => {
   const payloads = phoneNumbers.map(number => (
     {
       to: number,
@@ -17,3 +17,5 @@ export const sendGroupSMS = (phoneNumbers) => {
   return Promise.all(
     payloads.map(payload => jusibe.sendSMS(payload)));
 };
+
+export default sendGroupSMS;

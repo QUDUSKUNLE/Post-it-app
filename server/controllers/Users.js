@@ -1,43 +1,44 @@
 import firebase from 'firebase';
 import moment from 'moment';
-// import path from 'path';
 import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper';
 
 /**
-* class Users: controls all Users routes
-* @class Users
-*/
+ * @export
+ * @class User
+ */
 export default class User {
 
+
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server signup response
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof User
+   */
   static signUp(req, res) {
     const { email, password,
       confirmPassword, phoneNumber, username } = req.body;
     if (!Helper.validatePassword(password)) {
-      res.status(501).send({
+      res.status(403).send({
         error: { code:
           'password should be at least 6' +
         ' characters with a speacial character' }
       });
     } else if (username === undefined) {
-      res.status(501).send({ error: { code:
+      res.status(400).send({ error: { code:
         'Username is required' }
       });
     } else if (username.length < 2) {
-      res.status(501).send({ error: { code: 'Username required at' +
+      res.status(403).send({ error: { code: 'Username required at' +
       ' least 2 characters' }
     });
     } else if (password !== confirmPassword) {
-      res.status(501).send({ error: { code:
+      res.status(403).send({ error: { code:
         'Password does not match' }
       });
     } else if (!Helper.validatePhoneNumber(phoneNumber)) {
-      res.status(501).send({ error: { code:
+      res.status(403).send({ error: { code:
         'Incorrect phone number' } });
     } else {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
@@ -69,7 +70,7 @@ export default class User {
         if (error.code === 'auth/invalid-email') {
           res.status(400).send({ error });
         } else if (error.code === 'auth/email-already-in-use') {
-          res.status(501).send({ error });
+          res.status(403).send({ error });
         } else {
           res.status(404).send({ error });
         }
@@ -77,15 +78,17 @@ export default class User {
     }
   }
 
+
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server signin response
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof User
+   */
   static signIn(req, res) {
     const { email, password } = req.body;
     if (email === undefined || password === undefined) {
-      res.status(404).send({
+      res.status(403).send({
         error: { code: 'Either email or passowrd is not provided' }
       });
     } else {
@@ -114,26 +117,54 @@ export default class User {
   }
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server signin response
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof User
+   */
   static googleSignIn(req, res) {
     const token = req.body.credential.idToken;
     const credentials = firebase.auth.GoogleAuthProvider.credential(token);
     firebase.auth().signInWithCredential(credentials)
-      .then(user => res.status(200).send({
-        message: 'user`s signed in succesfully',
-        user
-      }))
-      .catch(error => res.status(501).send({ response: error.message }));
+      .then((user) => {
+        dbConfig.database().ref('users').child(user.uid)
+          .once('value', snapshot => {
+            if (!snapshot.exists()) {
+              Promise.all(
+                [dbConfig.database().ref(`users/${user.uid}`).push({
+                  userEmail: user.email,
+                  userName: user.displayName,
+                  phone_Number: '08092893120',
+                  time: moment().format('llll'),
+                  userId: user.uid
+                }),
+                user
+              ])
+               .then(response => {
+                 const responseValue = response[1];
+                 res.status(200).send({
+                   message: 'user`s signed in succesfully', responseValue });
+               });
+            } else {
+              res.status(200).send({
+                message: 'user`s signed in succesfully',
+                user });
+            }
+          });
+      })
+      .catch((error) => {
+        if (error) {
+          res.status(501).send({ response: error.message });
+        }
+      });
   }
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server passwordReset response
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof User
+   */
   static passwordReset(req, res) {
     const { email } = req.body;
     firebase.auth().sendPasswordResetEmail(email).then(() =>
@@ -147,17 +178,19 @@ export default class User {
       });
   }
 
+
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server signOut response
-  */
+   * @static
+   * @param {any} req
+   * @param {any} res
+   * @memberof User
+   */
   static signOut(req, res) {
     firebase.auth().signOut()
       .then(() => {
         req.user = {};
         res.status(200).send({ message: 'User`s signed-out successfully.' });
       })
-      .catch(() => res.status(404).send({ message: 'Network Error' }));
+      .catch(() => res.status(500).send({ message: 'Network Error' }));
   }
 }
