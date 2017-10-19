@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * displays an error page when user navigates to an alien page
@@ -6,10 +7,10 @@ import React from 'react';
  * @return {void} - React component
  */
 const NotFound = () => (
-  <div className="col-md-12" id="notFound">
+  <div className="col-md-12">
     <div className="inner-content center m-auto">
-      <span className="center"><img alt="loading" src="imgs/404.png" /></span>
-      <h3 className="center">Page Not Found!</h3>
+      <h3 className="text-center">Page Not Found.</h3>
+      <Link to="/signin">Go Back</Link>
     </div>
   </div>
 );
