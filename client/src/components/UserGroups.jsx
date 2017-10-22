@@ -36,11 +36,6 @@ export default class UserGroups extends React.Component {
     this.props.getMembers(clickedGroup);
   }
 
-  // handleClick() {
-  //   getGeneralMessage();
-  //   getAllUsers();
-  // }
-
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} Groups component

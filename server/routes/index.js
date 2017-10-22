@@ -24,9 +24,5 @@ Router.get('/api/v1/getMessage/:groupId', Messages.getMessage);
 
 Router.get('/api/v1/getAllRegisteredUsers', Groups.getAllRegisteredUsers);
 
-Router.post('/api/v1/sendGeneralMessage', Messages.sendGeneralMessage);
-Router.post('/api/v1/sendGroupMessage', Messages.sendGroupMessage);
-Router.post('/api/v1/getGeneralMessage', Messages.getGeneralMessage);
-
 // export Router
 export default Router;

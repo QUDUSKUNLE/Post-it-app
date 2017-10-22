@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
 import config from '../vendors/vendors';
-// import { googleLogIn } from '../vendors/vendors';
 import toastr from 'toastr';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
@@ -234,6 +233,7 @@ export default class UserSignIn extends React.Component {
 
 // props validation
 UserSignIn.propTypes = {
+  // history: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

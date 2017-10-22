@@ -14,7 +14,7 @@ ShallowWrapper {
       role="navigation"
     >
       <div
-        className="container"
+        className="container-fluid"
       >
         <div
           className="navbar-header"
@@ -90,7 +90,7 @@ ShallowWrapper {
         role="navigation"
       >
         <div
-          className="container"
+          className="container-fluid"
         >
           <div
             className="navbar-header"
@@ -200,7 +200,7 @@ ShallowWrapper {
             role="navigation"
           >
             <div
-              className="container"
+              className="container-fluid"
             >
               <div
                 className="navbar-header"
@@ -276,7 +276,7 @@ ShallowWrapper {
             role="navigation"
           >
             <div
-              className="container"
+              className="container-fluid"
             >
               <div
                 className="navbar-header"

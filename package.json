@@ -3,13 +3,14 @@
     "version": "1.0.0",
     "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
     "main": "index.js",
+    "licence": "MIT",
     "engines": {
         "node": "6.9.4"
     },
     "scripts": {
         "start": "npm run client && npm run bundle",
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 20000 --compilers js:babel-register && npm run coverage-report",
-        "client_test": "jest __tests__  && npm run coverage-report",
+        "client_test": "jest ./client/__tests__",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
         "client": "webpack -p",
         "bundle": "babel server/ -d dist && npm run server",
@@ -22,13 +23,16 @@
     "author": "Qudus YEKEEN",
     "license": "ISC",
     "jest": {
+        "roots": [
+            "<rootDir>/client/__tests__"
+        ],
+        "moduleFileExtensions": [
+            "js",
+            "jsx"
+        ],
         "collectCoverage": true,
-        "transform": {
-            ".*": "<rootDir>/node_modules/babel-jest"
-        },
-        "collectCoverageFrom": [
-            "client/src/js/**/*.js",
-            "client/src/js/**/*.jsx"
+        "coveragePathIgnorePatterns": [
+            "<rootDir>/test-env.js"
         ]
     },
     "dependencies": {
@@ -108,7 +112,7 @@
         "object-assign": "*",
         "object.values": "^1.0.4",
         "react-dom": "^15.5.4",
-        "react-test-renderer": "^15.6.1",
+        "react-test-renderer": "^15.6.2",
         "sass-loader": "^6.0.6",
         "should": "^12.0.0",
         "sinon": "^3.2.1",

@@ -68,6 +68,25 @@ ShallowWrapper {
               className="form-group"
             >
               <label
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <input
+                className="signinform"
+                id="phoneNumber"
+                name="phoneNumber"
+                onChange={[Function]}
+                placeholder="08012345678"
+                required={true}
+                type="phone"
+                value=""
+              />
+            </div>
+            <div
+              className="form-group"
+            >
+              <label
                 htmlFor="password"
               >
                 Password
@@ -93,8 +112,8 @@ ShallowWrapper {
               </label>
               <input
                 className="signinform"
-                id="conf_password"
-                name="conf_password"
+                id="confirmPassword"
+                name="confirmPassword"
                 onChange={[Function]}
                 placeholder="********"
                 required={true}
@@ -109,12 +128,11 @@ ShallowWrapper {
               Sign up
             </button>
           </form>
-          <br />
-          <p
-            className="text-center"
+          <div
+            className="text-center term"
           >
             By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -180,6 +198,25 @@ ShallowWrapper {
                 className="form-group"
               >
                 <label
+                  htmlFor="phoneNumber"
+                >
+                  Phone Number
+                </label>
+                <input
+                  className="signinform"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  onChange={[Function]}
+                  placeholder="08012345678"
+                  required={true}
+                  type="phone"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-group"
+              >
+                <label
                   htmlFor="password"
                 >
                   Password
@@ -205,8 +242,8 @@ ShallowWrapper {
                 </label>
                 <input
                   className="signinform"
-                  id="conf_password"
-                  name="conf_password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   onChange={[Function]}
                   placeholder="********"
                   required={true}
@@ -221,12 +258,11 @@ ShallowWrapper {
                 Sign up
               </button>
             </form>
-            <br />
-            <p
-              className="text-center"
+            <div
+              className="text-center term"
             >
               By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -238,22 +274,24 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <SignUp />,
+      "_currentElement": <UserSignUp />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": SignUp {
+      "_instance": UserSignUp {
         "_reactInternalInstance": [Circular],
         "context": Object {},
+        "handleSignUpAction": [Function],
         "onChange": [Function],
         "onSubmit": [Function],
         "props": Object {},
         "refs": Object {},
         "state": Object {
-          "conf_password": "",
+          "confirmPassword": "",
           "email": "",
           "errMessage": "",
           "password": "",
+          "phoneNumber": "",
           "signupMessage": "",
           "username": "",
         },
@@ -335,6 +373,25 @@ ShallowWrapper {
                     className="form-group"
                   >
                     <label
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className="signinform"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      onChange={[Function]}
+                      placeholder="08012345678"
+                      required={true}
+                      type="phone"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
                       htmlFor="password"
                     >
                       Password
@@ -360,8 +417,8 @@ ShallowWrapper {
                     </label>
                     <input
                       className="signinform"
-                      id="conf_password"
-                      name="conf_password"
+                      id="confirmPassword"
+                      name="confirmPassword"
                       onChange={[Function]}
                       placeholder="********"
                       required={true}
@@ -376,12 +433,11 @@ ShallowWrapper {
                     Sign up
                   </button>
                 </form>
-                <br />
-                <p
-                  className="text-center"
+                <div
+                  className="text-center term"
                 >
                   By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -447,6 +503,25 @@ ShallowWrapper {
                     className="form-group"
                   >
                     <label
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className="signinform"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      onChange={[Function]}
+                      placeholder="08012345678"
+                      required={true}
+                      type="phone"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
                       htmlFor="password"
                     >
                       Password
@@ -472,8 +547,8 @@ ShallowWrapper {
                     </label>
                     <input
                       className="signinform"
-                      id="conf_password"
-                      name="conf_password"
+                      id="confirmPassword"
+                      name="confirmPassword"
                       onChange={[Function]}
                       placeholder="********"
                       required={true}
@@ -488,12 +563,11 @@ ShallowWrapper {
                     Sign up
                   </button>
                 </form>
-                <br />
-                <p
-                  className="text-center"
+                <div
+                  className="text-center term"
                 >
                   By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -509,6 +583,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <SignUp />,
+  "unrendered": <UserSignUp />,
 }
 `;

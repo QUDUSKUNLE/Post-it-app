@@ -1,15 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from '../../client/src/js/components/userApp.jsx';
-import NavBar from '../../client/src/js/components/navBar.jsx';
-import SignUp from '../../client/src/js/components/userSignUp.jsx';
+// import { expect } from 'chai';
+import UserApp from '../../src/components/UserApp.jsx';
+import NavBar from '../../src/components/NavBar.jsx';
+import UserSignUp from '../../src/components/UserSignUp.jsx';
 
-describe('App component', () => {
+describe('UserApp component', () => {
   it('expected to be defined', () => {
-    expect(App).toBeDefined();
+    expect(UserApp).toBeDefined();
   });
   it('should render correctly', () => {
-    const component = shallow(<App/>);
+    const component = shallow(<UserApp/>);
     expect(component).toMatchSnapshot();
   });
   it('should render correctly', () => {
@@ -17,11 +18,19 @@ describe('App component', () => {
     expect(component).toMatchSnapshot();
   });
   it('should render correctly', () => {
-    const component = shallow(<SignUp/>);
+    const component = shallow(<UserSignUp/>);
     expect(component).toMatchSnapshot();
   });
   it('should render without crashing', () => {
-    const component = shallow(<App/>);
+    const component = shallow(<UserApp/>);
+    expect(component.find('.mainbody').exists()).toBeTruthy();
     expect(component.find('.home').exists()).toBeTruthy();
+    expect(component.find('div')).toHaveLength(4);
+    expect(component.find('h4')).toHaveLength(1);
+    expect(component.find('small')).toHaveLength(1);
+    expect(component.find('NavBar')).toHaveLength(1);
+    expect(component.find('i')).toHaveLength(1);
+    expect(component.find('UserSignUp')).toHaveLength(1);
+    expect(component.find('Footer')).toHaveLength(1);
   });
 });

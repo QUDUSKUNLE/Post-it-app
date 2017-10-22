@@ -28,7 +28,7 @@ export const getUserGroups = (userId) => axios.get(
   });
 
 /**
- * @function userCreateNewGroup
+ * @function createGroup
  * @param {object} groupName - { andela }
  * @returns {object} object
  */

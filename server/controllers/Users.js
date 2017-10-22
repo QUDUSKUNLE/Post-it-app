@@ -38,7 +38,7 @@ export default class User {
         'Password does not match' }
       });
     } else if (!Helper.validatePhoneNumber(phoneNumber)) {
-      res.status(403).send({ error: { code:
+      res.status(400).send({ error: { code:
         'Incorrect phone number' } });
     } else {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
@@ -177,7 +177,6 @@ export default class User {
         }
       });
   }
-
 
   /**
    * @static

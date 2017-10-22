@@ -58,16 +58,20 @@ export default class Groups {
    * @memberof Groups
    */
   static getAllRegisteredUsers(req, res) {
-    Promise.all([
-      dbConfig.database().ref('users')
-        .once('value', (snapshot) => {
-          if (snapshot.val() != null) {
-            snapshot.val();
-          }
-        })
-    ])
-    .then(response => res.status(200).send({ response }))
-    .catch(error => res.status(401).send({ error }));
+    const userId = req.user.uid;
+    if (userId !== undefined) {
+      Promise.all([
+        dbConfig.database().ref('users')
+          .once('value', (snapshot) => {
+            if (snapshot.val() != null) {
+              snapshot.val();
+            }
+          })
+      ])
+      .then(response => res.status(200).send({ response }));
+    } else {
+      res.status(401).send({ error: 'User is not signed in' });
+    }
   }
 
   /**

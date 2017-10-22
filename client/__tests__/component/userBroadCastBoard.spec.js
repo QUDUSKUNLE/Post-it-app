@@ -1,9 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BroadCastBoard from '../../client/src/js/components/userBroadCastBoard.jsx';
+// import { expect } from 'chai';
+import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
 
 describe('PostIt-app', () => {
-  it('expects App component to be defined', () => {
-    expect(BroadCastBoard).toBeDefined();
+  it('expects BroadcastBoard component to be defined', () => {
+    expect(UserBroadCastBoard).toBeDefined();
   });
 });

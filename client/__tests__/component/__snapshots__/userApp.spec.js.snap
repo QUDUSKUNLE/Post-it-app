@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App component should render correctly 1`] = `
+exports[`UserApp component should render correctly 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -11,7 +11,7 @@ ShallowWrapper {
   "node": <div>
     <NavBar />
     <div
-      className="container"
+      className="container mainbody"
     >
       <div
         className="row home"
@@ -26,10 +26,14 @@ ShallowWrapper {
                 App
               </i>
             </small>
-              allows friends to come together and share vital informtion.
+             
+            allows friends to come together and share vital information.
           </h4>
         </div>
-        <SignUp />
+        <UserSignUp />
+        <br />
+        <br />
+        <Footer />
       </div>
     </div>
   </div>,
@@ -37,7 +41,7 @@ ShallowWrapper {
     <div>
       <NavBar />
       <div
-        className="container"
+        className="container mainbody"
       >
         <div
           className="row home"
@@ -52,10 +56,14 @@ ShallowWrapper {
                   App
                 </i>
               </small>
-                allows friends to come together and share vital informtion.
+               
+              allows friends to come together and share vital information.
             </h4>
           </div>
-          <SignUp />
+          <UserSignUp />
+          <br />
+          <br />
+          <Footer />
         </div>
       </div>
     </div>,
@@ -66,11 +74,11 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <App />,
+      "_currentElement": <UserApp />,
       "_debugID": 1,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": App {
+      "_instance": UserApp {
         "_reactInternalInstance": [Circular],
         "context": Object {},
         "props": Object {},
@@ -97,7 +105,7 @@ ShallowWrapper {
         "_currentElement": <div>
           <NavBar />
           <div
-            className="container"
+            className="container mainbody"
           >
             <div
               className="row home"
@@ -112,10 +120,14 @@ ShallowWrapper {
                       App
                     </i>
                   </small>
-                    allows friends to come together and share vital informtion.
+                   
+                  allows friends to come together and share vital information.
                 </h4>
               </div>
-              <SignUp />
+              <UserSignUp />
+              <br />
+              <br />
+              <Footer />
             </div>
           </div>
         </div>,
@@ -123,7 +135,7 @@ ShallowWrapper {
         "_renderedOutput": <div>
           <NavBar />
           <div
-            className="container"
+            className="container mainbody"
           >
             <div
               className="row home"
@@ -138,10 +150,14 @@ ShallowWrapper {
                       App
                     </i>
                   </small>
-                    allows friends to come together and share vital informtion.
+                   
+                  allows friends to come together and share vital information.
                 </h4>
               </div>
-              <SignUp />
+              <UserSignUp />
+              <br />
+              <br />
+              <Footer />
             </div>
           </div>
         </div>,
@@ -156,11 +172,11 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <App />,
+  "unrendered": <UserApp />,
 }
 `;
 
-exports[`App component should render correctly 2`] = `
+exports[`UserApp component should render correctly 2`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -174,7 +190,7 @@ ShallowWrapper {
       role="navigation"
     >
       <div
-        className="container"
+        className="container-fluid"
       >
         <div
           className="navbar-header"
@@ -250,7 +266,7 @@ ShallowWrapper {
         role="navigation"
       >
         <div
-          className="container"
+          className="container-fluid"
         >
           <div
             className="navbar-header"
@@ -360,7 +376,7 @@ ShallowWrapper {
             role="navigation"
           >
             <div
-              className="container"
+              className="container-fluid"
             >
               <div
                 className="navbar-header"
@@ -436,7 +452,7 @@ ShallowWrapper {
             role="navigation"
           >
             <div
-              className="container"
+              className="container-fluid"
             >
               <div
                 className="navbar-header"
@@ -520,7 +536,7 @@ ShallowWrapper {
 }
 `;
 
-exports[`App component should render correctly 3`] = `
+exports[`UserApp component should render correctly 3`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -588,6 +604,25 @@ ShallowWrapper {
               className="form-group"
             >
               <label
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <input
+                className="signinform"
+                id="phoneNumber"
+                name="phoneNumber"
+                onChange={[Function]}
+                placeholder="08012345678"
+                required={true}
+                type="phone"
+                value=""
+              />
+            </div>
+            <div
+              className="form-group"
+            >
+              <label
                 htmlFor="password"
               >
                 Password
@@ -613,8 +648,8 @@ ShallowWrapper {
               </label>
               <input
                 className="signinform"
-                id="conf_password"
-                name="conf_password"
+                id="confirmPassword"
+                name="confirmPassword"
                 onChange={[Function]}
                 placeholder="********"
                 required={true}
@@ -629,12 +664,11 @@ ShallowWrapper {
               Sign up
             </button>
           </form>
-          <br />
-          <p
-            className="text-center"
+          <div
+            className="text-center term"
           >
             By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-          </p>
+          </div>
         </div>
       </div>
     </div>
@@ -700,6 +734,25 @@ ShallowWrapper {
                 className="form-group"
               >
                 <label
+                  htmlFor="phoneNumber"
+                >
+                  Phone Number
+                </label>
+                <input
+                  className="signinform"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  onChange={[Function]}
+                  placeholder="08012345678"
+                  required={true}
+                  type="phone"
+                  value=""
+                />
+              </div>
+              <div
+                className="form-group"
+              >
+                <label
                   htmlFor="password"
                 >
                   Password
@@ -725,8 +778,8 @@ ShallowWrapper {
                 </label>
                 <input
                   className="signinform"
-                  id="conf_password"
-                  name="conf_password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   onChange={[Function]}
                   placeholder="********"
                   required={true}
@@ -741,12 +794,11 @@ ShallowWrapper {
                 Sign up
               </button>
             </form>
-            <br />
-            <p
-              className="text-center"
+            <div
+              className="text-center term"
             >
               By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-            </p>
+            </div>
           </div>
         </div>
       </div>
@@ -758,22 +810,24 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <SignUp />,
+      "_currentElement": <UserSignUp />,
       "_debugID": 5,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": SignUp {
+      "_instance": UserSignUp {
         "_reactInternalInstance": [Circular],
         "context": Object {},
+        "handleSignUpAction": [Function],
         "onChange": [Function],
         "onSubmit": [Function],
         "props": Object {},
         "refs": Object {},
         "state": Object {
-          "conf_password": "",
+          "confirmPassword": "",
           "email": "",
           "errMessage": "",
           "password": "",
+          "phoneNumber": "",
           "signupMessage": "",
           "username": "",
         },
@@ -855,6 +909,25 @@ ShallowWrapper {
                     className="form-group"
                   >
                     <label
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className="signinform"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      onChange={[Function]}
+                      placeholder="08012345678"
+                      required={true}
+                      type="phone"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
                       htmlFor="password"
                     >
                       Password
@@ -880,8 +953,8 @@ ShallowWrapper {
                     </label>
                     <input
                       className="signinform"
-                      id="conf_password"
-                      name="conf_password"
+                      id="confirmPassword"
+                      name="confirmPassword"
                       onChange={[Function]}
                       placeholder="********"
                       required={true}
@@ -896,12 +969,11 @@ ShallowWrapper {
                     Sign up
                   </button>
                 </form>
-                <br />
-                <p
-                  className="text-center"
+                <div
+                  className="text-center term"
                 >
                   By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -967,6 +1039,25 @@ ShallowWrapper {
                     className="form-group"
                   >
                     <label
+                      htmlFor="phoneNumber"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      className="signinform"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      onChange={[Function]}
+                      placeholder="08012345678"
+                      required={true}
+                      type="phone"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="form-group"
+                  >
+                    <label
                       htmlFor="password"
                     >
                       Password
@@ -992,8 +1083,8 @@ ShallowWrapper {
                     </label>
                     <input
                       className="signinform"
-                      id="conf_password"
-                      name="conf_password"
+                      id="confirmPassword"
+                      name="confirmPassword"
                       onChange={[Function]}
                       placeholder="********"
                       required={true}
@@ -1008,12 +1099,11 @@ ShallowWrapper {
                     Sign up
                   </button>
                 </form>
-                <br />
-                <p
-                  className="text-center"
+                <div
+                  className="text-center term"
                 >
                   By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1029,6 +1119,6 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <SignUp />,
+  "unrendered": <UserSignUp />,
 }
 `;

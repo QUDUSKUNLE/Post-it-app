@@ -35,7 +35,6 @@ export default class UserApp extends React.Component {
             <br/>
             <Footer/>
           </div>
-          {this.props.children}
         </div>
       </div>
     );

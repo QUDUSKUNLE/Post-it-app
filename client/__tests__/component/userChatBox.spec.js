@@ -1,10 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ChatBox from '../../client/src/js/components/userChatBox.jsx';
+// import { expect } from 'chai';
+import UserChatBox from '../../src/components/UserChatBox.jsx';
 
 
 describe('PostIt-app', () => {
   it('expects App component to be defined', () => {
-    expect(ChatBox).toBeDefined();
+    expect(UserChatBox).toBeDefined();
   });
 });
