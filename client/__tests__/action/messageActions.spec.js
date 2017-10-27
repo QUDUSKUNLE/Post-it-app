@@ -69,10 +69,10 @@ describe('MessageActions', () => {
     };
     it('should dispatch an action', () => {
       sendGroupMessage(messageDetails);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ sendMessageResponse });
-        });
+      mockAxios.getCall(0).returnValue.then((res) => {
+        expect(res).toBeInstanceOf(Object);
+        expect(res).toEqual({ sendMessageResponse });
+      });
       expect(mockAxios.calledOnce).toBe(true);
     });
   });
