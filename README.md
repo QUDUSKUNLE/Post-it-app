@@ -72,6 +72,8 @@
 
 + Users cannot delete message sent
 
++ Users that signed in with Google would not receive SMS notification
+
 ## Author
 + MIT © [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
 

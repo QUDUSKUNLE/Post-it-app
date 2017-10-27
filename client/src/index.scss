@@ -101,10 +101,6 @@ body {
 
 .creategroupform {
     margin-top: 200px;
-    // margin-left: auto;
-    // margin-right: auto;
-    // position: relative;
-    // top: 50%;
     transform: translateY(-50%);
 }
 
@@ -139,20 +135,6 @@ body {
     text-align: center;
 }
 
-
-/*Footer*/
-
-// .footer {
-//     position: fixed;
-//     left: 0;
-//     bottom: 0;
-//     width: 100%;
-//     height: 30px;
-//     margin-top: 20px;
-//     background-color: #222222;
-//     color: white;
-//     text-align: center;
-// }
 // New
 .row-offcanvas {
     height: 100%;
@@ -166,9 +148,7 @@ body {
     float: left;
     height: 90vh;
     position: relative;
-    /* overflow-y: auto; */
     overflow-x: hidden;
-    // padding-bottom: 100px;
     border-right: 1px solid gray;
 }
 
@@ -223,7 +203,6 @@ body {
 }
 
 .messageForm {
-    // margin: 10px -10px;
     padding-top: 20px;
     width: 98%;
 }
