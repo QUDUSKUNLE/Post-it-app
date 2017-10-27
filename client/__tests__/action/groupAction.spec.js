@@ -1,5 +1,6 @@
 import sinon from 'sinon';
 import axios from 'axios';
+import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock.js';
 import groupResponse from '../../src/__mock__/groupResponse.json';
@@ -34,12 +35,10 @@ describe('groupActions', () => {
       const userId = 'NCaAzr0ZzqfCLtXQlQG0jW2DWbg1';
       getUserGroups(userId).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        consolelog(mockAxios.calledOnce);
         mockAxios.getCall(0).returnValue.then((res) => {
           expect(res).toBeInstanceOf(Object);
           expect(res).toEqual({ groupResponse });
         });
-        console.log(dispatchSpy.called);
         expect(dispatchSpy.called).toEqual(false);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
       });
