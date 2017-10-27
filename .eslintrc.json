@@ -38,6 +38,9 @@
         "superInFunctions": true,
         "templateStrings": true
     },
+    "globals": {
+        "jest": true
+    },
     "rules": {
         "import/no-unresolved": 0,
         "one-var": 0,
