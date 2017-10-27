@@ -39,7 +39,7 @@ class GroupStore extends EventEmitter {
    * Receives actions and update the stores accordingly
    * @method handleActions
    * @param {object} action - Action type and data
-   * @return {null} -
+   * @return {*} -
    */
   handleActions(action) {
     switch (action.type) {

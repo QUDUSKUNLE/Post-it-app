@@ -10,10 +10,12 @@ import Helper from '../helper/Helper.js';
 export default class Groups {
 
   /**
-  * @param {Object} req requset object
-  * @param {Object} res response object
-  * @return {Object} contains server createGroup response
-  */
+   * @description This method create new group for user
+   * route POST: api/v1/createGroup
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response containing creating new group
+   */
   static createGroup(req, res) {
     const groupName = req.body.group;
     const userId = req.user.uid;
@@ -52,10 +54,12 @@ export default class Groups {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof Groups
+   * @description This method retrieves allRegisteredUsers
+   * route GET: api/v1/getAllRegisteredUsers
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response containing all registerdUsers
    */
   static getAllRegisteredUsers(req, res) {
     const userId = req.user.uid;
@@ -75,10 +79,11 @@ export default class Groups {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof Groups
+   * @description This method retrieves allRegisteredUsers
+   * route GET: api/v1/getMembers/:groupId
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains all members of a group
    */
   static getMembersOfGroup(req, res) {
     const groupId = req.params.groupId;
@@ -102,11 +107,11 @@ export default class Groups {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @returns
-   * @memberof Groups
+   * @description This method retrieves all user group
+   * route GET: api/v1/getgroups/:userId
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains all user group
    */
   static getUsersGroups(req, res) {
     const userId = req.params.userId;
@@ -124,10 +129,11 @@ export default class Groups {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof Groups
+   * @description This method add member to a group
+   * route POST: api/v1/addMembers/:groupId
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains add member response
    */
   static addMemberToGroup(req, res) {
     const memberId = req.body.memberId;

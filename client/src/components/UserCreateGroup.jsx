@@ -27,6 +27,11 @@ export default class UserCreateGroup extends React.Component {
       signOutMessage: '',
       loggedIn
     };
+
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
@@ -57,8 +62,8 @@ export default class UserCreateGroup extends React.Component {
 
   /**
 	 * @description This handles CreateGroup form submission
-	 * @param {object} event .
-	 * @returns {void} .
+	 * @param {object} event -
+	 * @returns {void}
 	 */
   onSubmit(event) {
     event.preventDefault();
@@ -153,7 +158,8 @@ export default class UserCreateGroup extends React.Component {
                       className="signinform" placeholder="andela-abuja"
                       name="group" required/>
                   </div>
-                  <button type="submit" className="signinformbtn">Create Group
+                  <button type="submit" className="signinformbtn">
+                    Create Group
                   </button>
                 </form>
               </div>

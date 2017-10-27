@@ -8,16 +8,16 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div>
-    <div
-      className="footer"
-    />
+  "node": <div
+    className="footer"
+  >
+    Andela 2017
   </div>,
   "nodes": Array [
-    <div>
-      <div
-        className="footer"
-      />
+    <div
+      className="footer"
+    >
+      Andela 2017
     </div>,
   ],
   "options": Object {},
@@ -54,16 +54,16 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div>
-          <div
-            className="footer"
-          />
+        "_currentElement": <div
+          className="footer"
+        >
+          Andela 2017
         </div>,
         "_debugID": 2,
-        "_renderedOutput": <div>
-          <div
-            className="footer"
-          />
+        "_renderedOutput": <div
+          className="footer"
+        >
+          Andela 2017
         </div>,
       },
       "_renderedNodeType": 0,

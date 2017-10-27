@@ -2,7 +2,6 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 
 import {
-  GET_GENERAL_MESSAGE, SEND_GENERAL_MESSAGE,
   GET_GROUP_MESSAGE, SEND_GROUP_MESSAGE } from
   '../constants/ActionConstants';
 
@@ -18,23 +17,13 @@ class MessageStore extends EventEmitter {
    */
   constructor() {
     super();
-    this.generalMessage = [];
     this.groupMessage = [];
-    this.allGroupMessages = this.allGroupMessage.bind(this);
-    this.allGeneralMessage = this.allGeneralMessage.bind(this);
+    this.allGroupMessage = this.allGroupMessage.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
   /**
-   * @returns
-   * @memberof MessageStore
-   */
-  allGeneralMessage() {
-    return this.generalMessage;
-  }
-
-  /**
-   * @returns
+   * @returns {object} - groupMessage
    * @memberof MessageStore
    */
   allGroupMessage() {
@@ -42,22 +31,12 @@ class MessageStore extends EventEmitter {
   }
 
   /**
-   * @param {any} action
+   * @param {any} action - payload
    * @memberof MessageStore
-   * @return action
+   * @return {*} action
    */
   handleActions(action) {
     switch (action.type) {
-      case GET_GENERAL_MESSAGE:
-        this.generalMessage = action.message;
-        this.emit('GET_GENERAL_MESSAGE');
-        break;
-
-      case SEND_GENERAL_MESSAGE:
-        this.generalMessage.push(action.message);
-        this.emit('SEND_GENERAL_MESSAGE');
-        break;
-
       case GET_GROUP_MESSAGE:
         this.groupMessage = action.message;
         this.emit('GET_GROUP_MESSAGE');

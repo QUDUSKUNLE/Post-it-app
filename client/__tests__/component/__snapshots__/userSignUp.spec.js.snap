@@ -275,7 +275,7 @@ ShallowWrapper {
       "_compositeType": 0,
       "_context": Object {},
       "_currentElement": <UserSignUp />,
-      "_debugID": 1,
+      "_debugID": 27,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignUp {
@@ -289,10 +289,8 @@ ShallowWrapper {
         "state": Object {
           "confirmPassword": "",
           "email": "",
-          "errMessage": "",
           "password": "",
           "phoneNumber": "",
-          "signupMessage": "",
           "username": "",
         },
         "updater": Object {
@@ -442,7 +440,7 @@ ShallowWrapper {
             </div>
           </div>
         </div>,
-        "_debugID": 2,
+        "_debugID": 28,
         "_renderedOutput": <div>
           <div
             className="col-md-5 col-md-offset-1"

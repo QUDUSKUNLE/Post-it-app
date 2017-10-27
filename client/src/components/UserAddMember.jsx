@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, browserHistory } from 'react-router-dom';
 import Footer from './Footer';
 import { addMember, getAllUsers } from '../actions/memberActions';
 import { signoutAction } from '../actions/signOutActions';
@@ -20,7 +20,7 @@ export default class UserAddMember extends React.Component {
   /**
    * Creates an instance of UserAddMember.
    * @constructor
-   * @param {any} props -
+   * @param {*} props -
    * @memberof UserAddMember
    */
   constructor(props) {
@@ -34,7 +34,10 @@ export default class UserAddMember extends React.Component {
       member: '',
       addMemberResponse: ''
     };
-    // bind the input values
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleAddMemberToGroup = this.handleAddMemberToGroup.bind(this);
@@ -44,6 +47,7 @@ export default class UserAddMember extends React.Component {
 
   /**
    * @memberof UserAddMember
+   * @return {*} void
    */
   componentWillMount() {
     getUserGroups(this.state.userId);
@@ -52,6 +56,7 @@ export default class UserAddMember extends React.Component {
 
   /**
    * @memberof UserAddMember
+   * @return {*} void
    */
   componentDidMount() {
     GroupStore.on('GET_USER_GROUPS', this.userGroups);
@@ -59,7 +64,6 @@ export default class UserAddMember extends React.Component {
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
     MemberStore.on('ADD_MEMBER_ERROR', this.handleAddMemberToGroup);
   }
-
 
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
@@ -70,6 +74,7 @@ export default class UserAddMember extends React.Component {
 
   /**
    * @memberof UserAddMember
+   * @return {*} void
    */
   userGroups() {
     const allUsers = MemberStore.registeredUsers();
@@ -104,7 +109,6 @@ export default class UserAddMember extends React.Component {
       group: groupDetails[1],
       memberId: this.state.member
     };
-
     addMember(memberDetails);
   }
 
@@ -129,8 +133,8 @@ export default class UserAddMember extends React.Component {
   handleSignOutEvent() {
     signoutAction().then((response) => {
       toastr.success(response.data.message);
+      browserHistory.push('/');
       localStorage.clear();
-      this.props.history.push('/');
       location.reload();
     }).catch((error) => {
       if (error.response) {

@@ -8,23 +8,6 @@ import {
     helpGetGroupMessages
 } from '../helper/helper.js';
 
-// /**
-//  * @description - Get message of general Group
-//  * @returns {function} dispatch - dispatch to MessageStore
-//  */
-// export const getGeneralMessage = () => axios.post('/api/v1/getGeneralMessage')
-//     .then(({ data }) => {
-//       AppDispatcher.dispatch({
-//         type: GET_GENERAL_MESSAGE,
-//         message: arrayOfGeneralMessage(data)
-//       });
-//     }, ({ response }) => {
-//       AppDispatcher.dispatch({
-//         type: GET_GENERAL_MESSAGE,
-//         error: response.data.message
-//       });
-//     });
-
 /**
  * @description - Get message of a group
  * @param {Object} groupId - { groupId }
@@ -53,11 +36,8 @@ export const getGroupMessage = (groupId) => axios.get(
 * @returns {function} dispatch - dispatch to MessageStore
 */
 export const sendGroupMessage = (messageDetails) => {
-  const message = messageDetails.message;
-  const priority = messageDetails.priority;
   axios.post(`/api/v1/sendMessage/${messageDetails.groupId}`,
-    { message, priority })
-    .then(({ data }) => {
+    messageDetails).then(({ data }) => {
       AppDispatcher.dispatch({
         type: SEND_GROUP_MESSAGE,
         message: data.response[1]

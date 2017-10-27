@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import MemberStore from '../stores/MemberStore';
 
 /**
  * @description - renders Groups Component
@@ -9,51 +8,33 @@ import MemberStore from '../stores/MemberStore';
  */
 export default class UserGroups extends React.Component {
   /**
-   * Create a constructor
-   * @constructor
-   * @param {object} props -
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      group: []
-    };
-    this.handleOnClick = this.handleOnClick.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
-  }
-
-  componentDidMount() {
-    MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleOnClick);
-  }
-
-  componentWillUnmount() {
-    MemberStore.removeListener('GET_MEMBERS_OF_GROUP',
-      this.handleOnClick);
-  }
-
-  handleOnClick() {
-    const clickedGroup = MemberStore.allGroupMembers();
-    this.props.getMembers(clickedGroup);
-  }
-
-  /**
    * @description - render method, React lifecycle method
-   * @returns {Object} Groups component
+   * @returns {*} UserGroups Component
    */
   render() {
+    const members = this.props.member.map(member => (
+      <li key={Object.keys(member)}>
+        <a href="#">{Object.values(member)}</a>
+      </li>));
     return (
-      <div>
-        <div className="col-md-3">
-          <div className="row chats-row">
-            <div className="col-md-12">
-              <ul
-              className="nav nav-pills nav-stacked grouplist">
-                {/* <li key="general"
-                  value="general" name="general"
-                  onClick={this.handleClick}><Link to="#">general
-                  </Link>
-                </li> */}
-                {this.props.grouplist}
+      <div className="groups">
+        <div className="grouplist">
+          <div className="col-md-12">
+            <ul className="nav nav-pills nav-stacked">
+              {this.props.grouplist}
+            </ul>
+          </div>
+        </div>
+        <div className="members">
+          <div className="col-md-12">
+            <div className="dropdown">
+              <button
+                className="btn btn-default dropdown-toggle"
+                data-toggle="dropdown">Group Members
+                <span className="caret"></span>
+              </button>
+              <ul className="dropdown-menu">
+                {members}
               </ul>
             </div>
           </div>
@@ -63,11 +44,10 @@ export default class UserGroups extends React.Component {
   }
 }
 
-
 // props validation
 UserGroups.propTypes = {
   grouplist: PropTypes.array,
   generalMessageLength: PropTypes.number,
   defaultGroup: PropTypes.string,
-  getMembers: PropTypes.func.isRequired
+  member: PropTypes.array
 };

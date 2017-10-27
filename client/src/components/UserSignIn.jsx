@@ -32,7 +32,11 @@ export default class UserSignIn extends React.Component {
       errMessage: '',
       loggedIn: false
     };
-    // Bind input field values
+
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleSignInAction = this.handleSignInAction.bind(this);
@@ -120,16 +124,18 @@ export default class UserSignIn extends React.Component {
   googleSignIn() {
     firebase.initializeApp(config);
     const provider = new firebase.auth.GoogleAuthProvider();
-    provider.addScope('profile');
-    provider.addScope('email');
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
         signInWithGoogle(result);
+      }).catch(error => {
+        console.log(error);
       });
   }
 
   /**
    * @memberof UserSignIn
+   * @return {*} void
    */
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
@@ -233,7 +239,6 @@ export default class UserSignIn extends React.Component {
 
 // props validation
 UserSignIn.propTypes = {
-  // history: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   })

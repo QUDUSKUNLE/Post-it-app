@@ -22,10 +22,13 @@ export default class UserSignUp extends React.Component {
       password: '',
       username: '',
       phoneNumber: '',
-      confirmPassword: '',
-      signupMessage: '',
-      errMessage: ''
+      confirmPassword: ''
     };
+
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
     this.onChange = this.onChange.bind(this);
     this.handleSignUpAction = this.handleSignUpAction.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -53,8 +56,8 @@ export default class UserSignUp extends React.Component {
 
   /**
    * @description - this handles SignUp form submission
-   * @param {object} event- event.
-   * @returns {void} .
+   * @param {event} event - event.
+   * @returns {*} void
   */
   onSubmit(event) {
     event.preventDefault();
@@ -115,42 +118,76 @@ export default class UserSignUp extends React.Component {
               <br />
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
-                  <label htmlFor="email">Email
+                  <label htmlFor="email">
+                    Email
                   </label>
-                  <input value={this.state.email} onChange={this.onChange}
+                  <input
+                    value={this.state.email}
+                    onChange={this.onChange}
                     id="email" type="email"
-                    className="signinform inp" placeholder="johndoe@example.com"
-                    name="email" required /></div>
+                    className="signinform inp"
+                    placeholder="johndoe@example.com"
+                    name="email" required />
+                </div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <input value={this.state.username} onChange={this.onChange}
-                    id="username" type="text"
-                    className="signinform" placeholder="johndoe"
+                  <label htmlFor="username">
+                    Username
+                  </label>
+                  <input
+                    value={this.state.username}
+                    onChange={this.onChange}
+                    id="username"
+                    type="text"
+                    className="signinform"
+                    placeholder="johndoe"
                     name="username" required /></div>
                 <div className="form-group">
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <input value={this.state.phoneNumber} onChange={this.onChange}
-                    id="phoneNumber" type="phone"
-                    className="signinform" placeholder="08012345678"
-                    name="phoneNumber" required /></div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input value={this.state.password} onChange={this.onChange}
-                    id="pass" type="password"
-                    className="signinform" placeholder="********"
-                    name="password" required /></div>
-                <div className="form-group">
-                  <label htmlFor="conf_password">Confirm Password</label>
-                  <input value={this.state.confirmPassword}
+                  <label htmlFor="phoneNumber">
+                    Phone Number
+                  </label>
+                  <input
+                    value={this.state.phoneNumber}
                     onChange={this.onChange}
-                    id="confirmPassword" type="password"
-                    className="signinform" placeholder="********"
-                    name="confirmPassword" required /></div>
-                <button type="submit" className="signinformbtn">Sign up</button>
+                    id="phoneNumber"
+                    type="phone"
+                    className="signinform"
+                    placeholder="08012345678"
+                    name="phoneNumber" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    id="pass"
+                    type="password"
+                    className="signinform"
+                    placeholder="********"
+                    name="password" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="conf_password">
+                    Confirm Password
+                  </label>
+                  <input
+                    value={this.state.confirmPassword}
+                    onChange={this.onChange}
+                    id="confirmPassword"
+                    type="password"
+                    className="signinform"
+                    placeholder="********"
+                    name="confirmPassword" required />
+                </div>
+                <button type="submit" className="signinformbtn">
+                  Sign up
+                </button>
               </form>
               <div className="text-center term">
                 By clicking "Sign up for Postit App",
-                  you agree to our terms of service and privacy policy.</div>
+                  you agree to our terms of service and privacy policy.
+              </div>
             </div>
           </div>
         </div>

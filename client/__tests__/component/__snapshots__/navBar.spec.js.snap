@@ -82,6 +82,8 @@ ShallowWrapper {
         </div>
       </div>
     </nav>
+    <UserApp />
+    <Footer />
   </div>,
   "nodes": Array [
     <div>
@@ -158,6 +160,8 @@ ShallowWrapper {
           </div>
         </div>
       </nav>
+      <UserApp />
+      <Footer />
     </div>,
   ],
   "options": Object {},
@@ -175,7 +179,9 @@ ShallowWrapper {
         "context": Object {},
         "props": Object {},
         "refs": Object {},
-        "state": null,
+        "state": Object {
+          "UserIn": false,
+        },
         "updater": Object {
           "enqueueCallback": [Function],
           "enqueueCallbackInternal": [Function],
@@ -268,6 +274,8 @@ ShallowWrapper {
               </div>
             </div>
           </nav>
+          <UserApp />
+          <Footer />
         </div>,
         "_debugID": 2,
         "_renderedOutput": <div>
@@ -344,6 +352,8 @@ ShallowWrapper {
               </div>
             </div>
           </nav>
+          <UserApp />
+          <Footer />
         </div>,
       },
       "_renderedNodeType": 0,

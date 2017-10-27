@@ -1,7 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://choosealicense.com/licenses/mit/)
+[![Code Climate](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
+[![Issue Count](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/issue_count.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 [![Build Status](https://travis-ci.org/QUDUSKUNLE/Post-it-app.svg?branch=development)](https://travis-ci.org/QUDUSKUNLE/Post-it-app)
 [![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=development)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=development)
-
 
 # PostIt-app
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
@@ -35,6 +36,8 @@
   
   <b>.</b> Users can sign out
 
+## API Documentation
+  The Link to API documentation can be found here <a href="https://app.apiary.io/postitapp/editor">API Doumentation</a>
 
 # Getting Started
   Kindly follow the steps below to setup a local development environment.
@@ -57,7 +60,8 @@
 
 + ```git clone https://github.com/QUDUSKUNLE/Post-it-app```
 
-+ and run ```npm test```
++ and run ```npm test``` for ```server test``` and
+* ```npm run client_test``` for ```client test```
 
 ## Limitations
 + Users cannot edit profile

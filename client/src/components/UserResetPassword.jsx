@@ -22,6 +22,11 @@ export default class UserResetPassword extends React.Component {
       email: '',
       response: ''
     };
+
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handlePasswordReset = this.handlePasswordReset.bind(this);
@@ -105,7 +110,11 @@ export default class UserResetPassword extends React.Component {
             </div>
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
+                <li><Link to="/">Home</Link></li>
                 <li><Link to="/signin">Sign in</Link></li>
+                <li className="active">
+                  <Link to="/passwordreset">PasswordReset</Link>
+                </li>
               </ul>
             </div>
           </div>

@@ -15,7 +15,7 @@ describe('groupActions', () => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() =>
       Promise.resolve({ groupResponse }));
     if (groupResponse.response[0] !== null) {
-      sinon.spy(AppDispatcher, 'dispatch');
+      dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
     } else {
       dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
     }
@@ -34,10 +34,12 @@ describe('groupActions', () => {
       const userId = 'NCaAzr0ZzqfCLtXQlQG0jW2DWbg1';
       getUserGroups(userId).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
+        consolelog(mockAxios.calledOnce);
         mockAxios.getCall(0).returnValue.then((res) => {
           expect(res).toBeInstanceOf(Object);
           expect(res).toEqual({ groupResponse });
         });
+        console.log(dispatchSpy.called);
         expect(dispatchSpy.called).toEqual(false);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
       });

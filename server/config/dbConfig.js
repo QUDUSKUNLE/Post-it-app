@@ -6,9 +6,11 @@ let checkProcess = '';
 if (env === 'test') {
   checkProcess = 'TEST';
 }
-
 dotenv.config();
 
+  /**
+   * @description Firebase configuration
+  */
 export const config = {
   apiKey: process.env[`${checkProcess}apiKey`],
   authDomain: process.env[`${checkProcess}authDomain`],
@@ -17,7 +19,7 @@ export const config = {
   storageBucket: process.env[`${checkProcess}storageBucket`],
   messagingSenderId: process.env[`${checkProcess}messagingSenderId`]
 };
-
+// firebase initialization
 const dbConfig = firebase.initializeApp(config);
 
 export default dbConfig;

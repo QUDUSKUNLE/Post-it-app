@@ -634,7 +634,7 @@ describe('PostIt', () => {
     });
 
   // Should throw error for a non signed in user trying to create group
-  it('should throw error for a non sign in user`s trying to add member to a group',
+  it('should throw error for a non sign in user`s trying to add member',
     (done) => {
       const memberDetails = {
         memberId: 'YExyPJnTgLSRU8YkJ2pgGEzEiS93',

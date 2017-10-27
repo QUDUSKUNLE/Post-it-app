@@ -4,7 +4,8 @@ import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
-// import Footer from './Footer';
+import Footer from './Footer';
+import NoGroupSelected from './NoGroupSelected';
 import { getUserGroups } from '../actions/groupAction';
 import { getGroupMessage } from '../actions/messageActions';
 import { signoutAction } from '../actions/signOutActions';
@@ -33,24 +34,31 @@ export default class UserBroadCastBoard extends React.Component {
       groups: [],
       groupId: '',
       userName: JSON.parse(localStorage.getItem('userName')),
-      allGeneralMessage: [],
+      groupMessage: [],
+      groupMember: [],
       groupMessages: [],
       signOutMessage: '',
       errSignOut: '',
-      broadcastmessage: ''
+      broadcastmessage: '',
+      groupSelected: false
     };
-    this.onChange = this.onChange.bind(this);
+
+    /**
+     * @description This binding is necessary to make `this` work
+     * in the callback
+     */
+    this.handleOnChangeEvent = this.handleOnChangeEvent.bind(this);
     this.handleSignOutAction = this.handleSignOutAction.bind(this);
-    this.newGroupMessage = this.newGroupMessage.bind(this);
-    this.getGroupMessage = this.getGroupMessage.bind(this);
-    this.userGroups = this.userGroups.bind(this);
-    this.getMembersOnClick = this.getMembersOnClick.bind(this);
+    this.handleSendGroupMessage = this.handleSendGroupMessage.bind(this);
+    this.handleGetGroupMessage = this.handleGetGroupMessage.bind(this);
+    this.handleGetUserGroups = this.handleGetUserGroups.bind(this);
+    this.handleGetGroupMember = this.handleGetGroupMember.bind(this);
   }
 
   /**
    * Call action on initial page load
    * @method componentWillMount
-   * @return {null} -
+   * @return {*} void
    */
   componentWillMount() {
     getUserGroups(this.state.userId);
@@ -59,74 +67,71 @@ export default class UserBroadCastBoard extends React.Component {
   /**
    * Attach an event listener to favorite store
    * @method componentDidMount
-   * @return {null} -
+   * @return {*} -
    */
   componentDidMount() {
-    GroupStore.on('GET_USER_GROUPS', this.userGroups);
-    MemberStore.on('GENERAL', this.userGroups);
-    MessageStore.on('SEND_GROUP_MESSAGE', this.newGroupMessage);
-    MessageStore.on('GET_GROUP_MESSAGE', this.getGroupMessage);
+    GroupStore.on('GET_USER_GROUPS', this.handleGetUserGroups);
+    MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleGetGroupMember);
+    MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
+    MessageStore.on('GET_GROUP_MESSAGE', this.handleGetGroupMessage);
   }
 
   /**
    * @method componentWillUnount
-   * @return {null} -
+   * @return {*} void
    */
   componentWillUnmount() {
-    GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
-    MemberStore.removeListener('GENERAL', this.userGroups);
-    MessageStore.removeListener('SEND_GROUP_MESSAGE', this.newGroupMessage);
-    MessageStore.removeListener('GET_GROUP_MESSAGE', this.getGroupMessage);
-  }
-
-  /**
-   * @method getMembersOnClick
-   * @return {null} -
-   */
-  getMembersOnClick(index) {
-    this.setState({ defaultGroup: index[1], groupId: index[2] },
-      () => {
-        const groupId = this.state.groupId;
-        getGroupMessage(groupId);
-      });
+    GroupStore.removeListener('GET_USER_GROUPS',
+      this.handleGetUserGroups);
+    MemberStore.removeListener('GET_MEMBERS_OF_GROUP',
+      this.handleGetGroupMember);
+    MessageStore.removeListener('SEND_GROUP_MESSAGE',
+      this.handleSendGroupMessage);
+    MessageStore.removeListener('GET_GROUP_MESSAGE',
+      this.handleGetGroupMessage);
   }
 
   /**
    * @method newGroupMessage
-   * @return {null} -
+   * @return {*} void
    */
-  newGroupMessage() {
+  handleSendGroupMessage() {
     this.setState({
-      allGeneralMessage: MessageStore.allGroupMessage()
+      groupMessage: MessageStore.allGroupMessage()
+    });
+  }
+
+  handleGetGroupMember() {
+    this.setState({
+      groupMember: (MemberStore.allGroupMembers())[0]
     });
   }
 
   /**
    * @method getGroupMessage
-   * @return {null} -
+   * @return {*} void
    */
-  getGroupMessage() {
+  handleGetGroupMessage() {
     this.setState({
-      allGeneralMessage: MessageStore.allGroupMessage()
+      groupMessage: MessageStore.allGroupMessage()
     });
   }
 
   /**
    * @method userGroups
-   * @return {null} -
+   * @return {*} void
    */
-  userGroups() {
+  handleGetUserGroups() {
     this.setState({
       groups: GroupStore.allGroups(),
-      defaultGroup: 'general'
     });
   }
   /**
    * onChange event.
    * @param {object} event The first number.
-   * @returns {void} bind input values to name.
+   * @returns {*} bind input values to name.
    */
-  onChange(event) {
+  handleOnChangeEvent(event) {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -135,8 +140,8 @@ export default class UserBroadCastBoard extends React.Component {
   handleSignOutAction() {
     signoutAction().then((response) => {
       toastr.success(response.data.message);
-      localStorage.clear();
       this.props.history.push('/');
+      localStorage.clear();
       location.reload();
     }).catch((error) => {
       if (error.response) {
@@ -147,7 +152,7 @@ export default class UserBroadCastBoard extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {Object} BroadCastBoard component
+   * @returns {*} BroadCastBoard component
    */
   render() {
     if (!this.state.loggedIn) {
@@ -155,17 +160,36 @@ export default class UserBroadCastBoard extends React.Component {
         <Redirect to="/signin" />
       );
     }
-    const grouplist = this.state.groups.map((group) =>
+    const groupList = this.state.groups.map((group) =>
       <li key={Object.values(group)}
         value={Object.keys(group)}
         name={Object.keys(group)}
-        onClick={() => getGroupMember(Object.values(group))}>
-        <Link to="#"> {Object.keys(group)}
-        </Link>
-      </li>, this);
+        onClick={() => {
+          getGroupMember(Object.values(group));
+          getGroupMessage(Object.values(group));
+          this.setState({
+            defaultGroup: (Object.keys(group))[0],
+            groupId: (Object.values(group))[0],
+            groupSelected: true
+          });
+        }}><Link to="#"> {Object.keys(group)}</Link>
+      </li>);
+    const isGroupSelected = () => {
+      let selectedGroup;
+      if (this.state.groupSelected) {
+        selectedGroup =
+          (<UserChatBox
+            defaultGroup={this.state.defaultGroup}
+            groupId={this.state.groupId}
+            allGeneralMessage={this.state.groupMessage} />);
+      } else {
+        selectedGroup = <NoGroupSelected />;
+      }
+      return selectedGroup;
+    };
     return (
       <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top">
+        <div className="navbar navbar-inverse navabar-fixed-top">
           <div className="container-fluid">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle"
@@ -192,30 +216,28 @@ export default class UserBroadCastBoard extends React.Component {
               </ul>
             </div>
           </div>
-        </nav>
-        <div className="container-fluid">
-          <div className="row">
+        </div>
+          {/* <div className="row">
             <div className="col-md-12">
               <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
             </div>
-          </div>
-          <div className="row">
-            <ul className="nav nav-pills nav-justified">
-              <li className="col-md-6"><Link to="/member">Add member</Link></li>
-            </ul>
-          </div>
-          <br/>
-          <div className="row">
-            <UserGroups
-              grouplist={grouplist}
-              getMembers={this.getMembersOnClick}
-              />
-            <UserChatBox
-              defaultGroup={this.state.defaultGroup}
-              groupId={this.state.groupId}
-              allGeneralMessage={this.state.allGeneralMessage}/>
-          </div>
-        </div>
+          </div> */}
+          <div className="">
+            <div className="row">
+              <div className="col-sm-12 col-md-2">
+                <UserGroups
+                  grouplist={groupList}
+                  member={this.state.groupMember}
+                  />
+              </div>
+              <div className="col-sm-12 col-md-10">
+                {isGroupSelected()}
+              </div>
+            </div>
+            <div className="row">
+              <Footer/>
+            </div>
+         </div>
       </div>
     );
   }

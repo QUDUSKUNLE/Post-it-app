@@ -1,7 +1,5 @@
 import React from 'react';
-import NavBar from './NavBar';
 import UserSignUp from './UserSignUp';
-import Footer from './Footer';
 
 
 /**
@@ -10,31 +8,24 @@ import Footer from './Footer';
  */
 export default class UserApp extends React.Component {
 
-  /**
-   * @description - render method, React lifecycle method
-   * @returns -
-   * @memberof UserApp
-   */
   render() {
+   /**
+   * @description - render method, React lifecycle method
+   * @returns {*} UserApp component
+   */
     return (
-      <div>
-        <NavBar />
-        <div className="container mainbody">
-          <div className="row home">
-            <div className="col-md-6">
-              <h4>PostIt
-                <small>
-                  <i>App</i>
-                </small>
-                  {' '}
-                  allows friends to come together and share vital information.
-              </h4>
-            </div>
-            <UserSignUp/>
-            <br/>
-            <br/>
-            <Footer/>
+      <div className="container mainbody">
+        <div className="row home">
+          <div className="col-md-6">
+            <h4>PostIt
+              <small>
+                <i>App</i>
+              </small>
+                {' '}
+                allows friends to come together and share vital information.
+            </h4>
           </div>
+          <UserSignUp/>
         </div>
       </div>
     );

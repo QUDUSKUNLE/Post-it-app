@@ -14,13 +14,15 @@ dotenv.config();
  */
 export default class Messages {
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof Messages
+   * @description This method send message to group
+   * route POST: api/v1/sendMessage/:groupId
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains message sent details
    */
   static sendMessageToGroup(req, res) {
-    const { message, priority } = req.body;
+    const message = req.body.message;
+    const priority = req.body.priority;
     const groupId = req.params.groupId;
     const userId = req.user.uid;
     const time = moment().format('llll');
@@ -59,11 +61,7 @@ export default class Messages {
               };
               transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                  return console.log(error);
-                } else {
-                  console.log('Message sent: %s', info.messageId);
-                  console.log('Preview URL: %s',
-                    nodemailer.getTestMessageUrl(info));
+                  return (error, info);
                 }
               });
             } else if (priority === 'critical') {
@@ -91,11 +89,7 @@ export default class Messages {
                   };
                   transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
-                      return console.log(error);
-                    } else {
-                      console.log('Message sent: %s', info.messageId);
-                      console.log('Preview URL: %s',
-                        nodemailer.getTestMessageUrl(info));
+                      return (error, info);
                     }
                   });
                 }
@@ -117,11 +111,11 @@ export default class Messages {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @returns
-   * @memberof Messages
+   * @description This method retrieves all message in a group
+   * route GET: api/v1/getMessage/:groupId
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains all message in a group
    */
   static getMessage(req, res) {
     const groupId = req.params.groupId;

@@ -34,9 +34,15 @@ const config = {
     }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    })
   ],
-
   module: {
     loaders: [
       {

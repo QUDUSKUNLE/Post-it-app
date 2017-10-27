@@ -9,12 +9,12 @@ import Helper from '../helper/Helper';
  */
 export default class User {
 
-
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof User
+   * @description This method signup a new user
+   * route POST: api/v1/signup
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains signed up user response
    */
   static signUp(req, res) {
     const { email, password,
@@ -44,22 +44,15 @@ export default class User {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
       .then(user => user.sendEmailVerification()
         .then(() => {
-          const userId = (firebase.auth().currentUser).uid;
+          const userUid = (firebase.auth().currentUser).uid;
           return Promise.all(
-            [dbConfig.database().ref(`users/${userId}`).push({
+            [dbConfig.database().ref(`users/${userUid}`).push({
               userEmail: email,
               userName: username,
               phone_Number: phoneNumber,
               time: moment().format('llll'),
-              userId: userId
-            }),
-              dbConfig.database().ref('Group/general/member')
-                .child(`${userId}`).push({
-                  user: username,
-                  phone_Number: phoneNumber,
-                  time: moment().format('llll')
-                }),
-              userId
+              userId: userUid
+            })
             ]);
         })
         .then(response => res.status(200).send({
@@ -80,10 +73,11 @@ export default class User {
 
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof User
+   * @description This method signin registered users
+   * route POST: api/v1/signin
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains signed user details
    */
   static signIn(req, res) {
     const { email, password } = req.body;
@@ -117,10 +111,11 @@ export default class User {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof User
+   * @description This method sign in users via Google account
+   * route POST: api/v1/googleSignIn
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains signed user details via Google
    */
   static googleSignIn(req, res) {
     const token = req.body.credential.idToken;
@@ -160,10 +155,11 @@ export default class User {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof User
+   * @description This method allow users reset their password
+   * route POST: api/v1/passwordReset
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains reset password details
    */
   static passwordReset(req, res) {
     const { email } = req.body;
@@ -179,10 +175,11 @@ export default class User {
   }
 
   /**
-   * @static
-   * @param {any} req
-   * @param {any} res
-   * @memberof User
+   * @description This method signout users
+   * route POST: api/v1/signout
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} response contains sign out response
    */
   static signOut(req, res) {
     firebase.auth().signOut()

@@ -6,7 +6,7 @@ import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 import sendMessageResponse from '../../src/__mock__/sendMessageResponse.json';
 import { getGroupMessage, sendGroupMessage }
   from '../../src/actions/messageActions';
-
+import 'babel-polyfill';
 
 describe('MessageActions', () => {
   let mockAxios;
@@ -15,7 +15,7 @@ describe('MessageActions', () => {
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() =>
       Promise.resolve({ groupMessageResponse }));
-    sinon.spy(AppDispatcher, 'dispatch');
+    dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
   });
 
   afterEach(() => {
@@ -24,7 +24,7 @@ describe('MessageActions', () => {
   });
 
   describe('Test for getGroupMessage Method', () => {
-    it('should dispatch an action', () => {
+    it('should dispatch an action here', () => {
       expect(getGroupMessage).toBeDefined();
     });
     it('should dispatch an action', () => {
@@ -36,7 +36,7 @@ describe('MessageActions', () => {
           expect(res).toEqual({ groupMessageResponse });
         });
         expect(dispatchSpy.called).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_GROUP_MESSAGE');
       });
     });
   });
@@ -49,7 +49,7 @@ describe('MessageActions', () => {
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
       Promise.resolve({ sendMessageResponse }));
-    sinon.spy(AppDispatcher, 'dispatch');
+    dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
   });
 
   afterEach(() => {
@@ -57,22 +57,22 @@ describe('MessageActions', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for getGroupMessage Method', () => {
+  describe('Test for sendGroupMessage Method', () => {
     it('should dispatch an action', () => {
       expect(sendGroupMessage).toBeDefined();
     });
+    const messageDetails = {
+      message: 'Hello, User Sign in',
+      priority: 'normal',
+      groupId: '-KvIvb4PMw3w2pr9196U'
+    };
     it('should dispatch an action', () => {
-      const messageDetails = { message: 'Hello, World', priority: 'normal',
-        groupId: '-KvIvb4PMw3w2pr9196U' };
-      sendGroupMessage(messageDetails).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
+      sendGroupMessage(messageDetails);
         mockAxios.getCall(0).returnValue.then((res) => {
           expect(res).toBeInstanceOf(Object);
           expect(res).toEqual({ sendMessageResponse });
         });
-        expect(dispatchSpy.called).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
-      });
+      expect(mockAxios.calledOnce).toBe(true);
     });
   });
 });

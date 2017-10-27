@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { sendGroupMessage } from '../actions/messageActions';
 
 
@@ -12,7 +13,7 @@ export default class UserChatBox extends React.Component {
   /**
    * Create a constructor
    * @constructor
-   * @param {object} props -
+   * @param {*} props -
    */
   constructor(props) {
     super(props);
@@ -23,6 +24,7 @@ export default class UserChatBox extends React.Component {
       priority: 'normal',
 
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -30,8 +32,7 @@ export default class UserChatBox extends React.Component {
   /**
    * @description - onChange event
    * @param {event} event - event
-   * @returns {null} null
-   * @memberOf ChatBox
+   * @returns {*} void
    */
   onChange(event) {
     this.setState({
@@ -41,8 +42,8 @@ export default class UserChatBox extends React.Component {
 
   /**
    * @description - onSubmit event
-   * @param {any} event - event
-   * @returns {null} null
+   * @param {event} event -
+   * @returns {*} null
    * @memberOf ChatBox
    */
   onSubmit(event) {
@@ -60,67 +61,105 @@ export default class UserChatBox extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {Object} ChatBox component
+   * @returns {*} ChatBox component
    * @ChatBox
    */
   render() {
+    const priorityColor = (priority) => {
+      let color;
+      if (priority === 'normal') {
+        color = <span className="pull-right text-primary">{priority}</span>;
+      } else if (priority === 'critical') {
+        color = <span className="pull-right text-danger">{priority}</span>;
+      } else if (priority === 'urgent') {
+        color = <span className="pull-right text-info">{priority}</span>;
+      }
+      return color;
+    };
     const chatMessage = this.props.allGeneralMessage.map((Index, i) =>
-      <li key={i} className="media">
-        <div className="media-body">
-          <div className="media">
-            <div className="media-body">
-              {Index.message}
-              <span className="pull-right">{Index.priority}</span>
+      <div className="row" key={i}>
+        <div className="col-md-12">
+          <div className="well">
+            <p>{Index.message}</p>
+            <small className="text-muted">
+              {Index.date} {Index.time} | {Index.userName}
+              {priorityColor(Index.priority)}
               <br/>
-              <small className="text-muted">
-                {Index.date} | {Index.time} | {Index.userName}
-              </small>
-              <hr/>
-            </div>
+            </small>
           </div>
         </div>
-      </li>
+      </div>
     );
     return (
-      <div className="col-md-9 current-chat">
-        <div className="row" style={{ backgroundColor: '#e8e8ee' }}>
-          <p className="text-center"
-            style={{ padding: '5px', marginTops: '5px' }}>
-            {this.props.defaultGroup}</p>
+      <div>
+        <div className="defaultGroup">
+        <h6>Group | {this.props.defaultGroup}
+          <Link to="/member">
+            <span className="glyphicon glyphicon-plus pull-right">
+            </span>
+          </Link>
+        </h6>
         </div>
-        <div className="row current-chat-area">
-          <div className="col-md-12">
-            <ul className="media-list">
-              {chatMessage}
-            </ul>
+          <div className="messageBoard">
+            {chatMessage}
           </div>
-        </div>
-        <div className="row current-chat-footer">
-          <div className="panel-footer">
-            <div className="input-group">
-            <div className="input-group-addon">
-            <select name="priority" onChange={this.onChange}>
-                <option value="normal">Normal</option>
-                <option value="critical">Critical</option>
-                <option value="urgent">Urgent</option>
-              </select>
+          <div className="messageForm">
+            <div className="row">
+              <form className="col-lg-12">
+                <div className="input-group input-group-lg">
+                  <span className="input-group-btn">
+                    <select
+                      className="btn btn-default btn-lg"
+                      name="priority"
+                      onChange={this.onChange}>
+                      <option value="normal">Normal</option>
+                      <option value="critical">Critical</option>
+                      <option value="urgent">Urgent</option>
+                    </select>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control input-lg message"
+                    placeholder="Type message....."
+                    name="message"
+                    value={this.state.message}
+                    onChange={this.onChange}/>
+                  <span className="input-group-btn">
+                    <button
+                      className="btn btn-default btn-lg"
+                      type="button" onClick={this.onSubmit}>Send
+                    </button>
+                  </span>
+                </div>
+              </form>
             </div>
-              <input
-                type="text"
-                name="message"
-                value={this.state.message}
-                className="form-control"
-                onChange={this.onChange}/>
-              <span className="input-group-btn">
-                <button
-                  className="btn btn-default"
-                  type="button"
-                  onClick={this.onSubmit}>Send
-                </button>
-              </span>
-            </div>
+            {/* <form className="col-md-12">
+              <div className="form-group">
+                <div className="input-group">
+                  <div className="input-group-addon">
+                    <select name="priority" onChange={this.onChange}>
+                      <option value="normal">Normal</option>
+                      <option value="critical">Crtical</option>
+                      <option value="urgent">Urgent</option>
+                    </select>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control message"
+                    placeholder="Type message....."
+                    name="message"
+                    value={this.state.message} onChange={this.onChange}/>
+                  <div className="input-group-addon">
+                    <button
+                      className="btn btn-default"
+                      type="button" onClick={this.onSubmit}>Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form> */}
           </div>
-        </div>
+        {/* </div> */}
       </div>
     );
   }

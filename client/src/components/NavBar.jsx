@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
+import UserApp from './UserApp';
 
 /**
  * @export
@@ -8,6 +10,17 @@ import { Link } from 'react-router-dom';
  * @extends {React.Component}
  */
 export default class NavBar extends React.Component {
+  /**
+   * Create a constructor
+   * @constructor
+   * @param {object} props -
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      UserIn: false
+    };
+  }
   render() {
     return (
       <div>
@@ -29,13 +42,22 @@ export default class NavBar extends React.Component {
             <div className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
               </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li className="active"><Link to="/">Home</Link></li>
-                <li><Link to="/signin">Sign in</Link></li>
-              </ul>
+              {!this.state.UserIn
+               ? <ul className="nav navbar-nav navbar-right">
+                  <li className="active"><Link to="/">Home</Link></li>
+                  <li><Link to="/signin">Sign in</Link></li>
+                 </ul>
+                : <ul className="nav navbar-nav navbar-right">
+                  <li className="active"><Link to="/">BroadCastBoard</Link></li>
+                  <li><Link to="/group">Create Group</Link></li>
+                  <li><Link to="#">Sign out</Link></li>
+                 </ul>
+              }
             </div>
           </div>
         </nav>
+        <UserApp/>
+        <Footer/>
       </div>
     );
   }

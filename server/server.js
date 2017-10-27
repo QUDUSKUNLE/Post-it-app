@@ -51,7 +51,6 @@ app.use(webpackMiddleware(compiler, {
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
-
 app.use('/', Router);
 app.use(express.static(path.join(__dirname, '../client/src/')));
 app.get('*', (req, res) => {

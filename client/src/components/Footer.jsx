@@ -9,8 +9,8 @@ import React from 'react';
 export default class Footer extends React.Component {
   render() {
     return (
-      <div>
-        <div className="footer"></div>
+      <div className="footer">
+        Andela 2017
       </div>
     );
   }

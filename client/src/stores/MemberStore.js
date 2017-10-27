@@ -1,11 +1,11 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import { getGroupMembers } from '../helper/helper';
-
 import {
-  ALL_USERS, ADD_MEMBER,
-  ADD_MEMBER_ERROR, GET_MEMBERS_OF_GROUP } from
-    '../constants/ActionConstants.js';
+  ALL_USERS,
+  ADD_MEMBER,
+  ADD_MEMBER_ERROR,
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**
  * Holds the storage, listen to actions and update the stores
@@ -65,7 +65,7 @@ class MemberStore extends EventEmitter {
         break;
 
       case GET_MEMBERS_OF_GROUP:
-        this.groupIndex.push((action.members)[0]);
+        this.groupIndex = [(action.members)[0]];
         this.members = getGroupMembers(this.groupIndex);
         this.groupId = (action.members)[1];
         this.group = (action.members)[2];
@@ -73,17 +73,14 @@ class MemberStore extends EventEmitter {
         break;
 
       case ADD_MEMBER:
-        console.log(action.member);
         this.addMemberResponse = action.member;
         this.emit('ADD_MEMBER');
         break;
 
       case ADD_MEMBER_ERROR:
-        console.log(action.error);
         this.addMemberResponse = action.error;
         this.emit('ADD_MEMBER_ERROR');
         break;
-
       default:
     }
   }

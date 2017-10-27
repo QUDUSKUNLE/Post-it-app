@@ -88,7 +88,6 @@ app.use((0, _webpackDevMiddleware2.default)(compiler, {
   noInfo: true
 }));
 app.use((0, _webpackHotMiddleware2.default)(compiler));
-
 app.use('/', _index2.default);
 app.use(_express2.default.static(_path2.default.join(__dirname, '../client/src/')));
 app.get('*', function (req, res) {

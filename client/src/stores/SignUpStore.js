@@ -26,7 +26,7 @@ class SignUpStore extends EventEmitter {
    * Receives actions and update the stores accordingly
    * @method handleSignUpActions
    * @param {object} action - Action type and data
-   * @return {null} -
+   * @return {*} -
    */
   handleSignUpActions(action) {
     switch (action.type) {

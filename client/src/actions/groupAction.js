@@ -8,7 +8,7 @@ import { GET_USER_GROUPS, CREATE_GROUP, CREATE_GROUP_ERROR
 
 /**
  * @description - Get groups of a user
- * @param {null} userId -
+ * @param {string} userId -
  * @returns {function} dispatch - dispatch to GroupStore
  */
 export const getUserGroups = (userId) => axios.get(

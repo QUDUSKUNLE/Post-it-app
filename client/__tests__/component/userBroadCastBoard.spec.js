@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// import { expect } from 'chai';
+import expect from 'expect';
 import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
 
 describe('PostIt-app', () => {

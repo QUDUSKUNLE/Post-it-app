@@ -9,8 +9,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} password
-   * @returns
+   * @param {string} password - validate password
+   * @returns {boolean} true
    * @memberof Helper
    */
   static validatePassword(password) {
@@ -22,8 +22,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} phoneNumber
-   * @returns
+   * @param {string} phoneNumber - validate phoneNumber
+   * @returns {boolean} true
    * @memberof Helper
    */
   static validatePhoneNumber(phoneNumber) {
@@ -35,8 +35,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} userId
-   * @returns
+   * @param {string} userId - get user phoneNumber and Email
+   * @returns {Object} - object that contains user email and phoneNumber
    * @memberof Helper
    */
   static getUserEmailAndPhoneNumber(userId) {
@@ -53,8 +53,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} groupId
-   * @returns
+   * @param {string} groupId - Group Identity
+   * @returns {Object} - Array of phoneNumbers in the group
    * @memberof Helper
    */
   static getGroupPhoneNumbers(groupId) {
@@ -71,8 +71,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} groupId
-   * @returns
+   * @param {string} groupId - get the name of a group
+   * @returns {Object} - Array of object
    * @memberof Helper
    */
   static getGroupName(groupId) {
@@ -87,11 +87,10 @@ export default class Helper {
     });
   }
 
-
   /**
    * @static
-   * @param {any} groupEmails
-   * @returns
+   * @param {Object} groupEmails - Array of Object of groupMembers Email
+   * @returns {string} - String of group Emails
    * @memberof Helper
    */
   static getGroupEmails(groupEmails) {
@@ -106,8 +105,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} groupPhoneNumbers
-   * @returns
+   * @param {Object} groupPhoneNumbers - Array of PhoneNumbers
+   * @returns {Object} -
    * @memberof Helper
    */
   static getPhoneNumbers(groupPhoneNumbers) {
@@ -122,8 +121,8 @@ export default class Helper {
 
   /**
    * @static
-   * @param {any} user
-   * @returns
+   * @param {Object} user - Object of array of all registered Users
+   * @returns {Object} - Array of all registered users
    * @memberof Helper
    */
   static getAllUsers(user) {
