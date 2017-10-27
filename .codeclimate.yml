@@ -4,3 +4,10 @@ engines:
     checks:
       linebreak-style:
         enabled: false
+fixme:
+    enabled: true
+exclude_paths:
+- "client/__tests__"
+- "server/__test__"
+- "coverage"
+- "node_modules"
