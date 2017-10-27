@@ -53,7 +53,7 @@ export default class UserSignIn extends React.Component {
     this.handleGoogleEvent);
   }
 
-  compoenentWillUnmount() {
+  componentWillUnmount() {
     SignInStore.removeListener('SIGN_IN_SUCCESS', this.handleSignInAction);
     SignInStore.removeListener('SIGN_IN_ERROR', this.handleSignInAction);
     SignInStore.removeListener('GOOGLE_SIGN_IN_SUCCESS',
