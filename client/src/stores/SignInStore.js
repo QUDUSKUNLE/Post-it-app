@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
-  SIGN_IN_SUCCESS, SIGN_IN_ERROR,
-  GOOGLE_SIGN_IN_SUCCESS, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_ERROR
+  SIGN_IN_SUCCESS,
+  GOOGLE_SIGN_IN_SUCCESS, PASSWORD_RESET_SUCCESS
 } from '../constants/ActionConstants';
 
 /**
@@ -49,11 +49,6 @@ class SignInStore extends EventEmitter {
         this.emit('SIGN_IN_SUCCESS');
         break;
 
-      case SIGN_IN_ERROR:
-        this.signInMessage = action.error;
-        this.emit('SIGN_IN_ERROR');
-        break;
-
       case GOOGLE_SIGN_IN_SUCCESS:
         this.googleSignInMessage = action.response;
         this.emit('GOOGLE_SIGN_IN_SUCCESS');
@@ -63,12 +58,6 @@ class SignInStore extends EventEmitter {
         this.passwordResetResponse = action.response;
         this.emit('PASSWORD_RESET_SUCCESS');
         break;
-
-      case PASSWORD_RESET_ERROR:
-        this.passwordResetResponse = action.error;
-        this.emit('PASSWORD_RESET_ERROR');
-        break;
-
       default:
     }
   }

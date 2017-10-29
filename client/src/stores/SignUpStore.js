@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
-  SIGN_UP_SUCCESS, SIGN_UP_ERROR
+  SIGN_UP_SUCCESS
 } from '../constants/ActionConstants';
 
 /**
@@ -33,11 +33,6 @@ class SignUpStore extends EventEmitter {
       case SIGN_UP_SUCCESS:
         this.signUpMessage = action.response;
         this.emit('SIGN_UP_SUCCESS');
-        break;
-
-      case SIGN_UP_ERROR:
-        this.signUpMessage = action.error;
-        this.emit('SIGN_UP_ERROR');
         break;
 
       default:

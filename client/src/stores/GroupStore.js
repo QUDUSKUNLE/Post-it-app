@@ -2,8 +2,7 @@ import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   GET_USER_GROUPS,
-  CREATE_GROUP,
-  CREATE_GROUP_ERROR } from '../constants/ActionConstants';
+  CREATE_GROUP } from '../constants/ActionConstants';
 
 /**
  * Holds the storage, listen to actions and update the stores
@@ -50,10 +49,6 @@ class GroupStore extends EventEmitter {
       case CREATE_GROUP:
         this.creategroup = action.message;
         this.emit('CREATE_GROUP');
-        break;
-      case CREATE_GROUP_ERROR:
-        this.creategroup = action.error;
-        this.emit('CREATE_GROUP_ERROR');
         break;
       default:
     }

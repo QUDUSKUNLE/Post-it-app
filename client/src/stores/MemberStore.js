@@ -76,11 +76,6 @@ class MemberStore extends EventEmitter {
         this.addMemberResponse = action.member;
         this.emit('ADD_MEMBER');
         break;
-
-      case ADD_MEMBER_ERROR:
-        this.addMemberResponse = action.error;
-        this.emit('ADD_MEMBER_ERROR');
-        break;
       default:
     }
   }
