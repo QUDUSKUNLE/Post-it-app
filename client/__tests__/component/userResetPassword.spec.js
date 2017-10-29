@@ -16,7 +16,6 @@ describe('UserResetPassword component', () => {
 
     const props = {
       email: '',
-      response: ''
     };
 
     wrapper = mount(<UserResetPassword {...props}/>,
@@ -52,7 +51,6 @@ describe('UserResetPassword component', () => {
   it('should have an empty initial state', () => {
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.state().email).toEqual('');
-    expect(wrapper.state().response).toEqual('');
   });
   it('should be defined', () => {
     expect(UserResetPassword).toBeDefined();
@@ -69,12 +67,12 @@ describe('UserResetPassword component', () => {
     expect(component.find('Footer')).toHaveLength(1);
     expect(component.find('input.signinform')).toHaveLength(1);
   });
-  it('should call onChange', () => {
+  it('should call onChange method', () => {
     const event = { target: { name: 'name', value: 'value' } };
     wrapper.instance().onChange(event);
     expect(wrapper.state().name).toEqual('value');
   });
-  it('should call onSubmit', () => {
+  it('should call onSubmit method', () => {
     wrapper.instance().onSubmit({ preventDefault() {} });
     expect(wrapper.state().email).toEqual('');
   });
@@ -89,7 +87,7 @@ describe('UserResetPassword component', () => {
     expect(spy.calledOnce).toBeTruthy();
   });
   it('sets state when handlePasswordReset method is called', () => {
-    expect(wrapper.node.state).toEqual({ email: '', response: '' });
+    expect(wrapper.node.state).toEqual({ email: '' });
     wrapper.instance().handlePasswordReset();
     expect(wrapper.nodes[0].onChange).toBeDefined();
     expect(wrapper.nodes[0].onSubmit).toBeDefined();
@@ -97,5 +95,10 @@ describe('UserResetPassword component', () => {
   });
   it('should redirect to another page on click of a button', () => {
     wrapper.find(Link).at(2).simulate('click');
+  });
+  it('should find a link', () => {
+    expect(wrapper.find(Link).at(1).prop('to')).toEqual('/');
+    expect(wrapper.find(Link).at(2).prop('to')).toEqual('/signin');
+    expect(wrapper.find(Link).at(3).prop('to')).toEqual('/passwordreset');
   });
 });
