@@ -218,10 +218,6 @@ export default class UserBroadCastBoard extends React.Component {
           <UserGroups
             grouplist={groupList}
             member={this.state.groupMember}/>
-          {/* <UserChatBox
-          defaultGroup={this.state.defaultGroup}
-          groupId={this.state.groupId}
-          allGeneralMessage={this.state.groupMessage}/> */}
           {isGroupSelected()}
         </div>
         <Footer/>

@@ -5,9 +5,7 @@ import {
   GET_GROUP_MESSAGE,
   SEND_GROUP_MESSAGE
 } from '../constants/ActionConstants.js';
-import {
-    helpGetGroupMessages
-} from '../helper/helper.js';
+import { helpGetGroupMessages } from '../helper/helper.js';
 
 /**
  * @description - Get message of a group

@@ -8,7 +8,6 @@ import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
 import { signinAction, signInWithGoogle } from '../actions/signInActions';
 
-
 /**
  * @description - renders UserSignIn Component
  * @class UserSignIn

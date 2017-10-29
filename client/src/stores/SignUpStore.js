@@ -1,8 +1,6 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import {
-  SIGN_UP_SUCCESS
-} from '../constants/ActionConstants';
+import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * Signout Store, it hold user's state, listen to signin Actions

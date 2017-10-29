@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { sendGroupMessage } from '../actions/messageActions';
 
-
 /**
  * @description - renders ChatBox Component
  * @class ChatBox

@@ -1,9 +1,7 @@
 import axios from 'axios';
 import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-
-import {
-  SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
+import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * @description - Sign Up Action

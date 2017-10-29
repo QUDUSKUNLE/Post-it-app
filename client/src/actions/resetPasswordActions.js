@@ -1,8 +1,7 @@
 import axios from 'axios';
 import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import {
-  PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
+import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * @description - Reset Password Action
