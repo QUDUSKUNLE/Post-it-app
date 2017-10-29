@@ -28,10 +28,6 @@ const constProps = () => {
 const wrapper = constProps();
 
 describe('PostIt-app', () => {
-  beforeEach(() => {
-    global.Materialize = { toast: () => {} };
-  });
-
   it('expects UserSignUp component to be defined', () => {
     expect(wrapper).toBeDefined();
   });
@@ -46,10 +42,6 @@ describe('PostIt-app', () => {
     wrapper.instance().onChange(event);
     expect(wrapper.state().name).toEqual('value');
   });
-  // it('should reset state when componentWillUnmount is called', () => {
-  //   wrapper.instance().componentWillUnmount();
-  //   expect(wrapper.props().userRegistration.reqProcessing).toEqual(false);
-  // });
   it('should call onSubmit', () => {
     wrapper.instance().onSubmit({ preventDefault() {} });
     expect(wrapper.state().email).toEqual('');
