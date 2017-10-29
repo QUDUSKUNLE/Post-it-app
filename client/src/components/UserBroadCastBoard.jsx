@@ -36,10 +36,6 @@ export default class UserBroadCastBoard extends React.Component {
       userName: JSON.parse(localStorage.getItem('userName')),
       groupMessage: [],
       groupMember: [],
-      groupMessages: [],
-      signOutMessage: '',
-      errSignOut: '',
-      broadcastmessage: '',
       groupSelected: false
     };
 
@@ -102,9 +98,7 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   handleGetGroupMember() {
-    this.setState({
-      groupMember: (MemberStore.allGroupMembers())[0]
-    });
+    this.setState({ groupMember: (MemberStore.allGroupMembers())[0] });
   }
 
   /**
@@ -112,9 +106,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {*} void
    */
   handleGetGroupMessage() {
-    this.setState({
-      groupMessage: MessageStore.allGroupMessage()
-    });
+    this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
   /**
@@ -122,9 +114,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {*} void
    */
   handleGetUserGroups() {
-    this.setState({
-      groups: GroupStore.allGroups(),
-    });
+    this.setState({ groups: GroupStore.allGroups() });
   }
   /**
    * onChange event.
@@ -132,9 +122,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @returns {*} bind input values to name.
    */
   handleOnChangeEvent(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   handleSignOutAction() {
@@ -143,11 +131,7 @@ export default class UserBroadCastBoard extends React.Component {
       this.props.history.push('/');
       localStorage.clear();
       location.reload();
-    }).catch((error) => {
-      if (error.response) {
-        toastr.error(error.response.data);
-      }
-    });
+    }).catch((error) => toastr.error(error.response.data));
   }
 
   /**

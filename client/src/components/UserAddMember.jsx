@@ -31,8 +31,7 @@ export default class UserAddMember extends React.Component {
       groups: [],
       registeredUsers: [],
       group: {},
-      member: '',
-      addMemberResponse: ''
+      member: ''
     };
     /**
      * @description This binding is necessary to make `this` work
@@ -62,14 +61,12 @@ export default class UserAddMember extends React.Component {
     GroupStore.on('GET_USER_GROUPS', this.userGroups);
     MemberStore.on('ALL_USERS', this.userGroups);
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
-    MemberStore.on('ADD_MEMBER_ERROR', this.handleAddMemberToGroup);
   }
 
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
     MemberStore.removeListener('ALL_USERS', this.userGroups);
     MemberStore.removeListener('ADD_MEMBER', this.handleAddMemberToGroup);
-    MemberStore.removeListener('ADD_MEMBER_ERROR', this.handleAddMemberToGroup);
   }
 
   /**
@@ -91,9 +88,7 @@ export default class UserAddMember extends React.Component {
    * @memberOf ChatBox
    */
   onChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
@@ -119,10 +114,8 @@ export default class UserAddMember extends React.Component {
 	 */
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
-    if (addMemberResponse === 'Add member successfully') {
-      toastr.success(addMemberResponse);
-      this.props.history.push('/broadcastboard');
-    }
+    toastr.success(addMemberResponse);
+    this.props.history.push('/broadcastboard');
   }
 
   /**
@@ -136,13 +129,8 @@ export default class UserAddMember extends React.Component {
       browserHistory.push('/');
       localStorage.clear();
       location.reload();
-    }).catch((error) => {
-      if (error.response) {
-        toastr.error(error.response.data);
-      }
-    });
+    }).catch((error) => toastr.error(error.response.data));
   }
-
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} AddMember component

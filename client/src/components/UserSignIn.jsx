@@ -1,9 +1,8 @@
 import React from 'react';
 import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
-import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import config from '../vendors/vendors';
+import firebase from '../vendors/index.js';
 import toastr from 'toastr';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
@@ -11,8 +10,8 @@ import { signinAction, signInWithGoogle } from '../actions/signInActions';
 
 
 /**
- * @description - renders SignIn Component
- * @class SignIn
+ * @description - renders UserSignIn Component
+ * @class UserSignIn
  * @extends {React.Component}
  */
 export default class UserSignIn extends React.Component {
@@ -28,8 +27,6 @@ export default class UserSignIn extends React.Component {
       userId: '',
       email: '',
       password: '',
-      signinMessage: '',
-      errMessage: '',
       loggedIn: false
     };
 
@@ -46,19 +43,12 @@ export default class UserSignIn extends React.Component {
 
   componentDidMount() {
     SignInStore.on('SIGN_IN_SUCCESS', this.handleSignInAction);
-    SignInStore.on('SIGN_IN_ERROR', this.handleSignInAction);
-    SignInStore.on('GOOGLE_SIGN_IN_SUCCESS',
-    this.handleGoogleEvent);
-    SignInStore.on('GOOGLE_SIGN_IN_ERROR',
-    this.handleGoogleEvent);
+    SignInStore.on('GOOGLE_SIGN_IN_SUCCESS', this.handleGoogleEvent);
   }
 
   componentWillUnmount() {
     SignInStore.removeListener('SIGN_IN_SUCCESS', this.handleSignInAction);
-    SignInStore.removeListener('SIGN_IN_ERROR', this.handleSignInAction);
     SignInStore.removeListener('GOOGLE_SIGN_IN_SUCCESS',
-      this.handleGoogleEvent);
-    SignInStore.removeListener('GOOGLE_SIGN_IN_ERROR',
       this.handleGoogleEvent);
   }
 
@@ -68,9 +58,7 @@ export default class UserSignIn extends React.Component {
    * @return {void} updated state of user
    */
   onChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    this.setState({ [event.target.name]: event.target.value });
   }
 
   /**
@@ -80,10 +68,7 @@ export default class UserSignIn extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    const user = { email: this.state.email, password: this.state.password };
     signinAction(user);
   }
 
@@ -94,27 +79,18 @@ export default class UserSignIn extends React.Component {
    */
   handleSignInAction() {
     const response = SignInStore.signInUser();
-    if (response.message === 'User Signed in successfully') {
-      toastr.success('User Signed in successfully');
-      this.setState({
-        userName: (Object.values((response.response)[0])[0].userName),
-        loggedIn: true,
-        email: this.state.email,
-        userId: (Object.values((response.response)[0]))[0].userId
-      });
-      localStorage.setItem('userName', JSON.stringify(this.state.userName));
-      localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
-      localStorage.setItem('Id', JSON.stringify(this.state.userId));
-      this.props.history.push('/broadcastboard');
-    } else if (response.data.error.code === 'auth/wrong-password') {
-      toastr.error(response.data.error.message);
-    } else if (response.data.error.code === 'auth/user-not-found') {
-      toastr.error(response.data.error.message);
-    } else if (response.data.error.code === 'auth/invalid-email') {
-      toastr.error(response.data.error.message);
-    }
+    toastr.success(response.message);
+    this.setState({
+      userName: (Object.values((response.response)[0])[0].userName),
+      loggedIn: true,
+      email: this.state.email,
+      userId: (Object.values((response.response)[0]))[0].userId
+    });
+    localStorage.setItem('userName', JSON.stringify(this.state.userName));
+    localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
+    localStorage.setItem('Id', JSON.stringify(this.state.userId));
+    this.props.history.push('/broadcastboard');
   }
-
 
   /**
    * @description - this handles Google SignIn Method
@@ -122,14 +98,13 @@ export default class UserSignIn extends React.Component {
    * @returns {void} .
   */
   googleSignIn() {
-    firebase.initializeApp(config);
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/plus.login');
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
         signInWithGoogle(result);
       }).catch(error => {
-        console.log(error);
+        toastr.error(error.message);
       });
   }
 
@@ -139,17 +114,16 @@ export default class UserSignIn extends React.Component {
    */
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
+    toastr.success(googleResponse.message);
     this.setState({
-      signinMessage: googleResponse.message,
       userName: googleResponse.user.displayName,
       loggedIn: true,
       userId: googleResponse.user.uid
     });
-    toastr.success(googleResponse.message);
+    this.props.history.push('/broadcastboard');
     localStorage.setItem('userName', JSON.stringify(this.state.userName));
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
     localStorage.setItem('Id', JSON.stringify(this.state.userId));
-    this.props.history.push('/broadcastboard');
   }
 
   /**
@@ -216,7 +190,8 @@ export default class UserSignIn extends React.Component {
                       className="signinform" placeholder="*********"
                       name="password" required />
                   </div>
-                  <button type="submit" className="signinformbtn">Sign in
+                  <button id="submitButton"
+                    type="submit" className="signinformbtn">Sign in
                   </button>
                 </form>
               </div>

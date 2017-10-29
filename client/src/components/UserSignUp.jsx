@@ -36,12 +36,10 @@ export default class UserSignUp extends React.Component {
 
   componentDidMount() {
     SignUpStore.on('SIGN_UP_SUCCESS', this.handleSignUpAction);
-    SignUpStore.on('SIGN_UP_ERROR', this.handleSignUpAction);
   }
 
   componentWillUnmount() {
     SignUpStore.removeListener('SIGN_UP_SUCCESS', this.handleSignUpAction);
-    SignUpStore.removeListener('SIGN_UP_ERROR', this.handleSignUpAction);
   }
   /**
    * @description - onChange event
@@ -84,23 +82,8 @@ export default class UserSignUp extends React.Component {
    */
   handleSignUpAction() {
     const response = SignUpStore.signUpUser();
-    if (response.message === 'Registration successful and' +
-    ' verification email sent to your email') {
-      toastr.success(response.message);
-      this.props.history.push('/signin');
-    } else if (response.data.error.code === 'auth/email-already-in-use') {
-      toastr.error(response.data.error.message);
-    } else if (response.data.error.code === 'password should be at least 6' +
-      ' characters with a speacial character') {
-      toastr.error(response.data.error.code);
-    } else if (response.data.error.code === 'Password does not match') {
-      toastr.error(response.data.error.code);
-    } else if (response.data.error.code === 'Username required at' +
-    ' least 2 characters') {
-      toastr.error(response.data.error.code);
-    } else if (response.data.error.code === 'Incorrect phone number') {
-      toastr.error('Incorrect phone number');
-    }
+    toastr.success(response.message);
+    this.props.history.push('/signin');
   }
 
   /**

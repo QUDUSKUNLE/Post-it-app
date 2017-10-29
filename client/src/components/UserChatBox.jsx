@@ -22,7 +22,6 @@ export default class UserChatBox extends React.Component {
       username: JSON.parse(localStorage.getItem('userName')),
       message: '',
       priority: 'normal',
-
     };
 
     this.onChange = this.onChange.bind(this);
@@ -54,9 +53,7 @@ export default class UserChatBox extends React.Component {
       priority: this.state.priority,
     };
     sendGroupMessage(newMessage);
-    this.setState({
-      message: ''
-    });
+    this.setState({ message: '' });
   }
 
   /**
@@ -133,33 +130,7 @@ export default class UserChatBox extends React.Component {
                 </div>
               </form>
             </div>
-            {/* <form className="col-md-12">
-              <div className="form-group">
-                <div className="input-group">
-                  <div className="input-group-addon">
-                    <select name="priority" onChange={this.onChange}>
-                      <option value="normal">Normal</option>
-                      <option value="critical">Crtical</option>
-                      <option value="urgent">Urgent</option>
-                    </select>
-                  </div>
-                  <input
-                    type="text"
-                    className="form-control message"
-                    placeholder="Type message....."
-                    name="message"
-                    value={this.state.message} onChange={this.onChange}/>
-                  <div className="input-group-addon">
-                    <button
-                      className="btn btn-default"
-                      type="button" onClick={this.onSubmit}>Send
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form> */}
           </div>
-        {/* </div> */}
       </div>
     );
   }

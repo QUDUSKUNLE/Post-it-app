@@ -24,7 +24,6 @@ export default class UserCreateGroup extends React.Component {
     super(props);
     this.state = {
       group: '',
-      signOutMessage: '',
       loggedIn
     };
 
@@ -40,13 +39,10 @@ export default class UserCreateGroup extends React.Component {
 
   componentDidMount() {
     GroupStore.on('CREATE_GROUP', this.handleCreateGroupEvent);
-    GroupStore.on('CREATE_GROUP_ERROR', this.handleCreateGroupEvent);
   }
 
   componentWillUnmount() {
     GroupStore.removeListener('CREATE_GROUP', this.handleCreateGroupEvent);
-    GroupStore.removeListener('CREATE_GROUP_ERROR',
-      this.handleCreateGroupEvent);
   }
 
   /**
@@ -67,9 +63,7 @@ export default class UserCreateGroup extends React.Component {
 	 */
   onSubmit(event) {
     event.preventDefault();
-    const group = {
-      group: this.state.group
-    };
+    const group = { group: this.state.group };
     createGroup(group);
   }
 
@@ -80,11 +74,7 @@ export default class UserCreateGroup extends React.Component {
   */
   handleCreateGroupEvent() {
     const createGroupResponse = GroupStore.createGroup();
-    if (createGroupResponse === 'Group already exists') {
-      toastr.error(createGroupResponse);
-    } else if (createGroupResponse === 'Group created successfully') {
-      toastr.success(createGroupResponse);
-    }
+    toastr.success(createGroupResponse);
   }
 
   /**
@@ -98,11 +88,7 @@ export default class UserCreateGroup extends React.Component {
       localStorage.clear();
       this.props.history.push('/');
       location.reload();
-    }).catch((error) => {
-      if (error.response) {
-        toastr.error(error.response.data);
-      }
-    });
+    }).catch((error) => toastr.error(error.response.data));
   }
 
   /**

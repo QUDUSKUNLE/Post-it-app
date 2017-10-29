@@ -18,10 +18,7 @@ export default class UserResetPassword extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      response: ''
-    };
+    this.state = { email: '' };
 
     /**
      * @description This binding is necessary to make `this` work
@@ -34,13 +31,10 @@ export default class UserResetPassword extends React.Component {
 
   componentDidMount() {
     SignInStore.on('PASSWORD_RESET_SUCCESS', this.handlePasswordReset);
-    SignInStore.on('PASSWORD_RESET_ERROR', this.handlePasswordReset);
   }
 
   componentWillUnmount() {
     SignInStore.removeListener('PASSWORD_RESET_SUCCESS',
-      this.handlePasswordReset);
-    SignInStore.removeListener('PASSWORD_RESET_ERROR',
       this.handlePasswordReset);
   }
 
@@ -62,9 +56,7 @@ export default class UserResetPassword extends React.Component {
 	 */
   onSubmit(event) {
     event.preventDefault();
-    const resetEmail = {
-      email: this.state.email
-    };
+    const resetEmail = { email: this.state.email };
     resetPassword(resetEmail);
   }
 
@@ -75,14 +67,7 @@ export default class UserResetPassword extends React.Component {
    */
   handlePasswordReset() {
     const passwordResetResponse = SignInStore.passwordReset();
-    if (passwordResetResponse.message ===
-      'Password reset email sent successfully!') {
-      toastr.success(passwordResetResponse.message);
-    } else if (passwordResetResponse.error.code === 'auth/user-not-found') {
-      toastr.error(passwordResetResponse.error.message);
-    } else if (passwordResetResponse.error.code === 'auth/invalid-email') {
-      toastr.error(passwordResetResponse.error.message);
-    }
+    toastr.success(passwordResetResponse.message);
   }
 
   /**

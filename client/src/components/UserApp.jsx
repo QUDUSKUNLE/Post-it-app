@@ -16,13 +16,13 @@ export default class UserApp extends React.Component {
     return (
       <div className="container mainbody">
         <div className="row home">
-          <div className="col-md-6">
+          <div className="col-md-6 postit">
             <h4>PostIt
               <small>
                 <i>App</i>
               </small>
                 {' '}
-                allows friends to come together and share vital information.
+                allows friends come together and share vital information.
             </h4>
           </div>
           <UserSignUp/>
