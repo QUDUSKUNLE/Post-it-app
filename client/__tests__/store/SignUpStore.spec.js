@@ -32,28 +32,3 @@ describe('SignUp Store', () => {
     });
   });
 });
-
-describe('SignUp Store', () => {
-  describe('Test for signUpUser method', () => {
-    let error;
-    let AppDispatcherMock;
-    beforeEach(() => {
-      AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      error = {
-        code: 'auth/email-already-in-use',
-        message: 'The email address is already in use by another account.'
-      };
-    });
-
-    afterEach(() => {
-      SignUpStore.handleSignUpActions({
-        type: 'SIGN_UP_ERROR', error: {}
-      });
-    });
-
-    it('should be registered to AppDispatcher', () => {
-      AppDispatcherMock({ type: 'SIGN_UP_ERROR', error });
-      expect(SignUpStore.signUpUser()).toEqual({});
-    });
-  });
-});

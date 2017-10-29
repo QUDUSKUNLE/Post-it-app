@@ -57,30 +57,6 @@ describe('Member Store', () => {
   });
 });
 
-describe('Member Store', () => {
-  describe('Test for addMember method', () => {
-    let error;
-    let AppDispatcherMock;
-    beforeEach(() => {
-      AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      error = 'Member already exist';
-    });
-
-    afterEach(() => {
-      MemberStore.handleActions({
-        type: 'ADD_MEMBER_ERROR', error: ''
-      });
-    });
-
-    it('should be registered to AppDispatcher', () => {
-      AppDispatcherMock({ type: 'ADD_MEMBER_ERROR', error });
-      expect(MemberStore.addMember()).toEqual(error);
-    });
-    it('should return an empty object on first call', () => {
-      expect(MemberStore.addMember()).toEqual('');
-    });
-  });
-});
 
 describe('Member Store', () => {
   describe('Test for allGroupMembers method', () => {

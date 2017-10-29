@@ -32,7 +32,7 @@ describe('Group Store', () => {
 });
 
 describe('Group Store', () => {
-  describe('Test for allGroups method', () => {
+  describe('Test for createGroup method', () => {
     let message;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -47,29 +47,6 @@ describe('Group Store', () => {
     it('should be registered to AppDispatcher', () => {
       AppDispatcherMock({ type: 'CREATE_GROUP', message });
       expect(GroupStore.createGroup()).toEqual(message);
-    });
-    it('should return an empty object on first call', () => {
-      expect(GroupStore.createGroup()).toEqual('');
-    });
-  });
-});
-
-describe('Group Store', () => {
-  describe('Test for allGroups method', () => {
-    let error;
-    let AppDispatcherMock;
-    beforeEach(() => {
-      AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      error = 'Group already exists';
-    });
-    afterEach(() => {
-      GroupStore.handleActions({
-        type: 'CREATE_GROUP_ERROR', error: ''
-      });
-    });
-    it('should be registered to AppDispatcher', () => {
-      AppDispatcherMock({ type: 'CREATE_GROUP_ERROR', error });
-      expect(GroupStore.createGroup()).toEqual(error);
     });
     it('should return an empty object on first call', () => {
       expect(GroupStore.createGroup()).toEqual('');
