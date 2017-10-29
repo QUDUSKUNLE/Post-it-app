@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserResetPassword component should render correctly 1`] = `
+exports[`UserBroadCastBoard Component should render correctly 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -9,9 +9,8 @@ ShallowWrapper {
   },
   "length": 1,
   "node": <div>
-    <nav
+    <div
       className="navbar navbar-inverse navabar-fixed-top"
-      role="navigation"
     >
       <div
         className="container-fluid"
@@ -20,16 +19,11 @@ ShallowWrapper {
           className="navbar-header"
         >
           <button
-            className="navbar-toggle collapsed"
+            className="navbar-toggle"
             data-target=".navbar-collapse"
             data-toggle="collapse"
             type="button"
           >
-            <span
-              className="sr-only"
-            >
-              Toggle navigation
-            </span>
             <span
               className="icon-bar"
             />
@@ -57,95 +51,69 @@ ShallowWrapper {
           <ul
             className="nav navbar-nav navbar-right"
           >
-            <li>
-              <Link
-                replace={false}
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                replace={false}
-                to="/signin"
-              >
-                Sign in
-              </Link>
-            </li>
             <li
               className="active"
             >
               <Link
                 replace={false}
-                to="/passwordreset"
+                to="/broadcastboard"
               >
-                PasswordReset
+                MessageBoard
+              </Link>
+            </li>
+            <li>
+              <Link
+                replace={false}
+                to="/group"
+              >
+                Create Group
+              </Link>
+            </li>
+            <li
+              onClick={[Function]}
+            >
+              <Link
+                replace={false}
+                to="#"
+              >
+                Sign out
               </Link>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </div>
     <div
-      className="passwordreset"
+      className=""
     >
-      <center>
-        <h4>
-          Reset your password
-        </h4>
-      </center>
-      <br />
       <div
-        className="container resetform"
+        className="row"
       >
         <div
-          className="row"
+          className="col-sm-12 col-md-2"
         >
-          <div
-            className="col-md-6 col-md-offset-3 w3-card w3-white"
-          >
-            <form
-              id="resetform"
-              onSubmit={[Function]}
-            >
-              <div
-                className="form-group"
-              >
-                <label
-                  htmlFor="email"
-                >
-                  Enter your email address
-                </label>
-                <input
-                  className="signinform"
-                  id="email"
-                  name="email"
-                  onChange={[Function]}
-                  placeholder="johndoe@example.com"
-                  required={true}
-                  type="email"
-                  value=""
-                />
-              </div>
-              <button
-                className="signinformbtn"
-                type="submit"
-              >
-                Send
-              </button>
-            </form>
-          </div>
+          <UserGroups
+            grouplist={Array []}
+            member={Array []}
+          />
+        </div>
+        <div
+          className="col-sm-12 col-md-10"
+        >
+          <NoGroupSelected />
         </div>
       </div>
+      <div
+        className="row"
+      >
+        <Footer />
+      </div>
     </div>
-    <Footer />
   </div>,
   "nodes": Array [
     <div>
-      <nav
+      <div
         className="navbar navbar-inverse navabar-fixed-top"
-        role="navigation"
       >
         <div
           className="container-fluid"
@@ -154,16 +122,11 @@ ShallowWrapper {
             className="navbar-header"
           >
             <button
-              className="navbar-toggle collapsed"
+              className="navbar-toggle"
               data-target=".navbar-collapse"
               data-toggle="collapse"
               type="button"
             >
-              <span
-                className="sr-only"
-              >
-                Toggle navigation
-              </span>
               <span
                 className="icon-bar"
               />
@@ -191,89 +154,64 @@ ShallowWrapper {
             <ul
               className="nav navbar-nav navbar-right"
             >
-              <li>
-                <Link
-                  replace={false}
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  replace={false}
-                  to="/signin"
-                >
-                  Sign in
-                </Link>
-              </li>
               <li
                 className="active"
               >
                 <Link
                   replace={false}
-                  to="/passwordreset"
+                  to="/broadcastboard"
                 >
-                  PasswordReset
+                  MessageBoard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  replace={false}
+                  to="/group"
+                >
+                  Create Group
+                </Link>
+              </li>
+              <li
+                onClick={[Function]}
+              >
+                <Link
+                  replace={false}
+                  to="#"
+                >
+                  Sign out
                 </Link>
               </li>
             </ul>
           </div>
         </div>
-      </nav>
+      </div>
       <div
-        className="passwordreset"
+        className=""
       >
-        <center>
-          <h4>
-            Reset your password
-          </h4>
-        </center>
-        <br />
         <div
-          className="container resetform"
+          className="row"
         >
           <div
-            className="row"
+            className="col-sm-12 col-md-2"
           >
-            <div
-              className="col-md-6 col-md-offset-3 w3-card w3-white"
-            >
-              <form
-                id="resetform"
-                onSubmit={[Function]}
-              >
-                <div
-                  className="form-group"
-                >
-                  <label
-                    htmlFor="email"
-                  >
-                    Enter your email address
-                  </label>
-                  <input
-                    className="signinform"
-                    id="email"
-                    name="email"
-                    onChange={[Function]}
-                    placeholder="johndoe@example.com"
-                    required={true}
-                    type="email"
-                    value=""
-                  />
-                </div>
-                <button
-                  className="signinformbtn"
-                  type="submit"
-                >
-                  Send
-                </button>
-              </form>
-            </div>
+            <UserGroups
+              grouplist={Array []}
+              member={Array []}
+            />
+          </div>
+          <div
+            className="col-sm-12 col-md-10"
+          >
+            <NoGroupSelected />
           </div>
         </div>
+        <div
+          className="row"
+        >
+          <Footer />
+        </div>
       </div>
-      <Footer />
     </div>,
   ],
   "options": Object {},
@@ -282,20 +220,51 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <UserResetPassword />,
-      "_debugID": 121,
+      "_currentElement": <UserBroadCastBoard
+        defaultGroup=""
+        groupId=""
+        groupMember={Array []}
+        groupMessage={Array []}
+        groupSelected={false}
+        groups={Array []}
+        loggedIn={true}
+        userId="AZCVGFRTUINSMUY15156"
+        userName="Kunle"
+      />,
+      "_debugID": 99,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": UserResetPassword {
+      "_instance": UserBroadCastBoard {
         "_reactInternalInstance": [Circular],
         "context": Object {},
-        "handlePasswordReset": [Function],
-        "onChange": [Function],
-        "onSubmit": [Function],
-        "props": Object {},
+        "handleGetGroupMember": [Function],
+        "handleGetGroupMessage": [Function],
+        "handleGetUserGroups": [Function],
+        "handleOnChangeEvent": [Function],
+        "handleSendGroupMessage": [Function],
+        "handleSignOutAction": [Function],
+        "props": Object {
+          "defaultGroup": "",
+          "groupId": "",
+          "groupMember": Array [],
+          "groupMessage": Array [],
+          "groupSelected": false,
+          "groups": Array [],
+          "loggedIn": true,
+          "userId": "AZCVGFRTUINSMUY15156",
+          "userName": "Kunle",
+        },
         "refs": Object {},
         "state": Object {
-          "email": "",
+          "defaultGroup": "",
+          "groupId": "",
+          "groupMember": Array [],
+          "groupMessage": Array [],
+          "groupSelected": false,
+          "groups": Array [],
+          "loggedIn": true,
+          "userId": "AZCVGFRTUINSMUY15156",
+          "userName": "Kunle",
         },
         "updater": Object {
           "enqueueCallback": [Function],
@@ -308,7 +277,7 @@ ShallowWrapper {
           "validateCallback": [Function],
         },
       },
-      "_mountOrder": 1,
+      "_mountOrder": 3,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
@@ -316,9 +285,8 @@ ShallowWrapper {
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
         "_currentElement": <div>
-          <nav
+          <div
             className="navbar navbar-inverse navabar-fixed-top"
-            role="navigation"
           >
             <div
               className="container-fluid"
@@ -327,16 +295,11 @@ ShallowWrapper {
                 className="navbar-header"
               >
                 <button
-                  className="navbar-toggle collapsed"
+                  className="navbar-toggle"
                   data-target=".navbar-collapse"
                   data-toggle="collapse"
                   type="button"
                 >
-                  <span
-                    className="sr-only"
-                  >
-                    Toggle navigation
-                  </span>
                   <span
                     className="icon-bar"
                   />
@@ -364,95 +327,69 @@ ShallowWrapper {
                 <ul
                   className="nav navbar-nav navbar-right"
                 >
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/signin"
-                    >
-                      Sign in
-                    </Link>
-                  </li>
                   <li
                     className="active"
                   >
                     <Link
                       replace={false}
-                      to="/passwordreset"
+                      to="/broadcastboard"
                     >
-                      PasswordReset
+                      MessageBoard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/group"
+                    >
+                      Create Group
+                    </Link>
+                  </li>
+                  <li
+                    onClick={[Function]}
+                  >
+                    <Link
+                      replace={false}
+                      to="#"
+                    >
+                      Sign out
                     </Link>
                   </li>
                 </ul>
               </div>
             </div>
-          </nav>
+          </div>
           <div
-            className="passwordreset"
+            className=""
           >
-            <center>
-              <h4>
-                Reset your password
-              </h4>
-            </center>
-            <br />
             <div
-              className="container resetform"
+              className="row"
             >
               <div
-                className="row"
+                className="col-sm-12 col-md-2"
               >
-                <div
-                  className="col-md-6 col-md-offset-3 w3-card w3-white"
-                >
-                  <form
-                    id="resetform"
-                    onSubmit={[Function]}
-                  >
-                    <div
-                      className="form-group"
-                    >
-                      <label
-                        htmlFor="email"
-                      >
-                        Enter your email address
-                      </label>
-                      <input
-                        className="signinform"
-                        id="email"
-                        name="email"
-                        onChange={[Function]}
-                        placeholder="johndoe@example.com"
-                        required={true}
-                        type="email"
-                        value=""
-                      />
-                    </div>
-                    <button
-                      className="signinformbtn"
-                      type="submit"
-                    >
-                      Send
-                    </button>
-                  </form>
-                </div>
+                <UserGroups
+                  grouplist={Array []}
+                  member={Array []}
+                />
+              </div>
+              <div
+                className="col-sm-12 col-md-10"
+              >
+                <NoGroupSelected />
               </div>
             </div>
+            <div
+              className="row"
+            >
+              <Footer />
+            </div>
           </div>
-          <Footer />
         </div>,
-        "_debugID": 122,
+        "_debugID": 100,
         "_renderedOutput": <div>
-          <nav
+          <div
             className="navbar navbar-inverse navabar-fixed-top"
-            role="navigation"
           >
             <div
               className="container-fluid"
@@ -461,16 +398,11 @@ ShallowWrapper {
                 className="navbar-header"
               >
                 <button
-                  className="navbar-toggle collapsed"
+                  className="navbar-toggle"
                   data-target=".navbar-collapse"
                   data-toggle="collapse"
                   type="button"
                 >
-                  <span
-                    className="sr-only"
-                  >
-                    Toggle navigation
-                  </span>
                   <span
                     className="icon-bar"
                   />
@@ -498,89 +430,64 @@ ShallowWrapper {
                 <ul
                   className="nav navbar-nav navbar-right"
                 >
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/"
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/signin"
-                    >
-                      Sign in
-                    </Link>
-                  </li>
                   <li
                     className="active"
                   >
                     <Link
                       replace={false}
-                      to="/passwordreset"
+                      to="/broadcastboard"
                     >
-                      PasswordReset
+                      MessageBoard
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/group"
+                    >
+                      Create Group
+                    </Link>
+                  </li>
+                  <li
+                    onClick={[Function]}
+                  >
+                    <Link
+                      replace={false}
+                      to="#"
+                    >
+                      Sign out
                     </Link>
                   </li>
                 </ul>
               </div>
             </div>
-          </nav>
+          </div>
           <div
-            className="passwordreset"
+            className=""
           >
-            <center>
-              <h4>
-                Reset your password
-              </h4>
-            </center>
-            <br />
             <div
-              className="container resetform"
+              className="row"
             >
               <div
-                className="row"
+                className="col-sm-12 col-md-2"
               >
-                <div
-                  className="col-md-6 col-md-offset-3 w3-card w3-white"
-                >
-                  <form
-                    id="resetform"
-                    onSubmit={[Function]}
-                  >
-                    <div
-                      className="form-group"
-                    >
-                      <label
-                        htmlFor="email"
-                      >
-                        Enter your email address
-                      </label>
-                      <input
-                        className="signinform"
-                        id="email"
-                        name="email"
-                        onChange={[Function]}
-                        placeholder="johndoe@example.com"
-                        required={true}
-                        type="email"
-                        value=""
-                      />
-                    </div>
-                    <button
-                      className="signinformbtn"
-                      type="submit"
-                    >
-                      Send
-                    </button>
-                  </form>
-                </div>
+                <UserGroups
+                  grouplist={Array []}
+                  member={Array []}
+                />
+              </div>
+              <div
+                className="col-sm-12 col-md-10"
+              >
+                <NoGroupSelected />
               </div>
             </div>
+            <div
+              className="row"
+            >
+              <Footer />
+            </div>
           </div>
-          <Footer />
         </div>,
       },
       "_renderedNodeType": 0,
@@ -593,6 +500,16 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <UserResetPassword />,
+  "unrendered": <UserBroadCastBoard
+    defaultGroup=""
+    groupId=""
+    groupMember={Array []}
+    groupMessage={Array []}
+    groupSelected={false}
+    groups={Array []}
+    loggedIn={true}
+    userId="AZCVGFRTUINSMUY15156"
+    userName="Kunle"
+  />,
 }
 `;

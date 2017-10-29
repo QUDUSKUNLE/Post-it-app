@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PostIt-app should render correctly 1`] = `
+exports[`UserSignIn component should render correctly 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -176,6 +176,7 @@ ShallowWrapper {
               </div>
               <button
                 className="signinformbtn"
+                id="submitButton"
                 type="submit"
               >
                 Sign in
@@ -371,6 +372,7 @@ ShallowWrapper {
                 </div>
                 <button
                   className="signinformbtn"
+                  id="submitButton"
                   type="submit"
                 >
                   Sign in
@@ -405,7 +407,7 @@ ShallowWrapper {
       "_compositeType": 0,
       "_context": Object {},
       "_currentElement": <UserSignIn />,
-      "_debugID": 97,
+      "_debugID": 865,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignIn {
@@ -420,10 +422,8 @@ ShallowWrapper {
         "refs": Object {},
         "state": Object {
           "email": "",
-          "errMessage": "",
           "loggedIn": false,
           "password": "",
-          "signinMessage": "",
           "userId": "",
           "userName": "",
         },
@@ -613,6 +613,7 @@ ShallowWrapper {
                     </div>
                     <button
                       className="signinformbtn"
+                      id="submitButton"
                       type="submit"
                     >
                       Sign in
@@ -639,7 +640,7 @@ ShallowWrapper {
           </div>
           <Footer />
         </div>,
-        "_debugID": 98,
+        "_debugID": 866,
         "_renderedOutput": <div>
           <nav
             className="navbar navbar-inverse navabar-fixed-top"
@@ -808,6 +809,7 @@ ShallowWrapper {
                     </div>
                     <button
                       className="signinformbtn"
+                      id="submitButton"
                       type="submit"
                     >
                       Sign in
