@@ -11,13 +11,25 @@ ShallowWrapper {
   "node": <div
     className="footer"
   >
-    Andela 2017
+    <div
+      className="container"
+    >
+      <center>
+        Andela 2017
+      </center>
+    </div>
   </div>,
   "nodes": Array [
     <div
       className="footer"
     >
-      Andela 2017
+      <div
+        className="container"
+      >
+        <center>
+          Andela 2017
+        </center>
+      </div>
     </div>,
   ],
   "options": Object {},
@@ -57,13 +69,25 @@ ShallowWrapper {
         "_currentElement": <div
           className="footer"
         >
-          Andela 2017
+          <div
+            className="container"
+          >
+            <center>
+              Andela 2017
+            </center>
+          </div>
         </div>,
         "_debugID": 2,
         "_renderedOutput": <div
           className="footer"
         >
-          Andela 2017
+          <div
+            className="container"
+          >
+            <center>
+              Andela 2017
+            </center>
+          </div>
         </div>,
       },
       "_renderedNodeType": 0,

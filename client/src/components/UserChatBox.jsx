@@ -88,50 +88,53 @@ export default class UserChatBox extends React.Component {
       </div>
     );
     return (
-      <div>
-        <div className="defaultGroup">
+    <div id="main">
+      <div className="col-md-10 col-md-offset-1">
+        <p className="visible-xs">
+          <button
+            type="button"
+            className="btn btn-default btn-xs" 
+            data-toggle="offcanvas">
+            <i className="glyphicon glyphicon-chevron-left"></i>
+          </button>
+        </p>
         <h6>Group | {this.props.defaultGroup}
           <Link to="/member">
             <span className="glyphicon glyphicon-plus pull-right">
             </span>
           </Link>
         </h6>
+        <div className="messageBoard">
+          {chatMessage}
         </div>
-          <div className="messageBoard">
-            {chatMessage}
-          </div>
-          <div className="messageForm">
-            <div className="row">
-              <form className="col-lg-12">
-                <div className="input-group input-group-lg">
-                  <span className="input-group-btn">
-                    <select
-                      className="btn btn-default btn-lg"
-                      name="priority"
-                      onChange={this.onChange}>
-                      <option value="normal">Normal</option>
-                      <option value="critical">Critical</option>
-                      <option value="urgent">Urgent</option>
-                    </select>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control input-lg message"
-                    placeholder="Type message....."
-                    name="message"
-                    value={this.state.message}
-                    onChange={this.onChange}/>
-                  <span className="input-group-btn">
-                    <button
-                      className="btn btn-default btn-lg"
-                      type="button" onClick={this.onSubmit}>Send
-                    </button>
-                  </span>
-                </div>
-              </form>
+        <div className="row messageForm">
+          <form className="col-md-12">
+            <div className="input-group">
+              <div className="input-group-addon">
+                <select name="priority" onChange={this.onChange}>
+                  <option value="normal">Normal</option>
+                  <option value="critical">Critical</option>
+                  <option value="urgent">Urgent</option>
+                </select>
+              </div>
+              <input
+                type="text"
+                className="form-control message"
+                placeholder="Type message....."
+                name="message"
+                value={this.state.message}
+                onChange={this.onChange}/>
+              <div className="input-group-addon">
+                <button
+                  className="btn btn-default"
+                  onClick={this.onSubmit}>Send
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
+        </div>
       </div>
+    </div>
     );
   }
 }

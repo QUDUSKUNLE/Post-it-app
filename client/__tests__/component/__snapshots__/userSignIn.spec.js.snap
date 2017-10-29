@@ -407,7 +407,7 @@ ShallowWrapper {
       "_compositeType": 0,
       "_context": Object {},
       "_currentElement": <UserSignIn />,
-      "_debugID": 865,
+      "_debugID": 883,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignIn {
@@ -640,7 +640,7 @@ ShallowWrapper {
           </div>
           <Footer />
         </div>,
-        "_debugID": 866,
+        "_debugID": 884,
         "_renderedOutput": <div>
           <nav
             className="navbar navbar-inverse navabar-fixed-top"

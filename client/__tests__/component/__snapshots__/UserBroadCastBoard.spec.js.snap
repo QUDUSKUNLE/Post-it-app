@@ -84,31 +84,15 @@ ShallowWrapper {
       </div>
     </div>
     <div
-      className=""
+      className="row-offcanvas row-offcanvas-left"
     >
-      <div
-        className="row"
-      >
-        <div
-          className="col-sm-12 col-md-2"
-        >
-          <UserGroups
-            grouplist={Array []}
-            member={Array []}
-          />
-        </div>
-        <div
-          className="col-sm-12 col-md-10"
-        >
-          <NoGroupSelected />
-        </div>
-      </div>
-      <div
-        className="row"
-      >
-        <Footer />
-      </div>
+      <UserGroups
+        grouplist={Array []}
+        member={Array []}
+      />
+      <NoGroupSelected />
     </div>
+    <Footer />
   </div>,
   "nodes": Array [
     <div>
@@ -187,31 +171,15 @@ ShallowWrapper {
         </div>
       </div>
       <div
-        className=""
+        className="row-offcanvas row-offcanvas-left"
       >
-        <div
-          className="row"
-        >
-          <div
-            className="col-sm-12 col-md-2"
-          >
-            <UserGroups
-              grouplist={Array []}
-              member={Array []}
-            />
-          </div>
-          <div
-            className="col-sm-12 col-md-10"
-          >
-            <NoGroupSelected />
-          </div>
-        </div>
-        <div
-          className="row"
-        >
-          <Footer />
-        </div>
+        <UserGroups
+          grouplist={Array []}
+          member={Array []}
+        />
+        <NoGroupSelected />
       </div>
+      <Footer />
     </div>,
   ],
   "options": Object {},
@@ -231,7 +199,7 @@ ShallowWrapper {
         userId="AZCVGFRTUINSMUY15156"
         userName="Kunle"
       />,
-      "_debugID": 99,
+      "_debugID": 101,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserBroadCastBoard {
@@ -360,33 +328,17 @@ ShallowWrapper {
             </div>
           </div>
           <div
-            className=""
+            className="row-offcanvas row-offcanvas-left"
           >
-            <div
-              className="row"
-            >
-              <div
-                className="col-sm-12 col-md-2"
-              >
-                <UserGroups
-                  grouplist={Array []}
-                  member={Array []}
-                />
-              </div>
-              <div
-                className="col-sm-12 col-md-10"
-              >
-                <NoGroupSelected />
-              </div>
-            </div>
-            <div
-              className="row"
-            >
-              <Footer />
-            </div>
+            <UserGroups
+              grouplist={Array []}
+              member={Array []}
+            />
+            <NoGroupSelected />
           </div>
+          <Footer />
         </div>,
-        "_debugID": 100,
+        "_debugID": 102,
         "_renderedOutput": <div>
           <div
             className="navbar navbar-inverse navabar-fixed-top"
@@ -463,31 +415,15 @@ ShallowWrapper {
             </div>
           </div>
           <div
-            className=""
+            className="row-offcanvas row-offcanvas-left"
           >
-            <div
-              className="row"
-            >
-              <div
-                className="col-sm-12 col-md-2"
-              >
-                <UserGroups
-                  grouplist={Array []}
-                  member={Array []}
-                />
-              </div>
-              <div
-                className="col-sm-12 col-md-10"
-              >
-                <NoGroupSelected />
-              </div>
-            </div>
-            <div
-              className="row"
-            >
-              <Footer />
-            </div>
+            <UserGroups
+              grouplist={Array []}
+              member={Array []}
+            />
+            <NoGroupSelected />
           </div>
+          <Footer />
         </div>,
       },
       "_renderedNodeType": 0,

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import $ from "jquery";
 import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
@@ -145,7 +146,9 @@ export default class UserBroadCastBoard extends React.Component {
       );
     }
     const groupList = this.state.groups.map((group) =>
-      <li key={Object.values(group)}
+      <li
+        className="text-center"
+        key={Object.values(group)}
         value={Object.keys(group)}
         name={Object.keys(group)}
         onClick={() => {
@@ -171,6 +174,11 @@ export default class UserBroadCastBoard extends React.Component {
       }
       return selectedGroup;
     };
+    $(document).ready(() => {
+      $('[data-toggle=offcanvas]').click(function() {
+        $('.row-offcanvas').toggleClass('active');
+      });
+    });
     return (
       <div>
         <div className="navbar navbar-inverse navabar-fixed-top">
@@ -201,27 +209,22 @@ export default class UserBroadCastBoard extends React.Component {
             </div>
           </div>
         </div>
-          {/* <div className="row">
-            <div className="col-md-12">
-              <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
-            </div>
-          </div> */}
-          <div className="">
-            <div className="row">
-              <div className="col-sm-12 col-md-2">
-                <UserGroups
-                  grouplist={groupList}
-                  member={this.state.groupMember}
-                  />
-              </div>
-              <div className="col-sm-12 col-md-10">
-                {isGroupSelected()}
-              </div>
-            </div>
-            <div className="row">
-              <Footer/>
-            </div>
-         </div>
+        {/* <div className="row">
+          <div className="col-md-12">
+            <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
+          </div>
+        </div> */}
+        <div className="row-offcanvas row-offcanvas-left">
+          <UserGroups
+            grouplist={groupList}
+            member={this.state.groupMember}/>
+          {/* <UserChatBox
+          defaultGroup={this.state.defaultGroup}
+          groupId={this.state.groupId}
+          allGeneralMessage={this.state.groupMessage}/> */}
+          {isGroupSelected()}
+        </div>
+        <Footer/>
       </div>
     );
   }

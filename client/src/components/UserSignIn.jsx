@@ -114,12 +114,12 @@ export default class UserSignIn extends React.Component {
    */
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
-    toastr.success(googleResponse.message);
     this.setState({
       userName: googleResponse.user.displayName,
       loggedIn: true,
       userId: googleResponse.user.uid
     });
+    toastr.success(googleResponse.message);
     this.props.history.push('/broadcastboard');
     localStorage.setItem('userName', JSON.stringify(this.state.userName));
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));

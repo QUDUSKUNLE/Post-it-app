@@ -17,29 +17,25 @@ export default class UserGroups extends React.Component {
         <a href="#">{Object.values(member)}</a>
       </li>));
     return (
-      <div className="groups">
-        <div className="grouplist">
-          <div className="col-md-12">
-            <ul className="nav nav-pills nav-stacked">
-              {this.props.grouplist}
-            </ul>
-          </div>
-        </div>
-        <div className="members">
-          <div className="col-md-12">
-            <div className="dropdown">
-              <button
-                className="btn btn-default dropdown-toggle"
-                data-toggle="dropdown">Group Members
-                <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu">
-                {members}
-              </ul>
-            </div>
-          </div>
+    <div id="sidebar" className="sidebar-offcanvas">
+      <div className="col-md-12 groups">
+        <ul className="nav nav-pills nav-stacked">
+          {this.props.grouplist}
+        </ul>
+      </div>
+      <div className="col-md-12 members">
+        <div className="dropdown">
+          <button
+            className="btn btn-default dropdown-toggle"
+            data-toggle="dropdown">Group Members
+            <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu">
+            {members}
+          </ul>
         </div>
       </div>
+    </div>
     );
   }
 }

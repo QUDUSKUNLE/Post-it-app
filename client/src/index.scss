@@ -3,46 +3,40 @@
 */
 
 body {
-    background-color: white;
+  background-color: white;
 }
 
 .navbar {
-    margin-bottom: 0;
-    border-radius: 0;
+  margin-bottom: 0;
+  border-radius: 0;
 }
-
 
 /*
   home
 */
 
 .home {
-    margin-top: 25px;
+  margin-top: 25px;
 }
 
 .mainbody {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .term {
-    margin-top: 5px;
+  margin-top: 5px;
 }
-
-#post-footer {
-    color: white
-}
-
 
 /*
   SignIn Component
 */
 
 .or {
-    font-size: 15px
+  font-size: 15px
 }
 
 .signin {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 #signinForm {
@@ -62,7 +56,7 @@ body {
     color: white;
     font-size: 25px;
     width: 100%;
-    background-color: #333333;
+    background-color: black;
     text-decoration: none;
     border: none;
     border-radius: 6px
@@ -108,7 +102,6 @@ body {
     margin: 20px 25px;
 }
 
-
 /*
   ResetPassword Component
 */
@@ -146,71 +139,75 @@ body {
     max-width: 220px;
     background-color: #222222;
     float: left;
-    height: 90vh;
+    height: 100vh;
     position: relative;
     overflow-x: hidden;
     border-right: 1px solid gray;
 }
-
-.groups {
-    height: 100vh;
-    background-color: black;
-}
-
-.grouplist {
-    height: 60%;
-    overflow-y: scroll;
+ .row-offcanvas .sidebar-offcanvas .groups {
+    height: 50vh
 }
 
 .members {
-    color: white;
-    height: 40%;
-    margin: 0 auto;
-    padding-top: 30px;
-}
-
-.defaultGroup {
-    width: 98%;
+  color: white;
 }
 
 .row-offcanvas .sidebar-offcanvas .members ul li {
-    padding: 10px;
-}
+  padding: 10px;
+  }
 
 #main {
-    height: 80%;
+    height: 95%;
     overflow: auto;
 }
 
 .footer {
-    background-color: #333333;
-    bottom: 0;
-    color: white;
     position: fixed;
     left: 0;
-    margin-top: 50px;
+    bottom: 0;
     width: 100%;
-    text-align: center;
-    padding: 10px 0;
+    margin-top: 50px;
+    background-color: #222222;
+    color: white;
 }
 
 .messageBoard {
-    margin-top: 10px;
     height: 65vh;
-    margin-right: 0;
-    width: 98%;
     overflow-y: scroll;
+    margin-top: 10px;
 }
 
 .messageForm {
     padding-top: 20px;
-    width: 98%;
+}
+
+.message {
+    padding: 25px;
+}
+
+ @media screen and (max-width: 768px) {
+    .row-offcanvas {
+        position: relative;
+        -webkit-transition: all 0.25s ease-out;
+        -moz-transition: all 0.25s ease-out;
+        transition: all 0.25s ease-out;
+        width: calc(100% + 220px);
+    }
+    .row-offcanvas-left {
+        left: -220px;
+    }
+    .row-offcanvas-left.active {
+        left: 0;
+    }
+    .sidebar-offcanvas {
+        position: absolute;
+        top: 0;
+    }
 }
 
 .nogroupselected {
     height: 300px;
     margin-top: 20px;
-    width: 98%;
 }
 
 #content {

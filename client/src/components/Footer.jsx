@@ -10,7 +10,11 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div className="footer">
-        Andela 2017
+        <div className="container">
+          <center>
+           Andela 2017
+          </center>
+        </div>
       </div>
     );
   }

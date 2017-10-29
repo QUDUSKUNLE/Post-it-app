@@ -80,7 +80,7 @@ describe('UserBroadCastBoard Component', () => {
   });
   it('should render correctly', () => {
     expect(component).toMatchSnapshot();
-    expect(component.find('div')).toHaveLength(10);
+    expect(component.find('div')).toHaveLength(6);
     expect(component.find('span')).toHaveLength(3);
     expect(component.find('form')).toHaveLength(0);
     expect(component.find('button')).toHaveLength(1);

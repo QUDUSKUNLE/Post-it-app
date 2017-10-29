@@ -11,6 +11,6 @@ describe('PostIt-app', () => {
     const component = shallow(<Footer/>);
     expect(component).toMatchSnapshot();
     expect(component.find('.footer')).toHaveLength(1);
-    expect(component.find('div')).toHaveLength(1);
+    expect(component.find('div')).toHaveLength(2);
   });
 });
