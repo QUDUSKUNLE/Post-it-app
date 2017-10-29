@@ -4,7 +4,7 @@ import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper';
 
 /**
- * @export
+ * @description This class create and read functions for User
  * @class User
  */
 export default class User {
@@ -14,7 +14,7 @@ export default class User {
    * route POST: api/v1/signup
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains signed up user response
+   * @return {Object} json response contains signed up user response
    */
   static signUp(req, res) {
     const { email, password,
@@ -77,7 +77,7 @@ export default class User {
    * route POST: api/v1/signin
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains signed user details
+   * @return {Object} json response contains signed user details
    */
   static signIn(req, res) {
     const { email, password } = req.body;
@@ -115,7 +115,7 @@ export default class User {
    * route POST: api/v1/googleSignIn
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains signed user details via Google
+   * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
     const token = req.body.credential.idToken;
@@ -135,7 +135,7 @@ export default class User {
                 }),
                 user
               ])
-               .then(response => {
+               .then((response) => {
                  const responseValue = response[1];
                  res.status(200).send({
                    message: 'user`s signed in succesfully', responseValue });
@@ -159,13 +159,13 @@ export default class User {
    * route POST: api/v1/passwordReset
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains reset password details
+   * @return {Object} json response contains reset password details
    */
   static passwordReset(req, res) {
     const { email } = req.body;
     firebase.auth().sendPasswordResetEmail(email).then(() =>
       res.status(200).send({ message: 'Password reset email sent successfully!'
-      })).catch(error => {
+      })).catch((error) => {
         if (error.code === 'auth/user-not-found') {
           res.status(404).send({ error });
         } else if (error.code === 'auth/invalid-email') {
@@ -179,7 +179,7 @@ export default class User {
    * route POST: api/v1/signout
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains sign out response
+   * @return {Object} json response contains sign out response
    */
   static signOut(req, res) {
     firebase.auth().signOut()

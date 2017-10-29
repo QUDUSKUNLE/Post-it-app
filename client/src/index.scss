@@ -3,40 +3,42 @@
 */
 
 body {
-  background-color: white;
+    background-color: white;
 }
 
 .navbar {
-  margin-bottom: 0;
-  border-radius: 0;
+    margin-bottom: 0;
+    border-radius: 0;
 }
+
 
 /*
   home
 */
 
 .home {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .mainbody {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 .term {
-  margin-top: 5px;
+    margin-top: 5px;
 }
+
 
 /*
   SignIn Component
 */
 
 .or {
-  font-size: 15px
+    font-size: 15px
 }
 
 .signin {
-  margin-top: 70px;
+    margin-top: 70px;
 }
 
 #signinForm {
@@ -102,6 +104,7 @@ body {
     margin: 20px 25px;
 }
 
+
 /*
   ResetPassword Component
 */
@@ -144,17 +147,18 @@ body {
     overflow-x: hidden;
     border-right: 1px solid gray;
 }
- .row-offcanvas .sidebar-offcanvas .groups {
+
+.row-offcanvas .sidebar-offcanvas .groups {
     height: 50vh
 }
 
 .members {
-  color: white;
+    color: white;
 }
 
 .row-offcanvas .sidebar-offcanvas .members ul li {
-  padding: 10px;
-  }
+    padding: 10px;
+}
 
 #main {
     height: 95%;
@@ -185,7 +189,7 @@ body {
     padding: 25px;
 }
 
- @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .row-offcanvas {
         position: relative;
         -webkit-transition: all 0.25s ease-out;
@@ -217,4 +221,16 @@ body {
     top: 45%;
     transform: translateY(-50%);
     font-size: 25px;
+}
+
+.addMember {
+    display: none;
+    color: #000;
+    background: #999;
+    position: absolute;
+    top: 10px;
+}
+
+#addMember:hover .addMember {
+    display: block;
 }

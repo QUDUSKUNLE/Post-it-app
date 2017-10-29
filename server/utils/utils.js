@@ -15,7 +15,7 @@ const sendGroupSMS = (phoneNumbers) => {
     }
   ));
   return Promise.all(
-    payloads.map((payload) => jusibe.sendSMS(payload)));
+    payloads.map(payload => jusibe.sendSMS(payload)));
 };
 
 export default sendGroupSMS;

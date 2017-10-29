@@ -2,13 +2,15 @@ import values from 'object.values';
 import dbConfig from '../config/dbConfig';
 
 /**
- * @export
+ * @description This is a class Helper that contains functions that helps to
+ * validate password, valiadte phoneNumber, help to destructure Object of arrays
+ * from firebase Database
  * @class Helper
  */
 export default class Helper {
 
   /**
-   * @static
+   * @description This function validates user`s password
    * @param {string} password - validate password
    * @returns {boolean} true
    * @memberof Helper
@@ -21,7 +23,7 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function validates user`s phoneNumber
    * @param {string} phoneNumber - validate phoneNumber
    * @returns {boolean} true
    * @memberof Helper
@@ -34,7 +36,8 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function helps pull out user`s email and phoneNumber
+   * from Firebase database
    * @param {string} userId - get user phoneNumber and Email
    * @returns {Object} - object that contains user email and phoneNumber
    * @memberof Helper
@@ -52,7 +55,8 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function helps to get phoneNumbers and Emails of Users in
+   * in a group
    * @param {string} groupId - Group Identity
    * @returns {Object} - Array of phoneNumbers in the group
    * @memberof Helper
@@ -70,13 +74,13 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function helps to get name of a group
    * @param {string} groupId - get the name of a group
    * @returns {Object} - Array of object
    * @memberof Helper
    */
   static getGroupName(groupId) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       dbConfig.database().ref('Groups').child(groupId).on('value',
       snapshot => {
         if (snapshot.val()) {
@@ -88,7 +92,7 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function helps to pull out Emails of Users in a group
    * @param {Object} groupEmails - Array of Object of groupMembers Email
    * @returns {string} - String of group Emails
    * @memberof Helper
@@ -104,7 +108,7 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function help to extract phoneNumber of users in a group
    * @param {Object} groupPhoneNumbers - Array of PhoneNumbers
    * @returns {Object} -
    * @memberof Helper
@@ -120,7 +124,7 @@ export default class Helper {
   }
 
   /**
-   * @static
+   * @description This function help to get Array of object of all Users
    * @param {Object} user - Object of array of all registered Users
    * @returns {Object} - Array of all registered users
    * @memberof Helper

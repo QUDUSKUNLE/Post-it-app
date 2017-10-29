@@ -9,7 +9,7 @@ import sendGroupSMS from '../utils/utils.js';
 dotenv.config();
 
 /**
- * @export
+ * @description This class create and read functions for Messages
  * @class Messages
  */
 export default class Messages {
@@ -18,7 +18,7 @@ export default class Messages {
    * route POST: api/v1/sendMessage/:groupId
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains message sent details
+   * @return {Object} json response contains message sent details
    */
   static sendMessageToGroup(req, res) {
     const message = req.body.message;
@@ -115,7 +115,7 @@ export default class Messages {
    * route GET: api/v1/getMessage/:groupId
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains all message in a group
+   * @return {Object} json response contains all message in a group
    */
   static getMessage(req, res) {
     const groupId = req.params.groupId;
@@ -128,11 +128,7 @@ export default class Messages {
           dbConfig.database().ref('Messages').child(groupId)
             .once('value', snapshot => snapshot.val())
         ])
-        .then(response => {
-          if (response) {
-            res.status(200).send({ response });
-          }
-        })
+        .then(response => res.status(200).send({ response }))
         .catch(error => res.status(403).send({ error }));
     }
   }

@@ -12,7 +12,7 @@ import {
  * @param {any} groupId -
  * @returns {function} dispatch - dispatch to MemberStore
  */
-export const getGroupMember = (groupId) => axios.get(
+export const getGroupMember = groupId => axios.get(
   `/api/v1/getMembers/${groupId}`)
     .then(({ data }) => {
       if (data.response[0] === null) {
@@ -39,14 +39,14 @@ export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
     });
-  }).catch((response) => toastr.error(response.data.message));
+  }).catch(response => toastr.error(response.data.message));
 
 /**
  * @description - addMember to a group
  * @param {object} memberDetails - { memberDetails }
  * @returns {object} object
  */
-export const addMember = (memberDetails) =>
+export const addMember = memberDetails =>
   axios.post(`/api/v1/addmember/${memberDetails.groupId}`, memberDetails)
     .then(({ data }) => {
       AppDispatcher.dispatch({
@@ -54,5 +54,5 @@ export const addMember = (memberDetails) =>
         member: data.response
       });
     })
-    .catch((error) => toastr.error(error.response.data.error));
+    .catch(error => toastr.error(error.response.data.error));
 

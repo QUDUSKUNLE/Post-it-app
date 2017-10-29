@@ -4,7 +4,6 @@ import { getGroupMembers } from '../helper/helper';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  ADD_MEMBER_ERROR,
   GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**

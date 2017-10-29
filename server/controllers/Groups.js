@@ -4,7 +4,7 @@ import dbConfig from '../config/dbConfig';
 import Helper from '../helper/Helper.js';
 
 /**
- * @export
+ * @description This class create and read functions for group
  * @class Groups
  */
 export default class Groups {
@@ -14,7 +14,7 @@ export default class Groups {
    * route POST: api/v1/createGroup
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response containing creating new group
+   * @return {Object} json response containing creating new group
    */
   static createGroup(req, res) {
     const groupName = req.body.group;
@@ -59,7 +59,7 @@ export default class Groups {
    *
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response containing all registerdUsers
+   * @return {Object} json response containing all registerdUsers
    */
   static getAllRegisteredUsers(req, res) {
     const userId = req.user.uid;
@@ -83,7 +83,7 @@ export default class Groups {
    * route GET: api/v1/getMembers/:groupId
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains all members of a group
+   * @return {Object} json response contains all members of a group
    */
   static getMembersOfGroup(req, res) {
     const groupId = req.params.groupId;
@@ -111,7 +111,7 @@ export default class Groups {
    * route GET: api/v1/getgroups/:userId
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains all user group
+   * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
     const userId = req.params.userId;
@@ -133,7 +133,7 @@ export default class Groups {
    * route POST: api/v1/addMembers/:groupId
    * @param {Object} req request object
    * @param {Object} res response object
-   * @return {Object} response contains add member response
+   * @return {Object} json response contains add member response
    */
   static addMemberToGroup(req, res) {
     const memberId = req.body.memberId;

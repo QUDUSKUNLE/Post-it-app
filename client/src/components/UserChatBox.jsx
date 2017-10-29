@@ -92,14 +92,17 @@ export default class UserChatBox extends React.Component {
         <p className="visible-xs">
           <button
             type="button"
-            className="btn btn-default btn-xs" 
+            className="btn btn-default btn-xs"
             data-toggle="offcanvas">
             <i className="glyphicon glyphicon-chevron-left"></i>
           </button>
         </p>
         <h6>Group | {this.props.defaultGroup}
-          <Link to="/member">
-            <span className="glyphicon glyphicon-plus pull-right">
+          <Link to="/member" className="anchor">
+            <span
+              id="addMember" className="glyphicon glyphicon-plus pull-right">
+              <p className="addMember">add Member to {this.props.defaultGroup}
+              </p>
             </span>
           </Link>
         </h6>

@@ -12,7 +12,7 @@ import {
  * @param {string} userId -
  * @returns {function} dispatch - dispatch to GroupStore
  */
-export const getUserGroups = (userId) => axios.get(
+export const getUserGroups = userId => axios.get(
   `/api/v1/getgroups/${userId}`)
   .then(({ data }) => {
     if (data.response[0] === null) {
@@ -33,7 +33,7 @@ export const getUserGroups = (userId) => axios.get(
  * @param {object} groupName - { andela }
  * @returns {object} object
  */
-export const createGroup = (groupName) => axios.post(
+export const createGroup = groupName => axios.post(
   '/api/v1/createGroup', groupName)
     .then(({ data }) =>
       AppDispatcher.dispatch({

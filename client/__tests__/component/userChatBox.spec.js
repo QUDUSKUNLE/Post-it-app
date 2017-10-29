@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-// import { expect } from 'expect';
+import { expect } from 'expect';
 import UserChatBox from '../../src/components/UserChatBox.jsx';
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import $ from "jquery";
+import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
@@ -175,7 +175,7 @@ export default class UserBroadCastBoard extends React.Component {
       return selectedGroup;
     };
     $(document).ready(() => {
-      $('[data-toggle=offcanvas]').click(function() {
+      $('[data-toggle=offcanvas]').click(() => {
         $('.row-offcanvas').toggleClass('active');
       });
     });

@@ -1,6 +1,7 @@
+import toastr from 'toastr';
 /**
  * @function helpgGetRegisteredUsers
- * @param {any} res -
+ * @param {Object} res -Object of Arrays from Firebase Database
  * @returns {Object} allUsers
  */
 export const helpGetRegisteredUsers = (res) => {
@@ -18,12 +19,13 @@ export const helpGetRegisteredUsers = (res) => {
 
 /**
  * @function helpGetGroupMessages
- * @param {any} data -
- * @returns {any} GroupMessage
+ * @param {object} data - Array of Object from Firebase Database
+ * @returns {object} object Array of Object of GroupMessage
  */
 export const helpGetGroupMessages = (data) => {
   let GroupMessage;
   if (data[0] === null) {
+    toastr.warning('No Message Found');
     GroupMessage = [];
   } else {
     GroupMessage = Object.values(data[0]);
@@ -34,8 +36,8 @@ export const helpGetGroupMessages = (data) => {
 
 /**
  * @function helpGetGroups
- * @param {any} data -
- * @returns {any} group
+ * @param {object} data -
+ * @returns {object} Array of object of user`s groups
  */
 export const helpGetGroups = (data) => {
   const groupNames = Object.keys(data[0]);
@@ -51,8 +53,8 @@ export const helpGetGroups = (data) => {
 
 /**
  * @function helpGetGroupMembers
- * @param {any} data -
- * @returns {any} groupMembers
+ * @param {object} data -
+ * @returns {object} array of object of members of a group
  */
 export const getGroupMembers = (data) => {
   const memberId = Object.keys(data[0]);
