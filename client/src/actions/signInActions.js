@@ -1,11 +1,9 @@
 import axios from 'axios';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import toastr from 'toastr';
 import {
   SIGN_IN_SUCCESS,
-  SIGN_IN_ERROR,
-  GOOGLE_SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_ERROR
-} from '../constants/ActionConstants.js';
+  GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * @description - Sign in Action
@@ -18,14 +16,7 @@ export const signinAction = (user) => axios.post('/api/v1/signin', user)
       type: SIGN_IN_SUCCESS,
       response: data
     });
-  }).catch((error) => {
-    if (error.response) {
-      AppDispatcher.dispatch({
-        type: SIGN_IN_ERROR,
-        error: error.response
-      });
-    }
-  });
+  }).catch((error) => toastr.error(error.response.data.error.message));
 
 /**
  * @description - Sign in with Google
@@ -38,12 +29,5 @@ export const signInWithGoogle = (user) => axios.post('/api/v1/google', user)
       type: GOOGLE_SIGN_IN_SUCCESS,
       response: data
     });
-  }).catch((error) => {
-    if (error.response) {
-      AppDispatcher.dispatch({
-        type: GOOGLE_SIGN_IN_ERROR,
-        error: error.response
-      });
-    }
-  });
+  }).catch((error) => toastr.error(error.response));
 

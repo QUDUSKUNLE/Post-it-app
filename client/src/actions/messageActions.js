@@ -1,8 +1,9 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
-  GET_GROUP_MESSAGE, GET_GROUP_MESSAGE_ERROR,
-  SEND_GROUP_MESSAGE, SEND_GROUP_MESSAGE_ERROR
+  GET_GROUP_MESSAGE,
+  SEND_GROUP_MESSAGE
 } from '../constants/ActionConstants.js';
 import {
     helpGetGroupMessages
@@ -21,14 +22,7 @@ export const getGroupMessage = (groupId) => axios.get(
       type: GET_GROUP_MESSAGE,
       message: messageResponse
     });
-  }).catch((error) => {
-    if (error.response) {
-      AppDispatcher.dispatch({
-        type: GET_GROUP_MESSAGE_ERROR,
-        error: error.response.data.message
-      });
-    }
-  });
+  }).catch((error) => toastr.error(error.response.data.message));
 
 /**
 * @description - Send message to a group
@@ -42,12 +36,5 @@ export const sendGroupMessage = (messageDetails) => {
         type: SEND_GROUP_MESSAGE,
         message: data.response[1]
       });
-    }).catch((error) => {
-      if (error.response) {
-        AppDispatcher.dispatch({
-          type: SEND_GROUP_MESSAGE_ERROR,
-          error: error.response.data.message
-        });
-      }
-    });
+    }).catch((error) => toastr.error(error.response.data.message));
 };

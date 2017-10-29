@@ -1,9 +1,11 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { helpGetRegisteredUsers } from '../helper/helper.js';
 import {
-  ALL_USERS, ADD_MEMBER_ERROR,
-  ADD_MEMBER, GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
+  ALL_USERS,
+  ADD_MEMBER,
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**
  * @description - Get members of a group
@@ -37,12 +39,7 @@ export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
     });
-  }, ({ response }) => {
-    AppDispatcher.dispatch({
-      type: ALL_USERS,
-      error: response.data.message
-    });
-  });
+  }).catch((response) => toastr.error(response.data.message));
 
 /**
  * @description - addMember to a group
@@ -57,10 +54,5 @@ export const addMember = (memberDetails) =>
         member: data.response
       });
     })
-    .catch(({ error }) => {
-      AppDispatcher.dispatch({
-        type: ADD_MEMBER_ERROR,
-        error: error.response.data.error
-      });
-    });
+    .catch((error) => toastr.error(error.response.data.error));
 

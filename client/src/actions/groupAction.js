@@ -1,8 +1,11 @@
 import axios from 'axios';
+import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { helpGetGroups } from '../helper/helper.js';
 
-import { GET_USER_GROUPS, CREATE_GROUP, CREATE_GROUP_ERROR
+import {
+  GET_USER_GROUPS,
+  CREATE_GROUP,
 } from '../constants/ActionConstants.js';
 
 
@@ -39,12 +42,5 @@ export const createGroup = (groupName) => axios.post(
         type: CREATE_GROUP,
         message: data.message
       }))
-    .catch(error => {
-      if (error.response) {
-        AppDispatcher.dispatch({
-          type: CREATE_GROUP_ERROR,
-          error: error.response.data.error
-        });
-      }
-    });
+    .catch(error => toastr.error(error.response.data.error));
 
