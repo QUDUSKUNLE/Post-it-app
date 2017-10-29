@@ -8,7 +8,6 @@ import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import { getGroupMember, getAllUsers, addMember }
   from '../../src/actions/memberActions';
 
-
 describe('MemberAction', () => {
   let mockAxios;
   let dispatchSpy;
@@ -43,7 +42,6 @@ describe('MemberAction', () => {
     });
   });
 });
-
 
 describe('MemberAction', () => {
   let mockAxios;
@@ -107,7 +105,8 @@ describe('AddMemberAction', () => {
         });
         expect(mockAxios.calledOnce).toBe(false);
         expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_MEMBERS_OF_GROUP');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_MEMBERS' +
+          '_OF_GROUP');
       });
     });
   });
