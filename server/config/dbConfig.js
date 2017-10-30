@@ -5,7 +5,7 @@ let checkProcess = '';
 
 if (env === 'test') {
   checkProcess = 'TEST';
-} else {
+} else if (env === 'production') {
   checkProcess = '';
 }
 dotenv.config();
