@@ -174,10 +174,8 @@ export default class UserBroadCastBoard extends React.Component {
       }
       return selectedGroup;
     };
-    $(document).ready(() => {
-      $('[data-toggle=offcanvas]').click(() => {
-        $('.row-offcanvas').toggleClass('active');
-      });
+    $('[data-toggle=offcanvas]').click(() => {
+      $('.row-offcanvas').toggleClass('active');
     });
     return (
       <div>

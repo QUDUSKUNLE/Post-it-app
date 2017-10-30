@@ -77,6 +77,10 @@
 ## Author
 + MIT © [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
 
+
+## Contribution
+If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```
+
  # MIT License
  
  Copyright © 2017

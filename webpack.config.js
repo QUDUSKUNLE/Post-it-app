@@ -57,8 +57,8 @@ const config = {
         projectId: JSON.stringify(process.env.projectId),
         storageBucket: JSON.stringify(process.env.storageBucket),
         messagingSenderId: JSON.stringify(process.env.messagingSenderId)
-    },
-  })
+      }
+    })
   ],
   module: {
     loaders: [

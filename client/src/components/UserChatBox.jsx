@@ -1,5 +1,6 @@
 import React from 'react';
 import toastr from 'toastr';
+import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { sendGroupMessage } from '../actions/messageActions';
@@ -90,6 +91,7 @@ export default class UserChatBox extends React.Component {
     );
     return (
     <div id="main">
+      <ReactTooltip place="bottom"/>
       <div className="col-md-10 col-md-offset-1">
         <p className="visible-xs">
           <button
@@ -101,10 +103,9 @@ export default class UserChatBox extends React.Component {
         </p>
         <h6>Group | {this.props.defaultGroup}
           <Link to="/member">
-            <span className="glyphicon glyphicon-plus pull-right popup">
-              <span className="popuptext" id="myPopup">
-                Add Member to {this.props.defaultGroup}
-              </span>
+            <span
+              data-tip={`Add Member to ${this.props.defaultGroup}`}
+              className="glyphicon glyphicon-plus pull-right">
             </span>
           </Link>
         </h6>
