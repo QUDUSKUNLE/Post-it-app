@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import values from 'object.values';
 import dbConfig from '../config/dbConfig';
-import Helper from '../helper/Helper.js';
+import Helper from '../helper/helper.js';
 import sendGroupSMS from '../utils/utils.js';
 
 dotenv.config();
