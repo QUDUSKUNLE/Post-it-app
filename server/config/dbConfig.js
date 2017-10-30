@@ -5,6 +5,8 @@ let checkProcess = '';
 
 if (env === 'test') {
   checkProcess = 'TEST';
+} else {
+  checkProcess = '';
 }
 dotenv.config();
 

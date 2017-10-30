@@ -129,7 +129,7 @@ export default class UserAddMember extends React.Component {
       browserHistory.push('/');
       localStorage.clear();
       location.reload();
-    }).catch((error) => toastr.error(error.response.data));
+    }).catch(error => toastr.error(error.response.data));
   }
   /**
    * @description - render method, React lifecycle method
