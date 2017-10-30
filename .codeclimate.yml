@@ -11,3 +11,7 @@ exclude_paths:
 - "server/__test__"
 - "coverage"
 - "node_modules"
+ratings:
+  paths:
+  - "**.js"
+
