@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
 import dbConfig from '../config/dbConfig';
-import Helper from '../helper/Helper';
+import Helper from '../helper/Helper.js';
 
 /**
  * @description This class create and read functions for User
@@ -31,8 +31,8 @@ export default class UserController {
       });
     } else if (username.length < 2) {
       res.status(403).send({ error: { code: 'Username required at' +
-      ' least 2 characters' }
-    });
+        ' least 2 characters' }
+      });
     } else if (password !== confirmPassword) {
       res.status(403).send({ error: { code:
         'Password does not match' }
@@ -57,9 +57,10 @@ export default class UserController {
         })
         .then(response => res.status(200).send({
           message: 'Registration successful and ' +
-          'verification email sent to your email', response })
+          'verification email sent to your email',
+          response })
         ))
-      .catch(error => {
+      .catch((error) => {
         if (error.code === 'auth/invalid-email') {
           res.status(400).send({ error });
         } else if (error.code === 'auth/email-already-in-use') {
@@ -98,7 +99,7 @@ export default class UserController {
         ]))
       .then(response => res.status(200).send({
         message: 'User Signed in successfully', response }))
-      .catch(error => {
+      .catch((error) => {
         if (error.code === 'auth/invalid-email') {
           res.status(400).send({ error });
         } else if (error.code === 'auth/wrong-password') {
@@ -123,7 +124,7 @@ export default class UserController {
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
         dbConfig.database().ref('users').child(user.uid)
-          .once('value', snapshot => {
+          .once('value', (snapshot) => {
             if (!snapshot.exists()) {
               Promise.all(
                 [dbConfig.database().ref(`users/${user.uid}`).push({
@@ -133,17 +134,16 @@ export default class UserController {
                   time: moment().format('llll'),
                   userId: user.uid
                 }),
-                user
-              ])
-               .then((response) => {
-                 const responseValue = response[1];
-                 res.status(200).send({
-                   message: 'user`s signed in succesfully', responseValue });
-               });
+                  user
+                ])
+                .then((response) => {
+                  const responseValue = response[1];
+                  res.status(200).send({
+                    message: 'user`s signed in succesfully', responseValue });
+                });
             } else {
               res.status(200).send({
-                message: 'user`s signed in succesfully',
-                user });
+                message: 'user`s signed in succesfully', user });
             }
           });
       })

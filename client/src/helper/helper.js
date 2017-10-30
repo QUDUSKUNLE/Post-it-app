@@ -12,7 +12,7 @@ export const helpGetRegisteredUsers = (res) => {
   while (index < users.length) {
     registeredUser = Object.values(users[index]);
     allUsers.push({ [registeredUser[0].userId]: registeredUser[0].userName });
-    index++;
+    index += 1;
   }
   return allUsers;
 };
@@ -46,7 +46,7 @@ export const helpGetGroups = (data) => {
   const groups = [];
   while (index < groupNames.length) {
     groups.push({ [groupNames[index]]: groupKeys[index] });
-    index++;
+    index += 1;
   }
   return groups;
 };
@@ -63,7 +63,7 @@ export const getGroupMembers = (data) => {
   const groupMembers = [];
   while (index < memberId.length) {
     groupMembers.push({ [memberId[index]]: memberName[index] });
-    index++;
+    index += 1;
   }
   return groupMembers;
 };

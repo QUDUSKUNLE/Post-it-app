@@ -9,7 +9,7 @@ import Footer from './Footer';
 import NoGroupSelected from './NoGroupSelected';
 import { getUserGroups } from '../actions/groupAction';
 import { getGroupMessage } from '../actions/messageActions';
-import { signoutAction } from '../actions/signOutActions';
+import signoutAction from '../actions/signOutActions';
 import { getGroupMember } from '../actions/memberActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';

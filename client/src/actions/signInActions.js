@@ -1,6 +1,6 @@
 import axios from 'axios';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import toastr from 'toastr';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
   SIGN_IN_SUCCESS,
   GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';

@@ -1,7 +1,7 @@
 import Jusibe from 'jusibe';
 import dotenv from 'dotenv';
-dotenv.config();
 
+dotenv.config();
 const key = process.env.PUBLIC_KEY;
 const token = process.env.ACCESS_TOKEN;
 const jusibe = new Jusibe(key, token);

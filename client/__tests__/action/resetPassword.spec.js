@@ -3,7 +3,7 @@ import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock.js';
-import { resetPassword } from '../../src/actions/resetPasswordActions';
+import resetPassword from '../../src/actions/resetPasswordActions';
 
 describe('resetPasswordAction', () => {
   let mockAxios;

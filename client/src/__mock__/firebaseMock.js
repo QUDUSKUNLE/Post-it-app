@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import dotenv from 'dotenv';
+
 const env = process.env.NODE_ENV;
 let checkProcess = '';
 

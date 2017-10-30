@@ -43,9 +43,9 @@ export default class Helper {
    * @memberof Helper
    */
   static getUserEmailAndPhoneNumber(userId) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       dbConfig.database().ref('users').child(userId).on('value',
-        snapshot => {
+        (snapshot) => {
           if (snapshot.val()) {
             resolve(snapshot.val());
           }
@@ -62,9 +62,9 @@ export default class Helper {
    * @memberof Helper
    */
   static getGroupPhoneNumbers(groupId) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       dbConfig.database().ref('GroupPhoneAndEmail').child(groupId).on('value',
-      snapshot => {
+      (snapshot) => {
         if (snapshot.val()) {
           resolve(values(snapshot.val()));
         }
@@ -82,7 +82,7 @@ export default class Helper {
   static getGroupName(groupId) {
     return new Promise((resolve) => {
       dbConfig.database().ref('Groups').child(groupId).on('value',
-      snapshot => {
+      (snapshot) => {
         if (snapshot.val()) {
           resolve(values(snapshot.val()));
         }
@@ -102,7 +102,7 @@ export default class Helper {
     const emails = [];
     while (emailIndex < groupEmails.length) {
       emails.push(groupEmails[emailIndex].email);
-      emailIndex++;
+      emailIndex += 1;
     }
     return emails.join();
   }
@@ -118,7 +118,7 @@ export default class Helper {
     const phoneNumbers = [];
     while (phoneNumberIndex < groupPhoneNumbers.length) {
       phoneNumbers.push(groupPhoneNumbers[phoneNumberIndex].phoneNumber);
-      phoneNumberIndex++;
+      phoneNumberIndex += 1;
     }
     return phoneNumbers;
   }
@@ -137,7 +137,7 @@ export default class Helper {
     while (index < users.length) {
       registeredUser = Object.values(users[index]);
       allUsers.push({ [registeredUser[0].userId]: registeredUser[0].userName });
-      index++;
+      index += 1;
     }
     return allUsers;
   }

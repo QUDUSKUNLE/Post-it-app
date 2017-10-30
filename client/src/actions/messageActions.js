@@ -27,7 +27,7 @@ export const getGroupMessage = groupId => axios.get(
 * @param {Object} messageDetails - { groupId, message, priority }
 * @returns {function} dispatch - dispatch to MessageStore
 */
-export const sendGroupMessage = messageDetails => {
+export const sendGroupMessage = (messageDetails) => {
   axios.post(`/api/v1/sendMessage/${messageDetails.groupId}`,
     messageDetails).then(({ data }) => {
       AppDispatcher.dispatch({

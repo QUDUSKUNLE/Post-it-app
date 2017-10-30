@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import SignUpStore from '../stores/SignUpStore';
-import { signupAction } from '../actions/signUpActions';
+import signupAction from '../actions/signUpActions';
 
 /**
  * @description - renders SignUp Component

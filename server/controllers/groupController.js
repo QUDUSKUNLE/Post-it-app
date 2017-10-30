@@ -28,9 +28,9 @@ export default class GroupController {
               group: group,
               time: moment().format('llll')
             })
-            .then(response => {
+            .then((response) => {
               Helper.getUserEmailAndPhoneNumber(userId)
-                .then(userEmailAndPhone => {
+                .then((userEmailAndPhone) => {
                   const userDetails = (values(userEmailAndPhone))[0];
                   dbConfig.database().ref(`UserGroups/${userId}`).child(group)
                     .set(response.key);
@@ -91,7 +91,7 @@ export default class GroupController {
     if (userId === undefined) {
       res.status(401).send({ error: 'User is not signed in' });
     } else {
-      Helper.getGroupName(groupId).then(groupName => {
+      Helper.getGroupName(groupId).then((groupName) => {
         if (groupName) {
           return Promise.all([
             dbConfig.database().ref('GroupMember').child(groupId).once('value',

@@ -8,9 +8,11 @@ import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
  * @param {object} email - { johndoe@example.cpm }
  * @returns {object} object
  */
-export const resetPassword = email => axios.post('/api/v1/passwordReset',
+const resetPassword = email => axios.post('/api/v1/passwordReset',
   email)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: PASSWORD_RESET_SUCCESS, response: data });
   }).catch(error => toastr.error(error.response.data.error.message));
+
+export default resetPassword;

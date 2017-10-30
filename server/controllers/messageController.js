@@ -35,11 +35,11 @@ export default class MessageController {
       res.status(403).send({ error: 'No message sent' });
     } else {
       Helper.getUserEmailAndPhoneNumber(userId)
-        .then(senderDetails => {
+        .then((senderDetails) => {
           const sender = values(senderDetails)[0];
           const userName = sender.userName;
           const email = sender.userEmail;
-          Helper.getGroupPhoneNumbers(groupId).then(groupPhoneAndEmail => {
+          Helper.getGroupPhoneNumbers(groupId).then((groupPhoneAndEmail) => {
             if (priority === 'urgent') {
               const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
               const transporter = nodemailer.createTransport({
@@ -68,7 +68,7 @@ export default class MessageController {
               const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
               const groupPhoneNumbers = Helper.getPhoneNumbers(
                 groupPhoneAndEmail);
-              sendGroupSMS(groupPhoneNumbers).then(res => {
+              sendGroupSMS(groupPhoneNumbers).then((res) => {
                 if (res) {
                   const transporter = nodemailer.createTransport({
                     service: 'gmail',

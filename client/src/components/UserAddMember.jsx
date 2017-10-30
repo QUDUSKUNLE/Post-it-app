@@ -4,7 +4,7 @@ import toastr from 'toastr';
 import { Link, Redirect, browserHistory } from 'react-router-dom';
 import Footer from './Footer';
 import { addMember, getAllUsers } from '../actions/memberActions';
-import { signoutAction } from '../actions/signOutActions';
+import signoutAction from '../actions/signOutActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
 import { getUserGroups } from '../actions/groupAction';
