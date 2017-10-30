@@ -57,7 +57,7 @@ Router.post('/api/v1/addmember/:groupId', GroupController.addMemberToGroup);
 Router.get('/api/v1/getMembers/:groupId', GroupController.getMembersOfGroup);
 
 /**
- * Router for signed user to send message to a group
+ * Router for a signed user to send message to a group
  */
 Router.post('/api/v1/sendMessage/:groupId',
   MessageController.sendMessageToGroup);
