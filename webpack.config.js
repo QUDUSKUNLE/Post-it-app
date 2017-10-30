@@ -47,7 +47,18 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        apiKey: JSON.stringify(process.env.apiKey),
+        authDomain: JSON.stringify(process.env.authDomain),
+        databaseURL: JSON.stringify(process.env.databaseURL),
+        projectId: JSON.stringify(process.env.projectId),
+        storageBucket: JSON.stringify(process.env.storageBucket),
+        messagingSenderId: JSON.stringify(process.env.messagingSenderId)
+    },
+  })
   ],
   module: {
     loaders: [
