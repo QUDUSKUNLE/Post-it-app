@@ -209,11 +209,6 @@ export default class UserBroadCastBoard extends React.Component {
             </div>
           </div>
         </div>
-        {/* <div className="row">
-          <div className="col-md-12">
-            <p className="pull-left">{`Hi, ${this.state.userName}.`}</p>
-          </div>
-        </div> */}
         <div className="row-offcanvas row-offcanvas-left">
           <UserGroups
             grouplist={groupList}

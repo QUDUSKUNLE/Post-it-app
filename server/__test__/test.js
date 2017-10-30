@@ -541,16 +541,6 @@ describe('PostIt', () => {
       });
   });
 });
-//   it('User`s should be able to get all GeneralMessage', (done) => {
-//     chai.request(server)
-//       .post('/api/v1/getGeneralMessage')
-//       .end((err, res) => {
-//         assert.equal(200, res.statusCode);
-//         expect(res.body).to.have.property('response');
-//         res.body.should.be.a('object');
-//         done();
-//       });
-//   });
 
 // Sign Out Route
 describe('PostIt', () => {
@@ -565,17 +555,6 @@ describe('PostIt', () => {
         done();
       });
   });
-
-//   it('User`s should be able to get all GeneralMessage', (done) => {
-//     chai.request(server)
-//       .post('/api/v1/getGeneralMessage')
-//       .end((err, res) => {
-//         assert.equal(400, res.statusCode);
-//         assert.equal('PERMISSION_DENIED', res.body.error.code);
-//         expect(res.body).to.have.property('error');
-//         done();
-//       });
-//   });
 
   it('should not allow a user`s that is not sign in to create groups',
     (done) => {
