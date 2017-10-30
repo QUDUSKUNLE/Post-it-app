@@ -3,6 +3,7 @@ const path = require('path');
 require('dotenv').config();
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const config = {
   entry: [
     'webpack-hot-middleware/client',

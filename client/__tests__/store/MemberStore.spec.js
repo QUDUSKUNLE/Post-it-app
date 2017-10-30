@@ -1,8 +1,8 @@
+import expect from 'expect';
+import 'babel-polyfill';
 import MemberStore from '../../src/stores/MemberStore';
 import groupMemberResponse from '../../src/__mock__/groupMemberResponse.json';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import expect from 'expect';
-import 'babel-polyfill';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/MemberStore.js');
