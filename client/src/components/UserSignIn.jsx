@@ -1,9 +1,9 @@
 import React from 'react';
 import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
+import toastr from 'toastr';
 import { Link } from 'react-router-dom';
 import firebase from '../vendors/index.js';
-import toastr from 'toastr';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
 import { signinAction, signInWithGoogle } from '../actions/signInActions';
@@ -119,10 +119,10 @@ export default class UserSignIn extends React.Component {
       userId: googleResponse.user.uid
     });
     toastr.success(googleResponse.message);
-    this.props.history.push('/broadcastboard');
     localStorage.setItem('userName', JSON.stringify(this.state.userName));
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
     localStorage.setItem('Id', JSON.stringify(this.state.userId));
+    this.props.history.push('/broadcastboard');
   }
 
   /**

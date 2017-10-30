@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import Footer from './Footer';
 import { Link, Redirect } from 'react-router-dom';
+import Footer from './Footer';
 import { createGroup } from '../actions/groupAction';
 import { signoutAction } from '../actions/signOutActions';
 import GroupStore from '../stores/GroupStore';

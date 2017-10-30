@@ -1,4 +1,5 @@
 import React from 'react';
+import toastr from 'toastr';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { sendGroupMessage } from '../actions/messageActions';
@@ -52,6 +53,7 @@ export default class UserChatBox extends React.Component {
       priority: this.state.priority,
     };
     sendGroupMessage(newMessage);
+    toastr.success('Message sent');
     this.setState({ message: '' });
   }
 
@@ -98,11 +100,11 @@ export default class UserChatBox extends React.Component {
           </button>
         </p>
         <h6>Group | {this.props.defaultGroup}
-          <Link to="/member" className="anchor">
-            <span
-              id="addMember" className="glyphicon glyphicon-plus pull-right">
-              <p className="addMember">add Member to {this.props.defaultGroup}
-              </p>
+          <Link to="/member">
+            <span className="glyphicon glyphicon-plus pull-right popup">
+              <span className="popuptext" id="myPopup">
+                Add Member to {this.props.defaultGroup}
+              </span>
             </span>
           </Link>
         </h6>

@@ -5,9 +5,9 @@ import Helper from '../helper/Helper.js';
 
 /**
  * @description This class create and read functions for group
- * @class Groups
+ * @class GroupController
  */
-export default class Groups {
+export default class GroupController {
 
   /**
    * @description This method create new group for user

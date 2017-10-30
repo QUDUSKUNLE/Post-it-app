@@ -10,9 +10,9 @@ dotenv.config();
 
 /**
  * @description This class create and read functions for Messages
- * @class Messages
+ * @class MessageController
  */
-export default class Messages {
+export default class MessageController {
   /**
    * @description This method send message to group
    * route POST: api/v1/sendMessage/:groupId

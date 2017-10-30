@@ -5,9 +5,9 @@ import Helper from '../helper/Helper';
 
 /**
  * @description This class create and read functions for User
- * @class User
+ * @class UserController
  */
-export default class User {
+export default class UserController {
 
   /**
    * @description This method signup a new user
