@@ -3,11 +3,11 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import Router from './routes/index.js';
 import webpack from 'webpack';
 import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import Router from './routes/index.js';
 import config from '../webpack.config.js';
 import dbConfig from './config/dbConfig.js';
 
