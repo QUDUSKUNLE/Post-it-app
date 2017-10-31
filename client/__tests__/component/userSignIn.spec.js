@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { shallow, mount } from 'enzyme';
 import GoogleButton from 'react-google-button';
-import firebase from '../../src/vendors/index';
-import axiosMock from '../../src/__mock__/axiosMock.jsx';
+import { shallow, mount } from 'enzyme';
 import expect from 'expect';
 import sinon from 'sinon';
+import firebase from '../../src/vendors/index';
+import axiosMock from '../../src/__mock__/axiosMock.jsx';
 import Footer from '../../src/components/Footer';
-import { signinAction } from '../../src/actions/signInActions';
+import { signInAction } from '../../src/actions/SignInActions';
 import UserSignIn from '../../src/components/UserSignIn';
 import SignInStore from '../../src/stores/SignInStore';
 import signInResponse from '../../src/__mock__/signInResponse.json';
@@ -42,7 +42,7 @@ describe('UserSignIn component', () => {
   let wrapper;
   // let axiosMock;
   const onSubmitSpy = sinon.spy();
-  const signinActionSpy = signinAction;
+  const signInActionSpy = signInAction;
   beforeEach(() => {
     // axiosMock = mockApiCall;
     // jest.mock('axios', () => axiosMock);
@@ -157,10 +157,10 @@ describe('UserSignIn component', () => {
 
 
 describe('<UserSignIn />', () => {
-  const signinActionSpy = signinAction;
+  const signInActionSpy = signInAction;
   it('simulates click events', () => {
     const onSubmitSpy = sinon.spy();
-    const component = shallow(<UserSignIn onSubmitSpy={signinActionSpy}/>);
+    const component = shallow(<UserSignIn onSubmitSpy={signInActionSpy}/>);
     component.find('#signinformbtn').simulate('click');
     expect(component.props.onSubmitSpy).toHaveBeenCalled();
   });

@@ -4,8 +4,8 @@ import { expect } from 'expect';
 import UserChatBox from '../../src/components/UserChatBox.jsx';
 
 
-describe('PostIt-app', () => {
-  it('expects App component to be defined', () => {
+describe('UserChatBox', () => {
+  it('component expects to be defined', () => {
     expect(UserChatBox).toBeDefined();
   });
 });

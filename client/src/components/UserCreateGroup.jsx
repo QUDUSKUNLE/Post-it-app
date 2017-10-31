@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Footer from './Footer';
-import { createGroup } from '../actions/groupAction';
-import signoutAction from '../actions/signOutActions';
+import { createGroup } from '../actions/GroupActions';
+import signOutAction from '../actions/SignOutActions';
 import GroupStore from '../stores/GroupStore';
 
 
@@ -83,7 +83,7 @@ export default class UserCreateGroup extends React.Component {
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
-    signoutAction().then((response) => {
+    signOutAction().then((response) => {
       toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');

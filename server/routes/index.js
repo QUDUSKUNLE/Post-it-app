@@ -1,7 +1,7 @@
 import express from 'express';
-import UserController from '../controllers/userController';
-import GroupController from '../controllers/groupController';
-import MessageController from '../controllers/messageController';
+import UserController from '../controller/UserController';
+import GroupController from '../controller/GroupController';
+import MessageController from '../controller/MessageController';
 
 /**
  * Creates express Router

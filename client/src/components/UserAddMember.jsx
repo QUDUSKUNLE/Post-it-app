@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect, browserHistory } from 'react-router-dom';
 import Footer from './Footer';
-import { addMember, getAllUsers } from '../actions/memberActions';
-import signoutAction from '../actions/signOutActions';
+import { addMember, getAllUsers } from '../actions/MemberActions';
+import signOutAction from '../actions/SignOutActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/groupAction';
+import { getUserGroups } from '../actions/GroupActions';
 
 /**
  * @export
@@ -124,7 +124,7 @@ export default class UserAddMember extends React.Component {
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
-    signoutAction().then((response) => {
+    signOutAction().then((response) => {
       toastr.success(response.data.message);
       browserHistory.push('/');
       localStorage.clear();

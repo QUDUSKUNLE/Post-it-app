@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import firebase from '../vendors/index.js';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
-import { signinAction, signInWithGoogle } from '../actions/signInActions';
+import { signInAction, signInWithGoogle } from '../actions/SignInActions';
 
 /**
  * @description - renders UserSignIn Component
@@ -26,7 +26,8 @@ export default class UserSignIn extends React.Component {
       userId: '',
       email: '',
       password: '',
-      loggedIn: false
+      loggedIn: false,
+      isLoading: false
     };
 
     /**
@@ -68,7 +69,7 @@ export default class UserSignIn extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const user = { email: this.state.email, password: this.state.password };
-    signinAction(user);
+    signInAction(user);
   }
 
   /**
@@ -102,6 +103,9 @@ export default class UserSignIn extends React.Component {
     firebase.auth().signInWithPopup(provider)
       .then((result) => {
         signInWithGoogle(result);
+        this.setState({
+          isLoading: true
+        });
       }).catch(error => {
         toastr.error(error.message);
       });
@@ -131,6 +135,12 @@ export default class UserSignIn extends React.Component {
    * @SignIn
    */
   render() {
+    const isLoading = () => {
+      const loading = (
+        this.state.isLoading ? <div id="loader">Loading...</div> : <span></span>
+      );
+      return loading;
+    };
     return (
       <div>
         <nav className="navbar navbar-inverse navabar-fixed-top"
@@ -155,6 +165,7 @@ export default class UserSignIn extends React.Component {
           </div>
         </nav>
         <div className="container signin">
+          {isLoading()}
           <div className="row">
             <div className="col-md-6 col-md-offset-3">
               <div className="row">

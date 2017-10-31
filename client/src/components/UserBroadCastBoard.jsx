@@ -7,10 +7,10 @@ import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
 import Footer from './Footer';
 import NoGroupSelected from './NoGroupSelected';
-import { getUserGroups } from '../actions/groupAction';
-import { getGroupMessage } from '../actions/messageActions';
-import signoutAction from '../actions/signOutActions';
-import { getGroupMember } from '../actions/memberActions';
+import { getUserGroups } from '../actions/GroupActions';
+import { getGroupMessage } from '../actions/MessageActions'
+import signOutAction from '../actions/SignOutActions';
+import { getGroupMember } from '../actions/MemberActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
 import MessageStore from '../stores/MessageStore';
@@ -127,7 +127,7 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   handleSignOutAction() {
-    signoutAction().then((response) => {
+    signOutAction().then((response) => {
       toastr.success(response.data.message);
       this.props.history.push('/');
       localStorage.clear();

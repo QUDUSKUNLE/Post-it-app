@@ -82,6 +82,7 @@ ShallowWrapper {
     <div
       className="container signin"
     >
+      <span />
       <div
         className="row"
       >
@@ -278,6 +279,7 @@ ShallowWrapper {
       <div
         className="container signin"
       >
+        <span />
         <div
           className="row"
         >
@@ -407,7 +409,7 @@ ShallowWrapper {
       "_compositeType": 0,
       "_context": Object {},
       "_currentElement": <UserSignIn />,
-      "_debugID": 883,
+      "_debugID": 892,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignIn {
@@ -422,6 +424,7 @@ ShallowWrapper {
         "refs": Object {},
         "state": Object {
           "email": "",
+          "isLoading": false,
           "loggedIn": false,
           "password": "",
           "userId": "",
@@ -519,6 +522,7 @@ ShallowWrapper {
           <div
             className="container signin"
           >
+            <span />
             <div
               className="row"
             >
@@ -640,7 +644,7 @@ ShallowWrapper {
           </div>
           <Footer />
         </div>,
-        "_debugID": 884,
+        "_debugID": 893,
         "_renderedOutput": <div>
           <nav
             className="navbar navbar-inverse navabar-fixed-top"
@@ -715,6 +719,7 @@ ShallowWrapper {
           <div
             className="container signin"
           >
+            <span />
             <div
               className="row"
             >

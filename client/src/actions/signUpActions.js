@@ -9,7 +9,7 @@ import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
      password, confirmPassword, phoneNumber, username }
  * @returns {function} Object -
  */
-const signupAction = user => axios.post('/api/v1/signup', user)
+const signUpAction = user => axios.post('/api/v1/signup', user)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: SIGN_UP_SUCCESS,
@@ -28,4 +28,4 @@ const signupAction = user => axios.post('/api/v1/signup', user)
     }
   });
 
-export default signupAction;
+export default signUpAction;

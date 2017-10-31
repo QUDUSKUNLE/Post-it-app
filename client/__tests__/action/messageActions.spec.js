@@ -7,7 +7,7 @@ import '../../src/__mock__/firebaseMock.js';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 import sendMessageResponse from '../../src/__mock__/sendMessageResponse.json';
 import { getGroupMessage, sendGroupMessage }
-  from '../../src/actions/messageActions';
+  from '../../src/actions/MessageActions';
 
 describe('MessageActions', () => {
   let mockAxios;

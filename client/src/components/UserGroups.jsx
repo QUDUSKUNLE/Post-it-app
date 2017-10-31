@@ -30,7 +30,7 @@ export default class UserGroups extends React.Component {
               data-toggle="dropdown">Group Members
               <span className="caret"></span>
             </button>
-            <ul className="dropdown-menu">
+            <ul className="dropdown-menu scrollable-menu">
               {members}
             </ul>
           </div>

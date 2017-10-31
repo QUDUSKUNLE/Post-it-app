@@ -10,7 +10,7 @@ import {
  * @param {any} user - { email, password }
  * @returns {Object} Object
  */
-export const signinAction = user => axios.post('/api/v1/signin', user)
+export const signInAction = user => axios.post('/api/v1/signin', user)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,

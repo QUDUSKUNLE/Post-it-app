@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import SignUpStore from '../stores/SignUpStore';
-import signupAction from '../actions/signUpActions';
+import signUpAction from '../actions/SignUpActions';
 
 /**
  * @description - renders SignUp Component
@@ -73,7 +73,7 @@ export default class UserSignUp extends React.Component {
       confirmPassword: this.state.confirmPassword,
       username: this.state.username
     };
-    signupAction(user);
+    signUpAction(user);
   }
 
   /**
