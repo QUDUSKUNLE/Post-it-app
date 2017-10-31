@@ -137,7 +137,7 @@ export default class UserSignIn extends React.Component {
   render() {
     const isLoading = () => {
       const loading = (
-        this.state.isLoading ? <div id="loader">Loading...</div> : <span></span>
+        this.state.isLoading ? <div id="loader"></div> : <span></span>
       );
       return loading;
     };
