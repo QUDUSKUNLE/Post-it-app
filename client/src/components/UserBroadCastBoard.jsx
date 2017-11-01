@@ -70,9 +70,6 @@ export default class UserBroadCastBoard extends React.Component {
     MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleGetGroupMember);
     MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
     MessageStore.on('GET_GROUP_MESSAGE', this.handleGetGroupMessage);
-    $('#offcanvas').click(() => {
-      $('.row-offcanvas').toggleClass('active');
-    });
   }
 
   /**
@@ -168,6 +165,9 @@ export default class UserBroadCastBoard extends React.Component {
       }
       return selectedGroup;
     };
+    $('[data-toggle=offcanvas]').click(() => {
+      $('.row-offcanvas').toggleClass('active');
+    });
     return (
       <div>
         <div className="navbar navbar-inverse navabar-fixed-top">
