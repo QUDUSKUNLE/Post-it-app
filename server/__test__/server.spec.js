@@ -151,7 +151,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('sign up routeshould throw error for invalid email', (done) => {
+  it('sign up route should throw error for invalid email', (done) => {
     const newUser = {
       email: 'kunle@',
       password: 'kawthar@',
@@ -385,7 +385,7 @@ describe('PostIt', () => {
         });
     });
 
-  it('create group rout should allow registered user`s to create groups',
+  it('create group route should allow registered user`s to create groups',
     (done) => {
       const group = { group: faker.name.findName() };
       chai.request(server)
