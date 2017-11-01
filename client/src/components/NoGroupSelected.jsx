@@ -14,7 +14,7 @@ export default class NoGroupSelected extends React.Component {
         <p className="visible-xs">
           <button
             type="button"
-            className="btn btn-default btn-xs" 
+            className="btn btn-default btn-xs"
             data-toggle="offcanvas">
             <i className="glyphicon glyphicon-chevron-left"></i>
           </button>

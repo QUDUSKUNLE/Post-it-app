@@ -8,9 +8,10 @@ import {
   GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**
- * @description - Get members of a group
- * @param {any} groupId -
- * @returns {function} dispatch - dispatch to MemberStore
+ * @description - An action that makes API call to server
+ *  to get members of a group
+ * @param {any} groupId - Is the group identity
+ * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const getGroupMember = groupId => axios.get(
   `/api/v1/getMembers/${groupId}`)
@@ -29,9 +30,10 @@ export const getGroupMember = groupId => axios.get(
     });
 
 /**
- * @description - Get all registered Users
- * @param {any} null -
- * @returns {function} dispatch - dispatch to MemberStore
+ * @description - An action that makes API call to server
+ *  to get all registered users
+ * @param {*} void - No paramater
+ * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
   .then(({ data }) => {
@@ -42,9 +44,10 @@ export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
   }).catch(response => toastr.error(response.data.message));
 
 /**
- * @description - addMember to a group
- * @param {object} memberDetails - { memberDetails }
- * @returns {object} object
+ * @description - An action that makes API call to server
+ *  to add member to a groups
+ * @param {object} memberDetails - This contains details of a member
+ * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const addMember = memberDetails =>
   axios.post(`/api/v1/addmember/${memberDetails.groupId}`, memberDetails)

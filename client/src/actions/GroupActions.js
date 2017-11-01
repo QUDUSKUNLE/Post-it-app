@@ -8,9 +8,11 @@ import {
 } from '../constants/ActionConstants.js';
 
 /**
- * @description - Get groups of a user
- * @param {string} userId -
- * @returns {function} dispatch - dispatch to GroupStore
+ * @description - An action that makes API call to server
+ *  to get groups of a user
+ * @function getUserGroups
+ * @param {string} userId - The User identity
+ * @returns {function} dispatch - Server Response is dispatch to GroupStore
  */
 export const getUserGroups = userId => axios.get(
   `/api/v1/getgroups/${userId}`)
@@ -29,9 +31,11 @@ export const getUserGroups = userId => axios.get(
   });
 
 /**
+ * @description - An action that makes API call to server
+ *  to create group for a user
  * @function createGroup
- * @param {object} groupName - { andela }
- * @returns {object} object
+ * @param {object} groupName - The name of group to be created
+ * @returns {function} dispatch - Server response is dispatch to GroupStore
  */
 export const createGroup = groupName => axios.post(
   '/api/v1/createGroup', groupName)

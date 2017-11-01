@@ -6,9 +6,10 @@ import {
   GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
- * @description - Sign in Action
- * @param {any} user - { email, password }
- * @returns {Object} Object
+ * @description - An action that makes API call to server
+ *  to sign in a user
+ * @param {object} user - This contains email and password of a user
+ * @returns {function} dispatch - server response is dispatch to SignInStore
  */
 export const signInAction = user => axios.post('/api/v1/signin', user)
   .then(({ data }) => {
@@ -19,9 +20,10 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
   }).catch(error => toastr.error(error.response.data.error.message));
 
 /**
- * @description - Sign in with Google
- * @param {any} user - { email, password }
- * @returns {any} Object
+ * @description - An action that makes API call to server
+ *  to sign in user`s via Google
+ * @param {object} user - This contains user credential provided by Google
+ * @returns {object} dispatch - server response is dispatch to SignInStore
  */
 export const signInWithGoogle = user => axios.post('/api/v1/google', user)
   .then(({ data }) => {

@@ -1,7 +1,8 @@
 import axios from 'axios';
 /**
- * @description - Sign out Action
- * @returns {Object} Object -
+ * @description - An action that makes API call to server
+ *  to sign out users
+ * @returns {Object} Object - server response
  */
 const signOutAction = () => axios.post('/api/v1/signout');
 

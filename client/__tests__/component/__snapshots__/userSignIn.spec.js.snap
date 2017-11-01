@@ -408,8 +408,15 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <UserSignIn />,
-      "_debugID": 892,
+      "_currentElement": <UserSignIn
+        email=""
+        isLoading={false}
+        loggeddIn={false}
+        password=""
+        userId=""
+        userName=""
+      />,
+      "_debugID": 102,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignIn {
@@ -420,7 +427,14 @@ ShallowWrapper {
         "handleSignInAction": [Function],
         "onChange": [Function],
         "onSubmit": [Function],
-        "props": Object {},
+        "props": Object {
+          "email": "",
+          "isLoading": false,
+          "loggeddIn": false,
+          "password": "",
+          "userId": "",
+          "userName": "",
+        },
         "refs": Object {},
         "state": Object {
           "email": "",
@@ -441,7 +455,7 @@ ShallowWrapper {
           "validateCallback": [Function],
         },
       },
-      "_mountOrder": 1,
+      "_mountOrder": 2,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
@@ -644,7 +658,7 @@ ShallowWrapper {
           </div>
           <Footer />
         </div>,
-        "_debugID": 893,
+        "_debugID": 103,
         "_renderedOutput": <div>
           <nav
             className="navbar navbar-inverse navabar-fixed-top"
@@ -852,6 +866,13 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <UserSignIn />,
+  "unrendered": <UserSignIn
+    email=""
+    isLoading={false}
+    loggeddIn={false}
+    password=""
+    userId=""
+    userName=""
+  />,
 }
 `;

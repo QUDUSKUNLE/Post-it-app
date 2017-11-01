@@ -4,7 +4,8 @@
     "plugins": [
         "react",
         "jsx-a11y",
-        "import"
+        "import",
+        "prefer-object-spread"
     ],
     "env": {
         "node": true,
@@ -42,6 +43,7 @@
         "jest": true
     },
     "rules": {
+        "prefer-object-spread/prefer-object-spread": 2,
         "import/no-unresolved": 0,
         "one-var": 0,
         "one-var-declaration-per-line": 0,

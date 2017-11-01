@@ -1,0 +1,718 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddMember component should render correctly 1`] = `
+ShallowWrapper {
+  "complexSelector": ComplexSelector {
+    "buildPredicate": [Function],
+    "childrenOfNode": [Function],
+    "findWhereUnwrapped": [Function],
+  },
+  "length": 1,
+  "node": <div>
+    <nav
+      className="navbar navbar-inverse navbar-fixed-top"
+      role="navigation"
+    >
+      <div
+        className="container-fluid"
+      >
+        <div
+          className="navbar-header"
+        >
+          <button
+            className="navbar-toggle"
+            data-target=".navbar-collapse"
+            data-toggle="collapse"
+            type="button"
+          >
+            <span
+              className="sr-only"
+            >
+              Toggle navigation
+            </span>
+            <span
+              className="icon-bar"
+            />
+            <span
+              className="icon-bar"
+            />
+            <span
+              className="icon-bar"
+            />
+            <span
+              className="icon-bar"
+            />
+          </button>
+          <Link
+            className="navbar-brand"
+            replace={false}
+            to="#"
+          >
+            PostIt
+            <small>
+              App
+            </small>
+          </Link>
+        </div>
+        <div
+          className="collapse navbar-collapse"
+        >
+          <ul
+            className="nav navbar-nav"
+          />
+          <ul
+            className="nav navbar-nav navbar-right"
+          >
+            <li>
+              <Link
+                replace={false}
+                to="/broadcastboard"
+              >
+                MessageBoard
+              </Link>
+            </li>
+            <li
+              className="active"
+            >
+              <Link
+                replace={false}
+                to="/member"
+              >
+                Add Member
+              </Link>
+            </li>
+            <li
+              onClick={[Function]}
+            >
+              <Link
+                replace={false}
+                to="/"
+              >
+                Sign Out
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div
+      className="container addmember"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-offset-3 col-md-6"
+        >
+          <div
+            className="row w3-card w3-white"
+          >
+            <form
+              className="addmemberform"
+              onSubmit={[Function]}
+            >
+              <div
+                className="form-group"
+              >
+                <label
+                  htmlFor="groupname"
+                >
+                  Group Name
+                </label>
+                <select
+                  className="form-control"
+                  name="group"
+                  onChange={[Function]}
+                >
+                  <option
+                    value=""
+                  >
+                    Select a group
+                  </option>
+                </select>
+              </div>
+              <div
+                className="form-group"
+              >
+                <label
+                  htmlFor="members"
+                >
+                  Member
+                </label>
+                <select
+                  className="form-control"
+                  name="member"
+                  onChange={[Function]}
+                >
+                  <option
+                    value=""
+                  >
+                    add member to group
+                  </option>
+                </select>
+              </div>
+              <button
+                className="signinformbtn"
+                type="submit"
+              >
+                Add Member
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <Footer />
+  </div>,
+  "nodes": Array [
+    <div>
+      <nav
+        className="navbar navbar-inverse navbar-fixed-top"
+        role="navigation"
+      >
+        <div
+          className="container-fluid"
+        >
+          <div
+            className="navbar-header"
+          >
+            <button
+              className="navbar-toggle"
+              data-target=".navbar-collapse"
+              data-toggle="collapse"
+              type="button"
+            >
+              <span
+                className="sr-only"
+              >
+                Toggle navigation
+              </span>
+              <span
+                className="icon-bar"
+              />
+              <span
+                className="icon-bar"
+              />
+              <span
+                className="icon-bar"
+              />
+              <span
+                className="icon-bar"
+              />
+            </button>
+            <Link
+              className="navbar-brand"
+              replace={false}
+              to="#"
+            >
+              PostIt
+              <small>
+                App
+              </small>
+            </Link>
+          </div>
+          <div
+            className="collapse navbar-collapse"
+          >
+            <ul
+              className="nav navbar-nav"
+            />
+            <ul
+              className="nav navbar-nav navbar-right"
+            >
+              <li>
+                <Link
+                  replace={false}
+                  to="/broadcastboard"
+                >
+                  MessageBoard
+                </Link>
+              </li>
+              <li
+                className="active"
+              >
+                <Link
+                  replace={false}
+                  to="/member"
+                >
+                  Add Member
+                </Link>
+              </li>
+              <li
+                onClick={[Function]}
+              >
+                <Link
+                  replace={false}
+                  to="/"
+                >
+                  Sign Out
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div
+        className="container addmember"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-offset-3 col-md-6"
+          >
+            <div
+              className="row w3-card w3-white"
+            >
+              <form
+                className="addmemberform"
+                onSubmit={[Function]}
+              >
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="groupname"
+                  >
+                    Group Name
+                  </label>
+                  <select
+                    className="form-control"
+                    name="group"
+                    onChange={[Function]}
+                  >
+                    <option
+                      value=""
+                    >
+                      Select a group
+                    </option>
+                  </select>
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="members"
+                  >
+                    Member
+                  </label>
+                  <select
+                    className="form-control"
+                    name="member"
+                    onChange={[Function]}
+                  >
+                    <option
+                      value=""
+                    >
+                      add member to group
+                    </option>
+                  </select>
+                </div>
+                <button
+                  className="signinformbtn"
+                  type="submit"
+                >
+                  Add Member
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>,
+  ],
+  "options": Object {},
+  "renderer": ReactShallowRenderer {
+    "_instance": ShallowComponentWrapper {
+      "_calledComponentWillUnmount": false,
+      "_compositeType": 0,
+      "_context": Object {},
+      "_currentElement": <UserAddMember
+        group={Object {}}
+        groups={Array []}
+        loggedIn={true}
+        member=""
+        registeredUsers={Array []}
+        userId="AZCVGFRTUINSMUY15156"
+      />,
+      "_debugID": 97,
+      "_hostContainerInfo": null,
+      "_hostParent": null,
+      "_instance": UserAddMember {
+        "_reactInternalInstance": [Circular],
+        "context": Object {},
+        "handleAddMemberToGroup": [Function],
+        "handleSignOutEvent": [Function],
+        "onChange": [Function],
+        "onSubmit": [Function],
+        "props": Object {
+          "group": Object {},
+          "groups": Array [],
+          "loggedIn": true,
+          "member": "",
+          "registeredUsers": Array [],
+          "userId": "AZCVGFRTUINSMUY15156",
+        },
+        "refs": Object {},
+        "state": Object {
+          "group": Object {},
+          "groups": Array [],
+          "loggedIn": true,
+          "member": "",
+          "registeredUsers": Array [],
+          "userId": "AZCVGFRTUINSMUY15156",
+        },
+        "updater": Object {
+          "enqueueCallback": [Function],
+          "enqueueCallbackInternal": [Function],
+          "enqueueElementInternal": [Function],
+          "enqueueForceUpdate": [Function],
+          "enqueueReplaceState": [Function],
+          "enqueueSetState": [Function],
+          "isMounted": [Function],
+          "validateCallback": [Function],
+        },
+        "userGroups": [Function],
+      },
+      "_mountOrder": 3,
+      "_pendingCallbacks": null,
+      "_pendingElement": null,
+      "_pendingForceUpdate": false,
+      "_pendingReplaceState": false,
+      "_pendingStateQueue": null,
+      "_renderedComponent": NoopInternalComponent {
+        "_currentElement": <div>
+          <nav
+            className="navbar navbar-inverse navbar-fixed-top"
+            role="navigation"
+          >
+            <div
+              className="container-fluid"
+            >
+              <div
+                className="navbar-header"
+              >
+                <button
+                  className="navbar-toggle"
+                  data-target=".navbar-collapse"
+                  data-toggle="collapse"
+                  type="button"
+                >
+                  <span
+                    className="sr-only"
+                  >
+                    Toggle navigation
+                  </span>
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                </button>
+                <Link
+                  className="navbar-brand"
+                  replace={false}
+                  to="#"
+                >
+                  PostIt
+                  <small>
+                    App
+                  </small>
+                </Link>
+              </div>
+              <div
+                className="collapse navbar-collapse"
+              >
+                <ul
+                  className="nav navbar-nav"
+                />
+                <ul
+                  className="nav navbar-nav navbar-right"
+                >
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/broadcastboard"
+                    >
+                      MessageBoard
+                    </Link>
+                  </li>
+                  <li
+                    className="active"
+                  >
+                    <Link
+                      replace={false}
+                      to="/member"
+                    >
+                      Add Member
+                    </Link>
+                  </li>
+                  <li
+                    onClick={[Function]}
+                  >
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div
+            className="container addmember"
+          >
+            <div
+              className="row"
+            >
+              <div
+                className="col-md-offset-3 col-md-6"
+              >
+                <div
+                  className="row w3-card w3-white"
+                >
+                  <form
+                    className="addmemberform"
+                    onSubmit={[Function]}
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="groupname"
+                      >
+                        Group Name
+                      </label>
+                      <select
+                        className="form-control"
+                        name="group"
+                        onChange={[Function]}
+                      >
+                        <option
+                          value=""
+                        >
+                          Select a group
+                        </option>
+                      </select>
+                    </div>
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="members"
+                      >
+                        Member
+                      </label>
+                      <select
+                        className="form-control"
+                        name="member"
+                        onChange={[Function]}
+                      >
+                        <option
+                          value=""
+                        >
+                          add member to group
+                        </option>
+                      </select>
+                    </div>
+                    <button
+                      className="signinformbtn"
+                      type="submit"
+                    >
+                      Add Member
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>,
+        "_debugID": 98,
+        "_renderedOutput": <div>
+          <nav
+            className="navbar navbar-inverse navbar-fixed-top"
+            role="navigation"
+          >
+            <div
+              className="container-fluid"
+            >
+              <div
+                className="navbar-header"
+              >
+                <button
+                  className="navbar-toggle"
+                  data-target=".navbar-collapse"
+                  data-toggle="collapse"
+                  type="button"
+                >
+                  <span
+                    className="sr-only"
+                  >
+                    Toggle navigation
+                  </span>
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                  <span
+                    className="icon-bar"
+                  />
+                </button>
+                <Link
+                  className="navbar-brand"
+                  replace={false}
+                  to="#"
+                >
+                  PostIt
+                  <small>
+                    App
+                  </small>
+                </Link>
+              </div>
+              <div
+                className="collapse navbar-collapse"
+              >
+                <ul
+                  className="nav navbar-nav"
+                />
+                <ul
+                  className="nav navbar-nav navbar-right"
+                >
+                  <li>
+                    <Link
+                      replace={false}
+                      to="/broadcastboard"
+                    >
+                      MessageBoard
+                    </Link>
+                  </li>
+                  <li
+                    className="active"
+                  >
+                    <Link
+                      replace={false}
+                      to="/member"
+                    >
+                      Add Member
+                    </Link>
+                  </li>
+                  <li
+                    onClick={[Function]}
+                  >
+                    <Link
+                      replace={false}
+                      to="/"
+                    >
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <div
+            className="container addmember"
+          >
+            <div
+              className="row"
+            >
+              <div
+                className="col-md-offset-3 col-md-6"
+              >
+                <div
+                  className="row w3-card w3-white"
+                >
+                  <form
+                    className="addmemberform"
+                    onSubmit={[Function]}
+                  >
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="groupname"
+                      >
+                        Group Name
+                      </label>
+                      <select
+                        className="form-control"
+                        name="group"
+                        onChange={[Function]}
+                      >
+                        <option
+                          value=""
+                        >
+                          Select a group
+                        </option>
+                      </select>
+                    </div>
+                    <div
+                      className="form-group"
+                    >
+                      <label
+                        htmlFor="members"
+                      >
+                        Member
+                      </label>
+                      <select
+                        className="form-control"
+                        name="member"
+                        onChange={[Function]}
+                      >
+                        <option
+                          value=""
+                        >
+                          add member to group
+                        </option>
+                      </select>
+                    </div>
+                    <button
+                      className="signinformbtn"
+                      type="submit"
+                    >
+                      Add Member
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </div>,
+      },
+      "_renderedNodeType": 0,
+      "_rootNodeID": 0,
+      "_topLevelWrapper": null,
+      "_updateBatchNumber": null,
+      "_warnedAboutRefsInRender": false,
+    },
+    "getRenderOutput": [Function],
+    "render": [Function],
+  },
+  "root": [Circular],
+  "unrendered": <UserAddMember
+    group={Object {}}
+    groups={Array []}
+    loggedIn={true}
+    member=""
+    registeredUsers={Array []}
+    userId="AZCVGFRTUINSMUY15156"
+  />,
+}
+`;

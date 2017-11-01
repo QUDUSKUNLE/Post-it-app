@@ -4,10 +4,11 @@ import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
- * @description - Sign Up Action
- * @param {object} user - { email,
+ * @description - An action that makes API call to server
+ *  to sign up a new user
+ * @param {object} user - This contain user`s details { email,
      password, confirmPassword, phoneNumber, username }
- * @returns {function} Object -
+ * @returns {function} dispatch - server response is dispatch to SignUpStore
  */
 const signUpAction = user => axios.post('/api/v1/signup', user)
   .then(({ data }) => {

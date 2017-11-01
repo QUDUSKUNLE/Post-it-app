@@ -68,8 +68,7 @@ export default class UserSignIn extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const user = { email: this.state.email, password: this.state.password };
-    signInAction(user);
+    signInAction({ ...this.state });
   }
 
   /**

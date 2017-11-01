@@ -199,7 +199,7 @@ ShallowWrapper {
         userId="AZCVGFRTUINSMUY15156"
         userName="Kunle"
       />,
-      "_debugID": 101,
+      "_debugID": 119,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserBroadCastBoard {
@@ -208,7 +208,6 @@ ShallowWrapper {
         "handleGetGroupMember": [Function],
         "handleGetGroupMessage": [Function],
         "handleGetUserGroups": [Function],
-        "handleOnChangeEvent": [Function],
         "handleSendGroupMessage": [Function],
         "handleSignOutAction": [Function],
         "props": Object {
@@ -338,7 +337,7 @@ ShallowWrapper {
           </div>
           <Footer />
         </div>,
-        "_debugID": 102,
+        "_debugID": 120,
         "_renderedOutput": <div>
           <div
             className="navbar navbar-inverse navabar-fixed-top"

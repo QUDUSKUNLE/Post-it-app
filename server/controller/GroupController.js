@@ -1,6 +1,6 @@
 import moment from 'moment';
 import values from 'object.values';
-import dbConfig from '../config/dbConfig';
+import dbConfig from '../config/index.js';
 import Helper from '../helper/helper.js';
 
 /**

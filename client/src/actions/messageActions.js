@@ -8,9 +8,10 @@ import {
 import { helpGetGroupMessages } from '../helper/helper.js';
 
 /**
- * @description - Get message of a group
- * @param {Object} groupId - { groupId }
- * @returns {function} dispatch - dispatch to MessageStore
+ * @description - An action that makes API call to server
+ *  to get messages of a group
+ * @param {Object} groupId - This represents the group Identity
+ * @returns {function} dispatch - server response is dispatch to MessageStore
  */
 export const getGroupMessage = groupId => axios.get(
   `/api/v1/getMessage/${groupId}`)
@@ -23,9 +24,10 @@ export const getGroupMessage = groupId => axios.get(
   }).catch(error => toastr.error(error.response.data.message));
 
 /**
-* @description - Send message to a group
-* @param {Object} messageDetails - { groupId, message, priority }
-* @returns {function} dispatch - dispatch to MessageStore
+* @description - An action that makes API call to server
+* to send message to a particular group
+* @param {Object} messageDetails - This contains message, groupId and priority
+* @returns {function} dispatch - Server ressponse is dispatch to MessageStore
 */
 export const sendGroupMessage = (messageDetails) => {
   axios.post(`/api/v1/sendMessage/${messageDetails.groupId}`,

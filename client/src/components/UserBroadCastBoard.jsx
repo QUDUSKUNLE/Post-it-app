@@ -8,7 +8,7 @@ import UserChatBox from './UserChatBox';
 import Footer from './Footer';
 import NoGroupSelected from './NoGroupSelected';
 import { getUserGroups } from '../actions/GroupActions';
-import { getGroupMessage } from '../actions/MessageActions'
+import { getGroupMessage } from '../actions/MessageActions';
 import signOutAction from '../actions/SignOutActions';
 import { getGroupMember } from '../actions/MemberActions';
 import MemberStore from '../stores/MemberStore';
@@ -44,7 +44,6 @@ export default class UserBroadCastBoard extends React.Component {
      * @description This binding is necessary to make `this` work
      * in the callback
      */
-    this.handleOnChangeEvent = this.handleOnChangeEvent.bind(this);
     this.handleSignOutAction = this.handleSignOutAction.bind(this);
     this.handleSendGroupMessage = this.handleSendGroupMessage.bind(this);
     this.handleGetGroupMessage = this.handleGetGroupMessage.bind(this);
@@ -71,6 +70,9 @@ export default class UserBroadCastBoard extends React.Component {
     MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleGetGroupMember);
     MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
     MessageStore.on('GET_GROUP_MESSAGE', this.handleGetGroupMessage);
+    $('#offcanvas').click(() => {
+      $('.row-offcanvas').toggleClass('active');
+    });
   }
 
   /**
@@ -117,14 +119,6 @@ export default class UserBroadCastBoard extends React.Component {
   handleGetUserGroups() {
     this.setState({ groups: GroupStore.allGroups() });
   }
-  /**
-   * onChange event.
-   * @param {object} event The first number.
-   * @returns {*} bind input values to name.
-   */
-  handleOnChangeEvent(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
 
   handleSignOutAction() {
     signOutAction().then((response) => {
@@ -132,7 +126,7 @@ export default class UserBroadCastBoard extends React.Component {
       this.props.history.push('/');
       localStorage.clear();
       location.reload();
-    }).catch((error) => toastr.error(error.response.data));
+    }).catch(error => toastr.error(error.response.data));
   }
 
   /**
@@ -174,9 +168,6 @@ export default class UserBroadCastBoard extends React.Component {
       }
       return selectedGroup;
     };
-    $('[data-toggle=offcanvas]').click(() => {
-      $('.row-offcanvas').toggleClass('active');
-    });
     return (
       <div>
         <div className="navbar navbar-inverse navabar-fixed-top">
@@ -207,7 +198,7 @@ export default class UserBroadCastBoard extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row-offcanvas row-offcanvas-left">
+        <div id="offcanvas" className="row-offcanvas row-offcanvas-left">
           <UserGroups
             grouplist={groupList}
             member={this.state.groupMember}/>

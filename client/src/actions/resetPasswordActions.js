@@ -4,9 +4,10 @@ import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
- * @description - Reset Password Action
- * @param {object} email - { johndoe@example.cpm }
- * @returns {object} object
+ * @description - An action that makes API call to server
+ *  to reset user`s password
+ * @param {string} email - This represents email of the user
+ * @returns {fucntion} dispatch - server response is dispatch to SignInStore
  */
 const resetPassword = email => axios.post('/api/v1/passwordReset',
   email)

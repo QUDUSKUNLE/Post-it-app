@@ -11,7 +11,7 @@ import UserAddMember from './components/UserAddMember';
 import NavBar from './components/NavBar';
 import UserResetPassword from './components/UserResetPassword';
 import NotFound from './components/NotFound';
-import './index.scss';
+import './index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>

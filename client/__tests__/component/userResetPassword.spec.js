@@ -1,5 +1,6 @@
 import React from 'react';
 import expect from 'expect';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -20,7 +21,7 @@ describe('UserResetPassword component', () => {
 
     wrapper = mount(<UserResetPassword {...props}/>,
       {
-        childContextTypes: { router: React.PropTypes.object },
+        childContextTypes: { router: PropTypes.object },
         context: {
           router:
           {

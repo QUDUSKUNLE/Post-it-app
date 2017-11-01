@@ -1,8 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { mount, shallow } from 'enzyme';
 import { Link } from 'react-router-dom';
 import expect from 'expect';
 import sinon from 'sinon';
+import 'babel-polyfill';
+import MessageStore from '../../src/stores/MessageStore';
+import MemberStore from '../../src/stores/MemberStore';
 import localStorageMock from '../../src/__mock__/localStorage';
 import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
 
@@ -10,6 +14,19 @@ window.localStorage = localStorageMock;
 describe('UserBroadCastBoard Component', () => {
   let wrapper;
   let component;
+  const mockOnMessage = sinon.stub(MessageStore,
+    'on').callsFake((message, cb) => cb());
+  const mockUnMountMessage = sinon.stub(MessageStore,
+    'removeListener').callsFake((message, cb) => cb());
+  const mockMessageResponse = sinon.stub(MessageStore,
+    'allGroupMessage').returns([{ name: 'Gold', message: 'Shola is here' }]);
+
+  const mockOnMembers = sinon.stub(MemberStore,
+    'on').callsFake((member, cb) => cb());
+  const mockUnMountMembers = sinon.stub(MemberStore,
+    'removeListener').callsFake((member, cb) => cb());
+  const mockMemberResponse = sinon.stub(MemberStore,
+    'allGroupMembers').returns([[{ a: 1 }, { b: 2 }, { c: 3 }]]);
 
   beforeEach(() => {
     window.localStorage.setItem('userIn', JSON.stringify(true));
@@ -29,7 +46,7 @@ describe('UserBroadCastBoard Component', () => {
     component = shallow(<UserBroadCastBoard {...props}/>);
     wrapper = mount(<UserBroadCastBoard {...props}/>,
       {
-        childContextTypes: { router: React.PropTypes.object },
+        childContextTypes: { router: PropTypes.object },
         context: {
           router:
           {
@@ -66,12 +83,9 @@ describe('UserBroadCastBoard Component', () => {
     expect(wrapper.state().defaultGroup).toEqual('');
     expect(wrapper.state().groups).toEqual([]);
     expect(wrapper.state().groupId).toEqual('');
-    expect(wrapper.state().groupMessage).toEqual([]);
-    expect(wrapper.state().groupMember).toEqual([]);
   });
 
   it('should contain defined methods', () => {
-    expect(wrapper.nodes[0].handleOnChangeEvent).toBeDefined();
     expect(wrapper.nodes[0].handleSignOutAction).toBeDefined();
     expect(wrapper.nodes[0].handleSendGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetGroupMessage).toBeDefined();
@@ -101,10 +115,24 @@ describe('UserBroadCastBoard Component', () => {
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
   });
-  it('should call componentWillUnmount component lifecycle', () => {
-    const spy = sinon.spy(UserBroadCastBoard.prototype, 'componentWillMount');
-    wrapper.instance().componentWillMount();
-    expect(spy.calledOnce).toBeTruthy();
+  it('expects componentDidMount to mount when event is fired', () => {
+    expect(mockOnMessage.displayName).toEqual('on');
+    expect(wrapper.state().loggedIn).toEqual(true);
+    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
+    expect(wrapper.state().groupMessage).toEqual(mockMessageResponse());
+  });
+  it('expects componentDidMount to mount', () => {
+    expect(mockOnMembers.displayName).toEqual('on');
+    expect(wrapper.state().groupMember).toEqual(mockMemberResponse()[0]);
+  });
+  it('expects componentWillUnmount to be unmounted', () => {
+    wrapper.unmount();
+    expect(mockUnMountMessage.callCount).toBe(4);
+    expect(mockUnMountMessage.displayName).toEqual('removeListener');
+  });
+  it('expects componentWillUnmount', () => {
+    wrapper.unmount();
+    expect(mockUnMountMembers.displayName).toEqual('removeListener');
   });
   // describe('Test for user log out', () => {
   //   it('should log a user out on click', () => {

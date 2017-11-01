@@ -1,8 +1,6 @@
 import React from 'react';
 import expect from 'expect';
 import { shallow } from 'enzyme';
-import { Link } from 'react-router';
-import renderer from 'react-test-renderer';
 import NavBar from '../../src/components/NavBar.jsx';
 
 describe('PostIt-app', () => {

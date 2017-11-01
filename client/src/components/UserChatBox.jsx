@@ -75,8 +75,8 @@ export default class UserChatBox extends React.Component {
       }
       return color;
     };
-    const chatMessage = this.props.allGeneralMessage.map((Index, i) =>
-      <div className="row" key={i}>
+    const chatMessage = this.props.allGeneralMessage.map((Index, key) =>
+      <div className="row" key={key}>
         <div className="col-md-12">
           <div className="well">
             <p>{Index.message}</p>

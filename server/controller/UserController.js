@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import dbConfig from '../config/dbConfig';
+import dbConfig from '../config/index.js';
 import Helper from '../helper/helper.js';
 
 /**

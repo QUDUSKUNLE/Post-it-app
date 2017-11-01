@@ -12,7 +12,7 @@ export default class Footer extends React.Component {
       <div className="footer">
         <div className="container">
           <center>
-           Andela 2017
+            Qudus Kunle
           </center>
         </div>
       </div>

@@ -274,8 +274,14 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <UserSignUp />,
-      "_debugID": 27,
+      "_currentElement": <UserSignUp
+        confirmPassword=""
+        email=""
+        password=""
+        phoneNumber=""
+        username=""
+      />,
+      "_debugID": 29,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserSignUp {
@@ -284,7 +290,13 @@ ShallowWrapper {
         "handleSignUpAction": [Function],
         "onChange": [Function],
         "onSubmit": [Function],
-        "props": Object {},
+        "props": Object {
+          "confirmPassword": "",
+          "email": "",
+          "password": "",
+          "phoneNumber": "",
+          "username": "",
+        },
         "refs": Object {},
         "state": Object {
           "confirmPassword": "",
@@ -304,7 +316,7 @@ ShallowWrapper {
           "validateCallback": [Function],
         },
       },
-      "_mountOrder": 1,
+      "_mountOrder": 2,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
@@ -440,7 +452,7 @@ ShallowWrapper {
             </div>
           </div>
         </div>,
-        "_debugID": 28,
+        "_debugID": 30,
         "_renderedOutput": <div>
           <div
             className="col-md-5 col-md-offset-1"
@@ -581,6 +593,12 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <UserSignUp />,
+  "unrendered": <UserSignUp
+    confirmPassword=""
+    email=""
+    password=""
+    phoneNumber=""
+    username=""
+  />,
 }
 `;
