@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import expect from 'expect';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
-import sinon from 'sinon';
-import signUpResponse from '../../src/__mock__/signUpResponse.json';
-import SignUpStore from '../../src/stores/SignUpStore';
+// import sinon from 'sinon';
+// import signUpResponse from '../../src/__mock__/signUpResponse.json';
+// import SignUpStore from '../../src/stores/SignUpStore';
 import UserSignUp from '../../src/components/UserSignUp';
 
 describe('PostIt-app', () => {
   let wrapper;
   let component;
-  const mockOnSignUp = sinon.stub(SignUpStore,
-    'on').callsFake((signUp, cb) => cb());
-  const mockUnMountSignUp = sinon.stub(SignUpStore,
-    'removeListener').callsFake((signUp, cb) => cb());
-  const mockSignUpResponse = sinon.stub(SignUpStore,
-    'signUpUser').returns('Adekunle');
+  // const mockOnSignUp = sinon.stub(SignUpStore,
+  //   'on').callsFake((signUp, cb) => cb());
+  // const mockUnMountSignUp = sinon.stub(SignUpStore,
+  //   'removeListener').callsFake((signUp, cb) => cb());
+  // const mockSignUpResponse = sinon.stub(SignUpStore,
+  //   'signUpUser').returns('Adekunle');
 
   beforeEach(() => {
     const props = {
@@ -70,7 +70,7 @@ describe('PostIt-app', () => {
   // });
   // it('should find a link', () => {
   //   console.log(component);
-  //   // expect(component.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
+  // expect(component.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
   //   // expect(component.find(Link).at(2).prop('to')).toEqual('/member');
   // });
   // it('should call onSubmit', () => {

@@ -41,7 +41,7 @@ describe('PostIt', () => {
           res.body.should.be.a('object');
           done();
         });
-  });
+    });
 
   // Sign Up Route
   it('sign up route should throw error for a non defined username', (done) => {
@@ -84,7 +84,7 @@ describe('PostIt', () => {
           res.body.should.be.a('object');
           done();
         });
-  });
+    });
 
   it('sign up route should throw error for password that does not match',
     (done) => {
@@ -105,7 +105,7 @@ describe('PostIt', () => {
           res.body.should.be.a('object');
           done();
         });
-  });
+    });
 
   it('sign up route should throw error for wrong phoneNumber', (done) => {
     const newUser = {
@@ -214,7 +214,7 @@ describe('PostIt', () => {
           expect(res.body).to.have.property('response');
           done();
         });
-  });
+    });
 
   it('sign in route should flag error if email is undefined', (done) => {
     const registeredUser = {
@@ -316,33 +316,33 @@ describe('PostIt', () => {
 describe('PostIt', () => {
   it('password reset route should allow registered user`s to ' +
     'reset their passwords', (done) => {
-      const userEmail = { email: 'sasil@gmail.com' };
-      chai.request(server)
-        .post('/api/v1/passwordreset')
-        .send(userEmail)
-        .end((err, res) => {
-          res.should.have.status(200);
-          assert.equal('Password reset email sent successfully!',
-            res.body.message);
-          res.body.should.be.a('object');
-          done();
-        });
+    const userEmail = { email: 'sasil@gmail.com' };
+    chai.request(server)
+      .post('/api/v1/passwordreset')
+      .send(userEmail)
+      .end((err, res) => {
+        res.should.have.status(200);
+        assert.equal('Password reset email sent successfully!',
+          res.body.message);
+        res.body.should.be.a('object');
+        done();
+      });
   });
 
   it('password reset route should flag error for a wrongly' +
     'formatted password', (done) => {
-      const userEmail = { email: 'user.gmail.com' };
-      chai.request(server)
-        .post('/api/v1/passwordreset')
-        .send(userEmail)
-        .end((err, res) => {
-          assert.equal(400, res.statusCode);
-          assert.equal('The email address is badly formatted.',
-            res.body.error.message);
-          expect(res.body).to.have.property('error');
-          res.body.should.be.a('object');
-          done();
-        });
+    const userEmail = { email: 'user.gmail.com' };
+    chai.request(server)
+      .post('/api/v1/passwordreset')
+      .send(userEmail)
+      .end((err, res) => {
+        assert.equal(400, res.statusCode);
+        assert.equal('The email address is badly formatted.',
+          res.body.error.message);
+        expect(res.body).to.have.property('error');
+        res.body.should.be.a('object');
+        done();
+      });
   });
 
   it('password reset route should throw an error if email is not found',
@@ -361,7 +361,7 @@ describe('PostIt', () => {
           res.body.should.be.a('object');
           done();
         });
-  });
+    });
 });
 
 // User's should be able to create grpoup
@@ -397,7 +397,7 @@ describe('PostIt', () => {
           expect(res.body).to.have.property('message');
           done();
         });
-  });
+    });
 
   it('create group route throw an error for an already created password',
     (done) => {
@@ -426,7 +426,7 @@ describe('PostIt', () => {
           assert.equal('object', typeof (res.body.response));
           done();
         });
-  });
+    });
 });
 
 describe('PostIt', () => {
@@ -452,7 +452,7 @@ describe('PostIt', () => {
           assert.equal('object', typeof (res.body.response));
           done();
         });
-  });
+    });
 });
 
 describe('PostIt', () => {
@@ -473,63 +473,63 @@ describe('PostIt', () => {
           assert.equal('object', typeof (res.body));
           done();
         });
-  });
+    });
 
   // { prority: normal}
   it('send Message route should allow signed in user`s to' +
     'send message to group', (done) => {
-      const message = 'Hello everyone';
-      const priority = 'normal';
-      const groupId = '-KwjAZcNyIdpMPk7GS0i';
-      chai.request(server)
-        .post(`/api/v1/sendMessage/${groupId}`)
-        .send({ message, priority })
-        .end((err, res) => {
-          res.should.have.status(200);
-          assert.equal(200, res.statusCode);
-          assert.equal('Broadcast Message sent successfully', res.body.message);
-          expect(res.body).to.have.property('message');
-          expect(res.body).to.have.property('response');
-          done();
-        });
-    });
+    const message = 'Hello everyone';
+    const priority = 'normal';
+    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    chai.request(server)
+      .post(`/api/v1/sendMessage/${groupId}`)
+      .send({ message, priority })
+      .end((err, res) => {
+        res.should.have.status(200);
+        assert.equal(200, res.statusCode);
+        assert.equal('Broadcast Message sent successfully', res.body.message);
+        expect(res.body).to.have.property('message');
+        expect(res.body).to.have.property('response');
+        done();
+      });
+  });
 
   // { prority: urgent}
   it('send Message route should allow signed in user`s to' +
     'send message to group', (done) => {
-      const message = 'Hello everyone';
-      const priority = 'urgent';
-      const groupId = '-KwjAZcNyIdpMPk7GS0i';
-      chai.request(server)
-        .post(`/api/v1/sendMessage/${groupId}`)
-        .send({ message, priority })
-        .end((err, res) => {
-          res.should.have.status(200);
-          assert.equal(200, res.statusCode);
-          assert.equal('Broadcast Message sent successfully', res.body.message);
-          expect(res.body).to.have.property('response');
-          expect(res.body).to.have.property('message');
-          done();
-        });
+    const message = 'Hello everyone';
+    const priority = 'urgent';
+    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    chai.request(server)
+      .post(`/api/v1/sendMessage/${groupId}`)
+      .send({ message, priority })
+      .end((err, res) => {
+        res.should.have.status(200);
+        assert.equal(200, res.statusCode);
+        assert.equal('Broadcast Message sent successfully', res.body.message);
+        expect(res.body).to.have.property('response');
+        expect(res.body).to.have.property('message');
+        done();
+      });
   });
 
   // { prority: critical}
   it('send Message route should allow signed in user`s to' +
     'send message to group', (done) => {
-      const message = 'Hello everyone';
-      const priority = 'critical';
-      const groupId = '-KwjAZcNyIdpMPk7GS0i';
-      chai.request(server)
-        .post(`/api/v1/sendMessage/${groupId}`)
-        .send({ message, priority })
-        .end((err, res) => {
-          res.should.have.status(200);
-          assert.equal(200, res.statusCode);
-          assert.equal('Broadcast Message sent successfully', res.body.message);
-          expect(res.body).to.have.property('message');
-          expect(res.body).to.have.property('response');
-          done();
-        });
+    const message = 'Hello everyone';
+    const priority = 'critical';
+    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    chai.request(server)
+      .post(`/api/v1/sendMessage/${groupId}`)
+      .send({ message, priority })
+      .end((err, res) => {
+        res.should.have.status(200);
+        assert.equal(200, res.statusCode);
+        assert.equal('Broadcast Message sent successfully', res.body.message);
+        expect(res.body).to.have.property('message');
+        expect(res.body).to.have.property('response');
+        done();
+      });
   });
 
   // Registered user should be able to send message to a group
@@ -568,18 +568,18 @@ describe('PostIt', () => {
 
   it('signout route should not allow a user`s that is not sign' +
     'in to create groups', (done) => {
-      const groupName = { group: 'andela' };
-      chai.request(server)
-        .post('/api/v1/createGroup')
-        .send(groupName)
-        .end((err, res) => {
-          assert.equal(401, res.statusCode);
-          expect(res.body).to.have.property('error');
-          assert.equal('User is not signed in', res.body.error);
-          res.body.should.be.a('object');
-          done();
-        });
-    });
+    const groupName = { group: 'andela' };
+    chai.request(server)
+      .post('/api/v1/createGroup')
+      .send(groupName)
+      .end((err, res) => {
+        assert.equal(401, res.statusCode);
+        expect(res.body).to.have.property('error');
+        assert.equal('User is not signed in', res.body.error);
+        res.body.should.be.a('object');
+        done();
+      });
+  });
 
   it('getAllRegisteredUsers should throw error while' +
     'trying to access it', (done) => {
@@ -596,16 +596,16 @@ describe('PostIt', () => {
 
   it('getMmebers route should throw error for a not signed user' +
     'while getting group members', (done) => {
-      const groupId = '-Kwj5WsTqFJaFddmh8uD';
-      chai.request(server)
-        .get(`/api/v1/getMembers/${groupId}`)
-        .end((err, res) => {
-          assert.equal(401, res.statusCode);
-          expect(res.body).to.have.property('error');
-          assert.equal('User is not signed in', res.body.error);
-          assert.equal('object', typeof (res.body));
-          done();
-        });
+    const groupId = '-Kwj5WsTqFJaFddmh8uD';
+    chai.request(server)
+      .get(`/api/v1/getMembers/${groupId}`)
+      .end((err, res) => {
+        assert.equal(401, res.statusCode);
+        expect(res.body).to.have.property('error');
+        assert.equal('User is not signed in', res.body.error);
+        assert.equal('object', typeof (res.body));
+        done();
+      });
   });
 
   it('getgroups route should not allow not signed in user`s get groups a user' +
@@ -624,23 +624,23 @@ describe('PostIt', () => {
 
   it('addmember route should throw error for a not signed in user`s' +
     'to add member', (done) => {
-      const memberDetails = {
-        memberId: 'YExyPJnTgLSRU8YkJ2pgGEzEiS93',
-        group: 'adolfo fisher',
-      };
-      const groupId = '-KwjAZcNyIdpMPk7GS0i';
-      chai.request(server)
-        .post(`/api/v1/addmember/${groupId}`)
-        .send(memberDetails)
-        .end((err, res) => {
-          assert.equal(400, res.statusCode);
-          expect(res.body).to.have.property('error');
-          assert.equal('User not signed in', res.body.error);
-          assert.equal('string', typeof (res.body.error));
-          done();
-        });
+    const memberDetails = {
+      memberId: 'YExyPJnTgLSRU8YkJ2pgGEzEiS93',
+      group: 'adolfo fisher',
+    };
+    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    chai.request(server)
+      .post(`/api/v1/addmember/${groupId}`)
+      .send(memberDetails)
+      .end((err, res) => {
+        assert.equal(400, res.statusCode);
+        expect(res.body).to.have.property('error');
+        assert.equal('User not signed in', res.body.error);
+        assert.equal('string', typeof (res.body.error));
+        done();
+      });
   });
-  
+
   it('sendMessage route not should allow not signed in user`s to' +
     'send message to group', (done) => {
     const message = 'Hello everyone';
