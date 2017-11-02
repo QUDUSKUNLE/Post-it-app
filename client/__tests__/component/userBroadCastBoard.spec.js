@@ -11,7 +11,7 @@ import localStorageMock from '../../src/__mock__/localStorage';
 import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
 
 window.localStorage = localStorageMock;
-describe('UserBroadCastBoard Component', () => {
+describe('<UserBroadCastBoard/>', () => {
   let wrapper;
   let component;
   const mockOnMessage = sinon.stub(MessageStore,
@@ -74,7 +74,7 @@ describe('UserBroadCastBoard Component', () => {
       }
     );
   });
-  it('expects BroadcastBoard component to be defined', () => {
+  it('component expected to be defined', () => {
     expect(UserBroadCastBoard).toBeDefined();
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.state().userName).toEqual('Kunle');
@@ -85,14 +85,14 @@ describe('UserBroadCastBoard Component', () => {
     expect(wrapper.state().groupId).toEqual('');
   });
 
-  it('should contain defined methods', () => {
+  it('component should contain defined methods', () => {
     expect(wrapper.nodes[0].handleSignOutAction).toBeDefined();
     expect(wrapper.nodes[0].handleSendGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetUserGroups).toBeDefined();
     expect(wrapper.nodes[0].handleGetGroupMember).toBeDefined();
   });
-  it('should render correctly', () => {
+  it('should render correctly without crashing', () => {
     expect(component).toMatchSnapshot();
     expect(component.find('div')).toHaveLength(6);
     expect(component.find('span')).toHaveLength(3);
@@ -101,16 +101,16 @@ describe('UserBroadCastBoard Component', () => {
     expect(component.find('Link')).toHaveLength(4);
     expect(component.find('Footer')).toHaveLength(1);
   });
-  it('should find a link', () => {
+  it('should find it Links to other paths', () => {
     expect(wrapper.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
     expect(wrapper.find(Link).at(2).prop('to')).toEqual('/group');
   });
-  it('should componentDidMount component lifecycle', () => {
+  it('component should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserBroadCastBoard.prototype, 'componentDidMount');
     wrapper.instance().componentDidMount();
     expect(spy.calledOnce).toBeTruthy();
   });
-  it('should call componentWillUnmount component lifecycle', () => {
+  it('component should call componentWillUnmount component lifecycle', () => {
     const spy = sinon.spy(UserBroadCastBoard.prototype, 'componentWillUnmount');
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
@@ -130,20 +130,8 @@ describe('UserBroadCastBoard Component', () => {
     expect(mockUnMountMessage.callCount).toBe(4);
     expect(mockUnMountMessage.displayName).toEqual('removeListener');
   });
-  it('expects componentWillUnmount', () => {
+  it('expects componentWillUnmount displayName to be removeListener', () => {
     wrapper.unmount();
     expect(mockUnMountMembers.displayName).toEqual('removeListener');
   });
-  // describe('Test for user log out', () => {
-  //   it('should log a user out on click', () => {
-  //     const event = {
-  //       type: 'click',
-  //       preventDefault: sinon.spy(),
-  //     };
-  //     wrapper.instance().handleLogOut(event);
-  //     expect(event.preventDefault.calledOnce).toBeTruthy();
-  //     window.localStorage.clear();
-  //     expect(window.localStorage.getItem('user')).toEqual(undefined);
-  //   });
-  // });
 });
