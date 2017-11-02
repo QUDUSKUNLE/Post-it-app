@@ -3,11 +3,11 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import NavBar from '../../src/components/NavBar.jsx';
 
-describe('PostIt-app', () => {
-  it('expects NavBar component to be defined', () => {
+describe('<NavBar/>', () => {
+  it('component expected to be defined', () => {
     expect(NavBar).toBeDefined();
   });
-  it('should render correctly', () => {
+  it('component should render correctly', () => {
     const component = shallow(<NavBar/>);
     expect(component).toMatchSnapshot();
     expect(component.find('nav').length).toBe(1);
