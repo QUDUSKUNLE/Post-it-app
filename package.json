@@ -12,8 +12,7 @@
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 20000 --compilers js:babel-register && npm run coverage-report",
         "client_test": "jest ./client/__tests__",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
-        "client": "webpack --config webpack.dev.js && babel-node ./server/server.js",
-        "server": "babel-watch ./dist/server.js"
+        "client": "webpack --config webpack.dev.js && babel-node ./server/server.js"
     },
     "repository": {
         "type": "git",
