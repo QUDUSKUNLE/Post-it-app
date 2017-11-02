@@ -7,7 +7,7 @@ import localStorageMock from '../../src/__mock__/localStorage';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 
 window.localStorage = localStorageMock;
-describe('UserChatBox component', () => {
+describe('<UserChatBox />', () => {
   let wrapper;
   let component;
   beforeEach(() => {
@@ -50,19 +50,19 @@ describe('UserChatBox component', () => {
         }
       });
   });
-  it('component expects to be defined', () => {
+  it('component expected to be defined', () => {
     expect(component.find('div')).toHaveLength(10);
     expect(component.find('form')).toHaveLength(1);
     expect(component.find('button')).toHaveLength(2);
     expect(component.find('Link')).toHaveLength(1);
   });
-  it('expects UserChatBox component to be defined', () => {
+  it('component states expected to be defined before it mounts', () => {
     expect(UserChatBox).toBeDefined();
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.state().username).toEqual('Kunle');
     expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
   });
-  it('should call onChange', () => {
+  it('component should call onChange method', () => {
     const event = {
       target: { name: 'name', value: 'value' }
     };
