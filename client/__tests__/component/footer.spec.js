@@ -3,8 +3,8 @@ import { shallow } from 'enzyme';
 import expect from 'expect';
 import Footer from '../../src/components/Footer';
 
-describe('PostIt-app', () => {
-  it('expects Footer component to be defined', () => {
+describe('<Footer/>', () => {
+  it('component should be defined', () => {
     expect(Footer).toBeDefined();
   });
   it('should render correctly', () => {
