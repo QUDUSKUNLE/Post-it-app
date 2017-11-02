@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import firebase from '../vendors/index.js';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
-import { signInAction, signInWithGoogle } from '../actions/SignInActions';
+import { signInAction, signInWithGoogle } from '../actions/SignInActions.js';
 
 /**
  * @description - renders UserSignIn Component
