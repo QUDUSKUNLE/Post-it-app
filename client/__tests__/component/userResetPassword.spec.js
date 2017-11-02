@@ -6,10 +6,10 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import UserResetPassword
   from '../../src/components/UserResetPassword';
-import '../../../server/config/dbConfig';
+import '../../../server/config/index.js';
 import SignInStore from '../../src/stores/SignInStore';
 
-describe('UserResetPassword component', () => {
+describe('<UserResetPassword/>', () => {
   let wrapper;
   beforeEach(() => {
     const res = { response: 'Password reset email sent successfully!' };
@@ -49,14 +49,14 @@ describe('UserResetPassword component', () => {
       }
     );
   });
-  it('should have an empty initial state', () => {
+  it('component should have empty initial states', () => {
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.state().email).toEqual('');
   });
-  it('should be defined', () => {
+  it('component should be defined', () => {
     expect(UserResetPassword).toBeDefined();
   });
-  it('should render correctly', () => {
+  it('component should render correctly', () => {
     const component = shallow(<UserResetPassword/>);
     expect(component).toMatchSnapshot();
     expect(component.find('nav')).toHaveLength(1);
@@ -68,21 +68,21 @@ describe('UserResetPassword component', () => {
     expect(component.find('Footer')).toHaveLength(1);
     expect(component.find('input.signinform')).toHaveLength(1);
   });
-  it('should call onChange method', () => {
+  it('component should call onChange method', () => {
     const event = { target: { name: 'name', value: 'value' } };
     wrapper.instance().onChange(event);
     expect(wrapper.state().name).toEqual('value');
   });
-  it('should call onSubmit method', () => {
+  it('component should call onSubmit method', () => {
     wrapper.instance().onSubmit({ preventDefault() {} });
     expect(wrapper.state().email).toEqual('');
   });
-  it('should componentDidMount component lifecycle', () => {
+  it('component should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserResetPassword.prototype, 'componentDidMount');
     wrapper.instance().componentDidMount();
     expect(spy.calledOnce).toBeTruthy();
   });
-  it('should call componentWillUnmount component lifecycle', () => {
+  it('component should call componentWillUnmount component lifecycle', () => {
     const spy = sinon.spy(UserResetPassword.prototype, 'componentWillUnmount');
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
@@ -97,7 +97,7 @@ describe('UserResetPassword component', () => {
   it('should redirect to another page on click of a button', () => {
     wrapper.find(Link).at(2).simulate('click');
   });
-  it('should find a link', () => {
+  it('component should find Links to other routes', () => {
     expect(wrapper.find(Link).at(1).prop('to')).toEqual('/');
     expect(wrapper.find(Link).at(2).prop('to')).toEqual('/signin');
     expect(wrapper.find(Link).at(3).prop('to')).toEqual('/passwordreset');
