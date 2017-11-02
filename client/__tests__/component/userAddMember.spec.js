@@ -8,7 +8,7 @@ import UserAddMember from '../../src/components/UserAddMember';
 import localStorageMock from '../../src/__mock__/localStorage';
 
 window.localStorage = localStorageMock;
-describe('AddMember component', () => {
+describe('<UserAddMember/>', () => {
   let wrapper;
   let component;
   beforeEach(() => {
@@ -52,17 +52,17 @@ describe('AddMember component', () => {
         }
       });
   });
-  it('expects UserAddMember component to be defined', () => {
+  it('component expected to be defined', () => {
     expect(UserAddMember).toBeDefined();
     expect(wrapper.state()).toBeDefined();
     expect(wrapper.state().loggedIn).toEqual(true);
     expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
   });
-  it('expects methods to be defined', () => {
+  it('component methods expected to be defined', () => {
     expect(wrapper.nodes[0].handleSignOutEvent).toBeDefined();
     expect(wrapper.nodes[0].handleAddMemberToGroup).toBeDefined();
   });
-  it('should render correctly', () => {
+  it('component should render correctly', () => {
     expect(component.find('div')).toHaveLength(10);
     expect(component.find('form')).toHaveLength(1);
     expect(component.find('button')).toHaveLength(2);
@@ -70,11 +70,11 @@ describe('AddMember component', () => {
     expect(component.find('Footer')).toHaveLength(1);
     expect(component).toMatchSnapshot();
   });
-  it('should find a link', () => {
+  it('component should find Link', () => {
     expect(wrapper.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
     expect(wrapper.find(Link).at(2).prop('to')).toEqual('/member');
   });
-  it('should componentDidMount component lifecycle', () => {
+  it('should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserAddMember.prototype, 'componentDidMount');
     wrapper.instance().componentDidMount();
     expect(spy.calledOnce).toBeTruthy();
@@ -84,7 +84,7 @@ describe('AddMember component', () => {
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
   });
-  it('should call onChange', () => {
+  it('component should call onChange method', () => {
     const event = {
       target: { name: 'name', value: 'value' }
     };
