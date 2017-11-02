@@ -4,7 +4,7 @@ import expect from 'expect';
 import UserApp from '../../src/components/UserApp.jsx';
 import UserSignUp from '../../src/components/UserSignUp.jsx';
 
-describe('UserApp component', () => {
+describe('<UserApp />', () => {
   it('expected to be defined', () => {
     expect(UserApp).toBeDefined();
   });
@@ -12,11 +12,7 @@ describe('UserApp component', () => {
     const component = shallow(<UserApp/>);
     expect(component).toMatchSnapshot();
   });
-  it('should render correctly', () => {
-    const component = shallow(<UserSignUp/>);
-    expect(component).toMatchSnapshot();
-  });
-  it('should render without crashing', () => {
+  it('should render without crashing and find its elements', () => {
     const component = shallow(<UserApp/>);
     expect(component.find('.mainbody').exists()).toBeTruthy();
     expect(component.find('.home').exists()).toBeTruthy();
