@@ -4,15 +4,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: './client/src/index.jsx'
-  },
+  entry: [
+    path.resolve(__dirname, 'client/src/index.jsx'),
+    path.resolve(__dirname, 'client/src/index.css')
+  ],
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      template: './client/src/index.html'
+      template: './client/src/index.html',
+      filename: 'index.html',
+      inject: 'body'
     }),
-    new ExtractTextPlugin('index.css')
+    new ExtractTextPlugin('bundle.css')
   ],
   output: {
     path: path.join(__dirname, 'client/src'),
@@ -41,4 +44,7 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
+  devServer: {
+    historyApiFallback: true
+  }
 };

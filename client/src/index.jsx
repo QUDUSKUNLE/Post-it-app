@@ -4,13 +4,13 @@ import {
   BrowserRouter as Router,
   browserHistory,
   Route, Switch } from 'react-router-dom';
-import UserSignIn from './components/UserSignIn';
-import UserCreateGroup from './components/UserCreateGroup';
-import UserBroadCastBoard from './components/UserBroadCastBoard';
-import UserAddMember from './components/UserAddMember';
-import NavBar from './components/NavBar';
-import UserResetPassword from './components/UserResetPassword';
-import NotFound from './components/NotFound';
+import UserSignIn from './components/UserSignIn.jsx';
+import UserCreateGroup from './components/UserCreateGroup.jsx';
+import UserBroadCastBoard from './components/UserBroadCastBoard.jsx';
+import UserAddMember from './components/UserAddMember.jsx';
+import NavBar from './components/NavBar.jsx';
+import UserResetPassword from './components/UserResetPassword.jsx';
+import NotFound from './components/NotFound.jsx';
 import './index.css';
 
 ReactDOM.render(
