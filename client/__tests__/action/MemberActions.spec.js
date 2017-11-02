@@ -6,7 +6,7 @@ import '../../src/__mock__/firebaseMock.js';
 import memberResponse from '../../src/__mock__/memberResponse.json';
 import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import { getGroupMember, getAllUsers, addMember }
-  from '../../src/actions/MemberActions';
+  from '../../src/actions/memberActions';
 
 describe('MemberAction', () => {
   let mockAxios;

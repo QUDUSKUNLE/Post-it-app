@@ -4,7 +4,7 @@ import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock.js';
 import signUpResponse from '../../src/__mock__/signUpResponse.json';
-import signUpAction from '../../src/actions/SignUpActions';
+import signUpAction from '../../src/actions/signUpActions';
 
 describe('signUpAction', () => {
   let mockAxios;

@@ -4,7 +4,7 @@ import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Footer from './Footer';
 import { createGroup } from '../actions/GroupActions.js';
-import signOutAction from '../actions/SignOutActions.js';
+import signOutAction from '../actions/signOutActions.js';
 import GroupStore from '../stores/GroupStore';
 
 

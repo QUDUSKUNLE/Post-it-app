@@ -6,7 +6,7 @@ import '../../src/__mock__/firebaseMock.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 import { signInAction, signInWithGoogle }
   from '../../src/actions/SignInActions';
-import signOutAction from '../../src/actions/SignOutActions';
+import signOutAction from '../../src/actions/signOutActions';
 
 describe('SignInAction', () => {
   let mockAxios;
