@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect } from 'react-router-dom';
 import Footer from './Footer';
-import { createGroup } from '../actions/GroupActions';
-import signOutAction from '../actions/SignOutActions';
+import { createGroup } from '../actions/GroupActions.js';
+import signOutAction from '../actions/SignOutActions.js';
 import GroupStore from '../stores/GroupStore';
 
 

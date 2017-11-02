@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link, Redirect, browserHistory } from 'react-router-dom';
 import Footer from './Footer';
-import { addMember, getAllUsers } from '../actions/MemberActions';
-import signOutAction from '../actions/SignOutActions';
+import { addMember, getAllUsers } from '../actions/MemberActions.js';
+import signOutAction from '../actions/SignOutActions.js';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/GroupActions';
+import { getUserGroups } from '../actions/GroupActions.js';
 
 /**
  * @export

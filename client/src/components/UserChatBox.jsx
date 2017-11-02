@@ -3,7 +3,7 @@ import toastr from 'toastr';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { sendGroupMessage } from '../actions/MessageActions';
+import { sendGroupMessage } from '../actions/MessageActions.js';
 
 /**
  * @description - renders ChatBox Component

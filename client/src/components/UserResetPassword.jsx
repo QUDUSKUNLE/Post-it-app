@@ -1,7 +1,7 @@
 import React from 'react';
 import toastr from 'toastr';
 import { Link } from 'react-router-dom';
-import resetPassword from '../actions/ResetPasswordActions';
+import resetPassword from '../actions/ResetPasswordActions.js';
 import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
 
