@@ -68,19 +68,4 @@ export const getGroupMembers = (data) => {
   return groupMembers;
 };
 
-// export const searchUser = () => {
-//   let a, index;
-//   const input = document.getElementById('myInput');
-//   const filter = input.value.toUpperCase();
-//   const ul = document.getElementById('myUL');
-//   const li = ul.getElementsByTagName('li');
-//   for (index = 0; index < li.length; index += 1) {
-//     a = li[index].getElementsByTagName('a')[0];
-//     if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-//       li[index].style.display = '';
-//     } else {
-//       li[index].style.display = 'none';
-//     }
-//   }
-// };
 
