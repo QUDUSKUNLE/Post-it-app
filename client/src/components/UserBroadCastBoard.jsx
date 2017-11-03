@@ -92,9 +92,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {*} void
    */
   handleSendGroupMessage() {
-    this.setState({
-      groupMessage: MessageStore.allGroupMessage()
-    });
+    this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
   handleGetGroupMember() {

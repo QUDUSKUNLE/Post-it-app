@@ -142,6 +142,7 @@ export default class UserAddMember extends React.Component {
         <Redirect to="/signin" />
       );
     }
+    console.log(this.state.registeredUsers);
     return (
       <div>
         <nav className="navbar navbar-inverse navbar-fixed-top"
