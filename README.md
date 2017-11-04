@@ -2,7 +2,7 @@
 [![Code Climate](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 [![Issue Count](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/issue_count.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 [![Build Status](https://travis-ci.org/QUDUSKUNLE/Post-it-app.svg?branch=feedback-implementation)](https://travis-ci.org/QUDUSKUNLE/Post-it-app)
-[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=development)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=development)
+[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=feedback-implementation)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=feedback-implementation)
 
 # PostIt-app
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
