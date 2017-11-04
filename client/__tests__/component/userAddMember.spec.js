@@ -59,20 +59,13 @@ describe('<UserAddMember/>', () => {
     expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
   });
   it('component methods expected to be defined', () => {
-    expect(wrapper.nodes[0].handleSignOutEvent).toBeDefined();
     expect(wrapper.nodes[0].handleAddMemberToGroup).toBeDefined();
   });
   it('component should render correctly', () => {
-    expect(component.find('div')).toHaveLength(10);
+    expect(component.find('div')).toHaveLength(6);
     expect(component.find('form')).toHaveLength(1);
-    expect(component.find('button')).toHaveLength(2);
-    expect(component.find('Link')).toHaveLength(4);
-    expect(component.find('Footer')).toHaveLength(1);
+    expect(component.find('button')).toHaveLength(1);
     expect(component).toMatchSnapshot();
-  });
-  it('component should find Link', () => {
-    expect(wrapper.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
-    expect(wrapper.find(Link).at(2).prop('to')).toEqual('/member');
   });
   it('should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserAddMember.prototype, 'componentDidMount');

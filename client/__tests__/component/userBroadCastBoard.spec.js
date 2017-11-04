@@ -86,7 +86,6 @@ describe('<UserBroadCastBoard/>', () => {
   });
 
   it('component should contain defined methods', () => {
-    expect(wrapper.nodes[0].handleSignOutAction).toBeDefined();
     expect(wrapper.nodes[0].handleSendGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetUserGroups).toBeDefined();
@@ -94,16 +93,7 @@ describe('<UserBroadCastBoard/>', () => {
   });
   it('should render correctly without crashing', () => {
     expect(component).toMatchSnapshot();
-    expect(component.find('div')).toHaveLength(6);
-    expect(component.find('span')).toHaveLength(3);
-    expect(component.find('form')).toHaveLength(0);
-    expect(component.find('button')).toHaveLength(1);
-    expect(component.find('Link')).toHaveLength(4);
-    expect(component.find('Footer')).toHaveLength(1);
-  });
-  it('should find it Links to other paths', () => {
-    expect(wrapper.find(Link).at(1).prop('to')).toEqual('/broadcastboard');
-    expect(wrapper.find(Link).at(2).prop('to')).toEqual('/group');
+    expect(component.find('div')).toHaveLength(1);
   });
   it('component should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserBroadCastBoard.prototype, 'componentDidMount');

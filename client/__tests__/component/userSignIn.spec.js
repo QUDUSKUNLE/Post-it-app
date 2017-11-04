@@ -69,7 +69,7 @@ describe('<UserSignIn/>', () => {
   });
   it('component should render correctly', () => {
     expect(component).toMatchSnapshot();
-    expect(component.find('div').length).toBe(15);
+    expect(component.find('div').length).toBe(9);
   });
 });
 

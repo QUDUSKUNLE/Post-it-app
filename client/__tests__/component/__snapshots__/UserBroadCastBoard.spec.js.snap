@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserBroadCastBoard Component should render correctly 1`] = `
+exports[`<UserBroadCastBoard/> should render correctly without crashing 1`] = `
 ShallowWrapper {
   "complexSelector": ComplexSelector {
     "buildPredicate": [Function],
@@ -8,81 +8,16 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div>
-    <div
-      className="navbar navbar-inverse navabar-fixed-top"
-    >
-      <div
-        className="container-fluid"
-      >
-        <div
-          className="navbar-header"
-        >
-          <button
-            className="navbar-toggle"
-            data-target=".navbar-collapse"
-            data-toggle="collapse"
-            type="button"
-          >
-            <span
-              className="icon-bar"
-            />
-            <span
-              className="icon-bar"
-            />
-            <span
-              className="icon-bar"
-            />
-          </button>
-          <Link
-            className="navbar-brand"
-            replace={false}
-            to="#"
-          >
-            PostIt
-            <small>
-              App
-            </small>
-          </Link>
-        </div>
-        <div
-          className="collapse navbar-collapse"
-        >
-          <ul
-            className="nav navbar-nav navbar-right"
-          >
-            <li
-              className="active"
-            >
-              <Link
-                replace={false}
-                to="/broadcastboard"
-              >
-                MessageBoard
-              </Link>
-            </li>
-            <li>
-              <Link
-                replace={false}
-                to="/group"
-              >
-                Create Group
-              </Link>
-            </li>
-            <li
-              onClick={[Function]}
-            >
-              <Link
-                replace={false}
-                to="#"
-              >
-                Sign out
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  "node": <div
+    className="row-offcanvas row-offcanvas-left"
+  >
+    <UserGroups
+      grouplist={Array []}
+      member={Array []}
+    />
+    <NoGroupSelected />
+  </div>,
+  "nodes": Array [
     <div
       className="row-offcanvas row-offcanvas-left"
     >
@@ -91,95 +26,6 @@ ShallowWrapper {
         member={Array []}
       />
       <NoGroupSelected />
-    </div>
-    <Footer />
-  </div>,
-  "nodes": Array [
-    <div>
-      <div
-        className="navbar navbar-inverse navabar-fixed-top"
-      >
-        <div
-          className="container-fluid"
-        >
-          <div
-            className="navbar-header"
-          >
-            <button
-              className="navbar-toggle"
-              data-target=".navbar-collapse"
-              data-toggle="collapse"
-              type="button"
-            >
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
-              <span
-                className="icon-bar"
-              />
-            </button>
-            <Link
-              className="navbar-brand"
-              replace={false}
-              to="#"
-            >
-              PostIt
-              <small>
-                App
-              </small>
-            </Link>
-          </div>
-          <div
-            className="collapse navbar-collapse"
-          >
-            <ul
-              className="nav navbar-nav navbar-right"
-            >
-              <li
-                className="active"
-              >
-                <Link
-                  replace={false}
-                  to="/broadcastboard"
-                >
-                  MessageBoard
-                </Link>
-              </li>
-              <li>
-                <Link
-                  replace={false}
-                  to="/group"
-                >
-                  Create Group
-                </Link>
-              </li>
-              <li
-                onClick={[Function]}
-              >
-                <Link
-                  replace={false}
-                  to="#"
-                >
-                  Sign out
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div
-        className="row-offcanvas row-offcanvas-left"
-      >
-        <UserGroups
-          grouplist={Array []}
-          member={Array []}
-        />
-        <NoGroupSelected />
-      </div>
-      <Footer />
     </div>,
   ],
   "options": Object {},
@@ -199,7 +45,7 @@ ShallowWrapper {
         userId="AZCVGFRTUINSMUY15156"
         userName="Kunle"
       />,
-      "_debugID": 119,
+      "_debugID": 65,
       "_hostContainerInfo": null,
       "_hostParent": null,
       "_instance": UserBroadCastBoard {
@@ -209,7 +55,6 @@ ShallowWrapper {
         "handleGetGroupMessage": [Function],
         "handleGetUserGroups": [Function],
         "handleSendGroupMessage": [Function],
-        "handleSignOutAction": [Function],
         "props": Object {
           "defaultGroup": "",
           "groupId": "",
@@ -251,178 +96,24 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div>
-          <div
-            className="navbar navbar-inverse navabar-fixed-top"
-          >
-            <div
-              className="container-fluid"
-            >
-              <div
-                className="navbar-header"
-              >
-                <button
-                  className="navbar-toggle"
-                  data-target=".navbar-collapse"
-                  data-toggle="collapse"
-                  type="button"
-                >
-                  <span
-                    className="icon-bar"
-                  />
-                  <span
-                    className="icon-bar"
-                  />
-                  <span
-                    className="icon-bar"
-                  />
-                </button>
-                <Link
-                  className="navbar-brand"
-                  replace={false}
-                  to="#"
-                >
-                  PostIt
-                  <small>
-                    App
-                  </small>
-                </Link>
-              </div>
-              <div
-                className="collapse navbar-collapse"
-              >
-                <ul
-                  className="nav navbar-nav navbar-right"
-                >
-                  <li
-                    className="active"
-                  >
-                    <Link
-                      replace={false}
-                      to="/broadcastboard"
-                    >
-                      MessageBoard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/group"
-                    >
-                      Create Group
-                    </Link>
-                  </li>
-                  <li
-                    onClick={[Function]}
-                  >
-                    <Link
-                      replace={false}
-                      to="#"
-                    >
-                      Sign out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div
-            className="row-offcanvas row-offcanvas-left"
-          >
-            <UserGroups
-              grouplist={Array []}
-              member={Array []}
-            />
-            <NoGroupSelected />
-          </div>
-          <Footer />
+        "_currentElement": <div
+          className="row-offcanvas row-offcanvas-left"
+        >
+          <UserGroups
+            grouplist={Array []}
+            member={Array []}
+          />
+          <NoGroupSelected />
         </div>,
-        "_debugID": 120,
-        "_renderedOutput": <div>
-          <div
-            className="navbar navbar-inverse navabar-fixed-top"
-          >
-            <div
-              className="container-fluid"
-            >
-              <div
-                className="navbar-header"
-              >
-                <button
-                  className="navbar-toggle"
-                  data-target=".navbar-collapse"
-                  data-toggle="collapse"
-                  type="button"
-                >
-                  <span
-                    className="icon-bar"
-                  />
-                  <span
-                    className="icon-bar"
-                  />
-                  <span
-                    className="icon-bar"
-                  />
-                </button>
-                <Link
-                  className="navbar-brand"
-                  replace={false}
-                  to="#"
-                >
-                  PostIt
-                  <small>
-                    App
-                  </small>
-                </Link>
-              </div>
-              <div
-                className="collapse navbar-collapse"
-              >
-                <ul
-                  className="nav navbar-nav navbar-right"
-                >
-                  <li
-                    className="active"
-                  >
-                    <Link
-                      replace={false}
-                      to="/broadcastboard"
-                    >
-                      MessageBoard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      replace={false}
-                      to="/group"
-                    >
-                      Create Group
-                    </Link>
-                  </li>
-                  <li
-                    onClick={[Function]}
-                  >
-                    <Link
-                      replace={false}
-                      to="#"
-                    >
-                      Sign out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div
-            className="row-offcanvas row-offcanvas-left"
-          >
-            <UserGroups
-              grouplist={Array []}
-              member={Array []}
-            />
-            <NoGroupSelected />
-          </div>
-          <Footer />
+        "_debugID": 66,
+        "_renderedOutput": <div
+          className="row-offcanvas row-offcanvas-left"
+        >
+          <UserGroups
+            grouplist={Array []}
+            member={Array []}
+          />
+          <NoGroupSelected />
         </div>,
       },
       "_renderedNodeType": 0,

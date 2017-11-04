@@ -59,13 +59,9 @@ describe('<UserResetPassword/>', () => {
   it('component should render correctly', () => {
     const component = shallow(<UserResetPassword/>);
     expect(component).toMatchSnapshot();
-    expect(component.find('nav')).toHaveLength(1);
-    expect(component.find('span')).toHaveLength(4);
     expect(component.find('form')).toHaveLength(1);
     expect(component.find('input')).toHaveLength(1);
-    expect(component.find('button')).toHaveLength(2);
-    expect(component.find('Link')).toHaveLength(4);
-    expect(component.find('Footer')).toHaveLength(1);
+    expect(component.find('button')).toHaveLength(1);
     expect(component.find('input.signinform')).toHaveLength(1);
   });
   it('component should call onChange method', () => {
@@ -96,10 +92,5 @@ describe('<UserResetPassword/>', () => {
   });
   it('should redirect to another page on click of a button', () => {
     wrapper.find(Link).at(2).simulate('click');
-  });
-  it('component should find Links to other routes', () => {
-    expect(wrapper.find(Link).at(1).prop('to')).toEqual('/');
-    expect(wrapper.find(Link).at(2).prop('to')).toEqual('/signin');
-    expect(wrapper.find(Link).at(3).prop('to')).toEqual('/passwordreset');
   });
 });
