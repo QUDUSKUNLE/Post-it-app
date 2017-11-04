@@ -1,19 +1,19 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
-import UserApp from '../../src/components/UserApp.jsx';
+import Home from '../../src/components/Home.jsx';
 import UserSignUp from '../../src/components/UserSignUp.jsx';
 
-describe('<UserApp />', () => {
+describe('<Home />', () => {
   it('expected to be defined', () => {
-    expect(UserApp).toBeDefined();
+    expect(Home).toBeDefined();
   });
   it('should render correctly', () => {
-    const component = shallow(<UserApp/>);
+    const component = shallow(<Home/>);
     expect(component).toMatchSnapshot();
   });
   it('should render without crashing and find its elements', () => {
-    const component = shallow(<UserApp/>);
+    const component = shallow(<Home/>);
     expect(component.find('.mainbody').exists()).toBeTruthy();
     expect(component.find('.home').exists()).toBeTruthy();
     expect(component.find('div')).toHaveLength(3);

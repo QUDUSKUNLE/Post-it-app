@@ -1,21 +1,19 @@
 import React from 'react';
 
 /**
- * @export
- * @description - renders Footer Component
- * @class Footer
- * @extends {React.Component}
+ * @export Footer component
+ * @description - Footer Component
+ * @return {Footer} component
  */
-export default class Footer extends React.Component {
-  render() {
-    return (
-      <div className="footer">
-        <div className="container">
-          <center>
-            Qudus Kunle
-          </center>
-        </div>
+const Footer = () =>
+ (
+    <div className="footer">
+      <div className="container">
+        <center>
+          &copy; Qudus Kunle
+        </center>
       </div>
-    );
-  }
-}
+    </div>
+  );
+
+export default Footer;

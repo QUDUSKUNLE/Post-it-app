@@ -1,7 +1,6 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 require('dotenv').config();
-const Dotenv = require('dotenv-webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const common = require('./webpack.common.js');
 

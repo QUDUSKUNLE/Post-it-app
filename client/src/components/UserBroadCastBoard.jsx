@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import toastr from 'toastr';
+// import toastr from 'toastr';
 import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
-import Footer from './Footer';
 import NoGroupSelected from './NoGroupSelected';
 import { getUserGroups } from '../actions/GroupActions.js';
 import { getGroupMessage } from '../actions/messageActions.js';
-import signOutAction from '../actions/signOutActions.js';
 import { getGroupMember } from '../actions/memberActions.js';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
@@ -44,7 +42,6 @@ export default class UserBroadCastBoard extends React.Component {
      * @description This binding is necessary to make `this` work
      * in the callback
      */
-    this.handleSignOutAction = this.handleSignOutAction.bind(this);
     this.handleSendGroupMessage = this.handleSendGroupMessage.bind(this);
     this.handleGetGroupMessage = this.handleGetGroupMessage.bind(this);
     this.handleGetUserGroups = this.handleGetUserGroups.bind(this);
@@ -115,15 +112,6 @@ export default class UserBroadCastBoard extends React.Component {
     this.setState({ groups: GroupStore.allGroups() });
   }
 
-  handleSignOutAction() {
-    signOutAction().then((response) => {
-      toastr.success(response.data.message);
-      this.props.history.push('/');
-      localStorage.clear();
-      location.reload();
-    }).catch(error => toastr.error(error.response.data));
-  }
-
   /**
    * @description - render method, React lifecycle method
    * @returns {*} BroadCastBoard component
@@ -167,42 +155,11 @@ export default class UserBroadCastBoard extends React.Component {
       $('.row-offcanvas').toggleClass('active');
     });
     return (
-      <div>
-        <div className="navbar navbar-inverse navabar-fixed-top">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle"
-                data-toggle="collapse" data-target=".navbar-collapse">
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <Link className="navbar-brand" to="#">
-                PostIt<small>App</small>
-              </Link>
-            </div>
-            <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
-                <li className="active">
-                  <Link to="/broadcastboard">MessageBoard</Link>
-                </li>
-                <li>
-                  <Link to="/group">Create Group</Link>
-                </li>
-                <li onClick={this.handleSignOutAction}>
-                  <Link to="#">Sign out</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="row-offcanvas row-offcanvas-left">
-          <UserGroups
-            grouplist={groupList}
-            member={this.state.groupMember}/>
-          {isGroupSelected()}
-        </div>
-        <Footer/>
+      <div className="row-offcanvas row-offcanvas-left">
+        <UserGroups
+          grouplist={groupList}
+          member={this.state.groupMember}/>
+        {isGroupSelected()}
       </div>
     );
   }

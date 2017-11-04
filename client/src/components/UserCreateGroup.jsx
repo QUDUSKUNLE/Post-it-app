@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Link, Redirect } from 'react-router-dom';
-import Footer from './Footer';
+import { Redirect } from 'react-router-dom';
 import { createGroup } from '../actions/GroupActions.js';
-import signOutAction from '../actions/signOutActions.js';
 import GroupStore from '../stores/GroupStore';
 
 
@@ -34,7 +32,6 @@ export default class UserCreateGroup extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
-    this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
   }
 
   componentDidMount() {
@@ -78,20 +75,6 @@ export default class UserCreateGroup extends React.Component {
   }
 
   /**
-   * @description This handles Click event
-   * @param {void} null no parameter.
-   * @returns {object} response from server.
-   */
-  handleSignOutEvent() {
-    signOutAction().then((response) => {
-      toastr.success(response.data.message);
-      localStorage.clear();
-      this.props.history.push('/');
-      location.reload();
-    }).catch((error) => toastr.error(error.response.data));
-  }
-
-  /**
    * @description - render method, React lifecycle method
    * @returns {Object} CreateGroup component
    */
@@ -102,57 +85,25 @@ export default class UserCreateGroup extends React.Component {
       );
     }
     return (
-      <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top"
-          role="navigation">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle"
-                data-toggle="collapse" data-target=".navbar-collapse">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <Link className="navbar-brand" to="#">PostIt<small>App</small>
-              </Link>
-            </div>
-            <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav">
-              </ul>
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/broadcastboard">MessageBoard</Link></li>
-                <li className="active">
-                  <Link to="/group">Create Group</Link>
-                </li>
-                <li onClick={this.handleSignOutEvent}><Link to="/">
-                  Sign Out</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="container">
-          <div className="row">
-            <div className="col-md-offset-3 col-md-6 creategroupform">
-              <div className="row w3-card w3-white">
-                <form id="creategroupform" onSubmit={this.onSubmit}>
-                  <div className="form-group">
-                    <label htmlFor="groupname">Group Name</label>
-                    <input value={this.state.group} onChange={this.onChange}
-                      id="groupname" type="text"
-                      className="signinform" placeholder="andela-abuja"
-                      name="group" required/>
-                  </div>
-                  <button type="submit" className="signinformbtn">
-                    Create Group
-                  </button>
-                </form>
-              </div>
+      <div className="container creategroup">
+        <div className="row">
+          <div className="col-md-offset-3 col-md-6 creategroupform">
+            <div className="row w3-card w3-white">
+              <form id="creategroupform" onSubmit={this.onSubmit}>
+                <div className="form-group">
+                  <label htmlFor="groupname">Group Name</label>
+                  <input value={this.state.group} onChange={this.onChange}
+                    id="groupname" type="text"
+                    className="signinform" placeholder="andela-abuja"
+                    name="group" required/>
+                </div>
+                <button type="submit" className="signinformbtn">
+                  Create Group
+                </button>
+              </form>
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }
