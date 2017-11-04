@@ -1,14 +1,12 @@
 import React from 'react';
 
 /**
- * @export
- * @description - renders Footer Component
- * @class NoGroupSelected
- * @extends {React.Component}
+ * @export NoGroupSelected component
+ * @description - NoGroupSelected Component
+ * @return {NoGroupSelected} component
  */
-export default class NoGroupSelected extends React.Component {
-  render() {
-    return (
+const NoGroupSelected = () =>
+  (
     <div id="main">
       <div className="col-md-10 col-md-offset-1">
         <p className="visible-xs">
@@ -26,6 +24,6 @@ export default class NoGroupSelected extends React.Component {
         </div>
       </div>
     </div>
-    );
-  }
-}
+  );
+
+export default NoGroupSelected;

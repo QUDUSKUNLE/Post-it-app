@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 /**
- * displays an error page when user navigates to an alien page
- * @function NotFound
- * @return {void} - React component
+ * @export NotFound component
+ * @description NotFound component
+ * @return {NotFound} component
  */
 const NotFound = () => (
   <div className="col-md-12">
