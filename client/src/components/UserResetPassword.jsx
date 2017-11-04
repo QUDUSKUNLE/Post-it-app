@@ -1,8 +1,6 @@
 import React from 'react';
 import toastr from 'toastr';
-import { Link } from 'react-router-dom';
 import resetPassword from '../actions/resetPasswordActions.js';
-import Footer from './Footer';
 import SignInStore from '../stores/SignInStore';
 
 /**
@@ -77,62 +75,31 @@ export default class UserResetPassword extends React.Component {
    */
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top"
-          role="navigation">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed"
-                data-toggle="collapse" data-target=".navbar-collapse">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <Link className="navbar-brand" to="#">
-                PostIt<small>App</small>
-              </Link>
-            </div>
-            <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/signin">Sign in</Link></li>
-                <li className="active">
-                  <Link to="/passwordreset">PasswordReset</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="passwordreset">
-          <center>
-            <h4>
-              Reset your password
-            </h4>
-          </center><br/>
-          <div className="container resetform">
-            <div className="row">
-              <div className="col-md-6 col-md-offset-3 w3-card w3-white">
-                <form onSubmit={this.onSubmit} id="resetform">
-                  <div className="form-group">
-                    <label htmlFor="email">
-                      Enter your email address
-                    </label>
-                    <input value={this.state.email}
-                      onChange={this.onChange}
-                      id="email" type="email"
-                      className="signinform" placeholder="johndoe@example.com"
-                      name="email" required />
-                  </div>
-                  <button type="submit"
-                    className="signinformbtn">Send
-                  </button>
-                </form>
-              </div>
+      <div className="passwordreset">
+        <h5 className="text-center">
+          Reset your password
+        </h5>
+        <div className="container resetform">
+          <div className="row">
+            <div className="col-md-6 col-md-offset-3 w3-card w3-white">
+              <form onSubmit={this.onSubmit} id="resetform">
+                <div className="form-group">
+                  <label htmlFor="email">
+                    Enter your email address
+                  </label>
+                  <input value={this.state.email}
+                    onChange={this.onChange}
+                    id="email" type="email"
+                    className="signinform" placeholder="johndoe@example.com"
+                    name="email" required />
+                </div>
+                <button type="submit"
+                  className="signinformbtn">Send
+                </button>
+              </form>
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
     );
   }

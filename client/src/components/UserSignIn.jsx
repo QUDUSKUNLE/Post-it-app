@@ -141,83 +141,57 @@ export default class UserSignIn extends React.Component {
       return loading;
     };
     return (
-      <div>
-        <nav className="navbar navbar-inverse navabar-fixed-top"
-          role="navigation">
-          <div className="container-fluid">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed"
-                data-toggle="collapse" data-target=".navbar-collapse">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button><Link className="navbar-brand" to="#">
-                PostIt<small>App</small>
-              </Link></div>
-            <div className="collapse navbar-collapse">
-              <ul className="nav navbar-nav navbar-right">
-                <li><Link to="/">Home</Link></li>
-                <li className="active"><Link to="/signin">Sign in</Link></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <div className="container signin">
-          {isLoading()}
-          <div className="row">
-            <div className="col-md-6 col-md-offset-3">
-              <div className="row">
-                <center>
-                  <GoogleButton onClick={this.googleSignIn}/>
-                </center>
-                <br/>
-                <div className="text-center or"><b>OR</b></div>
-                <form onSubmit={this.onSubmit}
-                  className="w3-card w3-white" id="signinForm">
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input value={this.state.email} onChange={this.onChange}
-                      id="email" type="email"
-                      className="signinform" placeholder="johndoe@example.com"
-                      name="email" required />
-                  </div>
-                  <div className="form-group">
-                    <div className="row">
-                      <div className="col-md-4">
-                        <label htmlFor="password">Password</label>
-                      </div>
-                      <div className="col-md-4 col-md-offset-4">
-                        <Link to="/passwordreset">
-                          <h6 className="pull-right create">
-                            <b>Forgot password?</b></h6>
-                        </Link>
-                      </div>
-                    </div>
-                    <input id="password" type="password"
-                      value={this.state.password} onChange={this.onChange}
-                      className="signinform" placeholder="*********"
-                      name="password" required />
-                  </div>
-                  <button id="submitButton"
-                    type="submit" className="signinformbtn">Sign in
-                  </button>
-                </form>
+      <div className="container signin">
+        {isLoading()}
+        <div className="row">
+          <div className="col-md-6 col-md-offset-3">
+            <form onSubmit={this.onSubmit}
+              className="w3-card w3-white" id="signinForm">
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input value={this.state.email} onChange={this.onChange}
+                  id="email" type="email"
+                  className="signinform" placeholder="johndoe@example.com"
+                  name="email" required />
               </div>
-              <br/>
-              <div>
-                <center>
-                  <p>New to PostIt App? <Link to="/" className="create">
-								Create an account.</Link>
-                  </p>
-                </center>
+              <div className="form-group">
+                <div className="row">
+                  <div className="col-md-4">
+                    <label htmlFor="password">Password</label>
+                  </div>
+                  <div className="col-md-4 col-md-offset-4">
+                    <Link to="/passwordreset">
+                      <h6 className="pull-right create">
+                        <b>Forgot password?</b>
+                      </h6>
+                    </Link>
+                  </div>
+                </div>
+                <input id="password" type="password"
+                  value={this.state.password} onChange={this.onChange}
+                  className="signinform" placeholder="*********"
+                  name="password" required />
               </div>
+              <button id="submitButton"
+                type="submit" className="signinformbtn">Sign in
+              </button>
+            </form>
+            <br/>
+            <center>
+              <GoogleButton onClick={this.googleSignIn} />
+            </center>
+            <br/>
+            <div>
+              <center>
+                <p>New to PostIt? <Link to="/" className="create">
+              Create an account.</Link>
+                </p>
+              </center>
             </div>
           </div>
         </div>
-        <Footer/>
       </div>
-    );
+    )
   }
 }
 

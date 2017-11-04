@@ -67,5 +67,3 @@ export const getGroupMembers = (data) => {
   }
   return groupMembers;
 };
-
-

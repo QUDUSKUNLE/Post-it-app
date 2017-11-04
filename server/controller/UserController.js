@@ -37,7 +37,7 @@ export default class UserController {
       res.status(403).send({ error: { code:
         'Password does not match' }
       });
-    } else if (!Helper.validatePhoneNumber(phoneNumber)) {
+    } else if (Helper.validatePhoneNumber(phoneNumber) === false) {
       res.status(400).send({ error: { code:
         'Incorrect phone number' } });
     } else {

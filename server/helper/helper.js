@@ -1,4 +1,5 @@
 import values from 'object.values';
+import naijaNumber from 'naija-phone-number';
 import dbConfig from '../config/index.js';
 
 /**
@@ -29,10 +30,7 @@ export default class Helper {
    * @memberof Helper
    */
   static validatePhoneNumber(phoneNumber) {
-    const matched = /^(\+234-|\+234|0)?\d{10}$/;
-    if (phoneNumber.match(matched) && phoneNumber.length >= 11) {
-      return true;
-    }
+    return naijaNumber.isValid(phoneNumber);
   }
 
   /**
