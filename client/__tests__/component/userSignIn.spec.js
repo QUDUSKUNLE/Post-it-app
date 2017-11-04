@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
 import { shallow, mount } from 'enzyme';
 import expect from 'expect';
