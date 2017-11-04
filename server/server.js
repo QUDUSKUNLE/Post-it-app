@@ -3,7 +3,6 @@ import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-// import expressValidator from 'express-validator';
 import compression from 'compression';
 import Router from './routes/index.js';
 import dbConfig from './config/index.js';
@@ -11,7 +10,6 @@ import dbConfig from './config/index.js';
 const port = process.env.PORT || 8080;
 const app = express();
 app.use(compression());
-// app.use(expressValidator());
 
 // Get current user
 const getCurrentUser = () => new Promise((resolve) => {
