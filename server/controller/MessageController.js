@@ -2,9 +2,9 @@ import moment from 'moment';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import values from 'object.values';
-import dbConfig from '../config/index.js';
-import Helper from '../helper/helper.js';
-import sendGroupSMS from '../utils/utils.js';
+import dbConfig from '../config/index';
+import Helper from '../helper/helper';
+import sendGroupSMS from '../utils/utils';
 
 dotenv.config();
 

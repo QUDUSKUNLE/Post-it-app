@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import dbConfig from '../config/index.js';
-import Helper from '../helper/helper.js';
+import dbConfig from '../config/index';
+import Helper from '../helper/helper';
 
 /**
  * @description This class create and read functions for User

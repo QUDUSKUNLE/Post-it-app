@@ -12,7 +12,7 @@ const Home = () =>
     <div className="container-fluid mainbody">
       <div className="row">
         <div className="col-md-6">
-          <div classNmae="row">
+          <div className="row">
             <div className="col-md-10 col-md-offset-1">
               <div className="word">
                 <h4>PostIt

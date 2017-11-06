@@ -3,7 +3,7 @@ import assert from 'assert';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import faker from 'faker';
-import server from '../server.js';
+import server from '../server';
 
 chai.should();
 const expect = chai.expect;

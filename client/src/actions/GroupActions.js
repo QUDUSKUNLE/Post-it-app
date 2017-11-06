@@ -1,11 +1,11 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { helpGetGroups } from '../helper/helper.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { helpGetGroups } from '../helper/helper';
 import {
   GET_USER_GROUPS,
   CREATE_GROUP,
-} from '../constants/ActionConstants.js';
+} from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server
