@@ -1,5 +1,6 @@
 import moment from 'moment';
 import values from 'object.values';
+import admin from '../firebaseSDK/firebaseConfiguration';
 import dbConfig from '../config/index';
 import Helper from '../helper/helper';
 
@@ -18,39 +19,37 @@ export default class GroupController {
    */
   static createGroup(req, res) {
     const groupName = req.body.group;
-    const userId = req.user.uid;
+    const idToken = req.body.token;
     const group = groupName.toLowerCase();
-    if (userId !== undefined) {
-      dbConfig.database().ref(`UserGroups/${userId}`).child(group)
-        .once('value', (snapshot) => {
-          if (!snapshot.exists()) {
-            dbConfig.database().ref('Groups').push({
-              group: group,
-              time: moment().format('llll')
-            })
-            .then((response) => {
-              Helper.getUserEmailAndPhoneNumber(userId)
-                .then((userEmailAndPhone) => {
-                  const userDetails = (values(userEmailAndPhone))[0];
-                  dbConfig.database().ref(`UserGroups/${userId}`).child(group)
-                    .set(response.key);
-                  dbConfig.database().ref(`GroupMember/${response.key}`)
-                    .child(userId).set(userDetails.userName);
-                  dbConfig.database().ref(`GroupPhoneAndEmail/${response.key}`)
-                    .child(userId).set({
-                      phoneNumber: userDetails.phone_Number,
-                      email: userDetails.userEmail
-                    });
-                }).then(() => res.status(200).send({
-                  message: 'Group created successfully' }));
-            });
-          } else {
-            res.status(403).send({ error: 'Group already exists' });
-          }
-        });
-    } else {
-      res.status(401).send({ error: 'User is not signed in' });
-    }
+    admin.auth().verifyIdToken(idToken)
+      .then((decodedToken) => {
+        const userId = decodedToken.uid;
+        admin.database().ref(`UserGroups/${userId}`).child(group)
+          .once('value', (snapshot) => {
+            if (!snapshot.exists()) {
+              admin.database().ref('Groups').push({
+                group,
+                time: moment().format('llll')
+              })
+              .then((response) => {
+                admin.database().ref(`UserGroups/${userId}`).child(group)
+                  .set(response.key);
+                admin.database().ref(`GroupMember/${response.key}`)
+                  .child(userId).set(decodedToken.name);
+                admin.database().ref(`GroupPhoneAndEmail/${response.key}`)
+                  .child(userId).set({
+                    phoneNumber: decodedToken.phone_number,
+                    email: decodedToken.email
+                  });
+              })
+              .then(() => res.status(200).send({
+                message: 'Group created successfully' }));
+            } else {
+              res.status(403).send({ error: 'Group already exists' });
+            }
+          });
+      })
+      .catch(error => res.status(401).send({ error }));
   }
 
   /**
@@ -62,19 +61,27 @@ export default class GroupController {
    * @return {Object} json response containing all registerdUsers
    */
   static getAllRegisteredUsers(req, res) {
-    const userId = req.user.uid;
-    if (userId !== undefined) {
-      Promise.all([
-        dbConfig.database().ref('users')
-          .once('value', (snapshot) => {
-            if (snapshot.val() != null) {
-              snapshot.val();
-            }
-          })
-      ])
-      .then(response => res.status(200).send({ response }));
+    const idToken = req.params.token;
+    if (idToken === undefined) {
+      res.status(403).send({
+        error: {
+          code: 'auth/argument-error',
+          message: 'User`s not signed in.'
+        }
+      });
     } else {
-      res.status(401).send({ error: 'User is not signed in' });
+      admin.auth().verifyIdToken(idToken)
+        .then((decodedToken) => {
+          if (decodedToken) {
+            admin.database().ref('users')
+              .once('value', (snapshot) => {
+                if (snapshot.val() != null) {
+                  snapshot.val();
+                }
+              }).then(response => res.status(200).send({ response }));
+          }
+        })
+        .catch(error => res.status(401).send({ error }));
     }
   }
 
