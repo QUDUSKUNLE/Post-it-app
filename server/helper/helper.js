@@ -1,5 +1,4 @@
 import values from 'object.values';
-import naijaNumber from 'naija-phone-number';
 import dbConfig from '../config/index';
 
 /**
@@ -21,16 +20,6 @@ export default class Helper {
       password.match(/^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)) {
       return true;
     }
-  }
-
-  /**
-   * @description This function validates user`s phoneNumber
-   * @param {string} phoneNumber - validate phoneNumber
-   * @returns {boolean} true
-   * @memberof Helper
-   */
-  static validatePhoneNumber(phoneNumber) {
-    return naijaNumber.isValid(phoneNumber);
   }
 
   /**

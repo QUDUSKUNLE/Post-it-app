@@ -2,6 +2,7 @@ import express from 'express';
 import UserController from '../controller/UserController';
 import GroupController from '../controller/GroupController';
 import MessageController from '../controller/MessageController';
+import Validate from '../utils/validate';
 
 /**
  * Creates express Router
@@ -11,13 +12,13 @@ const Router = express.Router();
 /**
  * Route for signup users to the application
  */
-Router.post('/api/v1/signup', UserController.signUp);
+Router.post('/api/v1/signup', Validate.signUpInputs, UserController.signUp);
 
 /**
  * Route for signin user to the application
  * Both { email and password }
  */
-Router.post('/api/v1/signin', UserController.signIn);
+Router.post('/api/v1/signin', Validate.signInInputs, UserController.signIn);
 
 /**
  * Route for signin user to the application via Google account

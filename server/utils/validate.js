@@ -1,0 +1,69 @@
+
+import Helper from '../helper/helper';
+
+/**
+ * @description: class Validates contains methods
+ * that validates requests inputs for each route
+ *
+ * @class Validate
+ */
+export default class Validate {
+  
+  /**
+   * @description: This validates signUpInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static signUpInputs(req, res, next) {
+    req.check('username', 'Username is required').notEmpty().matches(/\w/);
+    req.check('email', 'Email is badly formatted').isEmail();
+    req.check('email', 'User email is required').notEmpty();
+    req.check('password', 'Password is required').notEmpty();
+    req.check('phoneNumber', 'Incorect phoneNumber').isLength(11)
+    req.check('confirmPassword', 'Please confirm the password').notEmpty();
+    req.check('username', 'username should be at least 2 characters')
+      .isLength(2, 50);
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(400).send({ error: { code: message }});
+    } else if (req.body.password !== req.body.confirmPassword){
+      res.status(403).send({ error: { code: 'Password does not match'}});
+    } else if (!Helper.validatePassword(req.body.password)){
+      res.status(403).send({ error: { code:
+        'Password should be at least 6 characters with a speacial character' }
+      });
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * @description: This validates signInInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static signInInputs(req, res, next) {
+    req.check('username', 'Username is required').notEmpty().matches(/\w/);
+    req.check('email', 'Email is badly formatted').isEmail();
+    req.check('email', 'User email is required').notEmpty();
+    req.check('password', 'Password is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(403).send({
+        error: { code: 'Either email or passowrd is not provided' }
+      });
+    } else {
+      next();
+    }
+  }
+}

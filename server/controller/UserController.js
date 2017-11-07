@@ -18,55 +18,34 @@ export default class UserController {
    * @return {Object} json response contains signed up user response
    */
   static signUp(req, res) {
-    const { email, password,
-      confirmPassword, phoneNumber, username } = req.body;
-    if (!Helper.validatePassword(password)) {
-      res.status(403).send({
-        error: { code:
-          'password should be at least 6' +
-        ' characters with a speacial character' }
-      });
-    } else if (username === undefined) {
-      res.status(400).send({ error: { code:
-        'Username is required' }
-      });
-    } else if (username.length < 2) {
-      res.status(403).send({ error: { code: 'Username required at' +
-        ' least 2 characters' }
-      });
-    } else if (password !== confirmPassword) {
-      res.status(403).send({ error: { code:
-        'Password does not match' }
-      });
-    // } else if (Helper.validatePhoneNumber(phoneNumber) === false) {
-    //   res.status(400).send({ error: { code:
-    //     'Incorrect phone number' } });
-    } else {
-      const userEmail = email;
-      const userPassword = password;
-      const userPhoneNumber = phoneNumber;
-      const userDisplayName = username;
-      const signUpDetails = {
-        email: userEmail, phoneNumber: userPhoneNumber,
-        password: userPassword, displayName: userDisplayName
-      };
-      admin.auth().createUser(signUpDetails)
-        .then(userRecord => {
-          const userUid = userRecord.uid;
-          admin.database().ref(`users/${userUid}`).push({
-            userEmail: userEmail,
-            userName: userDisplayName,
-            phone_Number: userPhoneNumber,
-            time: moment().format('llll'),
-            userId: userUid
-          });
-          res.status(200).send({
-            message: 'User`s signed up successfully', userRecord });
-        }).catch(error => res.status(401).send({ error }));
-    }
+    const {
+      email, password,
+      confirmPassword,
+      phoneNumber, username } = req.body;
+    const userEmail = email;
+    const userPassword = password;
+    const userPhoneNumber = '+234' + phoneNumber;
+    const userDisplayName = username;
+    const signUpDetails = {
+      email: userEmail,
+      phoneNumber: userPhoneNumber,
+      password: userPassword,
+      displayName: userDisplayName
+    };
+    admin.auth().createUser(signUpDetails)
+      .then(userRecord => {
+        const userUid = userRecord.uid;
+        admin.database().ref(`users/${userUid}`).push({
+          userEmail: userEmail,
+          userName: userDisplayName,
+          phone_Number: userPhoneNumber,
+          time: moment().format('llll'),
+          userId: userUid
+        });
+        res.status(200).send({
+          message: 'User`s signed up successfully', userRecord });
+      }).catch(error => res.status(401).send({ error }));
   }
-
-
   /**
    * @description This method signin registered users
    * route POST: api/v1/signin
@@ -76,12 +55,7 @@ export default class UserController {
    */
   static signIn(req, res) {
     const { email, password } = req.body;
-    if (email === undefined || password === undefined) {
-      res.status(403).send({
-        error: { code: 'Either email or passowrd is not provided' }
-      });
-    } else {
-      firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
       .then(user => res.status(200).send({
         message: 'User Signed in successfully', user }))
       .catch((error) => {
@@ -93,7 +67,6 @@ export default class UserController {
           res.status(404).send({ error });
         }
       });
-    }
   }
 
   /**
@@ -108,11 +81,11 @@ export default class UserController {
     const credentials = firebase.auth.GoogleAuthProvider.credential(token);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
-        firebase.database().ref('users').child(user.uid)
+        admin.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
               Promise.all(
-                [dbConfig.database().ref(`users/${user.uid}`).push({
+                [admin.database().ref(`users/${user.uid}`).push({
                   userEmail: user.email,
                   userName: user.displayName,
                   phone_Number: '08092893120',

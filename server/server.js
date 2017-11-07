@@ -2,6 +2,7 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
+import expressValidator from 'express-validator';
 import morgan from 'morgan';
 import compression from 'compression';
 import Router from './routes/index';
@@ -13,6 +14,7 @@ app.use(compression());
 // CONFIG APP
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(expressValidator());
 
 // configure app to handle CORS requests
 app.use((req, res, next) => {
