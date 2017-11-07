@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
 import dbConfig from '../config/index';
+import admin from '../firebaseSDK/firebaseConfiguration';
 import Helper from '../helper/helper';
 
 /**
@@ -37,38 +38,31 @@ export default class UserController {
       res.status(403).send({ error: { code:
         'Password does not match' }
       });
-    } else if (Helper.validatePhoneNumber(phoneNumber) === false) {
-      res.status(400).send({ error: { code:
-        'Incorrect phone number' } });
+    // } else if (Helper.validatePhoneNumber(phoneNumber) === false) {
+    //   res.status(400).send({ error: { code:
+    //     'Incorrect phone number' } });
     } else {
-      dbConfig.auth().createUserWithEmailAndPassword(email, password)
-      .then(user => user.sendEmailVerification()
-        .then(() => {
-          const userUid = (firebase.auth().currentUser).uid;
-          return Promise.all(
-            [dbConfig.database().ref(`users/${userUid}`).push({
-              userEmail: email,
-              userName: username,
-              phone_Number: phoneNumber,
-              time: moment().format('llll'),
-              userId: userUid
-            })
-            ]);
-        })
-        .then(response => res.status(200).send({
-          message: 'Registration successful and ' +
-          'verification email sent to your email',
-          response })
-        ))
-      .catch((error) => {
-        if (error.code === 'auth/invalid-email') {
-          res.status(400).send({ error });
-        } else if (error.code === 'auth/email-already-in-use') {
-          res.status(403).send({ error });
-        } else {
-          res.status(404).send({ error });
-        }
-      });
+      const userEmail = email;
+      const userPassword = password;
+      const userPhoneNumber = phoneNumber;
+      const userDisplayName = username;
+      const signUpDetails = {
+        email: userEmail, phoneNumber: userPhoneNumber,
+        password: userPassword, displayName: userDisplayName
+      };
+      admin.auth().createUser(signUpDetails)
+        .then(userRecord => {
+          const userUid = userRecord.uid;
+          admin.database().ref(`users/${userUid}`).push({
+            userEmail: userEmail,
+            userName: userDisplayName,
+            phone_Number: userPhoneNumber,
+            time: moment().format('llll'),
+            userId: userUid
+          });
+          res.status(200).send({
+            message: 'User`s signed up successfully', userRecord });
+        }).catch(error => res.status(401).send({ error }));
     }
   }
 
@@ -88,17 +82,8 @@ export default class UserController {
       });
     } else {
       firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => Promise.all(
-        [
-          dbConfig.database().ref('users').child(user.uid)
-            .once('value', (snapshot) => {
-              if (!snapshot.val()) {
-                snapshot.val();
-              }
-            })
-        ]))
-      .then(response => res.status(200).send({
-        message: 'User Signed in successfully', response }))
+      .then(user => res.status(200).send({
+        message: 'User Signed in successfully', user }))
       .catch((error) => {
         if (error.code === 'auth/invalid-email') {
           res.status(400).send({ error });
@@ -123,7 +108,7 @@ export default class UserController {
     const credentials = firebase.auth.GoogleAuthProvider.credential(token);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
-        dbConfig.database().ref('users').child(user.uid)
+        firebase.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
               Promise.all(

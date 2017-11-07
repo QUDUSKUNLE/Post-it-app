@@ -83,6 +83,8 @@ export default class UserSignIn extends React.Component {
       loggedIn: true,
       userId: (Object.values((response.response)[0]))[0].userId
     });
+    const userToken = ((response.response)[1]).accessToken
+    localStorage.setItem('token', JSON.stringify(userToken));
     localStorage.setItem('user', JSON.stringify(response));
     localStorage.setItem('userName', JSON.stringify(this.state.userName));
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));

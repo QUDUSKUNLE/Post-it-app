@@ -70,7 +70,7 @@ Router.get('/api/v1/getMessage/:groupId', MessageController.getMessage);
 /**
  * Route for a signed in user to add members to a group
  */
-Router.get('/api/v1/getAllRegisteredUsers',
+Router.get('/api/v1/getAllRegisteredUsers/:token',
   GroupController.getAllRegisteredUsers);
 
 // export Router

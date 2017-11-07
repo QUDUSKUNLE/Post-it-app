@@ -13,6 +13,7 @@ import {
  */
 export const signInAction = user => axios.post('/api/v1/signin', user)
   .then(({ data }) => {
+    console.log(data);
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,
       response: data
