@@ -3,9 +3,9 @@ import axios from 'axios';
 import expect from 'expect';
 import 'babel-polyfill';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock.js';
-import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
-import sendMessageResponse from '../../src/__mock__/sendMessageResponse.json';
+import '../../src/__mock__/firebaseMock';
+import groupMessageResponse from '../../src/__mock__/groupMessageResponse';
+import sendMessageResponse from '../../src/__mock__/sendMessageResponse';
 import { getGroupMessage, sendGroupMessage }
   from '../../src/actions/messageActions';
 

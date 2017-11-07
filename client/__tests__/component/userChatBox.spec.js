@@ -4,7 +4,7 @@ import { shallow, mount } from 'enzyme';
 import expect from 'expect';
 import UserChatBox from '../../src/components/UserChatBox.jsx';
 import localStorageMock from '../../src/__mock__/localStorage';
-import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
+import groupMessageResponse from '../../src/__mock__/groupMessageResponse';
 
 window.localStorage = localStorageMock;
 describe('<UserChatBox />', () => {

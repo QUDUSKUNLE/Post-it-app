@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock.js';
+import '../../src/__mock__/firebaseMock';
 import resetPassword from '../../src/actions/resetPasswordActions';
 
 describe('resetPasswordAction', () => {

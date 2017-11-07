@@ -2,9 +2,9 @@ import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock.js';
-import memberResponse from '../../src/__mock__/memberResponse.json';
-import registeredUsers from '../../src/__mock__/registeredUsers.json';
+import '../../src/__mock__/firebaseMock';
+import memberResponse from '../../src/__mock__/memberResponse';
+import registeredUsers from '../../src/__mock__/registeredUsers';
 import { getGroupMember, getAllUsers, addMember }
   from '../../src/actions/memberActions';
 
@@ -37,7 +37,8 @@ describe('MemberAction', () => {
         });
         expect(mockAxios.calledOnce).toBe(false);
         expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_MEMBERS_OF_GROUP');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe(
+          'GET_MEMBERS_OF_GROUP');
       });
     });
   });

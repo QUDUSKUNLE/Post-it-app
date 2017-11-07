@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import toastr from 'toastr';
 import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
 import NoGroupSelected from './NoGroupSelected';
-import { getUserGroups } from '../actions/GroupActions.js';
-import { getGroupMessage } from '../actions/messageActions.js';
-import { getGroupMember } from '../actions/memberActions.js';
+import { getUserGroups } from '../actions/GroupActions';
+import { getGroupMessage } from '../actions/messageActions';
+import { getGroupMember } from '../actions/memberActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
 import MessageStore from '../stores/MessageStore';

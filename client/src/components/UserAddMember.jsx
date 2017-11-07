@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
-import { addMember, getAllUsers } from '../actions/memberActions.js';
+import { addMember, getAllUsers } from '../actions/memberActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/GroupActions.js';
+import { getUserGroups } from '../actions/GroupActions';
 
 /**
  * @export

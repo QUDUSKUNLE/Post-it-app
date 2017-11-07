@@ -1,6 +1,6 @@
 import values from 'object.values';
 import naijaNumber from 'naija-phone-number';
-import dbConfig from '../config/index.js';
+import dbConfig from '../config/index';
 
 /**
  * @description This is a class Helper that contains functions that helps to

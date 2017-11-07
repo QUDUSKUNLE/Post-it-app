@@ -6,7 +6,7 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import UserResetPassword
   from '../../src/components/UserResetPassword';
-import '../../../server/config/index.js';
+import '../../../server/config/index';
 import SignInStore from '../../src/stores/SignInStore';
 
 describe('<UserResetPassword/>', () => {

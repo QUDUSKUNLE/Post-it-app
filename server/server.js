@@ -4,8 +4,8 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import compression from 'compression';
-import Router from './routes/index.js';
-import dbConfig from './config/index.js';
+import Router from './routes/index';
+import dbConfig from './config/index';
 
 const port = process.env.PORT || 8080;
 const app = express();

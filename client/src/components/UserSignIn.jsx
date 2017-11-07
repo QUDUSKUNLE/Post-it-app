@@ -3,10 +3,9 @@ import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link } from 'react-router-dom';
-import firebase from '../vendors/index.js';
-import Footer from './Footer';
+import firebase from '../vendors/index';
 import SignInStore from '../stores/SignInStore';
-import { signInAction, signInWithGoogle } from '../actions/signInActions.js';
+import { signInAction, signInWithGoogle } from '../actions/signInActions';
 
 /**
  * @description - renders UserSignIn Component
@@ -191,7 +190,7 @@ export default class UserSignIn extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

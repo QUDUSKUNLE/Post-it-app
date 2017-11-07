@@ -1,9 +1,9 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';
+  GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server

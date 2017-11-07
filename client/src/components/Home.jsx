@@ -14,15 +14,10 @@ const Home = () =>
         <div className="col-md-6">
           <div className="row">
             <div className="col-md-10 col-md-offset-1">
-              <div className="word">
-                <h4>PostIt
-                <small>
-                    <i>App</i>
-                  </small>
-                  {' '}
-                  allows friends come together and share vital information.
+              <h4>PostIt
+                {' '}
+                allows friends come together and share vital information.
               </h4>
-              </div>
             </div>
           </div>
         </div>

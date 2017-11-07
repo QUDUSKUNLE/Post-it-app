@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
-import { createGroup } from '../actions/GroupActions.js';
+import { createGroup } from '../actions/GroupActions';
 import GroupStore from '../stores/GroupStore';
 
 

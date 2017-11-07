@@ -2,8 +2,8 @@ import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock.js';
-import signInResponse from '../../src/__mock__/signInResponse.json';
+import '../../src/__mock__/firebaseMock';
+import signInResponse from '../../src/__mock__/signInResponse';
 import { signInAction, signInWithGoogle }
   from '../../src/actions/SignInActions';
 import signOutAction from '../../src/actions/signOutActions';
@@ -62,7 +62,8 @@ describe('GoogleSignIn', () => {
       signInWithGoogle(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GOOGLE_SIGN_IN_SUCCESS');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe(
+          'GOOGLE_SIGN_IN_SUCCESS');
       });
     });
   });

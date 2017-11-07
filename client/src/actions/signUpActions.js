@@ -1,7 +1,7 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server
