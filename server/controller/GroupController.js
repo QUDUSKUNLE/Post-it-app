@@ -1,7 +1,6 @@
 import moment from 'moment';
 import values from 'object.values';
 import admin from '../firebaseSDK/firebaseConfiguration';
-import dbConfig from '../config/index';
 import Helper from '../helper/helper';
 
 /**
@@ -60,16 +59,8 @@ export default class GroupController {
    * @param {Object} res response object
    * @return {Object} json response containing all registerdUsers
    */
-  static getAllRegisteredUsers(req, res) {
+  static getRegisteredUsers(req, res) {
     const idToken = req.params.token;
-    if (idToken === undefined) {
-      res.status(403).send({
-        error: {
-          code: 'auth/argument-error',
-          message: 'User`s not signed in.'
-        }
-      });
-    } else {
       admin.auth().verifyIdToken(idToken)
         .then((decodedToken) => {
           if (decodedToken) {
@@ -80,9 +71,7 @@ export default class GroupController {
                 }
               }).then(response => res.status(200).send({ response }));
           }
-        })
-        .catch(error => res.status(401).send({ error }));
-    }
+        }).catch(error => res.status(401).send({ error }));
   }
 
   /**
@@ -92,25 +81,25 @@ export default class GroupController {
    * @param {Object} res response object
    * @return {Object} json response contains all members of a group
    */
-  static getMembersOfGroup(req, res) {
+  static getMembers(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.user.uid;
-    if (userId === undefined) {
-      res.status(401).send({ error: 'User is not signed in' });
-    } else {
-      Helper.getGroupName(groupId).then((groupName) => {
-        if (groupName) {
-          return Promise.all([
-            dbConfig.database().ref('GroupMember').child(groupId).once('value',
-              snapshot => snapshot.val()),
-            groupId,
-            groupName[0]
-          ])
-          .then(response => res.status(200).send({ response }))
-          .catch(error => res.status(403).send({ error }));
-        }
-      });
-    }
+    const idToken = req.params.token;
+    admin.auth().verifyIdToken(idToken)
+      .then((decodedToken) => {
+        const userId = decodedToken.uid;
+        Helper.getGroupName(groupId).then((groupName) => {
+          if (groupName) {
+            return Promise.all([
+              admin.database().ref('GroupMember').child(groupId)
+                .once('value', snapshot => snapshot.val()),
+              groupId,
+              groupName[0]
+            ])
+            .then(response => res.status(200).send({ response }))
+            .catch(error => res.status(403).send({ error }));
+          }
+        });
+      }).catch(error => res.status(401).send({ error }))
   }
 
   /**
@@ -121,18 +110,17 @@ export default class GroupController {
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
-    const userId = req.params.userId;
-    const uId = req.user.uid;
-    if (uId === undefined) {
-      res.status(401).send({ error: 'User is not signed in' });
-    } else {
-      return Promise.all([
-        dbConfig.database().ref('UserGroups').child(userId).once('value',
-          snapshot => snapshot.val())
-      ])
-      .then(response => res.status(200).send({ response }))
-      .catch(error => res.status(403).send({ error }));
-    }
+    const idToken = req.params.token;
+    admin.auth().verifyIdToken(idToken)
+      .then((decodedToken) => {
+        const userId = decodedToken.uid;
+        return Promise.all([
+          admin.database().ref('UserGroups').child(userId).once('value',
+            snapshot => snapshot.val())
+        ])
+        .then(response => res.status(200).send({ response }))
+        .catch(error => res.status(403).send({ error }))
+      }).catch(error => res.status(401).send({ error }))
   }
 
   /**
@@ -146,26 +134,31 @@ export default class GroupController {
     const memberId = req.body.memberId;
     const group = req.body.group;
     const groupId = req.params.groupId;
-    const userId = req.user.uid;
-    if (userId === undefined) {
-      res.status(400).send({
-        error: 'User not signed in'
-      });
-    } else {
-      Helper.getUserEmailAndPhoneNumber(memberId)
-        .then((response) => {
-          const memberDetails = values(response)[0];
-          dbConfig.database().ref(`UserGroups/${memberId}`).child(group)
-            .set(groupId);
-          dbConfig.database().ref(`GroupMember/${groupId}`).child(memberId)
-            .set(memberDetails.userName);
-          dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)
-            .child(memberId).set({
-              phoneNumber: memberDetails.phone_Number,
-              email: memberDetails.userEmail
-            });
-          res.status(200).send({ response: 'Add member successfully' });
-        }).catch(error => res.status(403).send({ error }));
-    }
+    const idToken = req.body.token;
+    admin.auth().verifyIdToken(idToken)
+      .then((decodedToken) => {
+        Helper.getUserEmailAndPhoneNumber(memberId)
+          .then((response) => {
+            const memberDetails = values(response)[0];
+            admin.database().ref('GroupMember').child(groupId)
+              .once('value', (snapshot) => {
+                if (snapshot.hasChild(memberId)) {
+                  res.status(403).send({ response: 'User`s already a member' })
+                } else {
+                  admin.database().ref(`UserGroups/${memberId}`).child(group)
+                    .set(groupId);
+                  admin.database().ref(`GroupMember/${groupId}`).child(memberId)
+                    .set(memberDetails.userName);
+                  admin.database().ref(`GroupPhoneAndEmail/${groupId}`)
+                    .child(memberId).set({
+                      phoneNumber: memberDetails.phone_Number,
+                      email: memberDetails.userEmail
+                    });
+                  res.status(200).send({ response: 'Add member successfully' });
+                }  
+              })
+            
+          }).catch(error => res.status(403).send({ error }));
+      }).catch(error => res.status(401).send({ error }));
   }
 }

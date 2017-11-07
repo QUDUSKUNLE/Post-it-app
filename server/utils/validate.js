@@ -52,16 +52,80 @@ export default class Validate {
    * @return {Object} response contains validation status
    */
   static signInInputs(req, res, next) {
-    req.check('username', 'Username is required').notEmpty().matches(/\w/);
-    req.check('email', 'Email is badly formatted').isEmail();
     req.check('email', 'User email is required').notEmpty();
+    req.check('email', 'Email is badly formatted').isEmail();
     req.check('password', 'Password is required').notEmpty();
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(403).send({
-        error: { code: 'Either email or passowrd is not provided' }
-      });
+      res.status(400).send({ error: { code: message } });
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * @description: This validates passwordResetInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static passwordResetInputs(req, res, next) {
+    req.check('email', 'User email is required').notEmpty();
+    req.check('email', 'Email is badly formatted').isEmail();
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(400).send({ error: { code: message } });
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * @description: This validates createGroupInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static createGroupInputs(req, res, next) {
+    req.check('group', 'Group name is required').notEmpty();
+    req.check('token', 'User token is required').notEmpty();
+    req.check('group',
+      'Group name should contain only words').notEmpty().matches(/^[a-zA-Z]*$/);
+    req.check('group', 'Group name should be at least 3 characters')
+      .isLength(3, 50);
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(400).send({ error: { code: message } });
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * @description: This validates addMemberInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static addMemberInputs(req, res, next) {
+    req.check('memberId', 'MemberId is required').notEmpty();
+    req.check('group', 'Group name is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(400).send({ error: { code: message } });
     } else {
       next();
     }

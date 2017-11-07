@@ -1,5 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
+import setAuthToken from '../helper/setAuthToken';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   SIGN_IN_SUCCESS,
@@ -18,7 +19,11 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
       type: SIGN_IN_SUCCESS,
       response: data
     });
-  }).catch(error => toastr.error(error.response.data.error.message));
+  }).catch((error) => {
+    if (error.response) {
+      toastr.error(error.response.data.error.message);
+    };
+  }
 
 /**
  * @description - An action that makes API call to server

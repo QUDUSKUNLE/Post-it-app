@@ -1,5 +1,5 @@
 import values from 'object.values';
-import dbConfig from '../config/index';
+import admin from '../firebaseSDK/firebaseConfiguration';
 
 /**
  * @description This is a class Helper that contains functions that helps to
@@ -31,7 +31,7 @@ export default class Helper {
    */
   static getUserEmailAndPhoneNumber(userId) {
     return new Promise((resolve) => {
-      dbConfig.database().ref('users').child(userId).on('value',
+      admin.database().ref('users').child(userId).on('value',
         (snapshot) => {
           if (snapshot.val()) {
             resolve(snapshot.val());
@@ -50,7 +50,7 @@ export default class Helper {
    */
   static getGroupPhoneNumbers(groupId) {
     return new Promise((resolve) => {
-      dbConfig.database().ref('GroupPhoneAndEmail').child(groupId).on('value',
+      admin.database().ref('GroupPhoneAndEmail').child(groupId).on('value',
       (snapshot) => {
         if (snapshot.val()) {
           resolve(values(snapshot.val()));
@@ -68,7 +68,7 @@ export default class Helper {
    */
   static getGroupName(groupId) {
     return new Promise((resolve) => {
-      dbConfig.database().ref('Groups').child(groupId).on('value',
+      admin.database().ref('Groups').child(groupId).on('value',
       (snapshot) => {
         if (snapshot.val()) {
           resolve(values(snapshot.val()));

@@ -30,7 +30,8 @@ Router.post('/api/v1/google', UserController.googleSignIn);
  * Route for reset user password
  * Both { email }
  */
-Router.post('/api/v1/passwordReset', UserController.passwordReset);
+Router.post('/api/v1/passwordReset',
+  Validate.passwordResetInputs, UserController.passwordReset);
 
 /**
  * Route for sign out user from the application
@@ -40,22 +41,24 @@ Router.post('/api/v1/signout', UserController.signOut);
 /**
  * Route for a signed in user to create groups in the application
  */
-Router.post('/api/v1/createGroup', GroupController.createGroup);
+Router.post('/api/v1/createGroup',
+  Validate.createGroupInputs, GroupController.createGroup);
 
 /**
  * Route to get a user groups
  */
-Router.get('/api/v1/getgroups/:userId', GroupController.getUsersGroups);
+Router.get('/api/v1/getgroups/:token', GroupController.getUsersGroups);
 
 /**
  * Route for a registered user to add registered member to a group
  */
-Router.post('/api/v1/addmember/:groupId', GroupController.addMemberToGroup);
+Router.post('/api/v1/addmember/:groupId',
+  Validate.addMemberInputs, GroupController.addMemberToGroup);
 
 /**
  * Route for a signed user to get members of a group
  */
-Router.get('/api/v1/getMembers/:groupId', GroupController.getMembersOfGroup);
+Router.get('/api/v1/getMembers/:groupId/:token', GroupController.getMembers);
 
 /**
  * Route for a signed user to send message to a group
@@ -71,8 +74,7 @@ Router.get('/api/v1/getMessage/:groupId', MessageController.getMessage);
 /**
  * Route for a signed in user to add members to a group
  */
-Router.get('/api/v1/getAllRegisteredUsers/:token',
-  GroupController.getAllRegisteredUsers);
+Router.get('/api/v1/getRegisteredUsers/:token', GroupController.getRegisteredUsers);
 
 // export Router
 export default Router;
