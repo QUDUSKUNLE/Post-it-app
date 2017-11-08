@@ -78,7 +78,9 @@ export default class UserController {
    */
   static googleSignIn(req, res) {
     const token = req.body.credential.idToken;
-    admin.auth().verifyIdToken(idToken)
+    const credentials = firebase.auth.GoogleAuthProvider.credential(token);
+    firebase.auth().signInWithCredential(credentials)
+    admin.auth().verifyIdToken(token)
       .then((decodedToken) => {
         admin.database().ref('users').child(decodedToken.uid)
           .once('value', (snapshot) => {
@@ -104,7 +106,10 @@ export default class UserController {
             }
           });
       })
-      .catch(error => res.status(501).send({ response: error.message }) );
+      .catch(error => {
+        console.log(error);
+        res.status(501).send({ response: error.message })
+      });
   }
 
   /**

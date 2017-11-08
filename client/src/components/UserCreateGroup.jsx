@@ -89,6 +89,9 @@ export default class UserCreateGroup extends React.Component {
       <div className="container creategroup">
         <div className="row">
           <div className="col-md-offset-3 col-md-6 creategroupform">
+            <h5 className="text-center">
+              <b>Create group</b>
+            </h5>
             <div className="row w3-card w3-white">
               <form id="creategroupform" onSubmit={this.onSubmit}>
                 <div className="form-group">

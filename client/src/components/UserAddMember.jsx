@@ -131,6 +131,9 @@ export default class UserAddMember extends React.Component {
       <div className="container addmember">
         <div className="row">
           <div className="col-md-offset-3 col-md-6">
+            <h5 className="text-center">
+              <b>Add Member to group</b>
+            </h5>
             <div className="row w3-card w3-white">
               <form className="addmemberform" onSubmit={this.onSubmit}>
                 <div className="form-group">

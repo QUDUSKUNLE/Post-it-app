@@ -77,7 +77,7 @@ export default class UserResetPassword extends React.Component {
     return (
       <div className="passwordreset">
         <h5 className="text-center">
-          Reset your password
+          <b>Reset your password</b>
         </h5>
         <div className="container resetform">
           <div className="row">
@@ -85,7 +85,7 @@ export default class UserResetPassword extends React.Component {
               <form onSubmit={this.onSubmit} id="resetform">
                 <div className="form-group">
                   <label htmlFor="email">
-                    Enter your email address
+                    Enter email
                   </label>
                   <input value={this.state.email}
                     onChange={this.onChange}

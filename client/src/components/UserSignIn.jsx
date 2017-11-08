@@ -138,6 +138,9 @@ export default class UserSignIn extends React.Component {
         {isLoading()}
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
+            <h5 className="text-center">
+              <b>Sign in to PostIt</b>
+            </h5>
             <form onSubmit={this.onSubmit}
               className="w3-card w3-white" id="signinForm">
               <div className="form-group">
@@ -175,7 +178,7 @@ export default class UserSignIn extends React.Component {
             <div>
               <center>
                 <p>New to PostIt? <Link to="/" className="create">
-                  Sign up.</Link>
+                  Create an account.</Link>
                 </p>
               </center>
             </div>
