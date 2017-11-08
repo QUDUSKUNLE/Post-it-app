@@ -2,7 +2,7 @@ import moment from 'moment';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import values from 'object.values';
-import dbConfig from '../config/index';
+import admin from '../firebaseSDK/firebaseConfiguration';
 import Helper from '../helper/helper';
 import sendGroupSMS from '../utils/utils';
 
@@ -137,7 +137,7 @@ export default class MessageController {
             }
           });
           return Promise.all([
-            dbConfig.database().ref('Messages')
+            admin.database().ref('Messages')
               .child(groupId).push({
                 message, priority, userName, email, time }),
                 { message, priority, userName, email, time }
@@ -159,18 +159,18 @@ export default class MessageController {
    */
   static getMessage(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.user.uid;
-    if (userId === undefined) {
-      res.status(401).send({ error: 'User not signed in' });
-    } else {
-      return Promise.all(
-        [
-          dbConfig.database().ref('Messages').child(groupId)
-            .once('value', snapshot => snapshot.val())
-        ])
-        .then(response => res.status(200).send({ response }))
-        .catch(error => res.status(403).send({ error }));
-    }
+    const idToken = req.headers['x-access-token'];
+    admin.auth().verifyIdToken(idToken)
+      .then((decodedToken) => {
+        if (decodedToken) {
+          return Promise.all(
+            [ admin.database().ref('Messages').child(groupId).once('value',
+             snapshot => snapshot.val())
+            ])
+            .then(response => res.status(200).send({ response }))
+            .catch(error => res.status(403).send({ error }));
+        }
+      }).catch(error => res.status(401).send({ error }));
   }
 }
 

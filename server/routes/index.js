@@ -47,7 +47,7 @@ Router.post('/api/v1/createGroup',
 /**
  * Route to get a user groups
  */
-Router.get('/api/v1/getgroups/:token', GroupController.getUsersGroups);
+Router.get('/api/v1/getgroups', GroupController.getUsersGroups);
 
 /**
  * Route for a registered user to add registered member to a group
@@ -58,7 +58,7 @@ Router.post('/api/v1/addmember/:groupId',
 /**
  * Route for a signed user to get members of a group
  */
-Router.get('/api/v1/getMembers/:groupId/:token', GroupController.getMembers);
+Router.get('/api/v1/getMembers/:groupId', GroupController.getMembers);
 
 /**
  * Route for a signed user to send message to a group
@@ -74,7 +74,7 @@ Router.get('/api/v1/getMessage/:groupId', MessageController.getMessage);
 /**
  * Route for a signed in user to add members to a group
  */
-Router.get('/api/v1/getRegisteredUsers/:token', GroupController.getRegisteredUsers);
+Router.get('/api/v1/getRegisteredUsers', GroupController.getRegisteredUsers);
 
 // export Router
 export default Router;

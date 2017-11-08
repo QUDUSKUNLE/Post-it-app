@@ -27,11 +27,9 @@ export default class UserBroadCastBoard extends React.Component {
     super(props);
     this.state = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: '',
       groups: [],
       groupId: '',
-      userName: JSON.parse(localStorage.getItem('userName')),
       groupMessage: [],
       groupMember: [],
       groupSelected: false
@@ -53,7 +51,7 @@ export default class UserBroadCastBoard extends React.Component {
    * @return {*} void
    */
   componentWillMount() {
-    getUserGroups(this.state.userId);
+    getUserGroups();
   }
 
   /**

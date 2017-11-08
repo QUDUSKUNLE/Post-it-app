@@ -35,13 +35,18 @@ export const getGroupMember = groupId => axios.get(
  * @param {*} void - No paramater
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
-export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
+export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
     });
-  }).catch(response => toastr.error(response.data.message));
+  }).catch((response) => {
+    if (response.data) {
+      toastr.error(response.data.message);
+    }
+  });
+  
 
 /**
  * @description - An action that makes API call to server
@@ -58,4 +63,3 @@ export const addMember = memberDetails =>
       });
     })
     .catch(error => toastr.error(error.response.data.error));
-

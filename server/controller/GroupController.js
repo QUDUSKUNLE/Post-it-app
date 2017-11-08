@@ -60,7 +60,7 @@ export default class GroupController {
    * @return {Object} json response containing all registerdUsers
    */
   static getRegisteredUsers(req, res) {
-    const idToken = req.params.token;
+    const idToken = req.headers['x-access-token'];
       admin.auth().verifyIdToken(idToken)
         .then((decodedToken) => {
           if (decodedToken) {
@@ -83,7 +83,7 @@ export default class GroupController {
    */
   static getMembers(req, res) {
     const groupId = req.params.groupId;
-    const idToken = req.params.token;
+    const idToken = req.headers['x-access-token'];
     admin.auth().verifyIdToken(idToken)
       .then((decodedToken) => {
         const userId = decodedToken.uid;
@@ -110,7 +110,7 @@ export default class GroupController {
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
-    const idToken = req.params.token;
+    const idToken = req.headers['x-access-token'];
     admin.auth().verifyIdToken(idToken)
       .then((decodedToken) => {
         const userId = decodedToken.uid;
@@ -134,7 +134,7 @@ export default class GroupController {
     const memberId = req.body.memberId;
     const group = req.body.group;
     const groupId = req.params.groupId;
-    const idToken = req.body.token;
+    const idToken = req.headers['x-access-token'];
     admin.auth().verifyIdToken(idToken)
       .then((decodedToken) => {
         Helper.getUserEmailAndPhoneNumber(memberId)
@@ -143,7 +143,7 @@ export default class GroupController {
             admin.database().ref('GroupMember').child(groupId)
               .once('value', (snapshot) => {
                 if (snapshot.hasChild(memberId)) {
-                  res.status(403).send({ response: 'User`s already a member' })
+                  res.status(403).send({ error: 'User`s already a member' });
                 } else {
                   admin.database().ref(`UserGroups/${memberId}`).child(group)
                     .set(groupId);
@@ -155,10 +155,9 @@ export default class GroupController {
                       email: memberDetails.userEmail
                     });
                   res.status(200).send({ response: 'Add member successfully' });
-                }  
+                }
               })
-            
-          }).catch(error => res.status(403).send({ error }));
+          }).catch(error => res.status(500).send({ error }));
       }).catch(error => res.status(401).send({ error }));
   }
 }

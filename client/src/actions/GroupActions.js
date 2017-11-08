@@ -14,8 +14,8 @@ import {
  * @param {string} userId - The User identity
  * @returns {function} dispatch - Server Response is dispatch to GroupStore
  */
-export const getUserGroups = userId => axios.get(
-  `/api/v1/getgroups/${userId}`)
+export const getUserGroups = () => {
+  axios.get('/api/v1/getgroups')
   .then(({ data }) => {
     if (data.response[0] === null) {
       AppDispatcher.dispatch({
@@ -29,6 +29,7 @@ export const getUserGroups = userId => axios.get(
       });
     }
   });
+}
 
 /**
  * @description - An action that makes API call to server
