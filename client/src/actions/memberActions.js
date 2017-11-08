@@ -16,7 +16,7 @@ import {
 export const getGroupMember = groupId => axios.get(
   `/api/v1/getMembers/${groupId}`)
     .then(({ data }) => {
-      if (data.response[0] === null) {
+      if ((data.response)[0] === null) {
         AppDispatcher.dispatch({
           type: GET_MEMBERS_OF_GROUP,
           members: []

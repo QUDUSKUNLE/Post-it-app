@@ -152,13 +152,6 @@ export default class UserSignIn extends React.Component {
                   <div className="col-md-4">
                     <label htmlFor="password">Password</label>
                   </div>
-                  <div className="col-md-4 col-md-offset-4">
-                    <Link to="/passwordreset">
-                      <h6 className="pull-right create">
-                        <b>Forgot password?</b>
-                      </h6>
-                    </Link>
-                  </div>
                 </div>
                 <input id="password" type="password"
                   value={this.state.password} onChange={this.onChange}
@@ -170,6 +163,11 @@ export default class UserSignIn extends React.Component {
               </button>
             </form>
             <br/>
+            <span className="pull-right create">
+              <Link to="/passwordreset">
+                Forgot password?
+              </Link></span>
+            <br/>
             <center>
               <GoogleButton onClick={this.googleSignIn} />
             </center>
@@ -177,7 +175,7 @@ export default class UserSignIn extends React.Component {
             <div>
               <center>
                 <p>New to PostIt? <Link to="/" className="create">
-              Create an account.</Link>
+                  Sign up.</Link>
                 </p>
               </center>
             </div>

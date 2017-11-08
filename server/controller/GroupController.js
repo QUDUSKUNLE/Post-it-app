@@ -18,7 +18,7 @@ export default class GroupController {
    */
   static createGroup(req, res) {
     const groupName = req.body.group;
-    const idToken = req.body.token;
+    const idToken = req.headers['x-access-token'];
     const group = groupName.toLowerCase();
     admin.auth().verifyIdToken(idToken)
       .then((decodedToken) => {
@@ -27,22 +27,25 @@ export default class GroupController {
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
               admin.database().ref('Groups').push({
-                group,
+                group: group,
                 time: moment().format('llll')
               })
               .then((response) => {
-                admin.database().ref(`UserGroups/${userId}`).child(group)
-                  .set(response.key);
-                admin.database().ref(`GroupMember/${response.key}`)
-                  .child(userId).set(decodedToken.name);
-                admin.database().ref(`GroupPhoneAndEmail/${response.key}`)
-                  .child(userId).set({
-                    phoneNumber: decodedToken.phone_number,
-                    email: decodedToken.email
-                  });
+                Helper.getUserEmailAndPhoneNumber(userId)
+                  .then((userEmailAndPhone) => {
+                    const userDetails = (values(userEmailAndPhone))[0];
+                    admin.database().ref(`UserGroups/${userId}`).child(group)
+                      .set(response.key);
+                    admin.database().ref(`GroupMember/${response.key}`)
+                      .child(userId).set(userDetails.userName);
+                    admin.database().ref(`GroupPhoneAndEmail/${response.key}`)
+                      .child(userId).set({
+                        phoneNumber: userDetails.phone_Number,
+                        email: userDetails.userEmail
+                      });
+                  }).then(() => res.status(200).send({
+                    message: 'Group created successfully' }))
               })
-              .then(() => res.status(200).send({
-                message: 'Group created successfully' }));
             } else {
               res.status(403).send({ error: 'Group already exists' });
             }

@@ -62,11 +62,12 @@ export default class UserCreateGroup extends React.Component {
     event.preventDefault();
     const group = { group: this.state.group };
     createGroup(group);
+    this.setState({ group: '' });
   }
 
   /**
    * @description This handles createGroupEvent
-   * @param {object} user .
+   * @param {*} any .
    * @returns {void} .
   */
   handleCreateGroupEvent() {
