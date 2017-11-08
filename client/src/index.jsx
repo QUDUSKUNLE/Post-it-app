@@ -12,7 +12,8 @@ import './index.css';
  */
 if (localStorage.user) {
   setAuthToken(JSON.parse(localStorage.getItem('user'))
-    .stsTokenManager.accessToken);
+    .stsTokenManager.accessToken) ||
+      setAuthToken(JSON.parse(localStorage.getItem('user')));
 }
 ReactDOM.render(
   <Router history={browserHistory}>

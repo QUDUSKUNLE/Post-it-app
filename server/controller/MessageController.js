@@ -2,7 +2,7 @@ import moment from 'moment';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import values from 'object.values';
-import admin from '../firebaseSDK/firebaseConfiguration';
+import dbConfig from '../config/index';
 import Helper from '../helper/helper';
 import sendGroupSMS from '../utils/utils';
 
@@ -24,12 +24,14 @@ export default class MessageController {
     const message = req.body.message;
     const priority = req.body.priority;
     const groupId = req.params.groupId;
-    const userId = req.user.uid;
+    const userId = req.decoded.data.userId;
     const time = moment().format('llll');
     if (userId === undefined) {
-      res.status(401).send({ error: {
-        code: 'PERMISSION_DENIED',
-        message: 'User is not signed in' }
+      res.status(401).send({
+        error: {
+          code: 'PERMISSION_DENIED',
+          message: 'User is not signed in'
+        }
       });
     } else if (message.length < 1) {
       res.status(403).send({ error: 'No message sent' });
@@ -48,7 +50,8 @@ export default class MessageController {
                 secure: false,
                 auth: {
                   user: process.env.APP_EMAIL,
-                  pass: process.env.APP_PASSWORD },
+                  pass: process.env.APP_PASSWORD
+                },
                 tls: { rejectUnauthorized: false }
               });
               const mailOptions = {
@@ -98,7 +101,8 @@ export default class MessageController {
                     secure: false,
                     auth: {
                       user: process.env.APP_EMAIL,
-                      pass: process.env.APP_PASSWORD },
+                      pass: process.env.APP_PASSWORD
+                    },
                     tls: { rejectUnauthorized: false }
                   });
                   const mailOptions = {
@@ -137,13 +141,15 @@ export default class MessageController {
             }
           });
           return Promise.all([
-            admin.database().ref('Messages')
+            dbConfig.database().ref('Messages')
               .child(groupId).push({
-                message, priority, userName, email, time }),
-                { message, priority, userName, email, time }
+                message, priority, userName, email, time
+              }),
+            { message, priority, userName, email, time }
           ])
             .then(response => res.status(200).send({
-              message: 'Broadcast Message sent successfully', response }))
+              message: 'Broadcast Message sent successfully', response
+            }))
             .catch(error => res.status(500).send({ error }));
         })
         .catch(error => res.status(403).send({ error }));
@@ -159,18 +165,12 @@ export default class MessageController {
    */
   static getMessage(req, res) {
     const groupId = req.params.groupId;
-    const idToken = req.headers['x-access-token'];
-    admin.auth().verifyIdToken(idToken)
-      .then((decodedToken) => {
-        if (decodedToken) {
-          return Promise.all(
-            [ admin.database().ref('Messages').child(groupId).once('value',
-             snapshot => snapshot.val())
-            ])
-            .then(response => res.status(200).send({ response }))
-            .catch(error => res.status(403).send({ error }));
-        }
-      }).catch(error => res.status(401).send({ error }));
-  }
+    return Promise.all([
+      dbConfig.database().ref('Messages').child(groupId)
+        .once('value', snapshot => snapshot.val())
+      ])
+        .then(response => res.status(200).send({ response }))
+        .catch(error => res.status(403).send({ error }));
+    }
 }
 

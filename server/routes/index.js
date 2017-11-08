@@ -2,6 +2,7 @@ import express from 'express';
 import UserController from '../controller/UserController';
 import GroupController from '../controller/GroupController';
 import MessageController from '../controller/MessageController';
+import jwtToken from '../middleware/jwtToken';
 import Validate from '../utils/validate';
 
 /**
@@ -42,39 +43,41 @@ Router.post('/api/v1/signout', UserController.signOut);
  * Route for a signed in user to create groups in the application
  */
 Router.post('/api/v1/createGroup',
-  Validate.createGroupInputs, GroupController.createGroup);
+  Validate.createGroupInputs, jwtToken, GroupController.createGroup);
 
 /**
  * Route to get a user groups
  */
-Router.get('/api/v1/getgroups', GroupController.getUsersGroups);
+Router.get('/api/v1/getGroups', jwtToken, GroupController.getUsersGroups);
 
 /**
  * Route for a registered user to add registered member to a group
  */
-Router.post('/api/v1/addmember/:groupId',
-  Validate.addMemberInputs, GroupController.addMemberToGroup);
+Router.post('/api/v1/addMember/:groupId',
+  Validate.addMemberInputs, jwtToken, GroupController.addMemberToGroup);
 
 /**
  * Route for a signed user to get members of a group
  */
-Router.get('/api/v1/getMembers/:groupId', GroupController.getMembers);
+Router.get('/api/v1/getMembers/:groupId', jwtToken, GroupController.getMembers);
 
 /**
  * Route for a signed user to send message to a group
  */
-Router.post('/api/v1/sendMessage/:groupId',
-  MessageController.sendMessageToGroup);
+Router.post('/api/v1/sendMessage/:groupId', jwtToken, 
+  Validate.sendMessageInputs, MessageController.sendMessageToGroup);
 
 /**
  * Route for signed user to vew message in a group
  */
-Router.get('/api/v1/getMessage/:groupId', MessageController.getMessage);
+Router.get('/api/v1/getMessage/:groupId', jwtToken,
+  MessageController.getMessage);
 
 /**
  * Route for a signed in user to add members to a group
  */
-Router.get('/api/v1/getRegisteredUsers', GroupController.getRegisteredUsers);
+Router.get('/api/v1/getRegisteredUsers', jwtToken,
+  GroupController.getRegisteredUsers);
 
 // export Router
 export default Router;

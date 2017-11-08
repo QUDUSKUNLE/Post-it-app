@@ -20,10 +20,12 @@ export default class Validate {
    */
   static signUpInputs(req, res, next) {
     req.check('username', 'Username is required').notEmpty().matches(/\w/);
-    req.check('email', 'Email is badly formatted').isEmail();
     req.check('email', 'User email is required').notEmpty();
+    req.check('email', 'Email is badly formatted').isEmail();
     req.check('password', 'Password is required').notEmpty();
     req.check('phoneNumber', 'Incorect phoneNumber').isLength(11)
+    req.check('phoneNumber', 'Enter a valid phone Number')
+      .isMobilePhone('en-NG');
     req.check('confirmPassword', 'Please confirm the password').notEmpty();
     req.check('username', 'username should be at least 2 characters')
       .isLength(2, 50);
@@ -121,6 +123,27 @@ export default class Validate {
   static addMemberInputs(req, res, next) {
     req.check('memberId', 'MemberId is required').notEmpty();
     req.check('group', 'Group name is required').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      const message = errors[0].msg;
+      res.status(400).send({ error: { code: message } });
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * @description: This validates sendMessageInputs
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @param {Function} next callback function
+   *
+   * @return {Object} response contains validation status
+   */
+  static sendMessageInputs(req, res, next) {
+    req.check('message', 'Message is required').notEmpty();
+    req.check('priority', 'Message priority is required').notEmpty();
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;

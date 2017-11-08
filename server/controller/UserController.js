@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
+import jwt from 'jsonwebtoken';
 import dbConfig from '../config/index';
-import admin from '../firebaseSDK/firebaseConfiguration';
 import Helper from '../helper/helper';
 
 /**
@@ -22,29 +22,24 @@ export default class UserController {
       email, password,
       confirmPassword,
       phoneNumber, username } = req.body;
-    const userEmail = email;
-    const userPassword = password;
-    const userPhoneNumber = '+234' + phoneNumber;
-    const userDisplayName = username;
-    const signUpDetails = {
-      email: userEmail,
-      phoneNumber: userPhoneNumber,
-      password: userPassword,
-      displayName: userDisplayName
-    };
-    admin.auth().createUser(signUpDetails)
-      .then(userRecord => {
-        const userUid = userRecord.uid;
-        admin.database().ref(`users/${userUid}`).push({
-          userEmail: userEmail,
-          userName: userDisplayName,
-          phone_Number: userPhoneNumber,
-          time: moment().format('llll'),
-          userId: userUid
-        });
-        res.status(200).send({
-          message: 'User`s signed up successfully', userRecord });
-      }).catch(error => res.status(401).send({ error }));
+    dbConfig.auth().createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        const userId = user.uid;
+        const token = jwt.sign({ data: { userId, username, email } },
+          process.env.TOKEN_SECRET, { expiresIn: '24h' })
+        return Promise.all(
+          [ dbConfig.database().ref(`users/${user.uid}`).push({
+            userEmail: email,
+            userName: username,
+            phone_Number: phoneNumber,
+            time: moment().format('llll'),
+            userId: user.uid
+          }),
+          { token: token }
+          ])
+      }).then(response => res.status(200).send({
+          message: 'User`s sign up successfully', response }))
+      .catch(error => res.status(401).send({ error }));
   }
   /**
    * @description This method signin registered users
@@ -56,8 +51,14 @@ export default class UserController {
   static signIn(req, res) {
     const { email, password } = req.body;
     firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(user => res.status(200).send({
-        message: 'User Signed in successfully', user }))
+      .then((user) => {
+        const userId = user.uid;
+        const token = jwt.sign({
+          data: { userId, email } },
+          process.env.TOKEN_SECRET, { expiresIn: '24h' });
+        res.status(200).send({
+        message: 'User Signed in successfully', token })
+      })
       .catch((error) => {
         if (error.code === 'auth/invalid-email') {
           res.status(400).send({ error });
@@ -80,13 +81,12 @@ export default class UserController {
     const token = req.body.credential.idToken;
     const credentials = firebase.auth.GoogleAuthProvider.credential(token);
     firebase.auth().signInWithCredential(credentials)
-    admin.auth().verifyIdToken(token)
-      .then((decodedToken) => {
-        admin.database().ref('users').child(decodedToken.uid)
+      .then((user) => {
+        dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
               Promise.all(
-                [admin.database().ref(`users/${decodedToken.uid}`).push({
+                [dbConfig.database().ref(`users/${user.uid}`).push({
                   userEmail: user.email,
                   userName: user.displayName,
                   phone_Number: '08092893120',
@@ -98,17 +98,20 @@ export default class UserController {
                 .then((response) => {
                   const responseValue = response[1];
                   res.status(200).send({
-                    message: 'user`s signed in succesfully', responseValue });
+                    message: 'user`s signed in succesfully', responseValue
+                  });
                 });
             } else {
               res.status(200).send({
-                message: 'user`s signed in succesfully', user });
+                message: 'user`s signed in succesfully', user
+              });
             }
           });
       })
-      .catch(error => {
-        console.log(error);
-        res.status(501).send({ response: error.message })
+      .catch((error) => {
+        if (error) {
+          res.status(501).send({ response: error.message });
+        }
       });
   }
 
@@ -142,7 +145,6 @@ export default class UserController {
   static signOut(req, res) {
     firebase.auth().signOut()
       .then(() => {
-        req.user = {};
         res.status(200).send({ message: 'User`s signed-out successfully.' });
       })
       .catch(() => res.status(500).send({ message: 'Network Error' }));
