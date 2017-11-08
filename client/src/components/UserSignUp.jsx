@@ -144,10 +144,6 @@ export default class UserSignUp extends React.Component {
                 Sign up
               </button>
             </form>
-            <div className="text-center term">
-              <i>By clicking <b>Sign up</b>,
-              you've agreed to our terms of service and privacy policy.</i>
-            </div>
           </div>
         </div>
       </div>
