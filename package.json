@@ -135,7 +135,7 @@
         "sinon": "^3.2.1",
         "superagent": "^3.5.2",
         "vinyl-source-stream": "*",
-        "webpack-hot-middleware": "^2.18.2",
+        "webpack-hot-middleware": "^2.20.0",
         "webpack-merge": "^4.1.0"
     }
 }
