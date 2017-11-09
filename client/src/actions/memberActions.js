@@ -36,7 +36,7 @@ export const getGroupMember = groupId => axios.get(
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
-  .then(({ data }) => {  
+  .then(({ data }) => {
     AppDispatcher.dispatch({
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
@@ -46,7 +46,6 @@ export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
       toastr.error(response.data.message);
     }
   });
-  
 
 /**
  * @description - An action that makes API call to server

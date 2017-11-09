@@ -168,9 +168,9 @@ export default class MessageController {
     return Promise.all([
       dbConfig.database().ref('Messages').child(groupId)
         .once('value', snapshot => snapshot.val())
-      ])
-        .then(response => res.status(200).send({ response }))
-        .catch(error => res.status(403).send({ error }));
-    }
+    ])
+      .then(response => res.status(200).send({ response }))
+      .catch(error => res.status(403).send({ error }));
+  }
 }
 

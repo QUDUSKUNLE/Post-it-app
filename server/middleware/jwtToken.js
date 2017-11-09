@@ -28,6 +28,6 @@ const jwtToken = (req, res, next) => {
     req.decoded = decoded;
     next();
   });
-}
+};
 
 export default jwtToken;

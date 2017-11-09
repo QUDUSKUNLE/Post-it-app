@@ -3,7 +3,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import toastr from 'toastr';
-import signOutAction from '../actions/signOutActions.js';
+import signOutAction from '../actions/signOutActions';
 import UserSignIn from './UserSignIn';
 import UserCreateGroup from './UserCreateGroup';
 import UserBroadCastBoard from './UserBroadCastBoard';

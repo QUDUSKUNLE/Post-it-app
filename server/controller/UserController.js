@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
 import dbConfig from '../config/index';
-import Helper from '../helper/helper';
 
 /**
  * @description This class create and read functions for User
@@ -20,25 +19,24 @@ export default class UserController {
   static signUp(req, res) {
     const {
       email, password,
-      confirmPassword,
       phoneNumber, username } = req.body;
     dbConfig.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         const userId = user.uid;
-        const token = jwt.sign({ data: { userId, username, email } },
-          process.env.TOKEN_SECRET, { expiresIn: '24h' })
+        const userToken = jwt.sign({ data: { userId, username, email } },
+          process.env.TOKEN_SECRET, { expiresIn: '24h' });
         return Promise.all(
-          [ dbConfig.database().ref(`users/${user.uid}`).push({
+          [dbConfig.database().ref(`users/${user.uid}`).push({
             userEmail: email,
             userName: username,
             phone_Number: phoneNumber,
             time: moment().format('llll'),
             userId: user.uid
           }),
-          { token: token }
-          ])
+          { token: userToken }
+          ]);
       }).then(response => res.status(200).send({
-          message: 'User`s sign up successfully', response }))
+        message: 'User`s sign up successfully', response }))
       .catch(error => res.status(401).send({ error }));
   }
   /**
@@ -57,7 +55,7 @@ export default class UserController {
           data: { userId, email } },
           process.env.TOKEN_SECRET, { expiresIn: '24h' });
         res.status(200).send({
-        message: 'User Signed in successfully', token })
+          message: 'User Signed in successfully', token });
       })
       .catch((error) => {
         if (error.code === 'auth/invalid-email') {
@@ -78,9 +76,8 @@ export default class UserController {
    * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
-    const token = req.body.credential.idToken;
-    const credentials = firebase.auth.GoogleAuthProvider.credential(token);
-    console.log(credentials);
+    const idToken = req.body.credential.idToken;
+    const credentials = firebase.auth.GoogleAuthProvider.credential(idToken);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
         dbConfig.database().ref('users').child(user.uid)
@@ -88,7 +85,7 @@ export default class UserController {
             if (!snapshot.exists()) {
               const userId = user.uid;
               const email = user.email;
-              const token = jwt.sign({ data: { userId, email }
+              const userToken = jwt.sign({ data: { userId, email }
                 }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
               Promise.all(
                 [dbConfig.database().ref(`users/${user.uid}`).push({
@@ -98,7 +95,7 @@ export default class UserController {
                   time: moment().format('llll'),
                   userId: user.uid
                 }),
-                { token: token }
+                { token: userToken }
                 ])
                 .then((response) => {
                   const responseValue = response[1];
@@ -109,11 +106,11 @@ export default class UserController {
             } else {
               const userId = user.uid;
               const email = user.email;
-              const token = jwt.sign({
+              const userToken = jwt.sign({
                 data: { userId, email }
               }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
               res.status(200).send({
-                message: 'user`s signed in succesfully', token: token
+                message: 'user`s signed in succesfully', token: userToken
               });
             }
           });

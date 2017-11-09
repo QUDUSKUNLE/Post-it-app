@@ -24,8 +24,8 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
   }).catch((error) => {
     if (error.response) {
       toastr.error(error.response.data.error.message);
-    };
-  })
+    }
+  });
 
 /**
  * @description - An action that makes API call to server

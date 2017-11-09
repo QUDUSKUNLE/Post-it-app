@@ -57,17 +57,17 @@ export const helpGetGroups = (data) => {
  * @returns {object} array of object of members of a group
  */
 export const getGroupMembers = (data) => {
-   if ( data.length === 0) {
-     return [];
-   } else {
-     const memberId = Object.keys(data[0]);
-     const memberName = Object.values(data[0]);
-     let index = 0;
-     const groupMembers = [];
-     while (index < memberId.length) {
-       groupMembers.push({ [memberId[index]]: memberName[index] });
-       index += 1;
-     }
-     return groupMembers;
-   }
+  let groupMembers = [];
+  if (data.length === 0) {
+    groupMembers = [];
+  } else {
+    const memberId = Object.keys(data[0]);
+    const memberName = Object.values(data[0]);
+    let index = 0;
+    while (index < memberId.length) {
+      groupMembers.push({ [memberId[index]]: memberName[index] });
+      index += 1;
+    }
+  }
+  return groupMembers;
 };

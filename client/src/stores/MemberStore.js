@@ -4,7 +4,7 @@ import { getGroupMembers } from '../helper/helper';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
 
 /**
  * Holds the storage, listen to actions and update the stores

@@ -4,9 +4,6 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
-import webpack from 'webpack';
-import webpackMiddleWare from 'webpack-dev-middleware';
-
 import compression from 'compression';
 import Router from './routes/index';
 

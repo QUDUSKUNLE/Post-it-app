@@ -1,6 +1,4 @@
-
 import Helper from '../helper/helper';
-import toastr from 'toastr';
 
 /**
  * @description: class Validates contains methods
@@ -9,7 +7,7 @@ import toastr from 'toastr';
  * @class Validate
  */
 export default class Validate {
-  
+
   /**
    * @description: This validates signUpInputs
    *
@@ -24,7 +22,7 @@ export default class Validate {
     req.check('email', 'User email is required').notEmpty();
     req.check('email', 'Email is badly formatted').isEmail();
     req.check('password', 'Password is required').notEmpty();
-    req.check('phoneNumber', 'Incorect phoneNumber').isLength(11)
+    req.check('phoneNumber', 'Incorect phoneNumber').isLength(11);
     req.check('phoneNumber', 'Enter a valid phone Number')
       .isMobilePhone('en-NG');
     req.check('confirmPassword', 'Please confirm the password').notEmpty();
@@ -33,10 +31,10 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message }});
-    } else if (req.body.password !== req.body.confirmPassword){
-      res.status(403).send({ error: { code: 'Password does not match'}});
-    } else if (!Helper.validatePassword(req.body.password)){
+      res.status(400).send({ error: { code: message } });
+    } else if (req.body.password !== req.body.confirmPassword) {
+      res.status(403).send({ error: { code: 'Password does not match' } });
+    } else if (!Helper.validatePassword(req.body.password)) {
       res.status(403).send({ error: { code:
         'Password should be at least 6 characters with a speacial character' }
       });

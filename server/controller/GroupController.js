@@ -1,6 +1,5 @@
 import moment from 'moment';
 import values from 'object.values';
-import jwt from 'jsonwebtoken';
 import dbConfig from '../config/index';
 import Helper from '../helper/helper';
 
@@ -18,22 +17,22 @@ export default class GroupController {
    * @return {Object} json response containing creating new group
    */
   static createGroup(req, res) {
-    const groupName = req.body.group;
+    const groupname = req.body.group;
     const userId = req.decoded.data.userId;
-    const group = groupName.toLowerCase();
-    dbConfig.database().ref(`UserGroups/${userId}`).child(group)
+    const groupName = groupname.toLowerCase();
+    dbConfig.database().ref(`UserGroups/${userId}`).child(groupName)
       .once('value', (snapshot) => {
         if (!snapshot.exists()) {
           dbConfig.database().ref('Groups').push({
-            group: group,
+            group: groupName,
             time: moment().format('llll')
           })
             .then((response) => {
               Helper.getUserEmailAndPhoneNumber(userId)
                 .then((userEmailAndPhone) => {
                   const userDetails = (values(userEmailAndPhone))[0];
-                  dbConfig.database().ref(`UserGroups/${userId}`).child(group)
-                    .set(response.key);
+                  dbConfig.database().ref(`UserGroups/${userId}`)
+                    .child(groupName).set(response.key);
                   dbConfig.database().ref(`GroupMember/${response.key}`)
                     .child(userId).set(userDetails.userName);
                   dbConfig.database().ref(`GroupPhoneAndEmail/${response.key}`)
@@ -41,9 +40,9 @@ export default class GroupController {
                       phoneNumber: userDetails.phone_Number,
                       email: userDetails.userEmail
                     });
-                  }).then(() => res.status(200).send({
-                    message: 'Group created successfully'
-                  }));
+                }).then(() => res.status(200).send({
+                  message: 'Group created successfully'
+                }));
             });
         } else {
           res.status(403).send({ error: 'Group already exists' });
@@ -60,7 +59,6 @@ export default class GroupController {
    * @return {Object} json response containing all registerdUsers
    */
   static getRegisteredUsers(req, res) {
-    const userId = req.decoded.data.userId;
     return Promise.all([
       dbConfig.database().ref('users')
         .once('value', (snapshot) => {
@@ -82,17 +80,15 @@ export default class GroupController {
    */
   static getMembers(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.decoded.data.userId;
-    Helper.getGroupName(groupId).then((groupName) => {
-      return Promise.all([
+    Helper.getGroupName(groupId).then((groupName) =>
+      Promise.all([
         dbConfig.database().ref('GroupMember').child(groupId)
           .once('value', snapshot => snapshot.val()),
-          groupId,
-          groupName[0]
-        ])
+        groupId,
+        groupName[0]
+      ])
         .then(response => res.status(200).send({ response }))
-        .catch(error => res.status(403).send({ error }));
-      });
+        .catch(error => res.status(403).send({ error })));
   }
 
   /**
@@ -123,7 +119,6 @@ export default class GroupController {
     const memberId = req.body.memberId;
     const group = req.body.group;
     const groupId = req.params.groupId;
-    const userId = req.decoded.data.userId;
     Helper.getUserEmailAndPhoneNumber(memberId)
       .then((response) => {
         const memberDetails = values(response)[0];
@@ -143,7 +138,7 @@ export default class GroupController {
                 });
               res.status(200).send({ response: 'Add member successfully' });
             }
-          })
+          });
       }).catch(error => res.status(500).send({ error }));
   }
 }

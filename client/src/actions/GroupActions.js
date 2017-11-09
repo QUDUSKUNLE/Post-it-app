@@ -29,7 +29,7 @@ export const getUserGroups = () => {
       });
     }
   });
-}
+};
 
 /**
  * @description - An action that makes API call to server
@@ -44,5 +44,5 @@ export const createGroup = groupName => axios.post(
       AppDispatcher.dispatch({
         type: CREATE_GROUP,
         message: data.message
-      })
+      });
     }).catch(error => toastr.error(error.response.data.error));

@@ -64,7 +64,7 @@ Router.get('/api/v1/getMembers/:groupId', jwtToken, GroupController.getMembers);
 /**
  * Route for a signed user to send message to a group
  */
-Router.post('/api/v1/sendMessage/:groupId', jwtToken, 
+Router.post('/api/v1/sendMessage/:groupId', jwtToken,
   Validate.sendMessageInputs, MessageController.sendMessageToGroup);
 
 /**
