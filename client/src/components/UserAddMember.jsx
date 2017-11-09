@@ -28,8 +28,8 @@ export default class UserAddMember extends React.Component {
       userId: JSON.parse(localStorage.getItem('Id')),
       groups: [],
       registeredUsers: [],
-      group: {},
-      member: ''
+      group: '',
+      member: '',
     };
     /**
      * @description This binding is necessary to make `this` work
@@ -95,10 +95,8 @@ export default class UserAddMember extends React.Component {
 	 */
   onSubmit(event) {
     event.preventDefault();
-    const groupDetails = this.state.group.split(',');
     const memberDetails = {
-      groupId: groupDetails[0],
-      group: groupDetails[1],
+      groupId: this.state.group,
       memberId: this.state.member
     };
     addMember(memberDetails);
@@ -143,7 +141,7 @@ export default class UserAddMember extends React.Component {
                     <option value="">Select a group</option>
                     {(this.state.groups).map(group =>
                       <option key={Object.values(group)}
-                        value={[Object.values(group), Object.keys(group)]}>
+                        value={Object.values(group)}>
                         {Object.keys(group)}</option>
                     )}
                   </select>

@@ -117,28 +117,30 @@ export default class GroupController {
    */
   static addMemberToGroup(req, res) {
     const memberId = req.body.memberId;
-    const group = req.body.group;
     const groupId = req.params.groupId;
     Helper.getUserEmailAndPhoneNumber(memberId)
       .then((response) => {
         const memberDetails = values(response)[0];
-        dbConfig.database().ref('GroupMember').child(groupId)
-          .once('value', (snapshot) => {
-            if (snapshot.hasChild(memberId)) {
-              res.status(403).send({ error: 'User`s already a member' });
-            } else {
-              dbConfig.database().ref(`UserGroups/${memberId}`).child(group)
-                .set(groupId);
-              dbConfig.database().ref(`GroupMember/${groupId}`)
-                .child(memberId).set(memberDetails.userName);
-              dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)
-                .child(memberId).set({
-                  phoneNumber: memberDetails.phone_Number,
-                  email: memberDetails.userEmail
-                });
-              res.status(200).send({ response: 'Add member successfully' });
-            }
-          });
+        Helper.getGroupName(groupId).then((group) => {
+          const groupName = group[0];
+          dbConfig.database().ref('GroupMember').child(groupId)
+            .once('value', (snapshot) => {
+              if (snapshot.hasChild(memberId)) {
+                res.status(403).send({ error: 'User`s already a member' });
+              } else {
+                dbConfig.database().ref(`UserGroups/${memberId}`)
+                .child(groupName).set(groupId);
+                dbConfig.database().ref(`GroupMember/${groupId}`)
+                  .child(memberId).set(memberDetails.userName);
+                dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)
+                  .child(memberId).set({
+                    phoneNumber: memberDetails.phone_Number,
+                    email: memberDetails.userEmail
+                  });
+                res.status(200).send({ response: 'Add member successfully' });
+              }
+            });
+        });
       }).catch(error => res.status(500).send({ error }));
   }
 }

@@ -121,7 +121,6 @@ export default class Validate {
    */
   static addMemberInputs(req, res, next) {
     req.check('memberId', 'MemberId is required').notEmpty();
-    req.check('group', 'Group name is required').notEmpty();
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
