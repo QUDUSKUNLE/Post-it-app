@@ -6,7 +6,7 @@ import signUpAction from '../actions/signUpActions';
 
 /**
  * @description - renders SignUp Component
- * @class SignUp
+ * @class UserSignUp
  * @extends {React.Component}
  */
 export default class UserSignUp extends React.Component {
