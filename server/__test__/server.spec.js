@@ -10,6 +10,16 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('PostIt', () => {
+  let token = '';
+  before((done) => {
+    chai.request(server)
+      .post('/api/v1/signin')
+      .send({ email: 'quduskunle@gmail.com', password: 'Ka123@' })
+      .end((err, res) => {
+        token = res.body;
+        done();
+      });
+  });
   it('allows anyone to visit its site', (done) => {
     chai.request(server)
       .get('http:127.0.0.1:8080')

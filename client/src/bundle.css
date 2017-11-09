@@ -155,7 +155,7 @@ body {
     max-width: 220px;
     background-color: #7067AF;
     float: left;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     overflow-x: hidden;
     border-right: 1px solid gray;
@@ -240,6 +240,7 @@ body {
 .nogroupselected {
     height: 300px;
     margin-top: 20px;
+    padding-bottom: 10px;
 }
 
 #content {
@@ -248,7 +249,7 @@ body {
     position: relative;
     top: 45%;
     transform: translateY(-50%);
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #loader {
