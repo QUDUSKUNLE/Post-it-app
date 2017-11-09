@@ -36,8 +36,8 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
 export const signInWithGoogle = user => axios.post('/api/v1/google', user)
   .then(({ data }) => {
     toastr.success(data.message);
-    localStorage.setItem('user', JSON.stringify(data.customToken));
-    setAuthToken(JSON.parse(localStorage.getItem('user')));
+    localStorage.setItem('token', JSON.stringify(data.token));
+    setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: GOOGLE_SIGN_IN_SUCCESS,
       response: data

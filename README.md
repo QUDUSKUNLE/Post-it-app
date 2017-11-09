@@ -10,12 +10,12 @@
 
   A live demo of the app can access on Heroku via <b><a href="https://heroku-postitapp.herokuapp.com/">PostIt-app</a></b>
 
-# PostIt-app API.
+## PostIt-app API.
   PostIt-app provides a restful API for users to sign up, sign in, create groups and as well add members to group.
   PostIt-app API is built with <a href="https://firebase.google.com/">Firebase</a>, <a href="https://expressjs.com/">Express</a>, <a href="https://facebook.github.io/react/">React</a> and <a href="https://nodejs.org/">Node.js</a>
 
 
- # Application Features
+ ## Application Features
   <b>.</b> Users can sign up
 
   <b>.</b> Users can sign in
@@ -39,7 +39,7 @@
 ## API Documentation
   The Link to API documentation can be found here <a href="https://app.apiary.io/postitapp/editor">API Doumentation</a>
 
-# Getting Started
+## Getting Started
   Kindly follow the steps below to setup a local development environment.
   + ```Clone``` this repository from a terminal ```git clone  https://github.com/QUDUSKUNLE/Post-it-app```
 
@@ -75,30 +75,12 @@
 + Users that signed in with Google would not receive SMS notification
 
 ## Author
-+ MIT © [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
++ [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
 
 
 ## Contribution
 If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```
 
- # MIT License
+ ## License
  
- Copyright © 2017
- 
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in all
- copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+This software is licensed under the MIT License. See the <a href="https://github.com/QUDUSKUNLE/Post-it-app/blob/feedback-implementation/LICENSE">LICENSE</a> file in the top distribution directory for the full license text.

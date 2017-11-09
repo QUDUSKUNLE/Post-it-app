@@ -80,11 +80,16 @@ export default class UserController {
   static googleSignIn(req, res) {
     const token = req.body.credential.idToken;
     const credentials = firebase.auth.GoogleAuthProvider.credential(token);
+    console.log(credentials);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
+              const userId = user.uid;
+              const email = user.email;
+              const token = jwt.sign({ data: { userId, email }
+                }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
               Promise.all(
                 [dbConfig.database().ref(`users/${user.uid}`).push({
                   userEmail: user.email,
@@ -93,7 +98,7 @@ export default class UserController {
                   time: moment().format('llll'),
                   userId: user.uid
                 }),
-                  user
+                { token: token }
                 ])
                 .then((response) => {
                   const responseValue = response[1];
@@ -102,8 +107,13 @@ export default class UserController {
                   });
                 });
             } else {
+              const userId = user.uid;
+              const email = user.email;
+              const token = jwt.sign({
+                data: { userId, email }
+              }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
               res.status(200).send({
-                message: 'user`s signed in succesfully', user
+                message: 'user`s signed in succesfully', token: token
               });
             }
           });

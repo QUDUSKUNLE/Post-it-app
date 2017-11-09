@@ -40,10 +40,9 @@ export const getUserGroups = () => {
  */
 export const createGroup = groupName => axios.post(
   '/api/v1/createGroup', groupName)
-    .then(({ data }) =>
+    .then(({ data }) => {
       AppDispatcher.dispatch({
         type: CREATE_GROUP,
         message: data.message
-      }))
-    .catch(error => toastr.error(error.response.data.error));
-
+      })
+    }).catch(error => toastr.error(error.response.data.error));
