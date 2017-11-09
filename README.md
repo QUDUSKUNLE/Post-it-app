@@ -79,7 +79,8 @@
 
 
 ## Contribution
-If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```
+If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```.
+For every pull request raised, kindly adhere to this best practises <a href="https://github.com/andela/bestpractices/wiki/Git-naming-conventions-and-best-practices">link</a> to conform to the standard to which this project codebase is written.
 
  ## License
  
