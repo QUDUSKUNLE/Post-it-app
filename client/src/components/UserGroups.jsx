@@ -19,6 +19,12 @@ export default class UserGroups extends React.Component {
     return (
       <div id="sidebar" className="sidebar-offcanvas">
         <div className="col-md-12 groups">
+          <div>
+            <center>
+              Your Groups
+            </center>
+          </div>
+          <br/>
           <ul className="nav nav-pills nav-stacked">
             {this.props.grouplist}
           </ul>
