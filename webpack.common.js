@@ -5,7 +5,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware',
     path.resolve(__dirname, 'client/src/index.jsx'),
     path.resolve(__dirname, 'client/src/index.css')
   ],
