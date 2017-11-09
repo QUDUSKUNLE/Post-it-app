@@ -12,7 +12,6 @@ import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
  */
 const signUpAction = user => axios.post('/api/v1/signup', user)
   .then(({ data }) => {
-    console.log(data);
     AppDispatcher.dispatch({
       type: SIGN_UP_SUCCESS,
       response: data
