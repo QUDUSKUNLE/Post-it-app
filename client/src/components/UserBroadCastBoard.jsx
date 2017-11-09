@@ -155,7 +155,8 @@ export default class UserBroadCastBoard extends React.Component {
       <div className="row-offcanvas row-offcanvas-left">
         <UserGroups
           grouplist={groupList}
-          member={this.state.groupMember}/>
+          member={this.state.groupMember}
+          groupSelected={this.state.groupSelected}/>
         {isGroupSelected()}
       </div>
     );

@@ -38,8 +38,8 @@ export const getUserGroups = () => {
  * @param {object} groupName - The name of group to be created
  * @returns {function} dispatch - Server response is dispatch to GroupStore
  */
-export const createGroup = groupName => axios.post(
-  '/api/v1/createGroup', groupName)
+export const createGroup = groupName => axios.post('/api/v1/createGroup',
+  groupName)
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: CREATE_GROUP,

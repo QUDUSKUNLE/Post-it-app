@@ -98,7 +98,7 @@ export default class Validate {
   static createGroupInputs(req, res, next) {
     req.check('group', 'Group name is required').notEmpty();
     req.check('group',
-      'Group name should contain only words').notEmpty().matches(/^[a-zA-Z]*$/);
+      'Group name should contain only words').notEmpty();
     req.check('group', 'Group name should be at least 3 characters')
       .isLength(3, 50);
     const errors = req.validationErrors();

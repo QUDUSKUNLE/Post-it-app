@@ -108,31 +108,33 @@ class Routes extends React.Component {
     ];
     return (
         <div>
-          <nav className="navbar navbar-inverse navabar-fixed-top"
-            role="navigation">
-            <div className="container-fluid">
-              <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed"
-                  data-toggle="collapse" data-target=".navbar-collapse">
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <Link className="navbar-brand" to="#">
-                  <i>PostIt</i>
-                </Link>
+          <div>
+            <nav className="navbar navbar-inverse navbar-fixed-top"
+              role="navigation">
+              <div className="container-fluid">
+                <div className="navbar-header">
+                  <button type="button" className="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                    <span className="sr-only">Toggle navigation</span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                    <span className="icon-bar"></span>
+                  </button>
+                  <Link className="navbar-brand" to="#">
+                    <i>PostIt</i>
+                  </Link>
+                </div>
+                <div className="collapse navbar-collapse">
+                  <ul className="nav navbar-nav">
+                  </ul>
+                  {path.filter(pathname =>
+                    pathname.path === location.pathname).map(
+                      exactPath => exactPath.ul)
+                  }
+                </div>
               </div>
-              <div className="collapse navbar-collapse">
-                <ul className="nav navbar-nav">
-                </ul>
-                {path.filter(pathname =>
-                  pathname.path === location.pathname).map(
-                    exactPath => exactPath.ul)
-                }
-              </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signin" component={UserSignIn} />
