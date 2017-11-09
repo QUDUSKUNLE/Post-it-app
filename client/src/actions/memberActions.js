@@ -36,7 +36,7 @@ export const getGroupMember = groupId => axios.get(
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
-  .then(({ data }) => {
+  .then(({ data }) => {  
     AppDispatcher.dispatch({
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
@@ -55,7 +55,7 @@ export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const addMember = memberDetails =>
-  axios.post(`/api/v1/addmember/${memberDetails.groupId}`, memberDetails)
+  axios.post(`/api/v1/addMember/${memberDetails.groupId}`, memberDetails)
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: ADD_MEMBER,

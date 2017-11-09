@@ -15,12 +15,11 @@ import {
 export const signInAction = user => axios.post('/api/v1/signin', user)
   .then(({ data }) => {
     toastr.success(data.message);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    setAuthToken(JSON.parse(localStorage.getItem('user'))
-      .stsTokenManager.accessToken);
+    localStorage.setItem('token', JSON.stringify(data.token));
+    setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,
-      response: data.user
+      response: data
     });
   }).catch((error) => {
     if (error.response) {

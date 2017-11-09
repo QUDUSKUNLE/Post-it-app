@@ -5,7 +5,7 @@ import toastr from 'toastr';
  * @returns {Object} allUsers
  */
 export const helpGetRegisteredUsers = (res) => {
-  const users = Object.values(res.response);
+  const users = Object.values(res.response[0]);
   let index = 0;
   const allUsers = [];
   let registeredUser;

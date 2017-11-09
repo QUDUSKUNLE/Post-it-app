@@ -1,5 +1,6 @@
 
 import Helper from '../helper/helper';
+import toastr from 'toastr';
 
 /**
  * @description: class Validates contains methods

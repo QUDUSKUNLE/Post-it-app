@@ -10,10 +10,8 @@ import './index.css';
 /**
  * Contains Routes to all my components
  */
-if (localStorage.user) {
-  setAuthToken(JSON.parse(localStorage.getItem('user'))
-    .stsTokenManager.accessToken) ||
-      setAuthToken(JSON.parse(localStorage.getItem('user')));
+if (localStorage.token) {
+  setAuthToken(JSON.parse(localStorage.getItem('token')));
 }
 ReactDOM.render(
   <Router history={browserHistory}>
