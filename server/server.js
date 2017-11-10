@@ -4,10 +4,6 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
-import webpack from 'webpack';
-import webpackConfig from '../webpack.dev';
-import webpackMiddleWare from 'webpack-dev-middleware';
-
 import compression from 'compression';
 import Router from './routes/index';
 
@@ -29,13 +25,6 @@ app.use((req, res, next) => {
   next();
 });
 
-const compiler = webpack(webpackConfig);
-
-app.use(webpackMiddleWare(
-  compiler, {
-    noInfo: true,
-    publicPath: webpackConfig.output.publicPath
-  }));
 // MIDDLEWARE
 app.use(morgan('dev'));
 app.use('/', Router);
