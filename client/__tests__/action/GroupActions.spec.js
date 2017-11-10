@@ -5,7 +5,7 @@ import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
 import groupResponse from '../../src/__mock__/groupResponse';
 import { getUserGroups, createGroup }
-  from '../../src/actions/GroupActions';
+  from '../../src/actions/groupActions';
 
 
 describe('groupActions', () => {

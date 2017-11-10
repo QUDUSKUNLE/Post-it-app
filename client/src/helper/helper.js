@@ -72,19 +72,3 @@ export const getGroupMembers = (data) => {
   return groupMembers;
 };
 
-export const getArray = (data) => {
-  let result = [];
-  if (data.length === 0) {
-    result = [{ value: '', label: '' }];
-  } else {
-    let index = 0;
-    while (index < data.length) {
-      result[index] = {
-        value: Object.values(data[index])[0],
-        label: Object.keys(data[index])[0]
-      };
-      index += 1;
-    }
-  }
-  return result;
-};
