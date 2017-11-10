@@ -4,7 +4,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import faker from 'faker';
 import server from '../server';
-import expiredToken from '../expired';
+import expiredToken from '../__mock__/expired';
 
 chai.should();
 const expect = chai.expect;

@@ -6,6 +6,12 @@ const key = process.env.PUBLIC_KEY;
 const token = process.env.ACCESS_TOKEN;
 const jusibe = new Jusibe(key, token);
 
+/**
+ * @description This method sends SMS
+ * route POST: api/v1/signup
+ * @param {Object} phoneNumbers request object
+ * @return {Object} response from Jusibe server
+ */
 const sendGroupSMS = (phoneNumbers) => {
   const payloads = phoneNumbers.map(number => (
     {

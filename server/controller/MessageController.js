@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import values from 'object.values';
 import dbConfig from '../config/index';
 import Helper from '../helper/helper';
-import sendGroupSMS from '../utils/utils';
+import sendGroupSMS from '../utils/smsTransporter';
 
 dotenv.config();
 
