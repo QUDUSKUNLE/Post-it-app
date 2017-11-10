@@ -9,7 +9,7 @@
     },
     "scripts": {
         "start": "webpack --config webpack.prod.js && babel-watch ./server/server.js",
-        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 20000 --compilers js:babel-register && npm run coverage-report",
+        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 40000 --compilers js:babel-register && npm run coverage-report",
         "client_test": "jest ./client/__tests__",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
         "start:dev": "webpack --config webpack.dev.js && babel-watch ./server/server.js"

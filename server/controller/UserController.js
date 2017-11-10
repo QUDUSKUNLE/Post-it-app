@@ -58,9 +58,7 @@ export default class UserController {
           message: 'User Signed in successfully', token });
       })
       .catch((error) => {
-        if (error.code === 'auth/invalid-email') {
-          res.status(400).send({ error });
-        } else if (error.code === 'auth/wrong-password') {
+        if (error.code === 'auth/wrong-password') {
           res.status(401).send({ error });
         } else if (error.code === 'auth/user-not-found') {
           res.status(404).send({ error });
@@ -131,15 +129,11 @@ export default class UserController {
    */
   static passwordReset(req, res) {
     const { email } = req.body;
-    firebase.auth().sendPasswordResetEmail(email).then(() =>
-      res.status(200).send({ message: 'Password reset email sent successfully!'
-      })).catch((error) => {
-        if (error.code === 'auth/user-not-found') {
-          res.status(404).send({ error });
-        } else if (error.code === 'auth/invalid-email') {
-          res.status(400).send({ error });
-        }
-      });
+    firebase.auth().sendPasswordResetEmail(email)
+    .then(() =>
+      res.status(200).send({
+        message: 'Password reset email sent successfully!'
+      })).catch(error => res.status(404).send({ error }));
   }
 
   /**
