@@ -8,15 +8,148 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <div>
+  "node": <div
+    className="col-md-6"
+  >
     <div
-      className="col-md-5 col-md-offset-1"
+      className="row"
+    >
+      <div
+        className="col-md-10 col-md-offset-1 w3-card w3-white"
+        id="signupform"
+      >
+        <h4>
+          Create an account
+        </h4>
+        <br />
+        <form
+          onSubmit={[Function]}
+        >
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="email"
+            >
+              Email
+            </label>
+            <input
+              className="signinform inp"
+              id="email"
+              name="email"
+              onChange={[Function]}
+              placeholder="johndoe@example.com"
+              required={true}
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="username"
+            >
+              Username
+            </label>
+            <input
+              className="signinform"
+              id="username"
+              name="username"
+              onChange={[Function]}
+              placeholder="johndoe"
+              required={true}
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="phoneNumber"
+            >
+              Phone Number
+            </label>
+            <input
+              className="signinform"
+              id="phoneNumber"
+              name="phoneNumber"
+              onChange={[Function]}
+              placeholder="08012345678"
+              required={true}
+              type="phone"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="password"
+            >
+              Password
+            </label>
+            <input
+              className="signinform"
+              id="pass"
+              name="password"
+              onChange={[Function]}
+              placeholder="********"
+              required={true}
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            className="form-group"
+          >
+            <label
+              htmlFor="confirmPassword"
+            >
+              Confirm Password
+            </label>
+            <input
+              className="signinform"
+              id="confirmPassword"
+              name="confirmPassword"
+              onChange={[Function]}
+              placeholder="********"
+              required={true}
+              type="password"
+              value=""
+            />
+          </div>
+          <button
+            className="signinformbtn"
+            type="submit"
+          >
+            Sign up
+          </button>
+        </form>
+        <div
+          className="text-center term"
+        >
+          <i>
+            By clicking 
+            <b>
+              Sign up
+            </b>
+            , you've agreed to our terms of service and privacy policy.
+          </i>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "nodes": Array [
+    <div
+      className="col-md-6"
     >
       <div
         className="row"
       >
         <div
-          className="col-md-12 w3-card w3-white"
+          className="col-md-10 col-md-offset-1 w3-card w3-white"
           id="signupform"
         >
           <h4>
@@ -68,6 +201,25 @@ ShallowWrapper {
               className="form-group"
             >
               <label
+                htmlFor="phoneNumber"
+              >
+                Phone Number
+              </label>
+              <input
+                className="signinform"
+                id="phoneNumber"
+                name="phoneNumber"
+                onChange={[Function]}
+                placeholder="08012345678"
+                required={true}
+                type="phone"
+                value=""
+              />
+            </div>
+            <div
+              className="form-group"
+            >
+              <label
                 htmlFor="password"
               >
                 Password
@@ -87,14 +239,14 @@ ShallowWrapper {
               className="form-group"
             >
               <label
-                htmlFor="conf_password"
+                htmlFor="confirmPassword"
               >
                 Confirm Password
               </label>
               <input
                 className="signinform"
-                id="conf_password"
-                name="conf_password"
+                id="confirmPassword"
+                name="confirmPassword"
                 onChange={[Function]}
                 placeholder="********"
                 required={true}
@@ -109,124 +261,16 @@ ShallowWrapper {
               Sign up
             </button>
           </form>
-          <br />
-          <p
-            className="text-center"
-          >
-            By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>,
-  "nodes": Array [
-    <div>
-      <div
-        className="col-md-5 col-md-offset-1"
-      >
-        <div
-          className="row"
-        >
           <div
-            className="col-md-12 w3-card w3-white"
-            id="signupform"
+            className="text-center term"
           >
-            <h4>
-              Create an account
-            </h4>
-            <br />
-            <form
-              onSubmit={[Function]}
-            >
-              <div
-                className="form-group"
-              >
-                <label
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  className="signinform inp"
-                  id="email"
-                  name="email"
-                  onChange={[Function]}
-                  placeholder="johndoe@example.com"
-                  required={true}
-                  type="email"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-group"
-              >
-                <label
-                  htmlFor="username"
-                >
-                  Username
-                </label>
-                <input
-                  className="signinform"
-                  id="username"
-                  name="username"
-                  onChange={[Function]}
-                  placeholder="johndoe"
-                  required={true}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-group"
-              >
-                <label
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  className="signinform"
-                  id="pass"
-                  name="password"
-                  onChange={[Function]}
-                  placeholder="********"
-                  required={true}
-                  type="password"
-                  value=""
-                />
-              </div>
-              <div
-                className="form-group"
-              >
-                <label
-                  htmlFor="conf_password"
-                >
-                  Confirm Password
-                </label>
-                <input
-                  className="signinform"
-                  id="conf_password"
-                  name="conf_password"
-                  onChange={[Function]}
-                  placeholder="********"
-                  required={true}
-                  type="password"
-                  value=""
-                />
-              </div>
-              <button
-                className="signinformbtn"
-                type="submit"
-              >
+            <i>
+              By clicking 
+              <b>
                 Sign up
-              </button>
-            </form>
-            <br />
-            <p
-              className="text-center"
-            >
-              By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-            </p>
+              </b>
+              , you've agreed to our terms of service and privacy policy.
+            </i>
           </div>
         </div>
       </div>
@@ -238,23 +282,35 @@ ShallowWrapper {
       "_calledComponentWillUnmount": false,
       "_compositeType": 0,
       "_context": Object {},
-      "_currentElement": <SignUp />,
-      "_debugID": 1,
+      "_currentElement": <UserSignUp
+        confirmPassword=""
+        email=""
+        password=""
+        phoneNumber=""
+        username=""
+      />,
+      "_debugID": 32,
       "_hostContainerInfo": null,
       "_hostParent": null,
-      "_instance": SignUp {
+      "_instance": UserSignUp {
         "_reactInternalInstance": [Circular],
         "context": Object {},
+        "handleSignUpAction": [Function],
         "onChange": [Function],
         "onSubmit": [Function],
-        "props": Object {},
+        "props": Object {
+          "confirmPassword": "",
+          "email": "",
+          "password": "",
+          "phoneNumber": "",
+          "username": "",
+        },
         "refs": Object {},
         "state": Object {
-          "conf_password": "",
+          "confirmPassword": "",
           "email": "",
-          "errMessage": "",
           "password": "",
-          "signupMessage": "",
+          "phoneNumber": "",
           "username": "",
         },
         "updater": Object {
@@ -268,232 +324,276 @@ ShallowWrapper {
           "validateCallback": [Function],
         },
       },
-      "_mountOrder": 1,
+      "_mountOrder": 2,
       "_pendingCallbacks": null,
       "_pendingElement": null,
       "_pendingForceUpdate": false,
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <div>
+        "_currentElement": <div
+          className="col-md-6"
+        >
           <div
-            className="col-md-5 col-md-offset-1"
+            className="row"
           >
             <div
-              className="row"
+              className="col-md-10 col-md-offset-1 w3-card w3-white"
+              id="signupform"
             >
-              <div
-                className="col-md-12 w3-card w3-white"
-                id="signupform"
+              <h4>
+                Create an account
+              </h4>
+              <br />
+              <form
+                onSubmit={[Function]}
               >
-                <h4>
-                  Create an account
-                </h4>
-                <br />
-                <form
-                  onSubmit={[Function]}
+                <div
+                  className="form-group"
                 >
-                  <div
-                    className="form-group"
+                  <label
+                    htmlFor="email"
                   >
-                    <label
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                    <input
-                      className="signinform inp"
-                      id="email"
-                      name="email"
-                      onChange={[Function]}
-                      placeholder="johndoe@example.com"
-                      required={true}
-                      type="email"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Email
+                  </label>
+                  <input
+                    className="signinform inp"
+                    id="email"
+                    name="email"
+                    onChange={[Function]}
+                    placeholder="johndoe@example.com"
+                    required={true}
+                    type="email"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="username"
                   >
-                    <label
-                      htmlFor="username"
-                    >
-                      Username
-                    </label>
-                    <input
-                      className="signinform"
-                      id="username"
-                      name="username"
-                      onChange={[Function]}
-                      placeholder="johndoe"
-                      required={true}
-                      type="text"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Username
+                  </label>
+                  <input
+                    className="signinform"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    placeholder="johndoe"
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="phoneNumber"
                   >
-                    <label
-                      htmlFor="password"
-                    >
-                      Password
-                    </label>
-                    <input
-                      className="signinform"
-                      id="pass"
-                      name="password"
-                      onChange={[Function]}
-                      placeholder="********"
-                      required={true}
-                      type="password"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Phone Number
+                  </label>
+                  <input
+                    className="signinform"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    onChange={[Function]}
+                    placeholder="08012345678"
+                    required={true}
+                    type="phone"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="password"
                   >
-                    <label
-                      htmlFor="conf_password"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      className="signinform"
-                      id="conf_password"
-                      name="conf_password"
-                      onChange={[Function]}
-                      placeholder="********"
-                      required={true}
-                      type="password"
-                      value=""
-                    />
-                  </div>
-                  <button
-                    className="signinformbtn"
-                    type="submit"
+                    Password
+                  </label>
+                  <input
+                    className="signinform"
+                    id="pass"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="********"
+                    required={true}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="confirmPassword"
                   >
+                    Confirm Password
+                  </label>
+                  <input
+                    className="signinform"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    onChange={[Function]}
+                    placeholder="********"
+                    required={true}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <button
+                  className="signinformbtn"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </form>
+              <div
+                className="text-center term"
+              >
+                <i>
+                  By clicking 
+                  <b>
                     Sign up
-                  </button>
-                </form>
-                <br />
-                <p
-                  className="text-center"
-                >
-                  By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                  </b>
+                  , you've agreed to our terms of service and privacy policy.
+                </i>
               </div>
             </div>
           </div>
         </div>,
-        "_debugID": 2,
-        "_renderedOutput": <div>
+        "_debugID": 33,
+        "_renderedOutput": <div
+          className="col-md-6"
+        >
           <div
-            className="col-md-5 col-md-offset-1"
+            className="row"
           >
             <div
-              className="row"
+              className="col-md-10 col-md-offset-1 w3-card w3-white"
+              id="signupform"
             >
-              <div
-                className="col-md-12 w3-card w3-white"
-                id="signupform"
+              <h4>
+                Create an account
+              </h4>
+              <br />
+              <form
+                onSubmit={[Function]}
               >
-                <h4>
-                  Create an account
-                </h4>
-                <br />
-                <form
-                  onSubmit={[Function]}
+                <div
+                  className="form-group"
                 >
-                  <div
-                    className="form-group"
+                  <label
+                    htmlFor="email"
                   >
-                    <label
-                      htmlFor="email"
-                    >
-                      Email
-                    </label>
-                    <input
-                      className="signinform inp"
-                      id="email"
-                      name="email"
-                      onChange={[Function]}
-                      placeholder="johndoe@example.com"
-                      required={true}
-                      type="email"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Email
+                  </label>
+                  <input
+                    className="signinform inp"
+                    id="email"
+                    name="email"
+                    onChange={[Function]}
+                    placeholder="johndoe@example.com"
+                    required={true}
+                    type="email"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="username"
                   >
-                    <label
-                      htmlFor="username"
-                    >
-                      Username
-                    </label>
-                    <input
-                      className="signinform"
-                      id="username"
-                      name="username"
-                      onChange={[Function]}
-                      placeholder="johndoe"
-                      required={true}
-                      type="text"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Username
+                  </label>
+                  <input
+                    className="signinform"
+                    id="username"
+                    name="username"
+                    onChange={[Function]}
+                    placeholder="johndoe"
+                    required={true}
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="phoneNumber"
                   >
-                    <label
-                      htmlFor="password"
-                    >
-                      Password
-                    </label>
-                    <input
-                      className="signinform"
-                      id="pass"
-                      name="password"
-                      onChange={[Function]}
-                      placeholder="********"
-                      required={true}
-                      type="password"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="form-group"
+                    Phone Number
+                  </label>
+                  <input
+                    className="signinform"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    onChange={[Function]}
+                    placeholder="08012345678"
+                    required={true}
+                    type="phone"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="password"
                   >
-                    <label
-                      htmlFor="conf_password"
-                    >
-                      Confirm Password
-                    </label>
-                    <input
-                      className="signinform"
-                      id="conf_password"
-                      name="conf_password"
-                      onChange={[Function]}
-                      placeholder="********"
-                      required={true}
-                      type="password"
-                      value=""
-                    />
-                  </div>
-                  <button
-                    className="signinformbtn"
-                    type="submit"
+                    Password
+                  </label>
+                  <input
+                    className="signinform"
+                    id="pass"
+                    name="password"
+                    onChange={[Function]}
+                    placeholder="********"
+                    required={true}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="form-group"
+                >
+                  <label
+                    htmlFor="confirmPassword"
                   >
+                    Confirm Password
+                  </label>
+                  <input
+                    className="signinform"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    onChange={[Function]}
+                    placeholder="********"
+                    required={true}
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <button
+                  className="signinformbtn"
+                  type="submit"
+                >
+                  Sign up
+                </button>
+              </form>
+              <div
+                className="text-center term"
+              >
+                <i>
+                  By clicking 
+                  <b>
                     Sign up
-                  </button>
-                </form>
-                <br />
-                <p
-                  className="text-center"
-                >
-                  By clicking "Sign up for Postit App", you agree to our terms of service and privacy policy.
-                </p>
+                  </b>
+                  , you've agreed to our terms of service and privacy policy.
+                </i>
               </div>
             </div>
           </div>
@@ -509,6 +609,12 @@ ShallowWrapper {
     "render": [Function],
   },
   "root": [Circular],
-  "unrendered": <SignUp />,
+  "unrendered": <UserSignUp
+    confirmPassword=""
+    email=""
+    password=""
+    phoneNumber=""
+    username=""
+  />,
 }
 `;

@@ -1,9 +1,9 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import Groups from '../../client/src/js/components/userGroups.jsx';
+import expect from 'expect';
+import UserGroups from '../../src/components/UserGroups';
 
-describe('PostIt-app', () => {
-  it('expects App component to be defined', () => {
-    expect(Groups).toBeDefined();
+
+describe('<UserGroups/>', () => {
+  it('component expected to be defined', () => {
+    expect(UserGroups).toBeDefined();
   });
 });

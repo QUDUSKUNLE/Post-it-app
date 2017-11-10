@@ -1,7 +1,8 @@
-
-[![Build Status](https://travis-ci.org/QUDUSKUNLE/Post-it-app.svg?branch=development)](https://travis-ci.org/QUDUSKUNLE/Post-it-app)
-[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=server-test)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=server-test)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://choosealicense.com/licenses/mit/)
+[![Code Climate](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/gpa.svg)](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app)
+[![Issue Count](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/issue_count.svg)](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app)
+[![Build Status](https://travis-ci.org/QUDUSKUNLE/Post-it-app.svg?branch=feedback-implementation)](https://travis-ci.org/QUDUSKUNLE/Post-it-app)
+[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=feedback-implementation)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=feedback-implementation)
 
 # PostIt-app
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
@@ -15,11 +16,11 @@
 
 
  # Application Features
-  <b>.</b> Users can Sign up
+  <b>.</b> Users can sign up
 
-  <b>.</b> Users can Sign in
+  <b>.</b> Users can sign in
 
-  <b>.</b> Users can Sign in with Google
+  <b>.</b> Users can sign in with Google Account
 
   <b>.</b> Users can reset password
 
@@ -29,46 +30,60 @@
 
   <b>.</b> Users can send message to groups they belong to
 
-  <b>.</b> Users can receive notification base on message priority
+  <b>.</b> Users would receive notification base on message priority ```normal```, ```urgent``` and ```critical```
 
   <b>.</b> Users can see members of their groups
   
-  <b>.</b> Users can Sign out
+  <b>.</b> Users can sign out
 
+## API Documentation
+  The Link to API documentation can be found here <a href="https://app.apiary.io/postitapp/editor">API Doumentation</a>
 
 # Getting Started
   Kindly follow the steps below to setup a local development environment.
-  1. <b>Clone</b> this repository from a terminal <b>git clone https://github.com/QUDUSKUNLE/Post-it-app.</b>
+  + ```Clone``` this repository from a terminal ```git clone  https://github.com/QUDUSKUNLE/Post-it-app```
 
-  2. Move into the project directory
+  + ```cd``` into the project directory
 
-  3. Install project dependencies <b>npm install</b>
+  + Install project dependencies ```npm install```
 
-  4. Create an account on firebase and set up the app
+  + Create an account on ```firebase``` and set up the app and get account details from ```firebase```
 
-  5. Create an .env file and set the variables in .env-sample to your specified database connection
+  + Create ```.env``` file and set up the variables in ```.env-sample``` to your specified database connection gotten from ```firebase```
 
-  6. <b>npm start</b>
+   + ```npm start```
 
-  7. Go to <b>http://localhost:8080/</b>
+   + Go to ```http://localhost:8080/```
 
-# Limitations
-1. Users cannot edit profile
 
-2. Users can add any registered users without users prior knowledge
+  ## How to run Test
 
-3. Users cannot leave a group
++ ```git clone https://github.com/QUDUSKUNLE/Post-it-app```
 
-4. Users cannot delete message sent
++ and run ```npm test``` for ```server test``` and
+* ```npm run client_test``` for ```client test```
 
-# FAQ
+## Limitations
++ Users cannot edit profile
 
-# Author
-  . Qudus YEKEEN
++ Users can add any registered users without users prior knowledge
+
++ Users cannot leave a group
+
++ Users cannot delete message sent
+
++ Users that signed in with Google would not receive SMS notification
+
+## Author
++ MIT © [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
+
+
+## Contribution
+If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```
 
  # MIT License
  
- Copyright (c) 2017
+ Copyright © 2017
  
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal

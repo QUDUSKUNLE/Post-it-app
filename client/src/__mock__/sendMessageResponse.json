@@ -1,0 +1,13 @@
+{
+    "message": "Broadcast Message sent successfully",
+    "response": [
+        "https://post-it-app.firebaseio.com/Messages/-KvIvb4PMw3w2pr9196U/-KwzH4CYdemiYu0zDwNf",
+        {
+            "message": "Hello, User Sign in",
+            "priority": "normal",
+            "userName": "kunle",
+            "email": "quduskunle@gmail.com",
+            "time": "Sat, Oct 21, 2017 3:13 PM"
+        }
+    ]
+}

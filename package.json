@@ -2,18 +2,17 @@
     "name": "postitapp",
     "version": "1.0.0",
     "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
-    "main": "index.js",
+    "main": "webpack.confiig.js",
+    "licence": "MIT",
     "engines": {
         "node": "6.9.4"
     },
     "scripts": {
-        "start": "npm run client && npm run bundle",
-        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/test --timeout 20000 --compilers js:babel-register && npm run coverage-report",
-        "client_test": "jest __tests__  && npm run coverage-report",
+        "start": "webpack --config webpack.prod.js && babel-node ./server/server.js",
+        "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 20000 --compilers js:babel-register && npm run coverage-report",
+        "client_test": "jest ./client/__tests__",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
-        "client": "webpack",
-        "bundle": "babel server/ -d dist && npm run server",
-        "server": "babel-watch ./dist/server.js"
+        "start:dev": "webpack --config webpack.dev.js && babel-node ./server/server.js"
     },
     "repository": {
         "type": "git",
@@ -22,53 +21,71 @@
     "author": "Qudus YEKEEN",
     "license": "ISC",
     "jest": {
+        "roots": [
+            "<rootDir>/client/__tests__",
+            "<rootDir>/node_modules/babel-polyfill"
+        ],
+        "moduleFileExtensions": [
+            "js",
+            "jsx"
+        ],
         "collectCoverage": true,
-        "transform": {
-            ".*": "<rootDir>/node_modules/babel-jest"
-        },
-        "collectCoverageFrom": [
-            "client/src/js/**/*.js",
-            "client/src/js/**/*.jsx"
+        "coveragePathIgnorePatterns": [
+            "<rootDir>/test-env.js"
         ]
     },
     "dependencies": {
         "axios": "^0.16.2",
         "babel-loader": "^7.0.0",
+        "babel-polyfill": "^6.26.0",
         "babel-preset-react": "^6.24.1",
         "babel-watch": "^2.0.6",
         "body-parser": "^1.17.2",
+        "bootstrap": "^3.3.7",
         "chai": "^4.1.1",
+        "clean-webpack-plugin": "^0.1.17",
         "compression": "^1.6.2",
         "connect-history-api-fallback": "^1.3.0",
         "cookie-parser": "^1.4.3",
         "css-loader": "^0.28.4",
         "dotenv": "^4.0.0",
+        "expect": "^21.2.1",
         "express": "^4.15.3",
         "express-session": "^1.15.3",
+        "express-validator": "^4.2.1",
         "firebase": "^4.0.0",
         "html-webpack-plugin": "^2.29.0",
         "i": "^0.3.5",
         "if-env": "^1.0.0",
         "jquery": "^3.2.1",
+        "jusibe": "^1.0.1",
         "mocha-lcov-reporter": "^1.3.0",
         "moment": "^2.18.1",
         "morgan": "^1.8.1",
         "multer": "^1.3.0",
+        "naija-phone-number": "^1.0.2",
         "nodemailer": "^4.1.0",
         "nyc": "^11.1.0",
         "prop-types": "^15.5.10",
         "react": "^15.5.4",
+        "react-bootstrap": "^0.31.3",
         "react-google-button": "^0.3.0",
         "react-hot-loader": "^1.3.1",
+        "react-loader-display": "^3.1.0",
+        "react-loading": "^1.0.1",
+        "react-native-loading-gif": "^1.1.3",
         "react-redux": "^5.0.5",
+        "react-responsive": "^3.0.0",
         "react-router": "^4.1.1",
         "react-router-dom": "^4.1.1",
+        "react-tooltip": "^3.4.0",
         "redux": "^2.0.0",
         "redux-devtools-extension": "^2.13.2",
         "redux-thunk": "^2.2.0",
         "style-loader": "^0.18.2",
         "supertest": "^3.0.0",
         "toastr": "^2.1.2",
+        "uglifyjs-webpack-plugin": "^1.0.1",
         "underscore": "^1.8.3",
         "validator": "^7.0.0",
         "webpack": "^2.5.1",
@@ -78,6 +95,8 @@
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-core": "^6.24.1",
+        "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-stage-2": "^6.24.1",
         "babel-register": "^6.26.0",
@@ -91,8 +110,10 @@
         "eslint-plugin-import": "^1.6.1",
         "eslint-plugin-jsx": "0.0.2",
         "eslint-plugin-jsx-a11y": "^1.5.5",
+        "eslint-plugin-prefer-object-spread": "^1.2.1",
         "eslint-plugin-react": "^5.0.1",
         "express-history-api-fallback": "^2.2.1",
+        "extract-text-webpack-plugin": "^2.1.2",
         "faker": "^4.1.0",
         "flux": "^3.1.2",
         "istanbul": "^0.4.5",
@@ -105,12 +126,13 @@
         "object-assign": "*",
         "object.values": "^1.0.4",
         "react-dom": "^15.5.4",
-        "react-test-renderer": "^15.6.1",
+        "react-test-renderer": "^15.6.2",
         "sass-loader": "^6.0.6",
         "should": "^12.0.0",
         "sinon": "^3.2.1",
         "superagent": "^3.5.2",
         "vinyl-source-stream": "*",
-        "webpack-hot-middleware": "^2.18.2"
+        "webpack-hot-middleware": "^2.18.2",
+        "webpack-merge": "^4.1.0"
     }
 }
