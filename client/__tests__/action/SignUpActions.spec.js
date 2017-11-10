@@ -3,7 +3,7 @@ import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
-import signUpResponse from '../../src/__mock__/signUpResponse';
+import signUpResponse from '../../src/__mock__/signUpResponse.json';
 import signUpAction from '../../src/actions/signUpActions';
 
 describe('signUpAction', () => {

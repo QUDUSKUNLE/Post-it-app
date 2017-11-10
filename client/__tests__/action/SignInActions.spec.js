@@ -3,9 +3,9 @@ import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
-import signInResponse from '../../src/__mock__/signInResponse';
+import signInResponse from '../../src/__mock__/signInResponse.json';
 import { signInAction, signInWithGoogle }
-  from '../../src/actions/SignInActions';
+  from '../../src/actions/signInActions';
 import signOutAction from '../../src/actions/signOutActions';
 
 describe('SignInAction', () => {

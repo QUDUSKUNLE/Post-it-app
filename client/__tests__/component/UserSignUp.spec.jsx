@@ -50,6 +50,6 @@ describe('PostIt-app', () => {
   });
   it('should render correctly', () => {
     expect(component).toMatchSnapshot();
-    expect(component.find('div').length).toBe(9);
+    expect(component.find('div').length).toBe(8);
   });
 });

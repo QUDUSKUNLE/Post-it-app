@@ -6,7 +6,7 @@ import expect from 'expect';
 import sinon from 'sinon';
 import 'babel-polyfill';
 import localStorageMock from '../../src/__mock__/localStorage';
-import axiosMock from '../../src/__mock__/axiosMock.jsx';
+import axiosMock from '../../src/__mock__/axiosMock.js';
 import Footer from '../../src/components/Footer';
 import { signInAction } from '../../src/actions/SignInActions';
 import UserSignIn from '../../src/components/UserSignIn';
@@ -68,7 +68,7 @@ describe('<UserSignIn/>', () => {
   });
   it('component should render correctly', () => {
     expect(component).toMatchSnapshot();
-    expect(component.find('div').length).toBe(9);
+    expect(component.find('div').length).toBe(8);
   });
 });
 

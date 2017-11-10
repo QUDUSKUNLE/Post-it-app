@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount } from 'enzyme';
 import expect from 'expect';
-import UserChatBox from '../../src/components/UserChatBox.jsx';
+import UserChatBox from '../../src/components/UserChatBox';
 import localStorageMock from '../../src/__mock__/localStorage';
-import groupMessageResponse from '../../src/__mock__/groupMessageResponse';
+import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 
 window.localStorage = localStorageMock;
 describe('<UserChatBox />', () => {

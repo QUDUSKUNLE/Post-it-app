@@ -29,11 +29,8 @@ describe('<UserBroadCastBoard/>', () => {
 
   beforeEach(() => {
     window.localStorage.setItem('userIn', JSON.stringify(true));
-    window.localStorage.setItem('Id', JSON.stringify('AZCVGFRTUINSMUY15156'));
-    window.localStorage.setItem('userName', JSON.stringify('Kunle'));
     const props = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: '',
       groups: [],
       groupId: '',
@@ -76,8 +73,6 @@ describe('<UserBroadCastBoard/>', () => {
   it('component expected to be defined', () => {
     expect(UserBroadCastBoard).toBeDefined();
     expect(wrapper.state()).toBeDefined();
-    expect(wrapper.state().userName).toEqual('Kunle');
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
     expect(wrapper.state().groupSelected).toEqual(false);
     expect(wrapper.state().defaultGroup).toEqual('');
     expect(wrapper.state().groups).toEqual([]);
@@ -107,7 +102,6 @@ describe('<UserBroadCastBoard/>', () => {
   it('expects componentDidMount to mount when event is fired', () => {
     expect(mockOnMessage.displayName).toEqual('on');
     expect(wrapper.state().loggedIn).toEqual(true);
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
     expect(wrapper.state().groupMessage).toEqual(mockMessageResponse());
   });
   it('expects componentDidMount to mount', () => {
