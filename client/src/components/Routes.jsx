@@ -125,7 +125,7 @@ class Routes extends React.Component {
                   </Link>
                 </div>
                 <div className="collapse navbar-collapse">
-                  <ul className="nav navbar-nav">
+                <ul className="nav navbar-nav" key={location.key}>
                   </ul>
                   {path.filter(pathname =>
                     pathname.path === location.pathname).map(
