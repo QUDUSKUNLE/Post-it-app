@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { addMember, getAllUsers } from '../actions/memberActions';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/GroupActions';
+import { getUserGroups } from '../actions/groupActions';
 
 /**
  * @export
