@@ -54,21 +54,6 @@ describe('PostIt', () => {
       });
   });
 
-  // it('create group route should throw error for group name' +
-  //   ' of contains characters other than alphabets', (done) => {
-  //   const group = { group: 'a23a' };
-  //   chai.request(server)
-  //     .post('/api/v1/createGroup')
-  //     .set('x-access-token', token)
-  //     .send(group)
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(400);
-  //       assert.equal('Group name should contain only words',
-  //         res.body.error.code);
-  //       done();
-  //     });
-  // });
-
   it('create group route should allow registered user`s to create groups',
     (done) => {
       const group = { group: faker.name.findName() };
@@ -163,20 +148,6 @@ describe('PostIt', () => {
           done();
         });
     });
-
-  // it('addmember route should allow user`s add registered users to groups',
-  //   (done) => {
-  //     const userId = { memberId: 'ydyF3k3uEOSvFKMbfZfHxXMAWNA2' };
-  //     chai.request(server)
-  //       .post('/api/v1/addMember/-Kwj5WsTqFJaFddmh8uD')
-  //       .set('x-access-token', token)
-  //       .send(userId)
-  //       .end((err, res) => {
-  //         assert.equal(200, res.statusCode);
-  //         assert.equal('Add member successfully', res.body.response);
-  //         done();
-  //       });
-  //   });
 });
 
 
