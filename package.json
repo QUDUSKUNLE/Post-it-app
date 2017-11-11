@@ -108,7 +108,7 @@
         "dotenv-webpack": "^1.5.4",
         "enzyme": "^2.9.1",
         "es6-module-transpiler-brunch": "0.0.6",
-        "eslint": "^2.13.1",
+        "eslint": "^3.19.0",
         "eslint-config-airbnb": "^8.0.0",
         "eslint-plugin-babel": "^4.1.2",
         "eslint-plugin-import": "^1.6.1",
