@@ -41,7 +41,7 @@ describe('PostIt', () => {
         });
     });
 
-  it('Sign up route should throw 400 status code for signing up without email',
+  it('Sign up route should throw 409 status code for signing up without email',
     (done) => {
       const newUser = {
         password: 'kawthar',
@@ -53,7 +53,7 @@ describe('PostIt', () => {
         .post('/api/v1/signup')
         .send(newUser)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('User email is required', res.body.error.code);
           done();
         });
@@ -71,7 +71,7 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Username is required', res.body.error.code);
         done();
       });
@@ -91,7 +91,7 @@ describe('PostIt', () => {
         .post('/api/v1/signup')
         .send(newUser)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('username should be at least 2 characters',
             res.body.error.code);
           done();
@@ -129,7 +129,7 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Incorect phoneNumber', res.body.error.code);
         done();
       });
@@ -147,7 +147,7 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Enter a valid phone Number', res.body.error.code);
         done();
       });
@@ -164,7 +164,7 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Email is badly formatted', res.body.error.code);
         done();
       });
@@ -182,7 +182,7 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201);
         expect((res.body.response)[1]).to.have.property('token');
         assert.equal('User`s sign up successfully', res.body.message);
         done();
@@ -204,7 +204,7 @@ describe('PostIt', () => {
         assert.equal('The email address is already in use by another account.',
           res.body.error.message);
         assert.equal('auth/email-already-in-use', res.body.error.code);
-        res.should.have.status(401);
+        res.should.have.status(409);
         done();
       });
   });
@@ -222,7 +222,7 @@ describe('PostIt', () => {
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(401);
+          res.should.have.status(400);
           assert.equal('auth/wrong-password', res.body.error.code);
           assert.equal('The password is invalid or the user does' +
             ' not have a password.', res.body.error.message);
@@ -239,7 +239,7 @@ describe('PostIt', () => {
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('User email is required', res.body.error.code);
           done();
         });
@@ -255,7 +255,7 @@ describe('PostIt', () => {
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('Email is badly formatted', res.body.error.code);
           done();
         });
@@ -269,7 +269,7 @@ describe('PostIt', () => {
       .post('/api/v1/signin')
       .send(registeredUser)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Password is required', res.body.error.code);
         done();
       });
@@ -317,7 +317,7 @@ describe('PostIt', () => {
         .post('/api/v1/passwordreset')
         .send(userEmail)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('User email is required',
             res.body.error.code);
           done();
@@ -331,7 +331,7 @@ describe('PostIt', () => {
         .post('/api/v1/passwordreset')
         .send(userEmail)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('Email is badly formatted',
             res.body.error.code);
           done();
@@ -344,7 +344,7 @@ describe('PostIt', () => {
       .post('/api/v1/passwordreset')
       .send(userEmail)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201);
         assert.equal('Password reset email sent successfully!',
           res.body.message);
         done();
@@ -384,7 +384,7 @@ describe('PostIt', () => {
       .post('/api/v1/signout')
       .set('x-access-token', token)
       .end((err, res) => {
-        res.should.have.status(200);
+        res.should.have.status(201);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.eql('User`s signed-out successfully.');

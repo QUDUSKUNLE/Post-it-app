@@ -1,5 +1,6 @@
 import expect from 'expect';
 import 'babel-polyfill';
+
 import Helper from '../helper/helper.js';
 import AllUsers from '../../client/src/__mock__/registeredUsers';
 

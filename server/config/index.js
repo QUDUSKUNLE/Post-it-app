@@ -22,6 +22,7 @@ const config = {
   storageBucket: process.env[`${checkProcess}storageBucket`],
   messagingSenderId: process.env[`${checkProcess}messagingSenderId`]
 };
+
 // firebase initialization
 const dbConfig = firebase.initializeApp(config);
 

@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
+
 import dbConfig from '../config/index.js';
 
 /**
@@ -12,8 +13,10 @@ export default class UserController {
   /**
    * @description This method signup a new user
    * route POST: api/v1/signup
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains signed up user response
    */
   static signUp(req, res) {
@@ -35,15 +38,18 @@ export default class UserController {
           }),
           { token: userToken }
           ]);
-      }).then(response => res.status(200).send({
+      }).then(response => res.status(201).send({
         message: 'User`s sign up successfully', response }))
-      .catch(error => res.status(401).send({ error }));
+      .catch(error => res.status(409).send({ error }));
   }
+
   /**
    * @description This method signin registered users
    * route POST: api/v1/signin
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains signed user details
    */
   static signIn(req, res) {
@@ -59,7 +65,7 @@ export default class UserController {
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {
-          res.status(401).send({ error });
+          res.status(400).send({ error });
         } else if (error.code === 'auth/user-not-found') {
           res.status(404).send({ error });
         }
@@ -69,8 +75,10 @@ export default class UserController {
   /**
    * @description This method sign in users via Google account
    * route POST: api/v1/googleSignIn
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
@@ -123,15 +131,17 @@ export default class UserController {
   /**
    * @description This method allow users reset their password
    * route POST: api/v1/passwordReset
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains reset password details
    */
   static passwordReset(req, res) {
     const { email } = req.body;
     firebase.auth().sendPasswordResetEmail(email)
     .then(() =>
-      res.status(200).send({
+      res.status(201).send({
         message: 'Password reset email sent successfully!'
       })).catch(error => res.status(404).send({ error }));
   }
@@ -139,15 +149,17 @@ export default class UserController {
   /**
    * @description This method signout users
    * route POST: api/v1/signout
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains sign out response
    */
   static signOut(req, res) {
     firebase.auth().signOut()
       .then(() => {
-        res.status(200).send({ message: 'User`s signed-out successfully.' });
+        res.status(201).send({ message: 'User`s signed-out successfully.' });
       })
-      .catch(() => res.status(500).send({ message: 'Network Error' }));
+      .catch(() => res.status(500).send({ error: 'Internal server error' }));
   }
 }

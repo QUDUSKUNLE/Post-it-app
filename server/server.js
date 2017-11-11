@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
 import compression from 'compression';
+
 import Router from './routes/index.js';
 
 const port = process.env.PORT || 8080;

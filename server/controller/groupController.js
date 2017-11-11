@@ -1,5 +1,6 @@
 import moment from 'moment';
 import values from 'object.values';
+
 import dbConfig from '../config/index.js';
 import Helper from '../helper/helper.js';
 
@@ -12,8 +13,10 @@ export default class GroupController {
   /**
    * @description This method create new group for user
    * route POST: api/v1/createGroup
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response containing creating new group
    */
   static createGroup(req, res) {
@@ -56,6 +59,7 @@ export default class GroupController {
    *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response containing all registerdUsers
    */
   static getRegisteredUsers(req, res) {
@@ -74,8 +78,10 @@ export default class GroupController {
   /**
    * @description This method retrieves allRegisteredUsers
    * route GET: api/v1/getMembers/:groupId
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains all members of a group
    */
   static getMembers(req, res) {
@@ -94,8 +100,10 @@ export default class GroupController {
   /**
    * @description This method retrieves all user group
    * route GET: api/v1/getgroups/:userId
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
@@ -111,8 +119,10 @@ export default class GroupController {
   /**
    * @description This method add member to a group
    * route POST: api/v1/addMembers/:groupId
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains add member response
    */
   static addMemberToGroup(req, res) {

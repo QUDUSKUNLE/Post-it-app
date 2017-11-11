@@ -31,7 +31,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message
+      res.status(409).send({ error: { code: message
       } });
     } else if (req.body.password !== req.body.confirmPassword) {
       res.status(403).send({ error: { code:
@@ -62,7 +62,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(409).send({ error: { code: message } });
     } else {
       next();
     }
@@ -83,7 +83,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(409).send({ error: { code: message } });
     } else {
       next();
     }

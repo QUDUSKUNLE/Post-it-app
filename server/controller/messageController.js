@@ -2,6 +2,7 @@ import moment from 'moment';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 import values from 'object.values';
+
 import dbConfig from '../config/index.js';
 import Helper from '../helper/helper.js';
 import sendGroupSMS from '../utils/smsTransporter.js';
@@ -16,8 +17,10 @@ export default class MessageController {
   /**
    * @description This method send message to group
    * route POST: api/v1/sendMessage/:groupId
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains message sent details
    */
   static sendMessageToGroup(req, res) {
@@ -159,8 +162,10 @@ export default class MessageController {
   /**
    * @description This method retrieves all message in a group
    * route GET: api/v1/getMessage/:groupId
+   *
    * @param {Object} req request object
    * @param {Object} res response object
+   *
    * @return {Object} json response contains all message in a group
    */
   static getMessage(req, res) {
