@@ -10,7 +10,6 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-
 // User's should be able to create grpoup
 describe('PostIt', () => {
   let token = '';

@@ -165,7 +165,7 @@ export default class UserAddMember extends React.Component {
           </div>
         </div>
       </div>
-  );
+    );
   }
 }
 
