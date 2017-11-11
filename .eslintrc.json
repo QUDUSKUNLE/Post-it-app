@@ -9,6 +9,9 @@
     },
     "rules": {
         "array-callback-return": 0,
+        "linebreak-style": [
+            "error", "unix"
+        ],
         "max-len": ["error", 80],
         "one-var": 0,
         "no-constant-condition": 1,

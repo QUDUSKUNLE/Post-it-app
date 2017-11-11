@@ -31,13 +31,16 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(400).send({ error: { code: message
+      } });
     } else if (req.body.password !== req.body.confirmPassword) {
-      res.status(403).send({ error: { code: 'Password does not match' } });
+      res.status(403).send({ error: { code:
+        'Password does not match'
+      } });
     } else if (!Helper.validatePassword(req.body.password)) {
       res.status(403).send({ error: { code:
-        'Password should be at least 6 characters with a speacial character' }
-      });
+        'Password should be at least 6 characters with a speacial character'
+      } });
     } else {
       next();
     }
