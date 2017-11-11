@@ -55,14 +55,6 @@
         "curly": [1, "multi-line"],
         "no-multi-spaces": [2, { "exceptions": { "ImportDeclaration": true } }],
         "no-multi-str": 0,
-        "import/no-extraneous-dependencies": [
-            2,
-            {
-                "devDependencies": true,
-                "optionalDependencies": false,
-                "peerDependencies": false
-            }
-        ],
         "max-len": [2, 80, 2],
         "no-shadow": [1, { "allow": ["req", "res", "err"] }],
         "require-jsdoc": [0, {
@@ -78,7 +70,6 @@
             "requireParamDescription": true,
             "requireReturnDescription": true
         }],
-        "import/extensions": 1,
         "jsx-quotes": 1,
         "react/display-name": [1, { "ignoreTranspilerName": false }],
         "react/forbid-prop-types": [1, { "forbid": ["any"] }],
@@ -107,7 +98,6 @@
         "react/prop-types": 1,
         "react/react-in-jsx-scope": 1,
         "react/self-closing-comp": 1,
-        "react/sort-comp": 1,
-        "react/wrap-multilines": 1
+        "react/sort-comp": 1
     }
 }
