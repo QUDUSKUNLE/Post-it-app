@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -15,6 +16,12 @@ module.exports = {
       template: './client/src/index.html',
       filename: 'index.html',
       inject: 'body'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Hammer: 'hammerjs/hammer'
     }),
     new ExtractTextPlugin('bundle.css')
   ],
