@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
   SIGN_IN_SUCCESS,
   GOOGLE_SIGN_IN_SUCCESS,
-  PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
+  PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * Signout Store, it hold user's state, listen to signin Actions

@@ -5,12 +5,12 @@ import { shallow, mount } from 'enzyme';
 import expect from 'expect';
 import sinon from 'sinon';
 import 'babel-polyfill';
-import localStorageMock from '../../src/__mock__/localStorage';
+import localStorageMock from '../../src/__mock__/localStorage.js';
 import axiosMock from '../../src/__mock__/axiosMock.js';
-import Footer from '../../src/components/Footer';
-import { signInAction } from '../../src/actions/SignInActions';
-import UserSignIn from '../../src/components/UserSignIn';
-import SignInStore from '../../src/stores/SignInStore';
+import Footer from '../../src/components/Footer.jsx';
+import { signInAction } from '../../src/actions/signInActions.js';
+import UserSignIn from '../../src/components/UserSignIn.jsx';
+import SignInStore from '../../src/stores/SignInStore.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 
 

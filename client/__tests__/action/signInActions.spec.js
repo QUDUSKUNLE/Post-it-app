@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
+import '../../src/__mock__/firebaseMock.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 import { signInAction, signInWithGoogle }
-  from '../../src/actions/signInActions';
-import signOutAction from '../../src/actions/signOutActions';
+  from '../../src/actions/signInActions.js';
+import signOutAction from '../../src/actions/signOutActions.js';
 
 describe('SignInAction', () => {
   let mockAxios;
@@ -25,8 +25,8 @@ describe('SignInAction', () => {
 
   describe('Test for signInAction Method', () => {
     const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
-    it('should dispatch an action', () => {
-      return signInAction(user).then(() => {
+    it('should dispatch an action', () =>
+      signInAction(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         mockAxios.getCall(0).returnValue.then((res) => {
           expect(res).toEqual({ signInResponse });
@@ -34,8 +34,8 @@ describe('SignInAction', () => {
         });
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_IN_SUCCESS');
-      });
-    });
+      })
+    );
   });
 });
 

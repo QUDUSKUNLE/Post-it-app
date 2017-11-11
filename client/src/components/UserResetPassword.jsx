@@ -1,7 +1,7 @@
 import React from 'react';
 import toastr from 'toastr';
-import resetPassword from '../actions/resetPasswordActions';
-import SignInStore from '../stores/SignInStore';
+import resetPassword from '../actions/resetPasswordActions.js';
+import SignInStore from '../stores/SignInStore.js';
 
 /**
  * @description - renders ResetPassword Component

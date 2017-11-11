@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import UserResetPassword
-  from '../../src/components/UserResetPassword';
-import '../../../server/config/index';
-import SignInStore from '../../src/stores/SignInStore';
+  from '../../src/components/UserResetPassword.jsx';
+import '../../../server/config/index.js';
+import SignInStore from '../../src/stores/SignInStore.js';
 
 describe('<UserResetPassword/>', () => {
   let wrapper;

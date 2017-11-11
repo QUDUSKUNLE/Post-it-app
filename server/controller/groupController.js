@@ -1,7 +1,7 @@
 import moment from 'moment';
 import values from 'object.values';
-import dbConfig from '../config/index';
-import Helper from '../helper/helper';
+import dbConfig from '../config/index.js';
+import Helper from '../helper/helper.js';
 
 /**
  * @description This class create and read functions for group

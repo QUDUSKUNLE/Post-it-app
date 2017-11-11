@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow, mount } from 'enzyme';
 import expect from 'expect';
-import UserChatBox from '../../src/components/UserChatBox';
-import localStorageMock from '../../src/__mock__/localStorage';
+import UserChatBox from '../../src/components/UserChatBox.jsx';
+import localStorageMock from '../../src/__mock__/localStorage.js';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 
 window.localStorage = localStorageMock;

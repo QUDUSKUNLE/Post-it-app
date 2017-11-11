@@ -3,15 +3,15 @@ import { Route, Switch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import toastr from 'toastr';
-import signOutAction from '../actions/signOutActions';
-import UserSignIn from './UserSignIn';
-import UserCreateGroup from './UserCreateGroup';
-import UserBroadCastBoard from './UserBroadCastBoard';
-import UserAddMember from './UserAddMember';
-import Home from './Home';
-import Footer from './Footer';
-import UserResetPassword from './UserResetPassword';
-import NotFound from './NotFound';
+import signOutAction from '../actions/signOutActions.js';
+import UserSignIn from './UserSignIn.jsx';
+import UserCreateGroup from './UserCreateGroup.jsx';
+import UserBroadCastBoard from './UserBroadCastBoard.jsx';
+import UserAddMember from './UserAddMember.jsx';
+import Home from './Home.jsx';
+import Footer from './Footer.jsx';
+import UserResetPassword from './UserResetPassword.jsx';
+import NotFound from './NotFound.jsx';
 
 /**
  * @description - renders Routes Component

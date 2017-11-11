@@ -1,7 +1,7 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * @description - An action that makes API call to server

@@ -1,4 +1,4 @@
-import Helper from '../helper/helper';
+import Helper from '../helper/helper.js';
 
 /**
  * @description: class Validates contains methods

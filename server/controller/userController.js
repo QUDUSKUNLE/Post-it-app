@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
 import jwt from 'jsonwebtoken';
-import dbConfig from '../config/index';
+import dbConfig from '../config/index.js';
 
 /**
  * @description This class create and read functions for User
@@ -84,7 +84,7 @@ export default class UserController {
               const userId = user.uid;
               const email = user.email;
               const userToken = jwt.sign({ data: { userId, email }
-                }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
+              }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
               Promise.all(
                 [dbConfig.database().ref(`users/${user.uid}`).push({
                   userEmail: user.email,

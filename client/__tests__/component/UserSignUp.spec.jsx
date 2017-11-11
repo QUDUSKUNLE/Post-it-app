@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import expect from 'expect';
 import { mount, shallow } from 'enzyme';
-import UserSignUp from '../../src/components/UserSignUp';
+import UserSignUp from '../../src/components/UserSignUp.jsx';
 
 describe('PostIt-app', () => {
   let wrapper;

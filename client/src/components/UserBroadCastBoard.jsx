@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
-import UserGroups from './UserGroups';
-import UserChatBox from './UserChatBox';
-import NoGroupSelected from './NoGroupSelected';
-import { getUserGroups } from '../actions/groupActions';
-import { getGroupMessage } from '../actions/messageActions';
-import { getGroupMember } from '../actions/memberActions';
-import MemberStore from '../stores/MemberStore';
-import GroupStore from '../stores/GroupStore';
-import MessageStore from '../stores/MessageStore';
+import UserGroups from './UserGroups.jsx';
+import UserChatBox from './UserChatBox.jsx';
+import NoGroupSelected from './NoGroupSelected.jsx';
+import { getUserGroups } from '../actions/groupActions.js';
+import { getGroupMessage } from '../actions/messageActions.js';
+import { getGroupMember } from '../actions/memberActions.js';
+import MemberStore from '../stores/MemberStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import MessageStore from '../stores/MessageStore.js';
 
 /**
  * @description - renders BroadCastBoard Component

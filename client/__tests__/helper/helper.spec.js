@@ -4,11 +4,11 @@ import {
   helpGetGroupMessages,
   helpGetGroups,
   getGroupMembers
-} from '../../src/helper/helper';
-import registeredUsers from '../../src/__mock__/registeredUsers';
-import groupMessageResponse from '../../src/__mock__/groupMessageResponse';
-import groupResponse from '../../src/__mock__/groupResponse';
-import groupMemberResponse from '../../src/__mock__/groupMemberResponse';
+} from '../../src/helper/helper.js';
+import registeredUsers from '../../src/__mock__/registeredUsers.json';
+import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
+import groupResponse from '../../src/__mock__/groupResponse.json';
+import groupMemberResponse from '../../src/__mock__/groupMemberResponse.json';
 import 'babel-polyfill';
 
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import SignUpStore from '../stores/SignUpStore';
-import signUpAction from '../actions/signUpActions';
+import SignUpStore from '../stores/SignUpStore.js';
+import signUpAction from '../actions/signUpActions.js';
 
 /**
  * @description - renders SignUp Component

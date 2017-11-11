@@ -1,5 +1,5 @@
 import expect from 'expect';
-import UserGroups from '../../src/components/UserGroups';
+import UserGroups from '../../src/components/UserGroups.jsx';
 
 
 describe('<UserGroups/>', () => {

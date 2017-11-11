@@ -1,11 +1,11 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import { helpGetRegisteredUsers } from '../helper/helper';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { helpGetRegisteredUsers } from '../helper/helper.js';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**
  * @description - An action that makes API call to server
@@ -15,19 +15,19 @@ import {
  */
 export const getGroupMember = groupId => axios.get(
   `/api/v1/getMembers/${groupId}`)
-    .then(({ data }) => {
-      if ((data.response)[0] === null) {
-        AppDispatcher.dispatch({
-          type: GET_MEMBERS_OF_GROUP,
-          members: []
-        });
-      } else {
-        AppDispatcher.dispatch({
-          type: GET_MEMBERS_OF_GROUP,
-          members: data.response
-        });
-      }
-    });
+  .then(({ data }) => {
+    if ((data.response)[0] === null) {
+      AppDispatcher.dispatch({
+        type: GET_MEMBERS_OF_GROUP,
+        members: []
+      });
+    } else {
+      AppDispatcher.dispatch({
+        type: GET_MEMBERS_OF_GROUP,
+        members: data.response
+      });
+    }
+  });
 
 /**
  * @description - An action that makes API call to server

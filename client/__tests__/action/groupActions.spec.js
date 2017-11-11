@@ -1,11 +1,11 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import '../../src/__mock__/firebaseMock';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
+import '../../src/__mock__/firebaseMock.js';
 import groupResponse from '../../src/__mock__/groupResponse.json';
 import { getUserGroups, createGroup }
-  from '../../src/actions/groupActions';
+  from '../../src/actions/groupActions.js';
 
 
 describe('groupActions', () => {

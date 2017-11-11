@@ -3,8 +3,8 @@ import expect from 'expect';
 import PropTypes from 'prop-types';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
-import UserAddMember from '../../src/components/UserAddMember';
-import localStorageMock from '../../src/__mock__/localStorage';
+import UserAddMember from '../../src/components/UserAddMember.jsx';
+import localStorageMock from '../../src/__mock__/localStorage.js';
 
 window.localStorage = localStorageMock;
 describe('<UserAddMember/>', () => {

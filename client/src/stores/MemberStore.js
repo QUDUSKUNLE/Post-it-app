@@ -1,10 +1,10 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import { getGroupMembers } from '../helper/helper';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { getGroupMembers } from '../helper/helper.js';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
 
 /**
  * Holds the storage, listen to actions and update the stores

@@ -1,9 +1,9 @@
 import express from 'express';
-import UserController from '../controller/userController';
-import GroupController from '../controller/groupController';
-import MessageController from '../controller/messageController';
-import jwtToken from '../middleware/jwtTokenValidator';
-import Validate from '../middleware/inputValidator';
+import UserController from '../controller/userController.js';
+import GroupController from '../controller/groupController.js';
+import MessageController from '../controller/messageController.js';
+import jwtToken from '../middleware/jwtTokenValidator.js';
+import Validate from '../middleware/inputValidator.js';
 
 /**
  * Creates express Router

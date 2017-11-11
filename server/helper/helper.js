@@ -1,5 +1,5 @@
 import values from 'object.values';
-import dbConfig from '../config/index';
+import dbConfig from '../config/index.js';
 
 /**
  * @description This is a class Helper that contains functions that helps to

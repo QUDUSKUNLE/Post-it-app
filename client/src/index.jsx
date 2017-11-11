@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {
   BrowserRouter as Router,
   browserHistory } from 'react-router-dom';
-import Routes from './components/Routes';
-import setAuthToken from '../src/helper/setAuthToken';
+import Routes from './components/Routes.jsx';
+import setAuthToken from '../src/helper/setAuthToken.js';
 import './index.css';
 
 /**

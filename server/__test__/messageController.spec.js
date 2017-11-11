@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'test';
 import assert from 'assert';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
+import server from '../server.js';
 
 chai.should();
 const expect = chai.expect;

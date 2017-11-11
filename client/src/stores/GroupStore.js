@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import {
   GET_USER_GROUPS,
-  CREATE_GROUP } from '../constants/ActionConstants';
+  CREATE_GROUP } from '../constants/ActionConstants.js';
 
 /**
  * Holds the storage, listen to actions and update the stores
