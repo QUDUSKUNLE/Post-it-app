@@ -30,6 +30,10 @@ class GroupStore extends EventEmitter {
     return this.groups;
   }
 
+  /**
+   * @method createGroup
+   * @return {string} creategroup - The createGroup response in the store
+  */
   createGroup() {
     return this.creategroup;
   }

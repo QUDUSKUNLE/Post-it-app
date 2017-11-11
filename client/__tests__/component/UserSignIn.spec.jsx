@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import GoogleButton from 'react-google-button';
 import { shallow, mount } from 'enzyme';

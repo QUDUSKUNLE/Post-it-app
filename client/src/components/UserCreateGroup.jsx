@@ -34,10 +34,23 @@ export default class UserCreateGroup extends React.Component {
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+	 * when the component is fully mounted.
+   * @return {void} void
+   * @memberof UserCreateGroup
+   */
   componentDidMount() {
     GroupStore.on('CREATE_GROUP', this.handleCreateGroupEvent);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserCreateGroup
+   */
   componentWillUnmount() {
     GroupStore.removeListener('CREATE_GROUP', this.handleCreateGroupEvent);
   }
@@ -72,6 +85,7 @@ export default class UserCreateGroup extends React.Component {
   */
   handleCreateGroupEvent() {
     const createGroupResponse = GroupStore.createGroup();
+    this.setState({});
     toastr.success(createGroupResponse);
   }
 

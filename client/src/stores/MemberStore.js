@@ -46,6 +46,10 @@ class MemberStore extends EventEmitter {
     return [this.members, this.group, this.groupId];
   }
 
+  /**
+   * @method addMember
+   * @return {string} addMemberResponse - addMemberResponse in the store
+   */
   addMember() {
     return this.addMemberResponse;
   }

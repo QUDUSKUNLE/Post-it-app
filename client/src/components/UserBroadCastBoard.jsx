@@ -46,12 +46,12 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * Call action on initial page load
    * @method componentWillMount
-   * @return {*} void
+   * @return {void} void
+   * @memberof UserBroadCastBoard
    */
   componentWillMount() {
-    getUserGroups();
+    getUserGroups(this);
   }
 
   /**
@@ -89,6 +89,10 @@ export default class UserBroadCastBoard extends React.Component {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
+  /**
+   * @method handleGetGroupMember
+   * @return {*} void
+   */
   handleGetGroupMember() {
     this.setState({ groupMember: (MemberStore.allGroupMembers())[0] });
   }

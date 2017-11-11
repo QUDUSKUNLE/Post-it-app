@@ -17,6 +17,12 @@ class SignUpStore extends EventEmitter {
     this.handleSignUpActions = this.handleSignUpActions.bind(this);
   }
 
+  /**
+   * @description describes a method that saves signUpMessage in the Store
+   * @method signUpUser
+   * @memberof SignUpStore
+   * @returns {object} signUpMessage
+   */
   signUpUser() {
     return this.signUpMessage;
   }

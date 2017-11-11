@@ -1,4 +1,3 @@
-import React from 'react';
 import expect from 'expect';
 import PropTypes from 'prop-types';
 import { shallow, mount } from 'enzyme';

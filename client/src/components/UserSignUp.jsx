@@ -34,10 +34,23 @@ export default class UserSignUp extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserSignUp
+  */
   componentDidMount() {
     SignUpStore.on('SIGN_UP_SUCCESS', this.handleSignUpAction);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserSignUp
+  */
   componentWillUnmount() {
     SignUpStore.removeListener('SIGN_UP_SUCCESS', this.handleSignUpAction);
   }

@@ -51,8 +51,11 @@ export default class UserAddMember extends React.Component {
   }
 
   /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+	 * when the component is fully mounted.
+   * @return {void} void
    * @memberof UserAddMember
-   * @return {*} void
    */
   componentDidMount() {
     GroupStore.on('GET_USER_GROUPS', this.userGroups);
@@ -60,6 +63,12 @@ export default class UserAddMember extends React.Component {
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserAddMember
+   */
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
     MemberStore.removeListener('ALL_USERS', this.userGroups);

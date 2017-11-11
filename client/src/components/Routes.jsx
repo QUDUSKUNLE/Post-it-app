@@ -3,10 +3,10 @@ import { Route, Switch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import toastr from 'toastr';
-import signOutAction from '../actions/signOutActions.js';
+import signOutAction from '../actions/signOutActions';
 import UserSignIn from './UserSignIn.jsx';
 import UserCreateGroup from './UserCreateGroup.jsx';
-import UserBroadCastBoard from './UserBroadCastBoard.jsx';
+import UserBroadCastBoard from './UserBroadCastBoard';
 import UserAddMember from './UserAddMember.jsx';
 import Home from './Home.jsx';
 import Footer from './Footer.jsx';
@@ -19,6 +19,12 @@ import NotFound from './NotFound.jsx';
  * @extends {React.Component}
  */
 class Routes extends React.Component {
+  /**
+   * Creates an instance of UserAddMember.
+   * @constructor
+   * @param {*} props -
+   * @memberof Routes
+   */
   constructor(props) {
     super(props);
     this.handleSignOutEvent = this.handleSignOutEvent.bind(this);
@@ -36,6 +42,12 @@ class Routes extends React.Component {
       this.props.history.push('/');
     }).catch(error => toastr.error(error.response.data));
   }
+
+  /**
+   * @description - render method, React lifecycle method
+   * @returns {*} Routes component
+   * @ResetPassword
+  */
   render() {
     const { location } = this.props;
     const path = [

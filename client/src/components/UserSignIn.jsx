@@ -40,11 +40,24 @@ export default class UserSignIn extends React.Component {
     this.handleGoogleEvent = this.handleGoogleEvent.bind(this);
   }
 
+   /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserSignIn
+  */
   componentDidMount() {
     SignInStore.on('SIGN_IN_SUCCESS', this.handleSignInAction);
     SignInStore.on('GOOGLE_SIGN_IN_SUCCESS', this.handleGoogleEvent);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserSignIn
+   */
   componentWillUnmount() {
     SignInStore.removeListener('SIGN_IN_SUCCESS', this.handleSignInAction);
     SignInStore.removeListener('GOOGLE_SIGN_IN_SUCCESS',

@@ -27,10 +27,23 @@ export default class UserResetPassword extends React.Component {
     this.handlePasswordReset = this.handlePasswordReset.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserResetPassword
+  */
   componentDidMount() {
     SignInStore.on('PASSWORD_RESET_SUCCESS', this.handlePasswordReset);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserResetPassword
+   */
   componentWillUnmount() {
     SignInStore.removeListener('PASSWORD_RESET_SUCCESS',
       this.handlePasswordReset);
@@ -56,6 +69,7 @@ export default class UserResetPassword extends React.Component {
     event.preventDefault();
     const resetEmail = { email: this.state.email };
     resetPassword(resetEmail);
+    this.setState({ email: '' });
   }
 
   /**
@@ -65,12 +79,13 @@ export default class UserResetPassword extends React.Component {
    */
   handlePasswordReset() {
     const passwordResetResponse = SignInStore.passwordReset();
+    this.setState({});
     toastr.success(passwordResetResponse.message);
   }
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {Object} ResetPassword component
+   * @returns {*} ResetPassword component
    * @ResetPassword
    */
   render() {

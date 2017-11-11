@@ -8,7 +8,6 @@ const jusibe = new Jusibe(key, token);
 
 /**
  * @description This method sends SMS
- * route POST: api/v1/signup
  * @param {Object} phoneNumbers request object
  * @return {Object} response from Jusibe server
  */

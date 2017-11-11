@@ -1,7 +1,6 @@
 import React from 'react';
 import UserSignUp from './UserSignUp.jsx';
 
-
 /**
  * @export Home component
  * @description - Home Component

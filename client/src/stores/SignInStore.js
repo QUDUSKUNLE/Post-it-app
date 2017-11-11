@@ -24,14 +24,33 @@ class SignInStore extends EventEmitter {
     this.handleActions = this.handleActions.bind(this);
   }
 
+/**
+ * @description describes a method that saves signInMessage in the Store
+ * @method signInUser
+ * @memberof SignInStore
+ * @returns {object} signInMessage
+ */
   signInUser() {
     return this.signInMessage;
   }
 
+/**
+ * @description describes a method that saves googleSignInMessage in the Store
+ * @method googleSignIn
+ * @memberof SignInStore
+ * @returns {object} googleSignInMessage
+ */
   googleSignIn() {
     return this.googleSignInMessage;
   }
 
+  /**
+   * @description describes a method that saves passwordResetResponse in
+   * the Store
+   * @method passwordReset
+   * @memberof SignInStore
+   * @returns {object} passwordResetResponse
+  */
   passwordReset() {
     return this.passwordResetResponse;
   }

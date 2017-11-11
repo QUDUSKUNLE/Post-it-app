@@ -2,7 +2,7 @@ import groupMemberResponse from './groupMemberResponse.json';
 import groupMessageResponse from './groupMessageResponse.json';
 import groupResponse from './groupResponse.json';
 import memberResponse from './memberResponse.json';
-import registeredUsers  from './registeredUsers.json';
+import registeredUsers from './registeredUsers.json';
 import sendMessageResponse from './sendMessageResponse.json';
 import signInResponse from './signInResponse.json';
 import signUpResponse from './signUpResponse.json';
