@@ -154,7 +154,7 @@ class Routes extends React.Component {
             <Route path="/broadcastboard" component={UserBroadCastBoard} />
             <Route path="/group" component={UserCreateGroup} />
             <Route path="/member" component={UserAddMember} />
-            <Route path="*" component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
           <Footer />
         </div>
