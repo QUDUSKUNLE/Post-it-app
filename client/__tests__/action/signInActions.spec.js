@@ -28,10 +28,6 @@ describe('SignInAction', () => {
     it('should dispatch an action', () =>
       signInAction(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toEqual({ signInResponse });
-          expect(res).toBeInstanceOf(Object);
-        });
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_IN_SUCCESS');
       })
@@ -58,7 +54,7 @@ describe('GoogleSignIn', () => {
 
   describe('Test for signInWithGoogle Method', () => {
     const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
-    it('should dispatch an action', () => {
+    it('should dispatch GOOGLE_SIGN_IN_SUCCESS', () => {
       signInWithGoogle(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
@@ -71,11 +67,11 @@ describe('GoogleSignIn', () => {
 
 describe('signOutAction', () => {
   let mockAxios;
+  const signOutResponse = {
+    message: 'User`s signed-out successfully'
+  };
 
   beforeEach(() => {
-    const signOutResponse = {
-      message: 'User`s signed-out successfully'
-    };
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
       Promise.resolve(signOutResponse));
   });
@@ -89,9 +85,6 @@ describe('signOutAction', () => {
       signOutAction().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         mockAxios.getCall(0).returnValue.then((res) => {
-          const signOutResponse = {
-            message: 'User`s signed-out successfully'
-          };
           expect(res).toEqual(signOutResponse);
           expect(res).toBeInstanceOf(Object);
         });
