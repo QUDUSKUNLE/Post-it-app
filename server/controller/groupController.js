@@ -43,7 +43,7 @@ export default class GroupController {
                       phoneNumber: userDetails.phone_Number,
                       email: userDetails.userEmail
                     });
-                }).then(() => res.status(200).send({
+                }).then(() => res.status(201).send({
                   message: 'Group created successfully'
                 }));
             });
@@ -147,7 +147,7 @@ export default class GroupController {
                     phoneNumber: memberDetails.phone_Number,
                     email: memberDetails.userEmail
                   });
-                res.status(200).send({ response: 'Add member successfully' });
+                res.status(201).send({ response: 'Add member successfully' });
               }
             });
         });

@@ -32,8 +32,8 @@ describe('PostIt', () => {
         .set('x-access-token', token)
         .send(group)
         .end((err, res) => {
-          expect(res).to.have.status(400);
-          assert.equal(400, res.statusCode);
+          expect(res).to.have.status(409);
+          assert.equal(409, res.statusCode);
           assert.equal('Group name is required', res.body.error.code);
           done();
         });
@@ -47,7 +47,7 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send(group)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(409);
         assert.equal('Group name should be at least 3 characters',
           res.body.error.code);
         done();
@@ -62,7 +62,7 @@ describe('PostIt', () => {
         .set('x-access-token', token)
         .send(group)
         .end((err, res) => {
-          assert.equal(200, res.statusCode);
+          assert.equal(201, res.statusCode);
           assert.equal('Group created successfully', res.body.message);
           done();
         });
@@ -129,7 +129,7 @@ describe('PostIt', () => {
         .set('x-access-token', token)
         .send(userId)
         .end((err, res) => {
-          expect(res).to.have.status(400);
+          expect(res).to.have.status(409);
           assert.equal('MemberId is required', res.body.error.code);
           done();
         });

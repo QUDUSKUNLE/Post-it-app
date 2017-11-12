@@ -29,13 +29,13 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send(messageDetails)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Message is required', res.body.error.code);
         done();
       });
   });
 
-  it('send Message route should throw error for undefined message', (done) => {
+  it('send Message route should throw error for undefined priority', (done) => {
     const messageDetails = { message: 'Hello wale', priority: '' };
     const groupId = '-KwjAZcNyIdpMPk7GS0i';
     chai.request(server)
@@ -43,7 +43,7 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send(messageDetails)
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(409);
         assert.equal('Message priority is required', res.body.error.code);
         done();
       });
@@ -59,8 +59,8 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
-        res.should.have.status(200);
-        assert.equal(200, res.statusCode);
+        res.should.have.status(201);
+        assert.equal(201, res.statusCode);
         assert.equal('Broadcast Message sent successfully', res.body.message);
         done();
       });
@@ -76,7 +76,7 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         assert.equal('Broadcast Message sent successfully', res.body.message);
         assert.equal(message, ((res.body.response)[1]).message);
         assert.equal(priority, ((res.body.response)[1]).priority);
@@ -95,8 +95,8 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
-        res.should.have.status(200);
-        assert.equal(200, res.statusCode);
+        res.should.have.status(201);
+        assert.equal(201, res.statusCode);
         assert.equal('Broadcast Message sent successfully', res.body.message);
         assert.equal(message, ((res.body.response)[1]).message);
         assert.equal(priority, ((res.body.response)[1]).priority);

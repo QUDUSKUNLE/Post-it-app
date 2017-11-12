@@ -158,7 +158,7 @@ export default class UserController {
   static signOut(req, res) {
     firebase.auth().signOut()
       .then(() => {
-        res.status(201).send({ message: 'User`s signed-out successfully.' });
+        res.status(200).send({ message: 'User`s signed-out successfully.' });
       })
       .catch(() => res.status(500).send({ error: 'Internal server error' }));
   }

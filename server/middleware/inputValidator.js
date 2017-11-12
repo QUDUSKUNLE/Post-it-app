@@ -107,7 +107,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(409).send({ error: { code: message } });
     } else {
       next();
     }
@@ -127,7 +127,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(409).send({ error: { code: message } });
     } else {
       next();
     }
@@ -148,7 +148,7 @@ export default class Validate {
     const errors = req.validationErrors();
     if (errors) {
       const message = errors[0].msg;
-      res.status(400).send({ error: { code: message } });
+      res.status(409).send({ error: { code: message } });
     } else {
       next();
     }
