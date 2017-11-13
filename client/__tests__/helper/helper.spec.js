@@ -20,7 +20,6 @@ describe('helper ', () => {
   });
 });
 
-
 describe('helper ', () => {
   describe('helpGetGroupMessages function helps', () => {
     it('destructure array of object from axios response', () => {

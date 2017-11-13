@@ -4,7 +4,7 @@ import dbConfig from '../config/index.js';
 
 /**
  * @description This is a class Helper that contains functions that helps to
- * validate password, valiadte phoneNumber, help to destructure Object of arrays
+ * validate password, validate phoneNumber, help to destructure Object of arrays
  * from firebase Database
  *
  * @class Helper

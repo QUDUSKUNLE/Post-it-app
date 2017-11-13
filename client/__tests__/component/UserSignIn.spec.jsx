@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GoogleButton from 'react-google-button';
 import expect from 'expect';
 import sinon from 'sinon';
 import { mount } from 'enzyme';

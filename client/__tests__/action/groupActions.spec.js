@@ -34,7 +34,6 @@ describe('groupActions', () => {
     it('should dispatch an action', () => {
       getUserGroups().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        // expect(dispatchSpy.called).toEqual(false);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
       });
     });
@@ -92,11 +91,11 @@ describe('groupActions', () => {
     axios.post.restore();
   });
 
-  describe('Test for createGroup Method', () => {
-    it('should dispatch an action CREATE_GROUP', () => {
+  describe('Test for createGroup Method Error', () => {
+    it('should not dispatch an action CREATE_GROUP', () => {
       expect(createGroup).toBeDefined();
     });
-    it('should dispatch an action', () => {
+    it('should throw error', () => {
       const groupName = { group: 'andelauuuuu' };
       createGroup(groupName).catch(() => {
         expect(mockCreatGroupError.throw()).toBe(true);

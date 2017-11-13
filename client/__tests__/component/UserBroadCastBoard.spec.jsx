@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import expect from 'expect';
 import sinon from 'sinon';
 import 'babel-polyfill';

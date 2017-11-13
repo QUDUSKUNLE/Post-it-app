@@ -99,7 +99,7 @@ describe('GoogleSignIn', () => {
 
 describe('GoogleSignIn Error', () => {
   let mockGoogleSignInError;
-  const error = { response: 'invalid sign in details'};
+  const error = { response: 'invalid sign in details' };
 
   beforeEach(() => {
     mockGoogleSignInError = sinon.stub(axios, 'post').callsFake(() => (

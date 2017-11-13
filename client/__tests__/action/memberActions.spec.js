@@ -142,8 +142,8 @@ describe('Test for AddMemberAction Error', () => {
     axios.post.restore();
   });
 
-  describe('Test for addMember Method', () => {
-    it('should dispatch an action', () => {
+  describe('Test for addMember Method Error', () => {
+    it('should not dispatch an action', () => {
       expect(addMember).toBeDefined();
     });
 
