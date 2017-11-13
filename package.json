@@ -2,7 +2,7 @@
     "name": "postitapp",
     "version": "1.0.0",
     "description": "PostItApp is a simple application that allows friends and colleagues create groups for notifications.",
-    "main": "webpack.confiig.js",
+    "main": "webpack.config.js",
     "licence": "MIT",
     "engines": {
         "node": "6.9.4"
