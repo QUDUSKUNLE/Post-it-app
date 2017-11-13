@@ -61,10 +61,10 @@ export default class UserResetPassword extends React.Component {
   }
 
   /**
-	 * @description This handles resetPassword form submission
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles resetPassword form submission
+   * @param {object} event .
+   * @returns {void} .
+   */
   onSubmit(event) {
     event.preventDefault();
     const resetEmail = { email: this.state.email };
