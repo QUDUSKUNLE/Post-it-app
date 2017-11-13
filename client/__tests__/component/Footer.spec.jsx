@@ -1,6 +1,7 @@
+import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
-import Footer from '../../src/components/Footer.jsx';
+import Footer from '../../src/components/Footer';
 
 describe('<Footer/>', () => {
   it('component should be defined', () => {
