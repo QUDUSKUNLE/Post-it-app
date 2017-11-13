@@ -1,0 +1,18 @@
+langauage: node_js
+
+node_js:
+  - 6.11.2
+  - 5.5.0
+  - 5.4.1
+
+before_install:
+  - travis_wait npm install
+
+cache:
+  - node_modules
+
+env:
+  CODECLIMATE_REPO_TOKEN: 6741a0ba3155fa8f976e977b2bd77e0e835534f1495868927a6deaa919a77a17
+
+script:
+  - npm test

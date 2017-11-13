@@ -1,3 +1,13 @@
 node_modules
 ./server/Config/postItApp.json
 .env
+dist
+.sample.json
+.vscode
+.nyc_output
+.DS_Store
+coverage
+__test__/component/
+example.html
+example2.html
+file.js

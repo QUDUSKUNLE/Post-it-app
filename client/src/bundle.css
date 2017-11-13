@@ -1,0 +1,266 @@
+    /*
+ Main body
+*/
+    
+    body {
+        background-color: white;
+    }
+    
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+    /*
+  home
+*/
+    
+    .mainbody {
+        margin-top: 20px
+    }
+    
+    .term {
+        margin-top: 5px;
+    }
+    /*
+  SignIn Component
+*/
+    
+    .signin {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    #signinForm {
+        margin-top: 20px;
+        padding: 15px 25px 25px 25px;
+    }
+    
+    .signinform {
+        color: black;
+        font-size: 15px;
+        width: 100%;
+        border-radius: 4px;
+        padding: 6px 0 6px 10px;
+    }
+    
+    .signinformbtn {
+        color: white;
+        font-size: 25px;
+        width: 100%;
+        background-color: black;
+        text-decoration: none;
+        border: none;
+        border-radius: 6px;
+    }
+    
+    .create {
+        color: blue;
+    }
+    /*
+ SignUp Component
+*/
+    
+    #signupform {
+        padding: 8px 20px 9px 20px;
+    }
+    /*
+  AddMember
+*/
+    
+    .addmember {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .addmemberform {
+        margin: 20px 25px;
+    }
+    /*
+  Create Group
+*/
+    
+    .creategroup {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    #creategroupform {
+        margin: 20px 25px;
+    }
+    /*
+  ResetPassword Component
+*/
+    
+    .passwordreset {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+    
+    .resetform {
+        margin-top: 1px;
+        border-radius: 10px;
+    }
+    
+    #resetform {
+        margin-top: 8px;
+        padding: 10px 10px 25px 10px;
+    }
+    /*Groups*/
+    
+    .grouplist {
+        color: white;
+        text-align: center;
+    }
+    
+    .row-offcanvas {
+        height: 100%;
+    }
+    
+    #sidebar {
+        width: inherit;
+        min-width: 220px;
+        max-width: 220px;
+        background-color: #222222;
+        float: left;
+        height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        border-right: 1px solid gray;
+    }
+    
+    .row-offcanvas .sidebar-offcanvas .groups {
+        height: 50vh;
+        overflow-y: scroll;
+        color: white;
+    }
+    
+    .members {
+        margin-top: 20px;
+        color: white;
+    }
+    
+    .scrollable-menu {
+        height: auto;
+        max-height: 200px;
+        overflow-x: hidden;
+    }
+    
+    .row-offcanvas .sidebar-offcanvas .members ul li {
+        padding: 10px;
+    }
+    
+    #main {
+        height: 95%;
+        overflow: auto;
+    }
+    
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        margin-top: 50px;
+        background-color: #333;
+        color: white;
+        padding: 4px;
+    }
+    
+    .messageBoard {
+        height: 65vh;
+        overflow-y: scroll;
+        margin-top: 10px;
+    }
+    
+    .messageForm {
+        padding-top: 20px;
+    }
+    
+    .message {
+        padding: 25px;
+    }
+    
+    @media screen and (max-width: 768px) {
+        .row-offcanvas {
+            position: relative;
+            -webkit-transition: all 0.25s ease-out;
+            -moz-transition: all 0.25s ease-out;
+            transition: all 0.25s ease-out;
+            width: calc(100% + 220px);
+        }
+        .row-offcanvas-left {
+            left: -220px;
+        }
+        .row-offcanvas-left.active {
+            left: 0;
+        }
+        .sidebar-offcanvas {
+            position: absolute;
+            top: 0;
+        }
+    }
+    
+    .nogroupselected {
+        height: 300px;
+        margin-top: 20px;
+    }
+    
+    #content {
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        top: 45%;
+        transform: translateY(-50%);
+        font-size: 25px;
+    }
+    
+    #loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 1;
+        width: 150px;
+        height: 150px;
+        margin: -75px 0 0 -75px;
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #222;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        animation: spin 2s linear infinite;
+    }
+    
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/
