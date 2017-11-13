@@ -1,12 +1,9 @@
 {
-    "message": "User Signed in successfully",
-    "response": [{
-        "-KwW2TEuvqwcF2ODZH1-": {
-            "phone_Number": "07031187445",
-            "time": "Sun, Oct 15, 2017 6:21 PM",
-            "userEmail": "quduskunle@gmail.com",
-            "userId": "NCaAzr0ZzqfCLtXQlQG0jW2DWbg1",
-            "userName": "kunle"
+    "message": "User`s sign up successfully",
+    "response": [
+        "https://post-it-app.firebaseio.com/users/WXBgzYF4T3cSAN1Ol4muOYiDfmJ2/-KyZx0b2UQV2DagIa_ML",
+        {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVzZXJJZCI6IldYQmd6WUY0VDNjU0FOMU9sNG11T1lpRGZtSjIiLCJ1c2VybmFtZSI6IktvbGF3b2xlIiwiZW1haWwiOiJhbmRlbGFAZ21haWwuY29tIn0sImlhdCI6MTUxMDMwMDk4MiwiZXhwIjoxNTEwMzg3MzgyfQ.BF5Ou0WjvpzoxnvsjB0aJngPTtfjj3On3k4NsQiQeOw"
         }
-    }]
+    ]
 }

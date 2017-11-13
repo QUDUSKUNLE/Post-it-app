@@ -1,6 +1,6 @@
+import React from 'react';
 import expect from 'expect';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import UserResetPassword
@@ -88,8 +88,5 @@ describe('<UserResetPassword/>', () => {
     expect(wrapper.nodes[0].onChange).toBeDefined();
     expect(wrapper.nodes[0].onSubmit).toBeDefined();
     expect(wrapper.nodes[0].handlePasswordReset).toBeDefined();
-  });
-  it('should redirect to another page on click of a button', () => {
-    wrapper.find(Link).at(2).simulate('click');
   });
 });

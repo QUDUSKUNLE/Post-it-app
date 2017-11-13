@@ -1,10 +1,10 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   GET_GROUP_MESSAGE,
   SEND_GROUP_MESSAGE
-} from '../constants/ActionConstants.js';
+} from '../constants/ActionConstants';
 import { helpGetGroupMessages } from '../helper/helper.js';
 
 /**
@@ -30,7 +30,8 @@ export const getGroupMessage = groupId => axios.get(
 * @returns {function} dispatch - Server ressponse is dispatch to MessageStore
 */
 export const sendGroupMessage = (messageDetails) => {
-  axios.post(`/api/v1/sendMessage/${messageDetails.groupId}`,
+  const groupId = messageDetails.groupId;
+  axios.post(`/api/v1/sendMessage/${groupId}`,
     messageDetails).then(({ data }) => {
       AppDispatcher.dispatch({
         type: SEND_GROUP_MESSAGE,

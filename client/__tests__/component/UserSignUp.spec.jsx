@@ -9,6 +9,7 @@ describe('PostIt-app', () => {
   const signUpAction = sinon.spy();
   sinon.spy(UserSignUp.prototype, 'onSubmit');
   sinon.spy(UserSignUp.prototype, 'componentDidMount');
+  const spy = sinon.spy(UserSignUp.prototype, 'componentWillUnmount');
   const props = {
     email: '',
     password: '',
@@ -44,10 +45,13 @@ describe('PostIt-app', () => {
           }
         }
       }
-    });
+    }
+  );
+
   it('expects UserSignUp component to be defined', () => {
     expect(UserSignUp).toBeDefined();
   });
+
   it('should have signup form', () => {
     expect(wrapper.find('form').length).toEqual(1);
     expect(wrapper.find('[type="text"]').at(0).length).toEqual(1);
@@ -55,17 +59,25 @@ describe('PostIt-app', () => {
     expect(wrapper.find('[type="password"]').at(0).length).toEqual(1);
     expect(wrapper.find('[type="submit"]').at(0).length).toEqual(1);
   });
+
   it('calls componentDidMount', () => {
     expect(UserSignUp.prototype.componentDidMount.calledOnce).toEqual(true);
     UserSignUp.prototype.componentDidMount.restore();
   });
+
   it('should called onSubmit method when submit button is clicked', () => {
     wrapper.find('form').simulate('submit');
     expect(UserSignUp.prototype.onSubmit.calledOnce).toEqual(true);
   });
+
   it('should call onChange method when type something in the input', () => {
     const event = { target: { name: 'name', value: 'value' } };
     wrapper.instance().onChange(event);
     expect(wrapper.state().name).toEqual('value');
+  });
+
+  it('expects componentWillUnmount to be unmounted', () => {
+    wrapper.instance().componentWillUnmount();
+    expect(spy.calledOnce).toBeTruthy();
   });
 });
