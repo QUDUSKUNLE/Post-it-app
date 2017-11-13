@@ -29,14 +29,49 @@ describe('signUpAction', () => {
         confirmPassword: 'Ka123@',
         phoneNumber: '07031187445',
         userName: 'kunle' };
-      return signUpAction(user).then(() => {
+      signUpAction(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toEqual({ signUpResponse });
-          expect(res).toBeInstanceOf(Object);
-        });
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_UP_SUCCESS');
+      });
+    });
+  });
+});
+
+
+describe('signUpAction error', () => {
+  let mockAxiosError;
+  const error = {
+    response:
+    {
+      data:
+      {
+        error:
+          { code: 'Password does not match' }
+      }
+    }
+  };
+
+  beforeEach(() => {
+    mockAxiosError = sinon.stub(axios, 'post').callsFake(() =>
+      Promise.reject(error));
+  });
+
+  afterEach(() => {
+    axios.post.restore();
+  });
+
+  describe('Test for signUpAction Method', () => {
+    it('should dispatch an action', () => {
+      const user = {
+        email: 'quduskunle@gmail.com',
+        password: 'Ka123@',
+        confirmPassword: 'Ka123@',
+        phoneNumber: '07031187445',
+        userName: 'kunle'
+      };
+      signUpAction(user).catch(() => {
+        mockAxiosError.threw().should.be.true();
       });
     });
   });
