@@ -56,10 +56,10 @@ export default class UserCreateGroup extends React.Component {
   }
 
   /**
-	 * onChange event.
-	 * @param {object} event no parameter.
-	 * @returns {void} bind input data to name.
-	 */
+   * onChange event.
+   * @param {object} event no parameter.
+   * @returns {void} bind input data to name.
+   */
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -67,10 +67,10 @@ export default class UserCreateGroup extends React.Component {
   }
 
   /**
-	 * @description This handles CreateGroup form submission
-	 * @param {object} event -
-	 * @returns {void}
-	 */
+   * @description This handles CreateGroup form submission
+   * @param {object} event -
+   * @returns {void}
+   */
   onSubmit(event) {
     event.preventDefault();
     const group = { group: this.state.group };
@@ -82,7 +82,7 @@ export default class UserCreateGroup extends React.Component {
    * @description This handles createGroupEvent
    * @param {*} any .
    * @returns {void} .
-  */
+   */
   handleCreateGroupEvent() {
     const createGroupResponse = GroupStore.createGroup();
     this.setState({});
