@@ -8,12 +8,12 @@ import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import { getGroupMember, getAllUsers, addMember }
   from '../../src/actions/memberActions.js';
 
-describe('MemberAction', () => {
-  let mockAxios;
+describe('getGroupMembers', () => {
+  let mockGetGroupMembers;
   let dispatchSpy;
 
   beforeEach(() => {
-    mockAxios = sinon.stub(axios, 'get').callsFake(() =>
+    mockGetGroupMembers = sinon.stub(axios, 'get').callsFake(() =>
       Promise.resolve({ memberResponse }));
     if (memberResponse.response[0] === null) {
       dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
@@ -31,11 +31,7 @@ describe('MemberAction', () => {
     const groupId = '-KwWEZj5RSYLAtP2TbDv';
     it('should dispatch an action', () => {
       getGroupMember(groupId).then(() => {
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ memberResponse });
-        });
-        expect(mockAxios.calledOnce).toBe(false);
+        expect(mockGetGroupMembers.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe(
           'GET_MEMBERS_OF_GROUP');
@@ -44,7 +40,7 @@ describe('MemberAction', () => {
   });
 });
 
-describe('MemberAction', () => {
+describe('Test for getAllUsers', () => {
   let mockAxios;
   let dispatchSpy;
 
@@ -62,10 +58,6 @@ describe('MemberAction', () => {
   describe('Test for getAllUsers Method', () => {
     it('should dispatch an action', () => {
       getAllUsers().then(() => {
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ memberResponse });
-        });
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('ALL_USERS');
@@ -74,13 +66,37 @@ describe('MemberAction', () => {
   });
 });
 
+describe('Test for getAllUsers error', () => {
+  let mockGetAllUsersError;
+  const response = { data: {
+    message: 'No user found' }
+  };
+
+  beforeEach(() => {
+    mockGetAllUsersError = sinon.stub(axios, 'get').callsFake(() =>
+      Promise.reject(response));
+  });
+
+  afterEach(() => {
+    axios.get.restore();
+  });
+
+  describe('Test for getAllUsers Method', () => {
+    it('should throw error if error is encountered', () => {
+      getAllUsers().catch(() => {
+        expect(mockGetAllUsersError.throw()).toBe(true);
+      });
+    });
+  });
+});
+
 describe('AddMemberAction', () => {
   let mockAxios;
   let dispatchSpy;
-
+  const addMemberResponse = {
+    response: 'Add member successfully'
+  };
   beforeEach(() => {
-    const addMemberResponse = {
-      response: 'Add member successfully' };
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
       Promise.resolve({ addMemberResponse }));
     dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
@@ -98,16 +114,46 @@ describe('AddMemberAction', () => {
 
     it('should dispatch an action', () => {
       const memberDetails = { groupId: '-KwZyowDPR6PAQmGIRcw',
-        memberId: 'SUL5pAUsQmV3FxNQXIb9hXFbI8h2', group: 'abuja' };
+        memberId: 'SUL5pAUsQmV3FxNQXIb9hXFbI8h2' };
       addMember(memberDetails).then(() => {
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ memberResponse });
-        });
-        expect(mockAxios.calledOnce).toBe(false);
+        expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_MEMBERS' +
-          '_OF_GROUP');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe('ADD_MEMBER');
+      });
+    });
+  });
+});
+
+describe('Test for AddMemberAction Error', () => {
+  let mockAddMemberError;
+  const error = {
+    response: {
+      data: {
+        error: 'User`s already a member'
+      }
+    }
+  };
+  beforeEach(() => {
+    mockAddMemberError = sinon.stub(axios, 'post').callsFake(() =>
+      Promise.reject(error));
+  });
+
+  afterEach(() => {
+    axios.post.restore();
+  });
+
+  describe('Test for addMember Method', () => {
+    it('should dispatch an action', () => {
+      expect(addMember).toBeDefined();
+    });
+
+    it('should dispatch an action', () => {
+      const memberDetails = {
+        groupId: '-KwZyowDPR6PAQmGIRcw',
+        memberId: 'SUL5pAUsQmV3FxNQXIb9hXFbI8h2'
+      };
+      addMember(memberDetails).catch(() => {
+        expect(mockAddMemberError.throw()).toBe(true);
       });
     });
   });
