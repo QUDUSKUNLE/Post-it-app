@@ -98,10 +98,10 @@ export default class UserAddMember extends React.Component {
   }
 
   /**
-	 * @description This handles addMember form submission
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles addMember form submission
+   * @param {object} event .
+   * @returns {void} .
+  */
   onSubmit(event) {
     event.preventDefault();
     const memberDetails = {
@@ -112,10 +112,10 @@ export default class UserAddMember extends React.Component {
   }
 
   /**
-	 * @description This handles addMember update from store
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles addMember update from store
+   * @param {object} event .
+   * @returns {void} .
+   */
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
     toastr.success(addMemberResponse);
