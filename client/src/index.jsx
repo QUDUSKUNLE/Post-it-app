@@ -5,7 +5,7 @@ import {
   browserHistory } from 'react-router-dom';
 import Routes from './components/Routes.jsx';
 import setAuthToken from '../src/helper/setAuthToken.js';
-import './index.css';
+import './index.scss';
 
 /**
  * Contains Routes to all my components
