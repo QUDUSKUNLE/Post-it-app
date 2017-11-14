@@ -286,4 +286,26 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.notFound {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.notFound .page {
+    font-size: 50px;
+    color: gray
+}
+
+#homeLink {
+    color: #253547
+}
+
+#let {
+    color: gray
+}
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJidW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

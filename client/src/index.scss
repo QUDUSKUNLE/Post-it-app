@@ -286,3 +286,25 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.notFound {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.notFound .page {
+    font-size: 50px;
+    color: gray
+}
+
+#homeLink {
+    color: #253547
+}
+
+#let {
+    color: gray
+}
