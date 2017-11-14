@@ -14,12 +14,12 @@ import {
  */
 export const signInAction = user => axios.post('/api/v1/signin', user)
   .then(({ data }) => {
+    localStorage.setItem('token', JSON.stringify(data.token));
+    setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,
       response: data
     });
-    localStorage.setItem('token', JSON.stringify(data.token));
-    setAuthToken(JSON.parse(localStorage.getItem('token')));
   }).catch((error) => {
     if (error.response) {
       toastr.error(error.response.data.error.message);
@@ -35,6 +35,7 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
 export const signInWithGoogle = user => axios.post('/api/v1/google', user)
   .then(({ data }) => {
     localStorage.setItem('token', JSON.stringify(data.token));
+    localStorage.setItem('isAuthenticated', JSON.stringify(true));
     setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: GOOGLE_SIGN_IN_SUCCESS,

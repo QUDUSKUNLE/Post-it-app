@@ -20,7 +20,7 @@ import NotFound from './NotFound.jsx';
  */
 class Routes extends React.Component {
   /**
-   * Creates an instance of UserAddMember.
+   * Creates an instance of Routes.
    * @constructor
    * @param {*} props -
    * @memberof Routes
@@ -46,7 +46,7 @@ class Routes extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {*} Routes component
-   * @ResetPassword
+   * @Routes
   */
   render() {
     const { location } = this.props;

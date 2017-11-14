@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
  * @return {NotFound} component
  */
 const NotFound = () => (
-  <div className="col-md-12">
-    <div className="inner-content center m-auto">
-      <h3 className="text-center">Page Not Found.</h3>
-      <Link to="/signin">Go Back</Link>
+  <div className="notFound">
+    <div className="page">PAGE NOT FOUND!!!</div>
+    <div className="text-center" id="let">Let's go back
+      <span id="homeLink"><Link to="/signin"> Home</Link></span>
     </div>
   </div>
 );
