@@ -77,6 +77,12 @@
 ## Author
 + [Qudus YEKEEN (ABU MUHSINAH)](https://github.com/QUDUSKUNLE)
 
+## FAQ
+#### Is PostIt a free app?
+Yes, it's free.
+
+#### Is PostIt an open source?
+Yes, It's an open source project, and we encourage anyone who wish to contribute to do so.
 
 ## Contribution
 If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```.
