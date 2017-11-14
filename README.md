@@ -81,6 +81,7 @@
 ## Contribution
 If you wish to contribute to this Open source project, kindly fork the respository and raise a Pull Request against ```development branch```.
 For every pull request raised, kindly adhere to this best practises <a href="https://github.com/airbnb/javascript">link</a> to conform with the standard to which this project codebase is written.
+For more clarifications, do contant via this email ```qudus.yekeen@andela.com```.
 
  ## License
  
