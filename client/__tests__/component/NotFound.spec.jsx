@@ -10,7 +10,7 @@ describe('<NotFound/>', () => {
   it('should render correctly', () => {
     const component = shallow(<NotFound />);
     expect(component).toMatchSnapshot();
-    expect(component.find('.col-md-12')).toHaveLength(1);
-    expect(component.find('div')).toHaveLength(2);
+    expect(component.find('.notFound')).toHaveLength(1);
+    expect(component.find('div')).toHaveLength(3);
   });
 });

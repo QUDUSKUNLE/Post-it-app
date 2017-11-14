@@ -8,7 +8,7 @@ module.exports = {
   entry: [
     'webpack-hot-middleware',
     path.resolve(__dirname, 'client/src/index.jsx'),
-    path.resolve(__dirname, 'client/src/index.css')
+    path.resolve(__dirname, 'client/src/index.scss')
   ],
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -41,7 +41,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.css?$/,
+        test: /\.scss?$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
