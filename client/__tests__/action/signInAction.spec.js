@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
-import '../../src/__mock__/firebaseMock.js';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import '../../src/__mock__/firebaseMock';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 import { signInAction, signInWithGoogle }
-  from '../../src/actions/signInActions.js';
-import signOutAction from '../../src/actions/signOutActions.js';
+  from '../../src/actions/signInAction';
+import signOutAction from '../../src/actions/signOutAction';
 
 describe('SignInAction', () => {
   let mockAxios;

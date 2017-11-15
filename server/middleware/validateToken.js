@@ -13,7 +13,7 @@ const jwtSecret = process.env.TOKEN_SECRET;
  *
  * @return {Object} response contains validates token
  */
-const jwtToken = (req, res, next) => {
+export default (req, res, next) => {
   const token = req.headers.authorization || req.headers['x-access-token'];
   if (!token) {
     return res.status(403).json({ error: 'No valid token provided' });
@@ -30,4 +30,3 @@ const jwtToken = (req, res, next) => {
   });
 };
 
-export default jwtToken;

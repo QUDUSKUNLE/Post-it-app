@@ -1,11 +1,12 @@
 import expect from 'expect';
 import 'babel-polyfill';
 
-import Helper from '../helper/helper.js';
+import DestructureFirebaseData from '../helper/DestructureFirebaseData';
 import AllUsers from '../../client/src/__mock__/registeredUsers';
 
 describe('Helper.getAllUsers', () => {
   it('helps to destructure array of Object coming from Firebase', () => {
-    expect(Helper.getAllUsers(AllUsers)).toBeInstanceOf(Object);
+    expect(DestructureFirebaseData.getAllUsers(AllUsers))
+      .toBeInstanceOf(Object);
   });
 });

@@ -3,8 +3,8 @@ import expect from 'expect';
 import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import UserAddMember from '../../src/components/UserAddMember.jsx';
-import localStorageMock from '../../src/__mock__/localStorage.js';
+import UserAddMember from '../../src/components/UserAddMember';
+import localStorageMock from '../../src/__mock__/localStorage';
 
 window.localStorage = localStorageMock;
 describe('<UserAddMember/>', () => {
@@ -18,7 +18,7 @@ describe('<UserAddMember/>', () => {
     group: {},
     member: ''
   };
-  const wrapper = mount(<UserAddMember {...props}/>,
+  const wrapper = mount(<UserAddMember {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {

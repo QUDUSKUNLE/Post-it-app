@@ -1,8 +1,7 @@
 import moment from 'moment';
 import values from 'object.values';
-
-import dbConfig from '../config/index.js';
-import Helper from '../helper/helper.js';
+import dbConfig from '../config/dbConfig';
+import QueryDatabase from '../helper/QueryDatabase';
 
 /**
  * @description This class create and read functions for group
@@ -31,7 +30,7 @@ export default class GroupController {
             time: moment().format('llll')
           })
             .then((response) => {
-              Helper.getUserEmailAndPhoneNumber(userId)
+              QueryDatabase.getUserEmailAndPhoneNumber(userId)
                 .then((userEmailAndPhone) => {
                   const userDetails = (values(userEmailAndPhone))[0];
                   dbConfig.database().ref(`UserGroups/${userId}`)
@@ -86,7 +85,7 @@ export default class GroupController {
    */
   static getMembers(req, res) {
     const groupId = req.params.groupId;
-    Helper.getGroupName(groupId).then((groupName) =>
+    QueryDatabase.getGroupName(groupId).then((groupName) =>
       Promise.all([
         dbConfig.database().ref('GroupMember').child(groupId)
           .once('value', snapshot => snapshot.val()),
@@ -128,10 +127,10 @@ export default class GroupController {
   static addMemberToGroup(req, res) {
     const memberId = req.body.memberId;
     const groupId = req.params.groupId;
-    Helper.getUserEmailAndPhoneNumber(memberId)
+    QueryDatabase.getUserEmailAndPhoneNumber(memberId)
       .then((response) => {
         const memberDetails = values(response)[0];
-        Helper.getGroupName(groupId).then((group) => {
+        QueryDatabase.getGroupName(groupId).then((group) => {
           const groupName = group[0];
           dbConfig.database().ref('GroupMember').child(groupId)
             .once('value', (snapshot) => {

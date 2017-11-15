@@ -1,8 +1,7 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import jwt from 'jsonwebtoken';
-
-import dbConfig from '../config/index.js';
+import sendToken from '../utils/sendToken';
+import dbConfig from '../config/dbConfig';
 
 /**
  * @description This class create and read functions for User
@@ -20,14 +19,10 @@ export default class UserController {
    * @return {Object} json response contains signed up user response
    */
   static signUp(req, res) {
-    const {
-      email, password,
-      phoneNumber, username } = req.body;
+    const { email, password, phoneNumber, username } = req.body;
     dbConfig.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        const userId = user.uid;
-        const userToken = jwt.sign({ data: { userId, username, email } },
-          process.env.TOKEN_SECRET, { expiresIn: '24h' });
+        const userToken = sendToken(user.uid, email);
         return Promise.all(
           [dbConfig.database().ref(`users/${user.uid}`).push({
             userEmail: email,
@@ -56,10 +51,7 @@ export default class UserController {
     const { email, password } = req.body;
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        const userId = user.uid;
-        const token = jwt.sign({
-          data: { userId, email } },
-          process.env.TOKEN_SECRET, { expiresIn: '24h' });
+        const token = sendToken(user.uid, email);
         res.status(200).send({
           message: 'User Signed in successfully', token });
       })
@@ -75,10 +67,8 @@ export default class UserController {
   /**
    * @description This method sign in users via Google account
    * route POST: api/v1/googleSignIn
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
@@ -89,10 +79,7 @@ export default class UserController {
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
-              const userId = user.uid;
-              const email = user.email;
-              const userToken = jwt.sign({ data: { userId, email }
-              }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
+              const userToken = sendToken(user.uid, user.email);
               Promise.all(
                 [dbConfig.database().ref(`users/${user.uid}`).push({
                   userEmail: user.email,
@@ -110,11 +97,7 @@ export default class UserController {
                   });
                 });
             } else {
-              const userId = user.uid;
-              const email = user.email;
-              const userToken = jwt.sign({
-                data: { userId, email }
-              }, process.env.TOKEN_SECRET, { expiresIn: '24h' });
+              const userToken = sendToken(user.uid, user.email);
               res.status(200).send({
                 message: 'user`s signed in succesfully', token: userToken
               });

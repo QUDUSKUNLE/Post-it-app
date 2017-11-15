@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link } from 'react-router-dom';
 import firebase from '../vendors/index';
-import SignInStore from '../stores/SignInStore.js';
-import { signInAction, signInWithGoogle } from '../actions/signInActions.js';
+import SignInStore from '../stores/SignInStore';
+import { signInAction, signInWithGoogle } from '../actions/signInAction';
 
 /**
  * @description - renders UserSignIn Component

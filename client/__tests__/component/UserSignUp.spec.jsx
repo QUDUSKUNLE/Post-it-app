@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import expect from 'expect';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
-import UserSignUp from '../../src/components/UserSignUp.jsx';
+import UserSignUp from '../../src/components/UserSignUp';
 
 describe('PostIt-app', () => {
   const signUpAction = sinon.spy();
@@ -18,7 +18,7 @@ describe('PostIt-app', () => {
     phoneNumber: '',
     signUpAction
   };
-  const wrapper = mount(<UserSignUp {...props}/>,
+  const wrapper = mount(<UserSignUp {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {

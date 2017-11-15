@@ -6,7 +6,7 @@ import expressValidator from 'express-validator';
 import morgan from 'morgan';
 import compression from 'compression';
 
-import Router from './routes/index.js';
+import router from './routes/router';
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // MIDDLEWARE
 app.use(morgan('dev'));
-app.use('/', Router);
+app.use('/', router);
 app.use(express.static(path.join(__dirname, '../client/src/')));
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/client/src/index.html`);

@@ -1,7 +1,7 @@
 import React from 'react';
 import toastr from 'toastr';
-import resetPassword from '../actions/resetPasswordActions.js';
-import SignInStore from '../stores/SignInStore.js';
+import resetPasswordAction from '../actions/resetPasswordAction';
+import SignInStore from '../stores/SignInStore';
 
 /**
  * @description - renders ResetPassword Component
@@ -68,7 +68,7 @@ export default class UserResetPassword extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const resetEmail = { email: this.state.email };
-    resetPassword(resetEmail);
+    resetPasswordAction(resetEmail);
     this.setState({ email: '' });
   }
 
@@ -102,14 +102,18 @@ export default class UserResetPassword extends React.Component {
                   <label htmlFor="email">
                     Enter email
                   </label>
-                  <input value={this.state.email}
+                  <input
+                    value={this.state.email}
                     onChange={this.onChange}
                     id="email" type="email"
                     className="signinform" placeholder="johndoe@example.com"
-                    name="email" required />
+                    name="email" required
+                  />
                 </div>
-                <button type="submit"
-                  className="signinformbtn">Send
+                <button
+                  type="submit"
+                  className="signinformbtn"
+                >Send
                 </button>
               </form>
             </div>

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 import expect from 'expect';
-import UserChatBox from '../../src/components/UserChatBox.jsx';
-import localStorageMock from '../../src/__mock__/localStorage.js';
+import UserChatBox from '../../src/components/UserChatBox';
+import localStorageMock from '../../src/__mock__/localStorage';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 
 window.localStorage = localStorageMock;
@@ -19,7 +19,7 @@ describe('<UserChatBox />', () => {
     priority: 'normal',
     allGeneralMessage: groupMessageResponse.response
   };
-  const wrapper = mount(<UserChatBox {...props}/>,
+  const wrapper = mount(<UserChatBox {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {

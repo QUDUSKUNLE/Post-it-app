@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
-import UserGroups from './UserGroups.jsx';
-import UserChatBox from './UserChatBox.jsx';
-import NoGroupSelected from './NoGroupSelected.jsx';
-import { getUserGroups } from '../actions/groupActions.js';
-import { getGroupMessage } from '../actions/messageActions.js';
-import { getGroupMember } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
-import MessageStore from '../stores/MessageStore.js';
+import UserGroups from './UserGroups';
+import UserChatBox from './UserChatBox';
+import NoGroupSelected from './NoGroupSelected';
+import { getUserGroups } from '../actions/groupAction';
+import { getGroupMessage } from '../actions/messageAction';
+import { getGroupMember } from '../actions/memberAction';
+import MemberStore from '../stores/MemberStore';
+import GroupStore from '../stores/GroupStore';
+import MessageStore from '../stores/MessageStore';
 
 /**
  * @description - renders BroadCastBoard Component
@@ -137,7 +137,8 @@ export default class UserBroadCastBoard extends React.Component {
             groupId: (Object.values(group))[0],
             groupSelected: true
           });
-        }}><Link to="#"> {Object.keys(group)}</Link>
+        }}
+      ><Link to="#"> {Object.keys(group)}</Link>
       </li>);
     const isGroupSelected = () => {
       let selectedGroup;
@@ -146,7 +147,8 @@ export default class UserBroadCastBoard extends React.Component {
           (<UserChatBox
             defaultGroup={this.state.defaultGroup}
             groupId={this.state.groupId}
-            allGeneralMessage={this.state.groupMessage} />);
+            allGeneralMessage={this.state.groupMessage}
+          />);
       } else {
         selectedGroup = <NoGroupSelected />;
       }
@@ -160,7 +162,8 @@ export default class UserBroadCastBoard extends React.Component {
         <UserGroups
           grouplist={groupList}
           member={this.state.groupMember}
-          groupSelected={this.state.groupSelected}/>
+          groupSelected={this.state.groupSelected}
+        />
         {isGroupSelected()}
       </div>
     );

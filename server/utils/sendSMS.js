@@ -13,7 +13,7 @@ const jusibe = new Jusibe(key, token);
  *
  * @return {Object} response from Jusibe server
  */
-const sendGroupSMS = (phoneNumbers) => {
+export default (phoneNumbers) => {
   const payloads = phoneNumbers.map(number => (
     {
       to: number,
@@ -25,4 +25,3 @@ const sendGroupSMS = (phoneNumbers) => {
     payloads.map(payload => jusibe.sendSMS(payload)));
 };
 
-export default sendGroupSMS;

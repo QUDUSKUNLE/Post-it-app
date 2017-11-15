@@ -4,10 +4,10 @@ import { mount } from 'enzyme';
 import expect from 'expect';
 import sinon from 'sinon';
 import 'babel-polyfill';
-import MessageStore from '../../src/stores/MessageStore.js';
-import MemberStore from '../../src/stores/MemberStore.js';
-import localStorageMock from '../../src/__mock__/localStorage.js';
-import UserBroadCastBoard from '../../src/components/UserBroadCastBoard.jsx';
+import MessageStore from '../../src/stores/MessageStore';
+import MemberStore from '../../src/stores/MemberStore';
+import localStorageMock from '../../src/__mock__/localStorage';
+import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
 
 window.localStorage = localStorageMock;
 describe('<UserBroadCastBoard/>', () => {
@@ -39,7 +39,7 @@ describe('<UserBroadCastBoard/>', () => {
       groupMember: [],
       groupSelected: false
     };
-    wrapper = mount(<UserBroadCastBoard {...props}/>,
+    wrapper = mount(<UserBroadCastBoard {...props} />,
       {
         childContextTypes: { router: PropTypes.object },
         context: {
