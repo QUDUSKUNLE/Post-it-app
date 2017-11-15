@@ -1,10 +1,11 @@
 import moment from 'moment';
 import values from 'object.values';
 
-import dbConfig from '../config/index.js';
-import Helper from '../helper/helper.js';
+import dbConfig from '../config/dbConfig';
+import DestructureFirebaseData from '../helper/DestructureFirebaseData';
 import sendMail from '../utils/sendMail';
 import sendSMS from '../utils/sendSMS';
+import QueryDatabase from '../helper/QueryDatabase';
 
 /**
  * @description This class create and read functions for Messages
@@ -26,18 +27,21 @@ export default class MessageController {
     const groupId = req.params.groupId;
     const userId = req.decoded.data.userId;
     const time = moment().format('llll');
-    Helper.getUserEmailAndPhoneNumber(userId)
+    QueryDatabase.getUserEmailAndPhoneNumber(userId)
       .then((senderDetails) => {
         const sender = values(senderDetails)[0];
         const userName = sender.userName;
         const email = sender.userEmail;
-        Helper.getGroupPhoneNumbers(groupId).then((groupPhoneAndEmail) => {
+        QueryDatabase.getGroupPhoneNumbers(groupId).then((
+          groupPhoneAndEmail) => {
           if (priority === 'urgent') {
-            const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
+            const groupEmails = DestructureFirebaseData.getGroupEmails(
+              groupPhoneAndEmail);
             sendMail(groupEmails);
           } else if (priority === 'critical') {
-            const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
-            const groupPhoneNumbers = Helper.getPhoneNumbers(
+            const groupEmails = DestructureFirebaseData.getGroupEmails(
+              groupPhoneAndEmail);
+            const groupPhoneNumbers = DestructureFirebaseData.getPhoneNumbers(
               groupPhoneAndEmail);
             sendSMS(groupPhoneNumbers).then((res) => {
               if (res) {

@@ -1,4 +1,4 @@
-import Helper from '../helper/helper.js';
+import DestructureFirebaseData from '../helper/DestructureFirebaseData';
 
 /**
  * @description: class Validates contains methods
@@ -37,7 +37,7 @@ export default class ValidateInputFields {
       res.status(403).send({ error: { code:
         'Password does not match'
       } });
-    } else if (!Helper.validatePassword(req.body.password)) {
+    } else if (!DestructureFirebaseData.validatePassword(req.body.password)) {
       res.status(403).send({ error: { code:
         'Password should be at least 6 characters with a speacial character'
       } });
