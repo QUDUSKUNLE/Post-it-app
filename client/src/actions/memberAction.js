@@ -1,12 +1,12 @@
 import axios from 'axios';
 import toastr from 'toastr';
 import catchError from '../helper/catchError';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { helpGetRegisteredUsers } from '../helper/helper.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { helpGetRegisteredUsers } from '../helper/convertObject';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
+  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server

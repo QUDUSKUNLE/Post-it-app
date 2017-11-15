@@ -1,7 +1,7 @@
 import axios from 'axios';
 import catchError from '../helper/catchError';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { helpGetGroups } from '../helper/helper.js';
+import { helpGetGroups } from '../helper/convertObject';
 import {
   GET_USER_GROUPS,
   CREATE_GROUP,

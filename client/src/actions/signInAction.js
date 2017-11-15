@@ -1,11 +1,11 @@
 import axios from 'axios';
 import toastr from 'toastr';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import setAuthToken from '../helper/setAuthToken.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import setAuthToken from '../helper/setAuthToken';
 import catchError from '../helper/catchError';
 import {
   SIGN_IN_SUCCESS,
-  GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';
+  GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server

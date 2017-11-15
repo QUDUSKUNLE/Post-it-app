@@ -5,7 +5,7 @@ import {
   GET_GROUP_MESSAGE,
   SEND_GROUP_MESSAGE
 } from '../constants/ActionConstants';
-import { helpGetGroupMessages } from '../helper/helper.js';
+import { helpGetGroupMessages } from '../helper/convertObject';
 
 /**
  * @description - An action that makes API call to server

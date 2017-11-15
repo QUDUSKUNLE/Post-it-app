@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import { getGroupMembers } from '../helper/helper.js';
+import { getGroupMembers } from '../helper/convertObject';
 import {
   ALL_USERS,
   ADD_MEMBER,

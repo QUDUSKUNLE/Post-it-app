@@ -1,7 +1,7 @@
 import axios from 'axios';
 import catchError from '../helper/catchError';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * @description - An action that makes API call to server
