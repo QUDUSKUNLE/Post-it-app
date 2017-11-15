@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import expect from 'expect';
 import sinon from 'sinon';
 import 'babel-polyfill';
-import MessageStore from '../../src/stores/MessageStore';
-import MemberStore from '../../src/stores/MemberStore';
-import localStorageMock from '../../src/__mock__/localStorage';
-import UserBroadCastBoard from '../../src/components/UserBroadCastBoard';
+import MessageStore from '../../src/stores/MessageStore.js';
+import MemberStore from '../../src/stores/MemberStore.js';
+import localStorageMock from '../../src/__mock__/localStorage.js';
+import UserBroadCastBoard from '../../src/components/UserBroadCastBoard.jsx';
 
 window.localStorage = localStorageMock;
 describe('<UserBroadCastBoard/>', () => {
   let wrapper;
-  let component;
+  // Mock MemberStore allGroupMessage
   const mockOnMessage = sinon.stub(MessageStore,
     'on').callsFake((message, cb) => cb());
   const mockUnMountMessage = sinon.stub(MessageStore,
@@ -20,6 +20,7 @@ describe('<UserBroadCastBoard/>', () => {
   const mockMessageResponse = sinon.stub(MessageStore,
     'allGroupMessage').returns([{ name: 'Gold', message: 'Shola is here' }]);
 
+  // Mock MemberStore allGroupMembers
   const mockOnMembers = sinon.stub(MemberStore,
     'on').callsFake((member, cb) => cb());
   const mockUnMountMembers = sinon.stub(MemberStore,
@@ -29,20 +30,15 @@ describe('<UserBroadCastBoard/>', () => {
 
   beforeEach(() => {
     window.localStorage.setItem('userIn', JSON.stringify(true));
-    window.localStorage.setItem('Id', JSON.stringify('AZCVGFRTUINSMUY15156'));
-    window.localStorage.setItem('userName', JSON.stringify('Kunle'));
     const props = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: '',
       groups: [],
       groupId: '',
-      userName: JSON.parse(localStorage.getItem('userName')),
       groupMessage: [],
       groupMember: [],
       groupSelected: false
     };
-    component = shallow(<UserBroadCastBoard {...props}/>);
     wrapper = mount(<UserBroadCastBoard {...props}/>,
       {
         childContextTypes: { router: PropTypes.object },
@@ -76,8 +72,6 @@ describe('<UserBroadCastBoard/>', () => {
   it('component expected to be defined', () => {
     expect(UserBroadCastBoard).toBeDefined();
     expect(wrapper.state()).toBeDefined();
-    expect(wrapper.state().userName).toEqual('Kunle');
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
     expect(wrapper.state().groupSelected).toEqual(false);
     expect(wrapper.state().defaultGroup).toEqual('');
     expect(wrapper.state().groups).toEqual([]);
@@ -89,10 +83,6 @@ describe('<UserBroadCastBoard/>', () => {
     expect(wrapper.nodes[0].handleGetGroupMessage).toBeDefined();
     expect(wrapper.nodes[0].handleGetUserGroups).toBeDefined();
     expect(wrapper.nodes[0].handleGetGroupMember).toBeDefined();
-  });
-  it('should render correctly without crashing', () => {
-    expect(component).toMatchSnapshot();
-    expect(component.find('div')).toHaveLength(1);
   });
   it('component should call componentDidMount component lifecycle', () => {
     const spy = sinon.spy(UserBroadCastBoard.prototype, 'componentDidMount');
@@ -107,7 +97,6 @@ describe('<UserBroadCastBoard/>', () => {
   it('expects componentDidMount to mount when event is fired', () => {
     expect(mockOnMessage.displayName).toEqual('on');
     expect(wrapper.state().loggedIn).toEqual(true);
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
     expect(wrapper.state().groupMessage).toEqual(mockMessageResponse());
   });
   it('expects componentDidMount to mount', () => {

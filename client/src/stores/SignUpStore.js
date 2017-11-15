@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
 
 /**
  * Signout Store, it hold user's state, listen to signin Actions
@@ -17,6 +17,12 @@ class SignUpStore extends EventEmitter {
     this.handleSignUpActions = this.handleSignUpActions.bind(this);
   }
 
+  /**
+   * @description describes a method that saves signUpMessage in the Store
+   * @method signUpUser
+   * @memberof SignUpStore
+   * @returns {object} signUpMessage
+   */
   signUpUser() {
     return this.signUpMessage;
   }

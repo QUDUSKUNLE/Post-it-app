@@ -1,6 +1,5 @@
 import React from 'react';
-import UserSignUp from './UserSignUp';
-
+import UserSignUp from './UserSignUp.jsx';
 
 /**
  * @export Home component
@@ -12,17 +11,12 @@ const Home = () =>
     <div className="container-fluid mainbody">
       <div className="row">
         <div className="col-md-6">
-          <div classNmae="row">
+          <div className="row">
             <div className="col-md-10 col-md-offset-1">
-              <div className="word">
-                <h4>PostIt
-                <small>
-                    <i>App</i>
-                  </small>
-                  {' '}
-                  allows friends come together and share vital information.
+              <h4>PostIt
+                {' '}
+                allows friends come together and share vital information.
               </h4>
-              </div>
             </div>
           </div>
         </div>

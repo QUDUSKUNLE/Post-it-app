@@ -1,9 +1,9 @@
 import expect from 'expect';
 import 'babel-polyfill';
-import MessageStore from '../../src/stores/MessageStore';
+import MessageStore from '../../src/stores/MessageStore.js';
 import getMessageResponse from '../../src/__mock__/getMessageResponse.json';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
-import { helpGetGroupMessages } from '../../src/helper/helper';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
+import { helpGetGroupMessages } from '../../src/helper/helper.js';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/MessageStore.js');

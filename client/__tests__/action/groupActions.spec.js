@@ -1,11 +1,11 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 import '../../src/__mock__/firebaseMock.js';
 import groupResponse from '../../src/__mock__/groupResponse.json';
 import { getUserGroups, createGroup }
-  from '../../src/actions/GroupActions';
+  from '../../src/actions/groupActions.js';
 
 
 describe('groupActions', () => {
@@ -32,14 +32,8 @@ describe('groupActions', () => {
       expect(getUserGroups).toBeDefined();
     });
     it('should dispatch an action', () => {
-      const userId = 'NCaAzr0ZzqfCLtXQlQG0jW2DWbg1';
-      getUserGroups(userId).then(() => {
+      getUserGroups().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ groupResponse });
-        });
-        expect(dispatchSpy.called).toEqual(false);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
       });
     });
@@ -64,18 +58,47 @@ describe('groupActions', () => {
   });
 
   describe('Test for createGroup Method', () => {
-    it('should dispatch an action', () => {
+    it('should dispatch an action CREATE_GROUP', () => {
       expect(createGroup).toBeDefined();
     });
     it('should dispatch an action', () => {
       const groupName = { group: 'andelauuuuu' };
       createGroup(groupName).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toBeInstanceOf(Object);
-          expect(res).toEqual({ groupResponse });
-        });
         expect(dispatchSpy.getCall(0).args[0].type).toBe('CREATE_GROUP');
+      });
+    });
+  });
+});
+
+describe('groupActions', () => {
+  let mockCreatGroupError;
+  const error = {
+    response: {
+      data: {
+        error: 'Group already exists'
+      }
+    }
+  };
+
+  beforeEach(() => {
+    mockCreatGroupError = sinon.stub(axios, 'post').callsFake(() => (
+      Promise.reject(error)
+    ));
+  });
+
+  afterEach(() => {
+    axios.post.restore();
+  });
+
+  describe('Test for createGroup Method Error', () => {
+    it('should not dispatch an action CREATE_GROUP', () => {
+      expect(createGroup).toBeDefined();
+    });
+    it('should throw error', () => {
+      const groupName = { group: 'andelauuuuu' };
+      createGroup(groupName).catch(() => {
+        expect(mockCreatGroupError.throw()).toBe(true);
       });
     });
   });

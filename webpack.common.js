@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -5,8 +6,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
+    'webpack-hot-middleware',
     path.resolve(__dirname, 'client/src/index.jsx'),
-    path.resolve(__dirname, 'client/src/index.css')
+    path.resolve(__dirname, 'client/src/index.scss')
   ],
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -14,6 +16,12 @@ module.exports = {
       template: './client/src/index.html',
       filename: 'index.html',
       inject: 'body'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      Hammer: 'hammerjs/hammer'
     }),
     new ExtractTextPlugin('bundle.css')
   ],
@@ -33,7 +41,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.css?$/,
+        test: /\.scss?$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
@@ -46,5 +54,9 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true
+  },
+  node: {
+    net: 'empty',
+    dns: 'empty'
   }
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-
 /**
  * @export NoGroupSelected component
  * @description - NoGroupSelected Component
@@ -18,9 +17,9 @@ const NoGroupSelected = () =>
           </button>
         </p>
         <div className="text-center w3-card w3-white nogroupselected">
-          <div id="content">
-            No Group is selected!
-          </div>
+          <p id="content">
+          Please select a group to send message or create one
+          </p>
         </div>
       </div>
     </div>

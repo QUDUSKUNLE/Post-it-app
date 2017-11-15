@@ -16,6 +16,7 @@ module.exports = merge(common, {
       path: './.env',
       safe: false
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
   ]
 });

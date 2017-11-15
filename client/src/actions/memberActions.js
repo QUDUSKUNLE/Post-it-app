@@ -15,19 +15,19 @@ import {
  */
 export const getGroupMember = groupId => axios.get(
   `/api/v1/getMembers/${groupId}`)
-    .then(({ data }) => {
-      if (data.response[0] === null) {
-        AppDispatcher.dispatch({
-          type: GET_MEMBERS_OF_GROUP,
-          members: []
-        });
-      } else {
-        AppDispatcher.dispatch({
-          type: GET_MEMBERS_OF_GROUP,
-          members: data.response
-        });
-      }
-    });
+  .then(({ data }) => {
+    if ((data.response)[0] === null) {
+      AppDispatcher.dispatch({
+        type: GET_MEMBERS_OF_GROUP,
+        members: []
+      });
+    } else {
+      AppDispatcher.dispatch({
+        type: GET_MEMBERS_OF_GROUP,
+        members: data.response
+      });
+    }
+  });
 
 /**
  * @description - An action that makes API call to server
@@ -35,13 +35,17 @@ export const getGroupMember = groupId => axios.get(
  * @param {*} void - No paramater
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
-export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
+export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: ALL_USERS,
       allUser: helpGetRegisteredUsers(data)
     });
-  }).catch(response => toastr.error(response.data.message));
+  }).catch((response) => {
+    if (response.data) {
+      toastr.error(response.data.message);
+    }
+  });
 
 /**
  * @description - An action that makes API call to server
@@ -50,7 +54,7 @@ export const getAllUsers = () => axios.get('/api/v1/getAllRegisteredUsers')
  * @returns {function} dispatch - server response is dispatch to MemberStore
  */
 export const addMember = memberDetails =>
-  axios.post(`/api/v1/addmember/${memberDetails.groupId}`, memberDetails)
+  axios.post(`/api/v1/addMember/${memberDetails.groupId}`, memberDetails)
     .then(({ data }) => {
       AppDispatcher.dispatch({
         type: ADD_MEMBER,
@@ -58,4 +62,3 @@ export const addMember = memberDetails =>
       });
     })
     .catch(error => toastr.error(error.response.data.error));
-

@@ -1,6 +1,6 @@
 import expect from 'expect';
-import SignInStore from '../../src/stores/SignInStore';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import SignInStore from '../../src/stores/SignInStore.js';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 
 jest.mock('../../src/dispatcher/AppDispatcher');

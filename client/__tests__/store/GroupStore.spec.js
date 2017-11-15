@@ -1,6 +1,6 @@
 import expect from 'expect';
-import GroupStore from '../../src/stores/GroupStore';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import GroupStore from '../../src/stores/GroupStore.js';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/GroupStore.js');

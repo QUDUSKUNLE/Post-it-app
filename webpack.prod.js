@@ -1,3 +1,4 @@
+// Webpack configuration
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 require('dotenv').config();
@@ -20,5 +21,6 @@ module.exports = merge(common, {
         messagingSenderId: JSON.stringify(process.env.messagingSenderId)
       }
     })
-  ]
+  ],
+  devtool: 'source-map',
 });

@@ -3,9 +3,8 @@ import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Link } from 'react-router-dom';
-import firebase from '../vendors/index.js';
-import Footer from './Footer';
-import SignInStore from '../stores/SignInStore';
+import firebase from '../vendors/index';
+import SignInStore from '../stores/SignInStore.js';
 import { signInAction, signInWithGoogle } from '../actions/signInActions.js';
 
 /**
@@ -27,7 +26,8 @@ export default class UserSignIn extends React.Component {
       email: '',
       password: '',
       loggedIn: false,
-      isLoading: false
+      isLoading: false,
+      signInResponse: ''
     };
 
     /**
@@ -41,11 +41,24 @@ export default class UserSignIn extends React.Component {
     this.handleGoogleEvent = this.handleGoogleEvent.bind(this);
   }
 
+   /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserSignIn
+  */
   componentDidMount() {
     SignInStore.on('SIGN_IN_SUCCESS', this.handleSignInAction);
     SignInStore.on('GOOGLE_SIGN_IN_SUCCESS', this.handleGoogleEvent);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserSignIn
+   */
   componentWillUnmount() {
     SignInStore.removeListener('SIGN_IN_SUCCESS', this.handleSignInAction);
     SignInStore.removeListener('GOOGLE_SIGN_IN_SUCCESS',
@@ -78,16 +91,11 @@ export default class UserSignIn extends React.Component {
    */
   handleSignInAction() {
     const response = SignInStore.signInUser();
-    toastr.success(response.message);
     this.setState({
-      userName: (Object.values((response.response)[0])[0].userName),
       loggedIn: true,
-      userId: (Object.values((response.response)[0]))[0].userId
     });
-    localStorage.setItem('user', JSON.stringify(response));
-    localStorage.setItem('userName', JSON.stringify(this.state.userName));
+    toastr.success(response.message);
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
-    localStorage.setItem('Id', JSON.stringify(this.state.userId));
     this.props.history.push('/broadcastboard');
   }
 
@@ -117,14 +125,9 @@ export default class UserSignIn extends React.Component {
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
     this.setState({
-      userName: googleResponse.user.displayName,
       loggedIn: true,
-      userId: googleResponse.user.uid
     });
-    toastr.success(googleResponse.message);
-    localStorage.setItem('userName', JSON.stringify(this.state.userName));
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
-    localStorage.setItem('Id', JSON.stringify(this.state.userId));
     this.props.history.push('/broadcastboard');
   }
 
@@ -145,6 +148,9 @@ export default class UserSignIn extends React.Component {
         {isLoading()}
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
+            <h5 className="text-center">
+              <b>Sign in to PostIt</b>
+            </h5>
             <form onSubmit={this.onSubmit}
               className="w3-card w3-white" id="signinForm">
               <div className="form-group">
@@ -159,13 +165,6 @@ export default class UserSignIn extends React.Component {
                   <div className="col-md-4">
                     <label htmlFor="password">Password</label>
                   </div>
-                  <div className="col-md-4 col-md-offset-4">
-                    <Link to="/passwordreset">
-                      <h6 className="pull-right create">
-                        <b>Forgot password?</b>
-                      </h6>
-                    </Link>
-                  </div>
                 </div>
                 <input id="password" type="password"
                   value={this.state.password} onChange={this.onChange}
@@ -177,6 +176,11 @@ export default class UserSignIn extends React.Component {
               </button>
             </form>
             <br/>
+            <span className="pull-right create">
+              <Link to="/passwordreset">
+                Forgot password?
+              </Link></span>
+            <br/>
             <center>
               <GoogleButton onClick={this.googleSignIn} />
             </center>
@@ -184,14 +188,14 @@ export default class UserSignIn extends React.Component {
             <div>
               <center>
                 <p>New to PostIt? <Link to="/" className="create">
-              Create an account.</Link>
+                  Create an account.</Link>
                 </p>
               </center>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

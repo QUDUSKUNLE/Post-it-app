@@ -1,7 +1,7 @@
 import React from 'react';
 import toastr from 'toastr';
 import resetPassword from '../actions/resetPasswordActions.js';
-import SignInStore from '../stores/SignInStore';
+import SignInStore from '../stores/SignInStore.js';
 
 /**
  * @description - renders ResetPassword Component
@@ -27,10 +27,23 @@ export default class UserResetPassword extends React.Component {
     this.handlePasswordReset = this.handlePasswordReset.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserResetPassword
+  */
   componentDidMount() {
     SignInStore.on('PASSWORD_RESET_SUCCESS', this.handlePasswordReset);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserResetPassword
+   */
   componentWillUnmount() {
     SignInStore.removeListener('PASSWORD_RESET_SUCCESS',
       this.handlePasswordReset);
@@ -48,14 +61,15 @@ export default class UserResetPassword extends React.Component {
   }
 
   /**
-	 * @description This handles resetPassword form submission
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles resetPassword form submission
+   * @param {object} event .
+   * @returns {void} .
+   */
   onSubmit(event) {
     event.preventDefault();
     const resetEmail = { email: this.state.email };
     resetPassword(resetEmail);
+    this.setState({ email: '' });
   }
 
   /**
@@ -65,19 +79,20 @@ export default class UserResetPassword extends React.Component {
    */
   handlePasswordReset() {
     const passwordResetResponse = SignInStore.passwordReset();
+    this.setState({});
     toastr.success(passwordResetResponse.message);
   }
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {Object} ResetPassword component
+   * @returns {*} ResetPassword component
    * @ResetPassword
    */
   render() {
     return (
       <div className="passwordreset">
         <h5 className="text-center">
-          Reset your password
+          <b>Reset your password</b>
         </h5>
         <div className="container resetform">
           <div className="row">
@@ -85,7 +100,7 @@ export default class UserResetPassword extends React.Component {
               <form onSubmit={this.onSubmit} id="resetform">
                 <div className="form-group">
                   <label htmlFor="email">
-                    Enter your email address
+                    Enter email
                   </label>
                   <input value={this.state.email}
                     onChange={this.onChange}

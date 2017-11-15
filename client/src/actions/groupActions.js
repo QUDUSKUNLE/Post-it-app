@@ -14,8 +14,8 @@ import {
  * @param {string} userId - The User identity
  * @returns {function} dispatch - Server Response is dispatch to GroupStore
  */
-export const getUserGroups = userId => axios.get(
-  `/api/v1/getgroups/${userId}`)
+export const getUserGroups = () => {
+  axios.get('/api/v1/getgroups')
   .then(({ data }) => {
     if (data.response[0] === null) {
       AppDispatcher.dispatch({
@@ -29,6 +29,7 @@ export const getUserGroups = userId => axios.get(
       });
     }
   });
+};
 
 /**
  * @description - An action that makes API call to server
@@ -37,12 +38,11 @@ export const getUserGroups = userId => axios.get(
  * @param {object} groupName - The name of group to be created
  * @returns {function} dispatch - Server response is dispatch to GroupStore
  */
-export const createGroup = groupName => axios.post(
-  '/api/v1/createGroup', groupName)
-    .then(({ data }) =>
-      AppDispatcher.dispatch({
-        type: CREATE_GROUP,
-        message: data.message
-      }))
-    .catch(error => toastr.error(error.response.data.error));
-
+export const createGroup = groupName => axios.post('/api/v1/createGroup',
+  groupName)
+  .then(({ data }) => {
+    AppDispatcher.dispatch({
+      type: CREATE_GROUP,
+      message: data.message
+    });
+  }).catch(error => toastr.error(error.response.data.error));

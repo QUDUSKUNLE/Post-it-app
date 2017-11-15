@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher';
-import { getGroupMembers } from '../helper/helper';
+import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import { getGroupMembers } from '../helper/helper.js';
 import {
   ALL_USERS,
   ADD_MEMBER,
@@ -46,6 +46,10 @@ class MemberStore extends EventEmitter {
     return [this.members, this.group, this.groupId];
   }
 
+  /**
+   * @method addMember
+   * @return {string} addMemberResponse - addMemberResponse in the store
+   */
   addMember() {
     return this.addMemberResponse;
   }
@@ -64,7 +68,7 @@ class MemberStore extends EventEmitter {
         break;
 
       case GET_MEMBERS_OF_GROUP:
-        this.groupIndex = [(action.members)[0]];
+        this.groupIndex = action.members;
         this.members = getGroupMembers(this.groupIndex);
         this.groupId = (action.members)[1];
         this.group = (action.members)[2];

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
 import { addMember, getAllUsers } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore';
-import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/GroupActions.js';
+import MemberStore from '../stores/MemberStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import { getUserGroups } from '../actions/groupActions.js';
 
 /**
  * @export
@@ -28,8 +28,8 @@ export default class UserAddMember extends React.Component {
       userId: JSON.parse(localStorage.getItem('Id')),
       groups: [],
       registeredUsers: [],
-      group: {},
-      member: ''
+      group: '',
+      member: '',
     };
     /**
      * @description This binding is necessary to make `this` work
@@ -51,8 +51,11 @@ export default class UserAddMember extends React.Component {
   }
 
   /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+	 * when the component is fully mounted.
+   * @return {void} void
    * @memberof UserAddMember
-   * @return {*} void
    */
   componentDidMount() {
     GroupStore.on('GET_USER_GROUPS', this.userGroups);
@@ -60,6 +63,12 @@ export default class UserAddMember extends React.Component {
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserAddMember
+   */
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
     MemberStore.removeListener('ALL_USERS', this.userGroups);
@@ -89,26 +98,24 @@ export default class UserAddMember extends React.Component {
   }
 
   /**
-	 * @description This handles addMember form submission
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles addMember form submission
+   * @param {object} event .
+   * @returns {void} .
+  */
   onSubmit(event) {
     event.preventDefault();
-    const groupDetails = this.state.group.split(',');
     const memberDetails = {
-      groupId: groupDetails[0],
-      group: groupDetails[1],
+      groupId: this.state.group,
       memberId: this.state.member
     };
     addMember(memberDetails);
   }
 
   /**
-	 * @description This handles addMember update from store
-	 * @param {object} event .
-	 * @returns {void} .
-	 */
+   * @description This handles addMember update from store
+   * @param {object} event .
+   * @returns {void} .
+   */
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
     toastr.success(addMemberResponse);
@@ -131,6 +138,9 @@ export default class UserAddMember extends React.Component {
       <div className="container addmember">
         <div className="row">
           <div className="col-md-offset-3 col-md-6">
+            <h5 className="text-center">
+              <b>Add Member to group</b>
+            </h5>
             <div className="row w3-card w3-white">
               <form className="addmemberform" onSubmit={this.onSubmit}>
                 <div className="form-group">
@@ -140,7 +150,7 @@ export default class UserAddMember extends React.Component {
                     <option value="">Select a group</option>
                     {(this.state.groups).map(group =>
                       <option key={Object.values(group)}
-                        value={[Object.values(group), Object.keys(group)]}>
+                        value={Object.values(group)}>
                         {Object.keys(group)}</option>
                     )}
                   </select>
@@ -164,7 +174,7 @@ export default class UserAddMember extends React.Component {
           </div>
         </div>
       </div>
-  );
+    );
   }
 }
 

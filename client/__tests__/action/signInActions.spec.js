@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 import '../../src/__mock__/firebaseMock.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 import { signInAction, signInWithGoogle }
-  from '../../src/actions/SignInActions';
-import signOutAction from '../../src/actions/signOutActions';
+  from '../../src/actions/signInActions.js';
+import signOutAction from '../../src/actions/signOutActions.js';
 
 describe('SignInAction', () => {
   let mockAxios;
@@ -25,17 +25,45 @@ describe('SignInAction', () => {
 
   describe('Test for signInAction Method', () => {
     const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
-    it('should dispatch an action', () => {
-      return signInAction(user).then(() => {
+    it('should dispatch an action', () =>
+      signInAction(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toEqual({ signInResponse });
-          expect(res).toBeInstanceOf(Object);
-        });
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_IN_SUCCESS');
-      });
-    });
+      })
+    );
+  });
+});
+
+describe('SignInAction Error', () => {
+  let mockAxiosError;
+  const error = {
+    response:
+    {
+      data:
+      {
+        error:
+        { message: 'Invalid signin details' }
+      }
+    }
+  };
+
+  beforeEach(() => {
+    mockAxiosError = sinon.stub(axios, 'post').callsFake(() =>
+      Promise.reject(error));
+  });
+
+  afterEach(() => {
+    axios.post.restore();
+  });
+
+  describe('Test for signInAction Method', () => {
+    const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
+    it('should error with invalid sign in details', () =>
+      signInAction(user).catch(() => {
+        expect(mockAxiosError.throw()).toBe(true);
+      })
+    );
   });
 });
 
@@ -58,11 +86,35 @@ describe('GoogleSignIn', () => {
 
   describe('Test for signInWithGoogle Method', () => {
     const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
-    it('should dispatch an action', () => {
+    it('should dispatch GOOGLE_SIGN_IN_SUCCESS', () => {
       signInWithGoogle(user).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GOOGLE_SIGN_IN_SUCCESS');
+        expect(dispatchSpy.getCall(0).args[0].type).toBe(
+          'GOOGLE_SIGN_IN_SUCCESS');
+      });
+    });
+  });
+});
+
+describe('GoogleSignIn Error', () => {
+  let mockGoogleSignInError;
+  const error = { response: 'invalid sign in details' };
+
+  beforeEach(() => {
+    mockGoogleSignInError = sinon.stub(axios, 'post').callsFake(() => (
+      Promise.reject(error)));
+  });
+
+  afterEach(() => {
+    axios.post.restore();
+  });
+
+  describe('Test for signInWithGoogle Method', () => {
+    const user = { email: 'quduskunle@gmail.com', password: 'Ka123@' };
+    it('should throw error for wrong signin details', () => {
+      signInWithGoogle(user).catch(() => {
+        expect(mockGoogleSignInError.throw()).toBe(true);
       });
     });
   });
@@ -70,11 +122,11 @@ describe('GoogleSignIn', () => {
 
 describe('signOutAction', () => {
   let mockAxios;
+  const signOutResponse = {
+    message: 'User`s signed-out successfully'
+  };
 
   beforeEach(() => {
-    const signOutResponse = {
-      message: 'User`s signed-out successfully'
-    };
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
       Promise.resolve(signOutResponse));
   });
@@ -88,9 +140,6 @@ describe('signOutAction', () => {
       signOutAction().then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         mockAxios.getCall(0).returnValue.then((res) => {
-          const signOutResponse = {
-            message: 'User`s signed-out successfully'
-          };
           expect(res).toEqual(signOutResponse);
           expect(res).toBeInstanceOf(Object);
         });
@@ -98,4 +147,3 @@ describe('signOutAction', () => {
     });
   });
 });
-

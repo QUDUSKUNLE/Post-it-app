@@ -1,5 +1,4 @@
 import React from 'react';
-
 /**
  * @export Footer component
  * @description - Footer Component

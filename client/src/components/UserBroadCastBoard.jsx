@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import toastr from 'toastr';
 import $ from 'jquery';
 import { Link, Redirect } from 'react-router-dom';
-import UserGroups from './UserGroups';
-import UserChatBox from './UserChatBox';
-import NoGroupSelected from './NoGroupSelected';
-import { getUserGroups } from '../actions/GroupActions.js';
+import UserGroups from './UserGroups.jsx';
+import UserChatBox from './UserChatBox.jsx';
+import NoGroupSelected from './NoGroupSelected.jsx';
+import { getUserGroups } from '../actions/groupActions.js';
 import { getGroupMessage } from '../actions/messageActions.js';
 import { getGroupMember } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore';
-import GroupStore from '../stores/GroupStore';
-import MessageStore from '../stores/MessageStore';
+import MemberStore from '../stores/MemberStore.js';
+import GroupStore from '../stores/GroupStore.js';
+import MessageStore from '../stores/MessageStore.js';
 
 /**
  * @description - renders BroadCastBoard Component
@@ -28,11 +27,9 @@ export default class UserBroadCastBoard extends React.Component {
     super(props);
     this.state = {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
       defaultGroup: '',
       groups: [],
       groupId: '',
-      userName: JSON.parse(localStorage.getItem('userName')),
       groupMessage: [],
       groupMember: [],
       groupSelected: false
@@ -49,12 +46,12 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * Call action on initial page load
    * @method componentWillMount
-   * @return {*} void
+   * @return {void} void
+   * @memberof UserBroadCastBoard
    */
   componentWillMount() {
-    getUserGroups(this.state.userId);
+    getUserGroups(this);
   }
 
   /**
@@ -92,6 +89,10 @@ export default class UserBroadCastBoard extends React.Component {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
+  /**
+   * @method handleGetGroupMember
+   * @return {*} void
+   */
   handleGetGroupMember() {
     this.setState({ groupMember: (MemberStore.allGroupMembers())[0] });
   }
@@ -158,7 +159,8 @@ export default class UserBroadCastBoard extends React.Component {
       <div className="row-offcanvas row-offcanvas-left">
         <UserGroups
           grouplist={groupList}
-          member={this.state.groupMember}/>
+          member={this.state.groupMember}
+          groupSelected={this.state.groupSelected}/>
         {isGroupSelected()}
       </div>
     );

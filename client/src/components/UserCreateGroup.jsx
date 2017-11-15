@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
-import { createGroup } from '../actions/GroupActions.js';
-import GroupStore from '../stores/GroupStore';
+import { createGroup } from '../actions/groupActions.js';
+import GroupStore from '../stores/GroupStore.js';
 
 
 /**
@@ -34,19 +34,32 @@ export default class UserCreateGroup extends React.Component {
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+	 * when the component is fully mounted.
+   * @return {void} void
+   * @memberof UserCreateGroup
+   */
   componentDidMount() {
     GroupStore.on('CREATE_GROUP', this.handleCreateGroupEvent);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserCreateGroup
+   */
   componentWillUnmount() {
     GroupStore.removeListener('CREATE_GROUP', this.handleCreateGroupEvent);
   }
 
   /**
-	 * onChange event.
-	 * @param {object} event no parameter.
-	 * @returns {void} bind input data to name.
-	 */
+   * onChange event.
+   * @param {object} event no parameter.
+   * @returns {void} bind input data to name.
+   */
   onChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -54,23 +67,25 @@ export default class UserCreateGroup extends React.Component {
   }
 
   /**
-	 * @description This handles CreateGroup form submission
-	 * @param {object} event -
-	 * @returns {void}
-	 */
+   * @description This handles CreateGroup form submission
+   * @param {object} event -
+   * @returns {void}
+   */
   onSubmit(event) {
     event.preventDefault();
     const group = { group: this.state.group };
     createGroup(group);
+    this.setState({ group: '' });
   }
 
   /**
    * @description This handles createGroupEvent
-   * @param {object} user .
+   * @param {*} any .
    * @returns {void} .
-  */
+   */
   handleCreateGroupEvent() {
     const createGroupResponse = GroupStore.createGroup();
+    this.setState({});
     toastr.success(createGroupResponse);
   }
 
@@ -88,6 +103,9 @@ export default class UserCreateGroup extends React.Component {
       <div className="container creategroup">
         <div className="row">
           <div className="col-md-offset-3 col-md-6 creategroupform">
+            <h5 className="text-center">
+              <b>Create group</b>
+            </h5>
             <div className="row w3-card w3-white">
               <form id="creategroupform" onSubmit={this.onSubmit}>
                 <div className="form-group">

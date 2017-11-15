@@ -4,7 +4,7 @@ import {
   helpGetGroupMessages,
   helpGetGroups,
   getGroupMembers
-} from '../../src/helper/helper';
+} from '../../src/helper/helper.js';
 import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 import groupResponse from '../../src/__mock__/groupResponse.json';
@@ -19,7 +19,6 @@ describe('helper ', () => {
     });
   });
 });
-
 
 describe('helper ', () => {
   describe('helpGetGroupMessages function helps', () => {

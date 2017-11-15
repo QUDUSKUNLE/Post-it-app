@@ -19,21 +19,29 @@ export default class UserGroups extends React.Component {
     return (
       <div id="sidebar" className="sidebar-offcanvas">
         <div className="col-md-12 groups">
+          <div className="groupName">
+            <center>
+              Your Groups
+            </center>
+          </div>
+          <br/>
           <ul className="nav nav-pills nav-stacked">
             {this.props.grouplist}
           </ul>
         </div>
         <div className="col-md-12 members">
-          <div className="dropdown">
-            <button
-              className="btn btn-default dropdown-toggle"
-              data-toggle="dropdown">Group Members
+          {this.props.groupSelected ?
+            <div className="dropdown">
+              <button
+                className="btn btn-default dropdown-toggle"
+                data-toggle="dropdown">Group Members
               <span className="caret"></span>
-            </button>
-            <ul className="dropdown-menu scrollable-menu">
-              {members}
-            </ul>
-          </div>
+              </button>
+              <ul className="dropdown-menu scrollable-menu">
+                {members}
+              </ul>
+            </div> : <span></span>
+          }
         </div>
       </div>
     );
@@ -45,5 +53,6 @@ UserGroups.propTypes = {
   grouplist: PropTypes.array,
   generalMessageLength: PropTypes.number,
   defaultGroup: PropTypes.string,
-  member: PropTypes.array
+  member: PropTypes.array,
+  groupSelected: PropTypes.bool
 };

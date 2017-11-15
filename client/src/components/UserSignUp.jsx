@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import SignUpStore from '../stores/SignUpStore';
+import SignUpStore from '../stores/SignUpStore.js';
 import signUpAction from '../actions/signUpActions.js';
 
 /**
  * @description - renders SignUp Component
- * @class SignUp
+ * @class UserSignUp
  * @extends {React.Component}
  */
 export default class UserSignUp extends React.Component {
@@ -34,10 +34,23 @@ export default class UserSignUp extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  /**
+   * @method componentDidMount
+   * @description Adds an event Listener to the Store and fires
+   * when the component is fully mounted.
+   * @return { void} void
+   * @memberof UserSignUp
+  */
   componentDidMount() {
     SignUpStore.on('SIGN_UP_SUCCESS', this.handleSignUpAction);
   }
 
+  /**
+   * @method componentWillUnmount
+   * @description remove event Listener from the Store and fires.
+   * @return {void} void
+   * @memberof UserSignUp
+  */
   componentWillUnmount() {
     SignUpStore.removeListener('SIGN_UP_SUCCESS', this.handleSignUpAction);
   }
@@ -105,7 +118,7 @@ export default class UserSignUp extends React.Component {
                   type="text"
                   className="signinform"
                   placeholder="johndoe"
-                  name="username" required />
+                  name="username" minLength="2" required />
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">Phone Number</label>
@@ -116,7 +129,7 @@ export default class UserSignUp extends React.Component {
                   type="phone"
                   className="signinform"
                   placeholder="08012345678"
-                  name="phoneNumber" required />
+                  name="phoneNumber" minLength="11" required />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -127,7 +140,7 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="password" required />
+                  name="password" minLength="6" required />
               </div>
               <div className="form-group">
                 <label htmlFor="confirmPassword">Confirm Password</label>
@@ -138,16 +151,12 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="confirmPassword" required />
+                  name="confirmPassword" minLength="6" required />
               </div>
               <button type="submit" className="signinformbtn">
                 Sign up
               </button>
             </form>
-            <div className="text-center term">
-              <i>By clicking <b>Sign up</b>,
-              you've agreed to our terms of service and privacy policy.</i>
-            </div>
           </div>
         </div>
       </div>
