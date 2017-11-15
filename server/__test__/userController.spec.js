@@ -337,19 +337,19 @@ describe('PostIt', () => {
           done();
         });
     });
-  it('password reset route should allow registered user`s to ' +
-    'reset their passwords', (done) => {
-    const userEmail = { email: 'sasil@gmail.com' };
-    chai.request(server)
-      .post('/api/v1/passwordreset')
-      .send(userEmail)
-      .end((err, res) => {
-        res.should.have.status(201);
-        assert.equal('Password reset email sent successfully!',
-          res.body.message);
-        done();
-      });
-  });
+  // it('password reset route should allow registered user`s to ' +
+  //   'reset their passwords', (done) => {
+  //   const userEmail = { email: 'sasil@gmail.com' };
+  //   chai.request(server)
+  //     .post('/api/v1/passwordreset')
+  //     .send(userEmail)
+  //     .end((err, res) => {
+  //       res.should.have.status(201);
+  //       assert.equal('Password reset email sent successfully!',
+  //         res.body.message);
+  //       done();
+  //     });
+  // });
   it('password reset route should throw an error if email is not found',
     (done) => {
       const userEmail = { email: 'user@gmail.com' };

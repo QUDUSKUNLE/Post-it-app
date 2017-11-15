@@ -4,9 +4,9 @@ import Helper from '../helper/helper.js';
  * @description: class Validates contains methods
  * that validates requests inputs for each route
  *
- * @class Validate
+ * @class ValidateInputFields
  */
-export default class Validate {
+export default class ValidateInputFields {
 
   /**
    * @description: This validates signUpInputs
