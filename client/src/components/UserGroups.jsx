@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 /**
  * @description - renders Groups Component
- * @class Groups
- * @extends {React.Component}
+ * @function Groups
+ * @param {object} props
+ * @return {object} UserGroups component
  */
 const UserGroups = (props) => {
   const members = props.member.map(member => (
