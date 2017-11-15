@@ -4,7 +4,7 @@ import {
   helpGetGroupMessages,
   helpGetGroups,
   getGroupMembers
-} from '../../src/helper/helper.js';
+} from '../../src/helper/convertObject';
 import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 import groupResponse from '../../src/__mock__/groupResponse.json';

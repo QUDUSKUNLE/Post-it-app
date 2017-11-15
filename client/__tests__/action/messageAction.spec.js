@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
 import 'babel-polyfill';
-import { helpGetGroupMessages } from '../../src/helper/helper';
+import { helpGetGroupMessages } from '../../src/helper/convertObject';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
