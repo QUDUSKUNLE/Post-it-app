@@ -2,6 +2,7 @@ import axios from 'axios';
 import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import setAuthToken from '../helper/setAuthToken.js';
+import catchError from '../helper/catchError';
 import {
   SIGN_IN_SUCCESS,
   GOOGLE_SIGN_IN_SUCCESS } from '../constants/ActionConstants.js';
@@ -20,11 +21,7 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
       type: SIGN_IN_SUCCESS,
       response: data
     });
-  }).catch((error) => {
-    if (error.response) {
-      toastr.error(error.response.data.error.message);
-    }
-  });
+  }).catch((error) => catchError(error));
 
 /**
  * @description - An action that makes API call to server

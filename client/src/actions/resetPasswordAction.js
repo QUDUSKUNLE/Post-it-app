@@ -1,5 +1,5 @@
 import axios from 'axios';
-import toastr from 'toastr';
+import catchError from '../helper/catchError';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
 
@@ -14,6 +14,6 @@ const resetPasswordAction = email => axios.post('/api/v1/passwordReset',
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: PASSWORD_RESET_SUCCESS, response: data });
-  }).catch(error => toastr.error(error.response.data.error.message));
+  }).catch(error => catchError(error));
 
 export default resetPasswordAction;
