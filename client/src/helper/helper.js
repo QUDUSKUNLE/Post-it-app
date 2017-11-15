@@ -1,11 +1,11 @@
 import toastr from 'toastr';
 /**
  * @function helpgGetRegisteredUsers
- * @param {Object} res -Object of Arrays from Firebase Database
+ * @param {Object} user -Object of Arrays from Firebase Database
  * @returns {Object} allUsers
  */
-export const helpGetRegisteredUsers = (res) => {
-  const users = Object.values(res.response[0]);
+export const helpGetRegisteredUsers = (user) => {
+  const users = Object.values(user.response[0]);
   let index = 0;
   const allUsers = [];
   let registeredUser;
@@ -19,16 +19,16 @@ export const helpGetRegisteredUsers = (res) => {
 
 /**
  * @function helpGetGroupMessages
- * @param {object} data - Array of Object from Firebase Database
+ * @param {object} message - Array of Object from Firebase Database
  * @returns {object} object Array of Object of GroupMessage
  */
-export const helpGetGroupMessages = (data) => {
+export const helpGetGroupMessages = (message) => {
   let GroupMessage;
-  if (data[0] === null) {
+  if (message[0] === null) {
     toastr.warning('No Message Found');
     GroupMessage = [];
   } else {
-    GroupMessage = Object.values(data[0]);
+    GroupMessage = Object.values(message[0]);
   }
   return GroupMessage;
 };
@@ -36,12 +36,12 @@ export const helpGetGroupMessages = (data) => {
 
 /**
  * @function helpGetGroups
- * @param {object} data -
+ * @param {object} group -
  * @returns {object} Array of object of user`s groups
  */
-export const helpGetGroups = (data) => {
-  const groupNames = Object.keys(data[0]);
-  const groupKeys = Object.values(data[0]);
+export const helpGetGroups = (group) => {
+  const groupNames = Object.keys(group[0]);
+  const groupKeys = Object.values(group[0]);
   let index = 0;
   const groups = [];
   while (index < groupNames.length) {
@@ -53,16 +53,16 @@ export const helpGetGroups = (data) => {
 
 /**
  * @function helpGetGroupMembers
- * @param {object} data -
+ * @param {object} member -
  * @returns {object} array of object of members of a group
  */
-export const getGroupMembers = (data) => {
+export const getGroupMembers = (member) => {
   let groupMembers = [];
-  if (data.length === 0) {
+  if (member.length === 0) {
     groupMembers = [];
   } else {
-    const memberId = Object.keys(data[0]);
-    const memberName = Object.values(data[0]);
+    const memberId = Object.keys(member[0]);
+    const memberName = Object.values(member[0]);
     let index = 0;
     while (index < memberId.length) {
       groupMembers.push({ [memberId[index]]: memberName[index] });

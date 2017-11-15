@@ -97,7 +97,6 @@ class Routes extends React.Component {
         ul: (
           <ul className="nav navbar-nav navbar-right" key={location.key}>
             <li><Link to="/broadcastboard">MessageBoard</Link></li>
-            <li className="active"><Link to="/member">Add Member</Link></li>
             <li onClick={this.handleSignOutEvent}>
               <Link to="#">Sign Out</Link>
             </li>
@@ -109,7 +108,6 @@ class Routes extends React.Component {
         ul: (
           <ul className="nav navbar-nav navbar-right" key={location.key}>
             <li><Link to="/broadcastboard">MessageBoard</Link></li>
-            <li className="active"><Link to="/group">Create Group</Link></li>
             <li onClick={this.handleSignOutEvent}>
               <Link to="#">Sign Out</Link></li>
           </ul>
