@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   GET_GROUP_MESSAGE,
-  SEND_GROUP_MESSAGE } from '../constants/ActionConstants.js';
+  SEND_GROUP_MESSAGE } from '../constants/ActionConstants';
 
 
 /**

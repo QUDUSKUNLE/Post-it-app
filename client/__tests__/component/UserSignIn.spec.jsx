@@ -4,9 +4,9 @@ import expect from 'expect';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 import 'babel-polyfill';
-import localStorageMock from '../../src/__mock__/localStorage.js';
-import UserSignIn from '../../src/components/UserSignIn.jsx';
-import SignInStore from '../../src/stores/SignInStore.js';
+import localStorageMock from '../../src/__mock__/localStorage';
+import UserSignIn from '../../src/components/UserSignIn';
+import SignInStore from '../../src/stores/SignInStore';
 import signInResponse from '../../src/__mock__/signInResponse.json';
 
 window.localStorage = localStorageMock;
@@ -35,7 +35,7 @@ describe('<UserSignIn/>', () => {
     },
     signInAction
   };
-  const wrapper = mount(<UserSignIn {...props}/>,
+  const wrapper = mount(<UserSignIn {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {

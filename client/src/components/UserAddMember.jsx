@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
-import { addMember, getAllUsers } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
-import { getUserGroups } from '../actions/groupActions.js';
+import { addMember, getAllUsers } from '../actions/memberAction';
+import MemberStore from '../stores/MemberStore';
+import GroupStore from '../stores/GroupStore';
+import { getUserGroups } from '../actions/groupAction';
 
 /**
  * @export
@@ -74,19 +74,6 @@ export default class UserAddMember extends React.Component {
     MemberStore.removeListener('ALL_USERS', this.userGroups);
     MemberStore.removeListener('ADD_MEMBER', this.handleAddMemberToGroup);
   }
-
-  /**
-   * @memberof UserAddMember
-   * @return {*} void
-   */
-  userGroups() {
-    const allUsers = MemberStore.registeredUsers();
-    this.setState({
-      groups: GroupStore.allGroups(),
-      registeredUsers: allUsers.filter(user =>
-        (Object.keys(user)[0] !== this.state.userId))
-    });
-  }
   /**
    * @description - onChange event
    * @param {event} event - event
@@ -109,6 +96,19 @@ export default class UserAddMember extends React.Component {
       memberId: this.state.member
     };
     addMember(memberDetails);
+  }
+
+  /**
+   * @memberof UserAddMember
+   * @return {*} void
+   */
+  userGroups() {
+    const allUsers = MemberStore.registeredUsers();
+    this.setState({
+      groups: GroupStore.allGroups(),
+      registeredUsers: allUsers.filter(user =>
+        (Object.keys(user)[0] !== this.state.userId))
+    });
   }
 
   /**
@@ -145,24 +145,32 @@ export default class UserAddMember extends React.Component {
               <form className="addmemberform" onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="groupname">Group Name</label>
-                  <select name="group" onChange={this.onChange}
-                    className="form-control">
+                  <select
+                    name="group" onChange={this.onChange}
+                    className="form-control"
+                  >
                     <option value="">Select a group</option>
                     {(this.state.groups).map(group =>
-                      <option key={Object.values(group)}
-                        value={Object.values(group)}>
+                      <option
+                        key={Object.values(group)}
+                        value={Object.values(group)}
+                      >
                         {Object.keys(group)}</option>
                     )}
                   </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="members">Member</label>
-                  <select name="member" onChange={this.onChange}
-                    className="form-control">
+                  <select
+                    name="member" onChange={this.onChange}
+                    className="form-control"
+                  >
                     <option value="">add member to group</option>
                     {(this.state.registeredUsers).map(user =>
-                      <option key={Object.keys(user)}
-                        value={Object.keys(user)}>
+                      <option
+                        key={Object.keys(user)}
+                        value={Object.keys(user)}
+                      >
                         {Object.values(user)}</option>
                     )}
                   </select>

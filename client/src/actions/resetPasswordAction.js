@@ -9,11 +9,11 @@ import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
  * @param {string} email - This represents email of the user
  * @returns {fucntion} dispatch - server response is dispatch to SignInStore
  */
-const resetPassword = email => axios.post('/api/v1/passwordReset',
+const resetPasswordAction = email => axios.post('/api/v1/passwordReset',
   email)
   .then(({ data }) => {
     AppDispatcher.dispatch({
       type: PASSWORD_RESET_SUCCESS, response: data });
   }).catch(error => toastr.error(error.response.data.error.message));
 
-export default resetPassword;
+export default resetPasswordAction;

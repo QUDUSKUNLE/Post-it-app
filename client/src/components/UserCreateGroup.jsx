@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import { Redirect } from 'react-router-dom';
-import { createGroup } from '../actions/groupActions.js';
-import GroupStore from '../stores/GroupStore.js';
+import { createGroup } from '../actions/groupAction';
+import GroupStore from '../stores/GroupStore';
 
 
 /**
@@ -110,10 +110,12 @@ export default class UserCreateGroup extends React.Component {
               <form id="creategroupform" onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="groupname">Group Name</label>
-                  <input value={this.state.group} onChange={this.onChange}
+                  <input
+                    value={this.state.group} onChange={this.onChange}
                     id="groupname" type="text"
                     className="signinform" placeholder="andela-abuja"
-                    name="group" required/>
+                    name="group" required
+                  />
                 </div>
                 <button type="submit" className="signinformbtn">
                   Create Group

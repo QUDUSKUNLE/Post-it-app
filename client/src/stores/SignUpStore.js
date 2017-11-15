@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { SIGN_UP_SUCCESS } from '../constants/ActionConstants.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * Signout Store, it hold user's state, listen to signin Actions

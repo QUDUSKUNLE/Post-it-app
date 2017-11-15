@@ -3,15 +3,15 @@ import { Route, Switch, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import toastr from 'toastr';
-import signOutAction from '../actions/signOutActions';
-import UserSignIn from './UserSignIn.jsx';
-import UserCreateGroup from './UserCreateGroup.jsx';
+import signOutAction from '../actions/signOutAction';
+import UserSignIn from './UserSignIn';
+import UserCreateGroup from './UserCreateGroup';
 import UserBroadCastBoard from './UserBroadCastBoard';
-import UserAddMember from './UserAddMember.jsx';
-import Home from './Home.jsx';
-import Footer from './Footer.jsx';
-import UserResetPassword from './UserResetPassword.jsx';
-import NotFound from './NotFound.jsx';
+import UserAddMember from './UserAddMember';
+import Home from './Home';
+import Footer from './Footer';
+import UserResetPassword from './UserResetPassword';
+import NotFound from './NotFound';
 
 /**
  * @description - renders Routes Component
@@ -119,43 +119,47 @@ class Routes extends React.Component {
       }
     ];
     return (
+      <div>
         <div>
-          <div>
-            <nav className="navbar navbar-inverse navbar-fixed-top"
-              role="navigation">
-              <div className="container-fluid">
-                <div className="navbar-header">
-                  <button type="button" className="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target=".navbar-collapse">
-                    <span className="sr-only">Toggle navigation</span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                    <span className="icon-bar"></span>
-                  </button>
-                  <Link className="navbar-brand" to="#">
-                    <i>PostIt</i>
-                  </Link>
-                </div>
-                <div className="collapse navbar-collapse">
-                  {path.filter(pathname =>
-                    pathname.path === location.pathname).map(
-                      exactPath => exactPath.ul)
-                  }
-                </div>
+          <nav
+            className="navbar navbar-inverse navbar-fixed-top"
+            role="navigation"
+          >
+            <div className="container-fluid">
+              <div className="navbar-header">
+                <button
+                  type="button" className="navbar-toggle collapsed"
+                  data-toggle="collapse" data-target=".navbar-collapse"
+                >
+                  <span className="sr-only">Toggle navigation</span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                  <span className="icon-bar"></span>
+                </button>
+                <Link className="navbar-brand" to="#">
+                  <i>PostIt</i>
+                </Link>
               </div>
-            </nav>
-          </div>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/signin" component={UserSignIn} />
-            <Route path="/passwordreset" component={UserResetPassword} />
-            <Route path="/broadcastboard" component={UserBroadCastBoard} />
-            <Route path="/group" component={UserCreateGroup} />
-            <Route path="/member" component={UserAddMember} />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
+              <div className="collapse navbar-collapse">
+                {path.filter(pathname =>
+                  pathname.path === location.pathname).map(
+                    exactPath => exactPath.ul)
+                }
+              </div>
+            </div>
+          </nav>
         </div>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/signin" component={UserSignIn} />
+          <Route path="/passwordreset" component={UserResetPassword} />
+          <Route path="/broadcastboard" component={UserBroadCastBoard} />
+          <Route path="/group" component={UserCreateGroup} />
+          <Route path="/member" component={UserAddMember} />
+          <Route component={NotFound} />
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }

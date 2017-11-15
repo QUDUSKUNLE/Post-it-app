@@ -1,12 +1,12 @@
 import sinon from 'sinon';
 import axios from 'axios';
 import expect from 'expect';
-import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
-import '../../src/__mock__/firebaseMock.js';
+import AppDispatcher from '../../src/dispatcher/AppDispatcher';
+import '../../src/__mock__/firebaseMock';
 import memberResponse from '../../src/__mock__/memberResponse.json';
 import registeredUsers from '../../src/__mock__/registeredUsers.json';
 import { getGroupMember, getAllUsers, addMember }
-  from '../../src/actions/memberActions.js';
+  from '../../src/actions/memberAction';
 
 describe('getGroupMembers', () => {
   let mockGetGroupMembers;

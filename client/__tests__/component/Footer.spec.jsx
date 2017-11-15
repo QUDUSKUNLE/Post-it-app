@@ -8,7 +8,7 @@ describe('<Footer/>', () => {
     expect(Footer).toBeDefined();
   });
   it('should render correctly', () => {
-    const component = shallow(<Footer/>);
+    const component = shallow(<Footer />);
     expect(component).toMatchSnapshot();
     expect(component.find('.footer')).toHaveLength(1);
     expect(component.find('div')).toHaveLength(2);

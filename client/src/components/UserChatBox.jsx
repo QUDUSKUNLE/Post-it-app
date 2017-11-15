@@ -3,7 +3,7 @@ import toastr from 'toastr';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { sendGroupMessage } from '../actions/messageActions.js';
+import { sendGroupMessage } from '../actions/messageAction';
 
 /**
  * @description - renders ChatBox Component
@@ -83,63 +83,67 @@ export default class UserChatBox extends React.Component {
             <small className="text-muted">
               {Index.date} {Index.time} | {Index.userName}
               {priorityColor(Index.priority)}
-              <br/>
+              <br />
             </small>
           </div>
         </div>
       </div>
     );
     return (
-    <div id="main">
-      <ReactTooltip place="bottom"/>
-      <div className="col-md-10 col-md-offset-1">
-        <p className="visible-xs">
-          <button
-            type="button"
-            className="btn btn-default btn-xs"
-            data-toggle="offcanvas">
-            <i className="glyphicon glyphicon-chevron-left"></i>
-          </button>
-        </p>
-        <h6>Group | {this.props.defaultGroup}
-          <Link to="/member">
-            <span
-              data-tip={`Add Member to ${this.props.defaultGroup}`}
-              className="glyphicon glyphicon-plus pull-right">
-            </span>
-          </Link>
-        </h6>
-        <div className="messageBoard">
-          {chatMessage}
-        </div>
-        <div className="row messageForm">
-          <form className="col-md-12">
-            <div className="input-group">
-              <div className="input-group-addon">
-                <select name="priority" onChange={this.onChange}>
-                  <option value="normal">Normal</option>
-                  <option value="critical">Critical</option>
-                  <option value="urgent">Urgent</option>
-                </select>
+      <div id="main">
+        <ReactTooltip place="bottom" />
+        <div className="col-md-10 col-md-offset-1">
+          <p className="visible-xs">
+            <button
+              type="button"
+              className="btn btn-default btn-xs"
+              data-toggle="offcanvas"
+            >
+              <i className="glyphicon glyphicon-chevron-left"></i>
+            </button>
+          </p>
+          <h6>Group | {this.props.defaultGroup}
+            <Link to="/member">
+              <span
+                data-tip={`Add Member to ${this.props.defaultGroup}`}
+                className="glyphicon glyphicon-plus pull-right"
+              >
+              </span>
+            </Link>
+          </h6>
+          <div className="messageBoard">
+            {chatMessage}
+          </div>
+          <div className="row messageForm">
+            <form className="col-md-12">
+              <div className="input-group">
+                <div className="input-group-addon">
+                  <select name="priority" onChange={this.onChange}>
+                    <option value="normal">Normal</option>
+                    <option value="critical">Critical</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                </div>
+                <input
+                  type="text"
+                  className="form-control message"
+                  placeholder="Type message....."
+                  name="message"
+                  value={this.state.message}
+                  onChange={this.onChange}
+                />
+                <div className="input-group-addon">
+                  <button
+                    className="btn btn-default"
+                    onClick={this.onSubmit}
+                  >Send
+                  </button>
+                </div>
               </div>
-              <input
-                type="text"
-                className="form-control message"
-                placeholder="Type message....."
-                name="message"
-                value={this.state.message}
-                onChange={this.onChange}/>
-              <div className="input-group-addon">
-                <button
-                  className="btn btn-default"
-                  onClick={this.onSubmit}>Send
-                </button>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     );
   }
 }
