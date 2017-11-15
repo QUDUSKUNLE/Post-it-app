@@ -1,8 +1,8 @@
 import express from 'express';
 
-import UserController from '../controller/userController.js';
-import GroupController from '../controller/groupController.js';
-import MessageController from '../controller/messageController.js';
+import UserController from '../controller/UserController';
+import GroupController from '../controller/GroupController';
+import MessageController from '../controller/MessageController';
 import jwtToken from '../middleware/jwtTokenValidator.js';
 import Validate from '../middleware/inputValidator.js';
 

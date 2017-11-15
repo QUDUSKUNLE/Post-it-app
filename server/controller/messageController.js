@@ -5,7 +5,7 @@ import values from 'object.values';
 
 import dbConfig from '../config/index.js';
 import Helper from '../helper/helper.js';
-import sendGroupSMS from '../utils/smsTransporter.js';
+import sendSMS from '../utils/sendSMS';
 
 dotenv.config();
 
@@ -86,7 +86,7 @@ export default class MessageController {
             const groupEmails = Helper.getGroupEmails(groupPhoneAndEmail);
             const groupPhoneNumbers = Helper.getPhoneNumbers(
               groupPhoneAndEmail);
-            sendGroupSMS(groupPhoneNumbers).then((res) => {
+            sendSMS(groupPhoneNumbers).then((res) => {
               if (res) {
                 const transporter = nodemailer.createTransport({
                   service: 'gmail',
