@@ -100,8 +100,6 @@ export default class ValidateInputFields {
    */
   static createGroupInputs(req, res, next) {
     req.check('group', 'Group name is required').notEmpty();
-    req.check('group',
-      'Group name should contain only words').notEmpty().matches(/\w/);
     req.check('group', 'Group name should be at least 3 characters')
       .isLength(3, 50);
     const errors = req.validationErrors();

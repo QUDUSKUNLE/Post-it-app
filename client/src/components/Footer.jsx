@@ -6,13 +6,13 @@ import React from 'react';
  */
 const Footer = () =>
  (
-    <div className="footer">
-      <div className="container">
-        <center>
-          &copy; Qudus Kunle
-        </center>
-      </div>
+  <div className="footer">
+    <div className="container">
+      <center>
+        &copy; Qudus Kunle
+      </center>
     </div>
+  </div>
   );
 
 export default Footer;

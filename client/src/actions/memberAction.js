@@ -1,5 +1,6 @@
 import axios from 'axios';
 import toastr from 'toastr';
+import catchError from '../helper/catchError';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
 import { helpGetRegisteredUsers } from '../helper/helper.js';
 import {
@@ -61,4 +62,4 @@ export const addMember = memberDetails =>
         member: data.response
       });
     })
-    .catch(error => toastr.error(error.response.data.error));
+    .catch(error => catchError(error));

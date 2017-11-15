@@ -40,7 +40,10 @@ class Routes extends React.Component {
       toastr.success(response.data.message);
       localStorage.clear();
       this.props.history.push('/');
-    }).catch(error => toastr.error(error.response.data));
+    }).catch(error => {
+      console.log(error.response);
+      toastr.error(error.response.data);
+    });
   }
 
   /**

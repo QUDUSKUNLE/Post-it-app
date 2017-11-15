@@ -23,10 +23,19 @@ export default (error) => {
     toastr.error(error.response.data.error.message);
   } else if (error.response.data.error.code === 'Email is badly formatted') {
     toastr.error('Email is badly formatted');
+  } else if (error.response.data.error.code ===
+    'Group name should be at least 3 characters') {
+    toastr.error('Group name should be at least 3 characters');
   } else if (error.response.data.error.code === 'auth/user-not-found') {
     toastr.error('There is no user record corresponding to this identifier.' +
     ' The user may have been deleted.');
   } else if (error.response.data.error.code === 'auth/wrong-password') {
     toastr.error('Invalid password');
+  } else if (error.response.data.error === 'Group already exists') {
+    toastr.error('Group already exists');
+  } else if (error.response.data.error === 'User`s already a member') {
+    toastr.error('User`s already a member');
+  } else if (error.response.data.error === 'No valid token provided') {
+    return;
   }
 };
