@@ -55,10 +55,8 @@ export default class GroupController {
   /**
    * @description This method retrieves allRegisteredUsers
    * route GET: api/v1/getAllRegisteredUsers
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response containing all registerdUsers
    */
   static getRegisteredUsers(req, res) {
@@ -99,10 +97,8 @@ export default class GroupController {
   /**
    * @description This method retrieves all user group
    * route GET: api/v1/getgroups/:userId
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {

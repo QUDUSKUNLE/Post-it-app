@@ -114,10 +114,8 @@ export default class UserController {
   /**
    * @description This method allow users reset their password
    * route POST: api/v1/passwordReset
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains reset password details
    */
   static passwordReset(req, res) {
@@ -127,6 +125,36 @@ export default class UserController {
       res.status(201).send({
         message: 'Password reset email sent successfully!'
       })).catch(error => res.status(404).send({ error }));
+  }
+
+  /**
+   * @description This method allow users reset their password
+   * route POST: api/v1/search?:user
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} json response contains reset password details
+   */
+  static searchUser(req, res) {
+    const userName = req.query.user;
+    const user = {};
+    dbConfig.database().ref('users/').orderByChild('userName/')
+      .startAt(userName)
+      .endAt(`${userName}\uf8ff`)
+      .once('value', (msg) => {
+        console.log(msg.val());
+        if (msg.val()) {
+          console.log(msg.key);
+          Object.keys(msg.val()).forEach(() => {
+            user.email = (Object.values(msg.val())[0]).email;
+            user.userName = (Object.values(msg.val())[0]).userName;
+            user.userId = (Object.keys(msg.val()))[0];
+          });
+          return res.status(200).json({ user });
+        }
+        return res.status(404).send({
+          message: 'No user found'
+        });
+      });
   }
 
   /**

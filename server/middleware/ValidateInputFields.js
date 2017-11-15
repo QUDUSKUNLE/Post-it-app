@@ -1,5 +1,3 @@
-import DestructureFirebaseData from '../helper/DestructureFirebaseData';
-
 /**
  * @description: class Validates contains methods
  * that validates requests inputs for each route
@@ -9,12 +7,22 @@ import DestructureFirebaseData from '../helper/DestructureFirebaseData';
 export default class ValidateInputFields {
 
   /**
+   * @description This checks for password format
+   * @param {Object} password request object
+   * @param {Function} next callback function
+   * @return {Object} response contains validation status
+   */
+  static validatePassword(password) {
+    if (
+      password.match(/^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)) {
+      return true;
+    }
+  }
+  /**
    * @description: This validates signUpInputs
-   *
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {Function} next callback function
-   *
    * @return {Object} response contains validation status
    */
   static signUpInputs(req, res, next) {
@@ -37,7 +45,7 @@ export default class ValidateInputFields {
       res.status(403).send({ error: { code:
         'Password does not match'
       } });
-    } else if (!DestructureFirebaseData.validatePassword(req.body.password)) {
+    } else if (!ValidateInputFields.validatePassword(req.body.password)) {
       res.status(403).send({ error: { code:
         'Password should be at least 6 characters with a speacial character'
       } });
@@ -47,12 +55,10 @@ export default class ValidateInputFields {
   }
 
   /**
-   * @description: This validates signInInputs
-   *
+   * @description This validates signInInputs
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {Function} next callback function
-   *
    * @return {Object} response contains validation status
    */
   static signInInputs(req, res, next) {
@@ -90,12 +96,10 @@ export default class ValidateInputFields {
   }
 
   /**
-   * @description: This validates createGroupInputs
-   *
+   * @description This validates createGroupInputs
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {Function} next callback function
-   *
    * @return {Object} response contains validation status
    */
   static createGroupInputs(req, res, next) {
@@ -112,12 +116,10 @@ export default class ValidateInputFields {
   }
 
   /**
-   * @description: This validates addMemberInputs
-   *
+   * @description This validates addMemberInputs
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {Function} next callback function
-   *
    * @return {Object} response contains validation status
    */
   static addMemberInputs(req, res, next) {
@@ -132,12 +134,10 @@ export default class ValidateInputFields {
   }
 
   /**
-   * @description: This validates sendMessageInputs
-   *
+   * @description This validates sendMessageInputs
    * @param {Object} req request object
    * @param {Object} res response object
    * @param {Function} next callback function
-   *
    * @return {Object} response contains validation status
    */
   static sendMessageInputs(req, res, next) {

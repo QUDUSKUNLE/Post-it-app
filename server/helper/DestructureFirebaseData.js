@@ -8,25 +8,8 @@
 export default class DestructureFirebaseData {
 
   /**
-   * @description This function validates user`s password
-   *
-   * @param {string} password - validate password
-   *
-   * @returns {boolean} true
-   * @memberof Helper
-   */
-  static validatePassword(password) {
-    if (
-      password.match(/^(?=.*?[A-Za-z0-9])(?=.*?[#?!@$%^&*-]).{6,}$/)) {
-      return true;
-    }
-  }
-
-  /**
    * @description This function helps to pull out Emails of Users in a group
-   *
    * @param {Object} groupEmails - Array of Object of groupMembers Email
-   *
    * @returns {string} - String of group Emails
    * @memberof Helper
    */
@@ -42,9 +25,7 @@ export default class DestructureFirebaseData {
 
   /**
    * @description This function help to extract phoneNumber of users in a group
-   *
    * @param {Object} groupPhoneNumbers - Array of PhoneNumbers
-   *
    * @returns {Object} -
    * @memberof Helper
    */
@@ -60,9 +41,7 @@ export default class DestructureFirebaseData {
 
   /**
    * @description This function help to get Array of object of all Users
-   *
    * @param {Object} user - Object of array of all registered Users
-   *
    * @returns {Object} - Array of all registered users
    * @memberof Helper
    */
