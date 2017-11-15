@@ -37,7 +37,7 @@
   <b>.</b> Users can sign out
 
 ## API Documentation
-  The Link to API documentation can be found here <a href="https://app.apiary.io/postitapp/editor">API Doumentation</a>
+  The Link to API documentation can be found here <a href="https://postitapp.docs.apiary.io/#reference">API Doumentation</a>
 
 ## Getting Started
   Kindly follow the steps below to setup a local development environment.
