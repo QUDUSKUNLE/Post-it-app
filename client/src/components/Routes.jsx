@@ -75,8 +75,6 @@ class Routes extends React.Component {
           <ul className="nav navbar-nav navbar-right" key={location.key}>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/signin">Sign in</Link></li>
-            <li className="active">
-              <Link to="/passwordreset">PasswordReset</Link></li>
           </ul>
         )
       },
