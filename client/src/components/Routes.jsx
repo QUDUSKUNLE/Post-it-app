@@ -151,7 +151,7 @@ class Routes extends React.Component {
           <Route path="/passwordreset" component={UserResetPassword} />
           <Route path="/broadcastboard" component={UserBroadCastBoard} />
           <Route path="/group" component={UserCreateGroup} />
-          <Route path="/member" component={UserAddMember} />
+          <Route path="/member/:groupId" component={UserAddMember} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

@@ -12,10 +12,8 @@ export default class GroupController {
   /**
    * @description This method create new group for user
    * route POST: api/v1/createGroup
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response containing creating new group
    */
   static createGroup(req, res) {
@@ -32,15 +30,14 @@ export default class GroupController {
             .then((response) => {
               QueryDatabase.getUserEmailAndPhoneNumber(userId)
                 .then((userEmailAndPhone) => {
-                  const userDetails = (values(userEmailAndPhone))[0];
                   dbConfig.database().ref(`UserGroups/${userId}`)
                     .child(groupName).set(response.key);
                   dbConfig.database().ref(`GroupMember/${response.key}`)
-                    .child(userId).set(userDetails.userName);
+                    .child(userId).set(userEmailAndPhone.userName);
                   dbConfig.database().ref(`GroupPhoneAndEmail/${response.key}`)
                     .child(userId).set({
-                      phoneNumber: userDetails.phone_Number,
-                      email: userDetails.userEmail
+                      phoneNumber: userEmailAndPhone.phone_Number,
+                      email: userEmailAndPhone.userEmail
                     });
                 }).then(() => res.status(201).send({
                   message: 'Group created successfully'
@@ -54,31 +51,9 @@ export default class GroupController {
 
   /**
    * @description This method retrieves allRegisteredUsers
-   * route GET: api/v1/getAllRegisteredUsers
-   * @param {Object} req request object
-   * @param {Object} res response object
-   * @return {Object} json response containing all registerdUsers
-   */
-  static getRegisteredUsers(req, res) {
-    return Promise.all([
-      dbConfig.database().ref('users')
-        .once('value', (snapshot) => {
-          if (snapshot.val() != null) {
-            snapshot.val();
-          }
-        })
-    ])
-      .then(response => res.status(200).send({ response }))
-      .catch(error => res.status(401).send({ error }));
-  }
-
-  /**
-   * @description This method retrieves allRegisteredUsers
    * route GET: api/v1/getMembers/:groupId
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains all members of a group
    */
   static getMembers(req, res) {

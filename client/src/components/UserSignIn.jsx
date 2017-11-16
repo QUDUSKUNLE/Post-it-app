@@ -127,6 +127,7 @@ export default class UserSignIn extends React.Component {
     this.setState({
       loggedIn: true,
     });
+    toastr.success(googleResponse.message);
     localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
     this.props.history.push('/broadcastboard');
   }

@@ -4,7 +4,7 @@ import { getGroupMembers } from '../helper/convertObject';
 import {
   ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
+  GET_MEMBERS_OF_GROUP, SEARCH_USER } from '../constants/ActionConstants';
 
 /**
  * Holds the storage, listen to actions and update the stores
@@ -19,22 +19,22 @@ class MemberStore extends EventEmitter {
     super();
     this.groupIndex = [];
     this.members = [];
-    this.allUser = [];
     this.group = '';
     this.groupId = '';
+    this.searchUser = {};
     this.addMemberResponse = '';
-    this.registeredUsers = this.registeredUsers.bind(this);
+    this.getSearchUser = this.getSearchUser.bind(this);
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.addMember = this.addMember.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
   /**
-   * @method allGeneralUsers
-   * @return {object} generalmembers - The general stored in the constructor
+   * @method getSearchUser
+   * @return {object} searchUser - searchUser stored in the constructor method
    */
-  registeredUsers() {
-    return this.allUser;
+  getSearchUser() {
+    return [this.searchUser];
   }
 
   /**
@@ -62,17 +62,17 @@ class MemberStore extends EventEmitter {
    */
   handleActions(action) {
     switch (action.type) {
-      case ALL_USERS:
-        this.allUser = action.allUser;
-        this.emit('ALL_USERS');
-        break;
-
       case GET_MEMBERS_OF_GROUP:
         this.groupIndex = action.members;
         this.members = getGroupMembers(this.groupIndex);
         this.groupId = (action.members)[1];
         this.group = (action.members)[2];
         this.emit('GET_MEMBERS_OF_GROUP');
+        break;
+
+      case SEARCH_USER:
+        this.searchUser = action.search;
+        this.emit('SEARCH_USER');
         break;
 
       case ADD_MEMBER:

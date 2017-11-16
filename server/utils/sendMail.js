@@ -15,31 +15,35 @@ export default (groupEmails) => {
     tls: { rejectUnauthorized: false }
   });
   const mailOptions = {
-    from: '"PostIt-App" <postitmail@gmail.com>',
+    from: '"PostIt" <postitmail@gmail.com>',
     to: groupEmails,
-    subject: 'You have a new Message',
-    text: 'PostIt-App',
+    subject: 'PostIt Message Notification',
+    text: 'PostIt',
     html: `
+    <body style="max-width:100%; color: #000;">
+    <div style="padding:10px; color:black; height: 50px;">
+      <h6 style="text-align: left;
+        font-size: 30px; margin-top: 10px; margin-left: 8px">PostIt
+      </h6>
+    </div>
+    <div style="outline: 0px solid black; padding-left: 20px;
+    padding-right: 30px;
+    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);">
     <div>
-      <hr style="height: 0.5px; background-color: white;
-        width: 100%;" />
-        <div>
-          <h2 style="margin-top: 25px;">Congratulations!!!</h2>
-          <p> Good day to you, 
-          <br />&#160;&#160;&#160;&#160;&#160;&#160;
-          You have an <b>important</b> message on PostIt.</p>
-          <p>Kindly checkout this link to log in and view your 
-          message  
-          <a href="https://heroku-postitapp.herokuapp.com/signin">
-          https://heroku-postitapp.herokuapp.com/signin</a>.</p>
-        </div>
-        <div style="margin-bottom: 15px;">
-          <h5>Truly yours,</h5>
-          <p><b>The PostIt Team</b></p>
-        </div>
-        <hr style="height: 0.5px; background-color: white;
-        width: 100%;" />
-      </div>`
+      <p style="margin-top: 20px">Dear esteemed user,</p>
+      <p style="margin-left: 20px">
+      This is to notify you that you have a message to attend to on PostIt.</p>
+    </div>
+    <p>Kindly checkout this link to log in and view your message  
+      <a href="https://heroku-postitapp.herokuapp.com/signin">
+          PostIt</a>.</p>
+      <br>
+      <p style="text-align: left;">Truly yours,<br>
+      <br>The PostIt Team.</p>
+      <br>
+      <br>
+      </div>
+    </body>`
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

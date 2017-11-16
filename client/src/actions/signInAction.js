@@ -14,12 +14,12 @@ import {
  * @returns {function} dispatch - server response is dispatch to SignInStore
  */
 export const signInAction = user => axios.post('/api/v1/signin', user)
-  .then(({ data }) => {
-    localStorage.setItem('token', JSON.stringify(data.token));
+  .then((res) => {
+    localStorage.setItem('token', JSON.stringify(res.data.token));
     setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,
-      response: data
+      response: res.data
     });
   }).catch((error) => catchError(error));
 
@@ -30,13 +30,13 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
  * @returns {object} dispatch - server response is dispatch to SignInStore
  */
 export const signInWithGoogle = user => axios.post('/api/v1/google', user)
-  .then(({ data }) => {
-    localStorage.setItem('token', JSON.stringify(data.token));
+  .then((res) => {
+    localStorage.setItem('token', JSON.stringify(res.data.token));
     localStorage.setItem('isAuthenticated', JSON.stringify(true));
     setAuthToken(JSON.parse(localStorage.getItem('token')));
     AppDispatcher.dispatch({
       type: GOOGLE_SIGN_IN_SUCCESS,
-      response: data
+      response: res.data
     });
   }).catch(error => toastr.error(error.response));
 

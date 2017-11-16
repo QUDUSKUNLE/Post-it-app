@@ -1,7 +1,9 @@
 import firebase from 'firebase';
 import moment from 'moment';
+// import values from 'object.values';
 import sendToken from '../utils/sendToken';
 import dbConfig from '../config/dbConfig';
+import 'babel-polyfill';
 
 /**
  * @description This class create and read functions for User
@@ -23,16 +25,14 @@ export default class UserController {
     dbConfig.auth().createUserWithEmailAndPassword(email, password)
       .then((user) => {
         const userToken = sendToken(user.uid, email);
-        return Promise.all(
-          [dbConfig.database().ref(`users/${user.uid}`).push({
-            userEmail: email,
-            userName: username,
-            phone_Number: phoneNumber,
-            time: moment().format('llll'),
-            userId: user.uid
-          }),
-          { token: userToken }
-          ]);
+        dbConfig.database().ref(`users/${user.uid}`).set({
+          userEmail: email,
+          userName: username,
+          phone_Number: phoneNumber,
+          time: moment().format('llll'),
+          userId: user.uid
+        });
+        return { token: userToken };
       }).then(response => res.status(201).send({
         message: 'User`s sign up successfully', response }))
       .catch(error => res.status(409).send({ error }));
@@ -76,37 +76,29 @@ export default class UserController {
     const credentials = firebase.auth.GoogleAuthProvider.credential(idToken);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
+        const userToken = sendToken(user.uid, user.email);
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
-              const userToken = sendToken(user.uid, user.email);
-              Promise.all(
-                [dbConfig.database().ref(`users/${user.uid}`).push({
-                  userEmail: user.email,
-                  userName: user.displayName,
-                  phone_Number: '08092893120',
-                  time: moment().format('llll'),
-                  userId: user.uid
-                }),
-                { token: userToken }
-                ])
-                .then((response) => {
-                  const responseValue = response[1];
-                  res.status(200).send({
-                    message: 'user`s signed in succesfully', responseValue
-                  });
-                });
-            } else {
-              const userToken = sendToken(user.uid, user.email);
-              res.status(200).send({
+              dbConfig.database().ref(`users/${user.uid}`).set({
+                userEmail: user.email,
+                userName: user.displayName,
+                phone_Number: '08092893120',
+                time: moment().format('llll'),
+                userId: user.uid
+              });
+              return res.status(200).send({
                 message: 'user`s signed in succesfully', token: userToken
               });
             }
+            return res.status(200).send({
+              message: 'user`s signed in succesfully', token: userToken
+            });
           });
       })
       .catch((error) => {
-        if (error) {
-          res.status(501).send({ response: error.message });
+        if (error.response) {
+          res.status(501).send({ error: error.response });
         }
       });
   }
@@ -128,32 +120,31 @@ export default class UserController {
   }
 
   /**
-   * @description This method allow users reset their password
+   * @description This method allow users to search users
    * route POST: api/v1/search?:user
    * @param {Object} req request object
    * @param {Object} res response object
    * @return {Object} json response contains reset password details
    */
   static searchUser(req, res) {
-    const userName = req.query.user;
+    const { keyword } = req.body;
     const user = {};
     dbConfig.database().ref('users/').orderByChild('userName/')
-      .startAt(userName)
-      .endAt(`${userName}\uf8ff`)
-      .once('value', (msg) => {
-        console.log(msg.val());
-        if (msg.val()) {
-          console.log(msg.key);
-          Object.keys(msg.val()).forEach(() => {
-            user.email = (Object.values(msg.val())[0]).email;
-            user.userName = (Object.values(msg.val())[0]).userName;
-            user.userId = (Object.keys(msg.val()))[0];
+      .startAt(keyword)
+      .endAt(`${keyword}\uf8ff`)
+      .once('value', (snapshot) => {
+        let response;
+        if (snapshot.val()) {
+          Object.keys(snapshot.val()).forEach(() => {
+            user.email = (Object.values(snapshot.val())[0]).userEmail;
+            user.userName = (Object.values(snapshot.val())[0]).userName;
+            user.userId = (Object.keys(snapshot.val()))[0];
           });
-          return res.status(200).json({ user });
+          response = user;
+        } else {
+          response = { user: 'No user Found' };
         }
-        return res.status(404).send({
-          message: 'No user found'
-        });
+        return res.status(200).send({ response });
       });
   }
 

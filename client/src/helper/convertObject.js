@@ -1,21 +1,4 @@
 import toastr from 'toastr';
-/**
- * @function helpgGetRegisteredUsers
- * @param {Object} user -Object of Arrays from Firebase Database
- * @returns {Object} allUsers
- */
-export const helpGetRegisteredUsers = (user) => {
-  const users = Object.values(user.response[0]);
-  let index = 0;
-  const allUsers = [];
-  let registeredUser;
-  while (index < users.length) {
-    registeredUser = Object.values(users[index]);
-    allUsers.push({ [registeredUser[0].userId]: registeredUser[0].userName });
-    index += 1;
-  }
-  return allUsers;
-};
 
 /**
  * @function helpGetGroupMessages

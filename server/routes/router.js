@@ -82,13 +82,7 @@ router.get('/api/v1/getMessage/:groupId', validateToken,
 /**
  * Route for a signed in user to add members to a group
  */
-router.get('/api/v1/getRegisteredUsers', validateToken,
-  GroupController.getRegisteredUsers);
-
-/**
- * Route for a signed in user to add members to a group
- */
-router.get('/api/v1/search?:user', validateToken, UserController.searchUser);
+router.post('/api/v1/search', validateToken, UserController.searchUser);
 
 // export Router
 export default router;

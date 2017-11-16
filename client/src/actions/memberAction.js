@@ -1,10 +1,8 @@
 import axios from 'axios';
-import toastr from 'toastr';
 import catchError from '../helper/catchError';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import { helpGetRegisteredUsers } from '../helper/convertObject';
 import {
-  ALL_USERS,
+  SEARCH_USER,
   ADD_MEMBER,
   GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants';
 
@@ -31,23 +29,19 @@ export const getGroupMember = groupId => axios.get(
   });
 
 /**
- * @description - An action that makes API call to server
- *  to get all registered users
- * @param {*} void - No paramater
- * @returns {function} dispatch - server response is dispatch to MemberStore
+ * @description - An action that makes API call to server that
+ * search for users
+ * @param {string} keyword - No paramater
+ * @returns { function} dispatch - server response is dispatch to MemberStore
  */
-export const getAllUsers = () => axios.get('/api/v1/getRegisteredUsers')
-  .then(({ data }) => {
+export const searchUser = (keyword) =>
+  axios.post('/api/v1/search', keyword)
+  .then((res) => {
     AppDispatcher.dispatch({
-      type: ALL_USERS,
-      allUser: helpGetRegisteredUsers(data)
+      type: SEARCH_USER,
+      search: res.data.response
     });
-  }).catch((response) => {
-    if (response.data) {
-      toastr.error(response.data.message);
-    }
   });
-
 /**
  * @description - An action that makes API call to server
  *  to add member to a groups

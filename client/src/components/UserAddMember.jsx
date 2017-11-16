@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
+import $ from 'jquery';
 import { Redirect } from 'react-router-dom';
-import { addMember, getAllUsers } from '../actions/memberAction';
+import { addMember, searchUser } from '../actions/memberAction';
 import MemberStore from '../stores/MemberStore';
 import GroupStore from '../stores/GroupStore';
 import { getUserGroups } from '../actions/groupAction';
@@ -27,9 +28,10 @@ export default class UserAddMember extends React.Component {
       loggedIn: JSON.parse(localStorage.getItem('userIn')),
       userId: JSON.parse(localStorage.getItem('Id')),
       groups: [],
-      registeredUsers: [],
       group: '',
       member: '',
+      keyword: '',
+      searchResult: [],
     };
     /**
      * @description This binding is necessary to make `this` work
@@ -37,17 +39,10 @@ export default class UserAddMember extends React.Component {
      */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleAddMemberToGroup = this.handleAddMemberToGroup.bind(this);
     this.userGroups = this.userGroups.bind(this);
-  }
-
-  /**
-   * @memberof UserAddMember
-   * @return {*} void
-   */
-  componentWillMount() {
-    getUserGroups(this.state.userId);
-    getAllUsers();
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   /**
@@ -58,9 +53,11 @@ export default class UserAddMember extends React.Component {
    * @memberof UserAddMember
    */
   componentDidMount() {
+    $('#selectId').val('');
+    getUserGroups();
     GroupStore.on('GET_USER_GROUPS', this.userGroups);
-    MemberStore.on('ALL_USERS', this.userGroups);
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
+    MemberStore.on('SEARCH_USER', this.handleSearch);
   }
 
   /**
@@ -71,8 +68,8 @@ export default class UserAddMember extends React.Component {
    */
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
-    MemberStore.removeListener('ALL_USERS', this.userGroups);
     MemberStore.removeListener('ADD_MEMBER', this.handleAddMemberToGroup);
+    MemberStore.removeListener('SEARCH_USER', this.handleSearch);
   }
   /**
    * @description - onChange event
@@ -93,21 +90,46 @@ export default class UserAddMember extends React.Component {
     event.preventDefault();
     const memberDetails = {
       groupId: this.state.group,
-      memberId: this.state.member
+      memberId: $('#selectId').val()
     };
+
     addMember(memberDetails);
   }
 
+  /**
+   * @description This handles on select of a member
+   * @param {string} memberId
+   * @returns {void} .
+  */
+  onSelect(memberId) {
+    $('#selectId').val(memberId);
+  }
+  /**
+   * @description This handles search query
+   * @returns {void} .
+  */
+  handleKeyPress() {
+    const query = { keyword: this.state.keyword };
+    if ((this.state.keyword).length >= 1) {
+      searchUser(query);
+    }
+  }
+  /**
+   * @memberof UserAddMember
+   * @return {*} void
+   */
+  handleSearch() {
+    this.setState({
+      searchResult: MemberStore.getSearchUser()
+    });
+  }
   /**
    * @memberof UserAddMember
    * @return {*} void
    */
   userGroups() {
-    const allUsers = MemberStore.registeredUsers();
     this.setState({
-      groups: GroupStore.allGroups(),
-      registeredUsers: allUsers.filter(user =>
-        (Object.keys(user)[0] !== this.state.userId))
+      groups: GroupStore.allGroups()
     });
   }
 
@@ -133,7 +155,6 @@ export default class UserAddMember extends React.Component {
         <Redirect to="/signin" />
       );
     }
-
     return (
       <div className="container addmember">
         <div className="row">
@@ -160,20 +181,31 @@ export default class UserAddMember extends React.Component {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="members">Member</label>
-                  <select
-                    name="member" onChange={this.onChange}
+                  <label htmlFor="search">Search User</label>
+                  <input
+                    list="searchUser"
+                    id="searchUsers"
+                    value={this.state.keyword}
+                    onChange={this.onChange}
+                    onKeyPress={this.handleKeyPress}
+                    type="text"
                     className="form-control"
-                  >
-                    <option value="">add member to group</option>
-                    {(this.state.registeredUsers).map(user =>
-                      <option
-                        key={Object.keys(user)}
-                        value={Object.keys(user)}
-                      >
-                        {Object.values(user)}</option>
-                    )}
-                  </select>
+                    placeholder="Search ...."
+                    name="keyword" required
+                  />
+                  <datalist id="searchUser">
+                   {this.state.searchResult.map(user =>
+                    (<option
+                      key={user.userId} value={user.userName}
+                      onClick={this.onSelect(user.userId)}
+                    />)
+                   )}
+                  </datalist>
+                  <input
+                    id="selectId"
+                    type="hidden"
+                    name="search"
+                  />
                 </div>
                 <button type="submit" className="signinformbtn">Add Member
                 </button>
@@ -190,5 +222,6 @@ export default class UserAddMember extends React.Component {
 UserAddMember.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  })
+  }),
+  memberId: PropTypes.string
 };

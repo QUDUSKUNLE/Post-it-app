@@ -46,20 +46,12 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method componentWillMount
-   * @return {void} void
-   * @memberof UserBroadCastBoard
-   */
-  componentWillMount() {
-    getUserGroups(this);
-  }
-
-  /**
    * Attach an event listener to favorite store
    * @method componentDidMount
    * @return {*} -
    */
   componentDidMount() {
+    getUserGroups();
     GroupStore.on('GET_USER_GROUPS', this.handleGetUserGroups);
     MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleGetGroupMember);
     MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
@@ -173,6 +165,6 @@ export default class UserBroadCastBoard extends React.Component {
 // props validation
 UserBroadCastBoard.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   })
 };

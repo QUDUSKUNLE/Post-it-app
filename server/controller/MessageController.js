@@ -1,5 +1,4 @@
 import moment from 'moment';
-import values from 'object.values';
 
 import dbConfig from '../config/dbConfig';
 import DestructureFirebaseData from '../helper/DestructureFirebaseData';
@@ -15,10 +14,8 @@ export default class MessageController {
   /**
    * @description This method send message to group
    * route POST: api/v1/sendMessage/:groupId
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains message sent details
    */
   static sendMessageToGroup(req, res) {
@@ -28,8 +25,7 @@ export default class MessageController {
     const userId = req.decoded.data.userId;
     const time = moment().format('llll');
     QueryDatabase.getUserEmailAndPhoneNumber(userId)
-      .then((senderDetails) => {
-        const sender = values(senderDetails)[0];
+      .then((sender) => {
         const userName = sender.userName;
         const email = sender.userEmail;
         QueryDatabase.getGroupPhoneNumbers(groupId).then((
@@ -68,10 +64,8 @@ export default class MessageController {
   /**
    * @description This method retrieves all message in a group
    * route GET: api/v1/getMessage/:groupId
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains all message in a group
    */
   static getMessage(req, res) {

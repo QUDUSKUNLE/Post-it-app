@@ -11,9 +11,9 @@ import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
  */
 const resetPasswordAction = email => axios.post('/api/v1/passwordReset',
   email)
-  .then(({ data }) => {
+  .then(({ res }) => {
     AppDispatcher.dispatch({
-      type: PASSWORD_RESET_SUCCESS, response: data });
+      type: PASSWORD_RESET_SUCCESS, response: res });
   }).catch(error => catchError(error));
 
 export default resetPasswordAction;
