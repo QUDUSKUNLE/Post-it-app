@@ -11,20 +11,21 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-// User's should be able to create grpoup
-describe('PostIt', () => {
+// Test for GroupController
+
+describe('Create group', () => {
   let token = '';
   before((done) => {
     chai.request(server)
       .post('/api/v1/signin')
-      .send({ email: 'kunle@gmail.com', password: 'Ka123@' })
+      .send({ email: 'asake@gmail.com', password: 'Ka123@' })
       .end((err, res) => {
         token = res.body.token;
         done();
       });
   });
 
-  it('create group route should throw error for undefined group name',
+  it('route should throw status code 400 for undefined group name',
     (done) => {
       const group = { group: '' };
       chai.request(server)
@@ -32,29 +33,29 @@ describe('PostIt', () => {
         .set('x-access-token', token)
         .send(group)
         .end((err, res) => {
-          expect(res).to.have.status(409);
-          assert.equal(409, res.statusCode);
+          expect(res).to.have.status(400);
+          assert.equal(400, res.statusCode);
           assert.equal('Group name is required', res.body.error.code);
           done();
         });
     });
 
-  it('create group route should throw error for group name' +
-    ' of character less than three', (done) => {
+  it('route should throw status code 400 for group name' +
+    ' with character less than three', (done) => {
     const group = { group: 'ab' };
     chai.request(server)
       .post('/api/v1/createGroup')
       .set('x-access-token', token)
       .send(group)
       .end((err, res) => {
-        expect(res).to.have.status(409);
+        expect(res).to.have.status(400);
         assert.equal('Group name should be at least 3 characters',
           res.body.error.code);
         done();
       });
   });
 
-  it('create group route should allow registered user`s to create groups',
+  it('route should allow registered user`s to create groups',
     (done) => {
       const group = { group: faker.name.findName() };
       chai.request(server)
@@ -68,7 +69,7 @@ describe('PostIt', () => {
         });
     });
 
-  it('create group route should throw an error for an already created group',
+  it('route should return status code 409 for an already created group',
     (done) => {
       const group = { group: 'andela' };
       chai.request(server)
@@ -76,15 +77,14 @@ describe('PostIt', () => {
         .set('x-access-token', token)
         .send(group)
         .end((err, res) => {
-          expect(res).to.have.status(403);
+          expect(res).to.have.status(409);
           assert.equal('Group already exists', res.body.error);
           done();
         });
     });
 });
 
-// get members of a group
-describe('PostIt', () => {
+describe('AddMember', () => {
   let token = '';
   before((done) => {
     chai.request(server)
@@ -96,63 +96,36 @@ describe('PostIt', () => {
       });
   });
 
-  it('getRegisteredUsers route should allow signed user`s to add group',
-    (done) => {
-      chai.request(server)
-        .get('/api/v1/getRegisteredUsers')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          assert.equal(200, res.statusCode);
-          done();
-        });
-    });
-});
-
-// Add member routes
-describe('PostIt', () => {
-  let token = '';
-  before((done) => {
-    chai.request(server)
-      .post('/api/v1/signin')
-      .send({ email: 'kunle@gmail.com', password: 'Ka123@' })
-      .end((err, res) => {
-        token = res.body.token;
-        done();
-      });
-  });
-
-  it('addmember route should throw error for undefined memberId',
+  it('route should return status code 400 for undefined memberId',
     (done) => {
       const userId = { memberId: '' };
       chai.request(server)
-        .post('/api/v1/addMember/-KyIH2unhlMmgGOlTtk2')
+        .post('/api/v1/addMember/-Kz5garRTF4ZXikiucJf')
         .set('x-access-token', token)
         .send(userId)
         .end((err, res) => {
-          expect(res).to.have.status(409);
+          expect(res).to.have.status(400);
           assert.equal('MemberId is required', res.body.error.code);
           done();
         });
     });
 
-  it('addmember route should allow throw error for already existing user',
+  it('route should return status code 409 an already existing user',
     (done) => {
-      const userId = { memberId: 'KD62nHTPybW047JYnMq6jC2aDJ82' };
+      const userId = { memberId: 'HoPNmtMqNgbKX6zKiH7yKIPazYx2' };
       chai.request(server)
-        .post('/api/v1/addMember/-Kwj5WsTqFJaFddmh8uD')
+        .post('/api/v1/addMember/-Kz5garRTF4ZXikiucJf')
         .set('x-access-token', token)
         .send(userId)
         .end((err, res) => {
-          assert.equal(403, res.statusCode);
+          assert.equal(409, res.statusCode);
           assert.equal('User`s already a member', res.body.error);
           done();
         });
     });
 });
 
-
-// Get group Route
-describe('PostIt', () => {
+describe('Get Group', () => {
   let token = '';
   before((done) => {
     chai.request(server)
@@ -164,7 +137,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('getgroups route should allow signed in user`s to get groups a user ' +
+  it('route should allow signed in user`s to get groups a user ' +
     'belongs to', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
@@ -175,7 +148,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('getgroups route should not permit ' +
+  it('route should not permit ' +
     'expired token to get groups a user belongs to', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
@@ -187,8 +160,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('getgroups route should not permit ' +
-    'request without a token', (done) => {
+  it('route should not permit request without a token', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
       .set('x-access-token', '')
@@ -199,14 +171,38 @@ describe('PostIt', () => {
       });
   });
 
-  it('getgroups route should not permit ' +
-    'request with an invalid token', (done) => {
+  it('route should not permit request with an invalid token', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
       .set('x-access-token', expiredToken.inValid)
       .end((err, res) => {
         expect(res).to.have.status(401);
         assert.equal('invalid signature', res.body.message);
+        done();
+      });
+  });
+});
+
+describe('Get Memebr', () => {
+  let token = '';
+  before((done) => {
+    chai.request(server)
+      .post('/api/v1/signin')
+      .send({ email: 'asake@gmail.com', password: 'Ka123@' })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
+
+  it('route should allow signed in user to see members of a group', (done) => {
+    const groupId = '-Kz5garRTF4ZXikiucJf';
+    chai.request(server)
+      .get(`/api/v1/getMembers/${groupId}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        assert.equal(groupId, (res.body.response)[1]);
         done();
       });
   });
