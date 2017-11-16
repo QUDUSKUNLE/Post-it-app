@@ -7,15 +7,15 @@ import toastr from 'toastr';
  */
 export default (error) => {
   if (error.response.data.error.code === 'Password should be at least 6' +
-    ' characters with a speacial character') {
+    ' characters and number') {
     toastr.error('Password should be at least 6' +
-      ' characters with a speacial character');
+      ' characters and contains number');
   } else if (error.response.data.error.code === 'Password does not match') {
     toastr.error('Password does not match');
-  } else if (error.response.data.error.code === 'Username required at least' +
+  } else if (error.response.data.error.code === 'Username should be at least' +
   ' 2 characters') {
     toastr.error('Username required at least 2 characters');
-  } else if (error.response.data.error.code === 'Incorrect phone number') {
+  } else if (error.response.data.error.code === 'Incorrect phoneNumber') {
     toastr.error('Incorrect phone number');
   } else if (error.response.data.error.code === 'Enter a valid phone Number') {
     toastr.error('Enter a valid phone Number');
