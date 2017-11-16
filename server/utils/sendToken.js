@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 
 /**
  * @description This method sends SMS
- *
  * @param {Object} userId request object
  * @param {Object} email request object
  * @return {string} token
