@@ -6,11 +6,9 @@ const jwtSecret = process.env.TOKEN_SECRET;
 
 /**
  * @description: This checks token
- *
  * @param {Object} req request object
  * @param {Object} res response object
  * @param {Function} next callback function
- *
  * @return {Object} response contains validates token
  */
 export default (req, res, next) => {

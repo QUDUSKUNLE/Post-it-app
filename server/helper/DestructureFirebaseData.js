@@ -38,23 +38,4 @@ export default class DestructureFirebaseData {
     }
     return phoneNumbers;
   }
-
-  /**
-   * @description This function help to get Array of object of all Users
-   * @param {Object} user - Object of array of all registered Users
-   * @returns {Object} - Array of all registered users
-   * @memberof Helper
-   */
-  static getAllUsers(user) {
-    const users = Object.values(user.response[0]);
-    let index = 0;
-    const allUsers = [];
-    let registeredUser;
-    while (index < users.length) {
-      registeredUser = Object.values(users[index]);
-      allUsers.push({ [registeredUser[0].userId]: registeredUser[0].userName });
-      index += 1;
-    }
-    return allUsers;
-  }
 }
