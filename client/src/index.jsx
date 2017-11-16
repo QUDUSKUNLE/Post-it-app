@@ -15,6 +15,6 @@ if (localStorage.token) {
 }
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Routes/>
+    <Routes />
   </Router>,
 document.getElementById('app'));

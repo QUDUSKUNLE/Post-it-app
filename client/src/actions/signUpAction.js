@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import toastr from 'toastr';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import { SIGN_UP_SUCCESS } from '../constants/ActionConstants';
 import catchError from '../helper/catchError';

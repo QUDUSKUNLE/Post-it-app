@@ -42,6 +42,7 @@ export const searchUser = (keyword) =>
       search: res.data.response
     });
   });
+
 /**
  * @description - An action that makes API call to server
  *  to add member to a groups
