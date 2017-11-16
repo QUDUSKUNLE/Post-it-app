@@ -8,20 +8,20 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-// Send Message Route
-describe('PostIt', () => {
+// Test for Message Controller
+describe('Send Message', () => {
   let token = '';
   before((done) => {
     chai.request(server)
       .post('/api/v1/signin')
-      .send({ email: 'kunle@gmail.com', password: 'Ka123@' })
+      .send({ email: 'asake@gmail.com', password: 'Ka123@' })
       .end((err, res) => {
         token = res.body.token;
         done();
       });
   });
 
-  it('send Message route should throw error for undefined message', (done) => {
+  it('route should return status code 400 for undefined message', (done) => {
     const messageDetails = { message: '', priority: 'normal' };
     const groupId = '-KwjAZcNyIdpMPk7GS0i';
     chai.request(server)
@@ -29,31 +29,32 @@ describe('PostIt', () => {
       .set('x-access-token', token)
       .send(messageDetails)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Message is required', res.body.error.code);
         done();
       });
   });
 
-  it('send Message route should throw error for undefined priority', (done) => {
+  it('route should return status code 400 for undefined message priority',
+  (done) => {
     const messageDetails = { message: 'Hello wale', priority: '' };
-    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    const groupId = '-Kz5fL9UhQOQjoRmHknY';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
       .send(messageDetails)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Message priority is required', res.body.error.code);
         done();
       });
   });
 
-  it('send Message route should allow signed in user`s to' +
+  it('route should allow signed in user`s to' +
     ' send message to group with priority normal', (done) => {
     const message = 'Hello everyone';
     const priority = 'normal';
-    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
@@ -66,11 +67,11 @@ describe('PostIt', () => {
       });
   });
 
-  it('send Message route should allow signed in user`s to' +
+  it('route should allow signed in user`s to' +
     ' send message to group with priority urgent', (done) => {
     const message = 'Hello everyone';
     const priority = 'urgent';
-    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
@@ -84,12 +85,11 @@ describe('PostIt', () => {
       });
   });
 
-  // { prority: critical}
-  it('send Message route should allow signed in user`s to' +
+  it('route should allow signed in user`s to' +
     ' send message to group with priority critical', (done) => {
     const message = 'Hello everyone';
     const priority = 'critical';
-    const groupId = '-KwjAZcNyIdpMPk7GS0i';
+    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
@@ -105,8 +105,7 @@ describe('PostIt', () => {
   });
 });
 
-// Get Message Route
-describe('PostIt', () => {
+describe('Get Message', () => {
   let token = '';
   before((done) => {
     chai.request(server)
@@ -118,8 +117,7 @@ describe('PostIt', () => {
       });
   });
 
-  it('get Message route should allow signed in user get message' +
-    ' from groups', (done) => {
+  it('route should allow signed in user get message from groups', (done) => {
     chai.request(server)
       .get('/api/v1/getMessage/-KwjAZcNyIdpMPk7GS0i')
       .set('x-access-token', token)

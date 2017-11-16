@@ -19,9 +19,11 @@ describe('PostIt', () => {
         done();
       });
   });
+});
 
-  // Sign Up Route
-  it('Sign up route should throw error for a non validated password',
+// Test for sign up route
+describe('Sign up', () => {
+  it('route should throw status code 400 for a non valid password',
     (done) => {
       const newUser = {
         email: faker.internet.email(),
@@ -34,16 +36,17 @@ describe('PostIt', () => {
         .post('/api/v1/signup')
         .send(newUser)
         .end((err, res) => {
-          res.should.have.status(403);
-          assert.equal('Password should be at least 6 characters with a' +
-            ' speacial character', res.body.error.code);
+          res.should.have.status(400);
+          assert.equal('Password must be at least 6 characters and' +
+          ' contain number', res.body.error.code);
           done();
         });
     });
 
-  it('Sign up route should throw 409 status code for signing up without email',
+  it('route should throw status code 400 for signing up without email',
     (done) => {
       const newUser = {
+        email: '',
         password: 'kawthar',
         confirmPassword: 'kawthar',
         username: faker.name.findName(),
@@ -53,37 +56,37 @@ describe('PostIt', () => {
         .post('/api/v1/signup')
         .send(newUser)
         .end((err, res) => {
-          res.should.have.status(409);
+          res.should.have.status(400);
           assert.equal('User email is required', res.body.error.code);
           done();
         });
     });
 
-  // Sign Up Route
-  it('sign up route should throw error for a non defined username', (done) => {
+  it('route should throw status code 400 for a non defined username',
+  (done) => {
     const newUser = {
       email: faker.internet.email(),
-      password: 'kawthar',
+      password: 'kawthar2',
       confirmPassword: 'kawthar',
+      username: '',
       phoneNumber: '08052327990'
     };
     chai.request(server)
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Username is required', res.body.error.code);
         done();
       });
   });
 
-  // Sign Up Route
-  it('sign up route should throw error for a username of length less than 2',
+  it('route should throw status code 400 for a username of length less than 2',
     (done) => {
       const newUser = {
         email: faker.internet.email(),
-        password: 'kawthar@',
-        confirmPassword: 'kawthar@',
+        password: 'kawthar1',
+        confirmPassword: 'kawthar1',
         username: 'a',
         phoneNumber: '08052327990'
       };
@@ -91,18 +94,18 @@ describe('PostIt', () => {
         .post('/api/v1/signup')
         .send(newUser)
         .end((err, res) => {
-          res.should.have.status(409);
-          assert.equal('username should be at least 2 characters',
+          res.should.have.status(400);
+          assert.equal('Username should be at least 2 characters',
             res.body.error.code);
           done();
         });
     });
 
-  it('sign up route should throw error for password that does not match',
+  it('route should throw status code 403 for password that does not match',
     (done) => {
       const newUser = {
         email: faker.internet.email(),
-        password: 'kawthar@',
+        password: 'kawthar1',
         confirmPassword: 'kawthar',
         username: faker.name.findName(),
         phoneNumber: '08052327990'
@@ -117,11 +120,11 @@ describe('PostIt', () => {
         });
     });
 
-  it('sign up route should throw error for wrong phoneNumber', (done) => {
+  it('route should throw status code for wrong phoneNumber', (done) => {
     const newUser = {
       email: faker.internet.email(),
-      password: 'kawthar@',
-      confirmPassword: 'kawthar@',
+      password: 'kawthar1',
+      confirmPassword: 'kawthar1',
       username: faker.name.findName(),
       phoneNumber: '0809289312'
     };
@@ -129,17 +132,16 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Incorect phoneNumber', res.body.error.code);
         done();
       });
   });
-
-  it('sign up route should throw error for invalid phoneNumber', (done) => {
+  it('route should throw error for invalid phoneNumber', (done) => {
     const newUser = {
       email: faker.internet.email(),
-      password: 'kawthar@',
-      confirmPassword: 'kawthar@',
+      password: 'kawthar1',
+      confirmPassword: 'kawthar1',
       username: faker.name.findName(),
       phoneNumber: '0809289312123'
     };
@@ -147,12 +149,12 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Enter a valid phone Number', res.body.error.code);
         done();
       });
   });
-  it('sign up route should throw error for a badly formatted email', (done) => {
+  it('route should throw error for a badly formatted email', (done) => {
     const newUser = {
       email: 'qudus.com',
       password: 'kawthar@',
@@ -164,13 +166,13 @@ describe('PostIt', () => {
       .post('/api/v1/signup')
       .send(newUser)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Email is badly formatted', res.body.error.code);
         done();
       });
   });
 
-  it('sign up route should allow new users to sign up', (done) => {
+  it('route should allow new users to sign up', (done) => {
     const newUser = {
       email: faker.internet.email(),
       password: 'Ka123@',
@@ -183,17 +185,17 @@ describe('PostIt', () => {
       .send(newUser)
       .end((err, res) => {
         res.should.have.status(201);
-        expect((res.body.response)[1]).to.have.property('token');
+        expect(res.body.response).to.have.property('token');
         assert.equal('User`s sign up successfully', res.body.message);
         done();
       });
   });
 
-  it('sign up route should not sign up already registered user', (done) => {
+  it('route should not sign up already registered user', (done) => {
     const newUser = {
       email: 'kawthar@gmail.com',
-      password: 'kawthar@',
-      confirmPassword: 'kawthar@',
+      password: 'kawthar1',
+      confirmPassword: 'kawthar1',
       username: 'Joke',
       phoneNumber: '08092893120'
     };
@@ -210,19 +212,19 @@ describe('PostIt', () => {
   });
 });
 
-// Sign In Route
-describe('PostIt', () => {
-  it('sign in route should throw error for providing wrong password',
+// Test for sign In route
+describe('SignIn', () => {
+  it('route should throw status code 409 for providing wrong password',
     (done) => {
       const registeredUser = {
-        email: 'kawthar@gmail.com',
-        password: 'Kawthar@'
+        email: 'Kemi@gmail.com',
+        password: 'Ka123@#'
       };
       chai.request(server)
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(400);
+          res.should.have.status(409);
           assert.equal('auth/wrong-password', res.body.error.code);
           assert.equal('The password is invalid or the user does' +
             ' not have a password.', res.body.error.message);
@@ -230,22 +232,23 @@ describe('PostIt', () => {
         });
     });
 
-  it('sign in route should throw error for not define an email',
+  it('route should return status code 400 for undefined email',
     (done) => {
       const registeredUser = {
+        email: '',
         password: 'kawthar@'
       };
       chai.request(server)
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(409);
+          res.should.have.status(400);
           assert.equal('User email is required', res.body.error.code);
           done();
         });
     });
 
-  it('sign in route should throw error for a badly formatted email',
+  it('route should return status code 400 for a badly formatted email',
     (done) => {
       const registeredUser = {
         email: 'kunle.com',
@@ -255,30 +258,32 @@ describe('PostIt', () => {
         .post('/api/v1/signin')
         .send(registeredUser)
         .end((err, res) => {
-          res.should.have.status(409);
+          res.should.have.status(400);
           assert.equal('Email is badly formatted', res.body.error.code);
           done();
         });
     });
 
-  it('sign in route should flag error if password is not undefined', (done) => {
+  it('route should return status code 400 for undefined password', (done) => {
     const registeredUser = {
-      email: 'kunle@gmail.com'
+      email: 'kunle@gmail.com',
+      password: ''
     };
     chai.request(server)
       .post('/api/v1/signin')
       .send(registeredUser)
       .end((err, res) => {
-        res.should.have.status(409);
+        res.should.have.status(400);
         assert.equal('Password is required', res.body.error.code);
         done();
       });
   });
 
-  it('sign in route should flag error for a non-registered user', (done) => {
+  it('route should return status code 404 for a non-registered user',
+  (done) => {
     const registeredUser = {
       email: 'kawthath@gmail.com',
-      password: 'kawthar@'
+      password: 'kawthar1'
     };
     chai.request(server)
       .post('/api/v1/signin')
@@ -292,7 +297,9 @@ describe('PostIt', () => {
         done();
       });
   });
-  it('sign in route should throw success message valid inputs', (done) => {
+
+  it('route should return success message and status code 200 for successfull'
+  + ' sign in', (done) => {
     const newUser = {
       email: 'kunle@gmail.com',
       password: 'Ka123@',
@@ -308,36 +315,36 @@ describe('PostIt', () => {
   });
 });
 
-// Password Reset Route
-describe('PostIt', () => {
-  it('password reset route should throw error for not providing email',
+// Test for Password Reset Route
+describe('PasswordReset', () => {
+  it('route should return status code 400 for not providing email',
     (done) => {
       const userEmail = { email: '' };
       chai.request(server)
         .post('/api/v1/passwordreset')
         .send(userEmail)
         .end((err, res) => {
-          res.should.have.status(409);
+          res.should.have.status(400);
           assert.equal('User email is required',
             res.body.error.code);
           done();
         });
     });
 
-  it('password reset route should throw error for badly formatted email',
+  it('route should return status code 400 for badly formatted email',
     (done) => {
       const userEmail = { email: 'kunle@.com' };
       chai.request(server)
         .post('/api/v1/passwordreset')
         .send(userEmail)
         .end((err, res) => {
-          res.should.have.status(409);
+          res.should.have.status(400);
           assert.equal('Email is badly formatted',
             res.body.error.code);
           done();
         });
     });
-  it('password reset route should allow registered user`s to ' +
+  it('route should allow registered user`s to ' +
     'reset their passwords', (done) => {
     const userEmail = { email: 'sasil@gmail.com' };
     chai.request(server)
@@ -350,7 +357,7 @@ describe('PostIt', () => {
         done();
       });
   });
-  it('password reset route should throw an error if email is not found',
+  it('route should throw an error if email is not found',
     (done) => {
       const userEmail = { email: 'user@gmail.com' };
       chai.request(server)
@@ -367,8 +374,8 @@ describe('PostIt', () => {
     });
 });
 
-// Sign Out Route
-describe('PostIt', () => {
+// Test for Sign Out Route
+describe('SignOut', () => {
   let token = '';
   before((done) => {
     chai.request(server)
@@ -379,7 +386,7 @@ describe('PostIt', () => {
         done();
       });
   });
-  it('signout route should allow a user sign out successfully', (done) => {
+  it('route should allow a user sign out successfully', (done) => {
     chai.request(server)
       .post('/api/v1/signout')
       .set('x-access-token', token)
@@ -388,6 +395,33 @@ describe('PostIt', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('message');
         expect(res.body.message).to.eql('User`s signed-out successfully.');
+        done();
+      });
+  });
+});
+
+
+// Test for Search endpoint
+describe('Search', () => {
+  let token = '';
+  before((done) => {
+    chai.request(server)
+      .post('/api/v1/signin')
+      .send({ email: 'asake@gmail.com', password: 'Ka123@' })
+      .end((err, res) => {
+        token = res.body.token;
+        done();
+      });
+  });
+  it('route should allow a user to search for user and' +
+  ' add to a group', (done) => {
+    chai.request(server)
+      .post('/api/v1/search')
+      .set('x-access-token', token)
+      .send({ keyword: 'O' })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
         done();
       });
   });
