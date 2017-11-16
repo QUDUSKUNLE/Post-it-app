@@ -17,7 +17,7 @@ const validate = (request) => {
         case 'password':
           request.check('password', 'Password is required').notEmpty();
           request.check('password',
-            'Password must be at least 6 characters and contain number')
+            'Password should be at least 6 characters and contains number')
             .isLength({ min: 6 })
             .matches(/\d/);
           break;
