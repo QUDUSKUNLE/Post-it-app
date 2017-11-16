@@ -28,7 +28,8 @@ export default (groupEmails) => {
     </div>
     <div style="outline: 0px solid black; padding-left: 20px;
     padding-right: 30px;
-    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);">
+    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3),
+      0 17px 17px 0 rgba(0, 0, 0, 0.15);">
     <div>
       <p style="margin-top: 20px">Dear esteemed user,</p>
       <p style="margin-left: 20px">
