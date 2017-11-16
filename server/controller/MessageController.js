@@ -19,8 +19,7 @@ export default class MessageController {
    * @return {Object} json response contains message sent details
    */
   static sendMessageToGroup(req, res) {
-    const message = req.body.message;
-    const priority = req.body.priority;
+    const { message, priority } = req.body;
     const groupId = req.params.groupId;
     const userId = req.decoded.data.userId;
     const time = moment().format('llll');
@@ -58,7 +57,7 @@ export default class MessageController {
           }))
           .catch(error => res.status(500).send({ error }));
       })
-      .catch(error => res.status(403).send({ error }));
+      .catch(error => res.status(500).send({ error }));
   }
 
   /**
@@ -75,7 +74,7 @@ export default class MessageController {
         .once('value', snapshot => snapshot.val())
     ])
       .then(response => res.status(200).send({ response }))
-      .catch(error => res.status(403).send({ error }));
+      .catch(error => res.status(500).send({ error }));
   }
 }
 

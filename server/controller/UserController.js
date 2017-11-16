@@ -14,37 +14,41 @@ export default class UserController {
   /**
    * @description This method signup a new user
    * route POST: api/v1/signup
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains signed up user response
    */
   static signUp(req, res) {
-    const { email, password, phoneNumber, username } = req.body;
-    dbConfig.auth().createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        const userToken = sendToken(user.uid, email);
-        dbConfig.database().ref(`users/${user.uid}`).set({
-          userEmail: email,
-          userName: username,
-          phone_Number: phoneNumber,
-          time: moment().format('llll'),
-          userId: user.uid
-        });
-        return { token: userToken };
-      }).then(response => res.status(201).send({
-        message: 'User`s sign up successfully', response }))
-      .catch(error => res.status(409).send({ error }));
+    const {
+      email, password,
+      phoneNumber, confirmPassword,
+      username } = req.body;
+    if (password !== confirmPassword) {
+      res.status(403).send({ error: { code: 'Password does not match' } });
+    } else {
+      dbConfig.auth().createUserWithEmailAndPassword(email, password)
+        .then((user) => {
+          const userToken = sendToken(user.uid, email);
+          const name = username.toLowerCase();
+          dbConfig.database().ref(`users/${user.uid}`).set({
+            userEmail: email,
+            userName: name,
+            phone_Number: phoneNumber,
+            time: moment().format('llll'),
+            userId: user.uid
+          });
+          return { token: userToken };
+        }).then(response => res.status(201).send({
+          message: 'User`s sign up successfully', response }))
+        .catch(error => res.status(409).send({ error }));
+    }
   }
 
   /**
    * @description This method signin registered users
    * route POST: api/v1/signin
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains signed user details
    */
   static signIn(req, res) {
@@ -57,7 +61,7 @@ export default class UserController {
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password') {
-          res.status(400).send({ error });
+          res.status(409).send({ error });
         } else if (error.code === 'auth/user-not-found') {
           res.status(404).send({ error });
         }
@@ -80,9 +84,10 @@ export default class UserController {
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
+              const username = user.displayName;
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: user.email,
-                userName: user.displayName,
+                userName: username,
                 phone_Number: '08092893120',
                 time: moment().format('llll'),
                 userId: user.uid
@@ -98,7 +103,7 @@ export default class UserController {
       })
       .catch((error) => {
         if (error.response) {
-          res.status(501).send({ error: error.response });
+          res.status(500).send({ error: error.response });
         }
       });
   }
@@ -151,10 +156,8 @@ export default class UserController {
   /**
    * @description This method signout users
    * route POST: api/v1/signout
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains sign out response
    */
   static signOut(req, res) {

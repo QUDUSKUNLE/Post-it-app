@@ -1,5 +1,4 @@
 import moment from 'moment';
-import values from 'object.values';
 import dbConfig from '../config/dbConfig';
 import QueryDatabase from '../helper/QueryDatabase';
 
@@ -44,7 +43,7 @@ export default class GroupController {
                 }));
             });
         } else {
-          res.status(403).send({ error: 'Group already exists' });
+          res.status(409).send({ error: 'Group already exists' });
         }
       });
   }
@@ -89,10 +88,8 @@ export default class GroupController {
   /**
    * @description This method add member to a group
    * route POST: api/v1/addMembers/:groupId
-   *
    * @param {Object} req request object
    * @param {Object} res response object
-   *
    * @return {Object} json response contains add member response
    */
   static addMemberToGroup(req, res) {
@@ -100,22 +97,21 @@ export default class GroupController {
     const groupId = req.params.groupId;
     QueryDatabase.getUserEmailAndPhoneNumber(memberId)
       .then((response) => {
-        const memberDetails = values(response)[0];
         QueryDatabase.getGroupName(groupId).then((group) => {
           const groupName = group[0];
           dbConfig.database().ref('GroupMember').child(groupId)
             .once('value', (snapshot) => {
               if (snapshot.hasChild(memberId)) {
-                res.status(403).send({ error: 'User`s already a member' });
+                res.status(409).send({ error: 'User`s already a member' });
               } else {
                 dbConfig.database().ref(`UserGroups/${memberId}`)
                 .child(groupName).set(groupId);
                 dbConfig.database().ref(`GroupMember/${groupId}`)
-                  .child(memberId).set(memberDetails.userName);
+                  .child(memberId).set(response.userName);
                 dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)
                   .child(memberId).set({
-                    phoneNumber: memberDetails.phone_Number,
-                    email: memberDetails.userEmail
+                    phoneNumber: response.phone_Number,
+                    email: response.userEmail
                   });
                 res.status(201).send({ response: 'Add member successfully' });
               }
