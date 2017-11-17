@@ -1,17 +1,9 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import toastr from 'toastr';
 import signOutAction from '../actions/signOutAction';
-import UserSignIn from './UserSignIn';
-import UserCreateGroup from './UserCreateGroup';
-import UserBroadCastBoard from './UserBroadCastBoard';
-import UserAddMember from './UserAddMember';
-import Home from './Home';
-import Footer from './Footer';
-import UserResetPassword from './UserResetPassword';
-import NotFound from './NotFound';
 
 /**
  * @description - renders Routes Component
@@ -145,16 +137,6 @@ class Routes extends React.Component {
             </div>
           </nav>
         </div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/signin" component={UserSignIn} />
-          <Route path="/passwordreset" component={UserResetPassword} />
-          <Route path="/broadcastboard" component={UserBroadCastBoard} />
-          <Route path="/group" component={UserCreateGroup} />
-          <Route path="/member/:groupId" component={UserAddMember} />
-          <Route component={NotFound} />
-        </Switch>
-        <Footer />
       </div>
     );
   }
