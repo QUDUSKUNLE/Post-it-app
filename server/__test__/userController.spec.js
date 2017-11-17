@@ -37,8 +37,8 @@ describe('Sign up', () => {
         .send(newUser)
         .end((err, res) => {
           res.should.have.status(400);
-          assert.equal('Password must be at least 6 characters and' +
-          ' contain number', res.body.error.code);
+          assert.equal('Password should be at least 6 characters' +
+          ' and contains number', res.body.error.code);
           done();
         });
     });
