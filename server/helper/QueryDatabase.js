@@ -14,9 +14,7 @@ export default class QueryDatabase {
   /**
    * @description This function helps pull out user`s email and phoneNumber
    * from Firebase database
-   *
    * @param {string} userId - get user phoneNumber and Email
-   *
    * @returns {Object} - object that contains user email and phoneNumber
    * @memberof QueryDatabase
    */
