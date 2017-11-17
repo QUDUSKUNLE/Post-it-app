@@ -15,7 +15,7 @@ export default (groupEmails) => {
     tls: { rejectUnauthorized: false }
   });
   const mailOptions = {
-    from: '"PostIt" <postitmail@gmail.com>',
+    from: '"PostIt" <postitappmail@gmail.com>',
     to: groupEmails,
     subject: 'PostIt Message Notification',
     text: 'PostIt',
