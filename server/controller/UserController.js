@@ -1,6 +1,5 @@
 import firebase from 'firebase';
 import moment from 'moment';
-// import values from 'object.values';
 import sendToken from '../utils/sendToken';
 import dbConfig from '../config/dbConfig';
 import 'babel-polyfill';

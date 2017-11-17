@@ -31,6 +31,8 @@ export default (error) => {
     ' The user may have been deleted.');
   } else if (error.response.data.error.code === 'auth/wrong-password') {
     toastr.error('Invalid password');
+  } else if (error.response.data.error.code === 'MemberId is required') {
+    toastr.error('Not a registered user');
   } else if (error.response.data.error === 'Group already exists') {
     toastr.error('Group already exists');
   } else if (error.response.data.error === 'User`s already a member') {
