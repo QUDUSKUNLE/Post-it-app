@@ -77,7 +77,7 @@ describe('<UserSignUp/>', () => {
     expect(wrapper.state().name).toEqual('value');
   });
 
-  it('componentWillUnmount component lifecycle to be unmounted when called',
+  it('componentWillUnmount component lifecycle to be called when unmounted',
   () => {
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
