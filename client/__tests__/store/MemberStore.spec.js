@@ -8,31 +8,6 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/MemberStore.js');
 
 describe('Member Store', () => {
-  describe('Test for registerUsers method', () => {
-    let allUser;
-    let AppDispatcherMock;
-    beforeEach(() => {
-      AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      allUser = [{ FHeyW95bhLgLtpOTfFSN8fscPxD2: 'kaduna' }];
-    });
-
-    afterEach(() => {
-      MemberStore.handleActions({
-        type: 'ALL_USERS', allUser: []
-      });
-    });
-
-    it('should be registered to AppDispatcher', () => {
-      AppDispatcherMock({ type: 'ALL_USERS', allUser });
-      expect(MemberStore.registeredUsers()).toEqual(allUser);
-    });
-    it('should return an empty object on first call', () => {
-      expect(MemberStore.registeredUsers()).toEqual([]);
-    });
-  });
-});
-
-describe('Member Store', () => {
   describe('Test for addMember method', () => {
     let member;
     let AppDispatcherMock;

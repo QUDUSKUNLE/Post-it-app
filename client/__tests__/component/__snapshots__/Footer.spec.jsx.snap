@@ -11,25 +11,17 @@ ShallowWrapper {
   "node": <div
     className="footer"
   >
-    <div
-      className="container"
-    >
-      <center>
-        © Qudus Kunle
-      </center>
-    </div>
+    <center>
+      © Qudus Kunle
+    </center>
   </div>,
   "nodes": Array [
     <div
       className="footer"
     >
-      <div
-        className="container"
-      >
-        <center>
-          © Qudus Kunle
-        </center>
-      </div>
+      <center>
+        © Qudus Kunle
+      </center>
     </div>,
   ],
   "options": Object {},
@@ -69,25 +61,17 @@ ShallowWrapper {
         "_currentElement": <div
           className="footer"
         >
-          <div
-            className="container"
-          >
-            <center>
-              © Qudus Kunle
-            </center>
-          </div>
+          <center>
+            © Qudus Kunle
+          </center>
         </div>,
         "_debugID": 2,
         "_renderedOutput": <div
           className="footer"
         >
-          <div
-            className="container"
-          >
-            <center>
-              © Qudus Kunle
-            </center>
-          </div>
+          <center>
+            © Qudus Kunle
+          </center>
         </div>,
       },
       "_renderedNodeType": 0,
