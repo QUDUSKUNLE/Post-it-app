@@ -2,7 +2,7 @@ import React from 'react';
 import toastr from 'toastr';
 import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import UserAddMember from './UserAddMember';
 import { sendGroupMessage } from '../actions/messageAction';
 
 /**
@@ -23,6 +23,7 @@ export default class UserChatBox extends React.Component {
       username: JSON.parse(localStorage.getItem('userName')),
       message: '',
       priority: 'normal',
+      show: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -89,6 +90,7 @@ export default class UserChatBox extends React.Component {
         </div>
       </div>
     );
+    const close = () => this.setState({ show: false });
     return (
       <div id="main">
         <ReactTooltip place="bottom" />
@@ -99,17 +101,19 @@ export default class UserChatBox extends React.Component {
               className="btn btn-default btn-xs"
               data-toggle="offcanvas"
             >
-              <i className="glyphicon glyphicon-chevron-left"></i>
+              <i
+                className="glyphicon glyphicon-chevron-left"
+              ></i>
             </button>
           </p>
           <h6>Group | {this.props.defaultGroup}
-            <Link to="/member">
-              <span
-                data-tip={`Add Member to ${this.props.defaultGroup}`}
-                className="glyphicon glyphicon-plus pull-right"
-              >
-              </span>
-            </Link>
+            <span
+              type="button"
+              data-tip={`Add Member to ${this.props.defaultGroup}`}
+              className="glyphicon glyphicon-plus pull-right"
+              onClick={() => this.setState({ show: true })}
+            >
+            </span>
           </h6>
           <div className="messageBoard">
             {chatMessage}
@@ -143,6 +147,12 @@ export default class UserChatBox extends React.Component {
             </form>
           </div>
         </div>
+        <UserAddMember
+          modalState={this.state.show}
+          closeModal={close}
+          selectedGroup={this.props.defaultGroup}
+          groupId={this.props.groupId}
+        />
       </div>
     );
   }

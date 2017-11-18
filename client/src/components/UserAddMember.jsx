@@ -1,12 +1,10 @@
 import React from 'react';
+import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import $ from 'jquery';
-import { Redirect } from 'react-router-dom';
 import { addMember, searchUser } from '../actions/memberAction';
 import MemberStore from '../stores/MemberStore';
-import GroupStore from '../stores/GroupStore';
-import { getUserGroups } from '../actions/groupAction';
 
 /**
  * @export
@@ -15,7 +13,6 @@ import { getUserGroups } from '../actions/groupAction';
  * @extends {React.Component}
  */
 export default class UserAddMember extends React.Component {
-
   /**
    * Creates an instance of UserAddMember.
    * @constructor
@@ -25,9 +22,6 @@ export default class UserAddMember extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
-      groups: [],
       group: '',
       member: '',
       keyword: '',
@@ -41,7 +35,6 @@ export default class UserAddMember extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleAddMemberToGroup = this.handleAddMemberToGroup.bind(this);
-    this.userGroups = this.userGroups.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -54,8 +47,6 @@ export default class UserAddMember extends React.Component {
    */
   componentDidMount() {
     $('#selectId').val('');
-    getUserGroups();
-    GroupStore.on('GET_USER_GROUPS', this.userGroups);
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
     MemberStore.on('SEARCH_USER', this.handleSearch);
   }
@@ -67,7 +58,6 @@ export default class UserAddMember extends React.Component {
    * @memberof UserAddMember
    */
   componentWillUnmount() {
-    GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
     MemberStore.removeListener('ADD_MEMBER', this.handleAddMemberToGroup);
     MemberStore.removeListener('SEARCH_USER', this.handleSearch);
   }
@@ -89,7 +79,7 @@ export default class UserAddMember extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const memberDetails = {
-      groupId: this.state.group,
+      groupId: this.props.groupId,
       memberId: $('#selectId').val()
     };
 
@@ -104,6 +94,7 @@ export default class UserAddMember extends React.Component {
   onSelect(memberId) {
     $('#selectId').val(memberId);
   }
+
   /**
    * @description This handles search query
    * @returns {void} .
@@ -123,15 +114,6 @@ export default class UserAddMember extends React.Component {
       searchResult: MemberStore.getSearchUser()
     });
   }
-  /**
-   * @memberof UserAddMember
-   * @return {*} void
-   */
-  userGroups() {
-    this.setState({
-      groups: GroupStore.allGroups()
-    });
-  }
 
   /**
    * @description This handles addMember update from store
@@ -141,7 +123,6 @@ export default class UserAddMember extends React.Component {
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
     toastr.success(addMemberResponse);
-    this.props.history.push('/broadcastboard');
   }
 
   /**
@@ -150,69 +131,60 @@ export default class UserAddMember extends React.Component {
    * @AddMember
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     return (
-      <div className="container addmember">
-        <div className="row">
-          <div className="col-md-offset-3 col-md-6">
-            <h5 className="text-center">
-              <b>Add Member to group</b>
-            </h5>
-            <div className="row w3-card w3-white">
-              <form className="addmemberform" onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <label htmlFor="groupname">Group Name</label>
-                  <select
-                    name="group" onChange={this.onChange}
-                    className="form-control"
-                  >
-                    <option value="">Select a group</option>
-                    {(this.state.groups).map(group =>
-                      <option
-                        key={Object.values(group)}
-                        value={Object.values(group)}
-                      >
-                        {Object.keys(group)}</option>
-                    )}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="search">Search User</label>
-                  <input
-                    list="searchUser"
-                    id="searchUsers"
-                    value={this.state.keyword}
-                    onChange={this.onChange}
-                    onKeyPress={this.handleKeyPress}
-                    type="text"
-                    className="form-control"
-                    placeholder="Search ...."
-                    name="keyword" required
-                  />
-                  <datalist id="searchUser">
-                   {this.state.searchResult.map(user =>
+      <div className="modal-container">
+        <Modal
+          show={this.props.modalState}
+          onHide={this.props.closeModal}
+          container={this}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Body>
+            <form className="addmemberform" onSubmit={this.onSubmit}>
+              <div className="form-group">
+                <label htmlFor="groupname">Group Name</label>
+                <input
+                  value={this.props.selectedGroup}
+                  onChange={this.onChange}
+                  type="text"
+                  className="form-control"
+                  placeholder="Search ...."
+                  name="group" required
+                  disabled
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="search">Search User</label>
+                <input
+                  list="searchUser"
+                  id="searchUsers"
+                  value={this.state.keyword}
+                  onChange={this.onChange}
+                  onKeyPress={this.handleKeyPress}
+                  type="text"
+                  className="form-control"
+                  placeholder="Search ...."
+                  name="keyword" required
+                />
+                <datalist id="searchUser">
+                  {this.state.searchResult.map((user, userId) =>
                     (<option
-                      key={user.userId} value={user.userName}
+                      key={userId} value={user.userName}
                       onClick={this.onSelect(user.userId)}
                     />)
-                   )}
-                  </datalist>
-                  <input
-                    id="selectId"
-                    type="hidden"
-                    name="search"
-                  />
-                </div>
-                <button type="submit" className="signinformbtn">Add Member
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
+                  )}
+                </datalist>
+                <input
+                  id="selectId"
+                  type="hidden"
+                  name="search"
+                />
+              </div>
+              <button type="submit" className="signinformbtn">Add Member
+              </button>
+            </form>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }
@@ -223,5 +195,9 @@ UserAddMember.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
-  memberId: PropTypes.string
+  memberId: PropTypes.string,
+  selectedGroup: PropTypes.string,
+  groupId: PropTypes.string,
+  modalState: PropTypes.bool,
+  closeModal: PropTypes.func.isRequired
 };

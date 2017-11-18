@@ -25,7 +25,6 @@ export default class UserSignIn extends React.Component {
       userId: '',
       email: '',
       password: '',
-      loggedIn: false,
       isLoading: false,
       signInResponse: ''
     };
@@ -40,7 +39,6 @@ export default class UserSignIn extends React.Component {
     this.googleSignIn = this.googleSignIn.bind(this);
     this.handleGoogleEvent = this.handleGoogleEvent.bind(this);
   }
-
    /**
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
@@ -91,11 +89,7 @@ export default class UserSignIn extends React.Component {
    */
   handleSignInAction() {
     const response = SignInStore.signInUser();
-    this.setState({
-      loggedIn: true,
-    });
     toastr.success(response.message);
-    localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
     this.props.history.push('/broadcastboard');
   }
 
@@ -124,11 +118,7 @@ export default class UserSignIn extends React.Component {
    */
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
-    this.setState({
-      loggedIn: true,
-    });
     toastr.success(googleResponse.message);
-    localStorage.setItem('userIn', JSON.stringify(this.state.loggedIn));
     this.props.history.push('/broadcastboard');
   }
 

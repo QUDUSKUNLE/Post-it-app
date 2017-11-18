@@ -17,10 +17,10 @@ const UserGroups = (props) => {
       <div className="col-md-12 groups">
         <div className="groupName">
           <center>
-            Your Groups
+            <i>Your Groups</i>
           </center>
         </div>
-        <br />
+        <hr />
         <ul className="nav nav-pills nav-stacked">
           {props.grouplist}
         </ul>
@@ -29,7 +29,7 @@ const UserGroups = (props) => {
         {props.groupSelected ?
           <div className="dropdown">
             <button
-              className="btn btn-default dropdown-toggle"
+              className="btn btn-default dropdown-toggle sidebarbutton"
               data-toggle="dropdown"
             >Group Members
               <span className="caret"></span>

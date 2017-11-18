@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Redirect } from 'react-router-dom';
 import { createGroup } from '../actions/groupAction';
 import GroupStore from '../stores/GroupStore';
-
 
 /**
  * @description - renders CreateGroup Component
@@ -18,11 +16,9 @@ export default class UserCreateGroup extends React.Component {
    * @param {object} props -
    */
   constructor(props) {
-    const loggedIn = (localStorage.getItem('userIn'));
     super(props);
     this.state = {
-      group: '',
-      loggedIn
+      group: ''
     };
 
     /**
@@ -94,11 +90,6 @@ export default class UserCreateGroup extends React.Component {
    * @returns {Object} CreateGroup component
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     return (
       <div className="container creategroup">
         <div className="row">
@@ -113,7 +104,7 @@ export default class UserCreateGroup extends React.Component {
                   <input
                     value={this.state.group} onChange={this.onChange}
                     id="groupname" type="text"
-                    className="signinform" placeholder="andela-abuja"
+                    className="signinform" placeholder="type ...."
                     name="group" required
                   />
                 </div>

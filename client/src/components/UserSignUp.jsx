@@ -4,6 +4,7 @@ import toastr from 'toastr';
 import SignUpStore from '../stores/SignUpStore';
 import signUpAction from '../actions/signUpAction';
 
+
 /**
  * @description - renders SignUp Component
  * @class UserSignUp

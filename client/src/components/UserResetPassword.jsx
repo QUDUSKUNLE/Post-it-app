@@ -1,5 +1,6 @@
 import React from 'react';
 import toastr from 'toastr';
+import PropTypes from 'prop-types';
 import resetPasswordAction from '../actions/resetPasswordAction';
 import SignInStore from '../stores/SignInStore';
 
@@ -123,3 +124,9 @@ export default class UserResetPassword extends React.Component {
     );
   }
 }
+
+UserResetPassword.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
+};

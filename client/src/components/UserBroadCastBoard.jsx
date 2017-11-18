@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
 import NoGroupSelected from './NoGroupSelected';
@@ -26,7 +26,6 @@ export default class UserBroadCastBoard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: JSON.parse(localStorage.getItem('userIn')),
       defaultGroup: '',
       groups: [],
       groupId: '',
@@ -110,11 +109,6 @@ export default class UserBroadCastBoard extends React.Component {
    * @returns {*} BroadCastBoard component
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     const groupList = this.state.groups.map((group) =>
       <li
         className="text-center"
