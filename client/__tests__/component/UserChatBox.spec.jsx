@@ -51,7 +51,6 @@ describe('<UserChatBox />', () => {
     expect(wrapper.find('div')).toHaveLength(12);
     expect(wrapper.find('form')).toHaveLength(1);
     expect(wrapper.find('button')).toHaveLength(2);
-    // expect(wrapper.find('Link')).toHaveLength(0);
   });
   it('component states expected to be defined before it mounts', () => {
     expect(UserChatBox).toBeDefined();
