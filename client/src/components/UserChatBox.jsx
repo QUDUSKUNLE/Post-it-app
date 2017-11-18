@@ -33,7 +33,7 @@ export default class UserChatBox extends React.Component {
   /**
    * @description - onChange event
    * @param {event} event - event
-   * @returns {*} void
+   * @returns {void} void
    */
   onChange(event) {
     this.setState({

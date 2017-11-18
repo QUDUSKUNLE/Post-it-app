@@ -23,8 +23,7 @@ class Navbar extends React.Component {
   }
 
   /**
-   * @description This handles SignOutEvent
-   * @param {*} void - no parameter.
+   * @description This handles SignOutEvent to every protected route
    * @returns {object} response from server.
    */
   handleSignOutEvent() {
