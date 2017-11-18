@@ -39,56 +39,6 @@ describe('getGroupMembers', () => {
   });
 });
 
-// describe('Test for getAllUsers', () => {
-//   let mockAxios;
-//   let dispatchSpy;
-
-//   beforeEach(() => {
-//     mockAxios = sinon.stub(axios, 'get').callsFake(() =>
-//       Promise.resolve({ registeredUsers }));
-//     dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
-//   });
-
-//   afterEach(() => {
-//     axios.get.restore();
-//     AppDispatcher.dispatch.restore();
-//   });
-
-//   describe('Test for getAllUsers Method', () => {
-//     it('should dispatch an action', () => {
-//       getAllUsers().then(() => {
-//         expect(mockAxios.calledOnce).toBe(true);
-//         expect(dispatchSpy.calledOnce).toEqual(true);
-//         expect(dispatchSpy.getCall(0).args[0].type).toBe('ALL_USERS');
-//       });
-//     });
-//   });
-// });
-
-// describe('Test for getAllUsers error', () => {
-//   let mockGetAllUsersError;
-//   const response = { data: {
-//     message: 'No user found' }
-//   };
-
-//   beforeEach(() => {
-//     mockGetAllUsersError = sinon.stub(axios, 'get').callsFake(() =>
-//       Promise.reject(response));
-//   });
-
-//   afterEach(() => {
-//     axios.get.restore();
-//   });
-
-//   describe('Test for getAllUsers Method', () => {
-//     it('should throw error if error is encountered', () => {
-//       getAllUsers().catch(() => {
-//         expect(mockGetAllUsersError.throw()).toBe(true);
-//       });
-//     });
-//   });
-// });
-
 describe('AddMemberAction', () => {
   let mockAxios;
   let dispatchSpy;
