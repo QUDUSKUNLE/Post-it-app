@@ -15,8 +15,8 @@ export default (phoneNumbers) => {
   const payloads = phoneNumbers.map(number => (
     {
       to: number,
-      from: 'PostIt App',
-      message: 'Hello, you have an important message.'
+      from: 'PostIt',
+      message: 'Hi there, you have a message on PostIt.'
     }
   ));
   return Promise.all(

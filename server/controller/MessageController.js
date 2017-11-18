@@ -27,24 +27,21 @@ export default class MessageController {
       .then((sender) => {
         const userName = sender.userName;
         const email = sender.userEmail;
-        QueryDatabase.getGroupPhoneNumbers(groupId).then((
-          groupPhoneAndEmail) => {
-          if (priority === 'urgent') {
-            const groupEmails = DestructureFirebaseData.getGroupEmails(
+        QueryDatabase.getGroupPhoneNumbers(groupId)
+          .then((groupPhoneAndEmail) => {
+            if ((priority === 'urgent') || (priority === 'critical')) {
+              const groupEmails = DestructureFirebaseData.getGroupEmails(
+                groupPhoneAndEmail);
+              sendMail(groupEmails, priority);
+            }
+            if (priority === 'critical') {
+              const groupPhoneNumbers = DestructureFirebaseData.getPhoneNumbers(
               groupPhoneAndEmail);
-            sendMail(groupEmails);
-          } else if (priority === 'critical') {
-            const groupEmails = DestructureFirebaseData.getGroupEmails(
-              groupPhoneAndEmail);
-            const groupPhoneNumbers = DestructureFirebaseData.getPhoneNumbers(
-              groupPhoneAndEmail);
-            sendSMS(groupPhoneNumbers).then((res) => {
-              if (res) {
-                sendMail(groupEmails);
-              }
-            });
-          }
-        });
+              sendSMS(groupPhoneNumbers)
+                .then(() => true)
+                .catch(() => true);
+            }
+          });
         return Promise.all([
           dbConfig.database().ref('Messages')
             .child(groupId).push({

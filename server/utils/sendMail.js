@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export default (groupEmails) => {
+export default (groupEmails, priority) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     port: 25,
@@ -17,34 +17,70 @@ export default (groupEmails) => {
   const mailOptions = {
     from: '"PostIt" <postitappmail@gmail.com>',
     to: groupEmails,
-    subject: 'PostIt Message Notification',
+    subject: 'PostIt Notification',
     text: 'PostIt',
-    html: `
-    <body style="max-width:100%; color: #000;">
-    <div style="padding:10px; color:black; height: 50px;">
-      <h6 style="text-align: left;
-        font-size: 30px; margin-top: 10px; margin-left: 8px">PostIt
-      </h6>
+    html: `<head>
+    <style>
+        #body-wrapper{
+            background-color: #f5f5f5;
+            margin-right: 15%;
+            margin-left: 15%;
+            border-radius: 10px;
+        }
+
+        #header{
+            background-color: #263647;
+            padding: 10px 0 10px 30px;
+            color: #ffffff;
+        }
+        .footer{
+            padding: 0 10px 20px 30px;
+            color: #263647;
+            font-size: 12px;
+          margin-top: 10px
+        }
+        #inner-body{
+            padding: 0 30px 10px 30px;
+        }
+        #notify-header{
+            color: #000;
+        }
+        hr{
+            border: 0;
+            border-top: 1px solid #eee;
+            height: 0;
+            box-sizing: content-box;
+            display: block;
+            unicode-bidi: isolate;
+        }
+
+      #complementary{
+        padding-left: 15px
+      }
+    </style>
+    </head>
+    <body>
+    <div id="body-wrapper">
+    <h2 id="header"><span>Post It</span></h2>
+    <div id="inner-body">
+        <h5 id="notify-header">Hi there,</h5>
+      <p id="complementary">This is to notify you that you have a message that 
+      is <strong>${priority}</strong> on PostIt.</p>
+        Kindly click on the box provided to access your account.
+      <div style="width: 100%; margin-top: 20px">
+<a href="https://heroku-postitapp.herokuapp.com/signin" style="width: 150px;
+padding:10px 0; text-decoration: none; cursor: pointer !important;
+display: block; border: 1px solid #263647; background-color: #fff;
+color: #263647; font-size: 18px; margin: auto; text-align: center">Sign in</a>
     </div>
-    <div style="outline: 0px solid black; padding-left: 20px;
-    padding-right: 30px;
-    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3),
-      0 17px 17px 0 rgba(0, 0, 0, 0.15);">
-    <div>
-      <p style="margin-top: 20px">Dear esteemed user,</p>
-      <p style="margin-left: 20px">
-      This is to notify you that you have a message to attend to on PostIt.</p>
     </div>
-    <p>Kindly checkout this link to log in and view your message  
-      <a href="https://heroku-postitapp.herokuapp.com/signin">
-          PostIt</a>.</p>
-      <br>
-      <p style="text-align: left;">Truly yours,<br>
-      <br>The PostIt Team.</p>
-      <br>
-      <br>
-      </div>
-    </body>`
+    <hr/>
+    <div class="footer">
+      <p>Truly yours,</p>
+      <p id="footer">PostIt Team</p>
+    </div>
+</div>
+</body>`
   };
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
