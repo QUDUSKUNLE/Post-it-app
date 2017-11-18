@@ -17,6 +17,7 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
   .then((res) => {
     localStorage.setItem('token', JSON.stringify(res.data.token));
     setAuthToken(JSON.parse(localStorage.getItem('token')));
+    localStorage.setItem('isAuthenticated', JSON.stringify(true));
     AppDispatcher.dispatch({
       type: SIGN_IN_SUCCESS,
       response: res.data

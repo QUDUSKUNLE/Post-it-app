@@ -11,10 +11,10 @@ import catchError from '../helper/catchError';
  * @returns {function} dispatch - server response is dispatch to SignUpStore
  */
 const signUpAction = user => axios.post('/api/v1/signup', user)
-  .then(({ data }) => {
+  .then((res) => {
     AppDispatcher.dispatch({
       type: SIGN_UP_SUCCESS,
-      response: data
+      response: res.data
     });
   }).catch(error => catchError(error));
 

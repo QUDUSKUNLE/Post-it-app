@@ -46,4 +46,3 @@ export const createGroup = groupName => axios.post('/api/v1/createGroup',
       message: data.message
     });
   }).catch(error => catchError(error));
-

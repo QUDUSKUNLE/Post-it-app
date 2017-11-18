@@ -7,11 +7,9 @@ import React from 'react';
 const Footer = () =>
  (
   <div className="footer">
-    <div className="container">
-      <center>
-        &copy; Qudus Kunle
-      </center>
-    </div>
+    <center>
+      &copy; Qudus Kunle
+    </center>
   </div>
   );
 
