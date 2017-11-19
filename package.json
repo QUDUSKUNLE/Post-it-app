@@ -9,7 +9,7 @@
     },
     "scripts": {
         "start": "webpack --config webpack.prod.js && npm run server",
-        "server": "nodemon --exec babel-node ./server/server.js",
+        "server": "nodemon --exec babel-node --optimize_for_size --max_old_space_size=460 --gc_interval=100 ./server/server.js",
         "test": "NODE_ENV=test nyc --reporter=text --reporter=html --reporter=lcov mocha ./server/__test__ --timeout 40000 --compilers js:babel-register && npm run coverage-report",
         "client_test": "jest ./client/__tests__",
         "coverage-report": "cat ./coverage/lcov.info | coveralls",
