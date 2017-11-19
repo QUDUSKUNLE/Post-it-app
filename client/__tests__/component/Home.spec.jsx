@@ -3,9 +3,13 @@ import expect from 'expect';
 import { shallow } from 'enzyme';
 import Home from '../../src/components/Home';
 import UserSignUp from '../../src/components/UserSignUp';
+import localStorageMock from '../../src/__mock__/localStorage';
+
+window.localStorage = localStorageMock;
 
 
 describe('<Home/>', () => {
+  window.localStorage.setItem('isAuthenticated', JSON.stringify(false));
   it('component expected to be defined', () => {
     expect(Home).toBeDefined();
   });
