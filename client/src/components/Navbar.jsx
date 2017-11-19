@@ -96,37 +96,35 @@ class Navbar extends React.Component {
     ];
     return (
       <div>
-        <div>
-          <nav
-            className="navbar navbar-inverse navbar-fixed-top"
-            role="navigation"
-          >
-            <div className="container-fluid">
-              <div className="navbar-header">
-                <button
-                  type="button" className="navbar-toggle collapsed"
-                  data-toggle="collapse" data-target=".navbar-collapse"
-                >
-                  <span className="sr-only">Toggle navigation</span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                  <span className="icon-bar"></span>
-                </button>
-                <Link className="navbar-brand" to="#">
-                  <i>PostIt</i>
-                </Link>
-              </div>
-              <div className="collapse navbar-collapse">
-                {path.filter(pathname =>
-                  pathname.path === location.pathname).map(
-                    (exactPath, index) =>
-                      <div key={index}>{exactPath.ul}</div>
-                    )
-                }
-              </div>
+        <nav
+          className="navbar navbar-inverse navbar-fixed-top"
+          role="navigation"
+        >
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <button
+                type="button" className="navbar-toggle collapsed"
+                data-toggle="collapse" data-target=".navbar-collapse"
+              >
+                <span className="sr-only">Toggle navigation</span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+                <span className="icon-bar"></span>
+              </button>
+              <Link className="navbar-brand" to="#">
+                <i>PostIt</i>
+              </Link>
             </div>
-          </nav>
-        </div>
+            <div className="collapse navbar-collapse">
+              {path.filter(pathname =>
+                pathname.path === location.pathname).map(
+                  (exactPath, index) =>
+                    <div key={index}>{exactPath.ul}</div>
+                  )
+              }
+            </div>
+          </div>
+        </nav>
       </div>
     );
   }

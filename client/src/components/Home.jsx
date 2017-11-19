@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import UserSignUp from './UserSignUp';
 
 /**
@@ -6,23 +7,30 @@ import UserSignUp from './UserSignUp';
  * @description - Home Component
  * @return {Home} component
  */
-const Home = () =>
- (
-  <div className="container-fluid mainbody">
-    <div className="row">
-      <div className="col-md-6">
-        <div className="row">
-          <div className="col-md-10 col-md-offset-1">
-            <h4>PostIt
-              {' '}
-              allows friends come together and share vital information.
-            </h4>
+const Home = () => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  if (isAuthenticated) {
+    return (
+      <Redirect to="/broadcastboard" />
+    );
+  }
+  return (
+    <div className="container-fluid mainbody">
+      <div className="row">
+        <div className="col-md-6">
+          <div className="row">
+            <div className="col-md-10 col-md-offset-1">
+              <h4>PostIt
+                {' '}
+                allows friends come together and share vital information.
+              </h4>
+            </div>
           </div>
         </div>
+        <UserSignUp />
       </div>
-      <UserSignUp />
     </div>
-  </div>
   );
+};
 
 export default Home;
