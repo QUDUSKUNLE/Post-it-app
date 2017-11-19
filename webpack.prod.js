@@ -21,6 +21,5 @@ module.exports = merge(common, {
         messagingSenderId: JSON.stringify(process.env.messagingSenderId)
       }
     })
-  ],
-  devtool: 'eval-source-map',
+  ]
 });
