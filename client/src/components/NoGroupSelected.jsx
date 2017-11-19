@@ -1,4 +1,5 @@
 import React from 'react';
+import ToggleButton from './ToggleButton';
 /**
  * @export NoGroupSelected component
  * @description - NoGroupSelected Component
@@ -6,17 +7,9 @@ import React from 'react';
  */
 const NoGroupSelected = () =>
   (
-  <div id="main">
+  <div className="main">
     <div className="col-md-10 col-md-offset-1">
-      <p className="visible-xs">
-        <button
-          type="button"
-          className="btn btn-default btn-xs"
-          data-toggle="offcanvas"
-        >
-          <i className="glyphicon glyphicon-chevron-left"></i>
-        </button>
-      </p>
+      <ToggleButton />
       <div className="text-center w3-card w3-white nogroupselected">
         <p id="content">
         Please select a group to send message or create one

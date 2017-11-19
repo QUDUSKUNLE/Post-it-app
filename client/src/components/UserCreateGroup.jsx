@@ -98,18 +98,28 @@ export default class UserCreateGroup extends React.Component {
               <b>Create group</b>
             </h5>
             <div className="row w3-card w3-white">
-              <form id="creategroupform" onSubmit={this.onSubmit}>
+              <form
+                id="creategroupform"
+                onSubmit={this.onSubmit}
+              >
                 <div className="form-group">
-                  <label htmlFor="groupname">Group Name</label>
+                  <label htmlFor="groupname">
+                    Group Name
+                  </label>
                   <input
-                    value={this.state.group} onChange={this.onChange}
-                    id="groupname" type="text"
-                    className="signinform" placeholder="type ...."
+                    value={this.state.group}
+                    onChange={this.onChange}
+                    id="groupname"
+                    type="text"
+                    className="signinform"
+                    placeholder="type ...."
                     name="group" required
                   />
                 </div>
-                <button type="submit" className="signinformbtn">
-                  Create Group
+                <button
+                  type="submit"
+                  className="signinformbtn"
+                >Send
                 </button>
               </form>
             </div>

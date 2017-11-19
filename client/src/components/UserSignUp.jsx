@@ -103,7 +103,9 @@ export default class UserSignUp extends React.Component {
             <br />
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">
+                  Email
+                </label>
                 <input
                   value={this.state.email}
                   onChange={this.onChange}
@@ -114,7 +116,9 @@ export default class UserSignUp extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">
+                  Username
+                </label>
                 <input
                   value={this.state.username}
                   onChange={this.onChange}
@@ -122,11 +126,15 @@ export default class UserSignUp extends React.Component {
                   type="text"
                   className="signinform"
                   placeholder="johndoe"
-                  name="username" minLength="2" required
+                  name="username"
+                  minLength="2"
+                  required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="phoneNumber">Phone Number</label>
+                <label htmlFor="phoneNumber">
+                  Phone Number
+                </label>
                 <input
                   value={this.state.phoneNumber}
                   onChange={this.onChange}
@@ -134,11 +142,15 @@ export default class UserSignUp extends React.Component {
                   type="phone"
                   className="signinform"
                   placeholder="08012345678"
-                  name="phoneNumber" minLength="11" required
+                  name="phoneNumber"
+                  minLength="11"
+                  required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+                  Password
+                </label>
                 <input
                   value={this.state.password}
                   onChange={this.onChange}
@@ -146,11 +158,15 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="password" minLength="6" required
+                  name="password"
+                  minLength="6"
+                  required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
                 <input
                   value={this.state.confirmPassword}
                   onChange={this.onChange}
@@ -158,11 +174,15 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="confirmPassword" minLength="6" required
+                  name="confirmPassword"
+                  minLength="6"
+                  required
                 />
               </div>
-              <button type="submit" className="signinformbtn">
-                Sign up
+              <button
+                type="submit"
+                className="signinformbtn"
+              >Sign up
               </button>
             </form>
           </div>

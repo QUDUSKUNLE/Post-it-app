@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import UserGroups from './UserGroups';
 import UserChatBox from './UserChatBox';
@@ -124,25 +123,8 @@ export default class UserBroadCastBoard extends React.Component {
             groupSelected: true
           });
         }}
-      ><Link to="#"> {Object.keys(group)}</Link>
+      ><Link to="#">{Object.keys(group)}</Link>
       </li>);
-    const isGroupSelected = () => {
-      let selectedGroup;
-      if (this.state.groupSelected) {
-        selectedGroup =
-          (<UserChatBox
-            defaultGroup={this.state.defaultGroup}
-            groupId={this.state.groupId}
-            allGeneralMessage={this.state.groupMessage}
-          />);
-      } else {
-        selectedGroup = <NoGroupSelected />;
-      }
-      return selectedGroup;
-    };
-    $('[data-toggle=offcanvas]').click(() => {
-      $('.row-offcanvas').toggleClass('active');
-    });
     return (
       <div className="row-offcanvas row-offcanvas-left">
         <UserGroups
@@ -150,7 +132,13 @@ export default class UserBroadCastBoard extends React.Component {
           member={this.state.groupMember}
           groupSelected={this.state.groupSelected}
         />
-        {isGroupSelected()}
+        {this.state.groupSelected
+          ? (<UserChatBox
+            defaultGroup={this.state.defaultGroup}
+            groupId={this.state.groupId}
+            allGeneralMessage={this.state.groupMessage}
+          />)
+          : <NoGroupSelected />}
       </div>
     );
   }

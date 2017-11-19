@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import PropTypes from 'prop-types';
 import UserAddMember from './UserAddMember';
 import { sendGroupMessage } from '../actions/messageAction';
+import ToggleButton from './ToggleButton';
 
 /**
  * @description - renders ChatBox Component
@@ -76,36 +77,12 @@ export default class UserChatBox extends React.Component {
       }
       return color;
     };
-    const chatMessage = this.props.allGeneralMessage.map((Index, key) =>
-      <div className="row" key={key}>
-        <div className="col-md-12">
-          <div className="well">
-            <p>{Index.message}</p>
-            <small className="text-muted">
-              {Index.date} {Index.time} | {Index.userName}
-              {priorityColor(Index.priority)}
-              <br />
-            </small>
-          </div>
-        </div>
-      </div>
-    );
     const close = () => this.setState({ show: false });
     return (
-      <div id="main">
+      <div className="main">
         <ReactTooltip place="bottom" />
         <div className="col-md-10 col-md-offset-1">
-          <p className="visible-xs">
-            <button
-              type="button"
-              className="btn btn-default btn-xs"
-              data-toggle="offcanvas"
-            >
-              <i
-                className="glyphicon glyphicon-chevron-left"
-              ></i>
-            </button>
-          </p>
+          <ToggleButton />
           <h6>Group | {this.props.defaultGroup}
             <span
               type="button"
@@ -116,7 +93,24 @@ export default class UserChatBox extends React.Component {
             </span>
           </h6>
           <div className="messageBoard">
-            {chatMessage}
+            {this.props.allGeneralMessage.length === 0 ?
+              <h5 className="center-align">
+                No message Found
+              </h5>
+            : this.props.allGeneralMessage.map((Index, key) =>
+              <div className="row" key={key}>
+                <div className="col-md-12">
+                  <div className="well">
+                    <p>{Index.message}</p>
+                    <small className="text-muted">
+                      {Index.date} {Index.time} | {Index.userName}
+                      {priorityColor(Index.priority)}
+                      <br />
+                    </small>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="row messageForm">
             <form className="col-md-12">

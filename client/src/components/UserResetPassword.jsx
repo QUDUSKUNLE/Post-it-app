@@ -98,7 +98,10 @@ export default class UserResetPassword extends React.Component {
         <div className="container resetform">
           <div className="row">
             <div className="col-md-6 col-md-offset-3 w3-card w3-white">
-              <form onSubmit={this.onSubmit} id="resetform">
+              <form
+                onSubmit={this.onSubmit}
+                id="resetform"
+              >
                 <div className="form-group">
                   <label htmlFor="email">
                     Enter email
@@ -107,8 +110,10 @@ export default class UserResetPassword extends React.Component {
                     value={this.state.email}
                     onChange={this.onChange}
                     id="email" type="email"
-                    className="signinform" placeholder="johndoe@example.com"
-                    name="email" required
+                    className="signinform"
+                    placeholder="johndoe@example.com"
+                    name="email"
+                    required
                   />
                 </div>
                 <button

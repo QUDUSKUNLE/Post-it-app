@@ -1,4 +1,3 @@
-import toastr from 'toastr';
 
 /**
  * @function helpGetGroupMessages
@@ -8,7 +7,6 @@ import toastr from 'toastr';
 export const helpGetGroupMessages = (message) => {
   let GroupMessage;
   if (message[0] === null) {
-    toastr.warning('No Message Found');
     GroupMessage = [];
   } else {
     GroupMessage = Object.values(message[0]);

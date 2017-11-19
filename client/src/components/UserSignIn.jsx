@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleButton from 'react-google-button';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import firebase from '../vendors/index';
 import SignInStore from '../stores/SignInStore';
 import { signInAction, signInWithGoogle } from '../actions/signInAction';
@@ -128,58 +128,85 @@ export default class UserSignIn extends React.Component {
    * @SignIn
    */
   render() {
-    const isLoading = () => {
-      const loading = (
-        this.state.isLoading ? <div id="loader"></div> : <span></span>
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
+    if (isAuthenticated) {
+      return (
+        <Redirect to="/broadcastboard" />
       );
-      return loading;
-    };
+    }
     return (
       <div className="container signin">
-        {isLoading()}
+        {this.state.isLoading
+          ? <div id="loader"></div>
+          : <span></span>
+        }
         <div className="row">
           <div className="col-md-6 col-md-offset-3">
             <h5 className="text-center">
               <b>Sign in to PostIt</b>
             </h5>
-            <form onSubmit={this.onSubmit}
-              className="w3-card w3-white" id="signinForm">
+            <form
+              onSubmit={this.onSubmit}
+              className="w3-card w3-white"
+              id="signinForm"
+            >
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input value={this.state.email} onChange={this.onChange}
+                <label htmlFor="email">
+                  Email
+                </label>
+                <input
+                  value={this.state.email}
+                  onChange={this.onChange}
                   id="email" type="email"
-                  className="signinform" placeholder="johndoe@example.com"
-                  name="email" required />
+                  className="signinform"
+                  placeholder="johndoe@example.com"
+                  name="email"
+                  required
+                />
               </div>
               <div className="form-group">
                 <div className="row">
                   <div className="col-md-4">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">
+                      Password
+                    </label>
                   </div>
                 </div>
-                <input id="password" type="password"
-                  value={this.state.password} onChange={this.onChange}
-                  className="signinform" placeholder="*********"
-                  name="password" required />
+                <input
+                  id="password" type="password"
+                  value={this.state.password}
+                  onChange={this.onChange}
+                  className="signinform"
+                  placeholder="*********"
+                  name="password"
+                  required
+                />
               </div>
-              <button id="submitButton"
-                type="submit" className="signinformbtn">Sign in
+              <button
+                id="submitButton"
+                type="submit"
+                className="signinformbtn"
+              >Sign in
               </button>
             </form>
-            <br/>
+            <br />
             <span className="pull-right create">
               <Link to="/passwordreset">
                 Forgot password?
               </Link></span>
-            <br/>
+            <br />
             <center>
-              <GoogleButton onClick={this.googleSignIn} />
+              <GoogleButton
+                onClick={this.googleSignIn}
+              />
             </center>
-            <br/>
+            <br />
             <div>
               <center>
-                <p>New to PostIt? <Link to="/" className="create">
-                  Create an account.</Link>
+                <p>New to PostIt?
+                  <Link to="/" className="create">
+                  Create an account.
+                  </Link>
                 </p>
               </center>
             </div>

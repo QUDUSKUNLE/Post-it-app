@@ -140,9 +140,14 @@ export default class UserAddMember extends React.Component {
           aria-labelledby="contained-modal-title"
         >
           <Modal.Body>
-            <form className="addmemberform" onSubmit={this.onSubmit}>
+            <form
+              className="addmemberform"
+              onSubmit={this.onSubmit}
+            >
               <div className="form-group">
-                <label htmlFor="groupname">Group Name</label>
+                <label htmlFor="groupname">
+                  Group Name
+                </label>
                 <input
                   value={this.props.selectedGroup}
                   onChange={this.onChange}
@@ -154,7 +159,9 @@ export default class UserAddMember extends React.Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="search">Search User</label>
+                <label htmlFor="search">
+                  Search User
+                </label>
                 <input
                   list="searchUser"
                   id="searchUsers"
@@ -180,7 +187,10 @@ export default class UserAddMember extends React.Component {
                   name="search"
                 />
               </div>
-              <button type="submit" className="signinformbtn">Add Member
+              <button
+                type="submit"
+                className="signinformbtn"
+              >Add Member
               </button>
             </form>
           </Modal.Body>
