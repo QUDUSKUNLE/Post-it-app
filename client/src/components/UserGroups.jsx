@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 /**
  * @description - renders Groups Component
- * @function Groups
  * @param {object} props
  * @return {object} UserGroups component
  */
@@ -12,7 +11,7 @@ const UserGroups = (props) =>
     id="sidebar"
     className="sidebar-offcanvas"
   >
-    <div className="col-md-12 groups">
+    <div className="col-xs-12 col-md-12 groups">
       <div className="groupName">
         <center>
           <i>Your Groups</i>
@@ -23,7 +22,7 @@ const UserGroups = (props) =>
         {props.grouplist}
       </ul>
     </div>
-    <div className="col-md-12 members">
+    <div className="col-xs-12 col-md-12 members">
       {props.groupSelected ?
         <div className="dropdown">
           <button

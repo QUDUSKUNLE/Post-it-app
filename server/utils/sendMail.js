@@ -3,6 +3,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * @description This method sends Email
+ * @param {Object} groupEmails user Emails
+ * @param {Object} priority message priority
+ * @return {object} sent message response
+ */
 export default (groupEmails, priority) => {
   const transporter = nodemailer.createTransport({
     service: 'gmail',

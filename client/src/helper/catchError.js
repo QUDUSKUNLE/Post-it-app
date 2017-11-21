@@ -10,7 +10,7 @@ export default (error) => {
     ' characters and contains number') {
     toastr.error('Password should be at least 6' +
       ' characters and contains number');
-  } else if (error.response.data.error.code === 'Password does not match') {
+  } else if (error.response.data.error.code === 'Password did not match') {
     toastr.error('Password did not match');
   } else if (error.response.data.error.code === 'Username should be at least' +
   ' 2 characters') {

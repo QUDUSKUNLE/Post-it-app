@@ -29,10 +29,6 @@ export default class UserSignIn extends React.Component {
       signInResponse: ''
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleSignInAction = this.handleSignInAction.bind(this);
@@ -43,7 +39,7 @@ export default class UserSignIn extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
    * when the component is fully mounted.
-   * @return { void} void
+   * @return { void}
    * @memberof UserSignIn
   */
   componentDidMount() {
@@ -54,7 +50,7 @@ export default class UserSignIn extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserSignIn
    */
   componentWillUnmount() {
@@ -66,7 +62,7 @@ export default class UserSignIn extends React.Component {
   /**
    * onChange event
    * @param {object} event - event
-   * @return {void} updated state of user
+   * @return {void}
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -75,7 +71,7 @@ export default class UserSignIn extends React.Component {
   /**
    * @description - this handles SignIn form submission
    * @param {object} event - event.
-   * @returns {void} .
+   * @returns {void}
    */
   onSubmit(event) {
     event.preventDefault();
@@ -85,7 +81,7 @@ export default class UserSignIn extends React.Component {
   /**
    * @description This handles handleSignInAction
    * @param {object} user .
-   * @returns {void} .
+   * @returns {void}
    */
   handleSignInAction() {
     const response = SignInStore.signInUser();
@@ -96,7 +92,7 @@ export default class UserSignIn extends React.Component {
   /**
    * @description - this handles Google SignIn Method
    * @param {object} event - event.
-   * @returns {void} .
+   * @returns {void}
   */
   googleSignIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -114,7 +110,7 @@ export default class UserSignIn extends React.Component {
 
   /**
    * @memberof UserSignIn
-   * @return {*} void
+   * @return {void}
    */
   handleGoogleEvent() {
     const googleResponse = SignInStore.googleSignIn();
@@ -125,7 +121,6 @@ export default class UserSignIn extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} SignIn component
-   * @SignIn
    */
   render() {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
