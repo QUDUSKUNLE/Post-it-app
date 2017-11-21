@@ -1,11 +1,11 @@
 /**
  * @description This is a class Helper that contains functions that helps to
- * validate password, validate phoneNumber, help to destructure Object of arrays
+ * help to destructure Object of arrays
  * from firebase Database
  *
  * @class DestructureFirebaseData
  */
-export default class DestructureFirebaseData {
+export default class FormatDatabaseResult {
 
   /**
    * @description This function helps to pull out Emails of Users in a group
