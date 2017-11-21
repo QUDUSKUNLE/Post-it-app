@@ -24,9 +24,8 @@ describe('Send Message', () => {
 
   it('route should not allow user`s with no message to send message',
   (done) => {
-    const groupId = '-KwjAZcNyIdpMPk7GS0i';
     chai.request(server)
-      .post(`/api/v1/sendMessage/${groupId}`)
+      .post('/api/v1/sendMessage/-KwjAZcNyIdpMPk7GS0i')
       .set('x-access-token', token)
       .send(mockData.sendMessageWithOutMessage)
       .end((err, res) => {
@@ -38,9 +37,8 @@ describe('Send Message', () => {
 
   it('route should not allow user`s with no message ' +
   'priority to send message', (done) => {
-    const groupId = '-Kz5fL9UhQOQjoRmHknY';
     chai.request(server)
-      .post(`/api/v1/sendMessage/${groupId}`)
+      .post('/api/v1/sendMessage/-Kz5fL9UhQOQjoRmHknY')
       .set('x-access-token', token)
       .send(mockData.sendMessageWithOutPriority)
       .end((err, res) => {
@@ -54,9 +52,8 @@ describe('Send Message', () => {
     ' send message to group with priority normal', (done) => {
     const message = 'Hello everyone';
     const priority = 'normal';
-    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
-      .post(`/api/v1/sendMessage/${groupId}`)
+      .post('/api/v1/sendMessage/-Kz5garRTF4ZXikiucJf')
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
@@ -71,9 +68,8 @@ describe('Send Message', () => {
     ' send message to group with priority urgent', (done) => {
     const message = 'Hello everyone';
     const priority = 'urgent';
-    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
-      .post(`/api/v1/sendMessage/${groupId}`)
+      .post('/api/v1/sendMessage/-Kz5garRTF4ZXikiucJf')
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
@@ -89,9 +85,8 @@ describe('Send Message', () => {
     ' send message to group with priority critical', (done) => {
     const message = 'Hello everyone';
     const priority = 'critical';
-    const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
-      .post(`/api/v1/sendMessage/${groupId}`)
+      .post('/api/v1/sendMessage/-Kz5garRTF4ZXikiucJf')
       .set('x-access-token', token)
       .send({ message, priority })
       .end((err, res) => {
