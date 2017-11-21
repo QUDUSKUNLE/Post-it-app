@@ -12,10 +12,10 @@ import signOutAction from '../actions/signOutAction';
  */
 class Navbar extends React.Component {
   /**
-   * Creates an instance of Routes.
+   * Creates an instance of Navbar.
    * @constructor
-   * @param {*} props
-   * @memberof Routes
+   * @param {any} props
+   * @memberof Navbar
    */
   constructor(props) {
     super(props);
@@ -36,8 +36,7 @@ class Navbar extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} Routes component
-   * @Routes
+   * @returns {object} Routes component
   */
   render() {
     const { location } = this.props;
@@ -103,10 +102,14 @@ class Navbar extends React.Component {
           <div className="container-fluid">
             <div className="navbar-header">
               <button
-                type="button" className="navbar-toggle collapsed"
-                data-toggle="collapse" data-target=".navbar-collapse"
+                type="button"
+                className="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target=".navbar-collapse"
               >
-                <span className="sr-only">Toggle navigation</span>
+                <span className="sr-only">
+                  Toggle navigation
+                </span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>

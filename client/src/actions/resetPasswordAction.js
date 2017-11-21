@@ -7,7 +7,7 @@ import { PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
  * @description - An action that makes API call to server
  *  to reset user`s password
  * @param {string} email - This represents email of the user
- * @returns {fucntion} dispatch - server response is dispatch to SignInStore
+ * @returns {object} dispatch - server response is dispatch to SignInStore
  */
 const resetPasswordAction = email => axios.post('/api/v1/passwordReset',
   email)

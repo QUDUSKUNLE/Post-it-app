@@ -5,7 +5,7 @@ import UserSignUp from './UserSignUp';
 /**
  * @export Home component
  * @description - Home Component
- * @return {Home} component
+ * @return {object} Home component
  */
 const Home = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');

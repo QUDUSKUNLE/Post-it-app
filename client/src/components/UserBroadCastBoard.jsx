@@ -20,7 +20,7 @@ export default class UserBroadCastBoard extends React.Component {
   /**
    * Create a constructor
    * @constructor
-   * @param {object} props -
+   * @param {any} props -
    */
   constructor(props) {
     super(props);
@@ -33,10 +33,6 @@ export default class UserBroadCastBoard extends React.Component {
       groupSelected: false
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.handleSendGroupMessage = this.handleSendGroupMessage.bind(this);
     this.handleGetGroupMessage = this.handleGetGroupMessage.bind(this);
     this.handleGetUserGroups = this.handleGetUserGroups.bind(this);
@@ -44,9 +40,9 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * Attach an event listener to favorite store
+   * Life Cycle method to be called when a component mounts
    * @method componentDidMount
-   * @return {*} -
+   * @return {void} void
    */
   componentDidMount() {
     getUserGroups();
@@ -57,8 +53,9 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method componentWillUnount
-   * @return {*} void
+   * Life Cycle method to be called when a component Unmounts
+   * @method componentWillUmount
+   * @return {void}
    */
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS',
@@ -72,8 +69,8 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method newGroupMessage
-   * @return {*} void
+   * @method handlesSendGroupMessage
+   * @return {void}
    */
   handleSendGroupMessage() {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
@@ -81,23 +78,23 @@ export default class UserBroadCastBoard extends React.Component {
 
   /**
    * @method handleGetGroupMember
-   * @return {*} void
+   * @return {void}
    */
   handleGetGroupMember() {
     this.setState({ groupMember: (MemberStore.allGroupMembers())[0] });
   }
 
   /**
-   * @method getGroupMessage
-   * @return {*} void
+   * @method handleGetGroupMessage
+   * @return {void}
    */
   handleGetGroupMessage() {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
   /**
-   * @method userGroups
-   * @return {*} void
+   * @method handleGetUserGroups
+   * @return {void}
    */
   handleGetUserGroups() {
     this.setState({ groups: GroupStore.allGroups() });
@@ -105,7 +102,7 @@ export default class UserBroadCastBoard extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} BroadCastBoard component
+   * @returns {void}
    */
   render() {
     const groupList = this.state.groups.map((group) =>

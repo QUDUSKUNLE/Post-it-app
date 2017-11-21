@@ -16,7 +16,7 @@ export default class UserAddMember extends React.Component {
   /**
    * Creates an instance of UserAddMember.
    * @constructor
-   * @param {*} props -
+   * @param {any} props -
    * @memberof UserAddMember
    */
   constructor(props) {
@@ -27,10 +27,6 @@ export default class UserAddMember extends React.Component {
       keyword: '',
       searchResult: [],
     };
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -64,7 +60,7 @@ export default class UserAddMember extends React.Component {
   /**
    * @description - onChange event
    * @param {event} event - event
-   * @returns {null} null
+   * @returns {any} null
    * @memberOf ChatBox
    */
   onChange(event) {
@@ -107,7 +103,7 @@ export default class UserAddMember extends React.Component {
   }
   /**
    * @memberof UserAddMember
-   * @return {*} void
+   * @return {void} void
    */
   handleSearch() {
     this.setState({

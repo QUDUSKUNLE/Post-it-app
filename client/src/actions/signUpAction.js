@@ -8,7 +8,7 @@ import catchError from '../helper/catchError';
  *  to sign up a new user
  * @param {object} user - This contain user`s details { email,
      password, confirmPassword, phoneNumber, username }
- * @returns {function} dispatch - server response is dispatch to SignUpStore
+ * @returns {object} dispatch - server response is dispatch to SignUpStore
  */
 const signUpAction = user => axios.post('/api/v1/signup', user)
   .then((res) => {

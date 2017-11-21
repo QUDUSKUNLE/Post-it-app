@@ -3,7 +3,7 @@ import ToggleButton from './ToggleButton';
 /**
  * @export NoGroupSelected component
  * @description - NoGroupSelected Component
- * @return {NoGroupSelected} component
+ * @return {object} NoGroupSelected component
  */
 const NoGroupSelected = () =>
   (
