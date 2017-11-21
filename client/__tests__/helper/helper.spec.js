@@ -3,7 +3,7 @@ import {
   helpGetGroupMessages,
   helpGetGroups,
   getGroupMembers
-} from '../../src/helper/convertObject';
+} from '../../src/helper/formatResponse';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 import groupResponse from '../../src/__mock__/groupResponse.json';
 import groupMemberResponse from '../../src/__mock__/groupMemberResponse.json';
