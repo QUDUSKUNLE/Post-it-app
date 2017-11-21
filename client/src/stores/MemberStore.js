@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import { getGroupMembers } from '../helper/convertObject';
+import { getGroupMembers } from '../helper/formatResponse';
 import {
   ADD_MEMBER,
   GET_MEMBERS_OF_GROUP, SEARCH_USER } from '../constants/ActionConstants';
