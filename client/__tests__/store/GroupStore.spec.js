@@ -1,6 +1,7 @@
 import expect from 'expect';
 import GroupStore from '../../src/stores/GroupStore.js';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
+import mockData from '../../src/__mock__/mockData';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/GroupStore.js');
@@ -11,10 +12,7 @@ describe('Group Store', () => {
     let AppDispatcherMock;
     beforeEach(() => {
       AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      groups = {
-        message: 'Registration successful and verification' +
-        ' email sent to your email'
-      };
+      groups = mockData.groupStoreGroups;
     });
     afterEach(() => {
       GroupStore.handleActions({

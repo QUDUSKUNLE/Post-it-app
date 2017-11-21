@@ -2,6 +2,7 @@ import expect from 'expect';
 import SignInStore from '../../src/stores/SignInStore.js';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 import signInResponse from '../../src/__mock__/signInResponse.json';
+import mockData from '../../src/__mock__/mockData';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/SignInStore.js');
@@ -35,9 +36,7 @@ describe('SignIn Store', () => {
     let AppDispatcherMock;
     beforeEach(() => {
       AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      response = {
-        message: 'Password reset email sent successfully!'
-      };
+      response = mockData.signInStorePasswordReset;
     });
     afterEach(() => {
       SignInStore.handleActions({
@@ -61,9 +60,7 @@ describe('SignIn Store', () => {
     let AppDispatcherMock;
     beforeEach(() => {
       AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      response = {
-        message: 'user`s signed in succesfully'
-      };
+      response = mockData.signInStoreGoogleSignIn;
     });
     afterEach(() => {
       SignInStore.handleActions({

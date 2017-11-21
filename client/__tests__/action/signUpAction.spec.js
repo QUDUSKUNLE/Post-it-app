@@ -4,6 +4,7 @@ import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
 import signUpResponse from '../../src/__mock__/signUpResponse.json';
+import mockData from '../../src/__mock__/mockData';
 import signUpAction from '../../src/actions/signUpAction';
 
 describe('signUpAction', () => {
@@ -23,13 +24,7 @@ describe('signUpAction', () => {
 
   describe('Test for signUpAction Method', () => {
     it('should dispatch an action', () => {
-      const user = {
-        email: 'quduskunle@gmail.com',
-        password: 'Ka123@',
-        confirmPassword: 'Ka123@',
-        phoneNumber: '07031187445',
-        userName: 'kunle' };
-      signUpAction(user).then(() => {
+      signUpAction(mockData.signUpUser).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_UP_SUCCESS');
@@ -41,20 +36,10 @@ describe('signUpAction', () => {
 
 describe('signUpAction error', () => {
   let mockAxiosError;
-  const error = {
-    response:
-    {
-      data:
-      {
-        error:
-          { code: 'Password does not match' }
-      }
-    }
-  };
 
   beforeEach(() => {
     mockAxiosError = sinon.stub(axios, 'post').callsFake(() =>
-      Promise.reject(error));
+      Promise.reject(mockData.signUpActionError));
   });
 
   afterEach(() => {
@@ -63,14 +48,7 @@ describe('signUpAction error', () => {
 
   describe('Test for signUpAction Method', () => {
     it('should dispatch an action', () => {
-      const user = {
-        email: 'quduskunle@gmail.com',
-        password: 'Ka123@',
-        confirmPassword: 'Ka123@',
-        phoneNumber: '07031187445',
-        userName: 'kunle'
-      };
-      signUpAction(user).catch(() => {
+      signUpAction(mockData.signUpUser).catch(() => {
         mockAxiosError.threw().should.be.true();
       });
     });

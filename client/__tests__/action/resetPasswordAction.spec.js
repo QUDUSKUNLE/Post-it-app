@@ -3,18 +3,16 @@ import axios from 'axios';
 import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
 import '../../src/__mock__/firebaseMock.js';
+import mockData from '../../src/__mock__/mockData';
 import resetPasswordAction from '../../src/actions/resetPasswordAction';
 
 describe('resetPasswordAction', () => {
   let mockAxios;
   let dispatchSpy;
-  const resetResponse = {
-    message: 'Password reset email sent successfully!'
-  };
 
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
-      Promise.resolve({ resetResponse }));
+      Promise.resolve(mockData.resetResponse));
     dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
   });
 
@@ -25,8 +23,7 @@ describe('resetPasswordAction', () => {
 
   describe('Test for resetPasswordAction Method', () => {
     it('should dispatch an action', () => {
-      const mail = { email: 'quduskunle@gmail.com' };
-      resetPasswordAction(mail).then(() => {
+      resetPasswordAction(mockData.mail).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('PASSWORD_RESET_' +
@@ -38,20 +35,9 @@ describe('resetPasswordAction', () => {
 
 describe('resetPasswordAction', () => {
   let mockResetPasswordError;
-  const error = {
-    response:
-    {
-      data:
-      {
-        error:
-        { message: 'Invalid email address' }
-      }
-    }
-  };
-
   beforeEach(() => {
     mockResetPasswordError = sinon.stub(axios, 'post').callsFake(() =>
-      Promise.reject(error));
+      Promise.reject(mockData.resetPasswordError));
   });
 
   afterEach(() => {
@@ -60,8 +46,7 @@ describe('resetPasswordAction', () => {
 
   describe('Test for resetPasswordAction Method', () => {
     it('should throw error for a wrong email address', () => {
-      const mail = { email: 'qudusgmail.com' };
-      resetPasswordAction(mail).catch(() => {
+      resetPasswordAction(mockData.email).catch(() => {
         expect(mockResetPasswordError.throw()).toBe(true);
       });
     });

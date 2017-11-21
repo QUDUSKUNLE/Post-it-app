@@ -4,6 +4,7 @@ import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
 import groupResponse from '../../src/__mock__/groupResponse.json';
+import mockData from '../../src/__mock__/mockData';
 import { getUserGroups, createGroup }
   from '../../src/actions/groupAction';
 
@@ -62,8 +63,7 @@ describe('groupActions', () => {
       expect(createGroup).toBeDefined();
     });
     it('should dispatch an action', () => {
-      const groupName = { group: 'andelauuuuu' };
-      createGroup(groupName).then(() => {
+      createGroup(mockData.groupName).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('CREATE_GROUP');
       });
@@ -73,17 +73,9 @@ describe('groupActions', () => {
 
 describe('groupActions', () => {
   let mockCreatGroupError;
-  const error = {
-    response: {
-      data: {
-        error: 'Group already exists'
-      }
-    }
-  };
-
   beforeEach(() => {
     mockCreatGroupError = sinon.stub(axios, 'post').callsFake(() => (
-      Promise.reject(error)
+      Promise.reject(mockData.groupActionError)
     ));
   });
 
@@ -96,8 +88,7 @@ describe('groupActions', () => {
       expect(createGroup).toBeDefined();
     });
     it('should throw error', () => {
-      const groupName = { group: 'andelauuuuu' };
-      createGroup(groupName).catch(() => {
+      createGroup(mockData.groupName).catch(() => {
         expect(mockCreatGroupError.throw()).toBe(true);
       });
     });

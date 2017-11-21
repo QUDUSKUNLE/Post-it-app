@@ -4,6 +4,7 @@ import expect from 'expect';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher';
 import '../../src/__mock__/firebaseMock';
 import memberResponse from '../../src/__mock__/memberResponse.json';
+import mockData from '../../src/__mock__/mockData';
 import { getGroupMember, addMember }
   from '../../src/actions/memberAction';
 
@@ -27,9 +28,8 @@ describe('getGroupMembers', () => {
   });
 
   describe('Test for getGroupMember Method', () => {
-    const groupId = '-KwWEZj5RSYLAtP2TbDv';
     it('should dispatch an action', () => {
-      getGroupMember(groupId).then(() => {
+      getGroupMember(mockData.groupId).then(() => {
         expect(mockGetGroupMembers.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe(
@@ -42,12 +42,9 @@ describe('getGroupMembers', () => {
 describe('AddMemberAction', () => {
   let mockAxios;
   let dispatchSpy;
-  const addMemberResponse = {
-    response: 'Add member successfully'
-  };
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
-      Promise.resolve({ addMemberResponse }));
+      Promise.resolve(mockData.addMemberResponse));
     dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
   });
 
@@ -62,9 +59,7 @@ describe('AddMemberAction', () => {
     });
 
     it('should dispatch an action', () => {
-      const memberDetails = { groupId: '-KwZyowDPR6PAQmGIRcw',
-        memberId: 'SUL5pAUsQmV3FxNQXIb9hXFbI8h2' };
-      addMember(memberDetails).then(() => {
+      addMember(mockData.memberDetails).then(() => {
         expect(mockAxios.calledOnce).toBe(true);
         expect(dispatchSpy.calledOnce).toEqual(true);
         expect(dispatchSpy.getCall(0).args[0].type).toBe('ADD_MEMBER');
@@ -75,16 +70,9 @@ describe('AddMemberAction', () => {
 
 describe('Test for AddMemberAction Error', () => {
   let mockAddMemberError;
-  const error = {
-    response: {
-      data: {
-        error: 'User`s already a member'
-      }
-    }
-  };
   beforeEach(() => {
     mockAddMemberError = sinon.stub(axios, 'post').callsFake(() =>
-      Promise.reject(error));
+      Promise.reject(mockData.memberActionError));
   });
 
   afterEach(() => {
@@ -97,11 +85,7 @@ describe('Test for AddMemberAction Error', () => {
     });
 
     it('should dispatch an action', () => {
-      const memberDetails = {
-        groupId: '-KwZyowDPR6PAQmGIRcw',
-        memberId: 'SUL5pAUsQmV3FxNQXIb9hXFbI8h2'
-      };
-      addMember(memberDetails).catch(() => {
+      addMember(mockData.memberDetails).catch(() => {
         expect(mockAddMemberError.throw()).toBe(true);
       });
     });
