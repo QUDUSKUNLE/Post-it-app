@@ -21,7 +21,7 @@ export default class MessageController {
   static sendMessageToGroup(req, res) {
     const { message, priority } = req.body;
     const groupId = req.params.groupId;
-    const userId = req.decoded.data.userId;
+    const userId = req.decoded.token.userId;
     const time = moment().format('llll');
     QueryDatabase.getUserEmailAndPhoneNumber(userId)
       .then((sender) => {

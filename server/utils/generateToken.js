@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
  * @return {string} token
  */
 const generateToken = (userId, email) => {
-  const Token = jwt.sign({ data: { userId, email } }, process.env.TOKEN_SECRET,
+  const Token = jwt.sign({ token: { userId, email } }, process.env.TOKEN_SECRET,
     { expiresIn: '24h' });
   return Token;
 };

@@ -17,7 +17,7 @@ export default class GroupController {
    */
   static createGroup(req, res) {
     const groupname = req.body.group;
-    const userId = req.decoded.data.userId;
+    const userId = req.decoded.token.userId;
     const groupName = groupname.toLowerCase();
     dbConfig.database().ref(`UserGroups/${userId}`).child(groupName)
       .once('value', (snapshot) => {
@@ -76,7 +76,7 @@ export default class GroupController {
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
-    const userId = req.decoded.data.userId;
+    const userId = req.decoded.token.userId;
     return Promise.all([
       dbConfig.database().ref('UserGroups').child(userId).once('value',
         snapshot => snapshot.val())
