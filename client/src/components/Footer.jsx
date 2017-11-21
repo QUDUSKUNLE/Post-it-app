@@ -2,7 +2,7 @@ import React from 'react';
 /**
  * @export Footer component
  * @description - Footer Component
- * @return {Footer} component
+ * @return {object} Footer component
  */
 const Footer = () =>
  (

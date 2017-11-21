@@ -3,6 +3,7 @@ import assert from 'assert';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
+import mockData from '../__mock__/mockData';
 
 chai.should();
 const expect = chai.expect;
@@ -21,13 +22,13 @@ describe('Send Message', () => {
       });
   });
 
-  it('route should return status code 400 for undefined message', (done) => {
-    const messageDetails = { message: '', priority: 'normal' };
+  it('route should not allow user`s with no message to send message',
+  (done) => {
     const groupId = '-KwjAZcNyIdpMPk7GS0i';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
-      .send(messageDetails)
+      .send(mockData.sendMessageWithOutMessage)
       .end((err, res) => {
         res.should.have.status(400);
         assert.equal('Message is required', res.body.error.code);
@@ -35,14 +36,13 @@ describe('Send Message', () => {
       });
   });
 
-  it('route should return status code 400 for undefined message priority',
-  (done) => {
-    const messageDetails = { message: 'Hello wale', priority: '' };
+  it('route should not allow user`s with no message ' +
+  'priority to send message', (done) => {
     const groupId = '-Kz5fL9UhQOQjoRmHknY';
     chai.request(server)
       .post(`/api/v1/sendMessage/${groupId}`)
       .set('x-access-token', token)
-      .send(messageDetails)
+      .send(mockData.sendMessageWithOutPriority)
       .end((err, res) => {
         res.should.have.status(400);
         assert.equal('Message priority is required', res.body.error.code);

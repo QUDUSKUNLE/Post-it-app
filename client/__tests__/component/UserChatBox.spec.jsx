@@ -10,11 +10,7 @@ import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 window.localStorage = localStorageMock;
 describe('<UserChatBox />', () => {
   sinon.spy(UserChatBox.prototype, 'onSubmit');
-  window.localStorage.setItem('userName', JSON.stringify('Kunle'));
-  window.localStorage.setItem('Id', JSON.stringify('AZCVGFRTUINSMUY15156'));
   const props = {
-    userId: JSON.parse(localStorage.getItem('Id')),
-    username: JSON.parse(localStorage.getItem('userName')),
     message: '',
     priority: 'normal',
     allGeneralMessage: groupMessageResponse.response
@@ -55,8 +51,6 @@ describe('<UserChatBox />', () => {
   it('component states expected to be defined before it mounts', () => {
     expect(UserChatBox).toBeDefined();
     expect(wrapper.state()).toBeDefined();
-    expect(wrapper.state().username).toEqual('Kunle');
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
   });
   it('component should call onChange method', () => {
     const event = { target: { name: 'name', value: 'value' } };

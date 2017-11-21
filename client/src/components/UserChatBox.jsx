@@ -15,13 +15,11 @@ export default class UserChatBox extends React.Component {
   /**
    * Create a constructor
    * @constructor
-   * @param {*} props -
+   * @param {any} props -
    */
   constructor(props) {
     super(props);
     this.state = {
-      userId: JSON.parse(localStorage.getItem('Id')),
-      username: JSON.parse(localStorage.getItem('userName')),
       message: '',
       priority: 'normal',
       show: false,
@@ -33,8 +31,8 @@ export default class UserChatBox extends React.Component {
 
   /**
    * @description - onChange event
-   * @param {event} event - event
-   * @returns {void} void
+   * @param {event} event
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -44,8 +42,8 @@ export default class UserChatBox extends React.Component {
 
   /**
    * @description - onSubmit event
-   * @param {event} event -
-   * @returns {*} null
+   * @param {event} event
+   * @returns {void}
    * @memberOf ChatBox
    */
   onSubmit(event) {
@@ -62,7 +60,7 @@ export default class UserChatBox extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} ChatBox component
+   * @returns {object} ChatBox component
    * @ChatBox
    */
   render() {
@@ -81,7 +79,7 @@ export default class UserChatBox extends React.Component {
     return (
       <div className="main">
         <ReactTooltip place="bottom" />
-        <div className="col-md-10 col-md-offset-1">
+        <div className="col-xs-12 col-md-10 col-md-offset-1">
           <ToggleButton />
           <h6>Group | {this.props.defaultGroup}
             <span
@@ -116,7 +114,10 @@ export default class UserChatBox extends React.Component {
             <form className="col-md-12">
               <div className="input-group">
                 <div className="input-group-addon">
-                  <select name="priority" onChange={this.onChange}>
+                  <select
+                    name="priority"
+                    onChange={this.onChange}
+                  >
                     <option value="normal">Normal</option>
                     <option value="critical">Critical</option>
                     <option value="urgent">Urgent</option>

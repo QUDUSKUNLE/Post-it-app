@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import dbConfig from '../config/dbConfig';
-import DestructureFirebaseData from '../helper/DestructureFirebaseData';
+import FormatDatabaseResult from '../helper/FormatDatabaseResult';
 import sendMail from '../utils/sendMail';
 import sendSMS from '../utils/sendSMS';
 import QueryDatabase from '../helper/QueryDatabase';
@@ -30,16 +30,14 @@ export default class MessageController {
         QueryDatabase.getGroupPhoneNumbers(groupId)
           .then((groupPhoneAndEmail) => {
             if ((priority === 'urgent') || (priority === 'critical')) {
-              const groupEmails = DestructureFirebaseData.getGroupEmails(
+              const groupEmails = FormatDatabaseResult.getGroupEmails(
                 groupPhoneAndEmail);
               sendMail(groupEmails, priority);
             }
             if (priority === 'critical') {
-              const groupPhoneNumbers = DestructureFirebaseData.getPhoneNumbers(
+              const groupPhoneNumbers = FormatDatabaseResult.getPhoneNumbers(
               groupPhoneAndEmail);
-              sendSMS(groupPhoneNumbers)
-                .then(() => true)
-                .catch(() => true);
+              sendSMS(groupPhoneNumbers);
             }
           });
         return Promise.all([

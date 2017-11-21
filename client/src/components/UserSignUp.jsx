@@ -26,10 +26,6 @@ export default class UserSignUp extends React.Component {
       confirmPassword: ''
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.handleSignUpAction = this.handleSignUpAction.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -39,7 +35,7 @@ export default class UserSignUp extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
    * when the component is fully mounted.
-   * @return { void} void
+   * @return { void}
    * @memberof UserSignUp
   */
   componentDidMount() {
@@ -49,7 +45,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserSignUp
   */
   componentWillUnmount() {
@@ -58,7 +54,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - onChange event
    * @param {object} event - event.
-   * @returns {void} bind input values to name.
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -69,7 +65,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - this handles SignUp form submission
    * @param {event} event - event.
-   * @returns {*} void
+   * @returns {void}
   */
   onSubmit(event) {
     event.preventDefault();
@@ -77,8 +73,8 @@ export default class UserSignUp extends React.Component {
   }
 
   /**
-   * handleSignUpAction event
-   * @returns {void} .
+   * @description - this handles handleSignUpAction event
+   * @returns {void}
    */
   handleSignUpAction() {
     const response = SignUpStore.signUpUser();
@@ -89,7 +85,6 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} SignUp component
-   * @SignUp
    */
   render() {
     return (

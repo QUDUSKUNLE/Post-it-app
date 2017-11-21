@@ -19,10 +19,6 @@ export default class UserResetPassword extends React.Component {
     super(props);
     this.state = { email: '' };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handlePasswordReset = this.handlePasswordReset.bind(this);
@@ -32,7 +28,7 @@ export default class UserResetPassword extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
    * when the component is fully mounted.
-   * @return { void} void
+   * @return { void}
    * @memberof UserResetPassword
   */
   componentDidMount() {
@@ -42,7 +38,7 @@ export default class UserResetPassword extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserResetPassword
    */
   componentWillUnmount() {
@@ -53,7 +49,7 @@ export default class UserResetPassword extends React.Component {
   /**
    * onChange event.
    * @param {object} event The first number.
-   * @returns {void} bind input values to name.
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -63,8 +59,8 @@ export default class UserResetPassword extends React.Component {
 
   /**
    * @description This handles resetPassword form submission
-   * @param {object} event .
-   * @returns {void} .
+   * @param {object} event
+   * @returns {void}
    */
   onSubmit(event) {
     event.preventDefault();
@@ -86,8 +82,7 @@ export default class UserResetPassword extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} ResetPassword component
-   * @ResetPassword
+   * @returns {obejct} ResetPassword component
    */
   render() {
     return (

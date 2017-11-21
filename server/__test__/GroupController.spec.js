@@ -2,17 +2,15 @@ process.env.NODE_ENV = 'test';
 import assert from 'assert';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import faker from 'faker';
-
 import server from '../server';
 import expiredToken from '../__mock__/expiredToken';
+import mockData from '../__mock__/mockData';
 
 chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
 // Test for GroupController
-
 describe('Create group', () => {
   let token = '';
   before((done) => {
@@ -25,13 +23,12 @@ describe('Create group', () => {
       });
   });
 
-  it('route should throw status code 400 for undefined group name',
+  it('route should not allow user`s without group name to create group',
     (done) => {
-      const group = { group: '' };
       chai.request(server)
         .post('/api/v1/createGroup')
         .set('x-access-token', token)
-        .send(group)
+        .send(mockData.creatGroupWithOutGroupName)
         .end((err, res) => {
           expect(res).to.have.status(400);
           assert.equal(400, res.statusCode);
@@ -40,13 +37,12 @@ describe('Create group', () => {
         });
     });
 
-  it('route should throw status code 400 for group name' +
-    ' with character less than three', (done) => {
-    const group = { group: 'ab' };
+  it('route should not allow user`s with group name' +
+    ' character less than three', (done) => {
     chai.request(server)
       .post('/api/v1/createGroup')
       .set('x-access-token', token)
-      .send(group)
+      .send(mockData.createGroupWithgroupNameLessThanThree)
       .end((err, res) => {
         expect(res).to.have.status(400);
         assert.equal('Group name should be at least 3 characters',
@@ -57,11 +53,10 @@ describe('Create group', () => {
 
   it('route should allow registered user`s to create groups',
     (done) => {
-      const group = { group: faker.name.findName() };
       chai.request(server)
         .post('/api/v1/createGroup')
         .set('x-access-token', token)
-        .send(group)
+        .send(mockData.createGroupWithCorrectDetails)
         .end((err, res) => {
           assert.equal(201, res.statusCode);
           assert.equal('Group created successfully', res.body.message);
@@ -69,13 +64,12 @@ describe('Create group', () => {
         });
     });
 
-  it('route should return status code 409 for an already created group',
+  it('route should throw error for already created group',
     (done) => {
-      const group = { group: 'andela' };
       chai.request(server)
         .post('/api/v1/createGroup')
         .set('x-access-token', token)
-        .send(group)
+        .send(mockData.createGroupWithAlreadyExistGroupName)
         .end((err, res) => {
           expect(res).to.have.status(409);
           assert.equal('Group already exists', res.body.error);
@@ -96,13 +90,12 @@ describe('AddMember', () => {
       });
   });
 
-  it('route should return status code 400 for undefined memberId',
+  it('route should not allow user`s without memberId to add member to a group',
     (done) => {
-      const userId = { memberId: '' };
       chai.request(server)
         .post('/api/v1/addMember/-Kz5garRTF4ZXikiucJf')
         .set('x-access-token', token)
-        .send(userId)
+        .send(mockData.addMemberToGroupWithOutMemberId)
         .end((err, res) => {
           expect(res).to.have.status(400);
           assert.equal('MemberId is required', res.body.error.code);
@@ -110,13 +103,12 @@ describe('AddMember', () => {
         });
     });
 
-  it('route should return status code 409 an already existing user',
+  it('route should throw error for already existing user`s in a group',
     (done) => {
-      const userId = { memberId: 'HoPNmtMqNgbKX6zKiH7yKIPazYx2' };
       chai.request(server)
         .post('/api/v1/addMember/-Kz5garRTF4ZXikiucJf')
         .set('x-access-token', token)
-        .send(userId)
+        .send(mockData.addAlreadyExistingUser)
         .end((err, res) => {
           assert.equal(409, res.statusCode);
           assert.equal('User`s already a member', res.body.error);
@@ -148,8 +140,8 @@ describe('Get Group', () => {
       });
   });
 
-  it('route should not permit ' +
-    'expired token to get groups a user belongs to', (done) => {
+  it('route should allow user`s with ' +
+    'expired token to get groups he/she belongs to', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
       .set('x-access-token', expiredToken.token)
@@ -160,7 +152,7 @@ describe('Get Group', () => {
       });
   });
 
-  it('route should not permit request without a token', (done) => {
+  it('route should not permit any private request without a token', (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
       .set('x-access-token', '')
@@ -171,7 +163,8 @@ describe('Get Group', () => {
       });
   });
 
-  it('route should not permit request with an invalid token', (done) => {
+  it('route should not permit any private request with an invalid token',
+  (done) => {
     chai.request(server)
       .get('/api/v1/getGroups')
       .set('x-access-token', expiredToken.inValid)
@@ -198,7 +191,7 @@ describe('Get Memebr', () => {
   it('route should allow signed in user to see members of a group', (done) => {
     const groupId = '-Kz5garRTF4ZXikiucJf';
     chai.request(server)
-      .get(`/api/v1/getMembers/${groupId}`)
+      .get('/api/v1/getMembers/-Kz5garRTF4ZXikiucJf')
       .set('x-access-token', token)
       .end((err, res) => {
         expect(res).to.have.status(200);

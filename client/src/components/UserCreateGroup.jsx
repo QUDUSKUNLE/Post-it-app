@@ -21,10 +21,6 @@ export default class UserCreateGroup extends React.Component {
       group: ''
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
@@ -34,7 +30,7 @@ export default class UserCreateGroup extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
 	 * when the component is fully mounted.
-   * @return {void} void
+   * @return {void}
    * @memberof UserCreateGroup
    */
   componentDidMount() {
@@ -44,7 +40,7 @@ export default class UserCreateGroup extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserCreateGroup
    */
   componentWillUnmount() {
@@ -53,8 +49,8 @@ export default class UserCreateGroup extends React.Component {
 
   /**
    * onChange event.
-   * @param {object} event no parameter.
-   * @returns {void} bind input data to name.
+   * @param {object} event
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -76,7 +72,7 @@ export default class UserCreateGroup extends React.Component {
 
   /**
    * @description This handles createGroupEvent
-   * @param {*} any .
+   * @param {any} any .
    * @returns {void} .
    */
   handleCreateGroupEvent() {

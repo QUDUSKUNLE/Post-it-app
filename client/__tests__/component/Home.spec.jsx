@@ -7,9 +7,7 @@ import localStorageMock from '../../src/__mock__/localStorage';
 
 window.localStorage = localStorageMock;
 
-
 describe('<Home/>', () => {
-  window.localStorage.setItem('isAuthenticated', JSON.stringify(false));
   it('component expected to be defined', () => {
     expect(Home).toBeDefined();
   });

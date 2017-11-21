@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import moment from 'moment';
-import sendToken from '../utils/sendToken';
+import generateToken from '../utils/generateToken';
 import dbConfig from '../config/dbConfig';
 import 'babel-polyfill';
 
@@ -23,11 +23,11 @@ export default class UserController {
       phoneNumber, confirmPassword,
       username } = req.body;
     if (password !== confirmPassword) {
-      res.status(403).send({ error: { code: 'Password does not match' } });
+      res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
-          const userToken = sendToken(user.uid, email);
+          const userToken = generateToken(user.uid, email);
           const name = username.toLowerCase();
           dbConfig.database().ref(`users/${user.uid}`).set({
             userEmail: email,
@@ -39,7 +39,7 @@ export default class UserController {
           return { token: userToken };
         }).then(response => res.status(201).send({
           message: 'User`s sign up successfully', response }))
-        .catch(error => res.status(409).send({ error }));
+        .catch(error => res.status(422).send({ error }));
     }
   }
 
@@ -54,17 +54,11 @@ export default class UserController {
     const { email, password } = req.body;
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((user) => {
-        const token = sendToken(user.uid, email);
+        const token = generateToken(user.uid, email);
         res.status(200).send({
           message: 'User Signed in successfully', token });
       })
-      .catch((error) => {
-        if (error.code === 'auth/wrong-password') {
-          res.status(409).send({ error });
-        } else if (error.code === 'auth/user-not-found') {
-          res.status(404).send({ error });
-        }
-      });
+      .catch(error => res.status(401).send({ error }));
   }
 
   /**
@@ -79,7 +73,7 @@ export default class UserController {
     const credentials = firebase.auth.GoogleAuthProvider.credential(idToken);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
-        const userToken = sendToken(user.uid, user.email);
+        const userToken = generateToken(user.uid, user.email);
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
@@ -100,11 +94,7 @@ export default class UserController {
             });
           });
       })
-      .catch((error) => {
-        if (error.response) {
-          res.status(500).send({ error: error.response });
-        }
-      });
+      .catch(error => res.status(500).send({ error: error.response }));
   }
 
   /**
@@ -118,9 +108,9 @@ export default class UserController {
     const { email } = req.body;
     firebase.auth().sendPasswordResetEmail(email)
     .then(() =>
-      res.status(201).send({
+      res.status(200).send({
         message: 'Password reset email sent successfully!'
-      })).catch(error => res.status(404).send({ error }));
+      })).catch(error => res.status(401).send({ error }));
   }
 
   /**

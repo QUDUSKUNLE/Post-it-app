@@ -6,9 +6,9 @@ import jwt from 'jsonwebtoken';
  * @param {Object} email request object
  * @return {string} token
  */
-const sendToken = (userId, email) => {
+const generateToken = (userId, email) => {
   const Token = jwt.sign({ data: { userId, email } }, process.env.TOKEN_SECRET,
     { expiresIn: '24h' });
   return Token;
 };
-export default sendToken;
+export default generateToken;

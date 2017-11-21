@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import AppDispatcher from '../dispatcher/AppDispatcher';
-import { getGroupMembers } from '../helper/convertObject';
+import { getGroupMembers } from '../helper/formatResponse';
 import {
   ADD_MEMBER,
   GET_MEMBERS_OF_GROUP, SEARCH_USER } from '../constants/ActionConstants';
@@ -11,7 +11,6 @@ import {
  */
 class MemberStore extends EventEmitter {
   /**
-   * sets the members, general to an empty []
    * @constructor
    */
   constructor() {
@@ -56,7 +55,7 @@ class MemberStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
+   * @param {object} action - Action payLoad
    * @return {null} -
    */
   handleActions(action) {

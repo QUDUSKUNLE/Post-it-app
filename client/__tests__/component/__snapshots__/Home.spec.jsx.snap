@@ -8,15 +8,59 @@ ShallowWrapper {
     "findWhereUnwrapped": [Function],
   },
   "length": 1,
-  "node": <Redirect
-    push={false}
-    to="/broadcastboard"
-  />,
+  "node": <div
+    className="container-fluid mainbody"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col-md-6"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-10 col-md-offset-1"
+          >
+            <h4>
+              PostIt
+               
+              allows friends come together and share vital information.
+            </h4>
+          </div>
+        </div>
+      </div>
+      <UserSignUp />
+    </div>
+  </div>,
   "nodes": Array [
-    <Redirect
-      push={false}
-      to="/broadcastboard"
-    />,
+    <div
+      className="container-fluid mainbody"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col-md-6"
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="col-md-10 col-md-offset-1"
+            >
+              <h4>
+                PostIt
+                 
+                allows friends come together and share vital information.
+              </h4>
+            </div>
+          </div>
+        </div>
+        <UserSignUp />
+      </div>
+    </div>,
   ],
   "options": Object {},
   "renderer": ReactShallowRenderer {
@@ -52,17 +96,61 @@ ShallowWrapper {
       "_pendingReplaceState": false,
       "_pendingStateQueue": null,
       "_renderedComponent": NoopInternalComponent {
-        "_currentElement": <Redirect
-          push={false}
-          to="/broadcastboard"
-        />,
+        "_currentElement": <div
+          className="container-fluid mainbody"
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="col-md-6"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-md-10 col-md-offset-1"
+                >
+                  <h4>
+                    PostIt
+                     
+                    allows friends come together and share vital information.
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <UserSignUp />
+          </div>
+        </div>,
         "_debugID": 2,
-        "_renderedOutput": <Redirect
-          push={false}
-          to="/broadcastboard"
-        />,
+        "_renderedOutput": <div
+          className="container-fluid mainbody"
+        >
+          <div
+            className="row"
+          >
+            <div
+              className="col-md-6"
+            >
+              <div
+                className="row"
+              >
+                <div
+                  className="col-md-10 col-md-offset-1"
+                >
+                  <h4>
+                    PostIt
+                     
+                    allows friends come together and share vital information.
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <UserSignUp />
+          </div>
+        </div>,
       },
-      "_renderedNodeType": 1,
+      "_renderedNodeType": 0,
       "_rootNodeID": 0,
       "_topLevelWrapper": null,
       "_updateBatchNumber": null,

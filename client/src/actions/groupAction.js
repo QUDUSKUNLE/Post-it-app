@@ -1,7 +1,7 @@
 import axios from 'axios';
 import catchError from '../helper/catchError';
 import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { helpGetGroups } from '../helper/convertObject';
+import { helpGetGroups } from '../helper/formatResponse';
 import {
   GET_USER_GROUPS,
   CREATE_GROUP,
@@ -12,7 +12,7 @@ import {
  *  to get groups of a user
  * @function getUserGroups
  * @param {string} userId - The User identity
- * @returns {function} dispatch - Server Response is dispatch to GroupStore
+ * @returns {object} dispatch - Server Response is dispatch to GroupStore
  */
 export const getUserGroups = () => {
   axios.get('/api/v1/getgroups')
@@ -36,7 +36,7 @@ export const getUserGroups = () => {
  *  to create group for a user
  * @function createGroup
  * @param {object} groupName - The name of group to be created
- * @returns {function} dispatch - Server response is dispatch to GroupStore
+ * @returns {object} dispatch - Server response is dispatch to GroupStore
  */
 export const createGroup = groupName => axios.post('/api/v1/createGroup',
   groupName)

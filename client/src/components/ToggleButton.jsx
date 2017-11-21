@@ -4,7 +4,7 @@ import $ from 'jquery';
 /**
  * @export Footer component
  * @description - Footer Component
- * @return {ToggleButton} component
+ * @return {object} ToggleButton component
  */
 const ToggleButton = () =>
   (<div>
