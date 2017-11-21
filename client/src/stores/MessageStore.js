@@ -32,7 +32,7 @@ class MessageStore extends EventEmitter {
   /**
    * @param {any} action - payload
    * @memberof MessageStore
-   * @return {*} action
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {

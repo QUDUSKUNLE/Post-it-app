@@ -58,8 +58,8 @@ class SignInStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
-   * @return {*} -
+   * @param {object} action - Action payLoad
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {

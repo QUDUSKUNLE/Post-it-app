@@ -11,7 +11,6 @@ import {
  */
 class MemberStore extends EventEmitter {
   /**
-   * sets the members, general to an empty []
    * @constructor
    */
   constructor() {
@@ -56,7 +55,7 @@ class MemberStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
+   * @param {object} action - Action payLoad
    * @return {null} -
    */
   handleActions(action) {

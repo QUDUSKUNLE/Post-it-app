@@ -198,9 +198,9 @@ export default class UserSignIn extends React.Component {
             <br />
             <div>
               <center>
-                <p>New to PostIt?
+                <p>New to PostIt?{' '}
                   <Link to="/" className="create">
-                  Create an account.
+                    Create an account.
                   </Link>
                 </p>
               </center>
