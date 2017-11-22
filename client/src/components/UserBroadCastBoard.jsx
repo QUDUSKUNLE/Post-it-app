@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import $ from 'jquery';
-import { Link, Redirect } from 'react-router-dom';
-import UserGroups from './UserGroups.jsx';
-import UserChatBox from './UserChatBox.jsx';
-import NoGroupSelected from './NoGroupSelected.jsx';
-import { getUserGroups } from '../actions/groupActions.js';
-import { getGroupMessage } from '../actions/messageActions.js';
-import { getGroupMember } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
-import MessageStore from '../stores/MessageStore.js';
+import { Link } from 'react-router-dom';
+import UserGroups from './UserGroups';
+import UserChatBox from './UserChatBox';
+import NoGroupSelected from './NoGroupSelected';
+import { getUserGroups } from '../actions/groupAction';
+import { getGroupMessage } from '../actions/messageAction';
+import { getGroupMember } from '../actions/memberAction';
+import MemberStore from '../stores/MemberStore';
+import GroupStore from '../stores/GroupStore';
+import MessageStore from '../stores/MessageStore';
 
 /**
  * @description - renders BroadCastBoard Component
@@ -21,12 +20,11 @@ export default class UserBroadCastBoard extends React.Component {
   /**
    * Create a constructor
    * @constructor
-   * @param {object} props -
+   * @param {any} props -
    */
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: JSON.parse(localStorage.getItem('userIn')),
       defaultGroup: '',
       groups: [],
       groupId: '',
@@ -35,10 +33,6 @@ export default class UserBroadCastBoard extends React.Component {
       groupSelected: false
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.handleSendGroupMessage = this.handleSendGroupMessage.bind(this);
     this.handleGetGroupMessage = this.handleGetGroupMessage.bind(this);
     this.handleGetUserGroups = this.handleGetUserGroups.bind(this);
@@ -46,20 +40,12 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method componentWillMount
-   * @return {void} void
-   * @memberof UserBroadCastBoard
-   */
-  componentWillMount() {
-    getUserGroups(this);
-  }
-
-  /**
-   * Attach an event listener to favorite store
+   * Life Cycle method to be called when a component mounts
    * @method componentDidMount
-   * @return {*} -
+   * @return {void} void
    */
   componentDidMount() {
+    getUserGroups();
     GroupStore.on('GET_USER_GROUPS', this.handleGetUserGroups);
     MemberStore.on('GET_MEMBERS_OF_GROUP', this.handleGetGroupMember);
     MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
@@ -67,8 +53,9 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method componentWillUnount
-   * @return {*} void
+   * Life Cycle method to be called when a component Unmounts
+   * @method componentWillUmount
+   * @return {void}
    */
   componentWillUnmount() {
     GroupStore.removeListener('GET_USER_GROUPS',
@@ -82,8 +69,8 @@ export default class UserBroadCastBoard extends React.Component {
   }
 
   /**
-   * @method newGroupMessage
-   * @return {*} void
+   * @method handlesSendGroupMessage
+   * @return {void}
    */
   handleSendGroupMessage() {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
@@ -91,23 +78,23 @@ export default class UserBroadCastBoard extends React.Component {
 
   /**
    * @method handleGetGroupMember
-   * @return {*} void
+   * @return {void}
    */
   handleGetGroupMember() {
     this.setState({ groupMember: (MemberStore.allGroupMembers())[0] });
   }
 
   /**
-   * @method getGroupMessage
-   * @return {*} void
+   * @method handleGetGroupMessage
+   * @return {void}
    */
   handleGetGroupMessage() {
     this.setState({ groupMessage: MessageStore.allGroupMessage() });
   }
 
   /**
-   * @method userGroups
-   * @return {*} void
+   * @method handleGetUserGroups
+   * @return {void}
    */
   handleGetUserGroups() {
     this.setState({ groups: GroupStore.allGroups() });
@@ -115,14 +102,9 @@ export default class UserBroadCastBoard extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} BroadCastBoard component
+   * @returns {void}
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     const groupList = this.state.groups.map((group) =>
       <li
         className="text-center"
@@ -137,31 +119,23 @@ export default class UserBroadCastBoard extends React.Component {
             groupId: (Object.values(group))[0],
             groupSelected: true
           });
-        }}><Link to="#"> {Object.keys(group)}</Link>
+        }}
+      ><Link to="#">{Object.keys(group)}</Link>
       </li>);
-    const isGroupSelected = () => {
-      let selectedGroup;
-      if (this.state.groupSelected) {
-        selectedGroup =
-          (<UserChatBox
-            defaultGroup={this.state.defaultGroup}
-            groupId={this.state.groupId}
-            allGeneralMessage={this.state.groupMessage} />);
-      } else {
-        selectedGroup = <NoGroupSelected />;
-      }
-      return selectedGroup;
-    };
-    $('[data-toggle=offcanvas]').click(() => {
-      $('.row-offcanvas').toggleClass('active');
-    });
     return (
       <div className="row-offcanvas row-offcanvas-left">
         <UserGroups
           grouplist={groupList}
           member={this.state.groupMember}
-          groupSelected={this.state.groupSelected}/>
-        {isGroupSelected()}
+          groupSelected={this.state.groupSelected}
+        />
+        {this.state.groupSelected
+          ? (<UserChatBox
+            defaultGroup={this.state.defaultGroup}
+            groupId={this.state.groupId}
+            allGeneralMessage={this.state.groupMessage}
+          />)
+          : <NoGroupSelected />}
       </div>
     );
   }
@@ -170,6 +144,6 @@ export default class UserBroadCastBoard extends React.Component {
 // props validation
 UserBroadCastBoard.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
   })
 };

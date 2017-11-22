@@ -1,11 +1,10 @@
 import React from 'react';
+import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Redirect } from 'react-router-dom';
-import { addMember, getAllUsers } from '../actions/memberActions.js';
-import MemberStore from '../stores/MemberStore.js';
-import GroupStore from '../stores/GroupStore.js';
-import { getUserGroups } from '../actions/groupActions.js';
+import $ from 'jquery';
+import { addMember, searchUser } from '../actions/memberAction';
+import MemberStore from '../stores/MemberStore';
 
 /**
  * @export
@@ -14,40 +13,25 @@ import { getUserGroups } from '../actions/groupActions.js';
  * @extends {React.Component}
  */
 export default class UserAddMember extends React.Component {
-
   /**
    * Creates an instance of UserAddMember.
    * @constructor
-   * @param {*} props -
+   * @param {any} props -
    * @memberof UserAddMember
    */
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: JSON.parse(localStorage.getItem('userIn')),
-      userId: JSON.parse(localStorage.getItem('Id')),
-      groups: [],
-      registeredUsers: [],
       group: '',
       member: '',
+      keyword: '',
+      searchResult: [],
     };
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleAddMemberToGroup = this.handleAddMemberToGroup.bind(this);
-    this.userGroups = this.userGroups.bind(this);
-  }
-
-  /**
-   * @memberof UserAddMember
-   * @return {*} void
-   */
-  componentWillMount() {
-    getUserGroups(this.state.userId);
-    getAllUsers();
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   /**
@@ -58,9 +42,9 @@ export default class UserAddMember extends React.Component {
    * @memberof UserAddMember
    */
   componentDidMount() {
-    GroupStore.on('GET_USER_GROUPS', this.userGroups);
-    MemberStore.on('ALL_USERS', this.userGroups);
+    $('#selectId').val('');
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
+    MemberStore.on('SEARCH_USER', this.handleSearch);
   }
 
   /**
@@ -70,27 +54,13 @@ export default class UserAddMember extends React.Component {
    * @memberof UserAddMember
    */
   componentWillUnmount() {
-    GroupStore.removeListener('GET_USER_GROUPS', this.userGroups);
-    MemberStore.removeListener('ALL_USERS', this.userGroups);
     MemberStore.removeListener('ADD_MEMBER', this.handleAddMemberToGroup);
-  }
-
-  /**
-   * @memberof UserAddMember
-   * @return {*} void
-   */
-  userGroups() {
-    const allUsers = MemberStore.registeredUsers();
-    this.setState({
-      groups: GroupStore.allGroups(),
-      registeredUsers: allUsers.filter(user =>
-        (Object.keys(user)[0] !== this.state.userId))
-    });
+    MemberStore.removeListener('SEARCH_USER', this.handleSearch);
   }
   /**
    * @description - onChange event
    * @param {event} event - event
-   * @returns {null} null
+   * @returns {any} null
    * @memberOf ChatBox
    */
   onChange(event) {
@@ -105,10 +75,40 @@ export default class UserAddMember extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const memberDetails = {
-      groupId: this.state.group,
-      memberId: this.state.member
+      groupId: this.props.groupId,
+      memberId: $('#selectId').val()
     };
+
     addMember(memberDetails);
+  }
+
+  /**
+   * @description This handles on select of a member
+   * @param {string} memberId
+   * @returns {void} .
+  */
+  onSelect(memberId) {
+    $('#selectId').val(memberId);
+  }
+
+  /**
+   * @description This handles search query
+   * @returns {void} .
+  */
+  handleKeyPress() {
+    const query = { keyword: this.state.keyword };
+    if ((this.state.keyword).length >= 1) {
+      searchUser(query);
+    }
+  }
+  /**
+   * @memberof UserAddMember
+   * @return {void} void
+   */
+  handleSearch() {
+    this.setState({
+      searchResult: MemberStore.getSearchUser()
+    });
   }
 
   /**
@@ -119,7 +119,6 @@ export default class UserAddMember extends React.Component {
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
     toastr.success(addMemberResponse);
-    this.props.history.push('/broadcastboard');
   }
 
   /**
@@ -128,51 +127,70 @@ export default class UserAddMember extends React.Component {
    * @AddMember
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
-
     return (
-      <div className="container addmember">
-        <div className="row">
-          <div className="col-md-offset-3 col-md-6">
-            <h5 className="text-center">
-              <b>Add Member to group</b>
-            </h5>
-            <div className="row w3-card w3-white">
-              <form className="addmemberform" onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <label htmlFor="groupname">Group Name</label>
-                  <select name="group" onChange={this.onChange}
-                    className="form-control">
-                    <option value="">Select a group</option>
-                    {(this.state.groups).map(group =>
-                      <option key={Object.values(group)}
-                        value={Object.values(group)}>
-                        {Object.keys(group)}</option>
-                    )}
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="members">Member</label>
-                  <select name="member" onChange={this.onChange}
-                    className="form-control">
-                    <option value="">add member to group</option>
-                    {(this.state.registeredUsers).map(user =>
-                      <option key={Object.keys(user)}
-                        value={Object.keys(user)}>
-                        {Object.values(user)}</option>
-                    )}
-                  </select>
-                </div>
-                <button type="submit" className="signinformbtn">Add Member
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
+      <div className="modal-container">
+        <Modal
+          show={this.props.modalState}
+          onHide={this.props.closeModal}
+          container={this}
+          aria-labelledby="contained-modal-title"
+        >
+          <Modal.Body>
+            <form
+              className="addmemberform"
+              onSubmit={this.onSubmit}
+            >
+              <div className="form-group">
+                <label htmlFor="groupname">
+                  Group Name
+                </label>
+                <input
+                  value={this.props.selectedGroup}
+                  onChange={this.onChange}
+                  type="text"
+                  className="form-control"
+                  placeholder="Search ...."
+                  name="group" required
+                  disabled
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="search">
+                  Search User
+                </label>
+                <input
+                  list="searchUser"
+                  id="searchUsers"
+                  value={this.state.keyword}
+                  onChange={this.onChange}
+                  onKeyPress={this.handleKeyPress}
+                  type="text"
+                  className="form-control"
+                  placeholder="Search ...."
+                  name="keyword" required
+                />
+                <datalist id="searchUser">
+                  {this.state.searchResult.map((user, userId) =>
+                    (<option
+                      key={userId} value={user.userName}
+                      onClick={this.onSelect(user.userId)}
+                    />)
+                  )}
+                </datalist>
+                <input
+                  id="selectId"
+                  type="hidden"
+                  name="search"
+                />
+              </div>
+              <button
+                type="submit"
+                className="signinformbtn"
+              >Add Member
+              </button>
+            </form>
+          </Modal.Body>
+        </Modal>
       </div>
     );
   }
@@ -182,5 +200,10 @@ export default class UserAddMember extends React.Component {
 UserAddMember.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
-  })
+  }),
+  memberId: PropTypes.string,
+  selectedGroup: PropTypes.string,
+  groupId: PropTypes.string,
+  modalState: PropTypes.bool,
+  closeModal: PropTypes.func.isRequired
 };

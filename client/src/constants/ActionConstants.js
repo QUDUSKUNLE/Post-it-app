@@ -11,3 +11,4 @@ export const ALL_USERS = 'ALL_USERS';
 export const SIGN_OUT_SUCCESS = 'SIGN_OUT_SUCCESS';
 export const SEND_GROUP_MESSAGE = 'SEND_GROUP_MESSAGE';
 export const GET_GROUP_MESSAGE = 'GET_GROUP_MESSAGE';
+export const SEARCH_USER = 'SEARCH_USER';

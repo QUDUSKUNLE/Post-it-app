@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 /**
  * @export NotFound component
  * @description NotFound component
- * @return {NotFound} component
+ * @return {object} component
  */
 const NotFound = () => (
   <div className="notFound">

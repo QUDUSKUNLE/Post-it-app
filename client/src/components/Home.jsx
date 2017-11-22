@@ -1,13 +1,20 @@
 import React from 'react';
-import UserSignUp from './UserSignUp.jsx';
+import { Redirect } from 'react-router-dom';
+import UserSignUp from './UserSignUp';
 
 /**
  * @export Home component
  * @description - Home Component
- * @return {Home} component
+ * @return {object} Home component
  */
-const Home = () =>
- (
+const Home = () => {
+  const isAuthenticated = localStorage.getItem('isAuthenticated');
+  if (isAuthenticated) {
+    return (
+      <Redirect to="/broadcastboard" />
+    );
+  }
+  return (
     <div className="container-fluid mainbody">
       <div className="row">
         <div className="col-md-6">
@@ -20,9 +27,10 @@ const Home = () =>
             </div>
           </div>
         </div>
-        <UserSignUp/>
+        <UserSignUp />
       </div>
     </div>
   );
+};
 
 export default Home;

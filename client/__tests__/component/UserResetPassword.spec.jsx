@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import UserResetPassword
-  from '../../src/components/UserResetPassword.jsx';
-import '../../../server/config/index.js';
-import SignInStore from '../../src/stores/SignInStore.js';
+  from '../../src/components/UserResetPassword';
+import '../../../server/config/dbConfig';
+import SignInStore from '../../src/stores/SignInStore';
 
 describe('<UserResetPassword/>', () => {
   let wrapper;
@@ -18,7 +18,7 @@ describe('<UserResetPassword/>', () => {
       email: '',
     };
 
-    wrapper = mount(<UserResetPassword {...props}/>,
+    wrapper = mount(<UserResetPassword {...props} />,
       {
         childContextTypes: { router: PropTypes.object },
         context: {
@@ -56,7 +56,7 @@ describe('<UserResetPassword/>', () => {
     expect(UserResetPassword).toBeDefined();
   });
   it('component should render correctly', () => {
-    const component = shallow(<UserResetPassword/>);
+    const component = shallow(<UserResetPassword />);
     expect(component).toMatchSnapshot();
     expect(component.find('form')).toHaveLength(1);
     expect(component.find('input')).toHaveLength(1);

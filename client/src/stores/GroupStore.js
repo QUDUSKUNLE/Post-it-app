@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   GET_USER_GROUPS,
-  CREATE_GROUP } from '../constants/ActionConstants.js';
+  CREATE_GROUP } from '../constants/ActionConstants';
 
 /**
  * Holds the storage, listen to actions and update the stores
@@ -10,7 +10,6 @@ import {
  */
 class GroupStore extends EventEmitter {
   /**
-   * sets the groups to an empty []
    * @constructor
    */
   constructor() {
@@ -41,8 +40,8 @@ class GroupStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
-   * @return {*} -
+   * @param {object} action - Action payload
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {

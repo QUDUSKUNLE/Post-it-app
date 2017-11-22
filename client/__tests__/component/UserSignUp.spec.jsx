@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import expect from 'expect';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
-import UserSignUp from '../../src/components/UserSignUp.jsx';
+import UserSignUp from '../../src/components/UserSignUp';
 
-describe('PostIt-app', () => {
+describe('<UserSignUp/>', () => {
   const signUpAction = sinon.spy();
   sinon.spy(UserSignUp.prototype, 'onSubmit');
   sinon.spy(UserSignUp.prototype, 'componentDidMount');
@@ -18,7 +18,7 @@ describe('PostIt-app', () => {
     phoneNumber: '',
     signUpAction
   };
-  const wrapper = mount(<UserSignUp {...props}/>,
+  const wrapper = mount(<UserSignUp {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {
@@ -48,11 +48,11 @@ describe('PostIt-app', () => {
     }
   );
 
-  it('expects UserSignUp component to be defined', () => {
+  it('component should be defined', () => {
     expect(UserSignUp).toBeDefined();
   });
 
-  it('should have signup form', () => {
+  it('component should have signup form', () => {
     expect(wrapper.find('form').length).toEqual(1);
     expect(wrapper.find('[type="text"]').at(0).length).toEqual(1);
     expect(wrapper.find('[type="email"]').at(0).length).toEqual(1);
@@ -60,23 +60,25 @@ describe('PostIt-app', () => {
     expect(wrapper.find('[type="submit"]').at(0).length).toEqual(1);
   });
 
-  it('calls componentDidMount', () => {
+  it('component should call componentDidMount', () => {
     expect(UserSignUp.prototype.componentDidMount.calledOnce).toEqual(true);
     UserSignUp.prototype.componentDidMount.restore();
   });
 
-  it('should called onSubmit method when submit button is clicked', () => {
+  it('component should called onSubmit method when submit button is clicked',
+  () => {
     wrapper.find('form').simulate('submit');
     expect(UserSignUp.prototype.onSubmit.calledOnce).toEqual(true);
   });
 
-  it('should call onChange method when type something in the input', () => {
+  it('onChange method should be called while typing in the input field', () => {
     const event = { target: { name: 'name', value: 'value' } };
     wrapper.instance().onChange(event);
     expect(wrapper.state().name).toEqual('value');
   });
 
-  it('expects componentWillUnmount to be unmounted', () => {
+  it('componentWillUnmount component lifecycle to be called when unmounted',
+  () => {
     wrapper.instance().componentWillUnmount();
     expect(spy.calledOnce).toBeTruthy();
   });

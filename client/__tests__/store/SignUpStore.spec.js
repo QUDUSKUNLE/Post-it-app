@@ -1,6 +1,7 @@
 import expect from 'expect';
 import SignUpStore from '../../src/stores/SignUpStore.js';
 import AppDispatcher from '../../src/dispatcher/AppDispatcher.js';
+import mockData from '../../src/__mock__/mockData';
 
 jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/SignUpStore.js');
@@ -11,10 +12,7 @@ describe('SignUp Store', () => {
     let AppDispatcherMock;
     beforeEach(() => {
       AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      response = {
-        message: 'Registration successful and verification' +
-        ' email sent to your email'
-      };
+      response = mockData.signUpMockData;
     });
 
     afterEach(() => {

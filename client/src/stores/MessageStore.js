@@ -1,8 +1,8 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   GET_GROUP_MESSAGE,
-  SEND_GROUP_MESSAGE } from '../constants/ActionConstants.js';
+  SEND_GROUP_MESSAGE } from '../constants/ActionConstants';
 
 
 /**
@@ -32,7 +32,7 @@ class MessageStore extends EventEmitter {
   /**
    * @param {any} action - payload
    * @memberof MessageStore
-   * @return {*} action
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {

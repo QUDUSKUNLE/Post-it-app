@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
 import {
   SIGN_IN_SUCCESS,
   GOOGLE_SIGN_IN_SUCCESS,
-  PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants.js';
+  PASSWORD_RESET_SUCCESS } from '../constants/ActionConstants';
 
 /**
  * Signout Store, it hold user's state, listen to signin Actions
@@ -58,8 +58,8 @@ class SignInStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
-   * @return {*} -
+   * @param {object} action - Action payLoad
+   * @return {void}
    */
   handleActions(action) {
     switch (action.type) {

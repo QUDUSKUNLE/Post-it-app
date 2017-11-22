@@ -2,17 +2,15 @@ import React from 'react';
 /**
  * @export Footer component
  * @description - Footer Component
- * @return {Footer} component
+ * @return {object} Footer component
  */
 const Footer = () =>
  (
-    <div className="footer">
-      <div className="container">
-        <center>
-          &copy; Qudus Kunle
-        </center>
-      </div>
-    </div>
+  <div className="footer">
+    <center>
+      &copy; Qudus Kunle
+    </center>
+  </div>
   );
 
 export default Footer;

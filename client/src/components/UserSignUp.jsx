@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import SignUpStore from '../stores/SignUpStore.js';
-import signUpAction from '../actions/signUpActions.js';
+import SignUpStore from '../stores/SignUpStore';
+import signUpAction from '../actions/signUpAction';
+
 
 /**
  * @description - renders SignUp Component
@@ -25,10 +26,6 @@ export default class UserSignUp extends React.Component {
       confirmPassword: ''
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.handleSignUpAction = this.handleSignUpAction.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -38,7 +35,7 @@ export default class UserSignUp extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
    * when the component is fully mounted.
-   * @return { void} void
+   * @return { void}
    * @memberof UserSignUp
   */
   componentDidMount() {
@@ -48,7 +45,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserSignUp
   */
   componentWillUnmount() {
@@ -57,7 +54,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - onChange event
    * @param {object} event - event.
-   * @returns {void} bind input values to name.
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -68,7 +65,7 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - this handles SignUp form submission
    * @param {event} event - event.
-   * @returns {*} void
+   * @returns {void}
   */
   onSubmit(event) {
     event.preventDefault();
@@ -76,8 +73,8 @@ export default class UserSignUp extends React.Component {
   }
 
   /**
-   * handleSignUpAction event
-   * @returns {void} .
+   * @description - this handles handleSignUpAction event
+   * @returns {void}
    */
   handleSignUpAction() {
     const response = SignUpStore.signUpUser();
@@ -88,29 +85,35 @@ export default class UserSignUp extends React.Component {
   /**
    * @description - render method, React lifecycle method
    * @returns {Object} SignUp component
-   * @SignUp
    */
   render() {
     return (
       <div className="col-md-6">
         <div className="row">
-          <div className="col-md-10 col-md-offset-1 w3-card w3-white"
-            id="signupform">
+          <div
+            className="col-md-10 col-md-offset-1 w3-card w3-white"
+            id="signupform"
+          >
             <h4>Create an account</h4>
             <br />
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">
+                  Email
+                </label>
                 <input
                   value={this.state.email}
                   onChange={this.onChange}
                   id="email" type="email"
                   className="signinform inp"
                   placeholder="johndoe@example.com"
-                  name="email" required />
+                  name="email" required
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">
+                  Username
+                </label>
                 <input
                   value={this.state.username}
                   onChange={this.onChange}
@@ -118,10 +121,15 @@ export default class UserSignUp extends React.Component {
                   type="text"
                   className="signinform"
                   placeholder="johndoe"
-                  name="username" minLength="2" required />
+                  name="username"
+                  minLength="2"
+                  required
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="phoneNumber">Phone Number</label>
+                <label htmlFor="phoneNumber">
+                  Phone Number
+                </label>
                 <input
                   value={this.state.phoneNumber}
                   onChange={this.onChange}
@@ -129,10 +137,15 @@ export default class UserSignUp extends React.Component {
                   type="phone"
                   className="signinform"
                   placeholder="08012345678"
-                  name="phoneNumber" minLength="11" required />
+                  name="phoneNumber"
+                  minLength="11"
+                  required
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">
+                  Password
+                </label>
                 <input
                   value={this.state.password}
                   onChange={this.onChange}
@@ -140,10 +153,15 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="password" minLength="6" required />
+                  name="password"
+                  minLength="6"
+                  required
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label htmlFor="confirmPassword">
+                  Confirm Password
+                </label>
                 <input
                   value={this.state.confirmPassword}
                   onChange={this.onChange}
@@ -151,10 +169,15 @@ export default class UserSignUp extends React.Component {
                   type="password"
                   className="signinform"
                   placeholder="********"
-                  name="confirmPassword" minLength="6" required />
+                  name="confirmPassword"
+                  minLength="6"
+                  required
+                />
               </div>
-              <button type="submit" className="signinformbtn">
-                Sign up
+              <button
+                type="submit"
+                className="signinformbtn"
+              >Sign up
               </button>
             </form>
           </div>

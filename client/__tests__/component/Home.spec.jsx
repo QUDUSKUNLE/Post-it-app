@@ -1,9 +1,11 @@
 import React from 'react';
 import expect from 'expect';
 import { shallow } from 'enzyme';
-import Home from '../../src/components/Home.jsx';
-import UserSignUp from '../../src/components/UserSignUp.jsx';
+import Home from '../../src/components/Home';
+import UserSignUp from '../../src/components/UserSignUp';
+import localStorageMock from '../../src/__mock__/localStorage';
 
+window.localStorage = localStorageMock;
 
 describe('<Home/>', () => {
   it('component expected to be defined', () => {

@@ -3,56 +3,52 @@ import PropTypes from 'prop-types';
 
 /**
  * @description - renders Groups Component
- * @class Groups
- * @extends {React.Component}
+ * @param {object} props
+ * @return {object} UserGroups component
  */
-export default class UserGroups extends React.Component {
-  /**
-   * @description - render method, React lifecycle method
-   * @returns {*} UserGroups Component
-   */
-  render() {
-    const members = this.props.member.map(member => (
-      <li key={Object.keys(member)}>
-        <a href="#">{Object.values(member)}</a>
-      </li>));
-    return (
-      <div id="sidebar" className="sidebar-offcanvas">
-        <div className="col-md-12 groups">
-          <div className="groupName">
-            <center>
-              Your Groups
-            </center>
-          </div>
-          <br/>
-          <ul className="nav nav-pills nav-stacked">
-            {this.props.grouplist}
-          </ul>
-        </div>
-        <div className="col-md-12 members">
-          {this.props.groupSelected ?
-            <div className="dropdown">
-              <button
-                className="btn btn-default dropdown-toggle"
-                data-toggle="dropdown">Group Members
-              <span className="caret"></span>
-              </button>
-              <ul className="dropdown-menu scrollable-menu">
-                {members}
-              </ul>
-            </div> : <span></span>
-          }
-        </div>
+const UserGroups = (props) =>
+  (<div
+    id="sidebar"
+    className="sidebar-offcanvas"
+  >
+    <div className="col-xs-12 col-md-12 groups">
+      <div className="groupName">
+        <center>
+          <i>Your Groups</i>
+        </center>
       </div>
-    );
-  }
-}
+      <hr />
+      <ul className="nav nav-pills nav-stacked">
+        {props.grouplist}
+      </ul>
+    </div>
+    <div className="col-xs-12 col-md-12 members">
+      {props.groupSelected ?
+        <div className="dropdown">
+          <button
+            className="btn btn-default dropdown-toggle sidebarbutton"
+            data-toggle="dropdown"
+          >Group Members
+            <span className="caret"></span>
+          </button>
+          <ul className="dropdown-menu scrollable-menu">
+            {props.member.map(member => (
+              <li key={Object.keys(member)}>
+                <a href="#">{Object.values(member)}</a>
+              </li>)
+            )}
+          </ul>
+        </div> : <span></span>
+      }
+    </div>
+  </div>
+  );
 
 // props validation
 UserGroups.propTypes = {
   grouplist: PropTypes.array,
-  generalMessageLength: PropTypes.number,
-  defaultGroup: PropTypes.string,
   member: PropTypes.array,
   groupSelected: PropTypes.bool
 };
+
+export default UserGroups;

@@ -3,23 +3,19 @@ import PropTypes from 'prop-types';
 import sinon from 'sinon';
 import { mount } from 'enzyme';
 import expect from 'expect';
-import UserChatBox from '../../src/components/UserChatBox.jsx';
-import localStorageMock from '../../src/__mock__/localStorage.js';
+import UserChatBox from '../../src/components/UserChatBox';
+import localStorageMock from '../../src/__mock__/localStorage';
 import groupMessageResponse from '../../src/__mock__/groupMessageResponse.json';
 
 window.localStorage = localStorageMock;
 describe('<UserChatBox />', () => {
   sinon.spy(UserChatBox.prototype, 'onSubmit');
-  window.localStorage.setItem('userName', JSON.stringify('Kunle'));
-  window.localStorage.setItem('Id', JSON.stringify('AZCVGFRTUINSMUY15156'));
   const props = {
-    userId: JSON.parse(localStorage.getItem('Id')),
-    username: JSON.parse(localStorage.getItem('userName')),
     message: '',
     priority: 'normal',
     allGeneralMessage: groupMessageResponse.response
   };
-  const wrapper = mount(<UserChatBox {...props}/>,
+  const wrapper = mount(<UserChatBox {...props} />,
     {
       childContextTypes: { router: PropTypes.object },
       context: {
@@ -48,16 +44,13 @@ describe('<UserChatBox />', () => {
       }
     });
   it('component expected to be defined', () => {
-    expect(wrapper.find('div')).toHaveLength(11);
+    expect(wrapper.find('div')).toHaveLength(13);
     expect(wrapper.find('form')).toHaveLength(1);
     expect(wrapper.find('button')).toHaveLength(2);
-    expect(wrapper.find('Link')).toHaveLength(1);
   });
   it('component states expected to be defined before it mounts', () => {
     expect(UserChatBox).toBeDefined();
     expect(wrapper.state()).toBeDefined();
-    expect(wrapper.state().username).toEqual('Kunle');
-    expect(wrapper.state().userId).toEqual('AZCVGFRTUINSMUY15156');
   });
   it('component should call onChange method', () => {
     const event = { target: { name: 'name', value: 'value' } };

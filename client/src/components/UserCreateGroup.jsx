@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import toastr from 'toastr';
-import { Redirect } from 'react-router-dom';
-import { createGroup } from '../actions/groupActions.js';
-import GroupStore from '../stores/GroupStore.js';
-
+import { createGroup } from '../actions/groupAction';
+import GroupStore from '../stores/GroupStore';
 
 /**
  * @description - renders CreateGroup Component
@@ -18,17 +16,11 @@ export default class UserCreateGroup extends React.Component {
    * @param {object} props -
    */
   constructor(props) {
-    const loggedIn = (localStorage.getItem('userIn'));
     super(props);
     this.state = {
-      group: '',
-      loggedIn
+      group: ''
     };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleCreateGroupEvent = this.handleCreateGroupEvent.bind(this);
@@ -38,7 +30,7 @@ export default class UserCreateGroup extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
 	 * when the component is fully mounted.
-   * @return {void} void
+   * @return {void}
    * @memberof UserCreateGroup
    */
   componentDidMount() {
@@ -48,7 +40,7 @@ export default class UserCreateGroup extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserCreateGroup
    */
   componentWillUnmount() {
@@ -57,8 +49,8 @@ export default class UserCreateGroup extends React.Component {
 
   /**
    * onChange event.
-   * @param {object} event no parameter.
-   * @returns {void} bind input data to name.
+   * @param {object} event
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -80,7 +72,7 @@ export default class UserCreateGroup extends React.Component {
 
   /**
    * @description This handles createGroupEvent
-   * @param {*} any .
+   * @param {any} any .
    * @returns {void} .
    */
   handleCreateGroupEvent() {
@@ -94,11 +86,6 @@ export default class UserCreateGroup extends React.Component {
    * @returns {Object} CreateGroup component
    */
   render() {
-    if (!this.state.loggedIn) {
-      return (
-        <Redirect to="/signin" />
-      );
-    }
     return (
       <div className="container creategroup">
         <div className="row">
@@ -107,16 +94,28 @@ export default class UserCreateGroup extends React.Component {
               <b>Create group</b>
             </h5>
             <div className="row w3-card w3-white">
-              <form id="creategroupform" onSubmit={this.onSubmit}>
+              <form
+                id="creategroupform"
+                onSubmit={this.onSubmit}
+              >
                 <div className="form-group">
-                  <label htmlFor="groupname">Group Name</label>
-                  <input value={this.state.group} onChange={this.onChange}
-                    id="groupname" type="text"
-                    className="signinform" placeholder="andela-abuja"
-                    name="group" required/>
+                  <label htmlFor="groupname">
+                    Group Name
+                  </label>
+                  <input
+                    value={this.state.group}
+                    onChange={this.onChange}
+                    id="groupname"
+                    type="text"
+                    className="signinform"
+                    placeholder="type ...."
+                    name="group" required
+                  />
                 </div>
-                <button type="submit" className="signinformbtn">
-                  Create Group
+                <button
+                  type="submit"
+                  className="signinformbtn"
+                >Send
                 </button>
               </form>
             </div>

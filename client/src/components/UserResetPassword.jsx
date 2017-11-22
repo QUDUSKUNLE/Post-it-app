@@ -1,7 +1,8 @@
 import React from 'react';
 import toastr from 'toastr';
-import resetPassword from '../actions/resetPasswordActions.js';
-import SignInStore from '../stores/SignInStore.js';
+import PropTypes from 'prop-types';
+import resetPasswordAction from '../actions/resetPasswordAction';
+import SignInStore from '../stores/SignInStore';
 
 /**
  * @description - renders ResetPassword Component
@@ -18,10 +19,6 @@ export default class UserResetPassword extends React.Component {
     super(props);
     this.state = { email: '' };
 
-    /**
-     * @description This binding is necessary to make `this` work
-     * in the callback
-     */
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handlePasswordReset = this.handlePasswordReset.bind(this);
@@ -31,7 +28,7 @@ export default class UserResetPassword extends React.Component {
    * @method componentDidMount
    * @description Adds an event Listener to the Store and fires
    * when the component is fully mounted.
-   * @return { void} void
+   * @return { void}
    * @memberof UserResetPassword
   */
   componentDidMount() {
@@ -41,7 +38,7 @@ export default class UserResetPassword extends React.Component {
   /**
    * @method componentWillUnmount
    * @description remove event Listener from the Store and fires.
-   * @return {void} void
+   * @return {void}
    * @memberof UserResetPassword
    */
   componentWillUnmount() {
@@ -52,7 +49,7 @@ export default class UserResetPassword extends React.Component {
   /**
    * onChange event.
    * @param {object} event The first number.
-   * @returns {void} bind input values to name.
+   * @returns {void}
    */
   onChange(event) {
     this.setState({
@@ -62,13 +59,13 @@ export default class UserResetPassword extends React.Component {
 
   /**
    * @description This handles resetPassword form submission
-   * @param {object} event .
-   * @returns {void} .
+   * @param {object} event
+   * @returns {void}
    */
   onSubmit(event) {
     event.preventDefault();
     const resetEmail = { email: this.state.email };
-    resetPassword(resetEmail);
+    resetPasswordAction(resetEmail);
     this.setState({ email: '' });
   }
 
@@ -85,8 +82,7 @@ export default class UserResetPassword extends React.Component {
 
   /**
    * @description - render method, React lifecycle method
-   * @returns {*} ResetPassword component
-   * @ResetPassword
+   * @returns {obejct} ResetPassword component
    */
   render() {
     return (
@@ -97,19 +93,28 @@ export default class UserResetPassword extends React.Component {
         <div className="container resetform">
           <div className="row">
             <div className="col-md-6 col-md-offset-3 w3-card w3-white">
-              <form onSubmit={this.onSubmit} id="resetform">
+              <form
+                onSubmit={this.onSubmit}
+                id="resetform"
+              >
                 <div className="form-group">
                   <label htmlFor="email">
                     Enter email
                   </label>
-                  <input value={this.state.email}
+                  <input
+                    value={this.state.email}
                     onChange={this.onChange}
                     id="email" type="email"
-                    className="signinform" placeholder="johndoe@example.com"
-                    name="email" required />
+                    className="signinform"
+                    placeholder="johndoe@example.com"
+                    name="email"
+                    required
+                  />
                 </div>
-                <button type="submit"
-                  className="signinformbtn">Send
+                <button
+                  type="submit"
+                  className="signinformbtn"
+                >Send
                 </button>
               </form>
             </div>
@@ -119,3 +124,9 @@ export default class UserResetPassword extends React.Component {
     );
   }
 }
+
+UserResetPassword.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  })
+};

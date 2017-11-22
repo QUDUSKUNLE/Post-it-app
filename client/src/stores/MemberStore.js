@@ -1,10 +1,9 @@
 import { EventEmitter } from 'events';
-import AppDispatcher from '../dispatcher/AppDispatcher.js';
-import { getGroupMembers } from '../helper/helper.js';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import { getGroupMembers } from '../helper/formatResponse';
 import {
-  ALL_USERS,
   ADD_MEMBER,
-  GET_MEMBERS_OF_GROUP } from '../constants/ActionConstants.js';
+  GET_MEMBERS_OF_GROUP, SEARCH_USER } from '../constants/ActionConstants';
 
 /**
  * Holds the storage, listen to actions and update the stores
@@ -12,29 +11,28 @@ import {
  */
 class MemberStore extends EventEmitter {
   /**
-   * sets the members, general to an empty []
    * @constructor
    */
   constructor() {
     super();
     this.groupIndex = [];
     this.members = [];
-    this.allUser = [];
     this.group = '';
     this.groupId = '';
+    this.searchUser = {};
     this.addMemberResponse = '';
-    this.registeredUsers = this.registeredUsers.bind(this);
+    this.getSearchUser = this.getSearchUser.bind(this);
     this.allGroupMembers = this.allGroupMembers.bind(this);
     this.addMember = this.addMember.bind(this);
     this.handleActions = this.handleActions.bind(this);
   }
 
   /**
-   * @method allGeneralUsers
-   * @return {object} generalmembers - The general stored in the constructor
+   * @method getSearchUser
+   * @return {object} searchUser - searchUser stored in the constructor method
    */
-  registeredUsers() {
-    return this.allUser;
+  getSearchUser() {
+    return [this.searchUser];
   }
 
   /**
@@ -57,22 +55,22 @@ class MemberStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} action - Action type and data
+   * @param {object} action - Action payLoad
    * @return {null} -
    */
   handleActions(action) {
     switch (action.type) {
-      case ALL_USERS:
-        this.allUser = action.allUser;
-        this.emit('ALL_USERS');
-        break;
-
       case GET_MEMBERS_OF_GROUP:
         this.groupIndex = action.members;
         this.members = getGroupMembers(this.groupIndex);
         this.groupId = (action.members)[1];
         this.group = (action.members)[2];
         this.emit('GET_MEMBERS_OF_GROUP');
+        break;
+
+      case SEARCH_USER:
+        this.searchUser = action.search;
+        this.emit('SEARCH_USER');
         break;
 
       case ADD_MEMBER:

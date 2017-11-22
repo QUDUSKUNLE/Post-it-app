@@ -1,8 +1,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://choosealicense.com/licenses/mit/)
 [![Code Climate](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/gpa.svg)](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app)
-[![Issue Count](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app/badges/issue_count.svg)](https://codeclimate.com/github/QUDUSKUNLE/Post-it-app)
 [![Build Status](https://travis-ci.org/QUDUSKUNLE/Post-it-app.svg?branch=feedback-implementation)](https://travis-ci.org/QUDUSKUNLE/Post-it-app)
-[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=feedback-implementation)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=feedback-implementation)
+[![Coverage Status](https://coveralls.io/repos/github/QUDUSKUNLE/Post-it-app/badge.svg?branch=second%2Ffeedback-implementation)](https://coveralls.io/github/QUDUSKUNLE/Post-it-app?branch=second%2Ffeedback-implementation)
 
 # PostIt-app
   PostIt is a simple application that allows friends come together and create group(s) for notifications.
@@ -37,7 +36,7 @@
   <b>.</b> Users can sign out
 
 ## API Documentation
-  The Link to API documentation can be found here <a href="https://app.apiary.io/postitapp/editor">API Doumentation</a>
+  The Link to API documentation can be found here <a href="https://postitapp.docs.apiary.io/#reference">API Doumentation</a>
 
 ## Getting Started
   Kindly follow the steps below to setup a local development environment.

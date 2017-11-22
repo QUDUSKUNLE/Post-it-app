@@ -1,6 +1,6 @@
 import React from 'react';
 import expect from 'expect';
-import UserGroups from '../../src/components/UserGroups.jsx';
+import UserGroups from '../../src/components/UserGroups';
 
 
 describe('<UserGroups/>', () => {
@@ -8,3 +8,4 @@ describe('<UserGroups/>', () => {
     expect(UserGroups).toBeDefined();
   });
 });
+
