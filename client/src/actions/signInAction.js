@@ -22,8 +22,11 @@ export const signInAction = user => axios.post('/api/v1/signin', user)
       type: SIGN_IN_SUCCESS,
       response: res.data
     });
-  }).catch((error) => catchError(error));
-
+  }).catch((error) => {
+    if (error.response) {
+      catchError(error);
+    }
+  });
 /**
  * @description - An action that makes API call to server
  *  to sign in user`s via Google
