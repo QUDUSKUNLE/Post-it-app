@@ -20,8 +20,8 @@ export default class MessageController {
    */
   static sendMessageToGroup(req, res) {
     const { message, priority } = req.body;
-    const groupId = req.params.groupId;
-    const userId = req.decoded.token.userId;
+    const { groupId } = req.params;
+    const { userId } = req.decoded.token;
     const time = moment().format('llll');
     QueryDatabase.getUserEmailAndPhoneNumber(userId)
       .then((sender) => {
@@ -63,7 +63,7 @@ export default class MessageController {
    * @return {Object} json response contains all message in a group
    */
   static getMessage(req, res) {
-    const groupId = req.params.groupId;
+    const { groupId } = req.params;
     return Promise.all([
       dbConfig.database().ref('Messages').child(groupId)
         .once('value', snapshot => snapshot.val())

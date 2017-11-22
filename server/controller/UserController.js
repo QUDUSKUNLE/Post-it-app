@@ -27,16 +27,14 @@ export default class UserController {
     } else {
       dbConfig.auth().createUserWithEmailAndPassword(email, password)
         .then((user) => {
-          const userToken = generateToken(user.uid, email);
-          const name = username.toLowerCase();
           dbConfig.database().ref(`users/${user.uid}`).set({
             userEmail: email,
-            userName: name,
+            userName: username.toLowerCase(),
             phone_Number: phoneNumber,
             time: moment().format('llll'),
             userId: user.uid
           });
-          return { token: userToken };
+          return { token: generateToken(user.uid, email) };
         }).then(response => res.status(201).send({
           message: 'User`s sign up successfully', response }))
         .catch(error => res.status(422).send({ error }));
@@ -69,28 +67,28 @@ export default class UserController {
    * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
-    const idToken = req.body.credential.idToken;
+    const { idToken } = req.body.credential;
     const credentials = firebase.auth.GoogleAuthProvider.credential(idToken);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
-        const userToken = generateToken(user.uid, user.email);
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
-              const username = user.displayName;
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: user.email,
-                userName: username,
+                userName: user.displayName,
                 phone_Number: '08092893120',
                 time: moment().format('llll'),
                 userId: user.uid
               });
               return res.status(200).send({
-                message: 'user`s signed in succesfully', token: userToken
+                message: 'user`s signed in succesfully',
+                token: generateToken(user.uid, user.email)
               });
             }
             return res.status(200).send({
-              message: 'user`s signed in succesfully', token: userToken
+              message: 'user`s signed in succesfully',
+              token: generateToken(user.uid, user.email)
             });
           });
       })
