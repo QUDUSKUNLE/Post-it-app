@@ -83,6 +83,14 @@ export default
     phoneNumber: '08092893120'
   },
 
+  signUpWithAlreadyUsedUserName: {
+    email: 'kawthar@gmail.com',
+    password: 'kawthar1',
+    confirmPassword: 'kawthar1',
+    username: 'everette murphy',
+    phoneNumber: '08092893120'
+  },
+
   // signIn MockData
   signInWithWrongPassword: {
     email: 'Kemi@gmail.com',

@@ -75,7 +75,7 @@ describe('Sign up', () => {
     });
 
   it('route should not allow user`s whose password and confirmPassword ' +
-  'did not match to sign up',
+  'does not match to sign up',
     (done) => {
       chai.request(server)
         .post('/api/v1/signup')
@@ -121,6 +121,18 @@ describe('Sign up', () => {
         done();
       });
   });
+
+  it('route should not allow an already sign up username to sign up',
+    (done) => {
+      chai.request(server)
+        .post('/api/v1/signup')
+        .send(mockData.signUpWithAlreadyUsedUserName)
+        .end((err, res) => {
+          res.should.have.status(409);
+          assert.equal('Username already exist!', res.body.error.code);
+          done();
+        });
+    });
 
   it('route should allow new user`s to sign up', (done) => {
     chai.request(server)
