@@ -58,3 +58,12 @@ export const addMember = memberDetails =>
       });
     })
     .catch(error => catchError(error));
+
+/**
+ * @description - An action that makes API call to server
+ * to check if a username already exist
+ * @param { object } userName - username
+ * @returns { object } server response
+ */
+export const isUserNameExist = userName => axios.post('/api/v1/checkuser',
+  userName);

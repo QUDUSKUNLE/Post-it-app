@@ -2,6 +2,8 @@ import firebase from 'firebase';
 import moment from 'moment';
 import generateToken from '../utils/generateToken';
 import dbConfig from '../config/dbConfig';
+import FormatDatabaseResult from '../utils/FormatDatabaseResult';
+import User from '../helper/User';
 import 'babel-polyfill';
 
 /**
@@ -9,6 +11,29 @@ import 'babel-polyfill';
  * @class UserController
  */
 export default class UserController {
+
+  /**
+   * @description This method allow users to search users
+   * route POST: api/v1/search?:user
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} json response contains reset password details
+   */
+  static checkUser(req, res) {
+    const { userName } = req.body;
+    dbConfig.database().ref('users/').orderByChild('userName/')
+      .startAt(userName)
+      .endAt(`${userName}\uf8ff`)
+      .once('value', (snapshot) => {
+        let response;
+        if (snapshot.val()) {
+          response = true;
+        } else {
+          response = false;
+        }
+        return res.status(200).send({ response });
+      });
+  }
 
   /**
    * @description This method signup a new user
@@ -25,19 +50,26 @@ export default class UserController {
     if (password !== confirmPassword) {
       res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
-      dbConfig.auth().createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-          dbConfig.database().ref(`users/${user.uid}`).set({
-            userEmail: email,
-            userName: username.toLowerCase(),
-            phone_Number: phoneNumber,
-            time: moment().format('llll'),
-            userId: user.uid
-          });
-          return { token: generateToken(user.uid, email) };
-        }).then(response => res.status(201).send({
-          message: 'User`s sign up successfully', response }))
-        .catch(error => res.status(422).send({ error }));
+      User.checkUser(username).then((userStatus) => {
+        if (userStatus === true) {
+          res.status(409).send({ error:
+            { code: 'Username already exist!' } });
+        } else {
+          dbConfig.auth().createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+              dbConfig.database().ref(`users/${user.uid}`).set({
+                userEmail: email,
+                userName: username.toLowerCase(),
+                phone_Number: phoneNumber,
+                time: moment().format('llll'),
+                userId: user.uid
+              });
+              return { token: generateToken(user.uid, email) };
+            }).then(respon => res.status(201).send({
+              message: 'User`s sign up successfully', respon }))
+            .catch(error => res.status(422).send({ error }));
+        }
+      });
     }
   }
 
@@ -120,19 +152,14 @@ export default class UserController {
    */
   static searchUser(req, res) {
     const { keyword } = req.body;
-    const user = {};
     dbConfig.database().ref('users/').orderByChild('userName/')
       .startAt(keyword)
       .endAt(`${keyword}\uf8ff`)
+      .limitToFirst(10)
       .once('value', (snapshot) => {
         let response;
         if (snapshot.val()) {
-          Object.keys(snapshot.val()).forEach(() => {
-            user.email = (Object.values(snapshot.val())[0]).userEmail;
-            user.userName = (Object.values(snapshot.val())[0]).userName;
-            user.userId = (Object.keys(snapshot.val()))[0];
-          });
-          response = user;
+          response = FormatDatabaseResult.formatSearchResult(snapshot.val());
         } else {
           response = { user: 'No user Found' };
         }
