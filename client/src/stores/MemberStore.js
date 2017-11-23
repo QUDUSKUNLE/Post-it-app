@@ -19,7 +19,7 @@ class MemberStore extends EventEmitter {
     this.members = [];
     this.group = '';
     this.groupId = '';
-    this.searchUser = {};
+    this.searchUser = [];
     this.addMemberResponse = '';
     this.getSearchUser = this.getSearchUser.bind(this);
     this.allGroupMembers = this.allGroupMembers.bind(this);
@@ -32,7 +32,7 @@ class MemberStore extends EventEmitter {
    * @return {object} searchUser - searchUser stored in the constructor method
    */
   getSearchUser() {
-    return [this.searchUser];
+    return this.searchUser;
   }
 
   /**
@@ -56,7 +56,7 @@ class MemberStore extends EventEmitter {
    * Receives actions and update the stores accordingly
    * @method handleActions
    * @param {object} action - Action payLoad
-   * @return {null} -
+   * @return {void} -
    */
   handleActions(action) {
     switch (action.type) {

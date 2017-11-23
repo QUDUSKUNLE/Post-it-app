@@ -99,7 +99,6 @@ export default class GroupController {
     User.details(memberId)
       .then((response) => {
         Group.name(groupId).then((group) => {
-          // const groupName = group[0];
           dbConfig.database().ref('GroupMember').child(groupId)
             .once('value', (snapshot) => {
               if (snapshot.hasChild(memberId)) {

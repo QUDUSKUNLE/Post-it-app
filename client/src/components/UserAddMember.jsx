@@ -25,7 +25,7 @@ export default class UserAddMember extends React.Component {
       group: '',
       member: '',
       keyword: '',
-      searchResult: [],
+      searchResult: []
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -64,7 +64,9 @@ export default class UserAddMember extends React.Component {
    * @memberOf ChatBox
    */
   onChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value,
+      searchResult: MemberStore.getSearchUser()
+    });
   }
 
   /**
@@ -170,9 +172,9 @@ export default class UserAddMember extends React.Component {
                   name="keyword" required
                 />
                 <datalist id="searchUser">
-                  {this.state.searchResult.map((user, userId) =>
+                  {(this.state.searchResult).map((user, index) =>
                     (<option
-                      key={userId} value={user.userName}
+                      key={index} value={user.userName}
                       onClick={this.onSelect(user.userId)}
                     />)
                   )}
