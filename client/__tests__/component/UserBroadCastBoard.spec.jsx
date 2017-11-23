@@ -96,7 +96,6 @@ describe('<UserBroadCastBoard/>', () => {
   });
   it('expects componentDidMount to mount when event is fired', () => {
     expect(mockOnMessage.displayName).toEqual('on');
-    expect(wrapper.state().loggedIn).toEqual(true);
     expect(wrapper.state().groupMessage).toEqual(mockMessageResponse());
   });
   it('expects componentDidMount to mount', () => {

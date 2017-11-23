@@ -161,7 +161,7 @@ export default class UserController {
         if (snapshot.val()) {
           response = FormatDatabaseResult.formatSearchResult(snapshot.val());
         } else {
-          response = { user: 'No user Found' };
+          response = [{ userName: 'No user Found', userId: 'No user Found' }];
         }
         return res.status(200).send({ response });
       });
