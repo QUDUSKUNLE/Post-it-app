@@ -14,7 +14,7 @@ export default class UserController {
 
   /**
    * @description This method allow users to search users
-   * route POST: api/v1/search?:user
+   * route POST: api/v1/checkuser
    * @param {Object} req request object
    * @param {Object} res response object
    * @return {Object} json response contains reset password details
@@ -50,7 +50,7 @@ export default class UserController {
     if (password !== confirmPassword) {
       res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
-      User.checkUser(username).then((userStatus) => {
+      User.checkUser(username.toLowerCase()).then((userStatus) => {
         if (userStatus === true) {
           res.status(409).send({ error:
             { code: 'Username already exist!' } });
@@ -65,8 +65,8 @@ export default class UserController {
                 userId: user.uid
               });
               return { token: generateToken(user.uid, email) };
-            }).then(respon => res.status(201).send({
-              message: 'User`s sign up successfully', respon }))
+            }).then(response => res.status(201).send({
+              message: 'User`s sign up successfully', response }))
             .catch(error => res.status(422).send({ error }));
         }
       });

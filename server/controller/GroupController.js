@@ -1,6 +1,7 @@
 import moment from 'moment';
 import dbConfig from '../config/dbConfig';
-import QueryDatabase from '../helper/QueryDatabase';
+import User from '../helper/User';
+import Group from '../helper/Group';
 
 /**
  * @description This class create and read functions for group
@@ -27,7 +28,7 @@ export default class GroupController {
             time: moment().format('llll')
           })
             .then((response) => {
-              QueryDatabase.getUserEmailAndPhoneNumber(userId)
+              User.details(userId)
                 .then((userEmailAndPhone) => {
                   dbConfig.database().ref(`UserGroups/${userId}`)
                     .child(groupName).set(response.key);
@@ -57,7 +58,7 @@ export default class GroupController {
    */
   static getMembers(req, res) {
     const { groupId } = req.params;
-    QueryDatabase.getGroupName(groupId).then((groupName) =>
+    Group.name(groupId).then((groupName) =>
       Promise.all([
         dbConfig.database().ref('GroupMember').child(groupId)
           .once('value', snapshot => snapshot.val()),
@@ -95,17 +96,17 @@ export default class GroupController {
   static addMemberToGroup(req, res) {
     const { memberId } = req.body;
     const { groupId } = req.params;
-    QueryDatabase.getUserEmailAndPhoneNumber(memberId)
+    User.details(memberId)
       .then((response) => {
-        QueryDatabase.getGroupName(groupId).then((group) => {
-          const groupName = group[0];
+        Group.name(groupId).then((group) => {
+          // const groupName = group[0];
           dbConfig.database().ref('GroupMember').child(groupId)
             .once('value', (snapshot) => {
               if (snapshot.hasChild(memberId)) {
                 res.status(409).send({ error: 'User`s already a member' });
               } else {
                 dbConfig.database().ref(`UserGroups/${memberId}`)
-                .child(groupName).set(groupId);
+                  .child(group[0]).set(groupId);
                 dbConfig.database().ref(`GroupMember/${groupId}`)
                   .child(memberId).set(response.userName);
                 dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)

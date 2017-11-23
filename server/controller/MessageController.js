@@ -1,10 +1,11 @@
 import moment from 'moment';
 
 import dbConfig from '../config/dbConfig';
-import FormatDatabaseResult from '../helper/FormatDatabaseResult';
+import FormatDatabaseResult from '../utils/FormatDatabaseResult';
 import sendMail from '../utils/sendMail';
 import sendSMS from '../utils/sendSMS';
-import QueryDatabase from '../helper/QueryDatabase';
+import User from '../helper/User';
+import Group from '../helper/Group';
 
 /**
  * @description This class create and read functions for Messages
@@ -23,11 +24,11 @@ export default class MessageController {
     const { groupId } = req.params;
     const { userId } = req.decoded.token;
     const time = moment().format('llll');
-    QueryDatabase.getUserEmailAndPhoneNumber(userId)
+    User.details(userId)
       .then((sender) => {
         const userName = sender.userName;
         const email = sender.userEmail;
-        QueryDatabase.getGroupPhoneNumbers(groupId)
+        Group.emailPhoneNumbers(groupId)
           .then((groupPhoneAndEmail) => {
             if ((priority === 'urgent') || (priority === 'critical')) {
               const groupEmails = FormatDatabaseResult.getGroupEmails(
