@@ -7,7 +7,8 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/GroupStore.js');
 
 describe('Group Store', () => {
-  describe('Test for allGroups method', () => {
+  // test for allGroups Method
+  describe('test for allGroups method', () => {
     let groups;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -27,10 +28,9 @@ describe('Group Store', () => {
       expect(GroupStore.allGroups()).toEqual([]);
     });
   });
-});
 
-describe('Group Store', () => {
-  describe('Test for createGroup method', () => {
+  // Test for createGroup Method
+  describe('createGroup method', () => {
     let message;
     let AppDispatcherMock;
     beforeEach(() => {
