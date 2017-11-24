@@ -45,7 +45,7 @@ describe('<UserAddMember/>', () => {
     }
   );
 
-  it('component expected to be defined', () => {
+  it('component is expected to be defined', () => {
     expect(UserAddMember).toBeDefined();
     expect(wrapper.state()).toBeDefined();
   });

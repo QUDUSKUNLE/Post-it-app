@@ -6,7 +6,7 @@ import '../../src/__mock__/firebaseMock.js';
 import mockData from '../../src/__mock__/mockData';
 import resetPasswordAction from '../../src/actions/resetPasswordAction';
 
-describe('resetPasswordAction', () => {
+describe('ResetPassword action', () => {
   let mockAxios;
   let dispatchSpy;
 
@@ -21,19 +21,18 @@ describe('resetPasswordAction', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for resetPasswordAction Method', () => {
-    it('should dispatch an action', () => {
-      resetPasswordAction(mockData.mail).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('PASSWORD_RESET_' +
-         'SUCCESS');
-      });
+  it(`should dispatch an action PASSWORD_RESET_SUCCESS on success
+   of resetPassword action`, () => {
+    resetPasswordAction(mockData.mail).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.calledOnce).toEqual(true);
+      expect(dispatchSpy.getCall(0).args[0].type)
+        .toBe('PASSWORD_RESET_SUCCESS');
     });
   });
 });
 
-describe('resetPasswordAction', () => {
+describe('ResetPassword cction', () => {
   let mockResetPasswordError;
   beforeEach(() => {
     mockResetPasswordError = sinon.stub(axios, 'post').callsFake(() =>
@@ -44,11 +43,10 @@ describe('resetPasswordAction', () => {
     axios.post.restore();
   });
 
-  describe('Test for resetPasswordAction Method', () => {
-    it('should throw error for a wrong email address', () => {
-      resetPasswordAction(mockData.email).catch(() => {
-        expect(mockResetPasswordError.throw()).toBe(true);
-      });
+  it(`should throw error when a wrong email address is passed to
+   the resetPassword action`, () => {
+    resetPasswordAction(mockData.email).catch(() => {
+      expect(mockResetPasswordError.throw()).toBe(true);
     });
   });
 });

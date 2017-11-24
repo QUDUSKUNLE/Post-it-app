@@ -31,7 +31,6 @@ describe('<UserBroadCastBoard/>', () => {
   beforeEach(() => {
     window.localStorage.setItem('userIn', JSON.stringify(true));
     const props = {
-      loggedIn: JSON.parse(localStorage.getItem('userIn')),
       defaultGroup: '',
       groups: [],
       groupId: '',
@@ -98,7 +97,7 @@ describe('<UserBroadCastBoard/>', () => {
     expect(mockOnMessage.displayName).toEqual('on');
     expect(wrapper.state().groupMessage).toEqual(mockMessageResponse());
   });
-  it('expects componentDidMount to mount', () => {
+  it('expects componentDidMount to be mounted', () => {
     expect(mockOnMembers.displayName).toEqual('on');
     expect(wrapper.state().groupMember).toEqual(mockMemberResponse()[0]);
   });

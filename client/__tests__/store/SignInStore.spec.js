@@ -8,7 +8,8 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/SignInStore.js');
 
 describe('SignIn Store', () => {
-  describe('Test for signInUser method', () => {
+  // signInUser method
+  describe('signInUser method', () => {
     let response;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -20,7 +21,8 @@ describe('SignIn Store', () => {
         type: 'SIGN_IN_SUCCESS', response: {}
       });
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when SIGN_IN_SUCCESS action type is
+     dispatched to the store`, () => {
       AppDispatcherMock({ type: 'SIGN_IN_SUCCESS', response });
       expect(SignInStore.signInUser()).toEqual(response);
     });
@@ -28,10 +30,9 @@ describe('SignIn Store', () => {
       expect(SignInStore.signInUser()).toEqual({});
     });
   });
-});
 
-describe('SignIn Store', () => {
-  describe('Test for passwordReset method', () => {
+// passwordReset method
+  describe('passwordReset method', () => {
     let response;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -43,19 +44,19 @@ describe('SignIn Store', () => {
         type: 'PASSWORD_RESET_SUCCESS', response: {}
       });
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when action SIGN_UP_SUCCESS action is dispatched
+     to the store`, () => {
       AppDispatcherMock({ type: 'PASSWORD_RESET_SUCCESS', response });
       expect(SignInStore.passwordReset()).toEqual(response);
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return an empty object on first call when no action is
+     dispatched to SignInStore`, () => {
       expect(SignInStore.passwordReset()).toEqual({});
     });
   });
-});
 
-
-describe('SignIn Store', () => {
-  describe('Test for googleSignIn method', () => {
+// googleSignIn method
+  describe('googleSignIn method', () => {
     let response;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -67,11 +68,13 @@ describe('SignIn Store', () => {
         type: 'GOOGLE_SIGN_IN_SUCCESS', response: {}
       });
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when action GOOGLE_SIGN_IN_SUCCESS action is
+     dispatched to SignInstore`, () => {
       AppDispatcherMock({ type: 'GOOGLE_SIGN_IN_SUCCESS', response });
       expect(SignInStore.googleSignIn()).toEqual(response);
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return an empty object on first call when no action is
+     dispatched to SignInStore`, () => {
       expect(SignInStore.googleSignIn()).toEqual({});
     });
   });

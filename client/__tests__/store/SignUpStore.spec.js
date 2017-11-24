@@ -7,7 +7,7 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/SignUpStore.js');
 
 describe('SignUp Store', () => {
-  describe('Test for signUpUser method', () => {
+  describe('signUpUser method', () => {
     let response;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -21,7 +21,8 @@ describe('SignUp Store', () => {
       });
     });
 
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when action SIGN_UP_SUCCESS action is dispatched
+     to the store`, () => {
       AppDispatcherMock({ type: 'SIGN_UP_SUCCESS', response });
       expect(SignUpStore.signUpUser()).toEqual(response);
     });

@@ -159,7 +159,7 @@ export default class UserController {
       .once('value', (snapshot) => {
         let response;
         if (snapshot.val()) {
-          response = FormatDatabaseResult.formatSearchResult(snapshot.val());
+          response = FormatDatabaseResult.searchResult(snapshot.val());
         } else {
           response = [{ userName: 'No user Found', userId: 'No user Found' }];
         }

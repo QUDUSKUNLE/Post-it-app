@@ -45,11 +45,11 @@ export default class FormatDatabaseResult {
    * @returns {Object} -
    * @memberof Helper
    */
-  static formatSearchResult(searchResult) {
+  static searchResult(searchResult) {
     const search = Object.values((searchResult));
-    const searchVal = search.map(user =>
+    const searchValue = search.map(user =>
       ({ userName: user.userName, userId: user.userId }));
-    return searchVal;
+    return searchValue;
   }
 
 }

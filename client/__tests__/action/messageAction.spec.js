@@ -11,7 +11,7 @@ import mockData from '../../src/__mock__/mockData';
 import { getGroupMessage, sendGroupMessage }
   from '../../src/actions/messageAction';
 
-describe('MessageActions', () => {
+describe('GetGroupMessage action', () => {
   let mockAxios;
   let dispatchSpy;
   const messageResponse = helpGetGroupMessages(
@@ -28,21 +28,19 @@ describe('MessageActions', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for getGroupMessage Method', () => {
-    it('should dispatch an action here', () => {
-      expect(getGroupMessage).toBeDefined();
-    });
-    it('should dispatch an action', () => {
-      getGroupMessage(mockData.groupId).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.called).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_GROUP_MESSAGE');
-      });
+  it('is expected to be defined', () => {
+    expect(getGroupMessage).toBeDefined();
+  });
+  it('should dispatch an action', () => {
+    getGroupMessage(mockData.groupId).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.called).toEqual(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_GROUP_MESSAGE');
     });
   });
 });
 
-describe('MessageActions', () => {
+describe('GetGroupMessage action', () => {
   let mockGetGroupMessageError;
   beforeEach(() => {
     mockGetGroupMessageError = sinon.stub(axios, 'get').callsFake(() =>
@@ -52,16 +50,14 @@ describe('MessageActions', () => {
   afterEach(() => {
     axios.get.restore();
   });
-  describe('Test for getGroupMessage Method', () => {
-    it('should throw error if no message found', () => {
-      getGroupMessage(mockData.groupId).catch(() => {
-        expect(mockGetGroupMessageError.throw()).toBe(true);
-      });
+  it('should throw error if no encoutered internal server error', () => {
+    getGroupMessage(mockData.groupId).catch(() => {
+      expect(mockGetGroupMessageError.throw()).toBe(true);
     });
   });
 });
 
-describe('MessageActions', () => {
+describe('sendGroupMessage action', () => {
   let mockAxios;
 
   beforeEach(() => {
@@ -73,13 +69,11 @@ describe('MessageActions', () => {
     axios.post.restore();
   });
 
-  describe('Test for sendGroupMessage Method', () => {
-    it('should dispatch an action', () => {
-      expect(sendGroupMessage).toBeDefined();
-    });
-    it('should dispatch an action', () => {
-      sendGroupMessage(mockData.messageDetails);
-      expect(mockAxios.calledOnce).toBe(true);
-    });
+  it('is expected to be defined', () => {
+    expect(sendGroupMessage).toBeDefined();
+  });
+  it('expects mockAxios to be calledOnce', () => {
+    sendGroupMessage(mockData.messageDetails);
+    expect(mockAxios.calledOnce).toBe(true);
   });
 });

@@ -9,28 +9,28 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/MessageStore.js');
 
 
-describe('Member Store', () => {
-  describe('Test for addMember method', () => {
+describe('Message Store', () => {
+  // allGroupMessage method
+  describe('allGroupMessage method', () => {
     let message;
     let AppDispatcherMock;
     beforeEach(() => {
       AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
-      message = message = helpGetGroupMessages(getMessageResponse.response);
+      message = helpGetGroupMessages(getMessageResponse.response);
     });
     afterEach(() => {
       MessageStore.handleActions({
         type: 'SEND_GROUP_MESSAGE', message: []
       });
     });
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when SEND_GROUP_MESSAGE action type is
+     dispatched to the store`, () => {
       AppDispatcherMock({ type: 'SEND_GROUP_MESSAGE', message });
       expect(MessageStore.allGroupMessage()).toEqual([message]);
     });
   });
-});
-
-describe('Message Store', () => {
-  describe('Test for allGroupMessage method', () => {
+  // allGroupMessage method
+  describe('allGroupMessage method', () => {
     let message;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -46,9 +46,9 @@ describe('Message Store', () => {
       AppDispatcherMock({ type: 'GET_GROUP_MESSSAGE', message });
       expect(MessageStore.allGroupMessage()).toEqual([message, []]);
     });
-    it('should return an empty object on first call', () => {
+    it('should return an empty object on first call when nothing is dispatched',
+    () => {
       expect(MessageStore.allGroupMessage()).toEqual([]);
     });
   });
 });
-

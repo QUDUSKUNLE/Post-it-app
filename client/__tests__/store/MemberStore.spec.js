@@ -8,7 +8,8 @@ jest.mock('../../src/dispatcher/AppDispatcher');
 jest.dontMock('../../src/stores/MemberStore.js');
 
 describe('Member Store', () => {
-  describe('Test for addMember method', () => {
+  // Add member method
+  describe('test for addMember method', () => {
     let member;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -22,7 +23,8 @@ describe('Member Store', () => {
       });
     });
 
-    it('should be registered to AppDispatcher', () => {
+    it(`should return response when action ADD_MEMBER action is dispatched
+    to the store`, () => {
       AppDispatcherMock({ type: 'ADD_MEMBER', member });
       expect(MemberStore.addMember()).toEqual(member);
     });
@@ -30,11 +32,9 @@ describe('Member Store', () => {
       expect(MemberStore.addMember()).toEqual('');
     });
   });
-});
 
-
-describe('Member Store', () => {
-  describe('Test for allGroupMembers method', () => {
+  // allGroupMembers method
+  describe('allGroupMembers method', () => {
     let members;
     let AppDispatcherMock;
     beforeEach(() => {
@@ -52,6 +52,34 @@ describe('Member Store', () => {
       AppDispatcherMock({ type: 'GET_MEMBERS_OF_GROUP', members });
       const response = MemberStore.allGroupMembers();
       expect(response[1]).toEqual(members[2]);
+    });
+  });
+
+  // allGroupMembers method
+  describe('searchUser method', () => {
+    let search;
+    let AppDispatcherMock;
+    beforeEach(() => {
+      AppDispatcherMock = AppDispatcher.register.mock.calls[0][0];
+      search = groupMemberResponse.response;
+    });
+
+    afterEach(() => {
+      MemberStore.handleActions({
+        type: 'SEARCH_USER', search: []
+      });
+    });
+
+    it(`should return response when action SEARCH_USER action is dispatched
+     to MemberStore store`, () => {
+      AppDispatcherMock({ type: 'SEARCH_USER', search });
+      const response = MemberStore.getSearchUser();
+      expect(response).toEqual(search);
+    });
+
+    it(`should return an empty object on first call when no action
+     is dispatched to the store`, () => {
+      expect(MemberStore.getSearchUser()).toEqual([]);
     });
   });
 });
