@@ -24,7 +24,7 @@ describe('User Controller:', () => {
             const assertText = [
               'Password should be at least 6 characters',
               'and contains number'
-            ]
+            ];
             assert.equal(assertText.join(' '), res.body.error.code);
             done();
           });
@@ -171,7 +171,7 @@ describe('User Controller:', () => {
           const assertText = [
             'The password is invalid or the user does',
             'not have a password.'
-          ]
+          ];
           assert.equal(assertText.join(' '), res.body.error.message);
           done();
         });
@@ -224,7 +224,7 @@ describe('User Controller:', () => {
           const assertText = [
             'There is no user record corresponding to',
             'this identifier. The user may have been deleted.'
-          ]
+          ];
           expect(res.body.error.message).to.equal(assertText.join(' '));
           done();
         });
