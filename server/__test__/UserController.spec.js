@@ -21,8 +21,11 @@ describe('User Controller:', () => {
           .send(signUpMockData.inCorrectPassword)
           .end((err, res) => {
             res.should.have.status(400);
-            assert.equal('Password should be at least 6 characters' +
-            ' and contains number', res.body.error.code);
+            const assertText = [
+              'Password should be at least 6 characters',
+              'and contains number'
+            ]
+            assert.equal(assertText.join(' '), res.body.error.code);
             done();
           });
       });
@@ -165,8 +168,11 @@ describe('User Controller:', () => {
         .end((err, res) => {
           res.should.have.status(401);
           assert.equal('auth/wrong-password', res.body.error.code);
-          assert.equal('The password is invalid or the user does' +
-            ' not have a password.', res.body.error.message);
+          const assertText = [
+            'The password is invalid or the user does',
+            'not have a password.'
+          ]
+          assert.equal(assertText.join(' '), res.body.error.message);
           done();
         });
     });
@@ -215,9 +221,11 @@ describe('User Controller:', () => {
           res.should.have.status(401);
           assert.equal('auth/user-not-found',
             res.body.error.code);
-          expect(res.body.error.message).to.equal(
-          'There is no user record corresponding to' +
-          ' this identifier. The user may have been deleted.');
+          const assertText = [
+            'There is no user record corresponding to',
+            'this identifier. The user may have been deleted.'
+          ]
+          expect(res.body.error.message).to.equal(assertText.join(' '));
           done();
         });
     });
@@ -285,9 +293,11 @@ describe('User Controller:', () => {
           .end((err, res) => {
             assert.equal(401, res.statusCode);
             res.should.have.status(401);
-            assert.equal('There is no user record corresponding ' +
-              'to this identifier. The user may have been deleted.',
-              res.body.error.message);
+            const assertText = [
+              'There is no user record corresponding',
+              'to this identifier. The user may have been deleted.'
+            ];
+            assert.equal(assertText.join(' '), res.body.error.message);
             done();
           });
       });
