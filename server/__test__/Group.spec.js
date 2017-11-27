@@ -7,7 +7,7 @@ chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
 
-
+// Test for Group
 describe('Test for methods in helper/Group:', () => {
   const groupId = '-Kz5garRTF4ZXikiucJf';
   describe('emailPhoneNumbers method', () => {
@@ -15,6 +15,10 @@ describe('Test for methods in helper/Group:', () => {
       Group.emailPhoneNumbers(groupId).then((res) => {
         expect(res).to.be.an('object');
       });
+    });
+
+    it('is expected to be a function', () => {
+      expect(Group.emailPhoneNumbers).to.be.a('function');
     });
   });
 
