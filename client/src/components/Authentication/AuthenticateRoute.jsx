@@ -37,8 +37,8 @@ const AuthenticateRoute = (UserComponent) => {
       if (getToken) {
         if (this.isTokenExpired() === true) {
           this.setState({ expiredToken: true });
-          this.props.history.push('/');
-          toastr.error('Your session has expired');
+          this.props.history.push('/signin');
+          toastr.error('Your session has expired. Please, sign in');
           localStorage.clear();
         }
       }
