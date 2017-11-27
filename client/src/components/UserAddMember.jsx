@@ -25,7 +25,8 @@ export default class UserAddMember extends React.Component {
       group: '',
       member: '',
       keyword: '',
-      searchResult: []
+      searchResult: [],
+      show: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -80,8 +81,9 @@ export default class UserAddMember extends React.Component {
       groupId: this.props.groupId,
       memberId: $('#selectId').val()
     };
-
-    addMember(memberDetails);
+    if (!this.state.show) {
+      addMember(memberDetails);
+    }
   }
 
   /**
@@ -108,9 +110,16 @@ export default class UserAddMember extends React.Component {
    * @return {void} void
    */
   handleSearch() {
-    this.setState({
-      searchResult: MemberStore.getSearchUser()
-    });
+    if (MemberStore.getSearchUser()[0].userName === 'No user Found') {
+      this.setState({
+        show: true
+      });
+    } else {
+      this.setState({
+        searchResult: MemberStore.getSearchUser(),
+        show: false
+      });
+    }
   }
 
   /**
@@ -129,6 +138,11 @@ export default class UserAddMember extends React.Component {
    * @AddMember
    */
   render() {
+    const showNotFound = () => {
+      if (this.state.show === true) {
+        return 'User Not Found';
+      }
+    };
     return (
       <div className="modal-container">
         <Modal
@@ -179,6 +193,9 @@ export default class UserAddMember extends React.Component {
                     />)
                   )}
                 </datalist>
+                <span className="danger">
+                  {showNotFound()}
+                </span>
                 <input
                   id="selectId"
                   type="hidden"
