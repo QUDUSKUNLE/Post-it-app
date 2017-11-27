@@ -1,5 +1,6 @@
 import React from 'react';
 import jwt from 'jsonwebtoken';
+import toastr from 'toastr';
 import PropTypes from 'prop-types';
 
 const AuthenticateRoute = (UserComponent) => {
@@ -28,7 +29,7 @@ const AuthenticateRoute = (UserComponent) => {
      * @return {void} void
      */
     componentWillMount() {
-      const getToken = localStorage.getItem('token');
+      const getToken = JSON.parse(localStorage.getItem('token'));
       const isAuthenticated = localStorage.getItem('isAuthenticated');
       if (!isAuthenticated) {
         this.props.history.push('/');
@@ -36,8 +37,9 @@ const AuthenticateRoute = (UserComponent) => {
       if (getToken) {
         if (this.isTokenExpired() === true) {
           this.setState({ expiredToken: true });
-          localStorage.removeItem('token');
           this.props.history.push('/');
+          toastr.error('Your session has expired');
+          localStorage.clear();
         }
       }
     }
