@@ -35,10 +35,11 @@ export default class User {
    * @memberof User
    */
   static checkUser(userName) {
+    const user = User.normalizeUsername(userName);
     return new Promise((resolve) => {
       dbConfig.database().ref('users/').orderByChild('userName/')
-        .startAt(userName)
-        .endAt(`${userName}\uf8ff`)
+        .startAt(user)
+        .endAt(`${user}\uf8ff`)
         .once('value', (snapshot) => {
           let response;
           if (snapshot.val()) {
@@ -49,5 +50,18 @@ export default class User {
           resolve(response);
         });
     });
+  }
+
+/**
+ * @description describes a function that takes in a string,
+ * as a parameter, takes the string to lower case and returns
+ * the first character to upper case
+ * @param { string } character that will be converted to lower case
+ * @function normalizeString
+ * @return { string } a string with first character as an uppercase
+ */
+  static normalizeUsername(character) {
+    const string = character.toLowerCase();
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }
