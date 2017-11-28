@@ -81,6 +81,9 @@ export default class UserAddMember extends React.Component {
       groupId: this.props.groupId,
       memberId: $('#selectId').val()
     };
+    if ($('#selectId').val() === 'No user Found') {
+      toastr.error('User does not exist!');
+    }
     if (!this.state.show) {
       addMember(memberDetails);
     }
@@ -112,6 +115,7 @@ export default class UserAddMember extends React.Component {
   handleSearch() {
     if (MemberStore.getSearchUser()[0].userName === 'No user Found') {
       this.setState({
+        searchResult: this.state.searchResult,
         show: true
       });
     } else {
@@ -138,11 +142,6 @@ export default class UserAddMember extends React.Component {
    * @AddMember
    */
   render() {
-    const showNotFound = () => {
-      if (this.state.show === true) {
-        return 'User Not Found';
-      }
-    };
     return (
       <div className="modal-container">
         <Modal
@@ -172,7 +171,7 @@ export default class UserAddMember extends React.Component {
               </div>
               <div className="form-group">
                 <label htmlFor="search">
-                  Search User
+                  Username
                 </label>
                 <input
                   list="searchUser"
@@ -182,7 +181,7 @@ export default class UserAddMember extends React.Component {
                   onKeyPress={this.handleKeyPress}
                   type="text"
                   className="form-control"
-                  placeholder="Search ...."
+                  placeholder="type username"
                   name="keyword" required
                 />
                 <datalist id="searchUser">
@@ -193,9 +192,6 @@ export default class UserAddMember extends React.Component {
                     />)
                   )}
                 </datalist>
-                <span className="danger">
-                  {showNotFound()}
-                </span>
                 <input
                   id="selectId"
                   type="hidden"
