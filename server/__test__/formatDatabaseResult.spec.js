@@ -3,6 +3,7 @@ import chaiHttp from 'chai-http';
 import formatDatabaseResult from '../utils/FormatDatabaseResult';
 import formatDatabaseMockData from '../__mock__/formatDatabaseMockData';
 import 'babel-polyfill';
+
 chai.should();
 const expect = chai.expect;
 chai.use(chaiHttp);
@@ -16,11 +17,12 @@ describe('formatDatabaseResult class', () => {
       expect(formatDatabaseResult.getGroupEmails).to.be.a('function');
     });
 
-    it(`should return a string of emails in a group when getGroupEmails
+    it(`return a string of emails in a group when getGroupEmails
     function is called`, () => {
       expect(groupEmails).to.be.a('string');
     });
-    it('not return an empty string', () => {
+    it('return non empty string when getGroupEmails function is called',
+    () => {
       expect(groupEmails).not.to.have.length(0);
     });
   });
@@ -31,11 +33,12 @@ describe('formatDatabaseResult class', () => {
     it('have a function called getPhoneNumbers', () => {
       expect(formatDatabaseResult.getPhoneNumbers).to.be.a('function');
     });
-    it(`should return an array of phoneNumbers in a group when getPhoneNumbers
+    it(`return an array of phoneNumbers in a group when getPhoneNumbers
     function is called`, () => {
       expect(phoneNumbers).to.be.an('array');
     });
-    it('not return an empty array', () => {
+    it('return non empty array when getPhoneNumbers function is called',
+    () => {
       expect(phoneNumbers).not.to.have.length(0);
     });
   });
@@ -48,7 +51,7 @@ describe('formatDatabaseResult class', () => {
       expect(formatDatabaseResult.searchResult(
         formatDatabaseMockData.searchUser)).to.be.an('array');
     });
-    it('not return an empty array', () => {
+    it('return non empty array when searchUser function is called', () => {
       expect(formatDatabaseResult.searchResult(
         formatDatabaseMockData.searchUser)).not.to.have.length(0);
     });

@@ -14,10 +14,10 @@ describe('sendSMS', () => {
     expect(sendSMS).to.be.a('function');
   });
 
-  it('should send SMS when called', (done) => {
+  it('should return status Sent when message sent successfully', (done) => {
     sendSMS(['08052327990']).then((res) => {
       assert.equal('Sent', res[0].body.status);
-      done();
     });
+    done();
   });
 });

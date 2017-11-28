@@ -18,7 +18,7 @@ describe('generateToken', () => {
     expect(typeof token).to.be.an('string');
   });
 
-  it('should generate a token with a certain length', () => {
+  it('should generate a token with length greater than zero', () => {
     expect(token).not.to.have.length(0);
   });
 });

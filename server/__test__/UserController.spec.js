@@ -118,18 +118,6 @@ describe('User Controller:', () => {
         });
     });
 
-    it(`should throw error when user sends query with username that is already
-    in use`, (done) => {
-      chai.request(server)
-        .post('/api/v1/signup')
-        .send(signUpMockData.alreadyUsedUserName)
-        .end((err, res) => {
-          res.should.have.status(409);
-          assert.equal('Username already exist!', res.body.error.code);
-          done();
-        });
-    });
-
     it(`should send success message when user sends query that meet all
     specifications for signing up`, (done) => {
       chai.request(server)
