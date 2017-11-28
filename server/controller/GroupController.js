@@ -19,19 +19,19 @@ export default class GroupController {
   static createGroup(req, res) {
     const groupname = req.body.group;
     const { userId } = req.decoded.token;
-    const groupName = groupname.toLowerCase();
-    dbConfig.database().ref(`UserGroups/${userId}`).child(groupName)
+    const normalizeName = User.normalizeUsername(groupname);
+    dbConfig.database().ref(`UserGroups/${userId}`).child(normalizeName)
       .once('value', (snapshot) => {
         if (!snapshot.exists()) {
           dbConfig.database().ref('Groups').push({
-            group: groupName,
+            group: normalizeName,
             time: moment().format('llll')
           })
             .then((response) => {
               User.details(userId)
                 .then((userEmailAndPhone) => {
                   dbConfig.database().ref(`UserGroups/${userId}`)
-                    .child(groupName).set(response.key);
+                    .child(normalizeName).set(response.key);
                   dbConfig.database().ref(`GroupMember/${response.key}`)
                     .child(userId).set(userEmailAndPhone.userName);
                   dbConfig.database().ref(`GroupPhoneAndEmail/${response.key}`)

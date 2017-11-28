@@ -21,9 +21,10 @@ export default class UserController {
    */
   static checkUser(req, res) {
     const { userName } = req.body;
+    const normalizeName = User.normalizeUsername(userName);
     dbConfig.database().ref('users/').orderByChild('userName/')
-      .startAt(userName)
-      .endAt(`${userName}\uf8ff`)
+      .startAt(normalizeName)
+      .endAt(`${normalizeName}\uf8ff`)
       .once('value', (snapshot) => {
         let response;
         if (snapshot.val()) {
@@ -50,7 +51,8 @@ export default class UserController {
     if (password !== confirmPassword) {
       res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
-      User.checkUser(username.toLowerCase()).then((userStatus) => {
+      const normalizeName = User.normalizeUsername(username);
+      User.checkUser(normalizeName).then((userStatus) => {
         if (userStatus === true) {
           res.status(409).send({ error:
             { code: 'Username already exist!' } });
@@ -59,7 +61,7 @@ export default class UserController {
             .then((user) => {
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: email,
-                userName: username.toLowerCase(),
+                userName: normalizeName,
                 phone_Number: phoneNumber,
                 time: moment().format('llll'),
                 userId: user.uid
@@ -106,9 +108,10 @@ export default class UserController {
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
+              const normalizeName = User.normalizeUsername(user.displayName);
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: user.email,
-                userName: user.displayName,
+                userName: normalizeName,
                 phone_Number: '08092893120',
                 time: moment().format('llll'),
                 userId: user.uid
@@ -152,9 +155,10 @@ export default class UserController {
    */
   static searchUser(req, res) {
     const { keyword } = req.body;
+    const normalizeName = User.normalizeUsername(keyword);
     dbConfig.database().ref('users/').orderByChild('userName/')
-      .startAt(keyword)
-      .endAt(`${keyword}\uf8ff`)
+      .startAt(normalizeName)
+      .endAt(`${normalizeName}\uf8ff`)
       .limitToFirst(10)
       .once('value', (snapshot) => {
         let response;
