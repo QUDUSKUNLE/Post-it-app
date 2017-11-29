@@ -65,8 +65,14 @@ export default class UserAddMember extends React.Component {
    */
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    const query = { keyword: event.target.value };
-    searchUser(query);
+    if (event.target.value.length === 0) {
+      this.setState({
+        searchResult: []
+      });
+    } else {
+      const query = { keyword: event.target.value };
+      searchUser(query);
+    }
   }
 
   /**
@@ -113,9 +119,10 @@ export default class UserAddMember extends React.Component {
    * @return {void} void
    */
   handleSearch() {
-    if (MemberStore.getSearchUser()[0].userName === 'No user Found') {
+    if (MemberStore.getSearchUser()[0].userName === 'No user Found' ||
+     this.state.keyword.length === 0) {
       this.setState({
-        searchResult: this.state.searchResult,
+        searchResult: [],
         show: true
       });
     } else {
