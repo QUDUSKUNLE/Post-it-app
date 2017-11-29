@@ -33,7 +33,7 @@ export default (error) => {
   } else if (error.response.data.error.code === 'auth/wrong-password') {
     toastr.error('Incorrect user email or password');
   } else if (error.response.data.error.code === 'MemberId is required') {
-    toastr.error('Not a registered user');
+    return;
   } else if (error.response.data.error === 'Group already exists') {
     toastr.error('Group already exists');
   } else if (error.response.data.error === 'User`s already a member') {
