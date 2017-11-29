@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import capitalize from 'capitalize';
 import toastr from 'toastr';
 import $ from 'jquery';
 import { addMember, searchUser } from '../actions/memberAction';
@@ -30,7 +31,6 @@ export default class UserAddMember extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleAddMemberToGroup = this.handleAddMemberToGroup.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
@@ -43,7 +43,6 @@ export default class UserAddMember extends React.Component {
    * @memberof UserAddMember
    */
   componentDidMount() {
-    $('#selectId').val('');
     MemberStore.on('ADD_MEMBER', this.handleAddMemberToGroup);
     MemberStore.on('SEARCH_USER', this.handleSearch);
   }
@@ -65,9 +64,9 @@ export default class UserAddMember extends React.Component {
    * @memberOf ChatBox
    */
   onChange(event) {
-    this.setState({ [event.target.name]: event.target.value,
-      searchResult: MemberStore.getSearchUser()
-    });
+    this.setState({ [event.target.name]: event.target.value });
+    const query = { keyword: event.target.value };
+    searchUser(query);
   }
 
   /**
@@ -81,11 +80,15 @@ export default class UserAddMember extends React.Component {
       groupId: this.props.groupId,
       memberId: $('#selectId').val()
     };
-    if ($('#selectId').val() === 'No user Found') {
+    if ($('#selectId').val().length === 0 ||
+    $('#selectId').val() === 'No user Found') {
       toastr.error('User does not exist!');
     }
     if (!this.state.show) {
       addMember(memberDetails);
+      this.setState({
+        keyword: ''
+      });
     }
   }
 
@@ -95,19 +98,16 @@ export default class UserAddMember extends React.Component {
    * @returns {void} .
   */
   onSelect(memberId) {
-    $('#selectId').val(memberId);
-  }
-
-  /**
-   * @description This handles search query
-   * @returns {void} .
-  */
-  handleKeyPress() {
-    const query = { keyword: this.state.keyword };
-    if ((this.state.keyword).length >= 1) {
-      searchUser(query);
+    const selectedUser = (
+      MemberStore.getSearchUser().filter(user =>
+        (user.userName === capitalize(this.state.keyword))));
+    if (selectedUser[0] === undefined) {
+      $('#selectId').val('');
+    } else {
+      $('#selectId').val(selectedUser[0].userId);
     }
   }
+
   /**
    * @memberof UserAddMember
    * @return {void} void
@@ -178,7 +178,6 @@ export default class UserAddMember extends React.Component {
                   id="searchUsers"
                   value={this.state.keyword}
                   onChange={this.onChange}
-                  onKeyPress={this.handleKeyPress}
                   type="text"
                   className="form-control"
                   placeholder="type username"
@@ -187,7 +186,8 @@ export default class UserAddMember extends React.Component {
                 <datalist id="searchUser">
                   {(this.state.searchResult).map((user, index) =>
                     (<option
-                      key={index} value={user.userName}
+                      key={index}
+                      value={user.userName}
                       onClick={this.onSelect(user.userId)}
                     />)
                   )}

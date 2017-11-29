@@ -1,3 +1,5 @@
+
+import capitalize from 'capitalize';
 import dbConfig from '../config/dbConfig';
 
 
@@ -35,7 +37,7 @@ export default class User {
    * @memberof User
    */
   static checkUser(userName) {
-    const user = User.normalizeUsername(userName);
+    const user = capitalize(userName);
     return new Promise((resolve) => {
       dbConfig.database().ref('users/').orderByChild('userName/')
         .startAt(user)
@@ -50,18 +52,5 @@ export default class User {
           resolve(response);
         });
     });
-  }
-
-/**
- * @description describes a function that takes in a string,
- * as a parameter, takes the string to lower case and returns
- * the first character to upper case
- * @param { string } character that will be converted to lower case
- * @function normalizeString
- * @return { string } a string with first character as an uppercase
- */
-  static normalizeUsername(character) {
-    const string = character.toLowerCase();
-    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }

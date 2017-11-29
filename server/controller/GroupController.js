@@ -1,4 +1,5 @@
 import moment from 'moment';
+import capitalize from 'capitalize';
 import dbConfig from '../config/dbConfig';
 import User from '../helper/User';
 import Group from '../helper/Group';
@@ -19,7 +20,7 @@ export default class GroupController {
   static createGroup(req, res) {
     const groupname = req.body.group;
     const { userId } = req.decoded.token;
-    const normalizeName = User.normalizeUsername(groupname);
+    const normalizeName = capitalize(groupname);
     dbConfig.database().ref(`UserGroups/${userId}`).child(normalizeName)
       .once('value', (snapshot) => {
         if (!snapshot.exists()) {

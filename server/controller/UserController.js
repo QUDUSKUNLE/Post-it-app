@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import moment from 'moment';
+import capitalize from 'capitalize';
 import generateToken from '../utils/generateToken';
 import dbConfig from '../config/dbConfig';
 import FormatDatabaseResult from '../utils/FormatDatabaseResult';
@@ -21,7 +22,7 @@ export default class UserController {
    */
   static checkUser(req, res) {
     const { userName } = req.body;
-    const normalizeName = User.normalizeUsername(userName);
+    const normalizeName = capitalize(userName);
     dbConfig.database().ref('users/').orderByChild('userName/')
       .startAt(normalizeName)
       .endAt(`${normalizeName}\uf8ff`)
@@ -51,7 +52,7 @@ export default class UserController {
     if (password !== confirmPassword) {
       res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
-      const normalizeName = User.normalizeUsername(username);
+      const normalizeName = capitalize(username);
       User.checkUser(normalizeName).then((userStatus) => {
         if (userStatus === true) {
           res.status(409).send({ error:
@@ -108,7 +109,7 @@ export default class UserController {
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
-              const normalizeName = User.normalizeUsername(user.displayName);
+              const normalizeName = capitalize(user.displayName);
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: user.email,
                 userName: normalizeName,
@@ -155,7 +156,7 @@ export default class UserController {
    */
   static searchUser(req, res) {
     const { keyword } = req.body;
-    const normalizeName = User.normalizeUsername(keyword);
+    const normalizeName = capitalize(keyword);
     dbConfig.database().ref('users/').orderByChild('userName/')
       .startAt(normalizeName)
       .endAt(`${normalizeName}\uf8ff`)

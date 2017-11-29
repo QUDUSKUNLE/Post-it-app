@@ -37,12 +37,4 @@ describe('User:', () => {
         });
       });
   });
-
-  describe('normalize Username function', () => {
-    const userName = 'sheridan rempel i';
-    it('should return a normalize value of userName',
-      () => {
-        assert.equal(User.normalizeUsername(userName), 'Sheridan rempel i');
-      });
-  });
 });
