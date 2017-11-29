@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import capitalize from 'capitalize';
 import toastr from 'toastr';
 import $ from 'jquery';
-import { addMember, searchUser } from '../actions/memberAction';
+import { addMember, searchUser, getGroupMember } from '../actions/memberAction';
 import MemberStore from '../stores/MemberStore';
 
 /**
@@ -140,6 +140,7 @@ export default class UserAddMember extends React.Component {
    */
   handleAddMemberToGroup() {
     const addMemberResponse = MemberStore.addMember();
+    getGroupMember(this.props.groupId);
     toastr.success(addMemberResponse);
   }
 
