@@ -65,9 +65,13 @@ export default class UserCreateGroup extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const group = { group: this.state.group };
-    createGroup(group);
-    this.setState({ group: '' });
+    if ((this.state.group.trim()).length === 0) {
+      toastr.error('Please provide a name for the group');
+    } else {
+      const group = { group: this.state.group };
+      createGroup(group);
+      this.setState({ group: '' });
+    }
   }
 
   /**

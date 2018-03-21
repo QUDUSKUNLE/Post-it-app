@@ -1,7 +1,10 @@
 import firebase from 'firebase';
 import moment from 'moment';
+import capitalize from 'capitalize';
 import generateToken from '../utils/generateToken';
 import dbConfig from '../config/dbConfig';
+import FormatDatabaseResult from '../utils/FormatDatabaseResult';
+import User from '../helper/User';
 import 'babel-polyfill';
 
 /**
@@ -9,6 +12,30 @@ import 'babel-polyfill';
  * @class UserController
  */
 export default class UserController {
+
+  /**
+   * @description This method allow users to search users
+   * route POST: api/v1/checkuser
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @return {Object} json response contains reset password details
+   */
+  static checkUser(req, res) {
+    const { userName } = req.body;
+    const normalizeName = capitalize(userName);
+    dbConfig.database().ref('users/').orderByChild('userName/')
+      .startAt(normalizeName)
+      .endAt(`${normalizeName}\uf8ff`)
+      .once('value', (snapshot) => {
+        let response;
+        if (snapshot.val()) {
+          response = true;
+        } else {
+          response = false;
+        }
+        return res.status(200).send({ response });
+      });
+  }
 
   /**
    * @description This method signup a new user
@@ -25,21 +52,27 @@ export default class UserController {
     if (password !== confirmPassword) {
       res.status(400).send({ error: { code: 'Password did not match' } });
     } else {
-      dbConfig.auth().createUserWithEmailAndPassword(email, password)
-        .then((user) => {
-          const userToken = generateToken(user.uid, email);
-          const name = username.toLowerCase();
-          dbConfig.database().ref(`users/${user.uid}`).set({
-            userEmail: email,
-            userName: name,
-            phone_Number: phoneNumber,
-            time: moment().format('llll'),
-            userId: user.uid
-          });
-          return { token: userToken };
-        }).then(response => res.status(201).send({
-          message: 'User`s sign up successfully', response }))
-        .catch(error => res.status(422).send({ error }));
+      const normalizeName = capitalize(username);
+      User.checkUser(normalizeName).then((userStatus) => {
+        if (userStatus === true) {
+          res.status(409).send({ error:
+            { code: 'Username already exist!' } });
+        } else {
+          dbConfig.auth().createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+              dbConfig.database().ref(`users/${user.uid}`).set({
+                userEmail: email,
+                userName: normalizeName,
+                phone_Number: phoneNumber,
+                time: moment().format('llll'),
+                userId: user.uid
+              });
+              return { token: generateToken(user.uid, email) };
+            }).then(response => res.status(201).send({
+              message: 'User`s sign up successfully', response }))
+            .catch(error => res.status(422).send({ error }));
+        }
+      });
     }
   }
 
@@ -69,28 +102,29 @@ export default class UserController {
    * @return {Object} json response contains signed user details via Google
    */
   static googleSignIn(req, res) {
-    const idToken = req.body.credential.idToken;
+    const { idToken } = req.body.credential;
     const credentials = firebase.auth.GoogleAuthProvider.credential(idToken);
     firebase.auth().signInWithCredential(credentials)
       .then((user) => {
-        const userToken = generateToken(user.uid, user.email);
         dbConfig.database().ref('users').child(user.uid)
           .once('value', (snapshot) => {
             if (!snapshot.exists()) {
-              const username = user.displayName;
+              const normalizeName = capitalize(user.displayName);
               dbConfig.database().ref(`users/${user.uid}`).set({
                 userEmail: user.email,
-                userName: username,
+                userName: normalizeName,
                 phone_Number: '08092893120',
                 time: moment().format('llll'),
                 userId: user.uid
               });
               return res.status(200).send({
-                message: 'user`s signed in succesfully', token: userToken
+                message: 'user`s signed in succesfully',
+                token: generateToken(user.uid, user.email)
               });
             }
             return res.status(200).send({
-              message: 'user`s signed in succesfully', token: userToken
+              message: 'user`s signed in succesfully',
+              token: generateToken(user.uid, user.email)
             });
           });
       })
@@ -122,21 +156,17 @@ export default class UserController {
    */
   static searchUser(req, res) {
     const { keyword } = req.body;
-    const user = {};
+    const normalizeName = capitalize(keyword);
     dbConfig.database().ref('users/').orderByChild('userName/')
-      .startAt(keyword)
-      .endAt(`${keyword}\uf8ff`)
+      .startAt(normalizeName)
+      .endAt(`${normalizeName}\uf8ff`)
+      .limitToFirst(10)
       .once('value', (snapshot) => {
         let response;
         if (snapshot.val()) {
-          Object.keys(snapshot.val()).forEach(() => {
-            user.email = (Object.values(snapshot.val())[0]).userEmail;
-            user.userName = (Object.values(snapshot.val())[0]).userName;
-            user.userId = (Object.keys(snapshot.val()))[0];
-          });
-          response = user;
+          response = FormatDatabaseResult.searchResult(snapshot.val());
         } else {
-          response = { user: 'No user Found' };
+          response = [{ userName: 'No user Found', userId: 'No user Found' }];
         }
         return res.status(200).send({ response });
       });

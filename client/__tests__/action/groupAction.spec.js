@@ -9,14 +9,14 @@ import { getUserGroups, createGroup }
   from '../../src/actions/groupAction';
 
 
-describe('groupActions', () => {
+describe('getUserGroups action', () => {
   let mockAxios;
   let dispatchSpy;
 
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'get').callsFake(() =>
       Promise.resolve({ groupResponse }));
-    if (groupResponse.response[0] !== null) {
+    if (groupResponse.response[0] === null) {
       dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
     } else {
       dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
@@ -28,21 +28,19 @@ describe('groupActions', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for getUserGroups Method', () => {
-    it('should dispatch an action', () => {
-      expect(getUserGroups).toBeDefined();
-    });
-    it('should dispatch an action', () => {
-      getUserGroups().then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
-      });
+  it('is expected to be defined', () => {
+    expect(getUserGroups).toBeDefined();
+  });
+  it('should dispatch an action GET_USER_GROUPS', () => {
+    getUserGroups().then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('GET_USER_GROUP');
     });
   });
 });
 
 
-describe('groupActions', () => {
+describe('createGroup action', () => {
   let mockAxios;
   let dispatchSpy;
 
@@ -58,20 +56,19 @@ describe('groupActions', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for createGroup Method', () => {
-    it('should dispatch an action CREATE_GROUP', () => {
-      expect(createGroup).toBeDefined();
-    });
-    it('should dispatch an action', () => {
-      createGroup(mockData.groupName).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('CREATE_GROUP');
-      });
+  it('is expected to be defined', () => {
+    expect(createGroup).toBeDefined();
+  });
+  it(`should dispatch an action CREATE_GROUP when createGroup
+   action is called`, () => {
+    createGroup(mockData.groupName).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('CREATE_GROUP');
     });
   });
 });
 
-describe('groupActions', () => {
+describe('createGroup action', () => {
   let mockCreatGroupError;
   beforeEach(() => {
     mockCreatGroupError = sinon.stub(axios, 'post').callsFake(() => (
@@ -83,14 +80,10 @@ describe('groupActions', () => {
     axios.post.restore();
   });
 
-  describe('Test for createGroup Method Error', () => {
-    it('should not dispatch an action CREATE_GROUP', () => {
-      expect(createGroup).toBeDefined();
-    });
-    it('should throw error', () => {
-      createGroup(mockData.groupName).catch(() => {
-        expect(mockCreatGroupError.throw()).toBe(true);
-      });
+  it('expects error to be thrown when no group is created', () => {
+    createGroup(mockData.groupName).catch(() => {
+      expect(mockCreatGroupError.throw()).toBe(true);
     });
   });
 });
+

@@ -48,14 +48,18 @@ export default class UserChatBox extends React.Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    const newMessage = {
-      groupId: this.props.groupId,
-      message: this.state.message,
-      priority: this.state.priority,
-    };
-    sendGroupMessage(newMessage);
-    toastr.success('Message sent');
-    this.setState({ message: '' });
+    if ((this.state.message.trim()).length === 0) {
+      toastr.error('Please the message field can not be empty');
+    } else {
+      const newMessage = {
+        groupId: this.props.groupId,
+        message: this.state.message,
+        priority: this.state.priority,
+      };
+      sendGroupMessage(newMessage);
+      toastr.success('Message sent');
+      this.setState({ message: '' });
+    }
   }
 
   /**

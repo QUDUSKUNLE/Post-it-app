@@ -16,6 +16,9 @@ const signUpAction = user => axios.post('/api/v1/signup', user)
       type: SIGN_UP_SUCCESS,
       response: res.data
     });
-  }).catch(error => catchError(error));
-
+  }).catch((error) => {
+    if (error.response) {
+      catchError(error);
+    }
+  });
 export default signUpAction;

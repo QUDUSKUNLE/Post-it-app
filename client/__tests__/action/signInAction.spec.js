@@ -9,13 +9,15 @@ import { signInAction, signInWithGoogle }
   from '../../src/actions/signInAction';
 import signOutAction from '../../src/actions/signOutAction';
 
-describe('SignInAction', () => {
+describe('SignIn action', () => {
   let mockAxios;
   let dispatchSpy;
+  let mockSetAuthToken;
 
   beforeEach(() => {
     mockAxios = sinon.stub(axios, 'post').callsFake(() =>
       Promise.resolve({ signInResponse }));
+    mockSetAuthToken = sinon.spy();
     dispatchSpy = sinon.spy(AppDispatcher, 'dispatch');
   });
 
@@ -24,18 +26,18 @@ describe('SignInAction', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for signInAction Method', () => {
-    it('should dispatch an action', () =>
-      signInAction(mockData.user).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_IN_SUCCESS');
-      })
-    );
-  });
+  it(`is expected to dispatch SIGN_IN_SUCCESS action on successful
+   sign in`, () =>
+    signInAction(mockData.user).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.calledOnce).toEqual(true);
+      expect(mockSetAuthToken.calledOnce).toBe(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('SIGN_IN_SUCCESS');
+    })
+  );
 });
 
-describe('SignInAction Error', () => {
+describe('Sign in action', () => {
   let mockAxiosError;
 
   beforeEach(() => {
@@ -47,17 +49,15 @@ describe('SignInAction Error', () => {
     axios.post.restore();
   });
 
-  describe('Test for signInAction Method', () => {
-    it('should error with invalid sign in details', () =>
-      signInAction(mockData.user).catch(() => {
-        expect(mockAxiosError.throw()).toBe(true);
-      })
-    );
-  });
+  it('should throw error for signin with invalid sign in details', () =>
+    signInAction(mockData.user).catch(() => {
+      expect(mockAxiosError.throw()).toBe(true);
+    })
+  );
 });
 
 
-describe('GoogleSignIn', () => {
+describe('Google SignIn action', () => {
   let mockAxios;
   let dispatchSpy;
 
@@ -73,19 +73,18 @@ describe('GoogleSignIn', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for signInWithGoogle Method', () => {
-    it('should dispatch GOOGLE_SIGN_IN_SUCCESS', () => {
-      signInWithGoogle(mockData.user).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe(
-          'GOOGLE_SIGN_IN_SUCCESS');
-      });
+  it(`should dispatch GOOGLE_SIGN_IN_SUCCESS action on successful
+   sign in with google`, () => {
+    signInWithGoogle(mockData.user).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.calledOnce).toEqual(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe(
+        'GOOGLE_SIGN_IN_SUCCESS');
     });
   });
 });
 
-describe('GoogleSignIn Error', () => {
+describe('GoogleSignIn action', () => {
   let mockGoogleSignInError;
 
   beforeEach(() => {
@@ -97,16 +96,14 @@ describe('GoogleSignIn Error', () => {
     axios.post.restore();
   });
 
-  describe('Test for signInWithGoogle Method', () => {
-    it('should throw error for wrong signin details', () => {
-      signInWithGoogle(mockData.user).catch(() => {
-        expect(mockGoogleSignInError.throw()).toBe(true);
-      });
+  it('should throw error for wrong signin details', () => {
+    signInWithGoogle(mockData.user).catch(() => {
+      expect(mockGoogleSignInError.throw()).toBe(true);
     });
   });
 });
 
-describe('signOutAction', () => {
+describe('signOut action', () => {
   let mockAxios;
 
   beforeEach(() => {
@@ -118,14 +115,12 @@ describe('signOutAction', () => {
     axios.post.restore();
   });
 
-  describe('Test for signOutAction', () => {
-    it('should signout user successfully', () => {
-      signOutAction().then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        mockAxios.getCall(0).returnValue.then((res) => {
-          expect(res).toEqual(mockData.signOutResponse);
-          expect(res).toBeInstanceOf(Object);
-        });
+  it('should signout user successfully', () => {
+    signOutAction().then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      mockAxios.getCall(0).returnValue.then((res) => {
+        expect(res).toEqual(mockData.signOutResponse);
+        expect(res).toBeInstanceOf(Object);
       });
     });
   });

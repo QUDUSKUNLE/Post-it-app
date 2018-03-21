@@ -8,7 +8,7 @@ import mockData from '../../src/__mock__/mockData';
 import { getGroupMember, addMember }
   from '../../src/actions/memberAction';
 
-describe('getGroupMembers', () => {
+describe('getGroupMembers action', () => {
   let mockGetGroupMembers;
   let dispatchSpy;
 
@@ -27,19 +27,18 @@ describe('getGroupMembers', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for getGroupMember Method', () => {
-    it('should dispatch an action', () => {
-      getGroupMember(mockData.groupId).then(() => {
-        expect(mockGetGroupMembers.calledOnce).toBe(true);
-        expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe(
-          'GET_MEMBERS_OF_GROUP');
-      });
+  it(`should dispatch an action GET_MEMBERS_OF_GROUP on
+   success of getGroupMembers`, () => {
+    getGroupMember(mockData.groupId).then(() => {
+      expect(mockGetGroupMembers.calledOnce).toBe(true);
+      expect(dispatchSpy.calledOnce).toEqual(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe(
+        'GET_MEMBERS_OF_GROUP');
     });
   });
 });
 
-describe('AddMemberAction', () => {
+describe('AddMember action', () => {
   let mockAxios;
   let dispatchSpy;
   beforeEach(() => {
@@ -53,22 +52,21 @@ describe('AddMemberAction', () => {
     AppDispatcher.dispatch.restore();
   });
 
-  describe('Test for addMember Method', () => {
-    it('should dispatch an action', () => {
-      expect(addMember).toBeDefined();
-    });
+  it('is expected to be defined', () => {
+    expect(addMember).toBeDefined();
+  });
 
-    it('should dispatch an action', () => {
-      addMember(mockData.memberDetails).then(() => {
-        expect(mockAxios.calledOnce).toBe(true);
-        expect(dispatchSpy.calledOnce).toEqual(true);
-        expect(dispatchSpy.getCall(0).args[0].type).toBe('ADD_MEMBER');
-      });
+  it(`should dispatch an action ADD_MEMBER on successfully add member
+   to a group`, () => {
+    addMember(mockData.memberDetails).then(() => {
+      expect(mockAxios.calledOnce).toBe(true);
+      expect(dispatchSpy.calledOnce).toEqual(true);
+      expect(dispatchSpy.getCall(0).args[0].type).toBe('ADD_MEMBER');
     });
   });
 });
 
-describe('Test for AddMemberAction Error', () => {
+describe('AddMember action', () => {
   let mockAddMemberError;
   beforeEach(() => {
     mockAddMemberError = sinon.stub(axios, 'post').callsFake(() =>
@@ -79,15 +77,10 @@ describe('Test for AddMemberAction Error', () => {
     axios.post.restore();
   });
 
-  describe('Test for addMember Method Error', () => {
-    it('should not dispatch an action', () => {
-      expect(addMember).toBeDefined();
-    });
-
-    it('should dispatch an action', () => {
-      addMember(mockData.memberDetails).catch(() => {
-        expect(mockAddMemberError.throw()).toBe(true);
-      });
+  it(`expects error to be thrown when no member is added to a
+   group successfully`, () => {
+    addMember(mockData.memberDetails).catch(() => {
+      expect(mockAddMemberError.throw()).toBe(true);
     });
   });
 });

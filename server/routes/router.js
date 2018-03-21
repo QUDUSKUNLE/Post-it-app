@@ -20,6 +20,13 @@ router.post('/api/v1/signup',
 );
 
 /**
+ * Route to check if a username already exist
+ */
+router.post('/api/v1/checkuser',
+  UserController.checkUser
+);
+
+/**
  * Route for signin user to the application
  * Both { email and password }
  */

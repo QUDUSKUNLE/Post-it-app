@@ -1,9 +1,8 @@
 /**
- * @description This is a class Helper that contains functions that helps to
- * help to destructure Object of arrays
- * from firebase Database
+ * @description This is a class FormatDatabaseResult that contains
+ * methodss that helps to formatDatabaseResult
  *
- * @class DestructureFirebaseData
+ * @class FormatDatabaseResult
  */
 export default class FormatDatabaseResult {
 
@@ -38,4 +37,19 @@ export default class FormatDatabaseResult {
     }
     return phoneNumbers;
   }
+
+  /**
+   * @description This function help to formatSearchResult of users
+   * before adding member to a group
+   * @param {Object} searchResult - Object of search result
+   * @returns {Object} -
+   * @memberof Helper
+   */
+  static searchResult(searchResult) {
+    const search = Object.values((searchResult));
+    const searchValue = search.map(user =>
+      ({ userName: user.userName, userId: user.userId }));
+    return searchValue;
+  }
+
 }

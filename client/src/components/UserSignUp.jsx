@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import toastr from 'toastr';
 import SignUpStore from '../stores/SignUpStore';
 import signUpAction from '../actions/signUpAction';
+import { isUserNameExist } from '../actions/memberAction.js';
 
 
 /**
@@ -23,12 +24,15 @@ export default class UserSignUp extends React.Component {
       password: '',
       username: '',
       phoneNumber: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      isUserExist: ''
     };
 
     this.onChange = this.onChange.bind(this);
     this.handleSignUpAction = this.handleSignUpAction.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleSearchUserName = this.handleSearchUserName.bind(this);
+    this.handleCorrectName = this.handleCorrectName.bind(this);
   }
 
   /**
@@ -70,6 +74,33 @@ export default class UserSignUp extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     signUpAction({ ...this.state });
+  }
+
+  /**
+   * @description - this handles search Username
+   * @returns {void}
+  */
+  handleSearchUserName() {
+    const query = { userName: (this.state.username).toLocaleLowerCase() };
+    if ((this.state.username).length >= 3) {
+      isUserNameExist(query).then((res) => {
+        if (res.data.response === true) {
+          this.setState({
+            isUserExist: 'Username already exist!'
+          });
+        }
+      });
+    }
+  }
+
+  /**
+   * @description - this handles search Username
+   * @returns {void}
+  */
+  handleCorrectName() {
+    this.setState({
+      isUserExist: ''
+    });
   }
 
   /**
@@ -117,6 +148,8 @@ export default class UserSignUp extends React.Component {
                 <input
                   value={this.state.username}
                   onChange={this.onChange}
+                  onBlur={this.handleSearchUserName}
+                  onFocus={this.handleCorrectName}
                   id="username"
                   type="text"
                   className="signinform"
@@ -125,6 +158,9 @@ export default class UserSignUp extends React.Component {
                   minLength="2"
                   required
                 />
+                <span className="danger">
+                  {this.state.isUserExist}
+                </span>
               </div>
               <div className="form-group">
                 <label htmlFor="phoneNumber">

@@ -1,6 +1,8 @@
 import moment from 'moment';
+import capitalize from 'capitalize';
 import dbConfig from '../config/dbConfig';
-import QueryDatabase from '../helper/QueryDatabase';
+import User from '../helper/User';
+import Group from '../helper/Group';
 
 /**
  * @description This class create and read functions for group
@@ -17,20 +19,20 @@ export default class GroupController {
    */
   static createGroup(req, res) {
     const groupname = req.body.group;
-    const userId = req.decoded.token.userId;
-    const groupName = groupname.toLowerCase();
-    dbConfig.database().ref(`UserGroups/${userId}`).child(groupName)
+    const { userId } = req.decoded.token;
+    const normalizeName = capitalize(groupname);
+    dbConfig.database().ref(`UserGroups/${userId}`).child(normalizeName)
       .once('value', (snapshot) => {
         if (!snapshot.exists()) {
           dbConfig.database().ref('Groups').push({
-            group: groupName,
+            group: normalizeName,
             time: moment().format('llll')
           })
             .then((response) => {
-              QueryDatabase.getUserEmailAndPhoneNumber(userId)
+              User.details(userId)
                 .then((userEmailAndPhone) => {
                   dbConfig.database().ref(`UserGroups/${userId}`)
-                    .child(groupName).set(response.key);
+                    .child(normalizeName).set(response.key);
                   dbConfig.database().ref(`GroupMember/${response.key}`)
                     .child(userId).set(userEmailAndPhone.userName);
                   dbConfig.database().ref(`GroupPhoneAndEmail/${response.key}`)
@@ -56,8 +58,8 @@ export default class GroupController {
    * @return {Object} json response contains all members of a group
    */
   static getMembers(req, res) {
-    const groupId = req.params.groupId;
-    QueryDatabase.getGroupName(groupId).then((groupName) =>
+    const { groupId } = req.params;
+    Group.name(groupId).then((groupName) =>
       Promise.all([
         dbConfig.database().ref('GroupMember').child(groupId)
           .once('value', snapshot => snapshot.val()),
@@ -76,7 +78,7 @@ export default class GroupController {
    * @return {Object} json response contains all user group
    */
   static getUsersGroups(req, res) {
-    const userId = req.decoded.token.userId;
+    const { userId } = req.decoded.token;
     return Promise.all([
       dbConfig.database().ref('UserGroups').child(userId).once('value',
         snapshot => snapshot.val())
@@ -93,19 +95,18 @@ export default class GroupController {
    * @return {Object} json response contains add member response
    */
   static addMemberToGroup(req, res) {
-    const memberId = req.body.memberId;
-    const groupId = req.params.groupId;
-    QueryDatabase.getUserEmailAndPhoneNumber(memberId)
+    const { memberId } = req.body;
+    const { groupId } = req.params;
+    User.details(memberId)
       .then((response) => {
-        QueryDatabase.getGroupName(groupId).then((group) => {
-          const groupName = group[0];
+        Group.name(groupId).then((group) => {
           dbConfig.database().ref('GroupMember').child(groupId)
             .once('value', (snapshot) => {
               if (snapshot.hasChild(memberId)) {
                 res.status(409).send({ error: 'User`s already a member' });
               } else {
                 dbConfig.database().ref(`UserGroups/${memberId}`)
-                .child(groupName).set(groupId);
+                  .child(group[0]).set(groupId);
                 dbConfig.database().ref(`GroupMember/${groupId}`)
                   .child(memberId).set(response.userName);
                 dbConfig.database().ref(`GroupPhoneAndEmail/${groupId}`)

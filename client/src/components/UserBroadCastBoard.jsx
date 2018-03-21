@@ -51,7 +51,6 @@ export default class UserBroadCastBoard extends React.Component {
     MessageStore.on('SEND_GROUP_MESSAGE', this.handleSendGroupMessage);
     MessageStore.on('GET_GROUP_MESSAGE', this.handleGetGroupMessage);
   }
-
   /**
    * Life Cycle method to be called when a component Unmounts
    * @method componentWillUmount

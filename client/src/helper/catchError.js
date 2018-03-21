@@ -17,6 +17,8 @@ export default (error) => {
     toastr.error('Username required at least 2 characters');
   } else if (error.response.data.error.code === 'Incorrect phoneNumber') {
     toastr.error('Incorrect phone number');
+  } else if (error.response.data.error.code === 'Username already exist!') {
+    toastr.error('Username already exist');
   } else if (error.response.data.error.code === 'Enter a valid phone Number') {
     toastr.error('Enter a valid phone Number');
   } else if (error.response.data.error.code === 'auth/email-already-in-use') {
@@ -31,7 +33,7 @@ export default (error) => {
   } else if (error.response.data.error.code === 'auth/wrong-password') {
     toastr.error('Incorrect user email or password');
   } else if (error.response.data.error.code === 'MemberId is required') {
-    toastr.error('Not a registered user');
+    return;
   } else if (error.response.data.error === 'Group already exists') {
     toastr.error('Group already exists');
   } else if (error.response.data.error === 'User`s already a member') {
